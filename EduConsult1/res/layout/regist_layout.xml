@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_hui"
+        android:background="#EEF3FA"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="5dp" >
@@ -23,8 +23,29 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/home_hui" />
-
-        <LinearLayout
+        <FrameLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_gravity="bottom"
+                android:layout_height="1dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/base_top_title_bg"
+                />
+        </LinearLayout>
+            <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -38,6 +59,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:padding="5dp"
+                android:background="@drawable/regist_unclick"
                 android:text="@string/regist_qiye" />
 
             <TextView
@@ -45,11 +67,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/search_lv_isnull_btn_bg"
+                android:background="@drawable/regist_clikeed"
                 android:gravity="center"
                 android:padding="5dp"
+                android:layout_marginBottom="2dp"
+                android:textColor="@color/white"
                 android:text="@string/regist_geren" />
         </LinearLayout>
+        </FrameLayout>
+
+        
 
         <EditText
             android:id="@+id/regist_et_username"
@@ -57,6 +84,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_vertical"
+            android:background="@drawable/regist_et_bg"
+            android:padding="10dp"
+            android:focusable="true"
+            android:textColor="@color/black"
             android:hint="@string/regist_uername"
             android:singleLine="true" />
 
@@ -67,6 +98,9 @@
             android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:hint="@string/regist_password"
+            android:background="@drawable/regist_et_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
             android:password="true"
             android:singleLine="true" />
 
@@ -77,6 +111,9 @@
             android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:hint="@string/regist_chognfu"
+             android:background="@drawable/regist_et_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
             android:password="true"
             android:singleLine="true" />
 
@@ -87,6 +124,9 @@
             android:layout_margin="10dp"
             android:gravity="center_vertical"
             android:hint="@string/regist_gongsi"
+            android:background="@drawable/regist_et_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
             android:singleLine="true" />
 
         <RadioGroup
@@ -100,6 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:textColor="@color/black"
                 android:text="@string/regist_sex_man" >
             </RadioButton>
 
@@ -107,6 +148,7 @@
                 android:id="@+id/regist_rb_woman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                 android:textColor="@color/black"
                 android:text="@string/regist_sex_woman" >
             </RadioButton>
         </RadioGroup>
@@ -116,6 +158,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+             android:background="@drawable/regist_et_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
             android:gravity="center_vertical"
             android:hint="@string/regist_lianxi_people"
             android:singleLine="true" />
@@ -125,6 +170,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+             android:background="@drawable/regist_et_bg"
+            android:padding="10dp"
+            android:textColor="@color/black"
             android:gravity="center_vertical"
             android:hint="@string/regist_lianxi_phone"
             android:singleLine="true" />

@@ -12,12 +12,16 @@ import com.example.educonsult.activitys.SearchHomeActivity;
 import com.example.educonsult.activitys.ShopcartActivity;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TabWidget;
 
 
 public class ExampleActivity extends TabHostActivity {
+	protected int activityCloseEnterAnimation;
+
+	protected int activityCloseExitAnimation;
 
 	private List<TabItem> mItems;
 
@@ -53,6 +57,13 @@ public class ExampleActivity extends TabHostActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
+		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
+		activityStyle.recycle();
+		activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] {android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+		activityStyle.recycle();
 		setCurrentTab(0);
 	}
 
@@ -77,5 +88,11 @@ public class ExampleActivity extends TabHostActivity {
 	@Override
 	protected int getTabItemCount() {
 		return mItems.size();
+	}
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
 }

@@ -22,6 +22,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -427,8 +428,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			}
 		}
 		if(bundle.getBundleActivity()!=null){
-			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
-				     Toast.LENGTH_SHORT).show();
+//			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
+//				     Toast.LENGTH_SHORT).show();
 			Intent i=new Intent();
 			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -506,6 +507,24 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		}
 		return true;
 	} 
+	@Override
+	public void onResume() {
+		if(MyApplication.isopen){
+			 //已安装插件列表
+			bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
+			BundleContext context =frame.getSystemBundleContext();
+			for(int i=0;i<context.getBundles().length;i++)
+			{
+				//获取已安装插件
+				bundles.add(context.getBundles()[i]);        	        
+			}
+			
+//			BundleContext context =frame.getSystemBundleContext();
+			startor(bundles);
+//			MyApplication.isopen = f
+		}
+		super.onResume();
+	}
 	
 	
 }

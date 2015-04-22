@@ -3,6 +3,7 @@ package com.example.educonsult;
 import android.annotation.SuppressLint;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 
 @SuppressWarnings({ "unused", "deprecation" })
 public abstract class TabHostActivity extends TabActivity {
+	protected int activityCloseEnterAnimation;
+
+	protected int activityCloseExitAnimation;
 
 	private static TabHost mTabHost;
 	private TabWidget mTabWidget;
@@ -25,6 +29,13 @@ public abstract class TabHostActivity extends TabActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		// set theme because we do not want the shadow
+		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
+		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
+		activityStyle.recycle();
+		activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] {android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+		activityStyle.recycle();
 		setTheme(R.style.Theme_Tabhost);
 		setContentView(R.layout.api_tab_host);
 
@@ -102,4 +113,10 @@ public abstract class TabHostActivity extends TabActivity {
 		mTabWidget.focusCurrentTab(index);
 	}
 
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
+	}
 }

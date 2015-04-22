@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		case R.id.login_tv_noaclogin:
 //			isremb = MyApplication.sp.getBoolean("isremb", false);
 //			Toast.makeText(context, "isremb"+isremb, 200).show();
-			Intent in = new Intent(this, ProductDetaileActivity.class);
+			Intent in = new Intent(this, ExampleActivity.class);
 			startActivity(in);
 			break;
 		case R.id.login_btn_login:

@@ -27,13 +27,13 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyGridView;
 
 public class GqHomeActivity extends BaseActivity implements OnClickListener{
-	private TextView tv_all,tv_diqu,tv_zhineng,tv_shaixuan,tv_more_tuijian,tv_more_paied,
+	private TextView tv_more_tuijian,tv_more_paied,
 	tv_price_l_tuijian,tv_price_t_tuijian,tv_price_r_tuijian,
 	tv_price_l_paied,tv_price_t_paied,tv_price_r_paied;
 	private ImageView iv_l_tuijian,iv_t_tuijian,iv_r_tuijian,
 	iv_l_paied,iv_t_paied,iv_r_paied,iv_topl,iv_topr;
 	private LinearLayout ll_l_tuijian,ll_t_tuijian,ll_r_tuijian,
-	ll_l_paied,ll_t_paied,ll_r_paied;
+	ll_l_paied,ll_t_paied,ll_r_paied,ll_all,ll_diqu,ll_zhineng,ll_shaixuan;
 	private ScrollView scrollView;
 	private PopupWindow popupWindow;
 	private boolean isshow;
@@ -87,7 +87,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		});
 
 		View v = new ImageView(context);
-		v.setBackgroundResource(R.drawable.ic_launcher);
+		v.setBackgroundResource(R.drawable.base_to_top);
 		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		isshow = false;
 		scrollView.setOnTouchListener(new OnTouchListener() {
@@ -121,7 +121,6 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 						popupWindow.dismiss();
 					}
 					scrollView.scrollTo(10, 10);
-					Toast.makeText(context, "µ±«∞Œª÷√"+scrollView.getScrollY(), Toast.LENGTH_SHORT).show();
 					isshow = false;
 				}
 			}
@@ -142,14 +141,14 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		context = this;
 		scrollView = (ScrollView) findViewById(R.id.gq_home_sc);
 		scrollView.scrollTo(0, 10);
-		tv_all = (TextView) findViewById(R.id.gq_home_tv_all);
-		tv_all.setOnClickListener(this);
-		tv_diqu = (TextView) findViewById(R.id.gq_home_tv_diqu);
-		tv_diqu.setOnClickListener(this);
-		tv_zhineng = (TextView) findViewById(R.id.gq_home_tv_zhineng);
-		tv_zhineng.setOnClickListener(this);
-		tv_shaixuan = (TextView) findViewById(R.id.gq_home_tv_shaixuan);
-		tv_shaixuan.setOnClickListener(this);
+		ll_all = (LinearLayout) findViewById(R.id.gq_home_ll_all);
+		ll_all.setOnClickListener(this);
+		ll_diqu = (LinearLayout) findViewById(R.id.gq_home_ll_diqu);
+		ll_diqu.setOnClickListener(this);
+		ll_zhineng = (LinearLayout) findViewById(R.id.gq_home_ll_zhineng);
+		ll_zhineng.setOnClickListener(this);
+		ll_shaixuan = (LinearLayout) findViewById(R.id.gq_home_ll_shaixuan);
+		ll_shaixuan.setOnClickListener(this);
 		tv_more_tuijian = (TextView) findViewById(R.id.gq_home_tv_more_tuijian);
 		tv_more_tuijian.setOnClickListener(this);
 		tv_more_paied = (TextView) findViewById(R.id.gq_home_tv_more_paied);
@@ -195,23 +194,23 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.gq_home_tv_all:
+		case R.id.gq_home_ll_all:
 			intent = new Intent(this,GqTwoActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		case R.id.gq_home_tv_diqu:
+		case R.id.gq_home_ll_diqu:
 			intent = new Intent(this,GqTwoActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		case R.id.gq_home_tv_zhineng:
+		case R.id.gq_home_ll_zhineng:
 			intent = new Intent(this,GqTwoActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
 			
-		case R.id.gq_home_tv_shaixuan:
+		case R.id.gq_home_ll_shaixuan:
 			intent = new Intent(this,GqTwoActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);

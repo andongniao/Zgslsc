@@ -2,26 +2,38 @@ package com.example.educonsult;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apkplug.app.FrameworkFactory;
 import org.apkplug.app.FrameworkInstance;
+import org.apkplug.app.apkplugActivity;
 import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMChatOptions;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.ChatType;
+import com.easemob.chat.OnNotificationClickListener;
+import com.example.educonsult.activitys.AboutActivity;
+import com.example.educonsult.activitys.ChatActivity;
+import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.fragments.HomeFragment;
 import com.example.educonsult.tools.Util;
 
 public class MyApplication extends Application{
@@ -30,6 +42,7 @@ public class MyApplication extends Application{
 	public static UserBean bean;
 	private static Util util;
 	public static FrameworkInstance frame=null;
+	public static boolean isopen;
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -41,6 +54,8 @@ public class MyApplication extends Application{
 		SimpleBundle s= new SimpleBundle();
 		list.add(s);
 		EMChat.getInstance().init(context);
+		// 获取到EMChatOptions对象
+		
 //		//只有注册了广播才能接收到新消息，目前离线消息，在线消息都是走接收消息的广播（离线消息目前无法监听，在登录以后，接收消息广播会执行一次拿到所有的离线消息）
 //		NewMessageBroadcastReceiver msgReceiver = new NewMessageBroadcastReceiver();
 //		IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
@@ -93,6 +108,32 @@ public class MyApplication extends Application{
 //	            int nPid = android.os.Process.myPid();
 //				android.os.Process.killProcess(nPid);
 	        }
+		 
+		 
+		 EMChatOptions options = EMChatManager.getInstance().getChatOptions();
+			//设置notification点击listener
+			options.setOnNotificationClickListener(new OnNotificationClickListener() {
+
+				@Override
+				public Intent onNotificationClick(EMMessage message) {
+					Intent i=new Intent();
+//					i.setClassName(MyApplication.this.context.getPackageName(), bundle.getBundleActivity().split(",")[0]);
+//					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					i = new Intent(MyApplication.this.context,HomePagerActivity.class);
+					isopen = true;
+					
+//					ChatType chatType = message.getChatType();
+//					if(chatType == ChatType.Chat){ //单聊信息
+//						intent.putExtra("userId", message.getFrom());
+////						intent.putExtra("chatType", ChatActivity.CHATTYPE_SINGLE);
+//					}else{ //群聊信息
+//						//message.getTo()为群聊id
+//						intent.putExtra("groupId", message.getTo());
+////						intent.putExtra("chatType", ChatActivity.CHATTYPE_GROUP);
+//					}
+					return i;
+				}
+			});
 		
 	}
 	public FrameworkInstance getFrame() {
@@ -141,4 +182,52 @@ public class MyApplication extends Application{
 		}
 	};
 	
+	private String getAppName(int pID) {
+		String processName = null;
+		ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
+		List l = am.getRunningAppProcesses();
+		Iterator i = l.iterator();
+		PackageManager pm = this.getPackageManager();
+		while (i.hasNext()) {
+			ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
+			try {
+				if (info.pid == pID) {
+					CharSequence c = pm.getApplicationLabel(pm.getApplicationInfo(info.processName, PackageManager.GET_META_DATA));
+					// Log.d("Process", "Id: "+ info.pid +" ProcessName: "+
+					// info.processName +"  Label: "+c.toString());
+					// processName = c.toString();
+					processName = info.processName;
+					return processName;
+				}
+			} catch (Exception e) {
+				// Log.d("Process", "Error>> :"+ e.toString());
+			}
+		}
+		return processName;
+	}
+	
+	public void startor(List<org.osgi.framework.Bundle> list){
+		org.osgi.framework.Bundle bundle=list.get(1);
+		if(bundle.getState()!=bundle.ACTIVE){
+			//判断插件是否已启动
+			try {
+				bundle.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(bundle.getBundleActivity()!=null){
+			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
+				     Toast.LENGTH_SHORT).show();
+			Intent i=new Intent();
+			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
+		}else{
+			
+			Toast.makeText(context, "该插件没有配置BundleActivity",
+				     Toast.LENGTH_SHORT).show();
+		}
+	}
 }
