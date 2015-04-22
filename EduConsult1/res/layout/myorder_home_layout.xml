@@ -1,0 +1,161 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#e6e6e6"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/myorder_home_ll_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/myorder_home_tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myorder_all"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/myorder_home_tv_all_show"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/orn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/myorder_home_ll_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/myorder_home_tv_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myorder_pay_wait"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/myorder_home_tv_pay_show"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/orn"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/myorder_home_ll_send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/myorder_home_tv_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myorder_send_wait"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/myorder_home_tv_send_show"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/orn"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/myorder_home_ll_shouhuo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/myorder_home_tv_shouhuo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myorder_shouhuo_wait"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/myorder_home_tv_shouhuo_show"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/orn"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/myorder_home_ll_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/myorder_home_tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myorder_comment_wait"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/myorder_home_tv_comment_show"
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/orn"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
+
+	<ListView
+        android:id="@+id/myorder_home_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:listSelector="#00000000"
+        android:divider="#00000000"
+        android:dividerHeight="10dp"
+        android:scrollbars="none" >
+    </ListView>
+</LinearLayout>

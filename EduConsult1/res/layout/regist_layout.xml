@@ -1,0 +1,168 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_hui"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/regist_xinxi"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/home_hui" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="5dp" >
+
+            <TextView
+                android:id="@+id/regist_tv_qiye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/regist_qiye" />
+
+            <TextView
+                android:id="@+id/regist_tv_geren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/search_lv_isnull_btn_bg"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/regist_geren" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/regist_et_username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:hint="@string/regist_uername"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/regist_et_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:hint="@string/regist_password"
+            android:password="true"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/regist_et_password_re"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:hint="@string/regist_chognfu"
+            android:password="true"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/regist_et_gongsi"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:hint="@string/regist_gongsi"
+            android:singleLine="true" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <RadioButton
+                android:id="@+id/regist_rb_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/regist_sex_man" >
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/regist_rb_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/regist_sex_woman" >
+            </RadioButton>
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/regist_et_lianxi_ren"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:hint="@string/regist_lianxi_people"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/regist_et_lianxi_dianhua"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:hint="@string/regist_lianxi_phone"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/regist_cb_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/regist_read"
+                android:textColor="@color/home_hui"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/regist_tv_tiaokuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/regist_tiaokuan"
+                android:textColor="@color/regist_tiaokuan_text"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/regist_btn_regist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/search_lv_isnull_btn_bg"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/regist_title"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+</ScrollView>

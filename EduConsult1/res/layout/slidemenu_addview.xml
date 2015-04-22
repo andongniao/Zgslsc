@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#e6e6e6"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="5dp" >
+
+    <ListView
+        android:id="@+id/slid_view_lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null" >
+    </ListView>
+    <LinearLayout 
+        android:id="@+id/slid_view_add_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        ></LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="gray">#707070</color>
+    <color name="themeblue">#1995d3</color>
+    <color name="darkgray">#A9A9A9</color>
+    <color name="graywhite">#F0F0F0</color>
+    <color name="darkblue">#00008b</color>
+    <color name="lightskyblue">#87cefa</color>
+    <color name="qiangray">#f0f0f0</color>
+    <color name="grayclickbg">#E7E7E7</color>
+    <color name="text_darkgray">#A9A9A9</color>
+    <color name="blue">#0000FF</color>
+    <color name="darkred">#D71120</color>
+    <color name="sjbgone">#8d0aa4</color>
+    <color name="sjbgtwo">#41328d</color>
+    <color name="sjbgthree">#1f8ac0</color>
+    <color name="sjbgfour">#44af0b</color>
+    <color name="sjbgfive">#dcab10</color>
+    <color name="backgroundcolor">#F1F1F1</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="base_hui">#e6e6e6</color>
+    <color name="home_hui">#AEAEAE</color>
+    <color name="home_image_bg">#FFF6DD</color>
+    <color name="base_top_title_bg">#28BC67</color>
+    <color name="orn">#FD5601</color>
+    <color name="login_text_gre">#0B9746</color>
+    <color name="login_bg">#EFFFE5</color>
+    <color name="regist_tiaokuan_text">#557BA2</color>
+    <color name="fenlei_bg">#FFF3ED</color>
+    <color name="know_home_head_bg">#F3BEA9</color>
+    <color name="base_he">#59392A</color>
+
+</resources>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.educonsult"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <application
+        android:name="com.example.educonsult.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AnimActivityTheme" >
+        <meta-data
+            android:name="apkplug-auth"
+            android:value="l0eaXdl4BhLz00G7a+4B+lK3SRjvcGXDb1TRxJvsHHl0EdNvEoeqcu86G5okb+01diFI+3IFHtjB1v13rGFejfejfFtLsNBB2xjX7KmrNDzN2IjMVubvkYIdXRtmGdLNbSdl5dvkFvR6hAmxSNtPdUj3LXtJgQoe5dsE4eMmF+8=" >
+        </meta-data>
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="xunbowangluo#zgslsc" />
+
+        <activity
+            android:name="com.example.educonsult.activitys.WelcomeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.educonsult.ExampleActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.HomePagerActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.LoginActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.SearchHomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.MyCenterActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.GqTwoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.RegistActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.ProductDetaileActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.ServiceCenterActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.AboutActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.AddressActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.AddressGLActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.ShopcartActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.QianBaoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.MyInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.XinjianActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.OrderActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.UpAddressActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.SearchResultActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.MyOrderActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.GqHomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.ZhanhuiHomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.ZhanhuiDetaileActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.educonsult.activitys.KnowHomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="org.apkplug.app.apkplugActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/android:Theme.Light" />
+        
+             <service android:name="com.easemob.chat.EMChatService">
+            <intent-filter >
+                <action android:name="com.easemob.chat.EMChatService"/>
+            </intent-filter>
+        </service>
+        
+    </application>
+
+</manifest>
