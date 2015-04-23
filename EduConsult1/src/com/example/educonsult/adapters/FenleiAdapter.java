@@ -30,6 +30,7 @@ import com.example.educonsult.R;
 	}
 	public void SetData(int index){
 		this.index = index;
+
 	}
 
 	@Override
