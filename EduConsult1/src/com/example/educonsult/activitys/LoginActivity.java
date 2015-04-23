@@ -112,6 +112,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 //			Toast.makeText(context, "isremb"+isremb, 200).show();
 			Intent in = new Intent(this, ExampleActivity.class);
 			startActivity(in);
+			finish();
 			break;
 		case R.id.login_btn_login:
 			String name = et_username.getText().toString().trim();

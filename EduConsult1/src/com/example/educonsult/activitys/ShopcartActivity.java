@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -21,6 +22,7 @@ import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ShopBean;
 
 public class ShopcartActivity extends BaseActivity implements OnClickListener{
+	private long exitTime = 0;
 	private ListView lv;
 	private Context context;
 	private ArrayList<ShopBean> list;
@@ -223,6 +225,20 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			break;
 
 		}
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	            finish();
+	            System.exit(0);
+	        }
+	        return true;   
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 	
 }

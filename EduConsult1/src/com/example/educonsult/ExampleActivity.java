@@ -3,19 +3,19 @@ package com.example.educonsult;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.educonsult.activitys.AboutActivity;
-import com.example.educonsult.activitys.GqTwoActivity;
-import com.example.educonsult.activitys.HomePagerActivity;
-import com.example.educonsult.activitys.LoginActivity;
-import com.example.educonsult.activitys.MyCenterActivity;
-import com.example.educonsult.activitys.SearchHomeActivity;
-import com.example.educonsult.activitys.ShopcartActivity;
-
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TabWidget;
+import android.widget.Toast;
+
+import com.example.educonsult.activitys.AboutActivity;
+import com.example.educonsult.activitys.HomePagerActivity;
+import com.example.educonsult.activitys.MyCenterActivity;
+import com.example.educonsult.activitys.SearchHomeActivity;
+import com.example.educonsult.activitys.ShopcartActivity;
 
 
 public class ExampleActivity extends TabHostActivity {

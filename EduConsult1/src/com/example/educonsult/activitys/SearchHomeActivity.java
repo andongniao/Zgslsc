@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -26,6 +27,7 @@ import com.example.educonsult.adapters.SearchAdapter;
 import com.example.educonsult.tools.Util;
 
 public class SearchHomeActivity extends BaseActivity implements OnClickListener{
+	private long exitTime = 0;
 	private Context context;
 	private Editor er;
 	private ListView lv;
@@ -189,5 +191,19 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			break;
 
 		}
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	            finish();
+	            System.exit(0);
+	        }
+	        return true;   
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 }

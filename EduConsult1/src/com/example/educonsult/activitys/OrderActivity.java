@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.OrderHomeAdapter;
 import com.example.educonsult.myviews.MyListview;
@@ -67,7 +68,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			startActivity(id);
 			break;
 		case R.id.order_tv_ok:
-
+//			ExampleActivity.setCurrentTab(3);?
+			finish();
+					
 			break;
 
 		}

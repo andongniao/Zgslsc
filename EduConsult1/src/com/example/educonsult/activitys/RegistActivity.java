@@ -25,7 +25,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	private RadioButton rb_man,rb_woman;
 	private Button btn_regist;
 	private CheckBox cb_read;
-	private int type;
+	private int type,tp;
 	private boolean isread;
 
 	@Override
@@ -43,11 +43,13 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		type = 1;
+		tp = 1;
 		isread = false;
 		tv_qiye = (TextView) findViewById(R.id.regist_tv_qiye);
 		tv_qiye.setOnClickListener(this);
 		tv_geren = (TextView) findViewById(R.id.regist_tv_geren);
 		tv_geren.setOnClickListener(this);
+		tv_qiye.setTextColor(getResources().getColor(R.color.black));
 		tv_tiaokuan = (TextView) findViewById(R.id.regist_tv_tiaokuan);
 		tv_tiaokuan.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//ÏÂ»®Ïß
 		tv_tiaokuan.setOnClickListener(this);
@@ -132,7 +134,20 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 			}
 
 			break;
-
+		case R.id.regist_tv_qiye:
+				tp = 1;
+				tv_qiye.setBackgroundResource(R.drawable.regist_clikeed);
+				tv_qiye.setTextColor(getResources().getColor(R.color.white));
+				tv_geren.setBackgroundResource(R.drawable.regist_unclick);
+				tv_geren.setTextColor(getResources().getColor(R.color.black));
+			break;
+		case R.id.regist_tv_geren:
+			tp = 2;
+			tv_geren.setBackgroundResource(R.drawable.regist_clikeed);
+			tv_geren.setTextColor(getResources().getColor(R.color.white));
+			tv_qiye.setBackgroundResource(R.drawable.regist_unclick);
+			tv_qiye.setTextColor(getResources().getColor(R.color.black));
+			break;
 		}
 	}
 
