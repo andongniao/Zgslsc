@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -21,22 +22,21 @@ import com.example.educonsult.beans.ShopBean;
 
 public class ShopcartLvAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Object>list;
+	private ArrayList<ShopBean>list;
 	private LayoutInflater inflater;
 	private Item item;
 	private int index;
 	private shop shop;
 
 
-	public ShopcartLvAdapter(Context context,ArrayList<Object>list, int index,shop shop
-			){
+	public ShopcartLvAdapter(Context context,ArrayList<ShopBean>list, int index,shop shop){
 		this.context = context;
 		this.list = list;
 		this.index = index;
 		this.shop = shop;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Object>list){
+	public void SetData(ArrayList<ShopBean>list){
 		this.list = list;
 	}
 
@@ -44,7 +44,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		ShopBean sb = (ShopBean) list.get(index);
-		ArrayList<Object> l = sb.getList();
+		ArrayList<BaseBean> l = sb.getList();
 		return l!=null?l.size():0;
 	}
 
@@ -78,9 +78,9 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item = (Item) convertView.getTag();
 		}
 		ShopBean sb = (ShopBean) list.get(index);
-		ArrayList<Object> l = sb.getList();
-		
-		BaseBean b = (BaseBean) l.get(position);
+		ArrayList<BaseBean> l = sb.getList();
+
+		final BaseBean b = (BaseBean) l.get(position);
 
 		item.cb.setChecked(b.isIsclick());
 		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -90,6 +90,27 @@ public class ShopcartLvAdapter extends BaseAdapter{
 				shop.click(isChecked, index, position);
 			}
 		});
+		item.iv_jia.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+//				int i = Integer.parseInt(item.et_number.getText().toString());
+//				i+=1;
+//				item.et_number.setText(""+i);
+				shop.add1(index, position);
+			}
+		});
+		item.iv_jian.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int i = b.getNum();
+				if(i>0){
+					shop.jian1(index, position);
+				}
+			}
+		});
+		item.et_number.setText(list.get(index).getList().get(position).getNum()+"");
 		return convertView;
 	}
 	class Item{

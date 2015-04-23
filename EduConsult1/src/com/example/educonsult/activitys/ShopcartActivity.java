@@ -23,7 +23,7 @@ import com.example.educonsult.beans.ShopBean;
 public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private ListView lv;
 	private Context context;
-	private ArrayList<Object> list;
+	private ArrayList<ShopBean> list;
 	private ShopcartHomeAdapter adapter;
 	private LinearLayout ll_isnull,ll_jeisuan;
 	private TextView tv_jiesuan;
@@ -47,7 +47,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		type = 0;
-		list = new ArrayList<Object>();
+		list = new ArrayList<ShopBean>();
 		lv = (ListView) findViewById(R.id.shopcart_home_lv);
 		ll_isnull = (LinearLayout) findViewById(R.id.shopcart_home_ll_isnull);
 		ll_jeisuan = (LinearLayout) findViewById(R.id.shopcart_home_ll_show);
@@ -115,6 +115,26 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				}
 				Toast.makeText(context, ""+len, 200).show();
 			}
+
+			@Override
+			public void add1(int index, int postion) {
+//				ShopBean s = (ShopBean) list.get(index);
+//				BaseBean bean = (BaseBean) s.getList().get(postion);
+				int i = list.get(index).getList().get(postion).getNum();
+				i+=1;
+				list.get(index).getList().get(postion).setNum(i);
+				adapter.SetData(list);
+				adapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void jian1(int index, int postion) {
+				int i = list.get(index).getList().get(postion).getNum();
+				i-=1;
+				list.get(index).getList().get(postion).setNum(i);
+				adapter.SetData(list);
+				adapter.notifyDataSetChanged();
+			}
 			
 			
 		};
@@ -124,9 +144,11 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		b1.setIsclick(false);
 		BaseBean a1 = new BaseBean();
 		a1.setIsclick(false);
+		a1.setNum(0);
 		BaseBean a2 = new BaseBean();
 		a2.setIsclick(false);
-		ArrayList<Object >l = new ArrayList<Object>();
+		a2.setNum(0);
+		ArrayList<BaseBean >l = new ArrayList<BaseBean>();
 		l.add(a1);
 		l.add(a2);
 		b1.setList(l);
@@ -136,8 +158,9 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		ShopBean b2= new ShopBean();
 		b2.setIsclick(false);
 		BaseBean a = new BaseBean();
+		a.setNum(0);
 		a.setIsclick(false);
-		ArrayList<Object>l2 = new ArrayList<Object>();
+		ArrayList<BaseBean>l2 = new ArrayList<BaseBean>();
 		l2.add(a);
 		b2.setList(l2);
 		list.add(b2);
@@ -186,6 +209,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	
 	public static interface shop{
 		void click(boolean b,int index,int postion);
+		void add1( int index,int postion);
+		void jian1(int index,int postion);
 	}
 
 	@Override

@@ -64,7 +64,7 @@
 	        </LinearLayout>
 	        
 	        <LinearLayout 
-	            android:layout_width="wrap_content"
+	            android:layout_width="fill_parent"
 	            android:layout_height="wrap_content"
 	            android:orientation="horizontal"
 	            android:gravity="center_vertical"
@@ -78,14 +78,14 @@
 	                />
 	            <EditText 
 	                android:id="@+id/shopcart_lv_lv_et_number"
-	                android:paddingTop="5dp"
-	                android:paddingLeft="10dp"
-	                android:paddingRight="10dp"
-	                android:paddingBottom="5dp"
-	                android:layout_width="wrap_content"
+	                android:padding="5dp"
+	                android:gravity="center"
+	                android:layout_width="0dp"
+	                android:layout_weight="1"
 	                android:layout_height="fill_parent"
 	                android:background="@drawable/order_et_bg_line"
 	                android:text="0"
+	                android:focusable="false"
 	                android:textColor="@color/black"
 	                android:textSize="18dp"
 	                
@@ -107,7 +107,7 @@
 	        android:textColor="@color/orn"
 	        android:layout_gravity="center_vertical"
 	        android:text="@string/test"
-	        android:layout_margin="5dp"
+	        android:layout_margin="20dp"
 	        />
 	</LinearLayout>
     

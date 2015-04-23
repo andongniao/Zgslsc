@@ -41,6 +41,7 @@ import android.widget.Toast;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.GqHomeActivity;
+import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.KnowHomeActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
@@ -65,11 +66,12 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	ll_hot_l,ll_hot_t,ll_hot_r
 	,ll_hot_b_l,ll_hot_b_t,ll_hot_b_r;
 	private TextView tv_m_jingpin,tv_m_hot,tv_m_ruzhu;
-	private ImageView iv_hot_l;
+	private ImageView iv_hot_l,iv_fenlei;
 	private Intent intent;
 	private FrameworkInstance frame=null;
 	private String name = "ChatUIDemo.apk";
 	private List<org.osgi.framework.Bundle> bundles=null;
+	private String title;
 
 
 	@Override
@@ -104,6 +106,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		}
 		
 		list = new ArrayList<String>();
+		iv_fenlei = (ImageView) view.findViewById(R.id.title_left_iv);
+		iv_fenlei.setOnClickListener(this);
 		ll_gq = (LinearLayout) view.findViewById(R.id.home_gongqiu_ll);
 		ll_gq.setOnClickListener(this);
 		ll_cx = (LinearLayout) view.findViewById(R.id.home_cuxiao_ll);
@@ -213,6 +217,11 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.title_left_iv:
+			Message msg = HomePagerActivity.handler.obtainMessage();
+			msg.obj = HomePagerActivity.SlidTag;
+			HomePagerActivity.handler.sendMessage(msg);
+			break;
 		case R.id.home_gongqiu_ll:
 			intent = new Intent(context,GqHomeActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -256,34 +265,60 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			
 			break;
 		case R.id.home_leimu_ll:
-			Message msg = HomePagerActivity.handler.obtainMessage();
-			msg.obj = HomePagerActivity.SlidTag;
-			HomePagerActivity.handler.sendMessage(msg);
+			
 
 			break;
 		case R.id.home_siliao_ll:
-
+			intent = new Intent(this.context,GqTwoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			title = getResources().getString(R.string.home_siliao);
+			intent.putExtra("title", title);
+			startActivity(intent);
 			break;
 		case R.id.home_shouyao_ll:
-
+			intent = new Intent(this.context,GqTwoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			title = getResources().getString(R.string.home_shouyao);
+			intent.putExtra("title", title);
+			startActivity(intent);
 			break;
 		case R.id.home_yangzhi_ll:
-
+			intent = new Intent(this.context,GqTwoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			title = getResources().getString(R.string.home_yangzhishebei);
+			intent.putExtra("title", title);
+			startActivity(intent);
 			break;
 		case R.id.home_chuqin_ll:
-
+			intent = new Intent(this.context,GqTwoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			title = getResources().getString(R.string.home_chuqinyangzhi);
+			intent.putExtra("title", title);
+			startActivity(intent);
 			break;
 		case R.id.home_tianjiaji_ll:
-
+			intent = new Intent(this.context,GqTwoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			title = getResources().getString(R.string.home_tianjiaji);
+			intent.putExtra("title", title);
+			startActivity(intent);
 			break;
 		case R.id.home_yuanliao_ll:
-
+			intent = new Intent(this.context,GqTwoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			title = getResources().getString(R.string.home_yuanliao);
+			intent.putExtra("title", title);
+			startActivity(intent);
 			break;
 		case R.id.home_tv_jingpin:
-
+//			intent = new Intent(this.context,GqTwoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			title = getResources().getString(R.string.home_tuijian);
+//			intent.putExtra("title", title);
+//			startActivity(intent);
 			break;
 		case R.id.home_tv_hot:
-
+			
 			break;
 		case R.id.home_tv_ruzhu:
 			

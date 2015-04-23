@@ -27,19 +27,19 @@ import com.example.educonsult.tools.Util;
 
 public class ShopcartHomeAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Object>list;
+	private ArrayList<ShopBean>list;
 	private LayoutInflater inflater;
 	private Item item;
 	private ShopcartLvAdapter adapter;
 	private shop shop;
 
-	public ShopcartHomeAdapter(Context context,ArrayList<Object>list, shop shop){
+	public ShopcartHomeAdapter(Context context,ArrayList<ShopBean>list, shop shop){
 		this.context = context;
 		this.list = list;
 		this.shop = shop;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Object>list){
+	public void SetData(ArrayList<ShopBean>list){
 		this.list = list;
 	}
 

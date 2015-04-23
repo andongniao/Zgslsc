@@ -336,6 +336,10 @@
 	<string name="know_detaile_commit">提交回答</string>
 	<string name="know_detaile_nim">匿名</string>
 	<string name="know_detaile_tiwen_i">我要提问</string>
+	<!-- 注册完成 -->
+	<string name="regist_ok_title">恭喜注册完成！</string>
+	<string name="regist_ok_tiaozhuan">自动跳转到商城首页...</string>
+	
     
     
     

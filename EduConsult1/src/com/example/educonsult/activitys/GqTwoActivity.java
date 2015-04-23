@@ -27,6 +27,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.GqAdapter;
 import com.example.educonsult.adapters.HomeRuzhuAdapter;
 import com.example.educonsult.myviews.MyGridView;
+import com.example.educonsult.tools.Util;
 
 public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -51,7 +52,12 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		super.onCreate(arg0);
 		topRightLVisible();
 		topRightRVisible();
+		String title = getIntent().getStringExtra("title");
+		if(Util.IsNull(title)){
+			setTopLeftTv(title);
+		}else{
 		setTopLeftTv(R.string.gongqiu_title);
+		}
 		setContentXml(R.layout.gq_two);
 		init();
 		addlistener();

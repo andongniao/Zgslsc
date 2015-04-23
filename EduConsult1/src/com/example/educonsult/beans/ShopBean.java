@@ -3,13 +3,13 @@ package com.example.educonsult.beans;
 import java.util.ArrayList;
 
 public class ShopBean extends BaseBean{
-	private ArrayList<Object>list;
+	private ArrayList<BaseBean>list;
 
-	public ArrayList<Object> getList() {
+	public ArrayList<BaseBean> getList() {
 		return list;
 	}
 
-	public void setList(ArrayList<Object> list) {
+	public void setList(ArrayList<BaseBean> list) {
 		this.list = list;
 	}
 	
