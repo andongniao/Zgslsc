@@ -1,6 +1,7 @@
 package com.example.educonsult.activitys;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -116,6 +117,9 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 					if(isread){
 						Toast.makeText(context, R.string.regist_ok, 200).show();
 						//TODO 跳转完善信息页面
+						Intent intent = new Intent(context,RegistOKActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
 						finish();
 					}else{
 						Toast.makeText(context, R.string.regist_inpu_error, 200).show();

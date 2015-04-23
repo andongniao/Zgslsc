@@ -22,13 +22,15 @@ import com.example.educonsult.adapters.SearchResultAdapter;
 public class SearchResultActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
 	protected int activityCloseExitAnimation;
-	private ImageView iv_back;
+	private ImageView iv_back,iv_num,iv_price,iv_renqi;
 	private EditText et;
 	private LinearLayout ll_zonghe,ll_xiaoliang,ll_price,ll_renqi;
 	private GridView gv;
 	private Context context;
 	private ArrayList<Integer> list;
 	private SearchResultAdapter adapter;
+	private ArrayList<View> list_view;
+	private boolean num,price,renqi;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	}
 
 	private void addlisteners() {
-		
+
 		gv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -65,7 +67,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		for(int i = 0;i<10;i++){
 			list.add(i);
 		}
-
+		list_view = new ArrayList<View>();
 		iv_back = (ImageView) findViewById(R.id.search_result_iv_back);
 		iv_back.setOnClickListener(this);
 		et = (EditText) findViewById(R.id.search_result_et);
@@ -78,6 +80,13 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		ll_price.setOnClickListener(this);
 		ll_renqi = (LinearLayout) findViewById(R.id.search_result_ll_renqi);
 		ll_renqi.setOnClickListener(this);
+		iv_num = (ImageView) findViewById(R.id.search_result_iv_xiaoliang);
+		iv_price = (ImageView) findViewById(R.id.search_result_iv_price);
+		iv_renqi = (ImageView) findViewById(R.id.search_result_iv_renqi);
+		list_view.add(iv_num);
+		list_view.add(iv_price);
+		list_view.add(iv_renqi);
+
 		gv = (GridView) findViewById(R.id.search_result_gv);
 		adapter = new SearchResultAdapter(context, list);
 		gv.setAdapter(adapter);
@@ -99,18 +108,49 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 
 			break;
 		case R.id.search_result_ll_xiaoliang:
-
+			Change(0);
 			break;
 		case R.id.search_result_ll_price:
-
+			Change(1);
 			break;
 		case R.id.search_result_ll_renqi:
-
+			Change(2);
 			break;
 
 		}
 	}
-	
+
+	private void Change(int i){
+		switch (i) {
+		case 0:
+			if(num){
+				num = false;
+				list_view.get(0).setBackgroundResource(R.drawable.jiantou_down);
+			}else{
+				num = true;
+				list_view.get(0).setBackgroundResource(R.drawable.jiantou_up);
+			}
+			break;
+		case 1:
+			if(price){
+				price = false;
+				list_view.get(1).setBackgroundResource(R.drawable.jiantou_down);
+			}else{
+				price = true;
+				list_view.get(1).setBackgroundResource(R.drawable.jiantou_up);
+			}
+			break;
+		case 2:
+			if(renqi){
+				renqi = false;
+				list_view.get(2).setBackgroundResource(R.drawable.jiantou_down);
+			}else{
+				renqi = true;
+				list_view.get(2).setBackgroundResource(R.drawable.jiantou_up);
+			}
+			break;
+		}
+	}
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub

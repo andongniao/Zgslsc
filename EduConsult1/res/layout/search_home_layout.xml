@@ -70,13 +70,6 @@
             android:scrollbars="none"
             android:background="@null"
             ></ListView>
-        <RatingBar 
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            style="@style/RatingBarItem"
-            android:focusable="false"
-            android:isIndicator="true"
-            />
 		<Button 
 		    android:id="@+id/search_home_btn_clean"
 		    android:layout_marginTop="30dp"

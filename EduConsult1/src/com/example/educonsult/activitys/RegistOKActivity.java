@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,12 +11,22 @@ import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 
 public class RegistOKActivity extends Activity{
+	protected int activityCloseEnterAnimation;
+
+	protected int activityCloseExitAnimation;
 	private Handler hand;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
+		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
+		activityStyle.recycle();
+		activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] {android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+		activityStyle.recycle();
 		setContentView(R.layout.tiaozhuan_layout);
 		hand = new Handler() {
 			@Override
@@ -43,5 +54,11 @@ public class RegistOKActivity extends Activity{
 			};
 		}.start();
 
+	}
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
 }
