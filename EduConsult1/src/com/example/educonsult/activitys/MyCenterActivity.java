@@ -115,16 +115,31 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_zhifu:
-	        
+			intent = new Intent(context,MyOrderActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("index", 1);
+			startActivity(intent);
 			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_fahuuo:
+			intent = new Intent(context,MyOrderActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("index", 2);
+			startActivity(intent);
 			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_shouhuo:
+			intent = new Intent(context,MyOrderActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("index", 3);
+			startActivity(intent);
 			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_pingjia:
+			intent = new Intent(context,MyOrderActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("index", 4);
+			startActivity(intent);
 			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_order:

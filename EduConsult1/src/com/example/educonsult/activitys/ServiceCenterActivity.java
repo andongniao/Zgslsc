@@ -1,7 +1,11 @@
 package com.example.educonsult.activitys;
 
-import org.jivesoftware.smack.ChatManager;
+import java.util.List;
 
+import org.jivesoftware.smack.ChatManager;
+import org.osgi.framework.BundleContext;
+
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -9,10 +13,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 
 public class ServiceCenterActivity extends BaseActivity implements OnClickListener{
@@ -24,6 +30,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	tv_shangjia_1_online,tv_shangjia_1_qq,tv_shangjia_2_online,tv_shangjia_2_qq,
 	tv_buy_1_online,tv_buy_1_qq,tv_buy_2_online,tv_buy_2_qq,
 	tv_zhuanjia_1_online,tv_zhuanjia_1_qq,tv_zhuanjia_2_online,tv_zhuanjia_2_qq;
+	private Context context;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -36,6 +43,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	}
 
 	private void init() {
+		context = this;
 		regist = false;
 		shangjia = false;
 		buy = false;
@@ -66,7 +74,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		ll_show_wenti = (LinearLayout) findViewById(R.id.service_center_ll_show_wenti);
 
 		tv_zhuce_1_online = (TextView) findViewById(R.id.service_center_tv_regist_one_line);
-		tv_zhuce_1_online.setOnClickListener(this);
+		tv_zhuce_1_online.setOnClickListener(new MyOnclickListener());
 		tv_zhuce_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuce_1_qq = (TextView) findViewById(R.id.service_center_tv_regist_one_qq);
@@ -74,7 +82,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_zhuce_1_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuce_2_online = (TextView) findViewById(R.id.service_center_tv_regist_two_line);
-		tv_zhuce_2_online.setOnClickListener(this);
+		tv_zhuce_2_online.setOnClickListener(new MyOnclickListener());
 		tv_zhuce_2_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuce_2_qq = (TextView) findViewById(R.id.service_center_tv_regist_two_qq);
@@ -83,7 +91,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 
 		tv_shangjia_1_online = (TextView) findViewById(R.id.service_center_tv_shangjia_one_line);
-		tv_shangjia_1_online.setOnClickListener(this);
+		tv_shangjia_1_online.setOnClickListener(new MyOnclickListener());
 		tv_shangjia_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_shangjia_1_qq = (TextView) findViewById(R.id.service_center_tv_shangjia_one_qq);
@@ -100,7 +108,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 
 		tv_buy_1_online = (TextView) findViewById(R.id.service_center_tv_buy_one_line);
-		tv_buy_1_online.setOnClickListener(this);
+		tv_buy_1_online.setOnClickListener(new MyOnclickListener());
 		tv_buy_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_buy_1_qq = (TextView) findViewById(R.id.service_center_tv_buy_one_qq);
@@ -108,7 +116,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_buy_1_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_buy_2_online = (TextView) findViewById(R.id.service_center_tv_buy_two_line);
-		tv_buy_2_online.setOnClickListener(this);
+		tv_buy_2_online.setOnClickListener(new MyOnclickListener());
 		tv_buy_2_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_buy_2_qq = (TextView) findViewById(R.id.service_center_tv_buy_two_qq);
@@ -117,7 +125,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 
 		tv_zhuanjia_1_online = (TextView) findViewById(R.id.service_center_tv_zhuanjia_one_line);
-		tv_zhuanjia_1_online.setOnClickListener(this);
+		tv_zhuanjia_1_online.setOnClickListener(new MyOnclickListener());
 		tv_zhuanjia_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuanjia_1_qq = (TextView) findViewById(R.id.service_center_tv_zhuanjia_one_qq);
@@ -125,7 +133,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_zhuanjia_1_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuanjia_2_online = (TextView) findViewById(R.id.service_center_tv_zhuanjia_two_line);
-		tv_zhuanjia_2_online.setOnClickListener(this);
+		tv_zhuanjia_2_online.setOnClickListener(new MyOnclickListener());
 		tv_zhuanjia_2_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuanjia_2_qq = (TextView) findViewById(R.id.service_center_tv_zhuanjia_two_qq);
@@ -144,6 +152,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
+		
 		switch (v.getId()) {
 		case R.id.service_center_ll_zx_regist:
 			if(!regist){
@@ -226,14 +235,46 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 			//		
 			//		break;
 
+		}
+	}
+	class MyOnclickListener implements OnClickListener{
 
-
-
-
-
-
-
-
+		@Override
+		public void onClick(View v) {
+			 //已安装插件列表
+			List<org.osgi.framework.Bundle> bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
+				BundleContext context =MyApplication.frame.getSystemBundleContext();
+				for(int i=0;i<context.getBundles().length;i++)
+				{
+					//获取已安装插件
+					bundles.add(context.getBundles()[i]);        	        
+				}
+				
+//				BundleContext context =frame.getSystemBundleContext();
+				startor(bundles);
+		}
+		
+	}
+	public void startor(List<org.osgi.framework.Bundle> list){
+		org.osgi.framework.Bundle bundle=list.get(1);
+		if(bundle.getState()!=bundle.ACTIVE){
+			//判断插件是否已启动
+			try {
+				bundle.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if(bundle.getBundleActivity()!=null){
+			Intent i=new Intent();
+			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
+		}else{
+			
+			Toast.makeText(context, "该插件没有配置BundleActivity",
+				     Toast.LENGTH_SHORT).show();
 		}
 	}
 

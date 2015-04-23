@@ -22,6 +22,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener{
 	private ArrayList<Integer> list;
 	private ArrayList<View> view_list;
 	private MyOrderHomeAdapter adapter;
+	private int index;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -34,6 +35,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		index = getIntent().getIntExtra("index", 0);
 		context = this;
 		view_list = new ArrayList<View>();
 		list = new ArrayList<Integer>();
@@ -70,7 +72,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener{
 		view_list.add(tv_show_comment);
 		adapter = new MyOrderHomeAdapter(context, list);
 		lv.setAdapter(adapter);
-		
+		change(index);
 
 	}
 

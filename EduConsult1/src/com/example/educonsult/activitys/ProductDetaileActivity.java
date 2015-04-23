@@ -16,12 +16,13 @@ import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private ScrollView scrollView;
-	private LinearLayout ll_addshopcart,ll_as_l,ll_as_t,ll_as_r,
+	private LinearLayout ll_addshopcart,ll_gopay,ll_as_l,ll_as_t,ll_as_r,
 	ll_paied_l,ll_paied_t,ll_paied_r;
 	private boolean isshow;
 	private PopupWindow popupWindow;
@@ -57,9 +58,10 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		ll_paied_t.setOnClickListener(this);
 		ll_paied_r = (LinearLayout) findViewById(R.id.product_detaile_ll_shopped_r);
 		ll_paied_r.setOnClickListener(this);
-
-
+		ll_gopay = (LinearLayout) findViewById(R.id.product_detaile_ll_pay_now);
+		ll_gopay.setOnClickListener(this);
 		ll_addshopcart = (LinearLayout) findViewById(R.id.product_detaile_ll_add_shopcart);
+		ll_addshopcart.setOnClickListener(this);
 		View v = new ImageView(context);
 		v.setBackgroundResource(R.drawable.ic_launcher);
 		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -123,6 +125,14 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		case R.id.product_detaile_ll_shopped_r:
 			Toproduct();
 			break;
+		case R.id.product_detaile_ll_pay_now:
+			ExampleActivity.setCurrentTab(3);
+			finish();
+			break;
+		case R.id.product_detaile_ll_add_shopcart:
+			Toast.makeText(context, "ok", 1000).show();
+			break;
+			
 			
 		}
 	}
