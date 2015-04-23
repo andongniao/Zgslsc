@@ -1,6 +1,7 @@
 package com.example.educonsult;
 
 import android.content.Intent;
+/***************≤‚ ‘***************************/
 
 public class TabItem {
 	private String title; // tab item title
