@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import libcore.io.DiskLruCache;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +20,7 @@ import com.example.educonsult.beans.ListUserBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.fragments.HomeFragment;
 import com.example.educonsult.fragments.HomePageFragmentMenu;
+import com.example.educonsult.tools.DiskLruCache;
 import com.example.educonsult.tools.Util;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
