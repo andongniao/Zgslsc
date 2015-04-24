@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
@@ -20,6 +22,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.ShopcartHomeAdapter;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.tools.Util;
 
 public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
@@ -32,13 +35,17 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private CheckBox cb_all;
 	private shop shop;
 	private int type,len,cl;
+	private ImageView iv_top_t;
+	private RelativeLayout rl_r;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		goneTopLeft();
 		topRightRVisible();
-		topRightTGone();
+		rl_r = (RelativeLayout) getTopRightRl();
+		iv_top_t = (ImageView) getTopRightView();
+		iv_top_t.setBackgroundResource(R.drawable.top_xx_bg);
 		setTitleTxt(R.string.shopcart_title);
 		setContentXml(R.layout.shopcart_home_view);
 		init();
@@ -48,6 +55,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		context = this;
+		Util.SetRedNum(context, rl_r, 1);
 		type = 0;
 		list = new ArrayList<ShopBean>();
 		lv = (ListView) findViewById(R.id.shopcart_home_lv);

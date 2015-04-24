@@ -30,14 +30,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.GqHomeActivity;
@@ -45,9 +49,12 @@ import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.KnowHomeActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
+import com.example.educonsult.activitys.XinjianActivity;
 import com.example.educonsult.activitys.ZhanhuiHomeActivity;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.HomeRuzhuAdapter;
+import com.example.educonsult.beans.ListUserBean;
+import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.tools.Util;
 import com.example.educonsult.tools.FileUtil.filter.apkFilter;
@@ -60,18 +67,22 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private HomeRuzhuAdapter ruzhuadapter;
 	private ArrayList<String> list;
 	private Context context;
-	private LinearLayout ll_gq,ll_cx,ll_pp,ll_zh,ll_zx,ll_zd,ll_free,ll_lm,ll_sl,ll_sy,ll_shebei,
+	private LinearLayout ll_gq,ll_news,ll_know,ll_zhanhui,ll_pinpai,ll_zhaobiao,ll_team,ll_leimu,ll_sl,ll_sy,ll_shebei,
 	ll_chuqin,ll_tianjia,ll_yuanliao,ll_tuijian_l,ll_tuijian_one,ll_tuijian_two,ll_tuijian_three,
-	ll_tuijian_four,ll_tuijian_b_l,ll_tuijian_b_t,ll_tuijian_b_r,
+	ll_tuijian_four,ll_tuijian_b_l,ll_tuijian_b_t,ll_tuijian_b_r,ll_search,
 	ll_hot_l,ll_hot_t,ll_hot_r
 	,ll_hot_b_l,ll_hot_b_t,ll_hot_b_r;
+	private RelativeLayout top_rl;
 	private TextView tv_m_jingpin,tv_m_hot,tv_m_ruzhu;
 	private ImageView iv_hot_l,iv_fenlei;
+	private EditText et_search;
 	private Intent intent;
 	private FrameworkInstance frame=null;
 	private String name = "ChatUIDemo.apk";
 	private List<org.osgi.framework.Bundle> bundles=null;
 	private String title;
+	private ListUserBean listUserBean;
+	private Message msg;
 
 
 	@Override
@@ -87,43 +98,47 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private void init() {
 		context = getActivity();
 		frame=MyApplication.frame;
-		
+		top_rl = (RelativeLayout) view.findViewById(R.id.home_top_rl_right);
+		Util.SetRedNum(context, top_rl, 1);
 		apkFilter apkFilter=new apkFilter(new isFilesFilter(null));
-//		  if(copyApkFromAssets(context, "chatdemo-ui.apk", Environment.getExternalStorageDirectory().getAbsolutePath()+"/chatdemo-ui.apk")){
-//			  Uri u = Uri.parse("file://" + Environment.getExternalStorageDirectory().getAbsolutePath()+"/chatdemo-ui.apk");
+		//		  if(copyApkFromAssets(context, "chatdemo-ui.apk", Environment.getExternalStorageDirectory().getAbsolutePath()+"/chatdemo-ui.apk")){
+		//			  Uri u = Uri.parse("file://" + Environment.getExternalStorageDirectory().getAbsolutePath()+"/chatdemo-ui.apk");
 		String path = Environment.getExternalStorageDirectory().getPath()+"/"+name;
 		try {
 			boolean b = Tosd(name,  path);
 			//调用osgi插件安装服务安装插件
-			
+
 			boolean a = MyApplication.sp.getBoolean("isinstaed", false); 
 			if(b && !a){
-			install(path,new myinstallCallback());
+				install(path,new myinstallCallback());
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		et_search = (EditText) view.findViewById(R.id.title_iv_search);
+		et_search.setOnClickListener(this);
+		ll_search = (LinearLayout) view.findViewById(R.id.home_ll_top_search);
+		ll_search.setOnClickListener(this);
 		list = new ArrayList<String>();
 		iv_fenlei = (ImageView) view.findViewById(R.id.title_left_iv);
 		iv_fenlei.setOnClickListener(this);
 		ll_gq = (LinearLayout) view.findViewById(R.id.home_gongqiu_ll);
 		ll_gq.setOnClickListener(this);
-		ll_cx = (LinearLayout) view.findViewById(R.id.home_cuxiao_ll);
-		ll_cx.setOnClickListener(this);
-		ll_pp = (LinearLayout) view.findViewById(R.id.home_pinpai_ll);
-		ll_pp.setOnClickListener(this);
-		ll_zh = (LinearLayout) view.findViewById(R.id.home_zhanhui_ll);
-		ll_zh.setOnClickListener(this);
-		ll_zx = (LinearLayout) view.findViewById(R.id.home_zixun_ll);
-		ll_zx.setOnClickListener(this);
-		ll_zd = (LinearLayout) view.findViewById(R.id.home_zhidao_ll);
-		ll_zd.setOnClickListener(this);
-		ll_free = (LinearLayout) view.findViewById(R.id.home_mianfei_ll);
-		ll_free.setOnClickListener(this);
-		ll_lm = (LinearLayout) view.findViewById(R.id.home_leimu_ll);
-		ll_lm.setOnClickListener(this);
+		ll_news = (LinearLayout) view.findViewById(R.id.home_news_ll);
+		ll_news.setOnClickListener(this);
+		ll_know = (LinearLayout) view.findViewById(R.id.home_zhidao_ll);
+		ll_know.setOnClickListener(this);
+		ll_zhanhui = (LinearLayout) view.findViewById(R.id.home_zhanhui_ll);
+		ll_zhanhui.setOnClickListener(this);
+		ll_pinpai = (LinearLayout) view.findViewById(R.id.home_pinpai_ll);
+		ll_pinpai.setOnClickListener(this);
+		ll_zhaobiao = (LinearLayout) view.findViewById(R.id.home_zhaobiao_ll);
+		ll_zhaobiao.setOnClickListener(this);
+		ll_team = (LinearLayout) view.findViewById(R.id.home_team_ll);
+		ll_team.setOnClickListener(this);
+		ll_leimu = (LinearLayout) view.findViewById(R.id.home_leimu_ll);
+		ll_leimu.setOnClickListener(this);
 		ll_sl = (LinearLayout) view.findViewById(R.id.home_siliao_ll);
 		ll_sl.setOnClickListener(this);
 		ll_sy = (LinearLayout) view.findViewById(R.id.home_shouyao_ll);
@@ -177,12 +192,14 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		String filename = "test";
 		Util util = new Util(context);
 		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
-		Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
-		iv_hot_l.setImageBitmap(b);
+			listUserBean = (ListUserBean) util.readObject(filename);
+			MyApplication.bean = listUserBean.getList().get(0);
+			Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
+			iv_hot_l.setImageBitmap(b);
 		}
-		
-		
-		
+
+
+
 
 
 		gv_like = (MyGridView) view.findViewById(R.id.home_ulike_gv);
@@ -197,6 +214,16 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	}
 
 	private void addlistener() {
+		top_rl.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				intent = new Intent(context,XinjianActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				context.startActivity(intent);
+				
+			}
+		});
 		gv_like.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -218,7 +245,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.title_left_iv:
-			Message msg = HomePagerActivity.handler.obtainMessage();
+			msg = HomePagerActivity.handler.obtainMessage();
 			msg.obj = HomePagerActivity.SlidTag;
 			HomePagerActivity.handler.sendMessage(msg);
 			break;
@@ -227,18 +254,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		case R.id.home_cuxiao_ll:
-
-			break;
-		case R.id.home_pinpai_ll:
-
-			break;
-		case R.id.home_zhanhui_ll:
-			intent = new Intent(context,ZhanhuiHomeActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			break;
-		case R.id.home_zixun_ll:
+		case R.id.home_news_ll:
 
 			break;
 		case R.id.home_zhidao_ll:
@@ -246,12 +262,22 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		case R.id.home_mianfei_ll:
-//			intent = new Intent(context,apkplugActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
-			
-			 //已安装插件列表
+		
+		case R.id.home_zhanhui_ll:
+			intent = new Intent(context,ZhanhuiHomeActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+		case R.id.home_pinpai_ll:
+
+			break;
+		case R.id.home_zhaobiao_ll:
+
+			break;
+	
+		case R.id.home_team_ll:
+
+			//已安装插件列表
 			bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
 			BundleContext context =frame.getSystemBundleContext();
 			for(int i=0;i<context.getBundles().length;i++)
@@ -259,13 +285,15 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				//获取已安装插件
 				bundles.add(context.getBundles()[i]);        	        
 			}
-			
-//			BundleContext context =frame.getSystemBundleContext();
+
+			//			BundleContext context =frame.getSystemBundleContext();
 			startor(bundles);
-			
+
 			break;
 		case R.id.home_leimu_ll:
-			
+			msg = HomePagerActivity.handler.obtainMessage();
+			msg.obj = HomePagerActivity.SlidTag;
+			HomePagerActivity.handler.sendMessage(msg);
 
 			break;
 		case R.id.home_siliao_ll:
@@ -311,17 +339,17 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.home_tv_jingpin:
-//			intent = new Intent(this.context,GqTwoActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			title = getResources().getString(R.string.home_tuijian);
-//			intent.putExtra("title", title);
-//			startActivity(intent);
+			//			intent = new Intent(this.context,GqTwoActivity.class);
+			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			title = getResources().getString(R.string.home_tuijian);
+			//			intent.putExtra("title", title);
+			//			startActivity(intent);
 			break;
 		case R.id.home_tv_hot:
-			
+
 			break;
 		case R.id.home_tv_ruzhu:
-			
+
 			break;
 
 
@@ -349,9 +377,15 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		case R.id.home_ll_tuijian_b_r:
 			Toproduct();
 			break;
+		case R.id.home_ll_top_search:
+			ExampleActivity.setCurrentTab(1);
+			break;
+		case R.id.title_iv_search:
+			ExampleActivity.setCurrentTab(1);
+			break;
 			
-			
-			
+
+
 		case R.id.home_ll_hot_l:
 			Toproduct();
 			break;
@@ -379,14 +413,14 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 		}
 	}
-	
+
 
 	private void Toproduct(){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
-	
+
 	/**
 	 * 安装插件回调函数
 	 */
@@ -408,9 +442,9 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				String s ="插件安装失败 ："+this.stutasToStr(arg0);
 				Toast.makeText(context, s, 3000).show();
 				System.out.println(s);
-			
+
 			}
-			
+
 		}
 		/**
 		 * 信息由 http://www.apkplug.com/javadoc/bundledoc1.5.3/
@@ -440,7 +474,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			return "状态信息不正确";
 		}
 	}
-	
+
 	public String showBundle(org.osgi.framework.Bundle b){
 		StringBuffer sb=new StringBuffer();
 		sb.append("\n插件名称:"+b.getName());
@@ -463,78 +497,78 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			}
 		}
 		if(bundle.getBundleActivity()!=null){
-//			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
-//				     Toast.LENGTH_SHORT).show();
+			//			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
+			//				     Toast.LENGTH_SHORT).show();
 			Intent i=new Intent();
 			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);
 		}else{
-			
+
 			Toast.makeText(context, "该插件没有配置BundleActivity",
-				     Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();
 		}
 	}
-	
-	
+
+
 	public boolean copyApkFromAssets(Context context, String fileName, String path) {  
-        boolean copyIsFinish = false;  
-        try {  
-            InputStream is = context.getAssets().open(fileName);  
-            File file = new File(path);  
-            file.createNewFile();  
-            FileOutputStream fos = new FileOutputStream(file);  
-            byte[] temp = new byte[1024];  
-            int i = 0;  
-            while ((i = is.read(temp)) > 0) {  
-                fos.write(temp, 0, i);  
-            }  
-            fos.close();  
-            is.close();  
-            copyIsFinish = true;  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-        return copyIsFinish;  
-    }  
+		boolean copyIsFinish = false;  
+		try {  
+			InputStream is = context.getAssets().open(fileName);  
+			File file = new File(path);  
+			file.createNewFile();  
+			FileOutputStream fos = new FileOutputStream(file);  
+			byte[] temp = new byte[1024];  
+			int i = 0;  
+			while ((i = is.read(temp)) > 0) {  
+				fos.write(temp, 0, i);  
+			}  
+			fos.close();  
+			is.close();  
+			copyIsFinish = true;  
+		} catch (IOException e) {  
+			e.printStackTrace();  
+		}  
+		return copyIsFinish;  
+	}  
 	public String getRealPathFromURI(Uri contentUri) {
-	    String res = null;
-	    String[] proj = { MediaStore.Images.Media.DATA };
-	    Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
-	    if(cursor.moveToFirst()){;
-	       int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-	       res = cursor.getString(column_index);
-	    }
-	    cursor.close();
-	    return res;
+		String res = null;
+		String[] proj = { MediaStore.Images.Media.DATA };
+		Cursor cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+		if(cursor.moveToFirst()){;
+		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		res = cursor.getString(column_index);
+		}
+		cursor.close();
+		return res;
 	}
 	/**
-	  * 安装本地插件服务调用
-	  * @param path
-	  * @param callback   安装插件的回掉函数
-	  * @throws Exception
-	  */
-	 public void install(String path,installCallback callback) throws Exception{
-		 System.out.println("安装 :"+path);
-		 BundleContext mcontext=frame.getSystemBundleContext();
-		 OSGIServiceAgent<BundleControl> agent=new OSGIServiceAgent<BundleControl>(mcontext,BundleControl.class);
+	 * 安装本地插件服务调用
+	 * @param path
+	 * @param callback   安装插件的回掉函数
+	 * @throws Exception
+	 */
+	public void install(String path,installCallback callback) throws Exception{
+		System.out.println("安装 :"+path);
+		BundleContext mcontext=frame.getSystemBundleContext();
+		OSGIServiceAgent<BundleControl> agent=new OSGIServiceAgent<BundleControl>(mcontext,BundleControl.class);
 		//插件启动级别为1(会自启) 并且不检查插件版本是否相同都安装
-		 agent.getService().install(mcontext, path,callback, 1,false,false,false);
+		agent.getService().install(mcontext, path,callback, 1,false,false,false);
 	}
 	public boolean Tosd(String fileName,String path) {
 		InputStream is;
 		try {
 			is = context.getAssets().open(fileName);
-		File file = new File(path);
-		file.createNewFile();
-		FileOutputStream fos = new FileOutputStream(file);
-		byte[] temp = new byte[1024];
-		int i = 0;
-		while ((i = is.read(temp)) > 0) {
-		fos.write(temp, 0, i);
-		}
-		fos.close();
-		is.close();
+			File file = new File(path);
+			file.createNewFile();
+			FileOutputStream fos = new FileOutputStream(file);
+			byte[] temp = new byte[1024];
+			int i = 0;
+			while ((i = is.read(temp)) > 0) {
+				fos.write(temp, 0, i);
+			}
+			fos.close();
+			is.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -545,7 +579,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onResume() {
 		if(MyApplication.isopen){
-			 //已安装插件列表
+			//已安装插件列表
 			bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
 			BundleContext context =frame.getSystemBundleContext();
 			for(int i=0;i<context.getBundles().length;i++)
@@ -553,13 +587,13 @@ public class HomeFragment extends Fragment implements OnClickListener{
 				//获取已安装插件
 				bundles.add(context.getBundles()[i]);        	        
 			}
-			
-//			BundleContext context =frame.getSystemBundleContext();
+
+			//			BundleContext context =frame.getSystemBundleContext();
 			startor(bundles);
-//			MyApplication.isopen = f
+			//			MyApplication.isopen = f
 		}
 		super.onResume();
 	}
-	
-	
+
+
 }

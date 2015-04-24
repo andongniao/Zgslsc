@@ -16,7 +16,7 @@
             android:id="@+id/order_home_ll_address"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/order_address_bg"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:gravity="center_vertical"

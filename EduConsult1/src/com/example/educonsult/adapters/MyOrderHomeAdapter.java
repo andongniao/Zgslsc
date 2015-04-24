@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.MyOrderActivity.Myorder;
 import com.example.educonsult.myviews.MyListview;
 
 public class MyOrderHomeAdapter extends BaseAdapter{
@@ -20,10 +22,12 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 	private Item item;
 	private MyOrderLvAdapter adapter;
 	private int n;
+	private Myorder myorder;
 
-	public MyOrderHomeAdapter(Context context,ArrayList<Integer>list){
+	public MyOrderHomeAdapter(Context context,ArrayList<Integer>list,Myorder myorder){
 		this.context = context;
 		this.list = list;
+		this.myorder = myorder;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(ArrayList<Integer>list){
@@ -89,6 +93,12 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 		item.lv.setAdapter(adapter);
 		item.tv_num.setText("共"+n+"件商品");
 		item.tv_day.setText("距离确认收货还有2天");
+		item.btn_l.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				myorder.delte(position);
+			}
+		});
 		return convertView;
 	}
 	class Item{

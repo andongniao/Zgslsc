@@ -32,6 +32,7 @@
             android:id="@+id/search_home_et_inpu"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:singleLine="true"
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:background="#e6e6e6"
@@ -69,6 +70,8 @@
             android:layout_height="wrap_content"
             android:scrollbars="none"
             android:background="@null"
+            android:listSelector="#00000000"
+            android:divider="#00000000"
             ></ListView>
 		<Button 
 		    android:id="@+id/search_home_btn_clean"
@@ -92,13 +95,15 @@
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_launcher"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/search_result_isnull"
             />
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_history_is_null"
             android:textColor="@color/black"
+            android:layout_marginTop="15dp"
             android:textSize="15dp"
             />
     </LinearLayout>

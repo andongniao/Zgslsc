@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.XinjianAdapter;
+import com.example.educonsult.tools.Util;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class XinjianActivity extends BaseActivity{
 	private ArrayList<Object> list;
 	private XinjianAdapter adapter;
 	private LinearLayout ll_isnull;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -26,6 +27,28 @@ public class XinjianActivity extends BaseActivity{
 		setTopLeftTv(R.string.xinjian_title);
 		setContentXml(R.layout.xinjian);
 		init();
+		String flag = getIntent().getStringExtra("flag");
+		if(Util.IsNull(flag)){
+			if("ghhome".equals(flag)){
+				GqHomeActivity.isread = true;
+			}else if("address".equals(flag)){
+				AddressActivity.isread = true;
+			}else if("service".equals(flag)){
+				ServiceCenterActivity.isread = true;
+			}
+			else if("qianbao".equals(flag)){
+				QianBaoActivity.isread = true;
+			}
+			else if("myinfo".equals(flag)){
+				MyInfoActivity.isread = true;
+			}
+			else if("gqtwo".equals(flag)){
+				GqTwoActivity.isread = true;
+			}
+//			else if("gqtwo".equals(flag)){
+//				GqTwoActivity.isread = true;
+//			}
+		}
 	}
 
 	private void init() {

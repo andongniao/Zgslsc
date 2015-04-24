@@ -56,8 +56,6 @@ public class HomeLikeAdapter extends BaseAdapter{
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
-//		ImageView v = new ImageView(context);
-		myitem.iv.setBackgroundResource(R.drawable.ic_launcher);
 		return convertView;
 	}
 	

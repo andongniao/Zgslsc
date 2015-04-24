@@ -64,8 +64,9 @@ public class Util {
 	private static final int CACHE_TIME = 60*60000;//缓存失效时间
 	private Hashtable<String, Object> memCacheRegion = new Hashtable<String, Object>();
 	private Context context;
-	
-	
+	private static BadgeView badge;
+
+
 	public Util(Context context){
 		this.context = context;
 	}
@@ -119,7 +120,7 @@ public class Util {
 			failure = true;
 		return failure;
 	}
-	
+
 	/**
 	 * 清除缓存目录
 	 * @param dir 目录
@@ -444,7 +445,7 @@ public class Util {
 		}
 		return bitmap;
 	}
-	
+
 	// 获取指定路径的图片  
 	public static Bitmap getBitmapForNet(String urlpath)  
 			throws Exception {  
@@ -497,8 +498,8 @@ public class Util {
 		Bitmap bt = BitmapFactory.decodeFile(fname);
 		return bt;
 	}
-	
-	
+
+
 
 	/**
 	 * 判断是否是电话号码
@@ -827,9 +828,19 @@ public class Util {
 	 * @param num
 	 */
 	public static void SetRedNum(Context context,View v,int num){
-		BadgeView badge = new BadgeView(context, v);
+		badge = new BadgeView(context, v);
 		badge.setText(""+num);
 		badge.show();
+	}
+	/**
+	 * 取消右上角小红点&数量
+	 * @param context
+	 * @param v
+	 */
+	public static void SetRedGone(Context context,View v){
+		if(badge!=null){
+			badge.toggle();
+		}
 	}
 
 }

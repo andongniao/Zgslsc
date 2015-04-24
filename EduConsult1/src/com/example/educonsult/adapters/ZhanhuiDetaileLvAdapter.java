@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.beans.ListUserBean;
+import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.tools.Util;
 
@@ -72,8 +74,10 @@ public class ZhanhuiDetaileLvAdapter extends BaseAdapter{
 		String filename = "test";
 		Util util = new Util(context);
 		if(util.isExistDataCache(filename)&& util.isReadDataCache(filename)){
-		Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
-		item.head.setImageBitmap(b);
+			ListUserBean listUserBean = (ListUserBean) util.readObject(filename);
+			UserBean bean = listUserBean.getList().get(0);
+			Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
+			item.head.setImageBitmap(b);
 		}
 		return convertView;
 	}

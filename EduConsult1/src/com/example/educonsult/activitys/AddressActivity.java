@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.AddressHomeAdapter;
 import com.example.educonsult.myviews.BadgeView;
@@ -33,6 +34,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private Intent intent;
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
+	public static boolean isread;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -48,6 +50,27 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		setTopLeftTv(R.string.address_title);
 		setContentXml(R.layout.address_home);
 		init();
+		addlistener();
+	}
+	private void addlistener() {
+		rl_l.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				intent = new Intent(context,XinjianActivity.class);
+				intent.putExtra("flag", "address");
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
+		rl_r.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ExampleActivity.setCurrentTab(0);
+				finish();
+			}
+		});
 	}
 	private void init() {
 		context = this;
@@ -86,7 +109,6 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 		Util.SetRedNum(context, rl_l, 1);
-		Util.SetRedNum(context, rl_r, 1);
 	}
 	@Override
 	public void onClick(View v) {
@@ -102,6 +124,14 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 
+		}
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isread){
+			Util.SetRedGone(context, rl_l);
+			isread = false;
 		}
 	}
 

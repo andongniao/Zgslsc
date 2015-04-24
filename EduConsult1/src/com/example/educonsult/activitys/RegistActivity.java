@@ -31,8 +31,9 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightLVisible();
-		topRightRVisible();
+//		topRightLVisible();
+//		topRightRVisible();
+		topRightTGone();
 		setTopLeftTv(R.string.regist_title);
 		setContentXml(R.layout.regist_layout);
 		init();
@@ -135,17 +136,19 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 
 			break;
 		case R.id.regist_tv_qiye:
-				tp = 1;
-				tv_qiye.setBackgroundResource(R.drawable.regist_clikeed);
-				tv_qiye.setTextColor(getResources().getColor(R.color.white));
-				tv_geren.setBackgroundResource(R.drawable.regist_unclick);
-				tv_geren.setTextColor(getResources().getColor(R.color.black));
+			tp = 1;
+			tv_qiye.setBackgroundResource(R.drawable.regist_clikeed);
+			tv_qiye.setTextColor(getResources().getColor(R.color.white));
+			tv_qiye.setBackgroundResource(R.color.regist_bg);
+			//				tv_geren.setBackgroundResource(R.drawable.regist_unclick);
+			tv_geren.setTextColor(getResources().getColor(R.color.black));
 			break;
 		case R.id.regist_tv_geren:
 			tp = 2;
 			tv_geren.setBackgroundResource(R.drawable.regist_clikeed);
 			tv_geren.setTextColor(getResources().getColor(R.color.white));
-			tv_qiye.setBackgroundResource(R.drawable.regist_unclick);
+			tv_qiye.setBackgroundResource(R.color.regist_bg);
+			//(R.drawable.regist_unclick);
 			tv_qiye.setTextColor(getResources().getColor(R.color.black));
 			break;
 		}

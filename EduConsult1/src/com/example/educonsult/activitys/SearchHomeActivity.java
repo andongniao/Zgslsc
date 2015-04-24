@@ -170,6 +170,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 					er.putInt("size", l.size());
 					er.commit();
 					ishave = false;
+					et.setText("");
 				}else{
 					Toast.makeText(SearchHomeActivity.this, "error", 500).show();
 					ishave = false;

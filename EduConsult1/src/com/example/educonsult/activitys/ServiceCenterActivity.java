@@ -11,15 +11,19 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
+import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.tools.Util;
 
 public class ServiceCenterActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_zx_regist,ll_zx_shangjia,ll_zx_buy,ll_zx_zhuanjia,
@@ -31,15 +35,47 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	tv_buy_1_online,tv_buy_1_qq,tv_buy_2_online,tv_buy_2_qq,
 	tv_zhuanjia_1_online,tv_zhuanjia_1_qq,tv_zhuanjia_2_online,tv_zhuanjia_2_qq;
 	private Context context;
+	private Intent intent;
+	private ImageView iv_top_l,iv_top_t;
+	private RelativeLayout rl_l,rl_r;
+	public static boolean isread;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightLVisible();
 		topRightRVisible();
 		topRightTGone();
+		rl_l = (RelativeLayout) getTopLightRl();
+		rl_r = (RelativeLayout) getTopRightRl();
+		iv_top_l = (ImageView) getTopLightView();
+		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+		iv_top_t = (ImageView) getTopRightView();
+		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTopLeftTv(R.string.service_center_title);
 		setContentXml(R.layout.service_center_layout);
 		init();
+		addlistener();
+	}
+
+	private void addlistener() {
+		rl_l.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				intent = new Intent(context,XinjianActivity.class);
+				intent.putExtra("flag", "service");
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
+		rl_r.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ExampleActivity.setCurrentTab(0);
+				finish();
+			}
+		});
 	}
 
 	private void init() {
@@ -141,7 +177,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_zhuanjia_2_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 
-
+		Util.SetRedNum(context, rl_l, 1);
 
 
 
@@ -275,6 +311,14 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 			
 			Toast.makeText(context, "该插件没有配置BundleActivity",
 				     Toast.LENGTH_SHORT).show();
+		}
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isread){
+			Util.SetRedGone(context, rl_l);
+			isread = false;
 		}
 	}
 

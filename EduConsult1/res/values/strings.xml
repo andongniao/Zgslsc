@@ -11,13 +11,13 @@
     <!-- 首页 -->
     <string name="home_more">更多></string>
     <string name="home_search">请输入关键词</string>
-    <string name="home_gongqiu">供求</string>
-    <string name="home_cuxiao">促销</string>
-    <string name="home_pinpai">品牌</string>
-    <string name="home_zhanhui">展会</string>
-    <string name="home_zixun">资讯</string>
+    <string name="home_gongqiu">产品</string>
     <string name="home_zhidao">知道</string>
-    <string name="home_mianfei">免费拿样</string>
+    <string name="home_news">新闻</string>
+    <string name="home_zhanhui">展会</string>
+    <string name="home_pinpai">品牌</string>
+    <string name="home_zhaobiao">招标</string>
+    <string name="home_team">团购</string>
     <string name="home_leimu">类目</string>
     <string name="home_siliao">饲料</string>
     <string name="home_shouyao">兽药</string>
@@ -262,6 +262,11 @@
     <string name="myorder_querenshouhuo">确认收货</string>
     <string name="myorder_tuikuan">申请退款</string>
     <string name="myorder_close">关闭交易</string>
+    <string name="myorder_order_isnull_up">你还没有相关订单</string>
+    <string name="myorder_order_isnull_down">可以去看看有哪些想买的</string>
+    <string name="myorder_see">随便逛逛</string>
+    
+    
     
     <!-- 供求 -->
     <string name="gongqiu_title">供求</string>

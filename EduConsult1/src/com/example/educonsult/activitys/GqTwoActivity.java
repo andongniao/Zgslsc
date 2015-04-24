@@ -18,14 +18,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.GqAdapter;
 import com.example.educonsult.adapters.HomeRuzhuAdapter;
+import com.example.educonsult.adapters.HomeSlidAdapter;
+import com.example.educonsult.adapters.KnowFenleiAdapter;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.tools.Util;
 
@@ -43,15 +47,30 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout add_ll;
 	private TextView tv_b;
 	private ArrayList<View> l;
-	private int pos = -1;
+	private int pos = 0;
 	private GqAdapter gqAdapter;
 	private Intent intent;
 	private LinearLayout ll_jingxuan_l,ll_jingxuan_t,ll_jingxuan_r;
+	private ImageView iv_top_l,iv_top_t;
+	private RelativeLayout rl_l,rl_r;
+	public static boolean isread;
+	
+	private HomeSlidAdapter adapter_r;
+	private KnowFenleiAdapter adapter_l;
+	
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightLVisible();
 		topRightRVisible();
+		topRightTGone();
+		rl_l = (RelativeLayout) getTopLightRl();
+		rl_r = (RelativeLayout) getTopRightRl();
+		iv_top_l = (ImageView) getTopLightView();
+		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+		iv_top_t = (ImageView) getTopRightView();
+		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		String title = getIntent().getStringExtra("title");
 		if(Util.IsNull(title)){
 			setTopLeftTv(title);
@@ -63,8 +82,26 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		addlistener();
 	}
 	private void addlistener() {
+		rl_l.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				intent = new Intent(context,XinjianActivity.class);
+				intent.putExtra("flag", "gqtwo");
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
+		rl_r.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ExampleActivity.setCurrentTab(0);
+				finish();
+			}
+		});
 		View v = new ImageView(context);
-		v.setBackgroundResource(R.drawable.ic_launcher);
+		v.setBackgroundResource(R.drawable.base_to_top);
 		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		isshow = false;
 		scrollView.setOnTouchListener(new OnTouchListener() {
@@ -98,7 +135,6 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 						popupWindow.dismiss();
 					}
 					scrollView.scrollTo(10, 10);
-					Toast.makeText(context, "µ±Ç°Î»ÖÃ"+scrollView.getScrollY(), Toast.LENGTH_SHORT).show();
 					isshow = false;
 				}
 			}
@@ -145,15 +181,19 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 			gqAdapter = new GqAdapter(context, s);
 			gv_dh_xq.setAdapter(gqAdapter);
 		}
+		if(l.size()>0){
+			l.get(0).setBackgroundResource(R.color.orn);
+		}
+		Util.SetRedNum(context, rl_l, 1);
 	}
 	class MyOnClickListener implements OnClickListener{
-		private int x = -1;
+		private int x = 0;
 		public MyOnClickListener(int x){
 			this.x=x;
 		}
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(context, "click"+x, 1000).show();
+			Toast.makeText(context, "click"+x, Toast.LENGTH_SHORT).show();
 			if(pos==-1){
 				l.get(x).setBackgroundResource(R.color.orn);
 			}else{
@@ -184,6 +224,15 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 
 		}
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isread){
+			Util.SetRedGone(context, rl_l);
+			isread = false;
+		}
+	}
+
 
 
 }
