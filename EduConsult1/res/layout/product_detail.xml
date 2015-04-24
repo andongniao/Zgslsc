@@ -481,6 +481,151 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="10dp" >
+
+                    <LinearLayout
+                        android:id="@+id/product_detaile_ll_add_view_chanpin"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:text="@string/product_detaile_product"
+                            android:textColor="@color/base_top_title_bg" />
+
+                        <TextView
+                            android:id="@+id/product_detaile_product_main_ingredients_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:lineSpacingExtra="5dp"
+                            android:text="@string/product_detaile_product_main_ingredients_text"
+                            android:textColor="@color/black"
+                            android:textScaleX="1.0" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/product_detaile_ll_add_view_pingjia"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <LinearLayout
+                                android:id="@+id/product_detaile_ll_add_view_pingjia_costperformace"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:id="@+id/product_detailel_add_view_pingjia_costperformace"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/products_et_bg_line"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="@string/product_detaile_ll_add_view_pingjia_costper_formace"
+                                    android:textColor="@color/red"
+                                    android:textSize="10dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/product_detaile_ll_add_view_pingjia_zhiliang"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:id="@+id/product_detaile_add_view_pingjia_zhiliang"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/products_et_bg_line"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="@string/product_detaile_ll_add_view_pingjia_yuanliaozhiliang"
+                                    android:textColor="@color/red"
+                                    android:textSize="10dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/product_detaile_ll_add_view_pingjia_fuwu"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:id="@+id/product_detaile_add_view_pingjia_fuwu"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/products_et_bg_line"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="@string/product_detaile_ll_add_view_pingjia_fuwutaidu"
+                                    android:textColor="@color/red"
+                                    android:textSize="10dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/product_detaile_ll_add_view_pingjia_xiaoguo"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:id="@+id/product_detaile_add_view_pingjia_xiaoguo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/products_et_bg_line"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:text="@string/product_detaile_ll_add_view_pingjia_effect"
+                                    android:textColor="@color/red"
+                                    android:textSize="10dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.example.educonsult.myviews.MyListview
+                            android:id="@+id/product_detaile_ll_add_view_list"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:dividerHeight="0.5dp" >
+                        </com.example.educonsult.myviews.MyListview>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/product_detaile_ll_add_view_dianputuijian"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" >
+
+                        <com.example.educonsult.myviews.MyGridView
+                            android:id="@+id/product_detaile_all_view_dianputuijian_gv"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fadingEdge="none"
+                            android:horizontalSpacing="10dp"
+                            android:listSelector="#00000000"
+                            android:numColumns="2"
+                            android:scrollbars="none"
+                            android:verticalSpacing="10dp" >
+                        </com.example.educonsult.myviews.MyGridView>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
