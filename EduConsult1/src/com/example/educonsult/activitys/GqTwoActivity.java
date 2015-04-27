@@ -54,12 +54,14 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private int pos = 0;
 	private GqAdapter gqAdapter;
 	private Intent intent;
+	private LayoutInflater inflater;
 	private LinearLayout ll_jingxuan_l,ll_jingxuan_t,ll_jingxuan_r;
-	private ImageView iv_top_l,iv_top_t;
+	//public LinearLayout ll_gqtwo_popu;
+	private ImageView iv_top_l,iv_top_t,gqtwo_1,gqtwo_2;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	private ThreadWithProgressDialog myPDT;
-
+	public View ll_gqtwo_popu;
 	private HomeSlidAdapter adapter_r;
 	private KnowFenleiAdapter adapter_l;
 
@@ -112,24 +114,39 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 				finish();
 			}
 		});
-		View v = new ImageView(context);
-		v.setBackgroundResource(R.drawable.base_to_top);
-		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		inflater = LayoutInflater.from(context);
+		ll_gqtwo_popu=inflater.inflate(R.layout.gqtwo_popu_layout, null);
+		gqtwo_1=(ImageView)ll_gqtwo_popu.findViewById(R.id.gqtwo_popu_layout_img1);
+		gqtwo_2=(ImageView)ll_gqtwo_popu.findViewById(R.id.gqtwo_popu_layout_img2);
+		gqtwo_1.setBackgroundResource(R.drawable.base_to_zj);
+		gqtwo_2.setBackgroundResource(R.drawable.base_to_top);
+		gqtwo_2.setVisibility(View.GONE);
+		//View v = new ImageView(context);
+		//v.setBackgroundResource(R.drawable.base_to_top);
+		
+		//View v=inflater.inflate(R.layout.gq_two, null);
+		
+		popupWindow = new PopupWindow(ll_gqtwo_popu, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
 		isshow = false;
 		scrollView.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+				
 				if(event.getAction()==MotionEvent.ACTION_MOVE){
 					if(!isshow){
 						if(scrollView.getScrollY()>100){
 							popupWindow.showAtLocation(v, Gravity.BOTTOM|Gravity.RIGHT,20, 60);
+							
+							gqtwo_2.setVisibility(View.VISIBLE);
 							isshow = true;
 						}
 					}else{
 						if(scrollView.getScrollY()<=100){
 							if(popupWindow!=null && popupWindow.isShowing()){
-								popupWindow.dismiss();
+								//popupWindow.dismiss();
+							gqtwo_2.setVisibility(View.GONE);
 							}
 							isshow = false;
 						}
@@ -139,16 +156,26 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 
-		v.setOnClickListener(new OnClickListener() {
+		gqtwo_2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if(isshow){
 					if(popupWindow!=null && popupWindow.isShowing()){
-						popupWindow.dismiss();
+						//popupWindow.dismiss();
+						gqtwo_2.setVisibility(View.GONE);
 					}
 					scrollView.scrollTo(10, 10);
 					isshow = false;
 				}
+			}
+		});
+		gqtwo_1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//Intent intent=new Intent();
+				//intent.setClass(packageContext, cls)
 			}
 		});
 		gv_dh_xq.setOnItemClickListener(new OnItemClickListener() {
