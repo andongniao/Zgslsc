@@ -26,6 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -42,9 +43,12 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -63,7 +67,7 @@ public class Util {
 	private static final String DEFAULT_CHARSET = "UTF-8";
 	private static final int CACHE_TIME = 60*60000;//ª∫¥Ê ß–ß ±º‰
 	private Hashtable<String, Object> memCacheRegion = new Hashtable<String, Object>();
-	private Context context;
+	private static Context context;
 	private static BadgeView badge;
 
 
@@ -842,5 +846,121 @@ public class Util {
 			badge.toggle();
 		}
 	}
+
+
+	public static void Getbitmap(final ImageView v,final String url){
+		Thread thread;
+		final Handler handler;
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				if (msg.what == 1 && msg.obj != null) {
+					v.setImageBitmap((Bitmap) msg.obj);
+					//					mViewSwitcher.showNext();
+				} else {
+					//					yToastMessage(ImageDialog.this, ErrMsg);
+					//					finish();
+				}
+			}
+		};
+		thread = new Thread() {
+			public void run() {
+				Message msg = new Message();
+				Bitmap bmp = null;
+				if (!StringUtils.isEmpty(url)) {
+					bmp = BitmapFactory.decodeFile(url);
+				}
+				String filename = FileUtils.getFileName(url);
+				try {
+					//					// ∂¡»°±æµÿÕº∆¨
+					//					if (imgURL.endsWith("portrait.gif")
+					//							|| StringUtils.isEmpty(imgURL)) {
+					//						bmp = BitmapFactory.decodeResource(
+					//								mImage.getResources(), R.drawable.widget_dface);
+					//					}
+					if (bmp == null) {
+						//  «∑Ò”–ª∫¥ÊÕº∆¨
+						// Environment.getExternalStorageDirectory();∑µªÿ/sdcard
+						String filepath = context.getFilesDir() + File.separator
+								+ filename;
+						File file = new File(filepath);
+						if (file.exists()) {
+							bmp = ImageUtils.getBitmap(context,
+									filename);
+							if (bmp != null) {
+								// Àı∑≈Õº∆¨
+								bmp = ImageUtils.reDrawBitMap((Activity) context,bmp);
+							}
+						}
+					}
+					if (bmp == null) {
+						if(Util.detect(context)){
+							bmp = Util.getBitmapForNet(url);
+						}
+						//						bmp = ApiClient.getNetBitmap(imgURL);
+						if (bmp != null) {
+							try {
+								// –¥Õº∆¨ª∫¥Ê
+								ImageUtils.saveImage(context,
+										filename, bmp);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							// Àı∑≈Õº∆¨
+							bmp = ImageUtils.reDrawBitMap((Activity) context, bmp);
+						}
+					}
+					if(bmp!=null){
+						msg.what = 1;
+						msg.obj = bmp;
+					}else{
+						msg.what=2;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					msg.what = -1;
+					msg.obj = e;
+				}
+				if (handler != null && !isInterrupted())
+					handler.sendMessage(msg);
+			}
+		};
+		thread.start();
+
+	}
+	public static void saveBitmap(String url){
+		Bitmap bmp = null;
+		//		if (!StringUtils.isEmpty(url)) {
+		//			bmp = BitmapFactory.decodeFile(url);
+		//		}
+		String filename = FileUtils.getFileName(url);
+		if(Util.detect(context)){
+			try {
+				bmp = Util.getBitmapForNet(url);
+				if (bmp != null) {
+					try {
+						// –¥Õº∆¨ª∫¥Ê
+						ImageUtils.saveImage(context,
+								filename, bmp);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					// Àı∑≈Õº∆¨
+					bmp = ImageUtils.reDrawBitMap((Activity) context, bmp);
+					//						return true;
+				}else{
+					//						return false;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				//					return false;
+			}
+		}
+		//		return false;
+
+	}
+
 
 }
