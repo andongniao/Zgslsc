@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <!-- 提示 -->
-
+	<string name="loding">正在加载...</string>
 
     <!-- 首页 -->
     <string name="home_more">更多></string>

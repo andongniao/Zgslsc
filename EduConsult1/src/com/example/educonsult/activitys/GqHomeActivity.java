@@ -257,7 +257,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 //			intent = new Intent(this,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			startActivity(intent);
-			if(pp_top_fenlei!=null && pp_top_fenlei.isShowing()){
+			if(pp_top_fenlei!=null && pp_top_fenlei.isShowing()){	
 				pp_top_fenlei.dismiss();
 			}else{
 //			pp_top_fenlei.showAtLocation(ll_all, Gravity.TOP, 0, ll_all.getHeight());

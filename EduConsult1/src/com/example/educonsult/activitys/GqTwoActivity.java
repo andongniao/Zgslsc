@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +25,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
@@ -54,11 +58,12 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
-	
+	private ThreadWithProgressDialog myPDT;
+
 	private HomeSlidAdapter adapter_r;
 	private KnowFenleiAdapter adapter_l;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -72,14 +77,21 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		String title = getIntent().getStringExtra("title");
+
+
 		if(Util.IsNull(title)){
 			setTopLeftTv(title);
 		}else{
-		setTopLeftTv(R.string.gongqiu_title);
+			setTopLeftTv(R.string.gongqiu_title);
 		}
 		setContentXml(R.layout.gq_two);
 		init();
 		addlistener();
+		/*************测试****************/
+		myPDT = new ThreadWithProgressDialog();
+		String  msg = getResources().getString(R.string.loding);
+		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+//		myPDT.Run(context, new RefeshData(),msg,false);//不可取消
 	}
 	private void addlistener() {
 		rl_l.setOnClickListener(new OnClickListener() {
@@ -170,7 +182,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		for(int i = 0;i<10;i++){
 			View v = LayoutInflater.from(context).inflate(R.layout.gq_two_add_view, null);//new ImageView(context);
 			tv_b = (TextView) v.findViewById(R.id.gq_two_add_tv_down);
-			v.setLayoutParams(new LayoutParams(100, 80));
+			v.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			v.setOnClickListener(new MyOnClickListener(i));
 			add_ll.addView(v);
 			l.add(tv_b);
@@ -230,6 +242,40 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		if(isread){
 			Util.SetRedGone(context, rl_l);
 			isread = false;
+		}
+	}
+
+
+	// 任务
+	public class RefeshData implements ThreadWithProgressDialogTask {
+
+		public RefeshData() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+//			Toast.makeText(context, "cancle", 1000).show();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			Thread t = new Thread();
+			try {
+				t.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
 		}
 	}
 
