@@ -90,8 +90,8 @@ OnClickListener {
 			b.setBmp(url);
 			l.add(b);
 			listUserBean.setList(l);
-			util.saveiamgetoload(url, mDiskLruCache);
 			util.saveObject(listUserBean, filename);
+			util.saveiamgetoload(url, mDiskLruCache);
 		}
 		
 	}
