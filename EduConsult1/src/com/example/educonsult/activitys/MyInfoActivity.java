@@ -61,6 +61,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		context = this;
 		ll_head = (LinearLayout) findViewById(R.id.myinfo_ll_head);
 		ll_head.setOnClickListener(this);
 		ll_friend = (LinearLayout) findViewById(R.id.myinfo_ll_friend);

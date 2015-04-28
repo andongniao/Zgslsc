@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/regist_bg"
+        android:background="#EEEEEE"
+       
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="5dp" >
@@ -24,33 +25,50 @@
             android:layout_height="1dp"
             android:background="@color/home_hui" />
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="5dp" >
+            android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/regist_tv_qiye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@null"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="@string/regist_qiye" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" 
+                android:paddingBottom="0.5dp">
 
-            <TextView
-                android:id="@+id/regist_tv_geren"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/regist_button_bg"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/regist_clikeed"
-                android:gravity="center"
-                android:text="@string/regist_geren"
-                android:textColor="@color/white" />
-        </LinearLayout>
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="5dp" >
+
+                <TextView
+                    android:id="@+id/regist_tv_qiye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/zcbq1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@string/regist_qiye" />
+
+                <TextView
+                    android:id="@+id/regist_tv_geren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/regist_clikeed"
+                    android:gravity="center"
+                    android:text="@string/regist_geren"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </FrameLayout>
 
         <EditText
             android:id="@+id/regist_et_username"

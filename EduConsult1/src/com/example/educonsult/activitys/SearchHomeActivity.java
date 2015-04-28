@@ -46,13 +46,13 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightTGone();
+		topRightTGone(); 
 		int type = getIntent().getIntExtra("type", -1);
 		if(type==-1){
 			goneTopLeft();
 		}
-		setTitleTxt(R.string.search_title);
 		setContentXml(R.layout.search_home_layout);
+		setTitleTxt(R.string.search_title);
 		init();
 		addlistener();
 	}

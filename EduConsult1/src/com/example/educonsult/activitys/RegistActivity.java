@@ -43,7 +43,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		context = this;
-		type = 1;
+		type = 2;
 		tp = 1;
 		isread = false;
 		tv_qiye = (TextView) findViewById(R.id.regist_tv_qiye);
@@ -139,15 +139,18 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 			tp = 1;
 			tv_qiye.setBackgroundResource(R.drawable.regist_clikeed);
 			tv_qiye.setTextColor(getResources().getColor(R.color.white));
-			tv_qiye.setBackgroundResource(R.color.regist_bg);
+			//tv_qiye.setBackgroundResource(R.drawable.regist_butten_bg);
+			//tv_qiye.setBackgroundResource(R.drawable.regist_button_bg);
 			//				tv_geren.setBackgroundResource(R.drawable.regist_unclick);
 			tv_geren.setTextColor(getResources().getColor(R.color.black));
+			tv_geren.setBackgroundResource(R.drawable.zcbq1);
 			break;
 		case R.id.regist_tv_geren:
 			tp = 2;
 			tv_geren.setBackgroundResource(R.drawable.regist_clikeed);
 			tv_geren.setTextColor(getResources().getColor(R.color.white));
 			tv_qiye.setBackgroundResource(R.color.regist_bg);
+			tv_qiye.setBackgroundResource(R.drawable.zcbq1);
 			//(R.drawable.regist_unclick);
 			tv_qiye.setTextColor(getResources().getColor(R.color.black));
 			break;

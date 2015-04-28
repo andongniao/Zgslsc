@@ -209,7 +209,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				if(arg2>1){
+				if(arg2>0){
 					lll_r.setVisibility(View.VISIBLE);
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();

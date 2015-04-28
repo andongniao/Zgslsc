@@ -25,7 +25,7 @@ import com.example.educonsult.R;
 	public KnowFenleiAdapter(Context context,ArrayList<Integer>list){
 		this.context = context;
 		this.list = list;
-		index = 2;
+		index = -1;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(int index){
@@ -70,39 +70,39 @@ import com.example.educonsult.R;
 			item.tv.setTextColor(context.getResources().getColor(R.color.base_top_title_bg));
 			item.tv_show.setVisibility(View.VISIBLE);
 			switch (position) {
-			case 0:
+			/*case 0:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_home));
-				break;
-			case 1:
+				break;*/
+			case 0:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_all));
 				break;
-			case 2:
+			case 1:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_siliao));
 				break;
-			case 3:
+			case 2:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_shouyao));
 				break;
-			case 4:
+			case 3:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_yanzhi));
 				break;
-			case 5:
+			case 4:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_xunchu));
 				break;
-			case 6:
+			case 5:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_tianjiaji));
 				break;
-			case 7:
+			case 6:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_yuanliao));
 				break;
-			case 8:
+			case 7:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_other));
 				break;
@@ -111,39 +111,39 @@ import com.example.educonsult.R;
 			item.tv.setTextColor(context.getResources().getColor(R.color.black));
 			item.tv_show.setVisibility(View.INVISIBLE);
 			switch (position) {
-			case 0:
+			/*case 0:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_home));
-				break;
-			case 1:
+				break;*/
+			case 0:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_all));
 				break;
-			case 2:
+			case 1:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_siliao));
 				break;
-			case 3:
+			case 2:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_shouyao));
 				break;
-			case 4:
+			case 3:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_yanzhi));
 				break;
-			case 5:
+			case 4:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_xunchu));
 				break;
-			case 6:
+			case 5:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_tianjiaji));
 				break;
-			case 7:
+			case 6:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_yuanliao));
 				break;
-			case 8:
+			case 7:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_other));
 				break;

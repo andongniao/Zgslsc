@@ -57,14 +57,14 @@
             android:text="@string/test"
             />
     </LinearLayout>
-    <TextView 
+    <ImageView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:padding="5dp"
         android:gravity="center"
         android:textColor="@color/black"
-        android:text=">"
+        android:background="@drawable/address_right"
         />
     
 </LinearLayout>

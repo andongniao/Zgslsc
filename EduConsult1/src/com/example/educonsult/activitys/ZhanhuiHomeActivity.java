@@ -96,13 +96,13 @@ public class ZhanhuiHomeActivity extends Activity implements OnClickListener{
 		for(int i = 0;i<10;i++){
 			View v = LayoutInflater.from(context).inflate(R.layout.gq_two_add_view, null);//new ImageView(context);
 			TextView tv_b = (TextView) v.findViewById(R.id.gq_two_add_tv_down);
-			v.setLayoutParams(new LayoutParams(100, 80));
+			v.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
 			v.setOnClickListener(new MyOnClickListener(i));
 			ll_add.addView(v);
 			list_view.add(tv_b);
 		}
 		
-		
+		 
 	}
 	
 	private void addlistener() {

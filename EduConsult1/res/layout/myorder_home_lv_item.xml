@@ -136,27 +136,23 @@
         <Button
             android:id="@+id/myorder_home_lv_item_btn_l"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/order_et_bg_line"
-            android:paddingBottom="3dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="3dp"
+            android:padding="5dp"
             android:text="@string/myorder_delete_order"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/myorder_home_lv_item_btn_r"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:background="@drawable/order_et_bg_line"
-            android:paddingBottom="3dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="3dp"
+            android:padding="5dp"
             android:text="@string/myorder_comment_order"
-            android:textColor="@color/black" />
+            android:textColor="@color/black" 
+            android:textSize="16dp"/>
     </LinearLayout>
 
 </LinearLayout>

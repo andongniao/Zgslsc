@@ -90,7 +90,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.gq_two);
 		init();
 		addlistener();
-		/*************≤‚ ‘****************/
+		/*************≤‚ ‘******** ********/
 		myPDT = new ThreadWithProgressDialog();
 		String  msg = getResources().getString(R.string.loding);
 		myPDT.Run(context, new RefeshData(),R.string.loding);//ø…»°œ˚
@@ -100,7 +100,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		rl_l.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v) { 
 				intent = new Intent(context,XinjianActivity.class);
 				intent.putExtra("flag", "gqtwo");
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

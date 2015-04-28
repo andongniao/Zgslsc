@@ -50,8 +50,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightLVisible();
-		topRightRVisible();
+//		topRightLVisible();
+//		topRightRVisible();
+		topRightTGone();
 		setTopLeftTv(R.string.product_detaile_title);
 		setContentXml(R.layout.product_detail);
 		init();
@@ -101,7 +102,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		homeLikeAdapter = new HomeLikeAdapter(context, list);
 		gridView.setAdapter(homeLikeAdapter);
 		View v = new ImageView(context);
-		v.setBackgroundResource(R.drawable.ic_launcher);
+		v.setBackgroundResource(R.drawable.base_to_top);
 		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		isshow = false;
 		scrollView.setOnTouchListener(new OnTouchListener() {
