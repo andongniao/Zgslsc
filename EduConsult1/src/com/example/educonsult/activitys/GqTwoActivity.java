@@ -55,13 +55,13 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private GqAdapter gqAdapter;
 	private Intent intent;
 	private LayoutInflater inflater;
+	public View ll_gqtwo_popu;
 	private LinearLayout ll_jingxuan_l,ll_jingxuan_t,ll_jingxuan_r;
 	//public LinearLayout ll_gqtwo_popu;
 	private ImageView iv_top_l,iv_top_t,gqtwo_1,gqtwo_2;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	private ThreadWithProgressDialog myPDT;
-	public View ll_gqtwo_popu;
 	private HomeSlidAdapter adapter_r;
 	private KnowFenleiAdapter adapter_l;
 
@@ -79,6 +79,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		String title = getIntent().getStringExtra("title");
+		pos=getIntent().getIntExtra("num",0);
 
 
 		if(Util.IsNull(title)){
@@ -221,7 +222,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 			gv_dh_xq.setAdapter(gqAdapter);
 		}
 		if(l.size()>0){
-			l.get(0).setBackgroundResource(R.color.orn);
+			l.get(pos).setBackgroundResource(R.color.orn);
 		}
 		Util.SetRedNum(context, rl_l, 1);
 	}

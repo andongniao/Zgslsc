@@ -847,7 +847,9 @@ public class Util {
 		}
 	}
 
-
+/**
+ * µÃµ½²¢»º´æÍ¼Æ¬
+ */
 	public static void Getbitmap(final ImageView v,final String url){
 		Thread thread;
 		final Handler handler;
@@ -859,8 +861,8 @@ public class Util {
 					v.setImageBitmap((Bitmap) msg.obj);
 					//					mViewSwitcher.showNext();
 				} else {
-					//					yToastMessage(ImageDialog.this, ErrMsg);
-					//					finish();
+					//yToastMessage(ImageDialog.this, ErrMsg);
+					//finish();
 				}
 			}
 		};
@@ -929,6 +931,10 @@ public class Util {
 		thread.start();
 
 	}
+	/**
+	 * ±£´æÍ¼Æ¬
+	 * @param url
+	 */
 	public static void saveBitmap(String url){
 		Bitmap bmp = null;
 		//		if (!StringUtils.isEmpty(url)) {
