@@ -75,9 +75,13 @@ public class ZhanhuiDetaileLvAdapter extends BaseAdapter{
 		Util util = new Util(context);
 		if(util.isExistDataCache(filename)&& util.isReadDataCache(filename)){
 			ListUserBean listUserBean = (ListUserBean) util.readObject(filename);
-			UserBean bean = listUserBean.getList().get(0);
-			Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
-			item.head.setImageBitmap(b);
+			UserBean bean;
+			if(position%2==0){
+				bean = listUserBean.getList().get(0);
+			}else{
+				bean = listUserBean.getList().get(1);
+			}
+			Util.Getbitmap(item.head, bean.getBmp());
 		}
 		return convertView;
 	}

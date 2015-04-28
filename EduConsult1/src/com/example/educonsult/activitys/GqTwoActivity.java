@@ -79,6 +79,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		String title = getIntent().getStringExtra("title");
+		pos=getIntent().getIntExtra("num",0);
 
 
 		if(Util.IsNull(title)){
@@ -221,7 +222,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 			gv_dh_xq.setAdapter(gqAdapter);
 		}
 		if(l.size()>0){
-			l.get(0).setBackgroundResource(R.color.orn);
+			l.get(pos).setBackgroundResource(R.color.orn);
 		}
 		Util.SetRedNum(context, rl_l, 1);
 	}

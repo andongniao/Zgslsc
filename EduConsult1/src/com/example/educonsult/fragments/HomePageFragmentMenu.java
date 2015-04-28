@@ -3,6 +3,7 @@ package com.example.educonsult.fragments;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.GqHomeActivity;
+import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.adapters.FenleiAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
@@ -31,7 +34,8 @@ public class HomePageFragmentMenu extends Fragment {
 	private HomeSlidAdapter adapter_r;
 	private FenleiAdapter adapter_l;
 	private LinearLayout addll,ll_mycenter,ll_about;
-	
+	private String title;
+	private Message msg;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -78,15 +82,78 @@ public class HomePageFragmentMenu extends Fragment {
 		lv_r = (ListView) view.findViewById(R.id.slid_view_lv_r);
 		adapter_r = new HomeSlidAdapter(context, list,2);
 		lv_r.setAdapter(adapter_r);
+		
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
+			Intent intent;
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				if(arg2>1){
+				switch (arg2) {
+				case 0:
+					msg = HomePagerActivity.handler.obtainMessage();
+					msg.obj = HomePagerActivity.SlidTag;
+					HomePagerActivity.handler.sendMessage(msg);
+					break;
+				case 1:
+					intent=new Intent(context, GqHomeActivity.class);
+					startActivity(intent);
+					break;
+				case 2:
 					ll_r.setVisibility(View.VISIBLE);
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
+					title="饲料";
+					break;
+				case 3:
+					ll_r.setVisibility(View.VISIBLE);
+					adapter_l.SetData(arg2);
+					adapter_l.notifyDataSetChanged();
+					title="兽药";
+					break;
+				case 4:
+					ll_r.setVisibility(View.VISIBLE);
+					adapter_l.SetData(arg2);
+					adapter_l.notifyDataSetChanged();
+					title="养殖设备";
+					break;
+				case 5:
+					ll_r.setVisibility(View.VISIBLE);
+					adapter_l.SetData(arg2);
+					adapter_l.notifyDataSetChanged();
+					title="畜禽养殖";
+					break;
+				case 6:
+					ll_r.setVisibility(View.VISIBLE);
+					adapter_l.SetData(arg2);
+					adapter_l.notifyDataSetChanged();
+					title="添加剂";
+					break;
+				case 7:
+					ll_r.setVisibility(View.VISIBLE);
+					adapter_l.SetData(arg2);
+					adapter_l.notifyDataSetChanged();
+					title="原料";
+					break;
+				
+
+				default:
+					break;
 				}
+				
+			}
+		});
+		lv_r.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(context,GqTwoActivity.class);
+				//intent.setClass(this, GqTwoActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("title", title);
+				intent.putExtra("num", arg2);
+				startActivity(intent);
 			}
 		});
 	}

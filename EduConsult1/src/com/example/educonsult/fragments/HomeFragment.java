@@ -14,11 +14,13 @@ import org.apkplug.Bundle.installCallback;
 import org.apkplug.app.FrameworkInstance;
 import org.osgi.framework.BundleContext;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,13 +32,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,8 +54,10 @@ import com.example.educonsult.activitys.ZhanhuiHomeActivity;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.HomeRuzhuAdapter;
 import com.example.educonsult.beans.ListUserBean;
-import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyGridView;
+import com.example.educonsult.tools.FileUtils;
+import com.example.educonsult.tools.ImageUtils;
+import com.example.educonsult.tools.StringUtils;
 import com.example.educonsult.tools.Util;
 import com.example.educonsult.tools.FileUtil.filter.apkFilter;
 import com.example.educonsult.tools.FileUtil.filter.isFilesFilter;
@@ -190,15 +192,20 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		ll_hot_b_r.setOnClickListener(this);
 		iv_hot_l = (ImageView) view.findViewById(R.id.home_iv_hot_l);
 		String filename = "test";
-		Util util = new Util(context);
+		final Util util = new Util(context);
 		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
 			listUserBean = (ListUserBean) util.readObject(filename);
 			MyApplication.bean = listUserBean.getList().get(0);
-			Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
-			iv_hot_l.setImageBitmap(b);
+//			Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
+//			iv_hot_l.setImageBitmap(b);
 		}
 
-
+		
+		
+		final String url = MyApplication.bean.getBmp();
+		
+		
+		Util.Getbitmap(iv_hot_l, url);
 
 
 
@@ -215,13 +222,13 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 	private void addlistener() {
 		top_rl.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				intent = new Intent(context,XinjianActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				context.startActivity(intent);
-				
+
 			}
 		});
 		gv_like.setOnItemClickListener(new OnItemClickListener() {
@@ -262,7 +269,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		
+
 		case R.id.home_zhanhui_ll:
 			intent = new Intent(context,ZhanhuiHomeActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -274,7 +281,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		case R.id.home_zhaobiao_ll:
 
 			break;
-	
+
 		case R.id.home_team_ll:
 
 			//已安装插件列表
@@ -383,7 +390,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		case R.id.title_iv_search:
 			ExampleActivity.setCurrentTab(1);
 			break;
-			
+
 
 
 		case R.id.home_ll_hot_l:
@@ -594,6 +601,5 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		}
 		super.onResume();
 	}
-
 
 }

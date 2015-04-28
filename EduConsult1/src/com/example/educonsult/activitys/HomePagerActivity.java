@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +25,9 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.fragments.HomeFragment;
 import com.example.educonsult.fragments.HomePageFragmentMenu;
 import com.example.educonsult.tools.DiskLruCache;
+import com.example.educonsult.tools.FileUtils;
+import com.example.educonsult.tools.ImageUtils;
+import com.example.educonsult.tools.StringUtils;
 import com.example.educonsult.tools.Util;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -37,7 +42,9 @@ OnClickListener {
 	private String filename = "test";
 	private ListUserBean listUserBean;
 	private DiskLruCache mDiskLruCache;
-	private String url = "http://pica.nipic.com/2007-12-18/200712189215503_2.jpg";
+	private String url1 = "http://pica.nipic.com/2007-12-18/200712189215503_2.jpg";
+	private String url2 = "http://tupian.enterdesk.com/2012/0621/gha/10/www.enterdesk.comq3.jpg.680.510.jpg";
+
 
 
 	@Override
@@ -79,21 +86,25 @@ OnClickListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
 			listUserBean = (ListUserBean) util.readObject(filename);
 			MyApplication.bean = listUserBean.getList().get(0);
 		}else{
-			ArrayList<UserBean> l = new ArrayList<UserBean>();
-			UserBean b = new UserBean();
-			b.setName("0.0");
-			b.setBmp(url);
-			l.add(b);
+			final ArrayList<UserBean> l = new ArrayList<UserBean>();
+			UserBean b1 = new UserBean();
+			b1.setName("0.0");
+			b1.setBmp(url1);
+			UserBean b2 = new UserBean();
+			b2.setName("0.0");
+			b2.setBmp(url2);
+			l.add(b1);
+			l.add(b2);
 			listUserBean.setList(l);
 			util.saveObject(listUserBean, filename);
-			util.saveiamgetoload(url, mDiskLruCache);
+//			final String imgURL = url1;
 		}
-		
+
 	}
 
 
@@ -143,16 +154,16 @@ OnClickListener {
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
-	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
-	            exitTime = System.currentTimeMillis();   
-	        } else {
-	            finish();
-	            System.exit(0);
-	        }
-	        return true;   
-	    }
-	    return super.onKeyDown(keyCode, event);
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+			if((System.currentTimeMillis()-exitTime) > 2000){  
+				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+				exitTime = System.currentTimeMillis();   
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;   
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

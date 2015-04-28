@@ -25,7 +25,7 @@ import com.example.educonsult.R;
 	public FenleiAdapter(Context context,ArrayList<Integer>list){
 		this.context = context;
 		this.list = list;
-		index = 2;
+		index = -1;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(int index){
