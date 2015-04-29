@@ -143,22 +143,22 @@
             android:name="com.example.educonsult.activitys.KnowHomeActivity"
             android:label="@string/app_name" >
         </activity>
-           <activity
+        <activity
             android:name="com.example.educonsult.activitys.RegistOKActivity"
             android:label="@string/app_name" >
         </activity>
-        
+        <activity android:name="com.unionpay.uppay.PayActivity" >
+        </activity>
         <activity
             android:name="org.apkplug.app.apkplugActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/android:Theme.Light" />
-        
-             <service android:name="com.easemob.chat.EMChatService">
-            <intent-filter >
-                <action android:name="com.easemob.chat.EMChatService"/>
+
+        <service android:name="com.easemob.chat.EMChatService" >
+            <intent-filter>
+                <action android:name="com.easemob.chat.EMChatService" />
             </intent-filter>
         </service>
-        
     </application>
 
 </manifest>

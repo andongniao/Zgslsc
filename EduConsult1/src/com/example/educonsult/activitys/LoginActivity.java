@@ -1,9 +1,21 @@
 package com.example.educonsult.activitys;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,8 +30,9 @@ import android.widget.Toast;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.tools.Util;
+import com.unionpay.UPPayAssistEx;
+import com.unionpay.uppay.PayActivity;
 
 public class LoginActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -30,6 +43,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	private boolean isremb;
 	private Editor er ;
 	private PopupWindow ppw;
+	
+	/*****************************************************************
+     * mMode参数解释：
+     *      "00" - 启动银联正式环境
+     *      "01" - 连接银联测试环境
+     *****************************************************************/
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -95,13 +114,22 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 
 			break;
 		case R.id.login_et_password:
-
+			String tn = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+//			UPPayAssistEx.startPay ( this, null, null, tn, mMode); 
+//			   doStartUnionPayPlugin(this, tn, mMode);
+//			Intent intent = new Intent();
+//			intent.setClass(this, SlPayActivity.class);
+//			startActivity(intent);
+			
 			break;
 		case R.id.login_cb_jizhu:
 			isremb = cb_jizhu.isChecked();
 			break;
 		case R.id.login_tv_wangji:
-			ppw.showAsDropDown(tv_wangji);
+//			ppw.showAsDropDown(tv_wangji);
+			
+//			 UPPayAssistEx.startPayByJAR(this, PayActivity.class, null, null,
+//					 Tn, mMode);
 			break;
 		case R.id.login_tv_regist:
 			Intent i = new Intent(this, RegistActivity.class);
@@ -134,4 +162,5 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			break;
 		}
 	}
+	
 }

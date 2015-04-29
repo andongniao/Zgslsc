@@ -302,6 +302,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
 			return true;
 		}
