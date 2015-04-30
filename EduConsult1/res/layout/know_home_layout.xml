@@ -41,12 +41,12 @@
         <EditText
             android:id="@+id/know_home_et_top"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:focusable="false"
-            android:hint="@string/search_title"
             android:gravity="center_vertical"
+            android:text="@string/search_title"
             android:textColor="@color/white" />
 
         <TextView
@@ -307,8 +307,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@color/base_he"
                         android:gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="vertical"
+                        android:padding="5dp" >
 
                         <TextView
                             android:id="@+id/know_home_tv_tiwen_num"
@@ -332,8 +334,10 @@
                         android:layout_marginLeft="1dp"
                         android:layout_marginRight="1dp"
                         android:layout_weight="1"
+                        android:background="@color/base_he"
                         android:gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="vertical"
+                        android:padding="5dp" >
 
                         <TextView
                             android:id="@+id/know_home_tv_huida_num"
@@ -356,6 +360,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@color/base_he"
                         android:orientation="vertical" >
 
                         <TextView
@@ -501,8 +507,8 @@
                         android:id="@+id/know_home_tv_show_t"
                         android:layout_width="fill_parent"
                         android:layout_height="1dp"
-                        android:visibility="invisible"
-                        android:background="@color/orn" />
+                        android:background="@color/orn"
+                        android:visibility="invisible" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -528,8 +534,8 @@
                         android:id="@+id/know_home_tv_show_r"
                         android:layout_width="fill_parent"
                         android:layout_height="1dp"
-                        android:visibility="invisible"
-                        android:background="@color/orn" />
+                        android:background="@color/orn"
+                        android:visibility="invisible" />
                 </LinearLayout>
             </LinearLayout>
 

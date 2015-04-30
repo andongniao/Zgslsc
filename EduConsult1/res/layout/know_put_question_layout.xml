@@ -40,11 +40,11 @@
         <EditText
             android:id="@+id/put_question_et_top"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:focusable="false"
-            android:hint="@string/search_title"
+            android:text="@string/search_title"
             android:gravity="center_vertical"
             android:textColor="@color/white" />
 
@@ -55,12 +55,14 @@
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:layout_marginTop="12dp"
+            android:visibility="invisible"
             android:background="@color/white" />
 
         <ImageView
             android:id="@+id/put_question_iv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:background="@drawable/ic_launcher" />
     </LinearLayout>
     <!--  -->
@@ -70,20 +72,24 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         >
-        <LinearLayout 
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_margin="10dp"
             android:background="@drawable/login_et_bg_line"
-            >
+            android:orientation="vertical" >
             
         <EditText 
+            android:id="@+id/know_put_question_et"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:layout_margin="3dp"
+            android:layout_margin="5dp"
+            android:gravity="top"
+            android:textColor="@color/black"
             android:background="@color/white"
             />
+       <!-- 
        <LinearLayout 
            android:layout_width="fill_parent"
            android:layout_height="wrap_content"
@@ -120,6 +126,7 @@
             android:text="0"
             />
        </LinearLayout>
+        -->
         </LinearLayout>
     </LinearLayout>
     
@@ -149,9 +156,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:layout_marginLeft="5dp"
             android:textSize="10dp"
             android:text="@string/zhanhui_detaile_niming"
             />
+        <!-- 
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,6 +168,7 @@
             android:textSize="10dp"
             android:text="@string/zhanhui_detaile_xianzhi"
             />
+         -->
         
     </LinearLayout>
     <TextView 
@@ -182,6 +192,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="horizontal"
             android:padding="10dp" >
 
@@ -204,10 +215,10 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:background="@color/base_top_title_bg"
+            android:background="@color/regist_button_bg"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp" >
+            android:padding="15dp" >
 
             <TextView
                 android:layout_width="wrap_content"

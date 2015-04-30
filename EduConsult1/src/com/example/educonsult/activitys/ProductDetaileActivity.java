@@ -13,21 +13,22 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
+import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.tools.Util;
 
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -43,7 +44,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
-	private ArrayList<String> list;
+	private ArrayList<ProductBean> list;
 	private HomeLikeAdapter homeLikeAdapter;
 	
 
@@ -93,7 +94,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		chanpin=(TextView)findViewById(R.id.product_detaile_tv_chanpin);
 		pingjia=(TextView)findViewById(R.id.product_detaile_tv_pingjia);
 		dianpu=(TextView)findViewById(R.id.product_detaile_tv_dianutuijian );
-		list=new ArrayList<String>();
+		list=new ArrayList<ProductBean>();
 		listView=(MyListview)findViewById(R.id.product_detaile_ll_add_view_list);
 		pingjiaAdapter=new ProductPingjiaAdapter(this, list);
 		listView.setAdapter(pingjiaAdapter);
@@ -204,8 +205,6 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			pingjia.setTextColor(getResources().getColor(R.color.black));
 			dianpu.setTextColor(getResources().getColor(R.color.orn));
 			break;
-			
-			
 		}
 	}
 	private void Toproduct(){

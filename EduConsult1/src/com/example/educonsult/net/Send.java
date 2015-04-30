@@ -1,8 +1,21 @@
 package com.example.educonsult.net;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 
+import com.example.educonsult.R;
+import com.example.educonsult.beans.CompanyBean;
+import com.example.educonsult.beans.HomeBean;
+import com.example.educonsult.beans.ProductBean;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 public class Send {
@@ -15,54 +28,75 @@ public class Send {
 
 	}
 
-//	/**
-//	 * 获取首页信息
-//	 */
-//	public ListGoodsBean RequestHome(String time) {
-//		ListGoodsBean List = new ListGoodsBean();
-//		String key = Util.hashKeyForDisk("AIAI.CN_" + time);
-//		String url = ServiceUrl.HomeUrl + key;
-//		String jsonStr = null;
-//		jsonStr = GetHttp.sendGet(url);
-//
-//		if (jsonStr != null && !jsonStr.equals("")) {
-//			JSONObject object = null;
-//			try {
-//				object = new JSONObject(jsonStr);
+	/**
+	 * 获取首页信息
+	 */
+	public HomeBean RequestHome() {
+		HomeBean home = new HomeBean();
+		String url = ServiceUrl.Home_url;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
 //				if (object.get("code") != null && object.getInt("code") == 200) {
 //					List.setCode(200);
 //					List.setMsg(object.getString("message"));
-//					JSONObject data = object.getJSONObject("data");
-//					Type type = new TypeToken<ArrayList<GoodsBean>>() {
-//					}.getType();
-//					ArrayList<ArrayList<GoodsBean>> l = new ArrayList<ArrayList<GoodsBean>>();
+					JSONArray recommend = object.getJSONArray("recommend");
+					Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+					}.getType();
+					ArrayList<ProductBean> list_recommend = gson.fromJson(recommend.toString(), type_re);
+					JSONArray hot = object.getJSONArray("hot");
+					Type type_hot = new TypeToken<ArrayList<ProductBean>>() {
+					}.getType();
+					ArrayList<ProductBean> list_hot = gson.fromJson(hot.toString(), type_hot);
+					JSONArray company = object.getJSONArray("company");
+					Type type_com = new TypeToken<ArrayList<CompanyBean>>() {
+					}.getType();
+					ArrayList<CompanyBean> list_com = gson.fromJson(company.toString(), type_com);
+					JSONArray ad = object.getJSONArray("ad");
+					Type type_ad = new TypeToken<ArrayList<String>>() {
+					}.getType();
+					ArrayList<String> list_ad = gson.fromJson(ad.toString(), type_ad);
+					//new ArrayList<ProductBean>();
 //					for (int i = 1; i < 9; i++) {
 //						String json = data.getString("ad_" + i).toString();
 //						ArrayList<GoodsBean> s = gson.fromJson(json, type);
 //						l.add(s);
 //					}
 //					List.setList(l);
-//					return List;
+					home.setRecommend(list_recommend);
+					home.setHot(list_hot);
+					home.setCompany(list_com);
+					home.setAd(list_ad);
+					home.setCode(200);
+					home.setMsg("success");
+					return home;
 //				} else {
 //					List.setMsg(object.getString("message"));
 //					List.setCode(object.getInt("code"));
-//					return List;
-//
+//					return home;
+
 //				}
-//
-//			} catch (JSONException e) {
-//				e.printStackTrace();
-//			}
-//		} else {
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				System.out.println("e============"+e);
+			}
+		} else {
 //			List.setCode(500);
 //			List.setMsg(context.getResources().getString(
 //					R.string.http_status_code_error));
-//			return List;
-//		}
-//
-//		return null;
-//
-//	}
+			home.setCode(400);
+			home.setMsg("error");
+			return home;
+		}
+
+		return null;
+
+	}
 //
 //	/**
 //	 * 获取单品信息

@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#e6e6e6"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+    <ListView 
+        android:id="@+id/know_my_question_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:listSelector="#00000000"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:scrollbars="none"
+        android:fadingEdge="none"
+        ></ListView>
+    <TextView 
+        android:id="@+id/know_my_question_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:background="@color/regist_button_bg"
+        android:text="@string/tiwen_zixun_online"
+        />
+    
+</LinearLayout>

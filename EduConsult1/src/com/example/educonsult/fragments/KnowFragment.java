@@ -19,19 +19,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.KnowDetaileActivity;
 import com.example.educonsult.activitys.KnowHomeActivity;
+import com.example.educonsult.activitys.MyQuestionActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
+import com.example.educonsult.activitys.PutQuestionActivity;
 import com.example.educonsult.adapters.KnowHomeLvAdapter;
 import com.example.educonsult.adapters.ZhanhuiHomeAdapter;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.tools.Util;
 
 public class KnowFragment extends Fragment implements OnClickListener{
 	private Context context;
 	private View v;
 	private Handler handler;
 	private LinearLayout ll_back,ll_tuijian_l,ll_tuijian_t,ll_tuijian_r,ll_fenlei,ll_tiwen,
-	ll_show_l,ll_show_t,ll_show_r;
+	ll_show_l,ll_show_t,ll_show_r,ll_my_tiwen,ll_my_huida,ll_my_shoucang;
 	private TextView show_l,show_t,show_r;
 	private MyGridView gridView;
 	private MyListview lv;
@@ -73,7 +77,6 @@ public class KnowFragment extends Fragment implements OnClickListener{
 		ll_show_l = (LinearLayout) v.findViewById(R.id.know_home_ll_tuijian);
 		ll_show_t = (LinearLayout) v.findViewById(R.id.know_home_ll_huida);
 		ll_show_r = (LinearLayout) v.findViewById(R.id.know_home_ll_like);
-		
 		ll_show_l.setOnClickListener(this);
 		ll_show_t.setOnClickListener(this);
 		ll_show_r.setOnClickListener(this);
@@ -90,6 +93,13 @@ public class KnowFragment extends Fragment implements OnClickListener{
 		ll_fenlei.setOnClickListener(this);
 		ll_tiwen = (LinearLayout) v.findViewById(R.id.know_home_ll_tiwen_i);
 		ll_tiwen.setOnClickListener(this);
+		ll_my_tiwen = (LinearLayout) v.findViewById(R.id.know_home_ll_tiwen_my);
+		ll_my_tiwen.setOnClickListener(this);
+		ll_my_huida = (LinearLayout) v.findViewById(R.id.know_home_ll_huida_my);
+		ll_my_huida.setOnClickListener(this);
+		ll_my_shoucang = (LinearLayout) v.findViewById(R.id.know_home_ll_shoucang_my);
+		ll_my_shoucang.setOnClickListener(this);
+		
 		
 	}
 
@@ -99,6 +109,9 @@ public class KnowFragment extends Fragment implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				intent = new Intent(context,KnowDetaileActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
 				
 			}
 		});
@@ -151,8 +164,26 @@ public class KnowFragment extends Fragment implements OnClickListener{
 			handler.sendMessage(msg);
 		break;
 		case R.id.know_home_ll_tiwen_i:
-			Change(2);
+			intent = new Intent(context,PutQuestionActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		break;
+		case R.id.know_home_ll_tiwen_my:
+			intent = new Intent(context,MyQuestionActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			context.startActivity(intent);
+		break;
+		
+		case R.id.know_home_ll_huida_my:
+			
+			break;
+		case R.id.know_home_ll_shoucang_my:
+			
+			break;
+		
+		
+		
+		
 		}
 	}
 

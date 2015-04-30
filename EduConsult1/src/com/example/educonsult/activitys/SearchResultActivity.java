@@ -102,6 +102,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			Intent intent = new Intent(this,SearchHomeActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("type", 1);
+			intent.putExtra("t", 1);
 			startActivity(intent);
 			break;
 		case R.id.search_result_ll_zonghe:

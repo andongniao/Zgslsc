@@ -2,8 +2,6 @@ package com.example.educonsult.adapters;
 
 import java.util.ArrayList;
 
-import com.example.educonsult.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,14 +10,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.educonsult.R;
+import com.example.educonsult.beans.CompanyBean;
+import com.example.educonsult.beans.ProductBean;
+
 public class ProductPingjiaAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<String> list;
+	private ArrayList<ProductBean> list;
 	private LayoutInflater inflater;
 	private Myitem myitem;
 	
 	
-	public ProductPingjiaAdapter(Context context,ArrayList<String> list){
+	public ProductPingjiaAdapter(Context context,ArrayList<ProductBean> list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);

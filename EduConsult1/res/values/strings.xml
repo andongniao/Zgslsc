@@ -335,8 +335,10 @@
     <string name="know_jingxuan">精选推荐</string>
     <string name="know_feilei">问题分类</string>
     <string name="know_tiwen_i">我要提问</string>
+    <!-- 我的提问 -->
+    <string name="know_my_question_title">我的提问</string>
     
-	<!-- 提问 -->    
+	<!-- 我要提问 -->    
 	<string name="tiwen_title">提问</string>    
 	<string name="tiwen_et_content">请在这里概述您的问题</string>
 	<string name="tiwen_commit">提交问题</string>
@@ -344,11 +346,13 @@
 
 	<!-- 知道详情 -->	
 	<string name="know_detaile_huidazhe">回答者：</string>
+	<string name="know_detaile_time">日期：</string>
 	<string name="know_detaile_huida_i">我来回答</string>
 	<string name="know_detaile_et_content">您的回答会被数十乃至数万的网友学习和参考，所以请一定对自己的回答负责，尽可能保障您的回答准确、详细和有效。</string>
 	<string name="know_detaile_commit">提交回答</string>
 	<string name="know_detaile_nim">匿名</string>
 	<string name="know_detaile_tiwen_i">我要提问</string>
+	
 	<!-- 注册完成 -->
 	<string name="regist_ok_title">恭喜注册完成！</string>
 	<string name="regist_ok_tiaozhuan">自动跳转到商城首页...</string>
