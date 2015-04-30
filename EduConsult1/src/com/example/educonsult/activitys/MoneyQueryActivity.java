@@ -3,7 +3,6 @@ package com.example.educonsult.activitys;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;

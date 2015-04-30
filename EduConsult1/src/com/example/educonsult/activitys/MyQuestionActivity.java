@@ -33,7 +33,7 @@ public class MyQuestionActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setTopLeftTv(R.string.know_my_question_title);
+		setTopLeftTv(R.string.tiwen_title);
 		topRightLVisible();
 		topRightRVisible();
 		topRightTGone();
