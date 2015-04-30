@@ -54,6 +54,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.educonsult.myviews.BadgeView;
+import com.unionpay.mobile.android.utils.h;
 
 /**
  * 公用工具类
@@ -868,7 +869,7 @@ public class Util {
 		};
 		thread = new Thread() {
 			public void run() {
-				Message msg = new Message();
+				Message msg = handler.obtainMessage();
 				Bitmap bmp = null;
 				if (!StringUtils.isEmpty(url)) {
 					bmp = BitmapFactory.decodeFile(url);

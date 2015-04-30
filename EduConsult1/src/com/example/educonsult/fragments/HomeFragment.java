@@ -32,15 +32,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
@@ -51,10 +55,15 @@ import com.example.educonsult.activitys.KnowHomeActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
 import com.example.educonsult.activitys.XinjianActivity;
 import com.example.educonsult.activitys.ZhanhuiHomeActivity;
+import com.example.educonsult.activitys.GqTwoActivity.RefeshData;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.HomeRuzhuAdapter;
+import com.example.educonsult.beans.CompanyBean;
+import com.example.educonsult.beans.HomeBean;
 import com.example.educonsult.beans.ListUserBean;
+import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.myviews.MyGridView;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.FileUtils;
 import com.example.educonsult.tools.ImageUtils;
 import com.example.educonsult.tools.StringUtils;
@@ -67,16 +76,21 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private View view;
 	private HomeLikeAdapter likeadapter;
 	private HomeRuzhuAdapter ruzhuadapter;
-	private ArrayList<String> list;
+	private ArrayList<ProductBean> list;
 	private Context context;
+	private ScrollView sc;
 	private LinearLayout ll_gq,ll_news,ll_know,ll_zhanhui,ll_pinpai,ll_zhaobiao,ll_team,ll_leimu,ll_sl,ll_sy,ll_shebei,
 	ll_chuqin,ll_tianjia,ll_yuanliao,ll_tuijian_l,ll_tuijian_one,ll_tuijian_two,ll_tuijian_three,
 	ll_tuijian_four,ll_tuijian_b_l,ll_tuijian_b_t,ll_tuijian_b_r,ll_search,
 	ll_hot_l,ll_hot_t,ll_hot_r
 	,ll_hot_b_l,ll_hot_b_t,ll_hot_b_r;
 	private RelativeLayout top_rl;
-	private TextView tv_m_jingpin,tv_m_hot,tv_m_ruzhu;
-	private ImageView iv_hot_l,iv_fenlei;
+	private TextView tv_m_jingpin,tv_m_hot,tv_m_ruzhu,
+	tv_tj_l_title,tv_tj_l_price,tv_tj_t_title,tv_tj_t_price,tv_tj_r_title,tv_tj_r_price,
+	tv_hot_l_title,tv_hot_l_price,tv_hot_t_title,tv_hot_t_price,tv_hot_r_title,tv_hot_r_price;
+	private ImageView iv_tj_l,iv_tj_t,iv_tj_r,iv_tj_t_l,iv_tj_1,iv_tj_2,iv_tj_3,iv_tj_4,
+	iv_hot_top_l,iv_hot_top_t,iv_hot_top_r,iv_hot_b_l,iv_hot_b_t,iv_hot_b_r,
+	iv_fenlei,iv_ad1,iv_ad2;
 	private EditText et_search;
 	private Intent intent;
 	private FrameworkInstance frame=null;
@@ -85,6 +99,10 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private String title;
 	private ListUserBean listUserBean;
 	private Message msg;
+	private ThreadWithProgressDialog myPDT;
+	private HomeBean home;
+	private ArrayList<ImageView>list_rem,list_hot,list_com;
+	private ArrayList<TextView>list_tv_rem_title,list_tv_rem_price,list_tv_hot_title,list_tv_hot_price;
 
 
 	@Override
@@ -99,12 +117,17 @@ public class HomeFragment extends Fragment implements OnClickListener{
 
 	private void init() {
 		context = getActivity();
+		list_rem = new ArrayList<ImageView>();
+		list_hot = new ArrayList<ImageView>();
+		list_com = new ArrayList<ImageView>();
+		list_tv_rem_title = new ArrayList<TextView>();
+		list_tv_rem_price = new ArrayList<TextView>();
+		list_tv_hot_title = new ArrayList<TextView>();
+		list_tv_hot_price = new ArrayList<TextView>();
 		frame=MyApplication.frame;
 		top_rl = (RelativeLayout) view.findViewById(R.id.home_top_rl_right);
 		Util.SetRedNum(context, top_rl, 1);
 		apkFilter apkFilter=new apkFilter(new isFilesFilter(null));
-		//		  if(copyApkFromAssets(context, "chatdemo-ui.apk", Environment.getExternalStorageDirectory().getAbsolutePath()+"/chatdemo-ui.apk")){
-		//			  Uri u = Uri.parse("file://" + Environment.getExternalStorageDirectory().getAbsolutePath()+"/chatdemo-ui.apk");
 		String path = Environment.getExternalStorageDirectory().getPath()+"/"+name;
 		try {
 			boolean b = Tosd(name,  path);
@@ -118,11 +141,82 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		sc = (ScrollView) view.findViewById(R.id.home_sc);
+		iv_ad1 = (ImageView) view.findViewById(R.id.home_iv_ad1);
+		iv_ad2 = (ImageView) view.findViewById(R.id.home_iv_ad2);
+		/***********rem**************/
+		iv_tj_t_l =(ImageView) view.findViewById(R.id.home_iv_tuijian_top_l);
+		list_rem.add(iv_tj_t_l);
+		iv_tj_1 =(ImageView) view.findViewById(R.id.home_iv_tuijian_1);
+		list_rem.add(iv_tj_1);
+		iv_tj_2 =(ImageView) view.findViewById(R.id.home_iv_tuijian_2);
+		list_rem.add(iv_tj_2);
+		iv_tj_3 =(ImageView) view.findViewById(R.id.home_iv_tuijian_3);
+		list_rem.add(iv_tj_3);
+		iv_tj_4 =(ImageView) view.findViewById(R.id.home_iv_tuijian_4);
+		list_rem.add(iv_tj_4);
+		iv_tj_l =(ImageView) view.findViewById(R.id.home_iv_tuijian_l);
+		list_rem.add(iv_tj_l);
+		iv_tj_t =(ImageView) view.findViewById(R.id.home_iv_tuijian_t);
+		list_rem.add(iv_tj_t);
+		iv_tj_r =(ImageView) view.findViewById(R.id.home_iv_tuijian_r);
+		list_rem.add(iv_tj_r);
+		
+		
+		tv_tj_l_title = (TextView) view.findViewById(R.id.home_tv_tuijian_l_title);
+		tv_tj_t_title = (TextView) view.findViewById(R.id.home_tv_tuijian_t_title);
+		tv_tj_r_title = (TextView) view.findViewById(R.id.home_tv_tuijian_r_title);
+		list_tv_rem_title.add(tv_tj_l_title);
+		list_tv_rem_title.add(tv_tj_t_title);
+		list_tv_rem_title.add(tv_tj_r_title);
+		
+		tv_tj_l_price = (TextView) view.findViewById(R.id.home_tv_tuijian_l_price);
+		tv_tj_t_price = (TextView) view.findViewById(R.id.home_tv_tuijian_t_price);
+		tv_tj_r_price = (TextView) view.findViewById(R.id.home_tv_tuijian_r_price);
+		list_tv_rem_price.add(tv_tj_l_price);
+		list_tv_rem_price.add(tv_tj_t_price);
+		list_tv_rem_price.add(tv_tj_r_price);
+		
+		/************hot*******************/
+		iv_hot_top_l =(ImageView) view.findViewById(R.id.home_iv_hot__top_l);
+		list_hot.add(iv_hot_top_l);
+		iv_hot_top_t =(ImageView) view.findViewById(R.id.home_iv_hot__top_t);
+		list_hot.add(iv_hot_top_t);
+		iv_hot_top_r =(ImageView) view.findViewById(R.id.home_iv_hot__top_r);
+		list_hot.add(iv_hot_top_r);
+		iv_hot_b_l =(ImageView) view.findViewById(R.id.home_iv_hot_b_l);
+		list_hot.add(iv_hot_b_l);
+		iv_hot_b_l =(ImageView) view.findViewById(R.id.home_iv_hot_b_t);
+		list_hot.add(iv_hot_b_t);
+		iv_hot_b_l =(ImageView) view.findViewById(R.id.home_iv_hot_b_r);
+		list_hot.add(iv_hot_b_r);
+		
+		tv_hot_l_title = (TextView) view.findViewById(R.id.home_iv_hot_b_l_title);
+		tv_hot_t_title = (TextView) view.findViewById(R.id.home_iv_hot_b_t_title);
+		tv_hot_r_title = (TextView) view.findViewById(R.id.home_iv_hot_b_r_title);
+		list_tv_hot_title.add(tv_hot_l_title);
+		list_tv_hot_title.add(tv_hot_t_title);
+		list_tv_hot_title.add(tv_hot_r_title);
+		
+		tv_hot_l_price = (TextView) view.findViewById(R.id.home_iv_hot_b_l_price);
+		tv_hot_t_price = (TextView) view.findViewById(R.id.home_iv_hot_b_t_price);
+		tv_hot_r_price = (TextView) view.findViewById(R.id.home_iv_hot_b_r_price);
+		list_tv_hot_price.add(tv_hot_l_price);
+		list_tv_hot_price.add(tv_hot_t_price);
+		list_tv_hot_price.add(tv_hot_r_price);
+		
+		
+		
+		
+		
+		
+		
+		
 		et_search = (EditText) view.findViewById(R.id.title_iv_search);
 		et_search.setOnClickListener(this);
 		ll_search = (LinearLayout) view.findViewById(R.id.home_ll_top_search);
 		ll_search.setOnClickListener(this);
-		list = new ArrayList<String>();
+		list = new ArrayList<ProductBean>();
 		iv_fenlei = (ImageView) view.findViewById(R.id.title_left_iv);
 		iv_fenlei.setOnClickListener(this);
 		ll_gq = (LinearLayout) view.findViewById(R.id.home_gongqiu_ll);
@@ -153,11 +247,11 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		ll_tianjia.setOnClickListener(this);
 		ll_yuanliao = (LinearLayout) view.findViewById(R.id.home_yuanliao_ll);
 		ll_yuanliao.setOnClickListener(this);
-		tv_m_jingpin = (TextView) view.findViewById(R.id.home_tv_jingpin);
+		tv_m_jingpin = (TextView) view.findViewById(R.id.home_tv_more_jingpin);
 		tv_m_jingpin.setOnClickListener(this);
-		tv_m_hot = (TextView) view.findViewById(R.id.home_tv_hot);
+		tv_m_hot = (TextView) view.findViewById(R.id.home_tv_more_hot);
 		tv_m_hot.setOnClickListener(this);
-		tv_m_ruzhu = (TextView) view.findViewById(R.id.home_tv_ruzhu);
+		tv_m_ruzhu = (TextView) view.findViewById(R.id.home_tv_more_ruzhu);
 		tv_m_ruzhu.setOnClickListener(this);
 
 
@@ -190,7 +284,6 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		ll_hot_b_t.setOnClickListener(this);
 		ll_hot_b_r = (LinearLayout) view.findViewById(R.id.home_ll_hot_b_r);
 		ll_hot_b_r.setOnClickListener(this);
-		iv_hot_l = (ImageView) view.findViewById(R.id.home_iv_hot_l);
 		String filename = "test";
 		final Util util = new Util(context);
 		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
@@ -205,17 +298,24 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		final String url = MyApplication.bean.getBmp();
 		
 		
-		Util.Getbitmap(iv_hot_l, url);
+//		Util.Getbitmap(iv_hot_l, url);
 
 
 
 		gv_like = (MyGridView) view.findViewById(R.id.home_ulike_gv);
 		likeadapter = new HomeLikeAdapter(context, list);
 		gv_ruzhu = (MyGridView) view.findViewById(R.id.home_ruzhu_gv);
-		ruzhuadapter = new HomeRuzhuAdapter(context, list);
 		gv_like.setAdapter(likeadapter);
-		gv_ruzhu.setAdapter(ruzhuadapter);
+//		ruzhuadapter = new HomeRuzhuAdapter(context, list);
+//		gv_ruzhu.setAdapter(ruzhuadapter);
 
+		
+		/*************测试****************/
+		myPDT = new ThreadWithProgressDialog();
+		String  msg = getResources().getString(R.string.loding);
+//		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		myPDT.Run(context, new RefeshData(),msg,false);//不可取消
+		
 
 
 	}
@@ -345,17 +445,17 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			intent.putExtra("title", title);
 			startActivity(intent);
 			break;
-		case R.id.home_tv_jingpin:
+		case R.id.home_tv_more_jingpin:
 			//			intent = new Intent(this.context,GqTwoActivity.class);
 			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			//			title = getResources().getString(R.string.home_tuijian);
 			//			intent.putExtra("title", title);
 			//			startActivity(intent);
 			break;
-		case R.id.home_tv_hot:
+		case R.id.home_tv_more_hot:
 
 			break;
-		case R.id.home_tv_ruzhu:
+		case R.id.home_tv_more_ruzhu:
 
 			break;
 
@@ -602,4 +702,71 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		super.onResume();
 	}
 
+	// 任务
+		public class RefeshData implements ThreadWithProgressDialogTask {
+
+			public RefeshData() {
+			}
+
+			@Override
+			public boolean OnTaskDismissed() {
+				//任务取消
+//				Toast.makeText(context, "cancle", 1000).show();
+				return false;
+			}
+
+			@Override
+			public boolean OnTaskDone() {
+				//任务完成后
+				if(home!=null){
+					if(home.getCode()==200){
+//					Util.ShowToast(context, "success");
+					Util.Getbitmap(iv_ad1, home.getAd().get(0));
+					Util.Getbitmap(iv_ad2, home.getAd().get(1));
+					ruzhuadapter = new HomeRuzhuAdapter(context, home.getCompany());
+					gv_ruzhu.setAdapter(ruzhuadapter);
+					sc.scrollTo(0, 1);
+					for(int i =0;i<home.getRecommend().size();i++){
+						String url = home.getRecommend().get(i).getThumb();
+						Util.Getbitmap(list_rem.get(i), url);
+						if(i>=5){
+							String t = home.getRecommend().get(i).getTitle();
+							String p = home.getRecommend().get(i).getPrice();
+							list_tv_rem_title.get((i-5)).setText(t);
+							SetPrice(list_tv_rem_price.get((i-5)), p);
+						}
+					}
+					for(int j=0;j<home.getHot().size();j++){
+						String url = home.getHot().get(j).getThumb();
+						Util.Getbitmap(list_hot.get(j), url);
+						if(j>=3){
+							String t = home.getHot().get(j).getTitle();
+							String p = home.getHot().get(j).getPrice();
+							list_tv_hot_title.get((j-3)).setText(t);
+							SetPrice(list_tv_hot_price.get((j-3)), p);
+						}
+					}
+					}else{
+						Util.ShowToast(context, "加载异常，稍后再试...");
+					}
+				}else{
+					Util.ShowToast(context, "error");
+				}
+				return true;
+			}
+
+			@Override
+			public boolean TaskMain() {
+				// 访问
+				Send send = new Send(context);
+				home = send.RequestHome();
+				return true;
+			}
+		}
+	
+		private void SetPrice(TextView v ,String s){
+			v.setText("￥"+s);
+		}
+		
+		
 }

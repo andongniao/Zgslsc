@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
+import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.myviews.MyListview;
 
 
@@ -15,7 +16,7 @@ public class ProductDetaileMoreActivity extends BaseActivity {
 	private MyListview listview;
 	private ProductPingjiaAdapter pingjiaAdapter;
 	private Context context;
-	private ArrayList<String > list;
+	private ArrayList<ProductBean> list;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -28,7 +29,7 @@ public class ProductDetaileMoreActivity extends BaseActivity {
 		init();
 	}
 	void init(){
-		list=new ArrayList<String>();
+		list=new ArrayList<ProductBean>();
 		listview=(MyListview)findViewById(R.id.product_detail_more_list);
 		pingjiaAdapter=new ProductPingjiaAdapter(context, list);
 		listview.setAdapter(pingjiaAdapter);

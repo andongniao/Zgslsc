@@ -41,6 +41,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private ArrayAdapter<String> arr_adapter;
 	private SearchAdapter adapter;
 	private boolean ishave;
+	private int t;
 
 
 	@Override
@@ -72,6 +73,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		context = this;
+		t = getIntent().getIntExtra("t", -1);
 		er = MyApplication.sp.edit();
 		sp = (Spinner) findViewById(R.id.search_home_sp);
 		et = (EditText) findViewById(R.id.search_home_et_inpu);
@@ -195,7 +197,8 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){  
+	    	if(t==-1){
 	        if((System.currentTimeMillis()-exitTime) > 2000){  
 	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
 	            exitTime = System.currentTimeMillis();   
@@ -203,6 +206,9 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	            finish();
 	            System.exit(0);
 	        }
+	    	}else{
+	    		finish();
+	    	}
 	        return true;   
 	    }
 	    return super.onKeyDown(keyCode, event);

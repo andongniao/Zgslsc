@@ -34,6 +34,7 @@ import com.example.educonsult.adapters.GqAdapter;
 import com.example.educonsult.adapters.HomeRuzhuAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.KnowFenleiAdapter;
+import com.example.educonsult.beans.CompanyBean;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.tools.Util;
 
@@ -45,7 +46,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private HomeRuzhuAdapter adapter;
 	//	private GridView gv_dh;
 	private MyGridView gv_pp,gv_dh,gv_dh_xq;
-	private ArrayList<String>list;
+	private ArrayList<CompanyBean>list;
 	private PagerSlidingTabStrip tabs;
 	private ViewPager pager;
 	private LinearLayout add_ll;
@@ -192,7 +193,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		l = new ArrayList<View>();
-		list = new ArrayList<String>();
+		list = new ArrayList<CompanyBean>();
 		adapter = new HomeRuzhuAdapter(context, list);
 		scrollView = (ScrollView) findViewById(R.id.gq_two_sc);
 		ll_jingxuan_l = (LinearLayout) findViewById(R.id.gq_two_ll_jingxuan_l);
