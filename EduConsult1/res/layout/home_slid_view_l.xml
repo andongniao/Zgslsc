@@ -12,8 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/test"
-        android:layout_margin="5dp"
-        android:gravity="center" />
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:textColor="@color/black" />
 <TextView 
     android:layout_width="0dp"
     android:layout_height="fill_parent"

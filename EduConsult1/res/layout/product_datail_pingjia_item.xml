@@ -25,13 +25,13 @@
                 android:background="@drawable/ic_launcher" />
 
             <RelativeLayout
-                android:layout_width="80dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal" >
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/v1" />
@@ -52,6 +52,7 @@
         android:orientation="vertical"
         android:layout_weight="1"  
         android:layout_gravity="center_horizontal"  
+        android:layout_marginLeft="10dp"
         >
         <TextView 
 			android:id="@+id/product_datail_pingjia_item_take"            

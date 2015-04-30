@@ -38,5 +38,9 @@
     <color name="base_he">#59392A</color>
     <color name="regist_bg">#EEF3FA</color>
     <color name="regist_button_bg">#00933F</color>
+    <color name="money_lin">#CFCFCF</color>
+    <color name="coupons_item_bg">#F1DECF</color>
+    <color name="coupons_item_tv">#9D653D</color>
+    
 
 </resources>

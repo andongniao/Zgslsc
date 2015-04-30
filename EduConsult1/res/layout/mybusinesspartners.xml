@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/base_hui">
+        <RelativeLayout
+        android:id="@+id/mybusinesspartners_rela"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/mybusinesspartners_allquery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/mybusinesspartners_all"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+    <com.example.educonsult.myviews.MyListview 
+         android:id="@+id/mybusinesspartners_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:dividerHeight="20dp"
+        >
+        
+    </com.example.educonsult.myviews.MyListview>
+    
+
+</LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class QianBaoActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_chaxun,ll_tixian;
@@ -74,12 +75,17 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		//Intent intent;
 		switch (v.getId()) {
 		case R.id.qianbao_ll_chaxun:
-			
+			intent = new Intent(this,MoneyQueryActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		case R.id.qianbao_ll_tixian:
-			
+			intent = new Intent(this,MoneyWithdrawalActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 
 		}

@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <!-- 提示 -->
-	<string name="loding">正在加载...</string>
+    <string name="loding">正在加载...</string>
 
     <!-- 首页 -->
     <string name="home_more">更多></string>
@@ -41,7 +41,7 @@
     <string name="home_slid_tianjiaji">添加剂</string>
     <string name="home_slid_yuanliao">原料</string>
     <string name="home_slid_other">其他</string>
-    
+
     <!-- 登录界面 -->
     <string name="login_username">会员名</string>
     <string name="login_password">密码</string>
@@ -86,13 +86,13 @@
     <string name="search_history">历史记录</string>
     <string name="search_inpu">请输入关键字</string>
     <string name="search_history_is_null">没有搜索记录</string>
-    
+
     <!-- 搜索结果 -->
     <string name="search_result_zonghe">综合排序</string>
     <string name="search_result_xiaoliang">销量</string>
     <string name="search_result_price">价格</string>
     <string name="search_result_renqi">人气</string>
-    
+
     <!-- 个人中心 -->
     <string name="mycenger_title">个人中心</string>
     <string name="mycenger_shoucang_cp">收藏的产品</string>
@@ -114,7 +114,7 @@
     <string name="mycenger_update">检查更新</string>
     <string name="mycenger_now_version">当前版本</string>
     <string name="mycenger_tuijian">精选推荐</string>
-    
+
     <!-- 服务中心 -->
     <string name="service_center_kefu_one">客服1</string>
     <string name="service_center_kefu_two">客服2</string>
@@ -130,7 +130,14 @@
     <string name="service_center_wenti_regist">注册问题</string>
     <string name="service_center_wenti_wuliu">物流问题</string>
     <string name="service_center_wenti_qita">其他问题</string>
-    
+    <!-- 我的商友 -->
+    <string name="mybusinesspartners_all">全部分类</string>
+    <string name="mybusinesspartners_title">我的商友</string>
+    <string name="mybusinesspartners_itme_way">（分类）</string>
+    <string name="mybusinesspartners_itme_tvbeizhu">（备注）</string>
+    <string name="mybusinesspartners_itme_tvtel">电话：</string>
+    <string name="mybusinesspartners_itme_tvQQ">QQ：</string>
+    <string name="mybusinesspartners_itme_tvpho">手机：</string>
     <!-- 我的钱包 -->
     <string name="qignbao_title">我的钱包</string>
     <string name="qignbao_zonge">总额</string>
@@ -138,7 +145,33 @@
     <string name="qignbao_tixianjine">提现中金额:</string>
     <string name="qignbao_chaxun">查询明细</string>
     <string name="qignbao_tixian">钱包提现</string>
-    
+    <!-- 钱包明细 -->
+    <string name="qianbao_query_title">查询明细</string>
+    <string name="qianbao_query_all">全部收支</string>
+    <string name="qianbao_query_money">余额：</string>
+    <!-- 钱包提现 -->
+    <string name="money_withdrawal_title">钱包提现</string>
+    <string name="money_withdrawal_allmoney">可转出金额</string>
+    <string name="money_withdrawal_jine">金额</string>
+    <string name="money_withtrawal_textjine">转出金额</string>
+    <string name="money_withtrawal_tishi">每笔限制额300元，本日还可转出</string>
+    <string name="money_withtrawal_tishi1">次</string>
+    <string name="money_withtrawal_ok">确定转出</string>
+    <!-- 收支详情 -->
+    <string name="moneyquery_info_title">收支详情</string>
+    <string name="moneyquery_info_id">流水号</string>
+    <string name="moneyquery_info_way">类型</string>
+    <string name="moneyquery_info_waymoney">收入</string>
+    <string name="moneyquery_info_moneyway">付款方式</string>
+    <string name="moneyquery_info_time">时间</string>
+    <string name="moneyquery_info_money">余额</string>
+    <string name="moneyquery_info_beizhu">备注</string>
+    <!-- 优惠券 -->
+    <string name="coupons_title">优惠券</string>
+    <string name="coupons_tvid">编号</string>
+    <string name="coupons_tvmoney">面值</string>
+    <string name="coupons_tvmustmoney">需消费金额</string>
+    <string name="coupons_tvtime">过期时间</string>
     <!-- 我的资料 -->
     <string name="myinfo_title">我的资料</string>
     <string name="myinfo_head">头像</string>
@@ -153,9 +186,10 @@
     <string name="myinfo_gongsim">公司名</string>
     <string name="myinfo_gongsid">公司电话</string>
     <string name="myinfo_gongsitype">公司类型</string>
-    
+
     <!-- 站内信件 -->
     <string name="xinjian_title">站内信件</string>
+    <string name="xinjianinfo_title">信件详情</string>
 
     <!-- 供求二级页 -->
     <string name="gq_two_pp">品牌推荐</string>
@@ -164,7 +198,7 @@
     <string name="gq_popw_price_min">最低价</string>
     <string name="gq_popw_price_max">最高价</string>
     <string name="gq_popw_price_ok">确定</string>
-    
+
     <!-- 产品详情页 -->
     <string name="product_detaile_title">产品详情</string>
     <string name="product_detaile_price_shangcheng">商城价：</string>
@@ -204,9 +238,11 @@
     <string name="product_detaile_ll_add_view_pingjia_yuanliaozhiliang">原料质量很好(7)</string>
     <string name="product_detaile_ll_add_view_pingjia_fuwutaidu">服务态度好(7)</string>
     <string name="product_detaile_ll_add_view_pingjia_effect">效果好(7)</string>
+    <string name="product_detaile_ll_add_view_pingjia_more">查看更多</string>
     <string name="product_detaile_pingjia_item_text">来说说这次团购的感受吧，对其他用户来说是很重要的参考！来说说这次团购的感受吧，对其他用户来说是很重要的参考！</string>
     <string name="product_detaile_pingjia_item_time">2015-1-8   15:27</string>
-    
+    <string name="product_detaile_more_title">更多评价</string>
+
     <!-- 购物车 -->
     <string name="shopcart_title">购物车</string>
     <string name="shopcart_jiesuan">结算</string>
@@ -214,7 +250,7 @@
     <string name="shopcart_xiaoji">小计</string>
     <string name="shopcart_heji">合计：</string>
     <string name="shopcart_yunfei">（不含运费）</string>
-    
+
     <!-- 关于商城 -->
     <string name="about_title">关于商城</string>
     <string name="about_erweima">扫一扫 即可轻松安装中国饲料商城网客户端</string>
@@ -225,7 +261,7 @@
     <string name="about_phone_content">400-7890-616</string>
     <string name="about_email">电话：</string>
     <string name="about_email_content">zgslsc@nm1668.com</string>
-    
+
     <!-- 地址管理 -->
     <string name="address_title">地址管理</string>
     <string name="address_default">[默认地址]</string>
@@ -241,7 +277,7 @@
     <string name="address_youbian">邮编</string>
     <string name="address_detele">删除</string>
     <string name="address_save">保存</string>
-    
+
     <!-- 确认订单 -->
     <string name="order_title">确认订单</string>
     <string name="order_shouhuoren">收货人：</string>
@@ -273,9 +309,7 @@
     <string name="myorder_order_isnull_up">你还没有相关订单</string>
     <string name="myorder_order_isnull_down">可以去看看有哪些想买的</string>
     <string name="myorder_see">随便逛逛</string>
-    
-    
-    
+
     <!-- 供求 -->
     <string name="gongqiu_title">供求</string>
     <string name="gongqiu_all">全部分类</string>
@@ -285,7 +319,7 @@
     <string name="gongqiu_add">加入购物车</string>
     <string name="gongqiu_tuijian">精品推荐</string>
     <string name="gongqiu_paied">已买过的产品</string>
-    
+
     <!-- 展会 -->
     <string name="zhanhui_title">展会</string>
     <string name="zhanhui_hot">今日热点</string>
@@ -319,7 +353,7 @@
     <string name="zhanhui_detaile_i_say">我来说两句</string>
     <string name="zhanhui_detaile_niming">匿名发表</string>
     <string name="zhanhui_detaile_xianzhi">（内容限5-500字）</string>
-    
+
     <!-- 知道首页 -->
     <string name="know_title">知道</string>
     <string name="know_jingyan">经验</string>
@@ -335,29 +369,23 @@
     <string name="know_jingxuan">精选推荐</string>
     <string name="know_feilei">问题分类</string>
     <string name="know_tiwen_i">我要提问</string>
-    
-	<!-- 提问 -->    
-	<string name="tiwen_title">提问</string>    
-	<string name="tiwen_et_content">请在这里概述您的问题</string>
-	<string name="tiwen_commit">提交问题</string>
-	<string name="tiwen_zixun_online">在线咨询</string>
 
-	<!-- 知道详情 -->	
-	<string name="know_detaile_huidazhe">回答者：</string>
-	<string name="know_detaile_huida_i">我来回答</string>
-	<string name="know_detaile_et_content">您的回答会被数十乃至数万的网友学习和参考，所以请一定对自己的回答负责，尽可能保障您的回答准确、详细和有效。</string>
-	<string name="know_detaile_commit">提交回答</string>
-	<string name="know_detaile_nim">匿名</string>
-	<string name="know_detaile_tiwen_i">我要提问</string>
-	<!-- 注册完成 -->
-	<string name="regist_ok_title">恭喜注册完成！</string>
-	<string name="regist_ok_tiaozhuan">自动跳转到商城首页...</string>
-	
-    
-    
-    
-    
-    
-    
+    <!-- 提问 -->
+    <string name="tiwen_title">提问</string>
+    <string name="tiwen_et_content">请在这里概述您的问题</string>
+    <string name="tiwen_commit">提交问题</string>
+    <string name="tiwen_zixun_online">在线咨询</string>
+
+    <!-- 知道详情 -->
+    <string name="know_detaile_huidazhe">回答者：</string>
+    <string name="know_detaile_huida_i">我来回答</string>
+    <string name="know_detaile_et_content">您的回答会被数十乃至数万的网友学习和参考，所以请一定对自己的回答负责，尽可能保障您的回答准确、详细和有效。</string>
+    <string name="know_detaile_commit">提交回答</string>
+    <string name="know_detaile_nim">匿名</string>
+    <string name="know_detaile_tiwen_i">我要提问</string>
+    <!-- 注册完成 -->
+    <string name="regist_ok_title">恭喜注册完成！</string>
+    <string name="regist_ok_tiaozhuan">自动跳转到商城首页...</string>
+    <string name="title_activity_money_query">MoneyQueryActivity</string>
 
 </resources>

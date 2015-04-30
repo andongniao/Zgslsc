@@ -604,8 +604,18 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
-                            android:dividerHeight="0.5dp" >
+                            android:dividerHeight="0.5dp"
+                            android:divider="@color/base_hui" >
                         </com.example.educonsult.myviews.MyListview>
+                        <TextView 
+                            android:id="@+id/product_detaile_ll_add_View_xiangqing_more"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="@string/product_detaile_ll_add_view_pingjia_more"
+                            android:gravity="center"
+                            android:clickable="true"
+                            />
                     </LinearLayout>
 
                     <LinearLayout

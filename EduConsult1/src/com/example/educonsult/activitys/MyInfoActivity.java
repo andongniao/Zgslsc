@@ -83,7 +83,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 
 			break;
 		case R.id.myinfo_ll_youhuiquan:
-
+			intent = new Intent(context,CouponsActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 
 		}

@@ -2,15 +2,18 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.XinjianAdapter;
 import com.example.educonsult.tools.Util;
-
-import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
 public class XinjianActivity extends BaseActivity{
 	private ListView lv;
@@ -18,11 +21,13 @@ public class XinjianActivity extends BaseActivity{
 	private ArrayList<Object> list;
 	private XinjianAdapter adapter;
 	private LinearLayout ll_isnull;
+	private Intent intent;
+	
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightRVisible();
+		//topRightRVisible();
 		topRightTGone();
 		setTopLeftTv(R.string.xinjian_title);
 		setContentXml(R.layout.xinjian);
@@ -70,6 +75,17 @@ public class XinjianActivity extends BaseActivity{
 		}
 		adapter = new XinjianAdapter(context, list);
 		lv.setAdapter(adapter);
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				intent=new Intent(context,XinJianInfoActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
 	}
 
 }

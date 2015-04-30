@@ -79,7 +79,7 @@ public class ZhanhuiDetaileLvAdapter extends BaseAdapter{
 			if(position%2==0){
 				bean = listUserBean.getList().get(0);
 			}else{
-				bean = listUserBean.getList().get(1);
+				bean = listUserBean.getList().get(0);
 			}
 			Util.Getbitmap(item.head, bean.getBmp());
 		}

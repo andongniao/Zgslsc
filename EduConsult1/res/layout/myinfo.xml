@@ -90,6 +90,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+            <TextView 
+                android:layout_width="5dp"
+                android:layout_height="10dp"
+                android:background="@drawable/myinfo_right"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -148,6 +153,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
+            <TextView 
+                android:layout_width="5dp"
+                android:layout_height="10dp"
+                android:background="@drawable/myinfo_right"
+                android:layout_margin="10dp"/>
         </LinearLayout>
 
         <LinearLayout

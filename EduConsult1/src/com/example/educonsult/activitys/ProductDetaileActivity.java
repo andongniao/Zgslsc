@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.test.UiThreadTest;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -28,6 +29,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.tools.Util;
 
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -39,7 +41,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private PopupWindow popupWindow;
 	private int w,h,lh;
 	private Intent intent;
-	private TextView chanpin,pingjia,dianpu;
+	private TextView chanpin,pingjia,dianpu,pingjiamore;
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
@@ -64,7 +66,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		DisplayMetrics  dm = new DisplayMetrics();  
 		getWindowManager().getDefaultDisplay().getMetrics(dm);  
 		w = dm.widthPixels;  
-		h = dm.heightPixels;    
+		h = dm.heightPixels; 
+		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
+		pingjiamore.setOnClickListener(this);
 		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
 		ll_as_l = (LinearLayout) findViewById(R.id.product_detaile_ll_tonglei_l);
 		ll_as_l.setOnClickListener(this);
@@ -204,6 +208,11 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			chanpin.setTextColor(getResources().getColor(R.color.black));
 			pingjia.setTextColor(getResources().getColor(R.color.black));
 			dianpu.setTextColor(getResources().getColor(R.color.orn));
+			break;
+		case R.id.product_detaile_ll_add_View_xiangqing_more:
+			intent = new Intent(context,ProductDetaileMoreActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 			
 			

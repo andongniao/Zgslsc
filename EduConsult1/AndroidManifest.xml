@@ -25,7 +25,7 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
-        android:name="com.example.educonsult.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -39,7 +39,7 @@
             android:value="xunbowangluo#zgslsc" />
 
         <activity
-            android:name="com.example.educonsult.activitys.WelcomeActivity"
+            android:name=".activitys.WelcomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,103 +48,103 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.educonsult.ExampleActivity"
+            android:name=".ExampleActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.HomePagerActivity"
+            android:name=".activitys.HomePagerActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.LoginActivity"
+            android:name=".activitys.LoginActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.SearchHomeActivity"
+            android:name=".activitys.SearchHomeActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.MyCenterActivity"
+            android:name=".activitys.MyCenterActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.GqTwoActivity"
+            android:name=".activitys.GqTwoActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.RegistActivity"
+            android:name=".activitys.RegistActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.ProductDetaileActivity"
+            android:name=".activitys.ProductDetaileActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.ServiceCenterActivity"
+            android:name=".activitys.ServiceCenterActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.AboutActivity"
+            android:name=".activitys.AboutActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.AddressActivity"
+            android:name=".activitys.AddressActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.AddressGLActivity"
+            android:name=".activitys.AddressGLActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.ShopcartActivity"
+            android:name=".activitys.ShopcartActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.QianBaoActivity"
+            android:name=".activitys.QianBaoActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.MyInfoActivity"
+            android:name=".activitys.MyInfoActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.XinjianActivity"
+            android:name=".activitys.XinjianActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.OrderActivity"
+            android:name=".activitys.OrderActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.UpAddressActivity"
+            android:name=".activitys.UpAddressActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.SearchResultActivity"
+            android:name=".activitys.SearchResultActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.MyOrderActivity"
+            android:name=".activitys.MyOrderActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.GqHomeActivity"
+            android:name=".activitys.GqHomeActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.ZhanhuiHomeActivity"
+            android:name=".activitys.ZhanhuiHomeActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.ZhanhuiDetaileActivity"
+            android:name=".activitys.ZhanhuiDetaileActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.KnowHomeActivity"
+            android:name=".activitys.KnowHomeActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.RegistOKActivity"
+            android:name=".activitys.RegistOKActivity"
             android:label="@string/app_name" >
         </activity>
         <activity android:name="com.unionpay.uppay.PayActivity" >
@@ -159,6 +159,32 @@
                 <action android:name="com.easemob.chat.EMChatService" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".activitys.MoneyQueryActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.MoneyQueryInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.MoneyWithdrawalActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.CouponsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.ProductDetaileMoreActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity
+            android:name=".activitys.XinJianInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

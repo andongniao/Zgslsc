@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.example.educonsult.myviews.MyListview
+        android:id="@+id/product_detail_more_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/base_hui"
+        android:dividerHeight="0.5dp"
+        android:padding="10dp" >
+    </com.example.educonsult.myviews.MyListview>
+
+</LinearLayout>

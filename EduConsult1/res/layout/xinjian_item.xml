@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center_vertical"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="10dp" >
 
     <TextView
@@ -12,5 +12,13 @@
         android:layout_height="wrap_content"
         android:text="@string/test"
         android:textColor="@color/black" />
+    <TextView 
+         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+    <TextView 
+        android:layout_width="5dp"
+        android:layout_height="10dp"
+        android:background="@drawable/myinfo_right"/>
 
 </LinearLayout>

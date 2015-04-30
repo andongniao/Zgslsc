@@ -22,7 +22,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Context context;
 	private Intent intent;
-	private LinearLayout ll_cp,ll_dp,ll_zj,ll_zf,ll_fh,ll_sh,ll_pj,ll_order,ll_address,
+	private LinearLayout ll_zhifu,ll_cp,ll_dp,ll_zj,ll_zf,ll_fh,ll_sh,ll_pj,ll_order,ll_address,
 	ll_qianbao,ll_xinjian,ll_jifen,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian;
 	private ImageView iv_zhifu,iv_fahuo,iv_shouhuo,iv_pingjia;
 	private CircleImageView icv_head;
@@ -79,8 +79,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_update.setOnClickListener(this);
 		ll_tuijian = (LinearLayout) findViewById(R.id.mycenter_home_ll_tuijian);
 		ll_tuijian.setOnClickListener(this);
-		
-		BadgeView badge = new BadgeView(this, iv_zhifu);
+		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
+		BadgeView badge = new BadgeView(this, ll_zhifu);
 		badge.setText(""+1);
 		badge.show();
 //		badge.toggle();

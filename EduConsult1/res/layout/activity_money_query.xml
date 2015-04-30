@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_hui"
+    android:orientation="vertical"
+    tools:context="com.example.educonsult.MoneyQueryActivity" >
+
+    <RelativeLayout
+        android:id="@+id/qianbao_query_rela"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/qianbao_query_allquery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/qianbao_query_all"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+    <com.example.educonsult.myviews.MyListview 
+         android:id="@+id/qianbao_query_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        
+    </com.example.educonsult.myviews.MyListview>
+
+     
+
+   
+</LinearLayout>

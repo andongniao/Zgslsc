@@ -152,12 +152,15 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                     android:id="@+id/mycenter_home_btn_zhifu_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     
                     android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                   android:paddingBottom="5dp"
+                   android:paddingRight="10dp"
+                   android:paddingLeft="10dp"
                     android:orientation="horizontal" >
 
                     <ImageView
@@ -193,6 +196,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     
+                   android:paddingRight="10dp"
+                   android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                     android:orientation="horizontal" >
@@ -231,6 +236,8 @@
                     
                     android:paddingTop="5dp"
                 android:paddingBottom="5dp"
+                   android:paddingRight="10dp"
+                   android:paddingLeft="10dp"
                     android:orientation="horizontal" >
 
                     <ImageView
@@ -266,6 +273,8 @@
                     android:gravity="center"
                     android:paddingTop="5dp"
                 android:paddingBottom="5dp"
+                   android:paddingRight="10dp"
+                   android:paddingLeft="10dp"
                     android:orientation="horizontal" >
 
                     <ImageView
@@ -302,6 +311,8 @@
                     android:gravity="center"
                     android:paddingTop="5dp"
                 android:paddingBottom="5dp"
+                   android:paddingRight="10dp"
+                   android:paddingLeft="10dp"
                     android:orientation="horizontal" >
 
                     <ImageView
