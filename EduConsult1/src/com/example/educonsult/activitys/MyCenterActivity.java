@@ -22,8 +22,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Context context;
 	private Intent intent;
-	private LinearLayout ll_zhifu,ll_cp,ll_dp,ll_zj,ll_zf,ll_fh,ll_sh,ll_pj,ll_order,ll_address,
-	ll_qianbao,ll_xinjian,ll_jifen,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian;
+	private LinearLayout ll_zhifu,ll_cp,ll_mima,ll_dp,ll_zj,ll_zf,ll_fh,ll_sh,ll_pj,ll_order,ll_address,
+	ll_qianbao,ll_xinjian,ll_jifen,ll_youhuiquan,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian;
 	private ImageView iv_zhifu,iv_fahuo,iv_shouhuo,iv_pingjia;
 	private CircleImageView icv_head;
 	private TextView tv_version;
@@ -79,6 +79,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_update.setOnClickListener(this);
 		ll_tuijian = (LinearLayout) findViewById(R.id.mycenter_home_ll_tuijian);
 		ll_tuijian.setOnClickListener(this);
+		ll_youhuiquan = (LinearLayout) findViewById(R.id.myinfo_ll_youhuiquan);
+		ll_youhuiquan.setOnClickListener(this);
+		ll_mima = (LinearLayout) findViewById(R.id.mycenter_home_ll_mima);
+		ll_mima.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
 		BadgeView badge = new BadgeView(this, ll_zhifu);
 		badge.setText(""+1);
@@ -108,13 +112,25 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_cp:
-			Toast.makeText(context, "Test", 500).show();
+			intent = new Intent(context,SCProductActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_dp:
-			Toast.makeText(context, "Test", 500).show();
+			intent = new Intent(context,SCStoreActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+		case R.id.myinfo_ll_youhuiquan:
+			intent = new Intent(context,ConfirmTheDeliveryActivity.class);
+			//intent = new Intent(context,CouponsActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_zj:
-			Toast.makeText(context, "Test", 500).show();
+			intent = new Intent(context,MyZjActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_zhifu:
 			intent = new Intent(context,MyOrderActivity.class);
@@ -156,6 +172,11 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.mycenter_home_ll_qianbao:
 			intent = new Intent(context,QianBaoActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+		case R.id.mycenter_home_ll_mima:
+			intent = new Intent(context,PasswordActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;

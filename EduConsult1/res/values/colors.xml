@@ -41,6 +41,7 @@
     <color name="money_lin">#CFCFCF</color>
     <color name="coupons_item_bg">#F1DECF</color>
     <color name="coupons_item_tv">#9D653D</color>
+    <color name="myorderinfo_ca">#AE6D2D</color>
     
 
 </resources>

@@ -23,12 +23,14 @@ import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.MoneyQueryAdapter;
+import com.example.educonsult.adapters.TextItemListAdapter;
 import com.example.educonsult.myviews.MyListview;
 
 public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
-	private RelativeLayout reaLayout;
+	private LinearLayout reaLayout;
 	private TextView allquery;
-	private MyListview list_money,list_way;
+	private ListView list_money;
+	private MyListview list_way;
 	private ListView list_2,lv_l;
 	private MoneyQueryAdapter moneyQueryAdapter;
 	private Context context;
@@ -36,10 +38,10 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private ImageView iv_top_l,iv_top_t;
+	private ImageView iv_top_l,iv_top_t,image;
 	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
-	private HomeSlidAdapter adapter_r;
+	private TextItemListAdapter adapter_r;
 	private LinearLayout lin;
 	
 	@Override
@@ -83,11 +85,13 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		});
 	}
 	void init(){
-		reaLayout=(RelativeLayout)findViewById(R.id.qianbao_query_rela);
+		reaLayout=(LinearLayout)findViewById(R.id.qianbao_query_rela);
 		reaLayout.setOnClickListener(this);
-		list_money=(MyListview)findViewById(R.id.qianbao_query_list);
+		image=(ImageView)findViewById(R.id.qianbao_query_image);
+		list_money=(ListView)findViewById(R.id.qianbao_query_list);
 		allquery=(TextView)findViewById(R.id.qianbao_query_allquery);
 		list=new ArrayList<String>();
+		
 		moneyQueryAdapter=new MoneyQueryAdapter(context, list);
 		list_money.setAdapter(moneyQueryAdapter);
 		list_money.setOnItemClickListener(new OnItemClickListener() {
@@ -104,14 +108,14 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 		inflater=LayoutInflater.from(context);
-		v_fenlei = inflater.inflate(R.layout.know_slidemenu_view, null);
-		lin=(LinearLayout)v_fenlei.findViewById(R.id.know_slid_view_ll_r);
-		lin.setVisibility(View.GONE);
-		list_2=(ListView)v_fenlei.findViewById(R.id.know_slid_view_lv_r);
-		list_2.setVisibility(View.GONE);
-		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
-		ArrayList<String>ll = new ArrayList<String>();
-		adapter_r = new HomeSlidAdapter(context, ll,2);
+		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
+		
+		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
+		ArrayList<String> ll = new ArrayList<String>();
+		ll.add("全部收支");
+		ll.add("收入");
+		ll.add("支出");
+		adapter_r = new TextItemListAdapter(context, ll);
 		lv_l.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
@@ -119,6 +123,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				
 				popu.dismiss();
 			}
 		});

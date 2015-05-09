@@ -18,9 +18,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
+           android:background="@drawable/search_ore_et"
             android:padding="5dp"
             >
-        <Spinner
+            <!-- 
+             <Spinner
             android:id="@+id/search_home_sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,12 +30,21 @@
             android:background="@drawable/search_tubiao"
             android:paddingRight="10dp"
             android:entries="@array/search_home_list" />
+             -->
+             <TextView 
+             android:id="@+id/search_home_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_tubiao"
+            android:gravity="center"
+            android:textColor="@color/black"
+            />
+       
         <EditText 
             android:id="@+id/search_home_et_inpu"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:singleLine="true"
-            android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:background="#e6e6e6"
             android:gravity="center_vertical"
@@ -43,13 +54,16 @@
             <Button 
             android:id="@+id/search_home_btn_seatch"
             android:layout_width="60dp"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:text="@string/search_title"
             android:textColor="@color/white"
-            android:layout_margin="5dp"
+             android:layout_marginLeft="5dp"
+          android:layout_marginRight="5dp"
+          android:layout_marginTop="10dp"
             android:padding="10dp"
             android:textSize="16dp"
             android:gravity="center"
+            
             />
     </LinearLayout>
     <LinearLayout 

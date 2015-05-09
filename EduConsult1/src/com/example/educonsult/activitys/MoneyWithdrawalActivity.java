@@ -90,7 +90,9 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		case R.id.money_withdrawal_edmoney:
 			break;
 		case R.id.money_withdrawal_car:
-
+			intent = new Intent(context,MoneyCarListActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		case R.id.money_withdrawal_up:
 			String moneyStr=money.getText().toString().trim();

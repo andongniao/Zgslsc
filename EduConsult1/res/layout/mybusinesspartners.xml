@@ -22,7 +22,7 @@
             android:text="@string/mybusinesspartners_all"
             android:textColor="@color/black" />
     </RelativeLayout>
-    <com.example.educonsult.myviews.MyListview 
+    <ListView
          android:id="@+id/mybusinesspartners_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:dividerHeight="20dp"
         >
         
-    </com.example.educonsult.myviews.MyListview>
+    </ListView>
     
 
 </LinearLayout>

@@ -53,8 +53,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightLVisible();
+		
 		topRightRVisible();
+		topRightTGone();
 		setTopLeftTv(R.string.login_login);
 		setContentXml(R.layout.login_layout);
 		init();

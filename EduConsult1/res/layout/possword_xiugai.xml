@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+      android:background="@color/base_hui">
+     <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/home_hui" />
+     <EditText
+        android:id="@+id/possword_xiugai_oldpow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/possword_tvoldpow"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+     <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/home_hui" />
+<ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/home_hui" />
+     <EditText
+        android:id="@+id/possword_xiugai_newpow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/possword_tvnewpow"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+     <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/home_hui" />
+     <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/home_hui" />
+     <EditText
+        android:id="@+id/possword_xiugai_newpowtwo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/possword_tvnewpowtwo"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+     <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/home_hui" />
+     <Button
+        android:id="@+id/possword_xiugai_ok"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/possword_tvok" 
+        android:padding="10dp"
+        android:background="@drawable/search_lv_isnull_btn_bg"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"/>
+</LinearLayout>

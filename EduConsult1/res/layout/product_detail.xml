@@ -131,7 +131,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="10dp" >
+                    android:padding="10dp"
+                    android:visibility="gone" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -164,7 +165,7 @@
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="10dp" >
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,6 +210,29 @@
                         android:text="@string/test"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
+                    <TextView android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                    <LinearLayout
+                            android:id="@+id/product_detaile_ll_into_dianpu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                           
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="5dp" >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/product_dianpu" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/product_detaile_jinrudianpu"
+                                android:textColor="@color/base_top_title_bg" />
+                        </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -338,6 +362,30 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                             android:background="@drawable/product_zizhi_r" />
+                        <TextView 
+                            android:id="@+id/product_detaile_adds"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/product_detaile_add"
+                            android:layout_marginLeft="5dp"
+                            android:padding="5dp"
+                            android:textColor="@color/black"
+                            android:visibility="gone"/>
+                        <TextView 
+                            android:layout_width="0.5dp"
+                            android:layout_height="fill_parent"
+                            android:background="@color/black"
+                            android:layout_margin="5dp"
+                            android:visibility="gone"/>
+                        <TextView 
+                            android:id="@+id/product_detaile_sends"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/product_detaile_send"
+                            android:layout_marginLeft="5dp"
+                            android:padding="5dp"
+                            android:textColor="@color/black"
+                            android:visibility="gone"/>
                     </LinearLayout>
 
                     <TextView
@@ -350,30 +398,10 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:padding="5dp" >
+                        android:padding="5dp"
+                            android:visibility="gone" >
 
-                        <LinearLayout
-                            android:id="@+id/product_detaile_ll_into_dianpu"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/login_et_bg_line"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:padding="5dp" >
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/product_dianpu" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/product_detaile_jinrudianpu"
-                                android:textColor="@color/base_top_title_bg" />
-                        </LinearLayout>
+                        
 
                         <LinearLayout
                             android:id="@+id/product_detaile_ll_shoucang_dianpu"
@@ -456,7 +484,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical" >
+                        android:orientation="vertical" 
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/product_detaile_tv_dianutuijian"
@@ -513,97 +542,12 @@
                         android:orientation="vertical"
                         android:visibility="gone" >
 
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal" >
-
-                            <LinearLayout
-                                android:id="@+id/product_detaile_ll_add_view_pingjia_costperformace"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:gravity="center"
-                                android:orientation="vertical" >
-
-                                <TextView
-                                    android:id="@+id/product_detailel_add_view_pingjia_costperformace"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/products_et_bg_line"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="@string/product_detaile_ll_add_view_pingjia_costper_formace"
-                                    android:textColor="@color/red"
-                                    android:textSize="10dp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/product_detaile_ll_add_view_pingjia_zhiliang"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:gravity="center"
-                                android:orientation="vertical" >
-
-                                <TextView
-                                    android:id="@+id/product_detaile_add_view_pingjia_zhiliang"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/products_et_bg_line"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="@string/product_detaile_ll_add_view_pingjia_yuanliaozhiliang"
-                                    android:textColor="@color/red"
-                                    android:textSize="10dp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/product_detaile_ll_add_view_pingjia_fuwu"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:gravity="center"
-                                android:orientation="vertical" >
-
-                                <TextView
-                                    android:id="@+id/product_detaile_add_view_pingjia_fuwu"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/products_et_bg_line"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="@string/product_detaile_ll_add_view_pingjia_fuwutaidu"
-                                    android:textColor="@color/red"
-                                    android:textSize="10dp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/product_detaile_ll_add_view_pingjia_xiaoguo"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="2"
-                                android:gravity="center"
-                                android:orientation="vertical" >
-
-                                <TextView
-                                    android:id="@+id/product_detaile_add_view_pingjia_xiaoguo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/products_et_bg_line"
-                                    android:gravity="center"
-                                    android:padding="5dp"
-                                    android:text="@string/product_detaile_ll_add_view_pingjia_effect"
-                                    android:textColor="@color/red"
-                                    android:textSize="10dp" />
-                            </LinearLayout>
-                        </LinearLayout>
+                        
 
                         <com.example.educonsult.myviews.MyListview
                             android:id="@+id/product_detaile_ll_add_view_list"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="10dp"
                             android:dividerHeight="0.5dp"
                             android:divider="@color/base_hui" >
                         </com.example.educonsult.myviews.MyListview>
@@ -615,6 +559,7 @@
                             android:text="@string/product_detaile_ll_add_view_pingjia_more"
                             android:gravity="center"
                             android:clickable="true"
+                            android:textColor="@color/black"
                             />
                     </LinearLayout>
 

@@ -52,6 +52,7 @@ import com.example.educonsult.activitys.GqHomeActivity;
 import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.KnowHomeActivity;
+import com.example.educonsult.activitys.NewHomeActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
 import com.example.educonsult.activitys.XinjianActivity;
 import com.example.educonsult.activitys.ZhanhuiHomeActivity;
@@ -362,7 +363,9 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.home_news_ll:
-
+			intent = new Intent(context,NewHomeActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		case R.id.home_zhidao_ll:
 			intent = new Intent(context,KnowHomeActivity.class);

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/base_hui">
+    <LinearLayout 
+        android:id="@+id/scstore_allway_lin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:gravity="center_vertical">
+        <TextView 
+            android:id="@+id/scstore_allway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:text="@string/mybusinesspartners_all"/>
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom"/>
+    </LinearLayout>
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/home_hui"
+        />
+    <ListView 
+         android:id="@+id/scstore_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="10dp">
+        
+    </ListView>
+    
+
+</LinearLayout>

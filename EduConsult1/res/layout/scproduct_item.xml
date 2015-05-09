@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal" 
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/scproduct_item_ic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="3dp" >
+
+        <TextView
+            android:id="@+id/scproduct_item_productname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/scproduct_item_computername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="@string/test"
+            android:textColor="@color/black" />
+
+        
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp" >
+
+            <TextView
+                android:id="@+id/scproduct_item_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/test"
+                android:textColor="@color/orn"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scproduct_tvmoney"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+        
+       
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView 
+                android:id="@+id/scproduct_qxsc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scprodcut_tvqxsc"
+                android:background="@drawable/business_et_bg_line"
+                android:padding="5dp"
+                android:layout_weight="1"/>
+            <TextView 
+                android:id="@+id/scproduct_instores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scproduct_instore"
+                android:background="@drawable/business_et_bg_line"
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+        
+    </LinearLayout>
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+  
+     <TextView 
+         android:id="@+id/scproduct_time"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/test"/>
+
+</LinearLayout>
