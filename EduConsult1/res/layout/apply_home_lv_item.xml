@@ -1,0 +1,170 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/apply_home_lv_item_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/test"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text=">"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        
+
+        <TextView
+            android:id="@+id/apply_home_lv_item_tv_on_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:text="@string/test"
+            android:textColor="@color/orn" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/home_hui" />
+
+    <com.example.educonsult.myviews.MyListview
+        android:id="@+id/apply_home_lv_item_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/home_hui"
+        
+        android:dividerHeight="0.5dp"
+        android:listSelector="#00000000"
+        android:scrollbars="none" >
+    </com.example.educonsult.myviews.MyListview>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/home_hui" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+       <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/applyerfund_tvorderid"
+            />
+         <TextView
+             android:id="@+id/apply_home_orderid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/test"
+            android:layout_marginLeft="2dp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/applyinfo_tvallmoney"
+            android:textColor="@color/black" />
+
+        
+
+        <TextView
+            android:id="@+id/applyinfo_home_lv_item_tv_uhui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test"
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/home_hui"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp" 
+        android:layout_marginTop="5dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/applyerfund_tvorderid"
+            />
+        
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/apply_home_lv_item_tv_quxiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/applyinfo_tvapplyno"
+            android:textColor="@color/black" 
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/regist_et_bg"/>
+        <TextView
+            android:id="@+id/apply_home_lv_item_tv_xiugai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/applyinfo_tvapplyxiugai"
+            android:textColor="@color/black" 
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/regist_et_bg"/>
+    </LinearLayout>
+
+    <!--  -->
+
+</LinearLayout>

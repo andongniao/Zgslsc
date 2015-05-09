@@ -2,15 +2,115 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/base_hui">
 
-    <com.example.educonsult.myviews.MyListview
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/product_detaile_ll_add_view_pingjia_costperformace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/products_et_bg_line"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/product_detaile_add_view_pingjia_costperformace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/product_detaile_ll_add_view_pingjia_costper_formace"
+                android:textColor="@color/red"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/product_detaile_ll_add_view_pingjia_zhiliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/products_et_bg_line"
+            android:orientation="vertical" 
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/product_detaile_add_view_pingjia_zhiliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/product_detaile_ll_add_view_pingjia_yuanliaozhiliang"
+                android:textColor="@color/red"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/product_detaile_ll_add_view_pingjia_fuwu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/products_et_bg_line"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/product_detaile_add_view_pingjia_fuwu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/product_detaile_ll_add_view_pingjia_fuwutaidu"
+                android:textColor="@color/red"
+                android:textSize="10dp"
+             />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/product_detaile_ll_add_view_pingjia_xiaoguo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+             android:background="@drawable/products_et_bg_line"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp" >
+
+            <TextView
+                android:id="@+id/product_detaile_add_view_pingjia_xiaoguo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/product_detaile_ll_add_view_pingjia_effect"
+                android:textColor="@color/red"
+                android:textSize="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+<LinearLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white">
+
+    <ListView
+        
         android:id="@+id/product_detail_more_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:divider="@color/base_hui"
         android:dividerHeight="0.5dp"
         android:padding="10dp" >
-    </com.example.educonsult.myviews.MyListview>
+    </ListView>
+    </LinearLayout>
 
 </LinearLayout>

@@ -207,8 +207,81 @@
             android:name=".activitys.ServiceQuestionHomeActivity"
             android:label="@string/app_name" >
         </activity>
-         <activity
+          <activity
             android:name=".activitys.ServiceQuestionDetaileActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.MyBusinessperntActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.BusinesspartnersInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.SCProductActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+         <activity
+            android:name=".activitys.SCStoreActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.MyZjActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.MoneyCarListActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.BDCardActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.NewHomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.NewDetaileActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.ApplyerFundActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.ApplyInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.RechargeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.ApplyOrderActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.PasswordActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.PasswordXGActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.MyOrderInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activitys.PJOrderActivity"
+            android:label="@string/app_name" >
+        </activity>
+                <activity
+            android:name=".activitys.ConfirmTheDeliveryActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

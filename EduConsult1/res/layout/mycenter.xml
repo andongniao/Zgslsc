@@ -431,7 +431,66 @@
                android:layout_height="wrap_content"
                android:background="@drawable/mycenter_right"/>
         </LinearLayout>
+         <LinearLayout
+            android:id="@+id/mycenter_home_ll_mima"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:padding="10dp" >
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_mima" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/mycenter_mimaxiugai"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <ImageView 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:background="@drawable/mycenter_right"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/myinfo_ll_youhuiquan"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+<ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_youhuijuan" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/myinfo_youhuiquan"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <ImageView 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:background="@drawable/mycenter_right"/>
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/mycenter_home_ll_xinjian"
             android:layout_width="fill_parent"
@@ -474,7 +533,8 @@
             android:layout_marginTop="1dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10dp" >
+            android:padding="10dp" 
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -509,7 +569,8 @@
             android:layout_marginTop="1dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10dp" >
+            android:padding="10dp" 
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"

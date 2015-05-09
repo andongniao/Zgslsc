@@ -39,7 +39,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private PopupWindow popupWindow;
 	private int w,h,lh;
 	private Intent intent;
-	private TextView chanpin,pingjia,dianpu,pingjiamore;
+	private TextView chanpin,pingjia,dianpu,pingjiamore,add;
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
@@ -65,6 +65,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		getWindowManager().getDefaultDisplay().getMetrics(dm);  
 		w = dm.widthPixels;  
 		h = dm.heightPixels; 
+		add=(TextView)findViewById(R.id.product_detaile_adds);
+		add.setOnClickListener(this);
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
@@ -209,6 +211,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			break;
 		case R.id.product_detaile_ll_add_View_xiangqing_more:
 			intent = new Intent(context,ProductDetaileMoreActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+		case R.id.product_detaile_adds:
+			intent=new Intent(context, BusinesspartnersInfoActivity.class);
+			intent.putExtra("bus","2");
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;

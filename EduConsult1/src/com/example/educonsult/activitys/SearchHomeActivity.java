@@ -6,10 +6,13 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -17,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +28,16 @@ import android.widget.Toast;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.SearchAdapter;
+import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Context context;
 	private Editor er;
-	private ListView lv;
-	private Spinner sp;
+	private ListView lv,lv_l;;
+	private TextView sp;
 	private EditText et;
 	private Button btn_search,btn_clean;
 	private TextView tv;
@@ -42,8 +48,10 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private SearchAdapter adapter;
 	private boolean ishave;
 	private int t;
-
-
+	private PopupWindow popu;
+	private LayoutInflater inflater;
+	private View v_fenlei;
+	private SearchAdapter adapter_r;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -75,7 +83,8 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		context = this;
 		t = getIntent().getIntExtra("t", -1);
 		er = MyApplication.sp.edit();
-		sp = (Spinner) findViewById(R.id.search_home_sp);
+		sp = (TextView) findViewById(R.id.search_home_sp);
+		sp.setOnClickListener(this);
 		et = (EditText) findViewById(R.id.search_home_et_inpu);
 		et.setTextColor(getResources().getColor(R.color.black));
 		lv = (ListView) findViewById(R.id.search_home_lv);
@@ -115,13 +124,37 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		data_list.add("分类");
 		data_list.add("产地");
 
-		//适配器
+		/*//适配器
 		arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
 		//设置样式
 		arr_adapter.setDropDownViewResource(R.layout.drop_down_item);//(android.R.layout.simple_spinner_dropdown_item);
 		//加载适配器
-		sp.setAdapter(arr_adapter);
+		sp.setAdapter(arr_adapter);*/
+		inflater=LayoutInflater.from(context);
+		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
+		
+		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
+		ArrayList<String> ll = new ArrayList<String>();
+		ll.add("产品");
+		ll.add("分类");
+		ll.add("产地");
+		sp.setText(ll.get(0));
+		adapter_r = new SearchAdapter(context, ll);
+		lv_l.setAdapter(adapter_r);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				
+				popu.dismiss();
+			}
+		});
+		popu = new PopupWindow(v_fenlei, UITools.dip2px(context, 90f), LayoutParams.WRAP_CONTENT);
+		popu.setFocusable(true);
+		popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setOutsideTouchable(true);
 
 
 	}
@@ -129,6 +162,11 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.search_home_sp:
+			Toast.makeText(this, "1", 500).show();
+			popu.showAsDropDown(sp);
+			break;
+		
 		case R.id.search_home_btn_clean:
 			for(int i = 0;i<l.size();i++){
 				er.putString("search"+i,"");

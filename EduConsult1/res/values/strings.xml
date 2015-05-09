@@ -117,7 +117,16 @@
     <string name="mycenger_update">检查更新</string>
     <string name="mycenger_now_version">当前版本</string>
     <string name="mycenger_tuijian">精选推荐</string>
-
+    <string name="mycenter_mimaxiugai">密码修改</string>
+    <!-- 我收藏的产品 -->
+    <string name="scproduct_title">我收藏的产品</string>
+    <string name="scproduct_tvmoney">元/件</string>
+    <string name="scprodcut_tvqxsc">取消收藏</string>
+    <string name="scproduct_instore">进入店铺</string>
+    <!-- 我收藏的店铺 -->
+    <string name="scstore_title">我收藏的店铺</string>
+    <!-- 我的足迹 -->
+    <string name="myzj_title">我的足迹</string>
     <!-- 服务中心 -->
     <string name="service_center_kefu_one">客服1</string>
     <string name="service_center_kefu_two">客服2</string>
@@ -139,8 +148,25 @@
     <string name="mybusinesspartners_itme_way">（分类）</string>
     <string name="mybusinesspartners_itme_tvbeizhu">（备注）</string>
     <string name="mybusinesspartners_itme_tvtel">电话：</string>
-    <string name="mybusinesspartners_itme_tvQQ">QQ：</string>
+    <string name="mybusinesspartners_itme_tvqq"> Q  Q：</string>
     <string name="mybusinesspartners_itme_tvpho">手机：</string>
+    <string name="mybusinesspartners_itme_tvxiugai">修改</string>
+    <string name="mybusinesspartners_itme_tvdele">删除</string>
+    <!-- 添加、修改商友 -->
+    <string name="businesspartnersinfo_titlexiugai">修改商友</string>
+    <string name="businesspartnersinfo_titleadd">添加商友</string>
+    <string name="businesspartnersinfo_tvway">分类</string>
+    <string name="businesspartnersinfo_tvchooseway">请选择分类</string>
+    <string name="businesspartnersinfo_tvusername">姓名</string>
+    <string name="businesspartnersinfo_tvname">会员名</string>
+    <string name="businesspartnersinfo_tvcomputername">公司名称</string>
+    <string name="businesspartnersinfo_tvstore">店铺</string>
+    <string name="businesspartnersinfo_tvinstore">进入店铺</string>
+    <string name="businesspartnersinfo_tvbz">备注</string>
+    <string name="businesspartnersinfo_tvaddbz">添加备注</string>
+    <string name="businesspartnersinfo_tvre">重置</string>
+    <string name="businesspartnersinfo_tvsub">添加</string>
+
     <!-- 我的钱包 -->
     <string name="qignbao_title">我的钱包</string>
     <string name="qignbao_zonge">总额</string>
@@ -160,6 +186,17 @@
     <string name="money_withtrawal_tishi">每笔限制额300元，本日还可转出</string>
     <string name="money_withtrawal_tishi1">次</string>
     <string name="money_withtrawal_ok">确定转出</string>
+    <!-- 银行卡信息 -->
+    <string name="moneycar_list_title">银行卡信息</string>
+    <!-- 绑定银行卡 -->
+    <string name="bdmoneycar_title">绑定银行卡</string>
+    <string name="bdmoneycar_tvtest">仅能绑定您本人的银行卡</string>
+    <string name="bdmoneycar_tvusername">开户名</string>
+    <string name="bdmoneycar_tvcarid">银行卡卡号</string>
+    <string name="bdmoneycar_tvokbd">确定绑定</string>
+    <string name="bdmoneycar_tvcarway">开户行</string>
+    <string name="bdmoneycar_tvcarwhere">开户地区</string>
+    <string name="bdmoneycar_tvcarzhihang">开户支行</string>
     <!-- 收支详情 -->
     <string name="moneyquery_info_title">收支详情</string>
     <string name="moneyquery_info_id">流水号</string>
@@ -180,6 +217,7 @@
     <string name="myinfo_head">头像</string>
     <string name="myinfo_name">会员名</string>
     <string name="myinfo_friend">我的商友</string>
+    <string name="myinfo_mycard">我的银行卡</string>
     <string name="myinfo_dengji">会员等级</string>
     <string name="myinfo_youhuiquan">优惠券</string>
     <string name="myinfo_email">电子邮箱</string>
@@ -237,10 +275,10 @@
     <string name="product_detaile_add_shopcart">加入购物车</string>
     <string name="product_detaile_product">三效合一纯中药，主治腺胃炎、肌胃炎；开水煮泡效果更佳。</string>
     <string name="product_detaile_product_main_ingredients_text">【主要成分】主要成分、主要成分、主要成分\n【功能用户】功能用户、功能用户、功能用户\n【功能用户】功能用户、功能用户、功能用户\n【功能用户】功能用户、功能用户、功能用户\n【功能用户】功能用户、功能用户、功能用户\n【功能用户】功能用户、功能用户、功能用户\n</string>
-    <string name="product_detaile_ll_add_view_pingjia_costper_formace">性价比很高(7)</string>
-    <string name="product_detaile_ll_add_view_pingjia_yuanliaozhiliang">原料质量很好(7)</string>
-    <string name="product_detaile_ll_add_view_pingjia_fuwutaidu">服务态度好(7)</string>
-    <string name="product_detaile_ll_add_view_pingjia_effect">效果好(7)</string>
+    <string name="product_detaile_ll_add_view_pingjia_costper_formace">全部(7)</string>
+    <string name="product_detaile_ll_add_view_pingjia_yuanliaozhiliang">好评(7)</string>
+    <string name="product_detaile_ll_add_view_pingjia_fuwutaidu">中评(7)</string>
+    <string name="product_detaile_ll_add_view_pingjia_effect">差评(7)</string>
     <string name="product_detaile_ll_add_view_pingjia_more">查看更多</string>
     <string name="product_detaile_pingjia_item_text">来说说这次团购的感受吧，对其他用户来说是很重要的参考！来说说这次团购的感受吧，对其他用户来说是很重要的参考！</string>
     <string name="product_detaile_pingjia_item_time">2015-1-8   15:27</string>
@@ -356,6 +394,14 @@
     <string name="zhanhui_detaile_i_say">我来说两句</string>
     <string name="zhanhui_detaile_niming">匿名发表</string>
     <string name="zhanhui_detaile_xianzhi">（内容限5-500字）</string>
+    <!-- 新闻。资讯 -->
+    <string name="new_home_title">资讯</string>
+    <string name="new_detail_tvtextfrom">来源：</string>
+    <string name="new_datail_tvtextdate">日期：</string>
+    <string name="new_datail_tvtextlooknum">浏览次数：</string>
+    <string name="new_datail_tvtextnext">下一篇：</string>
+    <string name="new_datail_tvtextup">上一篇：</string>
+    <string name="new_datail_tvtext">同类资讯</string>
 
     <!-- 知道首页 -->
     <string name="know_title">知道</string>
@@ -402,4 +448,79 @@
 
 
 
+	<!-- 申请退款 -->
+	<string name="applyerfund_title">申请退款</string>
+	<string name="applyerfund_tvnum">（数量）</string>
+	<string name="applyerfund_tvorderid">订单编号</string>
+	<string name="applyerfund_tvapplyerfundmoney">退款金额</string>
+	<string name="applyerfund_tvapplyerfundway">退款类型：</string>
+	<string name="applyerfund_tvwayone">我要退款（无需退货）</string>
+	<string name="applyerfund_tvwaytwo">我要退货</string>
+	<string name="applyerfund_tvwhy">退款原因：</string>
+	<string name="applyerfund_tvwhytext">请选择退款原因</string>
+	<string name="applyerfund_tvapplyerfundwhy">退款说明：</string>
+	<string name="applyerfund_tvapplyerfundwhytext">请输入退款说明</string>
+	<string name="applyerfund_tvbreak">取消并返回</string>
+	<string name="applyerfund_tvok">申请退款</string>
+	<!-- 退款详情、退款/售后 -->
+	<string name="applyinfo_title">退款/售后</string>
+	<string name="applyinfo_text">退款详情</string>
+	<string name="applyinfo_apptext">申请已提交，等待客服处理</string>
+	<string name="applyinfo_apptextok">如果商家同意，退款申请将达成并退款至您的银行卡中。</string>
+	<string name="applyinfo_apptextno">如果商家拒绝，将需要您修改退款申请。</string>
+	<string name="applyinfo_apptextone">（若</string>
+	<string name="applyinfo_apptexttwo">天内商家未处理，退款申请将达成并退款至您的银行卡中。）</string>
+	<string name="applyinfo_tvcomputername">商家：</string>
+	<string name="applyinfo_tvshopkeeper">掌柜：</string>
+	<string name="applyinfo_tvtel">联系：</string>
+	<string name="applyinfo_tvapplytime">申请时间：</string>
+	<string name="applyinfo_tvapplyway">退款类型：</string>
+	<string name="applyinfo_tvapplying">退款状态：</string>
+	<string name="applyinfo_tvapplymoney">退款金额：</string>
+	<string name="applyinfo_tvapplywhy">退款原因：</string>
+	<string name="applyinfo_tvapplyno">取消退款</string>
+	<string name="applyinfo_tvallmoney">退款总额</string>
+	<string name="applyinfo_tvapplyxiugai">修改退款申请</string>
+	<string name="applyinfo_tvdelect">删除</string>
+	<!-- 充值界面 -->
+	<string name="recharge_title">充值</string>
+	<string name="recharge_tvmoney">充值金额</string>
+	<string name="recharge_tvmoneytext">请输入充值金额</string>
+	<string name="recharge_tvok">确定支付</string>
+	<!-- 密码修改 -->
+	<string name="possword_title">密码修改</string>
+	<string name="possword_tvlogin">登录密码修改</string>
+	<string name="possword_tvzhifu">支付密码修改</string>
+	<string name="possword_tvoldpow">原登录密码</string>
+	<string name="possword_tvnewpow">新登录密码</string>
+	<string name="possword_tvnewpowtwo">重新输入新登录密码</string>
+	<string name="possword_tvoldzhifu">原支付密码</string>
+	<string name="possword_tvnewzhifu">新支付密码</string>
+	<string name="possword_tvnewzhifutwo">重新输入新支付密码</string>
+	<string name="possword_tvok">确定</string>
+	<!-- 订单详情 待付款 -->
+	<string name="myorderinfo_title">订单详情</string>
+	<string name="myorderinfo_tvdaifukuan">待付款</string>
+	<string name="myorderinfo_tvyunfeimoney">运费金额：</string>
+	<string name="myorderinfo_tvordermoney">订单金额：</string>
+	<string name="myorderinfo_tvaddress">收货地址</string>
+	<string name="myorderinfo_tvyunfei">运费</string>
+	<string name="myorderinfo_tvrealmoney">实付款（含运费）</string>
+	<string name="myorderinfo_tvorderid">订单号：</string>
+	<string name="myorderinfo_tvordertime">下单时间：</string>
+	<string name="myorderinfo_tvquxiqao">取消订单</string>
+	<string name="myorderinfo_tvmast">立即付款</string>
+	<!-- 评价订单 -->
+	<string name="pingjiadingdan_title">评价订单</string>
+	<string name="pingjiadingdan_tvok">评价</string>
+	<string name="pingjiadingdan_tvtext">请在这里填写您的评价内容</string>
+	<!-- 确认发货 -->
+	<string name="confirm_the_delivery_title">确认发货</string>
+	<string name="confirm_the_delivery_tvway">物流类型</string>
+	<string name="confirm_the_delivery_tvallway">常用物流类型</string>
+	<string name="confirm_the_delivery_tvcarphone">随车司机电话</string>
+	<string name="confirm_the_delivery_tvcarid">车牌号</string>
+	<string name="confirm_the_delivery_tvwuliuid">物流号码</string>
+	<string name="confirm_the_delivery_tvtime">发货时间</string>
+	<string name="confirm_the_delivery_tvok">确认发货</string>
 </resources>

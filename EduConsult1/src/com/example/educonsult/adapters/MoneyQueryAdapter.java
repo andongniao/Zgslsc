@@ -29,7 +29,7 @@ public class MoneyQueryAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 4;//list!=null?list.size():0;
+		return 14;//list!=null?list.size():0;
 	}
 
 	@Override

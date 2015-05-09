@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_hui"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF6DD"
+            android:padding="10dp"
+            android:text="@string/businesspartnersinfo_tvway"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="5dp"
+           
+            android:orientation="vertical" >
+
+            <LinearLayout
+            android:id="@+id/businesspartnersinfo_way_lin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                android:background="@drawable/order_et_bg_line"
+                android:padding="4dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:id="@+id/businesspartnersinfo_way"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/businesspartnersinfo_tvchooseway" />
+                <TextView 
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <ImageView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        
+    </LinearLayout>
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/base_hui"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF6DD"
+            android:padding="10dp"
+            android:text="@string/businesspartnersinfo_tvusername"
+            android:textColor="@color/black" />
+
+          <TextView
+              android:id="@+id/businesspartnersinfo_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="10dp"
+            android:text="@string/test"
+            
+            android:textColor="@color/black" />
+        
+
+    </LinearLayout>
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/base_hui"/>
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF6DD"
+            android:padding="10dp"
+            android:text="@string/businesspartnersinfo_tvname"
+            android:textColor="@color/black" />
+
+          <TextView
+              android:id="@+id/businesspartnersinfo_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="10dp"
+            android:text="@string/test"
+            
+            android:textColor="@color/black" />
+        
+
+    </LinearLayout>
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/base_hui"/>
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF6DD"
+            android:padding="10dp"
+            android:text="@string/businesspartnersinfo_tvcomputername"
+            android:textColor="@color/black" />
+
+          <TextView
+              android:id="@+id/businesspartnersinfo_computername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="10dp"
+            android:text="@string/test"
+            
+            android:textColor="@color/black" />
+        
+
+    </LinearLayout>
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/base_hui"/>
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF6DD"
+            android:padding="10dp"
+            android:text="@string/businesspartnersinfo_tvstore"
+            android:textColor="@color/black" />
+
+          <TextView
+              android:id="@+id/businesspartnersinfo_instore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="10dp"
+            android:text="@string/businesspartnersinfo_tvinstore"
+            
+            android:textColor="@color/regist_button_bg" />
+        
+
+    </LinearLayout>
+    <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/base_hui"/>
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FFF6DD"
+            android:padding="10dp"
+            android:text="@string/businesspartnersinfo_tvbz"
+            android:textColor="@color/black" />
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="5dp"
+            >
+            <EditText
+                android:padding="4dp"
+              android:id="@+id/businesspartnersinfo_addbz"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:singleLine="true"
+           android:textColor="@color/black"
+           android:background="@drawable/order_et_bg_line"
+           android:layout_marginRight="10dp"
+           android:textSize="14dp"
+            android:hint="@string/businesspartnersinfo_tvaddbz" />
+        </LinearLayout>
+
+          
+        
+
+    </LinearLayout>
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"/>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:padding="5dp">
+       <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+       <TextView 
+        android:id="@+id/businesspartnersinfo_re"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/businesspartnersinfo_tvre"
+        android:textColor="@color/black"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/business_et_bg_line"
+        />
+       <TextView 
+        android:id="@+id/businesspartnersinfo_sup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/businesspartnersinfo_tvsub"
+        android:textColor="@color/white"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/business_et_bg_or_line"
+        />
+    </LinearLayout>
+    
+</LinearLayout>

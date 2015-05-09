@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/base_hui">
+     <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/home_hui" />
+    <LinearLayout
+        android:id="@+id/possword_login_lin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/possword_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/possword_tvlogin"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+             />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/address_right" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/home_hui" />
+ <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/home_hui" />
+    <LinearLayout
+        android:id="@+id/possword_zhifu_lin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+         android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/possword_zhifu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/possword_tvzhifu"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+             /> 
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/address_right" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/home_hui" />
+   
+    
+
+</LinearLayout>
