@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -15,7 +16,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.ShopcartActivity;
 import com.example.educonsult.activitys.ShopcartActivity.shop;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenu;
@@ -73,17 +73,27 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		ShopBean s = (ShopBean) list.get(position);
+		final ShopBean s = (ShopBean) list.get(position);
 
 		item.cb.setChecked(s.isIsclick());
-		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				shop.click(isChecked, position, -1);
+//			}
+//		});
+		item.cb.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				shop.click(isChecked, position, -1);
+			public void onClick(View v) {
+				if(s.isIsclick()){
+					shop.click(false, position, -1);
+				}else{
+					shop.click(true, position, -1);
+				}
 			}
 		});
-		
 		
 		SwipeMenuCreator creator = new SwipeMenuCreator() {
 

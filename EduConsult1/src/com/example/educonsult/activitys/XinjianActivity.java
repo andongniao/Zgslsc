@@ -50,9 +50,9 @@ public class XinjianActivity extends BaseActivity{
 			else if("gqtwo".equals(flag)){
 				GqTwoActivity.isread = true;
 			}
-//			else if("gqtwo".equals(flag)){
-//				GqTwoActivity.isread = true;
-//			}
+			else if("store".equals(flag)){
+				StoreActivity.isread = true;
+			}
 		}
 	}
 

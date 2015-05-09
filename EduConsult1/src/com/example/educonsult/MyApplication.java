@@ -7,9 +7,7 @@ import java.util.List;
 
 import org.apkplug.app.FrameworkFactory;
 import org.apkplug.app.FrameworkInstance;
-import org.apkplug.app.apkplugActivity;
 import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -18,7 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,11 +26,11 @@ import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.OnNotificationClickListener;
-import com.example.educonsult.activitys.AboutActivity;
-import com.example.educonsult.activitys.ChatActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
+import com.example.educonsult.beans.ListProductBean;
+import com.example.educonsult.beans.ProdectDetaileBean;
+import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
-import com.example.educonsult.fragments.HomeFragment;
 import com.example.educonsult.tools.Util;
 
 public class MyApplication extends Application{
@@ -43,10 +40,15 @@ public class MyApplication extends Application{
 	private static Util util;
 	public static FrameworkInstance frame=null;
 	public static boolean isopen;
+	public static String AreaName = "Area";
+	public static String FenleiName = "Fenlei";
+	public static String Seejilu = "Seejilu";
+	public static MyApplication mp;
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		context = this;
+		mp = this;
 		sp = getSharedPreferences("mysp", Context.MODE_PRIVATE);
 		bean = new UserBean();
 		util = new Util(context);
@@ -178,7 +180,6 @@ public class MyApplication extends Application{
 					msg.isAcked = true;
 				}
 			}
-					
 		}
 	};
 	
@@ -230,4 +231,30 @@ public class MyApplication extends Application{
 				     Toast.LENGTH_SHORT).show();
 		}
 	}
+	
+	
+	public void SaveSee(ProductBean bean){
+		ListProductBean lb;
+		ArrayList<ProductBean> list = GetSee();
+		if(list!=null){
+			if(list.size()>0 && list.size()<=30){
+				list.set(0, bean);
+			}else if(list.size()==30){
+				list.set(0, bean);
+				list.remove(30);
+			}
+		}
+	}
+	public ArrayList<ProductBean> GetSee(){
+		ListProductBean bean;
+		ArrayList<ProductBean> list = new ArrayList<ProductBean>();
+		if(util.isExistDataCache(Seejilu) && util.isReadDataCache(Seejilu)){
+			bean = (ListProductBean) util.readObject(Seejilu);
+			if(bean!=null){
+				list = bean.getList();
+			}
+		}
+		return list;
+	}
+	
 }

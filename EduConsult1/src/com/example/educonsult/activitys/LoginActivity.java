@@ -27,9 +27,14 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.GqTwoActivity.RefeshData;
+import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
@@ -43,21 +48,24 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	private boolean isremb;
 	private Editor er ;
 	private PopupWindow ppw;
-	
-	/*****************************************************************
-     * mMode参数解释：
-     *      "00" - 启动银联正式环境
-     *      "01" - 连接银联测试环境
-     *****************************************************************/
+	private UserBean bean;
+	private ThreadWithProgressDialog myPDT;
+	private String msg;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightLVisible();
-		topRightRVisible();
-		setTopLeftTv(R.string.login_login);
+		//		topRightLVisible();
+		//		topRightRVisible();
+		topRightTGone();
+		//		setTopLeftTv(R.string.login_login);
+		setTitleTxt(R.string.login_login);
 		setContentXml(R.layout.login_layout);
 		init();
+		myPDT = new ThreadWithProgressDialog();
+		msg = getResources().getString(R.string.loding);
+		//		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+
 	}
 
 	private void init() {
@@ -115,29 +123,29 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.login_et_password:
 			String tn = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-//			UPPayAssistEx.startPay ( this, null, null, tn, mMode); 
-//			   doStartUnionPayPlugin(this, tn, mMode);
-//			Intent intent = new Intent();
-//			intent.setClass(this, SlPayActivity.class);
-//			startActivity(intent);
-			
+			//			UPPayAssistEx.startPay ( this, null, null, tn, mMode); 
+			//			   doStartUnionPayPlugin(this, tn, mMode);
+			//			Intent intent = new Intent();
+			//			intent.setClass(this, SlPayActivity.class);
+			//			startActivity(intent);
+
 			break;
 		case R.id.login_cb_jizhu:
 			isremb = cb_jizhu.isChecked();
 			break;
 		case R.id.login_tv_wangji:
-//			ppw.showAsDropDown(tv_wangji);
-			
-//			 UPPayAssistEx.startPayByJAR(this, PayActivity.class, null, null,
-//					 Tn, mMode);
+			//			ppw.showAsDropDown(tv_wangji);
+
+			//			 UPPayAssistEx.startPayByJAR(this, PayActivity.class, null, null,
+			//					 Tn, mMode);
 			break;
 		case R.id.login_tv_regist:
 			Intent i = new Intent(this, RegistActivity.class);
 			startActivity(i);
 			break;
 		case R.id.login_tv_noaclogin:
-//			isremb = MyApplication.sp.getBoolean("isremb", false);
-//			Toast.makeText(context, "isremb"+isremb, 200).show();
+			//			isremb = MyApplication.sp.getBoolean("isremb", false);
+			//			Toast.makeText(context, "isremb"+isremb, 200).show();
 			Intent in = new Intent(this, ExampleActivity.class);
 			startActivity(in);
 			finish();
@@ -155,12 +163,62 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 					er.putString("pass", "");
 				}
 				er.commit();
-				Toast.makeText(context, "login_ok", 200).show();
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(name,pass),msg,false);//不可取消
+				}
 			}else{
-				Toast.makeText(context, "check_please", 200).show();
+				Toast.makeText(context, "请检查用户名和密码", 200).show();
 			}
 			break;
 		}
 	}
-	
+
+	// 任务
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		private String username,password;
+		public RefeshData(String username,String password) {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(bean!=null){
+				String code = bean.getCode();
+				String m = bean.getMsg();
+				if("200".equals(code)){
+					Util.ShowToast(context, bean.getAuthstr());
+					MyApplication.bean = bean;
+					Intent in = new Intent(context, ExampleActivity.class);
+					startActivity(in);
+					finish();
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		}
+
+
+
+		@Override
+		public boolean TaskMain() {
+
+			Send s = new Send(context);
+			bean = s.Login(username, password);
+
+			return true;
+		}
+	}
+
 }

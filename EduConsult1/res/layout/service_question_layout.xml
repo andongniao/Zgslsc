@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#e6e6e6"
+    android:orientation="vertical" >
+    <ListView 
+        android:id="@+id/service_question_home_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:listSelector="#00000000"
+        android:scrollbars="none"
+        android:fadingEdge="none"
+        ></ListView>
+    
+</LinearLayout>

@@ -30,7 +30,7 @@ public class PutQuestionActivity extends Activity implements OnClickListener{
 	private Context context;
 	private EditText et_content,et_search;;
 	private TextView tv_commit;
-	private LinearLayout ll_zixun;
+	private LinearLayout ll_zixun,ll_back;
 	private CheckBox cb;
 	private boolean isshow;
 	private Intent intent;
@@ -44,6 +44,7 @@ public class PutQuestionActivity extends Activity implements OnClickListener{
 	private void init() {
 		context = this;
 		findViewById(R.id.put_question_et_top).setOnClickListener(this);
+		findViewById(R.id.put_question_ll_back).setOnClickListener(this);
 		//		findViewById(R.id.know_put_question_et).setOnClickListener(this);
 		findViewById(R.id.put_question_tv_commit).setOnClickListener(this);
 		findViewById(R.id.put_question_ll_tiwen_i).setOnClickListener(this);
@@ -68,6 +69,9 @@ public class PutQuestionActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.put_question_tv_commit:
 
+			break;
+		case R.id.put_question_ll_back:
+			finish();
 			break;
 		case R.id.put_question_ll_tiwen_i:
 			//已安装插件列表

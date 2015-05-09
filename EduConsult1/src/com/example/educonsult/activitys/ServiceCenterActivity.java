@@ -39,6 +39,8 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
+	private String title;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -80,11 +82,11 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 	private void init() {
 		context = this;
-		regist = false;
-		shangjia = false;
-		buy = false;
-		zhuanjia = false;
-		wenti = false;
+		regist = true;
+		shangjia = true;
+		buy = true;
+		zhuanjia = true;
+		wenti = true;
 		ll_zx_regist = (LinearLayout) findViewById(R.id.service_center_ll_zx_regist);
 		ll_zx_regist.setOnClickListener(this);
 		ll_zx_shangjia = (LinearLayout) findViewById(R.id.service_center_ll_zx_shangjia);
@@ -258,18 +260,22 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 //				}
 //			});
 			break;
-			//	case R.id.service_center_ll_wenti_order:
-			//		
-			//		break;
-			//	case R.id.service_center_ll_wenti_regist:
-			//		
-			//		break;
-			//	case R.id.service_center_ll_wenti_wuliu:
-			//		
-			//		break;
-			//	case R.id.service_center_ll_wenti_qita:
-			//		
-			//		break;
+				case R.id.service_center_ll_wenti_order:
+					title = getResources().getString(R.string.service_center_wenti_order);
+					ToQuestion(title);
+					break;
+				case R.id.service_center_ll_wenti_regist:
+					title = getResources().getString(R.string.service_center_wenti_regist);
+					ToQuestion(title);
+					break;
+				case R.id.service_center_ll_wenti_wuliu:
+					title = getResources().getString(R.string.service_center_wenti_wuliu);
+					ToQuestion(title);
+					break;
+				case R.id.service_center_ll_wenti_qita:
+					title = getResources().getString(R.string.service_center_wenti_qita);
+					ToQuestion(title);
+					break;
 
 		}
 	}
@@ -322,4 +328,12 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		}
 	}
 
+	
+	private void ToQuestion(String title){
+		intent = new Intent(context,ServiceQuestionHomeActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("title", title);
+		startActivity(intent);
+		
+	}
 }

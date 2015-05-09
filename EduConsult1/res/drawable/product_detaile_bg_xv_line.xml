@@ -6,7 +6,7 @@
     <stroke
         android:dashGap="6dp"
         android:dashWidth="6dp"
-        android:color="@color/black" />
+        android:color="@color/home_hui" />
 
     <size android:height="1dp" />
 

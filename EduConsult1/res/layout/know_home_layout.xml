@@ -45,6 +45,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:focusable="false"
+            android:textSize="16dp"
             android:gravity="center_vertical"
             android:text="@string/search_title"
             android:textColor="@color/white" />
@@ -418,15 +419,15 @@
                         android:id="@+id/know_home_iv_up_hot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="3dp"
-                        android:background="@drawable/ic_launcher" />
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/detaile_up" />
 
                     <ImageView
                         android:id="@+id/know_home_iv_down_hot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="3dp"
-                        android:background="@drawable/ic_launcher" />
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/detaile_down" />
                 </LinearLayout>
 
                 <LinearLayout

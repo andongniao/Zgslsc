@@ -60,9 +60,11 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:focusable="false"
-                android:hint="@string/search_title"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:text="@string/search_title"
                 android:gravity="center_vertical"
-                android:textColor="@color/black" />
+                />
 
             <TextView
                 android:layout_width="1dp"

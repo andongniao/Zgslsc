@@ -1,12 +1,10 @@
 package com.example.educonsult.beans;
 
-import java.io.Serializable;
 
-import android.graphics.Bitmap;
-
-public class UserBean implements Serializable{
+public class UserBean extends BaseBean{
 	private String name;
 	private String bmp;
+	private String authstr;
 	public String getName() {
 		return name;
 	}
@@ -18,6 +16,12 @@ public class UserBean implements Serializable{
 	}
 	public void setBmp(String bmp) {
 		this.bmp = bmp;
+	}
+	public String getAuthstr() {
+		return authstr;
+	}
+	public void setAuthstr(String authstr) {
+		this.authstr = authstr;
 	}
 
 	

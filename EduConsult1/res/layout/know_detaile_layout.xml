@@ -42,7 +42,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher" />
+                            android:layout_marginRight="3dp"
+                            android:background="@drawable/know_detaile_question_logo" />
 
                         <TextView
                             android:id="@+id/know_detaile_title"
@@ -142,7 +143,9 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher" />
+                            android:layout_marginTop="3dp"
+                            android:layout_marginLeft="3dp"
+                            android:background="@drawable/know_detaile_huida_logo" />
 
                         <TextView
                             android:id="@+id/know_detaile_tv_content"
@@ -220,6 +223,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/know_detaile_huida_i"
                         android:textColor="#0862C3"
+                        android:layout_marginLeft="10dp"
                         android:textSize="14dp" />
                 </LinearLayout>
 
@@ -231,6 +235,7 @@
                     android:background="@drawable/login_et_bg_line"
                     android:gravity="top"
                     android:textSize="13dp"
+                    android:textColor="@color/black"
                     android:hint="@string/know_detaile_et_content"
                     android:padding="5dp" />
 

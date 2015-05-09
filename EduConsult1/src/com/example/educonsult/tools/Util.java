@@ -858,7 +858,7 @@ public class Util {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				if (msg.what == 1 && msg.obj != null) {
+				if (msg.what == 1 && msg.obj != null && v!=null) {
 					v.setImageBitmap((Bitmap) msg.obj);
 					//					mViewSwitcher.showNext();
 				} else {

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.educonsult"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="V1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -23,11 +23,12 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo_50"
         android:label="@string/app_name"
         android:theme="@style/AnimActivityTheme" >
         <meta-data
@@ -148,21 +149,24 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.educonsult.activitys.MyQuestionActivity"
+            android:name=".activitys.MyQuestionActivity"
             android:label="@string/app_name" >
         </activity>
-         <activity
-            android:name="com.example.educonsult.activitys.PutQuestionActivity"
+        <activity
+            android:name=".activitys.PutQuestionActivity"
             android:label="@string/app_name" >
         </activity>
-            <activity
-            android:name="com.example.educonsult.activitys.KnowDetaileActivity"
+        <activity
+            android:name=".activitys.KnowDetaileActivity"
+            android:label="@string/app_name" >
+        </activity>
+          <activity
+            android:name=".activitys.StoreActivity"
             android:label="@string/app_name" >
         </activity>
 
         <!-- 银联支付 -->
-        <activity 
-            android:name="com.unionpay.uppay.PayActivity" >
+        <activity android:name="com.unionpay.uppay.PayActivity" >
         </activity>
         <activity
             android:name="org.apkplug.app.apkplugActivity"
@@ -183,11 +187,11 @@
             android:name=".activitys.MoneyQueryInfoActivity"
             android:label="@string/app_name" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.MoneyWithdrawalActivity"
             android:label="@string/app_name" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.CouponsActivity"
             android:label="@string/app_name" >
         </activity>
@@ -195,9 +199,16 @@
             android:name=".activitys.ProductDetaileMoreActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name=".activitys.XinJianInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.ServiceQuestionHomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.ServiceQuestionDetaileActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

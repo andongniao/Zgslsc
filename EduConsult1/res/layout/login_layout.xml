@@ -28,6 +28,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:hint="@string/login_username"
+            android:textColor="@color/black"
             android:singleLine="true" />
     </LinearLayout>
 
@@ -53,6 +54,7 @@
             android:layout_weight="1"
             android:background="@color/white"
             android:hint="@string/login_password"
+            android:textColor="@color/black"
             android:password="true"
             android:singleLine="true" />
     </LinearLayout>

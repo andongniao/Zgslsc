@@ -111,10 +111,9 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		}
 
 		data_list = new ArrayList<String>();
-		data_list.add("北京");
-		data_list.add("上海");
-		data_list.add("广州");
-		data_list.add("深圳");
+		data_list.add("产品");
+		data_list.add("分类");
+		data_list.add("产地");
 
 		//适配器
 		arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);

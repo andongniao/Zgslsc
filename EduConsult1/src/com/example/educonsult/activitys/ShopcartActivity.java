@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.ShopcartHomeAdapter;
-import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.ShopItemBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.tools.Util;
 
@@ -74,15 +74,14 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				ShopBean s = (ShopBean) list.get(index);
 				int num = 0;
 				if(postion!=-1){
-					BaseBean bb = (BaseBean) s.getList().get(postion);
+					ShopItemBean bb = s.getList().get(postion);
 					bb.setIsclick(b);
 					for(int i=0;i<s.getList().size();i++){
-							BaseBean ba = (BaseBean) s.getList().get(i);;
+							ShopItemBean ba = (ShopItemBean) s.getList().get(i);;
 							if(ba.isIsclick()){
 								num+=1;
 						}
 					}
-//					if(b){
 						if(num==s.getList().size()){
 							s.setIsclick(true);
 							type = 0;
@@ -90,27 +89,18 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 							type = 1;
 							s.setIsclick(false);
 						}
-//					}else{
-//						if(num==0){
-//						s.setIsclick(false);
-//						}
-//					}
 				}else{
-					if(type==0){
 					s.setIsclick(b);
 					for(int i=0;i<s.getList().size();i++){
-						BaseBean ba = (BaseBean) s.getList().get(i);;
+						ShopItemBean ba = (ShopItemBean) s.getList().get(i);;
 						ba.setIsclick(b);
-					}
-					}else{
-						
 					}
 				}
 				adapter.SetData(list);
 				adapter.notifyDataSetChanged();
 				len=0;
 				for(int i=0;i<list.size();i++){
-					ShopBean sb = (ShopBean) list.get(i);
+					ShopItemBean sb = (ShopItemBean) list.get(i);
 					if(sb.isIsclick()){
 						len+=1;
 					}
@@ -129,7 +119,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void add1(int index, int postion) {
 //				ShopBean s = (ShopBean) list.get(index);
-//				BaseBean bean = (BaseBean) s.getList().get(postion);
+//				ShopItemBean bean = (ShopItemBean) s.getList().get(postion);
 				int i = list.get(index).getList().get(postion).getNum();
 				i+=1;
 				list.get(index).getList().get(postion).setNum(i);
@@ -152,13 +142,13 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 		ShopBean b1 = new ShopBean();
 		b1.setIsclick(false);
-		BaseBean a1 = new BaseBean();
+		ShopItemBean a1 = new ShopItemBean();
 		a1.setIsclick(false);
 		a1.setNum(0);
-		BaseBean a2 = new BaseBean();
+		ShopItemBean a2 = new ShopItemBean();
 		a2.setIsclick(false);
 		a2.setNum(0);
-		ArrayList<BaseBean >l = new ArrayList<BaseBean>();
+		ArrayList<ShopItemBean >l = new ArrayList<ShopItemBean>();
 		l.add(a1);
 		l.add(a2);
 		b1.setList(l);
@@ -167,10 +157,10 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 		ShopBean b2= new ShopBean();
 		b2.setIsclick(false);
-		BaseBean a = new BaseBean();
+		ShopItemBean a = new ShopItemBean();
 		a.setNum(0);
 		a.setIsclick(false);
-		ArrayList<BaseBean>l2 = new ArrayList<BaseBean>();
+		ArrayList<ShopItemBean>l2 = new ArrayList<ShopItemBean>();
 		l2.add(a);
 		b2.setList(l2);
 		list.add(b2);
@@ -205,7 +195,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						ShopBean s = (ShopBean) list.get(i);
 						s.setIsclick(isChecked);
 						for(int j=0;j<s.getList().size();j++){
-							BaseBean b = (BaseBean) s.getList().get(j);
+							ShopItemBean b = (ShopItemBean) s.getList().get(j);
 							b.setIsclick(isChecked);
 						}
 					}

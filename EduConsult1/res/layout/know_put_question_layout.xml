@@ -218,14 +218,14 @@
             android:background="@color/regist_button_bg"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="15dp" >
+            android:padding="20dp" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tiwen_zixun_online"
                 android:textColor="@color/white"
-                android:textSize="16dp" />
+                android:textSize="18dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

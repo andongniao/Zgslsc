@@ -6,7 +6,10 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <!-- 提示 -->
+    <string name="space">\u3000\u3000</string>
     <string name="loding">正在加载...</string>
+    <string name="maimeng">亲，板块升级中，不要着急啦</string>
+    <string name="net_is_eor">网络异常，请检查网络后再试</string>
 
     <!-- 首页 -->
     <string name="home_more">更多></string>
@@ -119,7 +122,7 @@
     <string name="service_center_kefu_one">客服1</string>
     <string name="service_center_kefu_two">客服2</string>
     <string name="service_center_on_line">在线交谈</string>
-    <string name="service_center_qq">QQ交谈</string>
+    <string name="service_center_qq">拨打电话</string>
     <string name="service_center_title">服务中心</string>
     <string name="service_center_zixun_zhuce">注册咨询</string>
     <string name="service_center_zixun_shangjia">商家咨询</string>
@@ -256,9 +259,9 @@
     <string name="about_erweima">扫一扫 即可轻松安装中国饲料商城网客户端</string>
     <string name="about_gongsi">河北迅博网络科技有限公司</string>
     <string name="about_address">地址：</string>
-    <string name="about_address_content">河北省石家庄市为名南大街12号京津冀青年创业服务中心5楼</string>
+    <string name="about_address_content">河北省石家庄市海悦国际D座801 802</string>
     <string name="about_phone">电话：</string>
-    <string name="about_phone_content">400-7890-616</string>
+    <string name="about_phone_content">400-604-0311</string>
     <string name="about_email">电话：</string>
     <string name="about_email_content">zgslsc@nm1668.com</string>
 
@@ -387,5 +390,16 @@
     <string name="regist_ok_title">恭喜注册完成！</string>
     <string name="regist_ok_tiaozhuan">自动跳转到商城首页...</string>
     <string name="title_activity_money_query">MoneyQueryActivity</string>
+	<!-- 店铺首页 -->
+	<string name="store_fenlei">产品分类</string>
+	<string name="store_online">在线交谈</string>
+	<string name="store_call">电话咨询</string>
+	<string name="store_good_comment">好评</string>
+	<string name="store_all">全部产品</string>
+	<string name="store_miaoshu">描述</string>
+	<string name="store_service">服务</string>
+	<string name="store_wuliu">物流</string>
+
+
 
 </resources>

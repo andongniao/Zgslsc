@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical"
@@ -24,6 +24,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -38,13 +40,18 @@
                     android:text="@string/service_center_zixun_zhuce"
                     android:textColor="@color/black" />
             </LinearLayout>
+             <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
             <LinearLayout
                 android:id="@+id/service_center_ll_show_regist"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                 android:visibility="gone"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -116,7 +123,7 @@
                         android:textColor="@color/base_top_title_bg" />
 
                     <TextView
-                         android:id="@+id/service_center_tv_regist_two_qq"
+                        android:id="@+id/service_center_tv_regist_two_qq"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
@@ -130,7 +137,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical"
@@ -141,6 +148,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -155,14 +164,20 @@
                     android:text="@string/service_center_zixun_shangjia"
                     android:textColor="@color/black" />
             </LinearLayout>
+             <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
             <LinearLayout
                 android:id="@+id/service_center_ll_show_shangjia"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                 android:visibility="gone"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                >
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -248,7 +263,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical"
@@ -259,6 +274,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -273,14 +290,20 @@
                     android:text="@string/service_center_zixun_buy"
                     android:textColor="@color/black" />
             </LinearLayout>
+             <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
             <LinearLayout
                 android:id="@+id/service_center_ll_show_buy"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:visibility="gone"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                >
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -366,7 +389,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical"
@@ -377,6 +400,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -391,14 +416,20 @@
                     android:text="@string/service_center_zixun_zhuanjia"
                     android:textColor="@color/black" />
             </LinearLayout>
+             <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
             <LinearLayout
                 android:id="@+id/service_center_ll_show_zhuanjia"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                 android:visibility="gone"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                >
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -483,7 +514,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:gravity="center"
             android:orientation="vertical"
@@ -494,6 +525,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -508,13 +541,18 @@
                     android:text="@string/service_center_wenti_chaxun"
                     android:textColor="@color/black" />
             </LinearLayout>
+             <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
             <LinearLayout
                 android:id="@+id/service_center_ll_show_wenti"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                 android:visibility="gone"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -530,7 +568,25 @@
                         android:layout_height="wrap_content"
                         android:text="@string/service_center_wenti_order"
                         android:textColor="@color/black" />
+                    <TextView 
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <ImageView 
+                        android:layout_width="5dp"
+                        android:layout_height="10dp"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/mycenter_right"
+                        />
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
                 <LinearLayout
                     android:id="@+id/service_center_ll_wenti_regist"
@@ -545,7 +601,25 @@
                         android:layout_height="wrap_content"
                         android:text="@string/service_center_wenti_regist"
                         android:textColor="@color/black" />
+                    <TextView 
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <ImageView 
+                        android:layout_width="5dp"
+                        android:layout_height="10dp"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/mycenter_right"
+                        />
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
                 <LinearLayout
                     android:id="@+id/service_center_ll_wenti_wuliu"
@@ -560,7 +634,25 @@
                         android:layout_height="wrap_content"
                         android:text="@string/service_center_wenti_wuliu"
                         android:textColor="@color/black" />
+                    <TextView 
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <ImageView 
+                        android:layout_width="5dp"
+                        android:layout_height="10dp"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/mycenter_right"
+                        />
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/product_detaile_bg_xv_line" />
 
                 <LinearLayout
                     android:id="@+id/service_center_ll_wenti_qita"
@@ -575,6 +667,17 @@
                         android:layout_height="wrap_content"
                         android:text="@string/service_center_wenti_qita"
                         android:textColor="@color/black" />
+                    <TextView 
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                    <ImageView 
+                        android:layout_width="5dp"
+                        android:layout_height="10dp"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/mycenter_right"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

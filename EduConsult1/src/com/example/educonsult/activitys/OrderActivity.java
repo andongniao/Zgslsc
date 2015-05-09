@@ -114,36 +114,43 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.order_tv_ok:
 			//			ExampleActivity.setCurrentTab(3);
-			new Thread(){ 
-				@Override
-				public void run() {
-					String tn = null;
-					InputStream is;
-					try {
-
-						String url = TN_URL_01;
-
-						URL myURL = new URL(url);
-						URLConnection ucon = myURL.openConnection();
-						ucon.setConnectTimeout(120000);
-						is = ucon.getInputStream();
-						int i = -1;
-						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-						while ((i = is.read()) != -1) {
-							baos.write(i);
-						}
-
-						tn = baos.toString();
-						is.close();
-						baos.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-
-					Message msg = mHandler.obtainMessage();
-					msg.obj = tn;
-					mHandler.sendMessage(msg);
-				}}.start();
+//			new Thread(){ 
+//				@Override
+//				public void run() {
+//					String tn = null;
+//					InputStream is;
+//					try {
+//
+//						String url = TN_URL_01;
+//
+//						URL myURL = new URL(url);
+//						URLConnection ucon = myURL.openConnection();
+//						ucon.setConnectTimeout(120000);
+//						is = ucon.getInputStream();
+//						int i = -1;
+//						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//						while ((i = is.read()) != -1) {
+//							baos.write(i);
+//						}
+//
+//						tn = baos.toString();
+//						is.close();
+//						baos.close();
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//
+//					Message msg = mHandler.obtainMessage();
+//					msg.obj = tn;
+//					mHandler.sendMessage(msg);
+//				}}.start();
+			/************************************************* 
+			 * 
+			 *  步骤2：通过银联工具类启动支付插件 
+			 *  
+			 ************************************************/
+			UPPayAssistEx.startPayByJAR(OrderActivity.this, PayActivity.class, null, null,
+					Tn, mMode);
 				break;
 
 		}

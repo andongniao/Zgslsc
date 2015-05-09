@@ -19,6 +19,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.activitys.ShopcartActivity.shop;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.beans.ShopItemBean;
 
 public class ShopcartLvAdapter extends BaseAdapter{
 	private Context context;
@@ -44,7 +45,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		ShopBean sb = (ShopBean) list.get(index);
-		ArrayList<BaseBean> l = sb.getList();
+		ArrayList<ShopItemBean> l = sb.getList();
 		return l!=null?l.size():0;
 	}
 
@@ -78,16 +79,27 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item = (Item) convertView.getTag();
 		}
 		ShopBean sb = (ShopBean) list.get(index);
-		ArrayList<BaseBean> l = sb.getList();
+		ArrayList<ShopItemBean> l = sb.getList();
 
-		final BaseBean b = (BaseBean) l.get(position);
+		final ShopItemBean b = (ShopItemBean) l.get(position);
 
 		item.cb.setChecked(b.isIsclick());
-		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				shop.click(isChecked, index, position);
+//			}
+//		});
+		item.cb.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				shop.click(isChecked, index, position);
+			public void onClick(View v) {
+				if(b.isIsclick()){
+					shop.click(false, index, position);
+				}else{
+					shop.click(true, index, position);
+				}
 			}
 		});
 		item.iv_jia.setOnClickListener(new OnClickListener() {
