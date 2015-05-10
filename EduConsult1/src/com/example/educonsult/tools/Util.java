@@ -21,6 +21,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,15 +47,24 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.educonsult.R;
+import com.example.educonsult.adapters.TextItemCenterListAdapter;
+import com.example.educonsult.adapters.TextItemListAdapter;
 import com.example.educonsult.myviews.BadgeView;
-import com.unionpay.mobile.android.utils.h;
 
 /**
  * 公用工具类
@@ -70,7 +80,14 @@ public class Util {
 	private Hashtable<String, Object> memCacheRegion = new Hashtable<String, Object>();
 	private static Context context;
 	private static BadgeView badge;
-
+	private static ArrayList<String> list;
+	private static PopupWindow popu;
+	private static LayoutInflater inflater;
+	private static View v_fenlei;
+	private static ListView list_2,lv_l;
+	private static TextItemListAdapter adapter_r;
+	private static TextItemCenterListAdapter textItemCenterListAdapter;
+    private static int postion;
 
 	public Util(Context context){
 		this.context = context;
@@ -968,6 +985,7 @@ public class Util {
 		//		return false;
 
 	}
+	
 
 
 }

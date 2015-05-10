@@ -152,16 +152,22 @@ public class WelcomeActivity extends Activity{
 //					Tologin();
 //				}
 //			}
-			if(l!=null){
-				if("200".equals(l.getCode())){
-					
-				}
-			}
-			if(lmoney!=null){
-				if("200".equals(lmoney.getCode())){
-					
-				}
-			}
+//			if(l!=null){
+//				if("200".equals(l.getCode())){
+//					
+//			if(lf!=null){
+//				if("200".equals(lf.getCode())){
+//					u.saveObject(lf, filename);
+//					fl = true;			
+//				}else{
+//					Util.ShowToast(context, lf.getMsg());
+//				}
+//			}
+//			if(lmoney!=null){
+//				if("200".equals(lmoney.getCode())){
+//					
+//				}
+//			}
 			Tologin();
 			return true;
 		}
@@ -192,4 +198,5 @@ public class WelcomeActivity extends Activity{
 		startActivity(intent);
 		finish();
 	}
+	
 }

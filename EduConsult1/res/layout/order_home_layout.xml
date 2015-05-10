@@ -101,6 +101,24 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/address_right" />
         </LinearLayout>
+         <LinearLayout
+            android:id="@+id/order_home_ll_add_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/order_address_bg"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center"
+            android:orientation="horizontal" 
+            android:visibility="gone">
+            <Button android:id="@+id/order_home_ll_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address_add_address"
+                android:padding="10dp"
+                android:background="@drawable/search_lv_notnull_btn_bg"
+                android:textColor="@color/white"/>
+            </LinearLayout>
 
         <com.example.educonsult.myviews.MyListview
             android:id="@+id/order_home_lv"

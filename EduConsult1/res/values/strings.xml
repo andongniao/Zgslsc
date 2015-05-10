@@ -69,8 +69,12 @@
     <string name="regist_read">我已阅读并接受</string>
     <string name="regist_tiaokuan">中国饲料商城网服务条款</string>
     <string name="regist_inpu_error">请保证信息完整</string>
+    <string name="regist_password_mach">请输入6-20位的字母或数字</string>
     <string name="regist_password_need_is_one">两次密码不一致</string>
+    <string name="regist_phone_isfalse">请输入正确的电话号码</string>
     <string name="regist_ok">注册成功</string>
+    <string name="regist_tvlianxifangshi">联系方式</string>
+    <string name="regist_tvgongsiinfo">公司信息</string>
     <!-- 完善信息 -->
     <string name="perfect_info_title">完善信息</string>
     <string name="perfect_info_please">请选择</string>
@@ -227,6 +231,18 @@
     <string name="myinfo_gongsim">公司名</string>
     <string name="myinfo_gongsid">公司电话</string>
     <string name="myinfo_gongsitype">公司类型</string>
+    <string name="myinfo_tvrealname">真实姓名</string>
+    <string name="myinfo_tvdiqu">所在地区</string>
+    <string name="myinfo_tvxiangxidizhi">详细地址</string>
+    <string name="myinfo_tvphone">手机号码</string>
+    <string name="myinfo_tvyangzhipingzhong">养殖品种</string>
+    <string name="myinfo_tvusersiliao">使用饲料</string>
+    <string name="myinfo_tvchangjia">现使用哪个厂家饲料</string>
+    <string name="myinfo_tvprice">可接受价格</string>
+    <string name="myinfo_tvproduct">急需产品</string>
+    <string name="myinfo_tvnum">养殖数量</string>
+    <string name="myinfo_tvtuijianname">推荐人</string>
+    <string name="myinfo_tvok">保存</string>
 
     <!-- 站内信件 -->
     <string name="xinjian_title">站内信件</string>

@@ -8,22 +8,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#EEEEEE"
-       
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="5dp" >
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/regist_xinxi"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/home_hui" />
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -31,19 +18,20 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" 
-                android:paddingBottom="0.5dp">
+                android:layout_height="fill_parent"
+                android:paddingBottom="0.5dp" >
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/regist_button_bg"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/regist_button_bg" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingTop="5dp" >
@@ -56,7 +44,8 @@
                     android:background="@drawable/zcbq1"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="@string/regist_qiye" />
+                    android:text="@string/regist_qiye"
+                    android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/regist_tv_geren"
@@ -66,9 +55,27 @@
                     android:background="@drawable/regist_clikeed"
                     android:gravity="center"
                     android:text="@string/regist_geren"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
             </LinearLayout>
         </FrameLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/regist_xinxi"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/home_hui" />
 
         <EditText
             android:id="@+id/regist_et_username"
@@ -81,45 +88,57 @@
             android:hint="@string/regist_uername"
             android:padding="10dp"
             android:singleLine="true"
-            android:textColor="@color/black" />
+            android:textColor="@color/black" 
+            android:textSize="12dp"/>
 
         <EditText
             android:id="@+id/regist_et_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/regist_et_bg"
             android:gravity="center_vertical"
             android:hint="@string/regist_password"
             android:padding="10dp"
             android:password="true"
             android:singleLine="true"
-            android:textColor="@color/black" />
+            android:textColor="@color/black" 
+            android:textSize="12dp"/>
 
         <EditText
             android:id="@+id/regist_et_password_re"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/regist_et_bg"
             android:gravity="center_vertical"
             android:hint="@string/regist_chognfu"
             android:padding="10dp"
             android:password="true"
             android:singleLine="true"
-            android:textColor="@color/black" />
+            android:textColor="@color/black" 
+            android:textSize="12dp"/>
 
-        <EditText
-            android:id="@+id/regist_et_gongsi"
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/regist_et_bg"
-            android:gravity="center_vertical"
-            android:hint="@string/regist_gongsi"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/black" />
+            android:layout_marginTop="10dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/regist_tvlianxifangshi"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/home_hui" />
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -133,47 +152,356 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/regist_sex_man"
-                android:textColor="@color/black" >
+                android:textColor="@color/black" 
+            android:textSize="12dp">
             </RadioButton>
 
             <RadioButton
                 android:id="@+id/regist_rb_woman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:text="@string/regist_sex_woman"
-                android:textColor="@color/black" >
+                android:textColor="@color/black"
+            android:textSize="12dp" >
             </RadioButton>
         </RadioGroup>
 
         <EditText
-            android:id="@+id/regist_et_lianxi_ren"
+            android:id="@+id/regist_ll_geren_rname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/regist_et_bg"
             android:gravity="center_vertical"
-            android:hint="@string/regist_lianxi_people"
+            android:hint="@string/myinfo_tvrealname"
             android:padding="10dp"
             android:singleLine="true"
-            android:textColor="@color/black" />
+            android:textColor="@color/black" 
+            android:textSize="12dp"/>
+
+        <LinearLayout
+            android:id="@+id/regist_ll_geren_diqu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/regist_et_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/regist_ll_geren_tv_diqu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/myinfo_tvdiqu"
+                android:textColor="@color/black" 
+            android:textSize="12dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="5dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/bottom" />
+        </LinearLayout>
 
         <EditText
-            android:id="@+id/regist_et_lianxi_dianhua"
+            android:id="@+id/regist_et_dizhi"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/regist_et_bg"
             android:gravity="center_vertical"
-            android:hint="@string/regist_lianxi_phone"
+            android:hint="@string/myinfo_tvxiangxidizhi"
             android:padding="10dp"
             android:singleLine="true"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/regist_ll_geren_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/regist_et_bg"
+            android:gravity="center_vertical"
+            android:hint="@string/myinfo_tvphone"
+            android:inputType="number"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black" 
+            android:textSize="12dp"/>
+
+        <LinearLayout
+            android:id="@+id/regist_ll_geren"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/regist_ll_geren_pingzhong"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/regist_et_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/regist_ll_geren_tv_pingzhong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/myinfo_tvyangzhipingzhong"
+                    android:textColor="@color/black"
+            android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="5dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bottom" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/regist_ll_geren_siliao"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/regist_et_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/regist_ll_geren_tv_siliao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/myinfo_tvusersiliao"
+                    android:textColor="@color/black" 
+            android:textSize="12dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="5dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bottom" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/regist_ll_geren_computer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/regist_et_bg"
+                android:gravity="center_vertical"
+                android:hint="@string/myinfo_tvchangjia"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+            android:textSize="12dp" />
+
+            <EditText
+                android:id="@+id/regist_ll_geren_price"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/regist_et_bg"
+                android:gravity="center_vertical"
+                android:hint="@string/myinfo_tvprice"
+                android:inputType="number"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+            android:textSize="12dp"/>
+
+            <LinearLayout
+                android:id="@+id/regist_ll_geren_product"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/regist_et_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/regist_ll_geren_tv_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/myinfo_tvproduct"
+                    android:textColor="@color/black" 
+            android:textSize="12dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="5dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bottom" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/regist_ll_geren_num"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/regist_et_bg"
+                android:gravity="center_vertical"
+                android:hint="@string/myinfo_tvnum"
+                android:inputType="number"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+            android:textSize="12dp" />
+
+            <EditText
+                android:id="@+id/regist_ll_geren_person"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/regist_et_bg"
+                android:gravity="center_vertical"
+                android:hint="@string/myinfo_tvtuijianname"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+            android:textSize="12dp" />
+        </LinearLayout>
+        <LinearLayout 
+            android:id="@+id/regist_ll_qiye"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+             <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/regist_tvgongsiinfo"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/home_hui" />
+        <EditText
+            android:id="@+id/regist_ll_qiye_cname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/regist_et_bg"
+            android:gravity="center_vertical"
+            android:hint="@string/myinfo_gongsim"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+
+        <LinearLayout
+            android:id="@+id/regist_ll_qiye_ctype"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/regist_et_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/regist_ll_qiye_tv_ctype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/myinfo_gongsitype"
+                android:textColor="@color/black"
+            android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="5dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/bottom" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/regist_ll_qiye_cphone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/regist_et_bg"
+            android:gravity="center_vertical"
+            android:hint="@string/myinfo_gongsid"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="12dp" 
+            android:inputType="number"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone" >
 
             <CheckBox
                 android:id="@+id/regist_cb_read"

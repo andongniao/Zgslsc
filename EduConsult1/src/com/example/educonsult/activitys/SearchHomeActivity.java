@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.SearchAdapter;
+import com.example.educonsult.adapters.TextItemCenterListAdapter;
 import com.example.educonsult.adapters.TextItemListAdapter;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
@@ -42,8 +43,8 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private Button btn_search,btn_clean;
 	private TextView tv;
 	private LinearLayout isnull;
-	private ArrayList<String> l;
-	private List<String> data_list;
+	private ArrayList<String> l,ll;
+	private ArrayList<String> data_list;
 	private ArrayAdapter<String> arr_adapter;
 	private SearchAdapter adapter;
 	private boolean ishave;
@@ -52,6 +53,8 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private LayoutInflater inflater;
 	private View v_fenlei;
 	private SearchAdapter adapter_r;
+	private static TextItemCenterListAdapter textItemCenterListAdapter;
+    private static int postion;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -130,41 +133,50 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		arr_adapter.setDropDownViewResource(R.layout.drop_down_item);//(android.R.layout.simple_spinner_dropdown_item);
 		//加载适配器
 		sp.setAdapter(arr_adapter);*/
-		inflater=LayoutInflater.from(context);
-		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
-		
-		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
-		ArrayList<String> ll = new ArrayList<String>();
+		ll = new ArrayList<String>();
 		ll.add("产品");
 		ll.add("分类");
 		ll.add("产地");
 		sp.setText(ll.get(0));
-		adapter_r = new SearchAdapter(context, ll);
-		lv_l.setAdapter(adapter_r);
+		
+
+
+	}
+
+	private void setPopuwindowCenter(Context contexts,ArrayList<String> list,TextView lin){
+		inflater=LayoutInflater.from(contexts);
+		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
+		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
+		textItemCenterListAdapter = new TextItemCenterListAdapter(context, list);
+		lv_l.setAdapter(textItemCenterListAdapter);
+		
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				sp.setText(ll.get(arg2));
 				popu.dismiss();
 			}
 		});
-		popu = new PopupWindow(v_fenlei, UITools.dip2px(context, 90f), LayoutParams.WRAP_CONTENT);
+		
+		popu = new PopupWindow(v_fenlei, UITools.dip2px(context, 90f) , UITools.dip2px(context, 300f));
 		popu.setFocusable(true);
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
-
-
+		popu.showAsDropDown(lin);
+		
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.search_home_sp:
-			Toast.makeText(this, "1", 500).show();
-			popu.showAsDropDown(sp);
+			//int num=Util.setPopuwindowCenter(context,ll, sp);
+			setPopuwindowCenter(context, ll, sp);
+			
+			//popu.showAsDropDown(sp);
 			break;
 		
 		case R.id.search_home_btn_clean:

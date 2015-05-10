@@ -47,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/orn"
-                android:text="@string/service_center_on_line" />
+                android:text="@string/service_center_on_line" 
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout
