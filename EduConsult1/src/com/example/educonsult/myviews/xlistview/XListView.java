@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.example.educonsult.R;
 
 
+
+
 public class XListView extends ListView implements OnScrollListener {
 	public int statu = 1;
 	private float mLastY = -1; // save event y

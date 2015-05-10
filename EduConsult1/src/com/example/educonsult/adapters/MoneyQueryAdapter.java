@@ -3,6 +3,7 @@ package com.example.educonsult.adapters;
 import java.util.ArrayList;
 
 import com.example.educonsult.R;
+import com.example.educonsult.beans.MoneyDetaileBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,13 +15,14 @@ import android.widget.TextView;
 
 public class MoneyQueryAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<String> list;
+	private ArrayList<MoneyDetaileBean> list;
 	private LayoutInflater inflater;
 	private Myitem myitem;
+	private MoneyDetaileBean money;
 	
 	
 	
-	public MoneyQueryAdapter(Context context,ArrayList<String> list){
+	public MoneyQueryAdapter(Context context,ArrayList<MoneyDetaileBean> list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -33,9 +35,9 @@ public class MoneyQueryAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Object getItem(int position) {
+	public MoneyDetaileBean getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return list.get(position);
 	}
 
 	@Override
@@ -57,6 +59,8 @@ public class MoneyQueryAdapter extends BaseAdapter{
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
+		money=list.get(position);
+		//myitem.money.setText(money.get)
 
 		return convertView;
 	}
