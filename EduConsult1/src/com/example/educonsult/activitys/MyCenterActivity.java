@@ -14,9 +14,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.LoginActivity.RefeshData;
+import com.example.educonsult.beans.CenterUserBean;
+import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.BadgeView;
 import com.example.educonsult.myviews.CircleImageView;
+import com.example.educonsult.net.Send;
+import com.example.educonsult.tools.Util;
+
 
 public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
@@ -27,6 +36,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private ImageView iv_zhifu,iv_fahuo,iv_shouhuo,iv_pingjia;
 	private CircleImageView icv_head;
 	private TextView tv_version;
+	private UserBean bean;
+	private CenterUserBean cbean;
+	private ThreadWithProgressDialog myPDT;
+	private String msg;
 	
 	
 	@Override
@@ -40,6 +53,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		
+		
 		context = this;
 		tv_version = (TextView) findViewById(R.id.mycenter_home_tv_version);
 		icv_head = (CircleImageView) findViewById(R.id.mycenter_home_civ_head);
@@ -100,6 +115,69 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 
 		String vserion = info.versionName;
 		tv_version.setText(vserion);
+		
+		
+		bean=MyApplication.mp.getUser();
+		if(bean.getType()==1){
+			ll_fh.setVisibility(View.GONE);
+		}else if(bean.getType()==0){
+			ll_zhifu.setVisibility(View.GONE);
+			ll_sh.setVisibility(View.GONE);
+			ll_youhuiquan.setVisibility(View.GONE);
+		}
+		myPDT = new ThreadWithProgressDialog();
+		msg = "加载中...";
+		if(Util.detect(context)){
+			//myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+		}
+	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		private int type;
+		private String authstr;
+		public RefeshData(int type,String authstr){
+			this.type=type;
+			this.authstr=authstr;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// TODO Auto-generated method stub
+			Send s=new Send(context);
+			cbean=s.getMyinfo(type, authstr);
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(cbean!=null){
+				String code = cbean.getCode();
+				String m = cbean.getMsg();
+				if("200".equals(code)){
+//					Util.ShowToast(context, bean.getAuthstr());
+//					MyApplication.bean.setAuthstr(bean.getAuthstr());
+					/*Intent in = new Intent(context, ExampleActivity.class);
+					MyApplication.mp.setUser(bean);
+					startActivity(in);*/
+					
+					finish();
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		
+		}
 		
 	}
 

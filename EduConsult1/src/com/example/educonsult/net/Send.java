@@ -128,7 +128,7 @@ public class Send {
 				ServiceUrl.Login_url_password+password;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
-		if (jsonStr != null && !jsonStr.equals("")) {
+		if (jsonStr != null && !jsonStr.equals("")) { 
 			JSONObject object = null;
 			try {
 				object = new JSONObject(jsonStr);

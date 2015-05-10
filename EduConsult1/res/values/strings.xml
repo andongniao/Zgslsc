@@ -272,7 +272,7 @@
     <string name="product_detaile_xiaoliang">销量：</string>
     <string name="product_detaile_kucun">库存：</string>
     <string name="product_detaile_result_header">订单未达到</string>
-    <string name="product_detaile_result_footer">需要运费</string>
+    <string name="product_detaile_result_all">，共</string>
     <string name="product_detaile_miaoshu">描述相符</string>
     <string name="product_detaile_fuwu">服务态度</string>
     <string name="product_detaile_fahuo">发货态度</string>
@@ -299,6 +299,7 @@
     <string name="product_detaile_pingjia_item_text">来说说这次团购的感受吧，对其他用户来说是很重要的参考！来说说这次团购的感受吧，对其他用户来说是很重要的参考！</string>
     <string name="product_detaile_pingjia_item_time">2015-1-8   15:27</string>
     <string name="product_detaile_more_title">更多评价</string>
+    <string name="product_detaile_chandi">产地：</string>
 
     <!-- 购物车 -->
     <string name="shopcart_title">购物车</string>

@@ -19,12 +19,20 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.MyInfoActivity.RefeshData;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.MoneyQueryAdapter;
 import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.beans.MoneyDetaileBean;
+import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.beans.ListMoneyBean;
 import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.net.Send;
+import com.example.educonsult.tools.Util;
 
 public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout reaLayout;
@@ -43,7 +51,10 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private Intent intent;
 	private TextItemListAdapter adapter_r;
 	private LinearLayout lin;
-	
+	private ListMoneyBean listmoneybean;
+	private UserBean bean;
+	private ArrayList<MoneyDetaileBean> moneylist;
+	private ThreadWithProgressDialog myPDT;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -92,21 +103,6 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		allquery=(TextView)findViewById(R.id.qianbao_query_allquery);
 		list=new ArrayList<String>();
 		
-		moneyQueryAdapter=new MoneyQueryAdapter(context, list);
-		list_money.setAdapter(moneyQueryAdapter);
-		list_money.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				//
-				intent = new Intent(context,MoneyQueryInfoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-				
-			}
-		});
 		inflater=LayoutInflater.from(context);
 		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
 		
@@ -132,6 +128,64 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
 		//popu.update();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}
+		
+		moneyQueryAdapter=new MoneyQueryAdapter(context, moneylist);
+		list_money.setAdapter(moneyQueryAdapter);
+		list_money.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				//
+				intent = new Intent(context,MoneyQueryInfoActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				
+			}
+		});
+		
+	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		public RefeshData(){
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// TODO Auto-generated method stub
+			Send s=new Send(context);
+			listmoneybean=s.getMoney(bean.getType(), bean.getAuthstr());
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(listmoneybean!=null){
+				String code = listmoneybean.getCode();
+				String m = listmoneybean.getMsg();
+				if("200".equals(code)){
+					moneylist=listmoneybean.getList();
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		
+		}
 		
 	}
 	

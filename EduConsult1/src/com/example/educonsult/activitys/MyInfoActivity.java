@@ -55,6 +55,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	private ListView list_2,lv_l;
 	private TextItemListAdapter adapter_r;
 	
+	
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -72,9 +73,16 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.myinfo);
 		init();
 		addlistener();
-//		if(Util.detect(context)){
-//			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-//		}
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}
+		
+		if(cardNum==0){
+			mycardNum.setText("未绑定");
+			mycardNum.setTextColor(getResources().getColor(R.color.red));
+		}else{
+			mycardNum.setText(cardNum+"张");
+		}
 		
 		
 		
@@ -119,12 +127,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		ll_qiye=(LinearLayout)findViewById(R.id.myinfo_ll_one_line);
 		ll_geren=(LinearLayout)findViewById(R.id.myinfo_ll_two_line);
 		mycardNum=(TextView)findViewById(R.id.myinfo_ll_mycard_num);
-		if(cardNum==0){
-			mycardNum.setText("未绑定");
-			mycardNum.setTextColor(getResources().getColor(R.color.red));
-		}else{
-			mycardNum.setText(cardNum+"张");
-		}
+		
 		Util.SetRedNum(context, rl_l, 1);
 		
 		tv_cname=(TextView)findViewById(R.id.myinfo_tv_gongsim);
@@ -175,6 +178,14 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		popu.setFocusable(true);
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
+		
+		
+		if(bean.getType()==1){
+			ll_qiye.setVisibility(View.GONE);
+		}else if(bean.getType()==0){
+			ll_geren.setVisibility(View.GONE);
+		}
+		
 	}
 
 	@Override
@@ -230,6 +241,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 			public boolean OnTaskDismissed() {
 				//任务取消
 //				Toast.makeText(context, "cancle", 1000).show();
+				finish();
 				return false;
 			}
 
@@ -239,6 +251,33 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 				if(centerbean!=null){
 					if("200".equals(centerbean.getCode())){
 						//TODO	
+						tv_name.setText(centerbean.getUsername());
+						
+						
+						if(bean.getType()==1){
+							t_rname.setText(centerbean.getTruename());
+							t_diqu.setText(centerbean.getAreaid());
+							e_dizhi.setText(centerbean.getXxdz());
+							e_product.setText(centerbean.getMobile());
+							t_pingzhong.setText(centerbean.getYzpz());
+							t_siliao.setText(centerbean.getSyzl());
+							e_computer.setText(centerbean.getXsycj());
+							e_price.setText(centerbean.getKjsjw());
+							e_product.setText(centerbean.getAvatar());///??急需产品
+							t_person.setText(centerbean.getTjr());
+							e_num.setText("");//
+						}else if(bean.getType()==0){
+							tv_level.setText(centerbean.getVip());
+							tv_rname.setText(centerbean.getTruename());
+							tv_diqu.setText(centerbean.getAreaid());
+							ed_dizhi.setText(centerbean.getXxdz());
+							ed_phone.setText(centerbean.getMobile());
+							tv_cname.setText(centerbean.getCompany());
+							tv_cway.setText(centerbean.getTypes());
+							tv_cphone.setText("");
+							
+						}
+						
 					}else{
 						Util.ShowToast(context, centerbean.getMsg());
 					}

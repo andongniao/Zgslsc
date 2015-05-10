@@ -22,12 +22,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.net.Send;
+import com.example.educonsult.tools.Util;
 
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -234,6 +237,47 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+
+		public RefeshData() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+//			Toast.makeText(context, "cancle", 1000).show();
+			finish();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(centerbean!=null){
+				if("200".equals(centerbean.getCode())){
+					//TODO	
+					
+				}else{
+					Util.ShowToast(context, centerbean.getMsg());
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			
+			
+			
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			Send s = new Send(context);
+			centerbean = s.GetProductDetaile("53");
+			return true;
+		}
+	}
+
 
 
 }

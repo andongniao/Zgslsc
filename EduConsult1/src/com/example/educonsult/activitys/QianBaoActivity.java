@@ -1,7 +1,12 @@
 package com.example.educonsult.activitys;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.beans.MoneyDetaileBean;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
 import android.content.Context;
@@ -23,6 +28,8 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
+	private UserBean bean;
+	private MoneyDetaileBean moneybean;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -64,6 +71,7 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 	}
 	private void init() {
 		context = this;
+		bean = MyApplication.mp.getUser();
 		ll_chaxun = (LinearLayout) findViewById(R.id.qianbao_ll_chaxun);
 		ll_chaxun.setOnClickListener(this);
 		ll_tixian = (LinearLayout) findViewById(R.id.qianbao_ll_tixian);
@@ -72,6 +80,7 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		tv.setOnClickListener(this);
 		Util.SetRedNum(context, rl_l, 1);
 	}
+	
 
 	@Override
 	public void onClick(View v) {

@@ -1,7 +1,11 @@
 package com.example.educonsult.activitys;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.LoginActivity.RefeshData;
+import com.example.educonsult.tools.Util;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +21,8 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 	private EditText ed;
 	private Button button;
 	private ImageView imaone,imatwo,imathree;
-	private int isgood;
+	private int isgood=5;
+	private Context context;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -29,6 +34,7 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 		init();
 	}
 	void init(){
+		context=this;
 		ll_l=(LinearLayout)findViewById(R.id.pjorder_one_lin);
 		ll_l.setOnClickListener(this);
 		ll_t=(LinearLayout)findViewById(R.id.pjorder_two_lin);
@@ -57,29 +63,47 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 			imatwo.setBackgroundResource(R.drawable.pingjiatwo);
 			imaone.setBackgroundResource(R.drawable.pingjiaone);
 			imathree.setBackgroundResource(R.drawable.pingjiaone);
-			isgood=2;
+			isgood=3;
 			break;
 		case R.id.pjorder_three_lin:
 			imathree.setBackgroundResource(R.drawable.pingjiatwo);
 			imatwo.setBackgroundResource(R.drawable.pingjiaone);
 			imaone.setBackgroundResource(R.drawable.pingjiaone);
-			isgood=3;
+			isgood=5;
 			break;
 		case R.id.pjorder_ok:
-			if(isgood==1){
-				
-			}else if(isgood==2){
-				
-			}else if(isgood==3){
-				
-			}
 			String edStr=ed.getText().toString().trim();
-			
+			if(Util.IsNull(edStr)){
+				if(Util.detect(context)){
+					//myPDT.Run(context, new RefeshData(name,pass),msg,false);//不可取消
+				}
+			}
 			break;
 
 		default:
 			break;
 		}
 	}
+	public class RefeshDate implements ThreadWithProgressDialogTask{
+
+		@Override
+		public boolean TaskMain() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
+	} 
 
 }
