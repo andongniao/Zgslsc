@@ -19,6 +19,7 @@ import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.beans.ListMoneyBean;
 import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
+import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
@@ -31,6 +32,7 @@ public class WelcomeActivity extends Activity{
 	private Context context;
 	private ListAreaBean lb;
 	private ThreadWithProgressDialog myPDT;
+	private String auth = "kn769osgurrqjrl8ljuk0boik4";
 	private String filename = MyApplication.AreaName; 
 	private Util u;
 	private ProdectDetaileBean bean;
@@ -181,7 +183,9 @@ public class WelcomeActivity extends Activity{
 //			lf = s.GetFenlei();
 //			lbn = s.GetComment("53", 1,"2");
 //			l = s.getCenterRecommend();
-			lmoney = s.getMoney(MyApplication.money_detaile, "76kilg8f94g867261e6mnbg951");
+//			s.getXinjianDetaile("1057", auth);
+			PostHttp p = new PostHttp(context);
+			p.doPost();
 			return true;
 		}
 	}

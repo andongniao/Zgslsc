@@ -3,19 +3,33 @@ package com.example.educonsult.beans;
 import java.util.ArrayList;
 
 public class ShopBean extends ShopItemBean{
-	private String name;
-	private ArrayList<ShopItemBean>list;
-	public String getName() {
-		return name;
+	private ArrayList<ShopItemBean>mall;
+	private String company;
+	private String companyid;
+	private String note;
+	public ArrayList<ShopItemBean> getMall() {
+		return mall;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMall(ArrayList<ShopItemBean> mall) {
+		this.mall = mall;
 	}
-	public ArrayList<ShopItemBean> getList() {
-		return list;
+	public String getCompany() {
+		return company;
 	}
-	public void setList(ArrayList<ShopItemBean> list) {
-		this.list = list;
+	public void setCompany(String company) {
+		this.company = company;
 	}
-
+	public String getCompanyid() {
+		return companyid;
+	}
+	public void setCompanyid(String companyid) {
+		this.companyid = companyid;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
+	
 }

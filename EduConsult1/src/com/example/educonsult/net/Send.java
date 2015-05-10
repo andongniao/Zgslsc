@@ -2,8 +2,8 @@ package com.example.educonsult.net;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,11 +25,16 @@ import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.beans.ListMoneyBean;
 import com.example.educonsult.beans.ListProductBean;
+import com.example.educonsult.beans.ListShopBean;
+import com.example.educonsult.beans.ListXinjianBean;
 import com.example.educonsult.beans.MallInfoBean;
 import com.example.educonsult.beans.MoneyDetaileBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.beans.XinJianBean;
+import com.example.educonsult.beans.XinJianDetaileBean;
 import com.example.educonsult.tools.Util;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -134,6 +139,8 @@ public class Send {
 					bean.setMsg(msg);
 					JSONObject data = object.getJSONObject("data");
 					String authstr = data.getString("authstr");
+//					int type = data.getInt("type");
+//					bean.setType(type);
 					bean.setAuthstr(authstr);
 					return bean;
 				} else {
@@ -622,7 +629,7 @@ public class Send {
 		}else if(type==MyApplication.money_pay){
 			url +=ServiceUrl.money_pay;
 		}
-		url=url+ServiceUrl.money_foot+authstr;
+		url=url+ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -661,6 +668,171 @@ public class Send {
 		}
 
 	}
+	
+	
+	/**
+	 * 获取购物车
+	 */
+	public ListShopBean getCartlist(String authstr) {
+		ListShopBean bean = new ListShopBean();
+		ArrayList<ShopBean>list = new ArrayList<ShopBean>();
+		String baseurl = ServiceUrl.Base;
+		String url="";
+			url = baseurl+ServiceUrl.cart_list+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					JSONObject data = object.getJSONObject("data");
+					@SuppressWarnings("unchecked")
+					Iterator<String> keys=data.keys();
+					while (keys.hasNext ())
+		            {
+						String k = (String) keys.next() + "";
+						JSONObject js = (JSONObject) data.get(k);
+						Type t = new TypeToken<ShopBean>() {
+							}.getType();
+						ShopBean sb = gson.fromJson(js.toString(), t);
+						sb.setCompanyid(k);
+						if(sb!=null){
+							list.add(0,sb);
+						}
+						
+		            }
+					bean.setCode(code);
+					bean.setMsg(msg);
+					bean.setList(list);
+					return bean;
+				} else {
+					bean.setMsg(msg);
+					bean.setCode(code);
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	
+	/**
+	 * 获取站内信件列表
+	 */
+	public ListXinjianBean getXinjianlist(String authstr) {
+		ListXinjianBean bean = new ListXinjianBean();
+		String baseurl = ServiceUrl.Base;
+		String url="";
+			url = baseurl+ServiceUrl.mycenter_hander+ServiceUrl.sms_list+
+					ServiceUrl.mycenter_footer+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					JSONArray data = object.getJSONArray("data");
+					Type t = new TypeToken<ArrayList<XinJianBean>>() {
+					}.getType();
+					ArrayList<XinJianBean> list = gson.fromJson(data.toString(), t);
+					bean.setList(list);
+					bean.setCode(code);
+					bean.setMsg(msg);
+					return bean;
+				} else {
+					bean.setMsg(msg);
+					bean.setCode(code);
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	
+	/**
+	 * 获取站内信件列表
+	 */
+	public XinJianDetaileBean getXinjianDetaile(String itemid,String authstr) {
+		XinJianDetaileBean bean = new XinJianDetaileBean();
+		String baseurl = ServiceUrl.Base;
+		String url="";
+			url = baseurl+ServiceUrl.mycenter_hander+ServiceUrl.sms_deteaile+itemid+
+					ServiceUrl.mycenter_footer+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					JSONArray data = object.getJSONArray("data");
+					JSONObject js = data.getJSONObject(0);
+					Type t = new TypeToken<XinJianDetaileBean>() {
+					}.getType();
+					bean = gson.fromJson(js.toString(), t);
+					bean.setCode(code);
+					bean.setMsg(msg);
+					return bean;
+				} else {
+					bean.setMsg(msg);
+					bean.setCode(code);
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	//

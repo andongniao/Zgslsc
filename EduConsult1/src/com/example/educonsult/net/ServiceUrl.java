@@ -5,7 +5,8 @@ package com.example.educonsult.net;
  *
  */
 public class ServiceUrl {
-	public static String Base="http://www.shop.com/app/";//"http://192.168.1.190/app/";
+	public static String Base="http://www.shop.com/app/";
+//	public static String Base="http://192.168.1.190/app/";
 	//首页
 	public static String Home_url=Base;
 	//城市
@@ -25,7 +26,8 @@ public class ServiceUrl {
 	public static String Product_comment_star = "&star=";
 
 	//个人中心首页 
-	public static String Mycenter_home= "member.php?action=";
+	public static String mycenter_hander= "member.php?action=";
+	public static String mycenter_footer = "&authstr=";
 	public static String Mycenter_home_member= "member_detail&authstr=";
 	public static String Mycenter_home_company= "company_detail&authstr=";
 	//钱包 查询明细
@@ -34,10 +36,20 @@ public class ServiceUrl {
 	public static String money_detaile = "bag_detail";
 	public static String money_income= "income";
 	public static String money_pay= "pay";
-	public static String money_foot = "&authstr=";
-	
+	//信件首页列表
+	public static String sms_list = "station_sms";
+	public static String sms_deteaile = "sms_detail&itemid=";
 	
 
 	//精选推荐（个人中心）
 	public static String Mycenter_recommend = "recommendproduct.php";
+	
+	
+	//购物车列表
+	public static String cart_list = "cart.php?authstr=";
+	
+	//购物车列表
+	public static String add_address = "address.php";
+	
+	
 }

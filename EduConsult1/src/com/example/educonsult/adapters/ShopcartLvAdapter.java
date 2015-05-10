@@ -45,7 +45,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		ShopBean sb = (ShopBean) list.get(index);
-		ArrayList<ShopItemBean> l = sb.getList();
+		ArrayList<ShopItemBean> l = sb.getMall();
 		return l!=null?l.size():0;
 	}
 
@@ -79,7 +79,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item = (Item) convertView.getTag();
 		}
 		ShopBean sb = (ShopBean) list.get(index);
-		ArrayList<ShopItemBean> l = sb.getList();
+		ArrayList<ShopItemBean> l = sb.getMall();
 
 		final ShopItemBean b = (ShopItemBean) l.get(position);
 
@@ -116,13 +116,13 @@ public class ShopcartLvAdapter extends BaseAdapter{
 
 			@Override
 			public void onClick(View v) {
-				int i = b.getNum();
+				int i = Integer.parseInt(b.getAmount());
 				if(i>0){
 					shop.jian1(index, position);
 				}
 			}
 		});
-		item.et_number.setText(list.get(index).getList().get(position).getNum()+"");
+		item.et_number.setText(list.get(index).getMall().get(position).getAmount());
 		return convertView;
 	}
 	class Item{

@@ -73,7 +73,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		init();
 		addlistener();
 //		if(Util.detect(context)){
-//			myPDT.Run(context, new RefeshData(),msg,false);//不可取消
+//			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 //		}
 		
 		
