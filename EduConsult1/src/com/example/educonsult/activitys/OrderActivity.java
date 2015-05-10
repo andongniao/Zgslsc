@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -32,11 +33,13 @@ import android.widget.TextView;
 public class OrderActivity extends BaseActivity implements OnClickListener{
 	private ScrollView scrollView;
 	private Context context;
-	private LinearLayout ll_address;
+	private LinearLayout ll_address,ll_add;
+	private Button button;
 	private MyListview lv;
 	private TextView tv_shouhuoren,tv_shoujihao,tv_address,tv_zongjia,tv_ok;
-	private ArrayList<Integer>list;
+	private ArrayList<Integer>list,listdizhi;
 	private OrderHomeAdapter adapter;
+	private Intent intent;
 	private Handler mHandler = null;
 	private String mMode = "01";
 	private String Tn = "201504281334390000902";
@@ -86,10 +89,14 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		list = new ArrayList<Integer>();
 		list.add(1);
 		list.add(2);
+		listdizhi = new ArrayList<Integer>();
 		scrollView = (ScrollView) findViewById(R.id.order_home_sc);
 		scrollView.scrollTo(0, 10);
 		ll_address = (LinearLayout) findViewById(R.id.order_home_ll_address);
 		ll_address.setOnClickListener(this);
+		ll_add=(LinearLayout)findViewById(R.id.order_home_ll_add_address);
+		button=(Button)findViewById(R.id.order_home_ll_add);
+		button.setOnClickListener(this);
 		tv_shouhuoren = (TextView) findViewById(R.id.order_tv_shouhuoren);
 		tv_shoujihao= (TextView) findViewById(R.id.order_tv_shoujihao);
 		tv_address = (TextView) findViewById(R.id.order_tv_dizhi);
@@ -100,12 +107,22 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		lv.setFocusable(false);
 		adapter = new OrderHomeAdapter(context, list);
 		lv.setAdapter(adapter);
+		if(listdizhi.size()==0){
+			ll_add.setVisibility(View.VISIBLE);
+			ll_address.setVisibility(View.GONE);
+		}
 
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.order_home_ll_add:
+			intent = new Intent(context,AddressGLActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("address", "1");
+			startActivity(intent);
+			break;
 		case R.id.order_home_ll_address:
 			//TODO 
 			Intent id = new Intent(this,UpAddressActivity.class);

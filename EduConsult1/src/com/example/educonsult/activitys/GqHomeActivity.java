@@ -16,6 +16,8 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,8 +32,10 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.GqAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.KnowFenleiAdapter;
+import com.example.educonsult.adapters.TextItemListAdapter;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyGridView;
+import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 public class GqHomeActivity extends BaseActivity implements OnClickListener{
@@ -43,7 +47,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_l_tuijian,ll_t_tuijian,ll_r_tuijian,
 	ll_l_paied,ll_t_paied,ll_r_paied,ll_all,ll_diqu,ll_zhineng,ll_shaixuan,lll_r;
 	private ScrollView scrollView;
-	private PopupWindow popupWindow,pp_top_fenlei;
+	private PopupWindow popupWindow,pp_top_fenlei,popu,popup_shaixuan;
 	private boolean isshow;
 	private Context context;
 	private MyGridView gridView;
@@ -55,10 +59,14 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	public static boolean isread;
 	private View v_fenlei;
 	private ListView lv_l,lv_r;
-	private HomeSlidAdapter adapter_r;
+	private HomeSlidAdapter adapter_r,adapter_rl;
 	private KnowFenleiAdapter adapter_l;
 	private LayoutInflater inflater;
 	public View ll_gqtwo_popu;
+	private TextItemListAdapter textItemListAdapter;
+	private ArrayList<String> zhinenglist;
+	private Button button;
+	private EditText edmin,edmax;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -187,35 +195,13 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		isread = false;
-		v_fenlei =  LayoutInflater.from(context).inflate(R.layout.know_slidemenu_view, null);
-		pp_top_fenlei = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-		pp_top_fenlei.setFocusable(true);
-		pp_top_fenlei.setBackgroundDrawable(new BitmapDrawable());
-		pp_top_fenlei.setOutsideTouchable(true);
-		pp_top_fenlei.update();
-		ArrayList<String>ll = new ArrayList<String>();
-		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
-		lll_r = (LinearLayout) v_fenlei.findViewById(R.id.know_slid_view_ll_r);
-		ArrayList<Integer> l = new ArrayList<Integer>();
-		for(int i=0;i<8;i++){
-			l.add(i);
-		}
-		adapter_l = new KnowFenleiAdapter(context, l);
-		lv_l.setAdapter(adapter_l);
-		lv_r = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_r);
-		adapter_r = new HomeSlidAdapter(context, ll,2);
-		lv_r.setAdapter(adapter_r);
-		lv_l.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				if(arg2>0){
-					lll_r.setVisibility(View.VISIBLE);
-					adapter_l.SetData(arg2);
-					adapter_l.notifyDataSetChanged();
-				}
-			}
-		});
+		zhinenglist=new ArrayList<String>();
+		zhinenglist.add("价格由低到高");
+		zhinenglist.add("价格由高到低");
+		zhinenglist.add("销量由低到高");
+		zhinenglist.add("销量由高到低");
+		zhinenglist.add("VIP级别由高到低");
+		zhinenglist.add("VIP级别由低到高");
 		
 		
 		
@@ -271,16 +257,137 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		gridView.setAdapter(adapter);
 		gridView.setFocusable(false);
 		Util.SetRedNum(context, rl_l, 0);
+		
+		
+		
+		
 
+	}
+	private void setpopuwindow(Context contexts,ArrayList<String> list,LinearLayout lin){
+		inflater=LayoutInflater.from(contexts);
+		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
+		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
+		textItemListAdapter = new TextItemListAdapter(context, list);
+		lv_l.setAdapter(textItemListAdapter);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				
+				popu.dismiss();
+			}
+		});
+		
+		popu = new PopupWindow(v_fenlei,LayoutParams.FILL_PARENT ,LayoutParams.WRAP_CONTENT);
+		popu.setFocusable(true);
+		popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setOutsideTouchable(true);
+		popu.showAsDropDown(lin);
+	}
+	void setShaixuanpopu(Context contexts,LinearLayout lin){
+		inflater=LayoutInflater.from(contexts);
+		v_fenlei = inflater.inflate(R.layout.gq_popw_price, null);
+		popu = new PopupWindow(v_fenlei,LayoutParams.FILL_PARENT ,LayoutParams.WRAP_CONTENT);
+		popu.setFocusable(true);
+		popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setOutsideTouchable(true);
+		popu.showAsDropDown(lin);
+		edmin=(EditText)v_fenlei.findViewById(R.id.gq_popw_price_et_min);
+		edmax=(EditText)v_fenlei.findViewById(R.id.gq_popw_price_et_max);
+		button=(Button)v_fenlei.findViewById(R.id.gq_popw_price_btn_ok);
+		button.setOnClickListener(this);
+		
+	}
+	void setDiQuPopu(){
+		v_fenlei =  LayoutInflater.from(context).inflate(R.layout.know_slidemenu_view, null);
+		pp_top_fenlei = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		pp_top_fenlei.setFocusable(true);
+		pp_top_fenlei.setBackgroundDrawable(new BitmapDrawable());
+		pp_top_fenlei.setOutsideTouchable(true);
+		pp_top_fenlei.update();
+		ArrayList<String>ll = new ArrayList<String>();
+		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
+		lll_r = (LinearLayout) v_fenlei.findViewById(R.id.know_slid_view_ll_r);
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		for(int i=0;i<8;i++){
+			l.add(i);
+		}
+		adapter_rl = new HomeSlidAdapter(context, ll,2);
+		lv_l.setAdapter(adapter_rl);
+		lv_r = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_r);
+		adapter_r = new HomeSlidAdapter(context, ll,3);
+		lv_r.setAdapter(adapter_r);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				if(arg2>0){
+					lll_r.setVisibility(View.VISIBLE);
+					adapter_rl.SetData(arg2);
+					adapter_rl.notifyDataSetChanged();
+				}
+			}
+		});
+		lv_r.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				pp_top_fenlei.dismiss();
+			}
+		});
+		pp_top_fenlei.showAsDropDown(ll_all);
+		
+	}
+	void setAllPopu(){
+		v_fenlei =  LayoutInflater.from(context).inflate(R.layout.know_slidemenu_view, null);
+		pp_top_fenlei = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		pp_top_fenlei.setFocusable(true);
+		pp_top_fenlei.setBackgroundDrawable(new BitmapDrawable());
+		pp_top_fenlei.setOutsideTouchable(true);
+		pp_top_fenlei.update();
+		ArrayList<String>ll = new ArrayList<String>();
+		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
+		lll_r = (LinearLayout) v_fenlei.findViewById(R.id.know_slid_view_ll_r);
+		ArrayList<Integer> l = new ArrayList<Integer>();
+		for(int i=0;i<8;i++){
+			l.add(i);
+		}
+		adapter_l = new KnowFenleiAdapter(context, l);
+		lv_l.setAdapter(adapter_l);
+		lv_r = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_r);
+		adapter_r = new HomeSlidAdapter(context, ll,2);
+		lv_r.setAdapter(adapter_r);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				if(arg2>0){
+					lll_r.setVisibility(View.VISIBLE);
+					adapter_l.SetData(arg2);
+					adapter_l.notifyDataSetChanged();
+				}
+			}
+		});
+		
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.gq_popw_price_btn_ok:
+			String stmax=edmax.getText().toString().trim();
+			String stmin=edmin.getText().toString().trim();
+		    popu.dismiss();
+			break;
 		case R.id.gq_home_ll_all:
 //			intent = new Intent(this,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			startActivity(intent);
+			setAllPopu();
 			if(pp_top_fenlei!=null && pp_top_fenlei.isShowing()){	
 				pp_top_fenlei.dismiss();
 			}else{
@@ -290,20 +397,24 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 			
 			break;
 		case R.id.gq_home_ll_diqu:
-			intent = new Intent(this,GqTwoActivity.class);
+			/*intent = new Intent(this,GqTwoActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			startActivity(intent);*/
+			setDiQuPopu();
 			break;
 		case R.id.gq_home_ll_zhineng:
-			intent = new Intent(this,GqTwoActivity.class);
+			/*intent = new Intent(this,GqTwoActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			startActivity(intent);*/
+			setpopuwindow(context, zhinenglist, ll_all);
+			
 			break;
 			
 		case R.id.gq_home_ll_shaixuan:
-			intent = new Intent(this,GqTwoActivity.class);
+			/*intent = new Intent(this,GqTwoActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			startActivity(intent);*/
+			setShaixuanpopu(context, ll_all);
 			break;
 			
 		case R.id.gq_home_ll_l_tuijian:

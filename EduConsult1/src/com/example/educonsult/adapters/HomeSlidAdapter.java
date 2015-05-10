@@ -79,6 +79,17 @@ public class HomeSlidAdapter extends BaseAdapter{
 				myitem.tv_title.setTextColor(context.getResources().getColor(R.color.base_top_title_bg));
 				myitem.tv_r.setVisibility(View.VISIBLE);
 			}
+		}else if(type==2){
+			for(int i=0;i<6;i++){
+				if(index==position){
+					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
+					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.base_top_title_bg));
+				}else{
+					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
+					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.black));
+				}
+				
+			}
 		}
 		return convertView;
 	}

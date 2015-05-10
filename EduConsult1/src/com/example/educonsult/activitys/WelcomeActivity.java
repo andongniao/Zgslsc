@@ -130,7 +130,7 @@ public class WelcomeActivity extends Activity{
 			//		finish();
 			//	}
 			//}
-			if(lf!=null){
+			/*if(lf!=null){
 				if("200".equals(lf.getCode())){
 					u.saveObject(lf, filename);
 					fl = true;			
@@ -155,7 +155,12 @@ public class WelcomeActivity extends Activity{
 					startActivity(intent);
 					finish();
 				}
-			}
+			}*/
+			Intent intent = new Intent(WelcomeActivity.this,
+					LoginActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
 			return true;
 		}
 
@@ -176,4 +181,5 @@ public class WelcomeActivity extends Activity{
 		super.finish();
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
+	
 }
