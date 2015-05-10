@@ -77,6 +77,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -119,6 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -202,6 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -244,6 +247,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -328,6 +332,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -370,6 +375,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -454,6 +460,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -496,6 +503,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
+                        android:visibility="gone"
                         android:text="@string/service_center_on_line"
                         android:textColor="@color/base_top_title_bg" />
 
@@ -517,6 +525,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="vertical"
             android:padding="5dp" >
 

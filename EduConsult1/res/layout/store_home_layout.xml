@@ -266,6 +266,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/store_left" />
+            <LinearLayout 
+                android:id="@+id/store_home_ll_top_pro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                >
 
             <ImageView
                 android:id="@+id/store_home_iv_title"
@@ -323,7 +331,7 @@
                         android:textColor="@color/black"
                         android:textSize="13dp" />
                 </LinearLayout>
-
+  </LinearLayout>
                 <TextView
                     android:id="@+id/store_home_tv_detaile"
                     android:layout_width="wrap_content"

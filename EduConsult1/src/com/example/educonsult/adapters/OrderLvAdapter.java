@@ -60,10 +60,12 @@ public class OrderLvAdapter extends BaseAdapter{
 			item = new Item();
 			//TODO 
 			item.iv = (ImageView) convertView.findViewById(R.id.order_two_lv_item_iv);
+			item.iv_uhui = (ImageView) convertView.findViewById(R.id.order_two_lv_item_iv_uhui);
 			item.tv_title = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_title);
 			item.tv_price = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_price);
 			item.tv_num = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_num);
 			item.tv_zongjia = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_zongjia);
+			item.tv_uhui = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_uhui);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -74,8 +76,8 @@ public class OrderLvAdapter extends BaseAdapter{
 		return convertView;
 	}
 	class Item{
-		TextView tv_title,tv_price,tv_zongjia,tv_num;
-		ImageView iv;
+		TextView tv_title,tv_price,tv_zongjia,tv_num,tv_uhui;
+		ImageView iv,iv_uhui;
 	}
 
 }

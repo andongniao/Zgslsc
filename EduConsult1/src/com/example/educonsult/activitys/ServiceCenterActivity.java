@@ -40,7 +40,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	private String title;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -190,7 +190,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
-		
+
 		switch (v.getId()) {
 		case R.id.service_center_ll_zx_regist:
 			if(!regist){
@@ -239,43 +239,24 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 			}
 			break;
 		case R.id.service_center_tv_regist_one_line:
-//			startActivity(new Intent(this,ChatManager));
-//			EMChatManager.getInstance().login("051530", "000000", new EMCallBack() {
-//				
-//				@Override
-//				public void onSuccess() {
-//					EMChatManager.getInstance().loadAllConversations();
-//				}
-//				
-//				@Override
-//				public void onProgress(int arg0, String arg1) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//				
-//				@Override
-//				public void onError(int arg0, String arg1) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//			});
+
 			break;
-				case R.id.service_center_ll_wenti_order:
-					title = getResources().getString(R.string.service_center_wenti_order);
-					ToQuestion(title);
-					break;
-				case R.id.service_center_ll_wenti_regist:
-					title = getResources().getString(R.string.service_center_wenti_regist);
-					ToQuestion(title);
-					break;
-				case R.id.service_center_ll_wenti_wuliu:
-					title = getResources().getString(R.string.service_center_wenti_wuliu);
-					ToQuestion(title);
-					break;
-				case R.id.service_center_ll_wenti_qita:
-					title = getResources().getString(R.string.service_center_wenti_qita);
-					ToQuestion(title);
-					break;
+		case R.id.service_center_ll_wenti_order:
+			title = getResources().getString(R.string.service_center_wenti_order);
+			ToQuestion(title);
+			break;
+		case R.id.service_center_ll_wenti_regist:
+			title = getResources().getString(R.string.service_center_wenti_regist);
+			ToQuestion(title);
+			break;
+		case R.id.service_center_ll_wenti_wuliu:
+			title = getResources().getString(R.string.service_center_wenti_wuliu);
+			ToQuestion(title);
+			break;
+		case R.id.service_center_ll_wenti_qita:
+			title = getResources().getString(R.string.service_center_wenti_qita);
+			ToQuestion(title);
+			break;
 
 		}
 	}
@@ -283,19 +264,19 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 		@Override
 		public void onClick(View v) {
-			 //已安装插件列表
+			//已安装插件列表
 			List<org.osgi.framework.Bundle> bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
-				BundleContext context =MyApplication.frame.getSystemBundleContext();
-				for(int i=0;i<context.getBundles().length;i++)
-				{
-					//获取已安装插件
-					bundles.add(context.getBundles()[i]);        	        
-				}
-				
-//				BundleContext context =frame.getSystemBundleContext();
-				startor(bundles);
+			BundleContext context =MyApplication.frame.getSystemBundleContext();
+			for(int i=0;i<context.getBundles().length;i++)
+			{
+				//获取已安装插件
+				bundles.add(context.getBundles()[i]);        	        
+			}
+
+			//				BundleContext context =frame.getSystemBundleContext();
+			startor(bundles);
 		}
-		
+
 	}
 	public void startor(List<org.osgi.framework.Bundle> list){
 		org.osgi.framework.Bundle bundle=list.get(1);
@@ -314,9 +295,9 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);
 		}else{
-			
+
 			Toast.makeText(context, "该插件没有配置BundleActivity",
-				     Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();
 		}
 	}
 	@Override
@@ -328,12 +309,12 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		}
 	}
 
-	
+
 	private void ToQuestion(String title){
 		intent = new Intent(context,ServiceQuestionHomeActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("title", title);
 		startActivity(intent);
-		
+
 	}
 }

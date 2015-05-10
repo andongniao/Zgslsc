@@ -135,7 +135,33 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				adapter.SetData(list);
 				adapter.notifyDataSetChanged();
 			}
-			
+			@Override
+			public void delete(int index, int postion) {
+				list.get(index).getList().remove(list.get(index).getList().get(postion));
+				int size = list.get(index).getList().size();
+				if(size==0){
+					list.remove(list.get(index));
+				}
+				adapter.SetData(list);
+				adapter.notifyDataSetChanged();
+				if(list!=null){
+					if(list.size()>0){
+						ll_jeisuan.setVisibility(View.VISIBLE);
+						ll_isnull.setVisibility(View.GONE);
+						lv.setVisibility(View.VISIBLE);
+					}else{
+						ll_jeisuan.setVisibility(View.GONE);
+						ll_isnull.setVisibility(View.VISIBLE);
+						lv.setVisibility(View.GONE);
+
+					}
+				}else{
+					ll_jeisuan.setVisibility(View.GONE);
+					ll_isnull.setVisibility(View.VISIBLE);
+					lv.setVisibility(View.GONE);
+
+				}
+			}
 			
 		};
 		
@@ -211,6 +237,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		void click(boolean b,int index,int postion);
 		void add1( int index,int postion);
 		void jian1(int index,int postion);
+		void delete(int index,int postion);
 	}
 
 	@Override

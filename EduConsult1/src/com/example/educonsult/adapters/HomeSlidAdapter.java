@@ -39,7 +39,7 @@ public class HomeSlidAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 6;//list!=null?list.size():0;
+		return 10;//list!=null?list.size():0;
 	}
 
 	@Override

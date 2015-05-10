@@ -2,7 +2,7 @@ package com.example.educonsult.beans;
 
 import java.util.ArrayList;
 
-public class ListProductBean {
+public class ListProductBean extends BaseBean{
 	private ArrayList<ProductBean> list;
 
 	public ArrayList<ProductBean> getList() {

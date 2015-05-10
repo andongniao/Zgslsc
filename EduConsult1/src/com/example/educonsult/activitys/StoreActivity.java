@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -86,9 +87,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 		findViewById(R.id.sotre_base_tv_fenlei).setOnClickListener(this);
 		findViewById(R.id.sotre_base_tv_online).setOnClickListener(this);
 		findViewById(R.id.sotre_base_tv_call).setOnClickListener(this);
-		rl_l = (RelativeLayout) findViewById(R.id.store_top_right_rl_l);
-		rl_l.setOnClickListener(this);
-		findViewById(R.id.store_top_right_rl_r).setOnClickListener(this);
+		findViewById(R.id.store_base_ll_back).setOnClickListener(this);
 
 
 
@@ -96,7 +95,6 @@ public class StoreActivity extends Activity implements OnClickListener{
 		v_home = inflater.inflate(R.layout.store_home_layout, null);
 		v_fenlei = inflater.inflate(R.layout.store_fenlei_layout, null);
 		v_result = inflater.inflate(R.layout.store_result_layout, null);
-		findViewById(R.id.sotre_base_ll_back).setOnClickListener(this);
 		ll_addview.addView(v_home);
 		ll_addview.addView(v_fenlei);
 		ll_addview.addView(v_result);
@@ -111,6 +109,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 		tv_h_service = (TextView) v_home.findViewById(R.id.store_home_tv_service);
 		tv_h_wuliu = (TextView) v_home.findViewById(R.id.store_home_tv_wuliu);
 		home_sc = (ScrollView) v_home.findViewById(R.id.store_home_sc);
+		v_home.findViewById(R.id.store_home_ll_top_pro).setOnClickListener(this);
 		
 		
 		fenlei_lv = (ListView) v_fenlei.findViewById(R.id.store_fenlei_lv); 
@@ -176,6 +175,13 @@ public class StoreActivity extends Activity implements OnClickListener{
 				showView(3);
 			}
 		});
+		gv_result.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Toproduct();
+			}
+		});
 		
 		
 	}
@@ -183,6 +189,9 @@ public class StoreActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.store_home_ll_top_pro:
+			Toproduct();
+			break;
 		case R.id.sotre_base_tv_fenlei:
 			showView(2);
 			break;
@@ -202,10 +211,10 @@ public class StoreActivity extends Activity implements OnClickListener{
 		case R.id.sotre_base_tv_call:
 			ShowDialog();
 			break;
-		case R.id.store_top_right_rl_l:
-			intent = new Intent(this,XinjianActivity.class);
-			break;
-		case R.id.store_top_right_rl_r:
+//		case R.id.store_base_ll_back:
+//			intent = new Intent(this,XinjianActivity.class);
+//			break;
+		case R.id.store_base_ll_back:
 			if(showstatu==1){
 				//				ExampleActivity.setCurrentTab(3);
 				finish();
@@ -220,9 +229,9 @@ public class StoreActivity extends Activity implements OnClickListener{
 		case R.id.store_home_iv_right:
 
 			break;
-		case R.id.sotre_base_ll_back:
-			finish();
-			break;
+//		case R.id.sotre_base_ll_back:
+//			finish();
+//			break;
 			
 
 		}
@@ -322,7 +331,19 @@ public class StoreActivity extends Activity implements OnClickListener{
 		}).create();
 		alertDialog.show();
 	}
-	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	    	if(showstatu==1){
+				//				ExampleActivity.setCurrentTab(3);
+				finish();
+			}else{
+				showView(1);
+			}
+	        return true;   
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
 	
 	
 	

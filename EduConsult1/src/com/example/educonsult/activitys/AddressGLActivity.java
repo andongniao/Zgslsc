@@ -19,18 +19,18 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	,tv_delete,tv_save;
 	private CheckBox cb_set;
 	private boolean isok;
-	private ImageView iv_top_l,iv_top_t;
+//	private ImageView iv_top_l,iv_top_t;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();
-		topRightLVisible();
-		topRightRVisible();
-		iv_top_l = (ImageView) getTopLightView();
-		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+//		topRightLVisible();
+//		topRightRVisible();
+//		iv_top_l = (ImageView) getTopLightView();
+//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+//		iv_top_t = (ImageView) getTopRightView();
+//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTopLeftTv(R.string.address_title);
 		setContentXml(R.layout.address_update);
 		init();
@@ -73,9 +73,9 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				isok = isChecked;
 			}
 		});
-		BadgeView badge = new BadgeView(this, iv_top_l);
-		badge.setText(""+1);
-		badge.show();
+//		BadgeView badge = new BadgeView(this, iv_top_l);
+//		badge.setText(""+1);
+//		badge.show();
 		
 	}
 

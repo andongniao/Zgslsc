@@ -535,13 +535,13 @@ public class Util {
 	}
 
 	/**
-	 * 密码位数限制，大于4位，小于10位
+	 * 密码位数限制，大于6位，小于20位
 	 * 
 	 * @param password
 	 * @return
 	 */
 	public static boolean ispassword(String password) {
-		String str = "[0-9A-Za-z]{4,10}";
+		String str = "[0-9A-Za-z]{6,20}";
 		Pattern p = Pattern.compile(str);
 		Matcher m = p.matcher(password);
 

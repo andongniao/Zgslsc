@@ -69,6 +69,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		add.setOnClickListener(this);
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
+		findViewById(R.id.product_detaile_ll_into_dianpu).setOnClickListener(this);
 		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
 		ll_as_l = (LinearLayout) findViewById(R.id.product_detaile_ll_tonglei_l);
 		ll_as_l.setOnClickListener(this);
@@ -140,7 +141,6 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 						popupWindow.dismiss();
 					}
 					scrollView.scrollTo(10, 10);
-					Toast.makeText(context, "µ±«∞Œª÷√"+scrollView.getScrollY(), Toast.LENGTH_SHORT).show();
 					isshow = false;
 				}
 			}
@@ -160,6 +160,11 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.product_detaile_ll_into_dianpu:
+			intent = new Intent(context,StoreActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
 		case R.id.product_detaile_ll_tonglei_l:
 			Toproduct();
 			break;

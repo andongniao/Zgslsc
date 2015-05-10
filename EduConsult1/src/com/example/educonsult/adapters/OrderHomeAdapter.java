@@ -73,7 +73,6 @@ public class OrderHomeAdapter extends BaseAdapter{
 			item.et = (EditText) convertView.findViewById(R.id.order_home_lv_item_et_liuyan);
 			item.tv_title = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_title);
 			item.tv_num = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_num);
-			item.tv_uhui = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_uhui);
 			item.tv_heji = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_heji);
 			item.tv_peisong = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_peisong);
 			item.tv_online = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_on_line);
@@ -101,7 +100,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 		return convertView;
 	}
 	class Item{
-		TextView tv_title,tv_uhui,tv_peisong,tv_heji,tv_num,tv_online,tv_qq;
+		TextView tv_title,tv_peisong,tv_heji,tv_num,tv_online,tv_qq;
 		MyListview lv;
 		EditText et;
 	}

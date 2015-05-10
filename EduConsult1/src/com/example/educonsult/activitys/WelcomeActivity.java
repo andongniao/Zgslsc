@@ -1,7 +1,5 @@
 package com.example.educonsult.activitys;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,14 +10,14 @@ import android.os.Message;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
-import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.GqTwoActivity.RefeshData;
 import com.example.educonsult.beans.AreaBean;
 import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
+import com.example.educonsult.beans.ListMoneyBean;
+import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
@@ -39,6 +37,8 @@ public class WelcomeActivity extends Activity{
 	private ListFenleiBean lf;
 	private boolean ct,fl;
 	ListComment lbn;
+	ListProductBean l;
+	ListMoneyBean lmoney;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,32 +130,39 @@ public class WelcomeActivity extends Activity{
 			//		finish();
 			//	}
 			//}
-			if(lf!=null){
-				if("200".equals(lf.getCode())){
-					u.saveObject(lf, filename);
-					fl = true;			
-				}else{
-					Util.ShowToast(context, lf.getMsg());
+//			if(lf!=null){
+//				if("200".equals(lf.getCode())){
+//					u.saveObject(lf, filename);
+//					fl = true;			
+//				}else{
+//					Util.ShowToast(context, lf.getMsg());
+//				}
+//			}
+//			if(ct && fl){
+//				Intent intent = new Intent(WelcomeActivity.this,
+//						LoginActivity.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+//				finish();
+//			}else{
+//				Util.ShowToast(context, "初始化失败,请保证网络通畅");
+//			}
+//			if(lbn!=null){
+//				if("200".equals(lbn.getCode())){
+//					Tologin();
+//				}
+//			}
+			if(l!=null){
+				if("200".equals(l.getCode())){
+					
 				}
 			}
-			if(ct && fl){
-				Intent intent = new Intent(WelcomeActivity.this,
-						LoginActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-				finish();
-			}else{
-				Util.ShowToast(context, "初始化失败,请保证网络通畅");
-			}
-			if(lbn!=null){
-				if("200".equals(lbn.getCode())){
-					Intent intent = new Intent(WelcomeActivity.this,
-							LoginActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish();
+			if(lmoney!=null){
+				if("200".equals(lmoney.getCode())){
+					
 				}
 			}
+			Tologin();
 			return true;
 		}
 
@@ -166,7 +173,9 @@ public class WelcomeActivity extends Activity{
 //			lb = s.GetArea();
 			//			bean = s.GetProductDetaile("512");
 //			lf = s.GetFenlei();
-			lbn = s.GetComment("53", 1,"2");
+//			lbn = s.GetComment("53", 1,"2");
+//			l = s.getCenterRecommend();
+			lmoney = s.getMoney(MyApplication.money_detaile, "76kilg8f94g867261e6mnbg951");
 			return true;
 		}
 	}
@@ -175,5 +184,12 @@ public class WelcomeActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.finish();
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
+	}
+	private void Tologin(){
+		Intent intent = new Intent(WelcomeActivity.this,
+				LoginActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+		finish();
 	}
 }

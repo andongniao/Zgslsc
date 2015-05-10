@@ -60,7 +60,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.login_layout);
 		init();
 		myPDT = new ThreadWithProgressDialog();
-		msg = getResources().getString(R.string.loding);
+		msg = "登录中...";
 		//		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 
 	}
@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			String n = MyApplication.sp.getString("name", "");
 			String p = MyApplication.sp.getString("pass", "");
 			et_username.setText(n);
-			et_password.setText(p);
+			et_password.setText(p);	
 			/*****************************************************/
 			//			Intent i = new Intent(this, ExampleActivity.class);
 			//			UserBean b = new UserBean();
@@ -174,6 +174,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	public class RefeshData implements ThreadWithProgressDialogTask {
 		private String username,password;
 		public RefeshData(String username,String password) {
+			this.username = username;
+			this.password = password;
 		}
 
 		@Override
@@ -190,9 +192,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 				String code = bean.getCode();
 				String m = bean.getMsg();
 				if("200".equals(code)){
-					Util.ShowToast(context, bean.getAuthstr());
-					MyApplication.bean = bean;
+//					Util.ShowToast(context, bean.getAuthstr());
+//					MyApplication.bean.setAuthstr(bean.getAuthstr());
 					Intent in = new Intent(context, ExampleActivity.class);
+					MyApplication.mp.setUser(bean);
 					startActivity(in);
 					finish();
 				}else{

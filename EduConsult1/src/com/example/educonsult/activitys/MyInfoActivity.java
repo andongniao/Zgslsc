@@ -1,9 +1,5 @@
 package com.example.educonsult.activitys;
 
-import com.example.educonsult.ExampleActivity;
-import com.example.educonsult.R;
-import com.example.educonsult.tools.Util;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +10,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.ExampleActivity;
+import com.example.educonsult.MyApplication;
+import com.example.educonsult.R;
+import com.example.educonsult.beans.CenterUserBean;
+import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.net.Send;
+import com.example.educonsult.tools.Util;
+
 public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_head,ll_friend,ll_mycard;
 	private Context context;
@@ -23,6 +29,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	public static boolean isread;
 	private TextView mycardNum;
 	private int cardNum=0;
+	private ThreadWithProgressDialog myPDT;
+	private CenterUserBean centerbean;
+	private UserBean bean;
 
 
 	@Override
@@ -41,6 +50,12 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.myinfo);
 		init();
 		addlistener();
+//		if(Util.detect(context)){
+//			myPDT.Run(context, new RefeshData(),msg,false);//不可取消
+//		}
+		
+		
+		
 	}
 
 	private void addlistener() {
@@ -66,6 +81,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		context = this;
+		bean = MyApplication.mp.getUser();
 		ll_head = (LinearLayout) findViewById(R.id.myinfo_ll_head);
 		ll_head.setOnClickListener(this);
 		ll_friend = (LinearLayout) findViewById(R.id.myinfo_ll_friend);
@@ -112,5 +128,49 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 			isread = false;
 		}
 	}
+	
+	
+	
+	
+	// 任务
+		public class RefeshData implements ThreadWithProgressDialogTask {
+
+			public RefeshData() {
+			}
+
+			@Override
+			public boolean OnTaskDismissed() {
+				//任务取消
+//				Toast.makeText(context, "cancle", 1000).show();
+				return false;
+			}
+
+			@Override
+			public boolean OnTaskDone() {
+				//任务完成后
+				if(centerbean!=null){
+					if("200".equals(centerbean.getCode())){
+						//TODO	
+					}else{
+						Util.ShowToast(context, centerbean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+				
+				
+				
+				return true;
+			}
+
+			@Override
+			public boolean TaskMain() {
+				// 访问
+				Send s = new Send(context);
+				centerbean = s.getMyinfo(bean.getType(), bean.getAuthstr());
+				return true;
+			}
+		}
+	
 
 }

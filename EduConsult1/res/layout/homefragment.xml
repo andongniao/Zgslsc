@@ -64,8 +64,15 @@
                 android:background="@drawable/top_xx_bg" />
         </RelativeLayout>
     </LinearLayout>
-
-    <ScrollView
+    <com.example.educonsult.myviews.RefreshableView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        android:background="@color/base_hui"
+        android:id="@+id/home_rview"
+        >
+        <ScrollView
         android:id="@+id/home_sc"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -1102,20 +1109,31 @@
                         android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_weight="1"
-                        android:background="#00ff00" />
+                        android:background="#00933E" />
+                    <ImageView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/home_like_5_bg"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="3dp"
-                        android:background="#00ff00"
+                        android:layout_margin="5dp"
+                        android:textColor="#00933E"
+                        android:textSize="16dp"
                         android:text="@string/home_like" />
+                     <ImageView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/home_like_5_bg"
+                        />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="2dp"
                         android:layout_weight="1"
-                        android:background="#00ff00" />
+                        android:background="#00933E" />
                 </LinearLayout>
 
                 <com.example.educonsult.myviews.MyGridView
@@ -1191,5 +1209,8 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    </com.example.educonsult.myviews.RefreshableView>
+
+    
 
 </LinearLayout>

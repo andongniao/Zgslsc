@@ -11,8 +11,10 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.CenterUserBean;
 import com.example.educonsult.beans.CommentBean;
 import com.example.educonsult.beans.CommentStar;
 import com.example.educonsult.beans.CompanyBean;
@@ -21,7 +23,10 @@ import com.example.educonsult.beans.HomeBean;
 import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
+import com.example.educonsult.beans.ListMoneyBean;
+import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.MallInfoBean;
+import com.example.educonsult.beans.MoneyDetaileBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
@@ -500,6 +505,163 @@ public class Send {
 
 	}
 
+	
+	
+	
+	/**
+	 * 个人中心推荐单品列表
+	 */
+	public ListProductBean getCenterRecommend() {
+		ListProductBean lb = new ListProductBean();
+		String url =  ServiceUrl.Base+ServiceUrl.Mycenter_recommend;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					lb.setCode(code);
+					lb.setMsg(msg);
+					JSONArray data = object.getJSONArray("data");
+					JSONArray j = data.getJSONArray(0);
+					Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+					}.getType();
+					ArrayList<ProductBean> list_recommend = gson.fromJson(j.toString(), type_re);
+					lb.setList(list_recommend);
+					return lb;
+				} else {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					return lb;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				lb.setCode("500");
+				lb.setMsg("服务器异常，请稍候再试...");
+				return lb;
+			}
+		} else {
+			lb.setCode("500");
+			lb.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return lb;
+		}
+
+	}
+	
+	
+	/**
+	 * 获取我的信息
+	 */
+	public CenterUserBean getMyinfo(int type,String authstr) {
+		CenterUserBean bean = new CenterUserBean();
+		String baseurl = ServiceUrl.Base;
+		String url="";
+		if(type==1){
+			url = baseurl+ServiceUrl.Mycenter_home_member+authstr;
+		}else{
+			url = baseurl+ServiceUrl.Mycenter_home_company+authstr;
+		}
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					JSONArray data = object.getJSONArray("data");
+					JSONArray j = data.getJSONArray(0);
+					Type t = new TypeToken<CenterUserBean>() {
+					}.getType();
+					bean = gson.fromJson(j.toString(), t);
+					bean.setCode(code);
+					bean.setMsg(msg);
+					return bean;
+				} else {
+					bean.setMsg(msg);
+					bean.setCode(code);
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	
+	/**
+	 * 获取钱包详情
+	 */
+	public ListMoneyBean getMoney(int type,String authstr) {
+ 		ListMoneyBean list = new ListMoneyBean();
+		String baseurl = ServiceUrl.Base;
+		String url=baseurl+ServiceUrl.money_hand;
+		if(type==MyApplication.money_home){
+			url +=ServiceUrl.money_home;
+		}else if(type==MyApplication.money_detaile){
+			url +=ServiceUrl.money_detaile;
+		}else if(type==MyApplication.money_income){
+			url +=ServiceUrl.money_income;
+		}else if(type==MyApplication.money_pay){
+			url +=ServiceUrl.money_pay;
+		}
+		url=url+ServiceUrl.money_foot+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					list.setCode(code);
+					list.setMsg(msg);
+					JSONArray data = object.getJSONArray("data");
+					Type t = new TypeToken<ArrayList<MoneyDetaileBean>>() {
+					}.getType();
+					ArrayList<MoneyDetaileBean>l = gson.fromJson(data.toString(), t);
+					list.setList(l);
+					return list;
+				} else {
+					list.setMsg(msg);
+					list.setCode(code);
+					return list;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				list.setCode("500");
+				list.setMsg("服务器异常，请稍候再试...");
+				return list;
+			}
+		} else {
+			list.setCode("500");
+			list.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return list;
+		}
+
+	}
+	
 
 	//
 	//	/**

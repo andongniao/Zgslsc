@@ -87,23 +87,23 @@ OnClickListener {
 			e.printStackTrace();
 		}
 
-		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
-			listUserBean = (ListUserBean) util.readObject(filename);
-			MyApplication.bean = listUserBean.getList().get(0);
-		}else{
-			final ArrayList<UserBean> l = new ArrayList<UserBean>();
-			UserBean b1 = new UserBean();
-			b1.setName("0.0");
-			b1.setBmp(url1);
-			UserBean b2 = new UserBean();
-			b2.setName("0.0");
-			b2.setBmp(url2);
-			l.add(b1);
-			l.add(b2);
-			listUserBean.setList(l);
-			util.saveObject(listUserBean, filename);
-//			final String imgURL = url1;
-		}
+//		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
+//			listUserBean = (ListUserBean) util.readObject(filename);
+//			MyApplication.bean = listUserBean.getList().get(0);
+//		}else{
+//			final ArrayList<UserBean> l = new ArrayList<UserBean>();
+//			UserBean b1 = new UserBean();
+//			b1.setName("0.0");
+//			b1.setBmp(url1);
+//			UserBean b2 = new UserBean();
+//			b2.setName("0.0");
+//			b2.setBmp(url2);
+//			l.add(b1);
+//			l.add(b2);
+//			listUserBean.setList(l);
+//			util.saveObject(listUserBean, filename);
+////			final String imgURL = url1;
+//		}
 
 	}
 

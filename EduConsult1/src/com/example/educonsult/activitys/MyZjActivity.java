@@ -55,13 +55,13 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		init();
 		addlistener();
 		//		/**********set***********/
-		UserBean b = new UserBean();
-		b.setName("121");
-		String l = b.toString();
-		MyApplication.bean = b;
-		/**********get***********/
-		UserBean a = MyApplication.bean;
-		String s = a.getName();
+//		UserBean b = new UserBean();
+//		b.setName("121");
+//		String l = b.toString();
+//		MyApplication.bean = b;
+//		/**********get***********/
+//		UserBean a = MyApplication.bean;
+//		String s = a.getName();
 
 
 

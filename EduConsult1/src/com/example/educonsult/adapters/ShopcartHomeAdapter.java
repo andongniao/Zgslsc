@@ -62,7 +62,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+	public View getView(final int index, View convertView, ViewGroup parent) {
 		if(convertView==null){
 			convertView = inflater.inflate(R.layout.shopcart_home_lv_item, null);
 			item = new Item();
@@ -73,7 +73,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		final ShopBean s = (ShopBean) list.get(position);
+		final ShopBean s = (ShopBean) list.get(index);
 
 		item.cb.setChecked(s.isIsclick());
 //		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -88,9 +88,9 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				if(s.isIsclick()){
-					shop.click(false, position, -1);
+					shop.click(false, index, -1);
 				}else{
-					shop.click(true, position, -1);
+					shop.click(true, index, -1);
 				}
 			}
 		});
@@ -111,7 +111,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 		item.lv.setMenuCreator(creator);
 //		ShopBean sb = (ShopBean) list.get(position);
 //		ArrayList<Object> l = sb.getList();
-		adapter = new ShopcartLvAdapter(context,list,position, shop);
+		adapter = new ShopcartLvAdapter(context,list,index, shop);
 		item.lv.setAdapter(adapter);
 		Util.setListViewHeightBasedOnChildren(item.lv);
 		item.lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -119,11 +119,11 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
 				switch (index) {
 				case 0:
-//					if (Util.detect(context)) {
-//
-//					} else {
-//
-//					}
+					if (Util.detect(context)) {
+						shop.delete(index, position);
+					} else {
+
+					}
 					break;
 				}
 			}

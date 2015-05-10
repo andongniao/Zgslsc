@@ -21,6 +21,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -59,13 +60,16 @@ import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListUserBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyGridView;
+import com.example.educonsult.myviews.RefreshableView;
+import com.example.educonsult.myviews.RefreshableView.RefreshListener;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 import com.example.educonsult.tools.FileUtil.filter.apkFilter;
 import com.example.educonsult.tools.FileUtil.filter.isFilesFilter;
 
-public class HomeFragment extends Fragment implements OnClickListener{
+public class HomeFragment extends Fragment implements OnClickListener,RefreshListener{
 	private MyGridView gv_like,gv_ruzhu,gv;
 	private View view;
 	private HomeLikeAdapter likeadapter;
@@ -98,6 +102,9 @@ public class HomeFragment extends Fragment implements OnClickListener{
 	private HomeBean home;
 	private ArrayList<ImageView>list_rem,list_hot,list_com;
 	private ArrayList<TextView>list_tv_rem_title,list_tv_rem_price,list_tv_hot_title,list_tv_hot_price;
+	private RefreshableView refreshableView;
+	private Handler handler;
+	private String filename = "home";
 
 
 	@Override
@@ -140,6 +147,8 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		refreshableView = (RefreshableView) view.findViewById(R.id.home_rview);
+		refreshableView.setRefreshListener(this);
 		sc = (ScrollView) view.findViewById(R.id.home_sc);
 		iv_ad1 = (ImageView) view.findViewById(R.id.home_iv_ad1);
 		iv_ad2 = (ImageView) view.findViewById(R.id.home_iv_ad2);
@@ -283,18 +292,18 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		ll_hot_b_t.setOnClickListener(this);
 		ll_hot_b_r = (LinearLayout) view.findViewById(R.id.home_ll_hot_b_r);
 		ll_hot_b_r.setOnClickListener(this);
-		String filename = "test";
+		/**************************************************/
 		final Util util = new Util(context);
-		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
-			listUserBean = (ListUserBean) util.readObject(filename);
-			MyApplication.bean = listUserBean.getList().get(0);
-			//			Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
-			//			iv_hot_l.setImageBitmap(b);
-		}
-
-
-
-		final String url = MyApplication.bean.getBmp();
+//		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
+//			listUserBean = (ListUserBean) util.readObject(filename);
+//			MyApplication.bean = listUserBean.getList().get(0);
+//			//			Bitmap b = util.getBitmaoForCahe(MyApplication.bean.getBmp());
+//			//			iv_hot_l.setImageBitmap(b);
+//		}
+//
+//
+//
+//		final String url = MyApplication.bean.getBmp();
 
 
 		//		Util.Getbitmap(iv_hot_l, url);
@@ -315,10 +324,20 @@ public class HomeFragment extends Fragment implements OnClickListener{
 			//		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 			myPDT.Run(context, new RefeshData(),msg,false);//不可取消
 		}else{
+			if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
+				home = (HomeBean) util.readObject(filename);
+				if(home!=null){
+					initdata(home);
+				}
+			}
 			util.ShowToast(context, R.string.net_is_eor);
 		}
 		/*************测试****************/
-
+		UserBean b = MyApplication.mp.getUser();
+		if(b!=null){
+		Util.ShowToast(context, b.getAuthstr());
+		System.out.println("MyApplication.mp.bean.getAuthstr()=="+b.getAuthstr());
+		}
 //		if(util.isExistDataCache(MyApplication.AreaName) && util.isReadDataCache(MyApplication.AreaName)){
 //			ListAreaBean lb = (ListAreaBean) util.readObject(MyApplication.AreaName);
 //			if(lb!=null){
@@ -328,6 +347,24 @@ public class HomeFragment extends Fragment implements OnClickListener{
 //			}
 //		}
 
+		
+		
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message m) {
+				super.handleMessage(m);
+				if(m.what==1){
+					refreshableView.finishRefresh();
+					home = (HomeBean) m.obj;
+					if(home!=null){
+					initdata(home);
+					}
+				}else{
+					refreshableView.finishRefresh();
+				}
+			}
+		};
+		
 	}
 
 	private void addlistener() {
@@ -731,44 +768,7 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		public boolean OnTaskDone() {
 			//任务完成后
 			if(home!=null){
-				if("200".equals(home.getCode())){
-					Util u = new Util(context);
-					u.saveObject(home, "home");
-					//					Util.ShowToast(context, "success");
-					Util.Getbitmap(iv_ad1, home.getAd().get(0));
-					Util.Getbitmap(iv_ad2, home.getAd().get(1));
-					ruzhuadapter = new HomeRuzhuAdapter(context, home.getCompany());
-					gv_ruzhu.setAdapter(ruzhuadapter);
-					sc.scrollTo(0, 1);
-					for(int i =0;i<home.getRecommend().size();i++){
-						String url = home.getRecommend().get(i).getThumb();
-						Util.Getbitmap(list_rem.get(i), url);
-						if(i>=5){
-							String t = home.getRecommend().get(i).getTitle();
-							String p = home.getRecommend().get(i).getPrice();
-							list_tv_rem_title.get((i-5)).setText(t);
-							SetPrice(list_tv_rem_price.get((i-5)), p);
-						}
-					}
-					for(int j=0;j<home.getHot().size();j++){
-						String url = home.getHot().get(j).getThumb();
-						Util.Getbitmap(list_hot.get(j), url);
-						if(j>=3){
-							String t = home.getHot().get(j).getTitle();
-							String p = home.getHot().get(j).getPrice();
-							list_tv_hot_title.get((j-3)).setText(t);
-							SetPrice(list_tv_hot_price.get((j-3)), p);
-							Util.ShowToast(context, ""+home.getHot().get(j).getItemid());
-						}
-					}
-				}else{
-					if(home!=null){
-						String msg = home.getMsg();
-						if(Util.IsNull(msg)){
-							Util.ShowToast(context, msg);
-						}
-					}
-				}
+			initdata(home);
 			}else{
 				Util.ShowToast(context, "error");
 			}
@@ -788,5 +788,77 @@ public class HomeFragment extends Fragment implements OnClickListener{
 		v.setText("￥"+s);
 	}
 
+
+	@Override
+	public void onRefresh(RefreshableView view) {
+		if (Util.detect(context)) {
+			new Thread(){
+				@Override
+				public void run() {
+					super.run();
+					Send send = new Send(context);
+					home = send.RequestHome();
+					Message m = handler.obtainMessage();
+					if(home!=null){
+					m.obj = home;
+					m.what=1;
+					}else{
+						m.what=2;
+					}
+					handler.sendMessage(m);
+				}
+			}.start();
+		} else {
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					Util.ShowToast(context, R.string.net_is_eor);
+					refreshableView.finishRefresh();
+				}
+			}, 500);
+		}
+	}
+
+	private void initdata(HomeBean home){
+		if("200".equals(home.getCode())){
+			Util u = new Util(context);
+			u.saveObject(home, "home");
+			//					Util.ShowToast(context, "success");
+			Util.Getbitmap(iv_ad1, home.getAd().get(0));
+			Util.Getbitmap(iv_ad2, home.getAd().get(1));
+			ruzhuadapter = new HomeRuzhuAdapter(context, home.getCompany());
+			gv_ruzhu.setAdapter(ruzhuadapter);
+			sc.scrollTo(0, 1);
+			for(int i =0;i<home.getRecommend().size();i++){
+				String url = home.getRecommend().get(i).getThumb();
+				Util.Getbitmap(list_rem.get(i), url);
+				if(i>=5){
+					String t = home.getRecommend().get(i).getTitle();
+					String p = home.getRecommend().get(i).getPrice();
+					list_tv_rem_title.get((i-5)).setText(t);
+					SetPrice(list_tv_rem_price.get((i-5)), p);
+				}
+			}
+			for(int j=0;j<home.getHot().size();j++){
+				String url = home.getHot().get(j).getThumb();
+				Util.Getbitmap(list_hot.get(j), url);
+				if(j>=3){
+					String t = home.getHot().get(j).getTitle();
+					String p = home.getHot().get(j).getPrice();
+					list_tv_hot_title.get((j-3)).setText(t);
+					SetPrice(list_tv_hot_price.get((j-3)), p);
+//					Util.ShowToast(context, ""+home.getHot().get(j).getItemid());
+				}
+			}
+			u.saveObject(home, filename);
+		}else{
+			if(home!=null){
+				String msg = home.getMsg();
+				if(Util.IsNull(msg)){
+					Util.ShowToast(context, msg);
+				}
+			}
+		}
+	}
 
 }

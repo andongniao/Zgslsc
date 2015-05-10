@@ -32,6 +32,7 @@ import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.KnowFenleiAdapter;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyGridView;
+import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 public class GqHomeActivity extends BaseActivity implements OnClickListener{
@@ -77,13 +78,13 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		init();
 		addlistener();
 		//		/**********set***********/
-		UserBean b = new UserBean();
-		b.setName("121");
-		String l = b.toString();
-		MyApplication.bean = b;
-		/**********get***********/
-		UserBean a = MyApplication.bean;
-		String s = a.getName();
+//		UserBean b = new UserBean();
+//		b.setName("121");
+//		String l = b.toString();
+//		MyApplication.bean = b;
+//		/**********get***********/
+//		UserBean a = MyApplication.bean;
+//		String s = a.getName();
 
 
 
@@ -188,7 +189,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		context = this;
 		isread = false;
 		v_fenlei =  LayoutInflater.from(context).inflate(R.layout.know_slidemenu_view, null);
-		pp_top_fenlei = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		pp_top_fenlei = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, UITools.dip2px(context, 300));
 		pp_top_fenlei.setFocusable(true);
 		pp_top_fenlei.setBackgroundDrawable(new BitmapDrawable());
 		pp_top_fenlei.setOutsideTouchable(true);

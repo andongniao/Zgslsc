@@ -28,7 +28,6 @@ import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.OnNotificationClickListener;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.beans.ListProductBean;
-import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.tools.Util;
@@ -36,7 +35,7 @@ import com.example.educonsult.tools.Util;
 public class MyApplication extends Application{
 	private Context context;
 	public static SharedPreferences sp;
-	public static UserBean bean;
+	public UserBean bean;
 	private static Util util;
 	public static FrameworkInstance frame=null;
 	public static boolean isopen;
@@ -44,6 +43,13 @@ public class MyApplication extends Application{
 	public static String FenleiName = "Fenlei";
 	public static String Seejilu = "Seejilu";
 	public static MyApplication mp;
+	public static int money_home = 1;
+	public static int money_detaile = 2;
+	public static int money_income = 3;
+	public static int money_pay = 4;
+	
+	
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -231,7 +237,12 @@ public class MyApplication extends Application{
 				     Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+	public void setUser(UserBean bean){
+		this.bean = bean;
+	}
+	public UserBean getUser(){
+		return this.bean;
+	}
 	
 	public void SaveSee(ProductBean bean){
 		ListProductBean lb;
