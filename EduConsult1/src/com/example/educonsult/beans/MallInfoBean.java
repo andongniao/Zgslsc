@@ -1,26 +1,27 @@
 package com.example.educonsult.beans;
 
 public class MallInfoBean {
-	private String itemid;
-	private String catid;
-	private String areaid;
-	private String title;
-	private String brand;
-	private String price;
-	private String amount;
-	private String keyword;
-	private String orders;
-	private String comments;
-	private String htts;
+	private String itemid;	//产品id
+	private String catid;	//产品分类id
+	private String areaid;	//产品地区id
+	private String title;	//名称标题
+	private String brand;	//品牌
+	private String price;	//单价
+	private String amount;	//库存
+	private String keyword;	//关键词
+	private String orders;	//订单数
+	private String sales;	//销售数量
+	private String comments;//评论数目
+	private String hits;	//浏览量
 	private String thumb;
-	private String thumb1;
+	private String thumb1;	//图片
 	private String thumb2;
 	private String express_1;
-	private String express_name_1;
+	private String express_name_1;//物流
 	private String fee_start_1;
 	private String fee_step_1;
 	private String express_2;
-	private String express_name_2;
+	private String express_name_2;//快递物流
 	private String fee_start_2;
 	private String fee_step_2;
 	private String express_3;
@@ -30,8 +31,8 @@ public class MallInfoBean {
 	private String username;
 	private String company;
 	private String unit;
-	private String weight;
-	private String qbnum;
+	private String weight;	//重量
+	private String qbnum;	//起订量
 	private String sfhsdw;
 	private String productsize;
 	private String price2;
@@ -97,10 +98,10 @@ public class MallInfoBean {
 		this.comments = comments;
 	}
 	public String getHtts() {
-		return htts;
+		return hits;
 	}
-	public void setHtts(String htts) {
-		this.htts = htts;
+	public void setHtts(String hits) {
+		this.hits = hits;
 	}
 	public String getThumb() {
 		return thumb;

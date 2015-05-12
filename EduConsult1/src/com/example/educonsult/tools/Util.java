@@ -580,13 +580,13 @@ public class Util {
 	}
 
 	/**
-	 * ÅÐ¶Ï×Ö·û´®ÊÇ·ñÎª¿Õ
+	 * ÅÐ¶Ï×Ö·û´®ÊÇ·ñÎª¿ÕÇÐ²»Îªnull
 	 * 
 	 * @param text
 	 * @return true ²»Îª¿Õ
 	 */
 	public static boolean IsNull(String text) {
-		if (text != null && !text.equals("")) {
+		if (text != null && !text.equals("")&&!text.equals("null")) {
 			return true;
 		}
 		return false;

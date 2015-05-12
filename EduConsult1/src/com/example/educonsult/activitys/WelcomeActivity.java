@@ -17,7 +17,10 @@ import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.beans.ListMoneyBean;
+import com.example.educonsult.beans.ListOrderBean;
+import com.example.educonsult.beans.ListOrderCommit;
 import com.example.educonsult.beans.ListProductBean;
+import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
@@ -38,9 +41,6 @@ public class WelcomeActivity extends Activity{
 	private ProdectDetaileBean bean;
 	private ListFenleiBean lf;
 	private boolean ct,fl;
-	ListComment lbn;
-	ListProductBean l;
-	ListMoneyBean lmoney;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class WelcomeActivity extends Activity{
 		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
 		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
 		activityStyle.recycle();
-		setContentView(R.layout.welcome);
+		setContentView(R.layout.welcome); 
 		hand = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -76,12 +76,12 @@ public class WelcomeActivity extends Activity{
 		myPDT = new ThreadWithProgressDialog();
 		String msg = "初始化...";
 		u = new Util(context);
-		//		if(u.isExistDataCache(filename)&& u.isReadDataCache(filename)){
-		//			Finish2min();
-		//		}else{
-		//			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		myPDT.Run(context, new RefeshData(),msg,false);//不可取消
-		//		}
+		if(u.isExistDataCache(filename)&& u.isReadDataCache(filename)){
+			Finish2min();
+		}else{
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			myPDT.Run(context, new RefeshData(),msg,false);//不可取消
+		}
 	}
 	private void Finish2min(){
 		new Thread() {
@@ -123,54 +123,23 @@ public class WelcomeActivity extends Activity{
 					Util.ShowToast(context, lb.getMsg());
 				}
 			}
-			//if(bean!=null){
-			//	if("200".equals(bean.getCode())){
-			//		Intent intent = new Intent(WelcomeActivity.this,
-			//				LoginActivity.class);
-			//		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			//		startActivity(intent);
-			//		finish();
-			//	}
-			//}
-//			if(lf!=null){
-//				if("200".equals(lf.getCode())){
-//					u.saveObject(lf, filename);
-//					fl = true;			
-//				}else{
-//					Util.ShowToast(context, lf.getMsg());
-//				}
-//			}
-//			if(ct && fl){
-//				Intent intent = new Intent(WelcomeActivity.this,
-//						LoginActivity.class);
-//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				startActivity(intent);
-//				finish();
-//			}else{
-//				Util.ShowToast(context, "初始化失败,请保证网络通畅");
-//			}
-//			if(lbn!=null){
-//				if("200".equals(lbn.getCode())){
-//					Tologin();
-//				}
-//			}
-//			if(l!=null){
-//				if("200".equals(l.getCode())){
-//					
-//			if(lf!=null){
-//				if("200".equals(lf.getCode())){
-//					u.saveObject(lf, filename);
-//					fl = true;			
-//				}else{
-//					Util.ShowToast(context, lf.getMsg());
-//				}
-//			}
-//			if(lmoney!=null){
-//				if("200".equals(lmoney.getCode())){
-//					
-//				}
-//			}
-			Tologin();
+			if(lf!=null){
+				if("200".equals(lf.getCode())){
+					u.saveObject(lf, filename);
+					fl = true;			
+				}else{
+					Util.ShowToast(context, lf.getMsg());
+				}
+			}
+			if(ct && fl){
+				Intent intent = new Intent(WelcomeActivity.this,
+						LoginActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				finish();
+			}else{
+				Util.ShowToast(context, "初始化失败,请检查网络后重试");
+			}
 			return true;
 		}
 
@@ -178,14 +147,8 @@ public class WelcomeActivity extends Activity{
 		public boolean TaskMain() {
 			// 访问
 			Send s = new Send(context);
-//			lb = s.GetArea();
-			//			bean = s.GetProductDetaile("512");
-//			lf = s.GetFenlei();
-//			lbn = s.GetComment("53", 1,"2");
-//			l = s.getCenterRecommend();
-//			s.getXinjianDetaile("1057", auth);
-			PostHttp p = new PostHttp(context);
-			p.doPost();
+			lb = s.GetArea();
+			lf = s.GetFenlei();
 			return true;
 		}
 	}
@@ -202,5 +165,5 @@ public class WelcomeActivity extends Activity{
 		startActivity(intent);
 		finish();
 	}
-	
+
 }

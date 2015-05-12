@@ -1,14 +1,22 @@
 package com.example.educonsult.beans;
 
+import java.util.ArrayList;
+
+/**
+ * 购物车单品实体
+ * @author Qzr
+ *
+ */
 public class ShopItemBean {
-	private boolean isclick;
-	private String itemid;
-	private String title;
-	private String unit;
-	private String thumb;
-	private String price;
-	private String amount;
-	private String ount;
+	private boolean isclick;	//本地属性是否勾选
+	private String itemid;		//商品ID
+	private String title;		//商品名称
+	private String unit;		//单位
+	private String thumb;		//图片
+	private String price;		//价格
+	private String amount;		//库存
+	private int num;			//数量
+	private ArrayList<CouponBean> coupon;//优惠券
 	public boolean isIsclick() {
 		return isclick;
 	}
@@ -51,11 +59,17 @@ public class ShopItemBean {
 	public void setAmount(String amount) {
 		this.amount = amount;
 	}
-	public String getOunt() {
-		return ount;
+	public int getNum() {
+		return num;
 	}
-	public void setOunt(String ount) {
-		this.ount = ount;
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public ArrayList<CouponBean> getCoupon() {
+		return coupon;
+	}
+	public void setCoupon(ArrayList<CouponBean> coupon) {
+		this.coupon = coupon;
 	}
 
 }

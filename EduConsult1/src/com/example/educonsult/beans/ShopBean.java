@@ -1,12 +1,17 @@
 package com.example.educonsult.beans;
 
 import java.util.ArrayList;
-
+/**
+ * 购物车店铺实体
+ * @author Qzr
+ *
+ */
 public class ShopBean extends ShopItemBean{
-	private ArrayList<ShopItemBean>mall;
-	private String company;
-	private String companyid;
-	private String note;
+	private ArrayList<ShopItemBean>mall;	//商品列表
+	private String company;					//店家名称
+	private String companyid;				//店家ID
+	private String note;					//店家留言
+	private ArrayList<ExpressBean> express;//运费模板
 	public ArrayList<ShopItemBean> getMall() {
 		return mall;
 	}
@@ -30,6 +35,12 @@ public class ShopBean extends ShopItemBean{
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public ArrayList<ExpressBean> getExpress() {
+		return express;
+	}
+	public void setExpress(ArrayList<ExpressBean> express) {
+		this.express = express;
 	}
 	
 }

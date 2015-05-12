@@ -27,6 +27,7 @@ import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
+import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.net.Send;
@@ -48,6 +49,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ProductPingjiaAdapter pingjiaAdapter;
 	private ArrayList<ProductBean> list;
 	private HomeLikeAdapter homeLikeAdapter;
+	private ProdectDetaileBean centerbean;
 	
 
 	@Override
