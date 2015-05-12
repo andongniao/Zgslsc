@@ -75,7 +75,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ProductBean productBean;
 	private String liulanfile;
 	private Util u;
-	private boolean isSave;
+	private boolean isSave,ispingjia;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -114,7 +114,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		add=(TextView)findViewById(R.id.product_detaile_adds);
 		add.setOnClickListener(this);
 		imageview=(ImageCycleView)findViewById(R.id.product_detail_icv);
-
+		ispingjia=false;
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		findViewById(R.id.product_detaile_ll_into_dianpu).setOnClickListener(this);
@@ -266,7 +266,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			}
 		});
 		tv_title.setText(mallinfo.getKeyword());
-		if(!mallinfo.getPrice2().equals("")){
+		if(!"".equals(mallinfo.getPrice2())){
 			tv_shangcheng.setText(mallinfo.getPrice2());
 		}else{
 			tv_shangcheng.setText(mallinfo.getPrice());
@@ -389,9 +389,14 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			chanpin.setTextColor(getResources().getColor(R.color.black));
 			pingjia.setTextColor(getResources().getColor(R.color.orn));
 			dianpu.setTextColor(getResources().getColor(R.color.black));
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
+			if(!ispingjia){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
+				}
 			}
+			ispingjia=true;
+			
+			
 			break;
 		case R.id.product_detaile_ll_dianputuijian:
 			ll_add_view_chanpin.setVisibility(View.GONE);
@@ -404,7 +409,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		case R.id.product_detaile_ll_add_View_xiangqing_more:
 			intent = new Intent(context,ProductDetaileMoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("qingjiamore", mallinfo.getItemid());
+			//intent.putExtra("qingjiamore", mallinfo.getItemid());
+			intent.putExtra("qingjiamore","53");
 			startActivity(intent);
 			
 			break;
@@ -472,7 +478,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	}
 	private void setpingjiaDate(){
 	
-			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist);
+			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
 			listView.setAdapter(pingjiaAdapter);
 			if(comlist.size()==0){
 				pingjiamore.setVisibility(View.GONE);

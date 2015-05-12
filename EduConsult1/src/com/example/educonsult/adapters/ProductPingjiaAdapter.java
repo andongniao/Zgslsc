@@ -21,19 +21,25 @@ public class ProductPingjiaAdapter extends BaseAdapter{
 	private LayoutInflater inflater;
 	private Myitem myitem;
 	private String star;
-	
+	private int num;
 
 
-	public ProductPingjiaAdapter(Context context,ArrayList<CommentBean> list){
+	public ProductPingjiaAdapter(Context context,ArrayList<CommentBean> list,int num){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
+		this.num=num;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 3;//list!=null?list.size():0;
+		if(num==3){
+			return 3;
+		}else{
+			return list!=null?list.size():0;
+		}
+		
 	}
 
 	@Override

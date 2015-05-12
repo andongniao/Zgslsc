@@ -103,13 +103,14 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		productBeans=(ArrayList<ProductBean>)u.readObject(MyApplication.Seejilu);
 		ll_not=(LinearLayout)findViewById(R.id.myzj_ll_isnull);
 		gridView = (GridView) findViewById(R.id.myzj_gv);
-		if(productBeans.size()==0||productBeans==null){
+		if(productBeans==null||productBeans.size()==0){
 			gridView.setVisibility(View.GONE);
+			
+			
+		}else{
+			ll_not.setVisibility(View.GONE);
 			adapter = new MyZjAdapter(context, productBeans);
 			gridView.setAdapter(adapter);
-			
-		}{
-			ll_not.setVisibility(View.GONE);
 		}
 		
 		
