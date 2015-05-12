@@ -25,11 +25,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.MyCenterTuijianActivity.RefeshData;
 import com.example.educonsult.adapters.SearchAdapter;
 import com.example.educonsult.adapters.TextItemCenterListAdapter;
 import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.beans.ListProductBean;
+import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.net.PostHttp;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
@@ -48,13 +55,17 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private ArrayAdapter<String> arr_adapter;
 	private SearchAdapter adapter;
 	private boolean ishave;
-	private int t;
+	private int t=0;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
 	private SearchAdapter adapter_r;
 	private static TextItemCenterListAdapter textItemCenterListAdapter;
     private static int postion;
+    private ThreadWithProgressDialog myPDT;
+    private ListProductBean listProductBean;
+    private ArrayList<ProductBean> list;
+    private Intent intent;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -75,15 +86,21 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent intent = new Intent(context,SearchResultActivity.class); 
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+//				Intent intent = new Intent(context,SearchResultActivity.class); 
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+				String tp = MyApplication.sp.getString("s_fenlei"+arg2, "");
+				/*if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(Integer.parseInt(tp),0,3,l.get(arg2)),R.string.loding);//可取消
+				}*/
+				initDate(Integer.parseInt(tp),0,3,l.get(arg2));
 			}
 		});
 	}
 
 	private void init() {
 		context = this;
+		myPDT=new ThreadWithProgressDialog();
 		t = getIntent().getIntExtra("t", -1);
 		er = MyApplication.sp.edit();
 		sp = (TextView) findViewById(R.id.search_home_sp);
@@ -157,6 +174,10 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 					long arg3) {
 				// TODO Auto-generated method stub
 				sp.setText(ll.get(arg2));
+				t=arg2;
+				/*if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(arg2,0,3,""),R.string.loding);//可取消
+				}*/
 				popu.dismiss();
 			}
 		});
@@ -176,12 +197,15 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			//int num=Util.setPopuwindowCenter(context,ll, sp);
 			setPopuwindowCenter(context, ll, sp);
 			
+			
+			
 			//popu.showAsDropDown(sp);
 			break;
 		
 		case R.id.search_home_btn_clean:
 			for(int i = 0;i<l.size();i++){
 				er.putString("search"+i,"");
+				er.putString("s_fenlei"+i,"");
 				er.commit();
 			}
 			l.clear();
@@ -209,6 +233,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 					}else{
 						if(s!=null && !"".equals(s)){
 							er.putString("search"+0,et.getText().toString().trim());
+							er.putString("s_fenlei"+(l.size()),t+"");
 							er.putInt("size", 1);
 							er.commit();
 							l.add(s);
@@ -217,11 +242,16 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 				}
 				if(!ishave && Util.IsNull(s)){
 					er.putString("search"+(l.size()),et.getText().toString().trim());
+					er.putString("s_fenlei"+(l.size()),t+"");
 					l.add(s);
 					er.putInt("size", l.size());
 					er.commit();
 					ishave = false;
 					et.setText("");
+					initDate(t,0,3,s);
+					/*if(Util.detect(context)){
+						myPDT.Run(context, new RefeshData(t,0,3,s),R.string.loding);//可取消
+					}*/
 				}else{
 					Toast.makeText(SearchHomeActivity.this, "error", 500).show();
 					ishave = false;
@@ -243,6 +273,72 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			break;
 
 		}
+	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		int type,order,page;
+		String text;
+		public RefeshData(int type,int order,int page,String text) {
+			this.type=type;
+		    this.order=order;
+		    this.page=page;
+		    this.text=text;
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//			Toast.makeText(context, "cancle", 1000).show();
+			finish();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(listProductBean!=null){
+				if("200".equals(listProductBean.getCode())){
+					//TODO	
+						
+					//initDate();
+				}else if("300".equals(listProductBean.getCode())){
+					//TODO	
+					Util.ShowToast(context,R.string.login_out_time);
+					intent=new Intent(context, LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					
+				}
+				else{
+					Util.ShowToast(context, listProductBean.getMsg());
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+
+
+
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+		
+			PostHttp p=new PostHttp(context);
+			listProductBean=p.SeanchText(type, order, page, text);
+			
+			return true;
+		}
+	}
+	void initDate(int type,int order,int page,String text){
+		list=listProductBean.getList();
+		intent=new Intent(context, SearchResultActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("searchtype", type+"");
+		intent.putExtra("searchorder", order+"");
+		intent.putExtra("searchpage", page+"");
+		intent.putExtra("searchtext", text);
+		startActivity(intent);
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

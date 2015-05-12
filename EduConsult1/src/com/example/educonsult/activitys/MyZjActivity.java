@@ -23,14 +23,19 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.MyCenterTuijianActivity.RefeshData;
 import com.example.educonsult.adapters.GqAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.KnowFenleiAdapter;
 import com.example.educonsult.adapters.MyZjAdapter;
+import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
 public class MyZjActivity extends BaseActivity implements OnClickListener{
@@ -43,6 +48,10 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	public View ll_gqtwo_popu;
+	private LinearLayout ll_not;
+	private ThreadWithProgressDialog myPDT;
+	private ArrayList<ProductBean> productBeans;
+	private Util u;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -71,15 +80,12 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 
 	private void addlistener() {
 		
-		
-
-	
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toproduct();
+				Toproduct(productBeans.get(arg2));
 			}
 		});
 
@@ -88,28 +94,45 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		isread = false;
+		/*myPDT=new ThreadWithProgressDialog();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
+		}*/
+		u=new Util(context);
 		
-
+		productBeans=(ArrayList<ProductBean>)u.readObject(MyApplication.Seejilu);
+		ll_not=(LinearLayout)findViewById(R.id.myzj_ll_isnull);
 		gridView = (GridView) findViewById(R.id.myzj_gv);
+		if(productBeans.size()==0||productBeans==null){
+			gridView.setVisibility(View.GONE);
+			adapter = new MyZjAdapter(context, productBeans);
+			gridView.setAdapter(adapter);
+			
+		}{
+			ll_not.setVisibility(View.GONE);
+		}
+		
+		
+		
 		list = new ArrayList<Integer>();
 		for(int i=0;i<10;i++){
 			list.add(i);
 		}
-		adapter = new MyZjAdapter(context, list);
-		gridView.setAdapter(adapter);
 		//gridView.setFocusable(false);
 		Util.SetRedNum(context, rl_l, 0);
 
 	}
+
 
 	@Override
 	public void onClick(View v) {
 		
 	}
 	
-	private void Toproduct(){
+	private void Toproduct(ProductBean bean){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("productdetaile", bean);
 		startActivity(intent);
 	}
 	

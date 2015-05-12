@@ -2,30 +2,29 @@ package com.example.educonsult.adapters;
 
 import java.util.ArrayList;
 
-import com.example.educonsult.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.educonsult.R;
+import com.example.educonsult.beans.FenleiBean;
 
 @SuppressLint("ResourceAsColor") 
 public class HomeSlidAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<String> list;
+	private ArrayList<FenleiBean> list;
 	private LayoutInflater inflater;
 	private int index;
 	private Myitem myitem;
 	private int type;
 
 
-	public HomeSlidAdapter(Context context,ArrayList<String> list,int type){
+	public HomeSlidAdapter(Context context,ArrayList<FenleiBean> list,int type){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);

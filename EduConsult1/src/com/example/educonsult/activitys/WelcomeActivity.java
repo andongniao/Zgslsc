@@ -13,6 +13,7 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
@@ -76,12 +77,12 @@ public class WelcomeActivity extends Activity{
 		myPDT = new ThreadWithProgressDialog();
 		String msg = "初始化...";
 		u = new Util(context);
-		//		if(u.isExistDataCache(filename)&& u.isReadDataCache(filename)){
-		//			Finish2min();
-		//		}else{
-		//			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		myPDT.Run(context, new RefeshData(),msg,false);//不可取消
-		//		}
+		if(u.isExistDataCache(filename)&& u.isReadDataCache(filename)){
+			Finish2min();
+		}else{
+			//myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		    myPDT.Run(context, new RefeshData(),msg,false);//不可取消
+		}
 	}
 	private void Finish2min(){
 		new Thread() {
@@ -115,6 +116,7 @@ public class WelcomeActivity extends Activity{
 		@Override
 		public boolean OnTaskDone() {
 			//任务完成后
+			
 			if(lb!=null){
 				if("200".equals(lb.getCode())){
 					u.saveObject(lb, filename);
@@ -123,6 +125,7 @@ public class WelcomeActivity extends Activity{
 					Util.ShowToast(context, lb.getMsg());
 				}
 			}
+			
 			//if(bean!=null){
 			//	if("200".equals(bean.getCode())){
 			//		Intent intent = new Intent(WelcomeActivity.this,
@@ -132,14 +135,15 @@ public class WelcomeActivity extends Activity{
 			//		finish();
 			//	}
 			//}
-//			if(lf!=null){
-//				if("200".equals(lf.getCode())){
-//					u.saveObject(lf, filename);
-//					fl = true;			
-//				}else{
-//					Util.ShowToast(context, lf.getMsg());
-//				}
-//			}
+			if(lf!=null){
+				if("200".equals(lf.getCode())){
+					u.saveObject(lf, filename);
+					fl = true;			
+				}else{
+					Util.ShowToast(context, lf.getMsg());
+					
+				}
+			}
 //			if(ct && fl){
 //				Intent intent = new Intent(WelcomeActivity.this,
 //						LoginActivity.class);
@@ -178,14 +182,14 @@ public class WelcomeActivity extends Activity{
 		public boolean TaskMain() {
 			// 访问
 			Send s = new Send(context);
-//			lb = s.GetArea();
-			//			bean = s.GetProductDetaile("512");
-//			lf = s.GetFenlei();
+			lb = s.GetArea();
+			//bean = s.GetProductDetaile("512");
+			lf = s.GetFenlei();
 //			lbn = s.GetComment("53", 1,"2");
-//			l = s.getCenterRecommend();
+	//		l = s.getCenterRecommend();
 //			s.getXinjianDetaile("1057", auth);
-			PostHttp p = new PostHttp(context);
-			p.doPost();
+//			PostHttp p = new PostHttp(context);
+//			basebean=p.addAddress();
 			return true;
 		}
 	}

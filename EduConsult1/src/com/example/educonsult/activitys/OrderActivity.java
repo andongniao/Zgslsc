@@ -1,34 +1,38 @@
 package com.example.educonsult.activitys;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
-import com.example.educonsult.ExampleActivity;
-import com.example.educonsult.R;
-import com.example.educonsult.adapters.OrderHomeAdapter;
-import com.example.educonsult.myviews.MyListview;
-import com.example.educonsult.tools.Util;
-import com.unionpay.UPPayAssistEx;
-import com.unionpay.uppay.PayActivity;
-
-import android.R.integer;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.educonsult.R;
+import com.example.educonsult.adapters.OrderHomeAdapter;
+import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.tools.UITools;
+import com.example.educonsult.tools.Util;
+import com.unionpay.UPPayAssistEx;
+import com.unionpay.uppay.PayActivity;
 
 public class OrderActivity extends BaseActivity implements OnClickListener{
 	private ScrollView scrollView;
@@ -44,7 +48,16 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private String mMode = "01";
 	private String Tn = "201504281334390000902";
 	private static final String TN_URL_01 = "http://202.101.25.178:8080/sim/gettn";
-
+	private PopupWindow popu;
+	private LayoutInflater inflater;
+	private View v_fenlei;
+	private ListView list_2,lv_l;
+	private TextItemListAdapter adapter_r;
+	private int mscreenwidth;
+	private DisplayMetrics dm;
+	private TextView tv_allmoney;
+	private EditText et_pass;
+	private Button b_no,b_yes;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -89,6 +102,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		list = new ArrayList<Integer>();
 		list.add(1);
 		list.add(2);
+		dm = new DisplayMetrics();
+		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		listdizhi = new ArrayList<Integer>();
 		scrollView = (ScrollView) findViewById(R.id.order_home_sc);
 		scrollView.scrollTo(0, 10);
@@ -120,7 +135,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		case R.id.order_home_ll_add:
 			intent = new Intent(context,AddressGLActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("address", "1");
+			intent.putExtra("addressnum", "1");
 			startActivity(intent);
 			break;
 		case R.id.order_home_ll_address:
@@ -160,18 +175,53 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 //					Message msg = mHandler.obtainMessage();
 //					msg.obj = tn;
 //					mHandler.sendMessage(msg);
-//				}}.start();
+//				}}.start();  
 			/************************************************* 
 			 * 
 			 *  步骤2：通过银联工具类启动支付插件 
 			 *  
 			 ************************************************/
-			UPPayAssistEx.startPayByJAR(OrderActivity.this, PayActivity.class, null, null,
-					Tn, mMode);
+			/*UPPayAssistEx.startPayByJAR(OrderActivity.this, PayActivity.class, null, null,
+					Tn, mMode);*/
+			if(listdizhi.size()==0){
+				Util.ShowToast(context, R.string.money_password_noadress);
+			}else{
+				
+				setpopuwindow();
+			}
 				break;
+		case R.id.money_password_no:
+			popu.dismiss();
+			break;
+		case R.id.money_password_yes:
+			String strpass=et_pass.getText().toString();
+			if(Util.IsNull(strpass)){
+				
+			}else{
+				Util.ShowToast(context, R.string.money_password_nopass);
+			}
+			break;
 
 		}
 
+	}
+	private void setpopuwindow(){
+		inflater=LayoutInflater.from(context);
+		v_fenlei = inflater.inflate(R.layout.money_password, null);
+		mscreenwidth=dm.widthPixels;
+		popu = new PopupWindow(v_fenlei, mscreenwidth-UITools.dip2px(context, 30), LayoutParams.WRAP_CONTENT);
+		popu.setFocusable(true);
+		//popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setBackgroundDrawable(getResources().getDrawable(R.drawable.regist_et_bg));
+		popu.setOutsideTouchable(true);
+		popu.showAtLocation(v_fenlei, Gravity.CENTER, 0, 0);
+		tv_allmoney=(TextView)v_fenlei.findViewById(R.id.money_password_money);
+		et_pass=(EditText)v_fenlei.findViewById(R.id.money_password_edpassword);
+		b_no=(Button)v_fenlei.findViewById(R.id.money_password_no);
+		b_no.setOnClickListener(this);
+		b_yes=(Button)v_fenlei.findViewById(R.id.money_password_yes);
+		b_yes.setOnClickListener(this);
+		
 	}
 
 	@Override

@@ -10,6 +10,9 @@
     <string name="loding">正在加载...</string>
     <string name="maimeng">亲，板块升级中，不要着急啦</string>
     <string name="net_is_eor">网络异常，请检查网络后再试</string>
+    <string name="notbuy">亲，您还没有买过任何产品哦！</string>
+    <string name="login_out_time">登陆超时</string>
+    
 
     <!-- 首页 -->
     <string name="home_more">更多></string>
@@ -99,7 +102,12 @@
     <string name="search_result_xiaoliang">销量</string>
     <string name="search_result_price">价格</string>
     <string name="search_result_renqi">人气</string>
-
+    <string name="search_result_text1">抱歉，没有找到与“</string>
+ 	<string name="search_result_text2">”相关的内容。</string>
+ 	<string name="search_result_text3">建议您：</string>
+ 	<string name="search_result_text4">•看看文字是否输入有误</string>
+ 	<string name="search_result_text5">•去掉可能不必要的字词，如“的”，“什么”等。</string>
+ 	<string name="search_result_text6">•调整更确切的关键词或搜索条件</string>
     <!-- 个人中心 -->
     <string name="mycenger_title">个人中心</string>
     <string name="mycenger_shoucang_cp">收藏的产品</string>
@@ -548,5 +556,17 @@
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     <string name="page_is_final">没有更多了哦，亲</string>
+    
+    <!-- 支付密码 -->
+    <string name="money_password_title">支付密码</string>
+    <string name="money_password_tvmoney">支付金额</string>
+    <string name="money_password_tvway">账户余额支付</string>
+    <string name="money_password_tvpass">请输入支付密码</string>
+    <string name="money_password_tv_no">取消</string>
+    <string name="money_password_tv_yes">付款</string>
+    <string name="money_password_nopass">请输入您的支付密码</string>
+    <string name="money_password_noadress">请选择您的地址</string>
+    <!-- 精品推荐 -->
+    <string name="mycenter_tuijian_title">精品推荐</string>
 
 </resources>

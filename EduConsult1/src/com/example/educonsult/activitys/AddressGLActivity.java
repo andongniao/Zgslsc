@@ -1,26 +1,52 @@
 package com.example.educonsult.activitys;
 
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.example.educonsult.adapters.TextItemListAdapter;
 import com.example.educonsult.myviews.BadgeView;
+import com.example.educonsult.tools.UITools;
 
 public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_diqu,ll_jiedao,ll_address,ll_shouhuoren,ll_number,ll_youbian;
-	private TextView tv_diqu,tv_jiedao,tv_address,tv_shouhuoren,tv_number,tv_youbian
-	,tv_delete,tv_save;
+	private TextView tv_diqu,tv_jiedao,tv_delete,tv_save;
+	private EditText tv_address,tv_shouhuoren,tv_number,tv_youbian;
 	private CheckBox cb_set;
 	private boolean isok;
 //	private ImageView iv_top_l,iv_top_t;
-
+	private Intent intent;
+	String num;
+	
+	private ArrayList<String> list;
+	private TextItemListAdapter adapter_r;
+	private PopupWindow popu;
+	private ListView list_2,lv_l;
+	private LayoutInflater inflater;
+	private View v_fenlei;
+	private ImageView iv_top_l,iv_top_t;
+	private RelativeLayout rl_l,rl_r;
+	private Context context;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -37,6 +63,9 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		context=this;
+		intent=getIntent();
+		num=intent.getStringExtra("addressnum");
 		isok = false;
 		ll_diqu = (LinearLayout) findViewById(R.id.address_up_ll_diqu);
 		ll_diqu.setOnClickListener(this);
@@ -51,17 +80,13 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		ll_youbian = (LinearLayout) findViewById(R.id.address_up_ll_youbian);
 		ll_youbian.setOnClickListener(this);
 		tv_diqu = (TextView) findViewById(R.id.address_up_tv_diqu);
-		tv_diqu.setOnClickListener(this);
-		tv_jiedao = (TextView) findViewById(R.id.address_up_tv_jiedao);
-		tv_jiedao.setOnClickListener(this);
-		tv_address = (TextView) findViewById(R.id.address_up_tv_detaile);
-		tv_address.setOnClickListener(this);
-		tv_shouhuoren = (TextView) findViewById(R.id.address_up_tv_shouhuoren);
-		tv_shouhuoren.setOnClickListener(this);
-		tv_number = (TextView) findViewById(R.id.address_up_tv_phone_number);
-		tv_number.setOnClickListener(this);
-		tv_youbian = (TextView) findViewById(R.id.address_up_tv_youbian);
-		tv_youbian.setOnClickListener(this);
+		//tv_diqu.setOnClickListener(this);
+//		tv_jiedao = (TextView) findViewById(R.id.address_up_tv_jiedao);
+//		tv_jiedao.setOnClickListener(this);
+		tv_address = (EditText) findViewById(R.id.address_up_tv_detaile);
+		tv_shouhuoren = (EditText) findViewById(R.id.address_up_tv_shouhuoren);
+		tv_number = (EditText) findViewById(R.id.address_up_tv_phone_number);
+		tv_youbian = (EditText) findViewById(R.id.address_up_tv_youbian);
 		tv_delete = (TextView) findViewById(R.id.address_up_tv_delete);
 		tv_delete.setOnClickListener(this);
 		tv_save = (TextView) findViewById(R.id.address_up_tv_save);
@@ -73,10 +98,41 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				isok = isChecked;
 			}
 		});
+		if(num.equals("1")){//ÐÞ¸Ä
+			
+			tv_delete.setVisibility(View.GONE);
+		}
 //		BadgeView badge = new BadgeView(this, iv_top_l);
 //		badge.setText(""+1);
 //		badge.show();
+		list=new ArrayList<String>();
+		list.add("2");
+		list.add("2");
+		list.add("2");
+		list.add("2");
+	}
+	private void setpopuwindow(Context contexts,ArrayList<String> list,LinearLayout lin){
+		inflater=LayoutInflater.from(contexts);
+		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
+		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
+		adapter_r = new TextItemListAdapter(context, list);
+		lv_l.setAdapter(adapter_r);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				
+				popu.dismiss();
+			}
+		});
 		
+		popu = new PopupWindow(v_fenlei,LayoutParams.FILL_PARENT , UITools.dip2px(context, 300f));
+		popu.setFocusable(true);
+		popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setOutsideTouchable(true);
+		popu.showAsDropDown(lin);
 	}
 
 	@Override
@@ -84,7 +140,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 
 		case R.id.address_up_ll_diqu:
-
+			setpopuwindow(context, list, ll_diqu);
 			break;
 		case R.id.address_up_ll_jiedao:
 

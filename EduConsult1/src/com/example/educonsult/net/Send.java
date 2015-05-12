@@ -13,22 +13,30 @@ import android.content.Context;
 
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.beans.AddressBean;
 import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.BanksBean;
+import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.CenterUserBean;
 import com.example.educonsult.beans.CommentBean;
 import com.example.educonsult.beans.CommentStar;
 import com.example.educonsult.beans.CompanyBean;
 import com.example.educonsult.beans.FenleiBean;
 import com.example.educonsult.beans.HomeBean;
+import com.example.educonsult.beans.ListAddressBean;
 import com.example.educonsult.beans.ListAreaBean;
+import com.example.educonsult.beans.ListBanksBean;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.beans.ListMoneyBean;
+import com.example.educonsult.beans.ListOrderBean;
 import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ListXinjianBean;
 import com.example.educonsult.beans.MallInfoBean;
 import com.example.educonsult.beans.MoneyDetaileBean;
+import com.example.educonsult.beans.OrderBean;
+import com.example.educonsult.beans.OrderFields;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.ShopBean;
@@ -671,7 +679,7 @@ public class Send {
 	
 	
 	/**
-	 * 获取购物车
+	 * 获取购物车列表
 	 */
 	public ListShopBean getCartlist(String authstr) {
 		ListShopBean bean = new ListShopBean();
@@ -689,6 +697,7 @@ public class Send {
 				String code = object.getString("code");
 				String msg = object.getString("message");
 				if (code != null && "200".equals(code)) {
+					if(Util.IsNull(object.getString("data"))){
 					JSONObject data = object.getJSONObject("data");
 					@SuppressWarnings("unchecked")
 					Iterator<String> keys=data.keys();
@@ -705,9 +714,10 @@ public class Send {
 						}
 						
 		            }
+				}
+					bean.setList(list);
 					bean.setCode(code);
 					bean.setMsg(msg);
-					bean.setList(list);
 					return bean;
 				} else {
 					bean.setMsg(msg);
@@ -729,6 +739,145 @@ public class Send {
 		}
 
 	}
+	
+	/**
+	 * 添加购物车
+	 */
+	public BaseBean CartAdd(String itemid,int number,String authstr) {
+		BaseBean bean = new BaseBean();
+		String url = ServiceUrl.Base+ServiceUrl.cart_add+itemid+"&number"+number+
+				ServiceUrl.mycenter_footer+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+		if (jsonStr != null && !jsonStr.equals("")) { 
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					bean.setCode(code);
+					bean.setMsg(msg);
+//					JSONObject data = object.getJSONObject("data");
+//					bean.setAuthstr(authstr);
+					return bean;
+				} else {
+					if(Util.IsNull(msg)){
+						bean.setMsg(msg);
+					}else{
+						bean.setMsg("");
+					}
+					bean.setCode(code);
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+
+	/**
+	 *	删除购物车
+	 */
+	public BaseBean CartDel(String itemid,String authstr) {
+		BaseBean bean = new BaseBean();
+		String url = ServiceUrl.Base+ServiceUrl.cart_del+itemid+
+				ServiceUrl.mycenter_footer+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+		if (jsonStr != null && !jsonStr.equals("")) { 
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					bean.setCode(code);
+					bean.setMsg(msg);
+//					JSONObject data = object.getJSONObject("data");
+//					bean.setAuthstr(authstr);
+					return bean;
+				} else {
+					if(Util.IsNull(msg)){
+						bean.setMsg(msg);
+					}else{
+						bean.setMsg("");
+					}
+					bean.setCode(code);
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	
+	/**
+	 *	清空购物车
+	 */
+	public BaseBean CartClear(String authstr) {
+		BaseBean bean = new BaseBean();
+		String url = ServiceUrl.Base+ServiceUrl.cart_clear+
+				ServiceUrl.mycenter_footer+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+		if (jsonStr != null && !jsonStr.equals("")) { 
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					bean.setCode(code);
+					bean.setMsg(msg);
+					return bean;
+				} else {
+					if(Util.IsNull(msg)){
+						bean.setMsg(msg);
+					}else{
+						bean.setMsg("");
+					}
+					bean.setCode(code);
+					return bean;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	
+	
+	
 	
 	/**
 	 * 获取站内信件列表
@@ -828,7 +977,123 @@ public class Send {
 	
 	
 	
+	/**
+	 * 获取地址列表
+	 */
+	public ListAddressBean getAddressList(String authstr) {
+		ListAddressBean lb = new ListAddressBean();
+		ArrayList<AddressBean> list = new ArrayList<AddressBean>();
+		String url =  ServiceUrl.Base+ServiceUrl.address+ServiceUrl.address_list+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					lb.setCode(code);
+					lb.setMsg(msg);
+					JSONArray data = object.getJSONArray("data");
+					Type type_re = new TypeToken<ArrayList<AddressBean>>() {
+					}.getType();
+					list = gson.fromJson(data.toString(), type_re);
+					lb.setList(list);
+					return lb;
+				} else {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					return lb;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				lb.setCode("500");
+				lb.setMsg("服务器异常，请稍候再试...");
+				return lb;
+			}
+		} else {
+			lb.setCode("500");
+			lb.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return lb;
+		}
+
+	}
 	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 获取订单列表
+	 */
+	public ListOrderBean getOrderList(String authstr) {
+		ListOrderBean lb = new ListOrderBean();
+		ArrayList<OrderBean> list_order = new ArrayList<OrderBean>();
+		ArrayList<OrderFields> list_fields = new ArrayList<OrderFields>();
+		String url =  ServiceUrl.Base+ServiceUrl.order
+				+ServiceUrl.mycenter_footer+authstr
+				;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					lb.setCode(code);
+					lb.setMsg(msg);
+					JSONArray data = object.getJSONArray("data");
+					Type type_o = new TypeToken<ArrayList<OrderBean>>() {
+					}.getType();
+					list_order = gson.fromJson(data.toString(), type_o);
+					JSONObject fields = object.getJSONObject("fields");
+					@SuppressWarnings("unchecked")
+					Iterator<String> keys=fields.keys();
+					while (keys.hasNext ())
+		            {
+						String k = (String) keys.next() + "";
+						JSONObject js = (JSONObject) fields.get(k);
+						Type t = new TypeToken<OrderFields>() {
+							}.getType();
+							OrderFields sb = gson.fromJson(js.toString(), t);
+						if(sb!=null){
+							list_fields.add(0,sb);
+						}
+						
+		            }
+					lb.setList_order(list_order);
+					lb.setList_key(list_fields);
+					return lb;
+				} else {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					return lb;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				lb.setCode("500");
+				lb.setMsg("服务器异常，请稍候再试...");
+				return lb;
+			}
+		} else {
+			lb.setCode("500");
+			lb.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return lb;
+		}
+
+	}
 	
 	
 	

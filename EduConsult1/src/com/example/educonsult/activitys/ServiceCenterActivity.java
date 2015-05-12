@@ -44,19 +44,19 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightLVisible();
-		topRightRVisible();
+//		topRightLVisible();
+//		topRightRVisible();
 		topRightTGone();
-		rl_l = (RelativeLayout) getTopLightRl();
-		rl_r = (RelativeLayout) getTopRightRl();
-		iv_top_l = (ImageView) getTopLightView();
-		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+//		rl_l = (RelativeLayout) getTopLightRl();
+//		rl_r = (RelativeLayout) getTopRightRl();
+//		iv_top_l = (ImageView) getTopLightView();
+//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+//		iv_top_t = (ImageView) getTopRightView();
+//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTopLeftTv(R.string.service_center_title);
 		setContentXml(R.layout.service_center_layout);
 		init();
-		addlistener();
+		//addlistener();
 	}
 
 	private void addlistener() {

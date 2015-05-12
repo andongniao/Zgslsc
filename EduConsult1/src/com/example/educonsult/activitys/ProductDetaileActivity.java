@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -22,39 +23,65 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
+import com.example.educonsult.beans.CommentBean;
+import com.example.educonsult.beans.CommentStar;
+import com.example.educonsult.beans.ListComment;
+import com.example.educonsult.beans.MallInfoBean;
+import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.myviews.ImageCycleView;
+import com.example.educonsult.myviews.ImageCycleView.ImageCycleViewListener;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
-
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private ScrollView scrollView;
 	private LinearLayout ll_addshopcart,ll_gopay,ll_as_l,ll_as_t,ll_as_r,
 	ll_paied_l,ll_paied_t,ll_paied_r,ll_add_chanpin,ll_add_pingjia,ll_add_dianpu,
-	ll_add_view_chanpin,ll_add_view_pingjia,ll_add_view_dianpu;
+	ll_add_view_chanpin,ll_add_view_pingjia,ll_add_view_dianpu,ll_kefu,ll_shouchang
+	,ll_buy,ll_nobuy;
 	private boolean isshow;
 	private PopupWindow popupWindow;
 	private int w,h,lh;
 	private Intent intent;
-	private TextView chanpin,pingjia,dianpu,pingjiamore,add;
+	private TextView chanpin,pingjia,dianpu,pingjiamore,add,buymore,tv_title
+	,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
+	,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo;
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
 	private ArrayList<ProductBean> list;
 	private HomeLikeAdapter homeLikeAdapter;
-	
+	private ProdectDetaileBean productdetailbean;
+	private ThreadWithProgressDialog myPDT;
+	private MallInfoBean mallinfo;
+	private ArrayList<ProductBean> recommend;
+	private ArrayList<ProductBean> buyedlist;
+	private ImageCycleView imageview;
+	private ArrayList<String> images;
+	private ImageView b_l,b_t,b_r,t_l,t_t,t_r;
+	private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r;
+	private ListComment listComment;
+	private ArrayList<CommentBean> comlist;
+	private ArrayList<CommentStar> comstar;
+	private ProductBean productBean;
+	private String liulanfile;
+	private Util u;
+	private boolean isSave;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-//		topRightLVisible();
-//		topRightRVisible();
+		//		topRightLVisible();
+		//		topRightRVisible();
 		topRightTGone();
 		setTopLeftTv(R.string.product_detaile_title);
 		setContentXml(R.layout.product_detail);
@@ -64,16 +91,38 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 	private void init() {
 		context = this;
+		intent=getIntent();
+		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");
+		liulanfile=MyApplication.Seejilu;
+		u=new Util(context);
+		isSave=u.saveObject(productBean, liulanfile);
+		if(isSave){
+			Util.ShowToast(context, "单品保存成功");
+		}else{
+			Util.ShowToast(context, "单品保存失败");
+		}
+		mallinfo=new MallInfoBean();
+		recommend=new ArrayList<ProductBean>();
+		buyedlist=new ArrayList<ProductBean>();
+		comlist=new ArrayList<CommentBean>();
+		comstar=new ArrayList<CommentStar>();
 		DisplayMetrics  dm = new DisplayMetrics();  
 		getWindowManager().getDefaultDisplay().getMetrics(dm);  
 		w = dm.widthPixels;  
 		h = dm.heightPixels; 
+		myPDT=new ThreadWithProgressDialog();
 		add=(TextView)findViewById(R.id.product_detaile_adds);
 		add.setOnClickListener(this);
+		imageview=(ImageCycleView)findViewById(R.id.product_detail_icv);
+
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		findViewById(R.id.product_detaile_ll_into_dianpu).setOnClickListener(this);
 		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
+		ll_kefu=(LinearLayout)findViewById(R.id.product_detail_ll_kefu);
+		ll_kefu.setOnClickListener(this);
+		ll_shouchang=(LinearLayout)findViewById(R.id.product_detail_ll_shoucang);
+		ll_shouchang.setOnClickListener(this);
 		ll_as_l = (LinearLayout) findViewById(R.id.product_detaile_ll_tonglei_l);
 		ll_as_l.setOnClickListener(this);
 		ll_as_t = (LinearLayout) findViewById(R.id.product_detaile_ll_tonglei_t);
@@ -104,8 +153,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		dianpu=(TextView)findViewById(R.id.product_detaile_tv_dianutuijian );
 		list=new ArrayList<ProductBean>();
 		listView=(MyListview)findViewById(R.id.product_detaile_ll_add_view_list);
-		pingjiaAdapter=new ProductPingjiaAdapter(this, list);
-		listView.setAdapter(pingjiaAdapter);
+		
 		gridView=(GridView)findViewById(R.id.product_detaile_all_view_dianputuijian_gv);
 		homeLikeAdapter = new HomeLikeAdapter(context, list);
 		gridView.setAdapter(homeLikeAdapter);
@@ -148,6 +196,131 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 				}
 			}
 		});
+		ll_nobuy=(LinearLayout)findViewById(R.id.product_detaile_ll_notbuy);
+		ll_buy=(LinearLayout)findViewById(R.id.product_detaile_ll_buied);
+		buymore=(TextView)findViewById(R.id.product_detaile_tv_more_shopped);
+		buymore.setOnClickListener(this);
+
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}
+
+		tv_title=(TextView)findViewById(R.id.product_detail_tv_title);
+		//		,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
+		//		,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo;
+		tv_shangcheng=(TextView)findViewById(R.id.product_detaile_tv_shangcheng);
+		tv_danjia=(TextView)findViewById(R.id.product_detaile_tv_danjia);
+		tv_qidingliang=(TextView)findViewById(R.id.product_detaile_tv_qiding);
+		tv_xiaoliang=(TextView)findViewById(R.id.product_detail_tv_xiaoliang);
+		tv_kucun=(TextView)findViewById(R.id.product_detail_tv_kucun);
+		tv_chandi=(TextView)findViewById(R.id.product_detail_tv_chandi);
+		tv_computer=(TextView)findViewById(R.id.product_detaile_tv_computer);
+		tv_miaoshu=(TextView)findViewById(R.id.product_detaile_tv_miaoshu);
+		tv_taidu=(TextView)findViewById(R.id.product_detaile_tv_fuwu);
+		tv_fahuo=(TextView)findViewById(R.id.product_detaile_tv_fahuo);
+
+
+
+		//		b_l,b_t,b_r,t_l,t_t,t_r;
+		//		private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r;
+		b_l=(ImageView)findViewById(R.id.product_detaile_ima_bui_l);
+		tb_l=(TextView)findViewById(R.id.product_detaile_tv_bui_l);
+		b_t=(ImageView)findViewById(R.id.product_detaile_ima_bui_t);
+		tb_t=(TextView)findViewById(R.id.product_detaile_tv_bui_t);
+		b_r=(ImageView)findViewById(R.id.product_detaile_ima_bui_4);
+		tb_r=(TextView)findViewById(R.id.product_detaile_tv_bui_r);
+		
+		t_l=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_l);
+		tt_l=(TextView)findViewById(R.id.product_detaile_tv_tonglei_l);
+		t_t=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_t);
+		tt_t=(TextView)findViewById(R.id.product_detaile_tv_tonglei_t);
+		t_r=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_r);
+		tt_r=(TextView)findViewById(R.id.product_detaile_tv_tonglei_r);
+		//b_l.setBackgroundDrawable(getResources().)
+
+
+
+
+		//		
+
+
+	}
+	void initDate(){
+		//ll_nobuy.setVisibility(View.GONE);
+		images=new ArrayList<String>();
+		images.add(mallinfo.getThumb());
+		images.add(mallinfo.getThumb1());
+		images.add(mallinfo.getThumb2());
+		imageview.setImageResources(images, new ImageCycleViewListener() {
+
+			@Override
+			public void onImageClick(int position, View imageView) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void displayImage(String imageURL, ImageView imageView) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		tv_title.setText(mallinfo.getKeyword());
+		if(!mallinfo.getPrice2().equals("")){
+			tv_shangcheng.setText(mallinfo.getPrice2());
+		}else{
+			tv_shangcheng.setText(mallinfo.getPrice());
+		}
+		tv_danjia.setText(mallinfo.getPrice());
+		tv_qidingliang.setText(mallinfo.getQbnum());
+		tv_xiaoliang.setText(mallinfo.getSales());
+		tv_kucun.setText(mallinfo.getAmount());
+		tv_chandi.setText(mallinfo.getAreaid());
+		tv_computer.setText(mallinfo.getCompany());
+		tv_miaoshu.setText("4.5");
+		tv_taidu.setText("4.5");
+		tv_fahuo.setText("4.5");
+
+		if(buyedlist.size()==0){
+			//ll_buy.setVisibility(View.GONE);
+			buymore.setVisibility(View.GONE);
+		}else{
+			ll_nobuy.setVisibility(View.GONE);
+			ll_buy.setVisibility(View.VISIBLE);
+			try {
+				b_l.setImageBitmap(Util.getBitmapForNet(buyedlist.get(0).getThumb()));
+				b_t.setImageBitmap(Util.getBitmapForNet(buyedlist.get(1).getThumb()));
+				b_r.setImageBitmap(Util.getBitmapForNet(buyedlist.get(2).getThumb()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
+			tb_l.setText(buyedlist.get(0).getPrice());
+			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
+			tb_t.setText(buyedlist.get(1).getPrice());
+			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
+			tb_r.setText(buyedlist.get(2).getPrice());
+		}
+		if(recommend.size()!=0){
+		
+			try {
+				t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
+				t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
+				t_r.setImageBitmap(Util.getBitmapForNet(recommend.get(2).getThumb()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
+			tb_l.setText(recommend.get(0).getPrice());
+			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
+			tb_t.setText(recommend.get(1).getPrice());
+			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
+			tb_r.setText(recommend.get(2).getPrice());
+		}
+		
+
 	}
 	private void addlistener() {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -163,10 +336,18 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.product_detaile_ll_into_dianpu:
-			intent = new Intent(context,StoreActivity.class);
+		case R.id.product_detail_ll_shoucang:
+			break;
+		case R.id.product_detail_ll_kefu:
+			intent = new Intent(context,ServiceCenterActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
+			break;
+		case R.id.product_detaile_ll_into_dianpu:
+//			intent = new Intent(context,StoreActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.product_detaile_ll_tonglei_l:
 			Toproduct();
@@ -186,7 +367,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		case R.id.product_detaile_ll_shopped_r:
 			Toproduct();
 			break;
-		case R.id.product_detaile_ll_pay_now:
+		case R.id.product_detaile_ll_pay_now: 
 			ExampleActivity.setCurrentTab(3);
 			finish();
 			break;
@@ -208,6 +389,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			chanpin.setTextColor(getResources().getColor(R.color.black));
 			pingjia.setTextColor(getResources().getColor(R.color.orn));
 			dianpu.setTextColor(getResources().getColor(R.color.black));
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
+			}
 			break;
 		case R.id.product_detaile_ll_dianputuijian:
 			ll_add_view_chanpin.setVisibility(View.GONE);
@@ -220,7 +404,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		case R.id.product_detaile_ll_add_View_xiangqing_more:
 			intent = new Intent(context,ProductDetaileMoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("qingjiamore", mallinfo.getItemid());
 			startActivity(intent);
+			
 			break;
 		case R.id.product_detaile_adds:
 			intent=new Intent(context, BusinesspartnersInfoActivity.class);
@@ -228,8 +414,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-			
-			
+
+
 		}
 	}
 	private void Toproduct(){
@@ -245,7 +431,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		@Override
 		public boolean OnTaskDismissed() {
 			//任务取消
-//			Toast.makeText(context, "cancle", 1000).show();
+			//			Toast.makeText(context, "cancle", 1000).show();
 			finish();
 			return false;
 		}
@@ -253,19 +439,25 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		@Override
 		public boolean OnTaskDone() {
 			//任务完成后
-			if(centerbean!=null){
-				if("200".equals(centerbean.getCode())){
+			if(productdetailbean!=null){
+				if("200".equals(productdetailbean.getCode())){
 					//TODO	
-					
+					//					private MallInfoBean mallinfo;
+					//					private ArrayList<ProductBean> recommend;
+					//					private ArrayList<ProductBean> buyedlist;
+					mallinfo=productdetailbean.getMallinfo();
+					recommend=productdetailbean.getRecommend();
+					buyedlist=productdetailbean.getBuyedlist();
+					initDate();
 				}else{
-					Util.ShowToast(context, centerbean.getMsg());
+					Util.ShowToast(context, productdetailbean.getMsg());
 				}
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
-			
-			
-			
+
+
+
 			return true;
 		}
 
@@ -273,7 +465,58 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		public boolean TaskMain() {
 			// 访问
 			Send s = new Send(context);
-			centerbean = s.GetProductDetaile("53");
+			productdetailbean = s.GetProductDetaile("53");
+			//productdetailbean = s.GetProductDetaile();
+			return true;
+		}
+	}
+	private void setpingjiaDate(){
+	
+			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist);
+			listView.setAdapter(pingjiaAdapter);
+			if(comlist.size()==0){
+				pingjiamore.setVisibility(View.GONE);
+			}
+		
+	}
+	public class RefeshData1 implements ThreadWithProgressDialogTask {
+
+		public RefeshData1() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//			Toast.makeText(context, "cancle", 1000).show();
+			finish();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(listComment!=null){
+				if("200".equals(listComment.getCode())){
+					comlist=listComment.getComlist();
+					comstar=listComment.getComstar();
+					setpingjiaDate();
+				}else{
+					Util.ShowToast(context, listComment.getMsg());
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+
+
+
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			Send s = new Send(context);
+			listComment=s.GetComment("53", 1, "");
 			return true;
 		}
 	}

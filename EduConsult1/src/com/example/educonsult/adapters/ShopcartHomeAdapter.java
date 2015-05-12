@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
 
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.ShopcartActivity.shop;
@@ -32,6 +33,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 	private Item item;
 	private ShopcartLvAdapter adapter;
 	private shop shop;
+	private ShopBean shopbean;
 
 	public ShopcartHomeAdapter(Context context,ArrayList<ShopBean>list, shop shop){
 		this.context = context;
@@ -67,6 +69,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 			convertView = inflater.inflate(R.layout.shopcart_home_lv_item, null);
 			item = new Item();
 			//TODO 
+			item.heji=(TextView)convertView.findViewById(R.id.shopcart_home_tv_heji);
 			item.cb = (CheckBox) convertView.findViewById(R.id.shopcart_home_lv_cb);
 			item.lv = (SwipeMenuListView) convertView.findViewById(R.id.shopcart_home_lv_lv);
 			convertView.setTag(item);
@@ -76,6 +79,8 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 		final ShopBean s = (ShopBean) list.get(index);
 
 		item.cb.setChecked(s.isIsclick());
+		item.cb.setText(s.getCompany());
+		item.heji.setText(s.getNote());
 //		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
 //			@Override
@@ -133,6 +138,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 	class Item{
 		CheckBox cb;
 		SwipeMenuListView lv;
+		TextView heji,computer;
 	}
 
 	private int dp2px(int dp) {

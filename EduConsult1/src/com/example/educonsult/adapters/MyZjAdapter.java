@@ -7,31 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.ShopcartActivity.shop;
-import com.example.educonsult.beans.BaseBean;
-import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.tools.Util;
 
 public class MyZjAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Integer>list;
+	private ArrayList<ProductBean>list;
 	private LayoutInflater inflater;
 	private Item item;
 
 
-	public MyZjAdapter(Context context,ArrayList<Integer>list){
+	public MyZjAdapter(Context context,ArrayList<ProductBean>list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Integer>list){
+	public void SetData(ArrayList<ProductBean>list){
 		this.list = list;
 	}
 
@@ -71,7 +66,15 @@ public class MyZjAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		item.tv_price.setText("гд170");
+		
+		try {
+			item.iv.setImageBitmap(Util.getBitmapForNet(list.get(position).getThumb()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		item.tv_address.setText(list.get(position).getAreaname());
+		item.tv_price.setText(list.get(position).getPrice());
 		return convertView;
 	}
 	class Item{

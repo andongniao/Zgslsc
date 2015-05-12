@@ -404,25 +404,29 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			HomePagerActivity.handler.sendMessage(msg);
 			break;
 		case R.id.home_gongqiu_ll:
-			intent = new Intent(context,GqHomeActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(context,GqHomeActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 			break;
 		case R.id.home_news_ll:
-			intent = new Intent(context,NewHomeActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(context,NewHomeActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 			break;
 		case R.id.home_zhidao_ll:
-			intent = new Intent(context,KnowHomeActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(context,KnowHomeActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 			break;
 
 		case R.id.home_zhanhui_ll:
-			intent = new Intent(context,ZhanhuiHomeActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(context,ZhanhuiHomeActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 			break;
 		case R.id.home_pinpai_ll:
 			Util.ShowToast(context, R.string.maimeng);
@@ -453,46 +457,52 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 			break;
 		case R.id.home_siliao_ll:
-			intent = new Intent(this.context,GqTwoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			title = getResources().getString(R.string.home_siliao);
-			intent.putExtra("title", title);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(this.context,GqTwoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			title = getResources().getString(R.string.home_siliao);
+//			intent.putExtra("title", title);
+//			startActivity(intent);
 			break;
 		case R.id.home_shouyao_ll:
-			intent = new Intent(this.context,GqTwoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			title = getResources().getString(R.string.home_shouyao);
-			intent.putExtra("title", title);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(this.context,GqTwoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			title = getResources().getString(R.string.home_shouyao);
+//			intent.putExtra("title", title);
+//			startActivity(intent);
 			break;
 		case R.id.home_yangzhi_ll:
-			intent = new Intent(this.context,GqTwoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			title = getResources().getString(R.string.home_yangzhishebei);
-			intent.putExtra("title", title);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(this.context,GqTwoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			title = getResources().getString(R.string.home_yangzhishebei);
+//			intent.putExtra("title", title);
+//			startActivity(intent);
 			break;
 		case R.id.home_chuqin_ll:
-			intent = new Intent(this.context,GqTwoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			title = getResources().getString(R.string.home_chuqinyangzhi);
-			intent.putExtra("title", title);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(this.context,GqTwoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			title = getResources().getString(R.string.home_chuqinyangzhi);
+//			intent.putExtra("title", title);
+//			startActivity(intent);
 			break;
 		case R.id.home_tianjiaji_ll:
-			intent = new Intent(this.context,GqTwoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			title = getResources().getString(R.string.home_tianjiaji);
-			intent.putExtra("title", title);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(this.context,GqTwoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			title = getResources().getString(R.string.home_tianjiaji);
+//			intent.putExtra("title", title);
+//			startActivity(intent);
 			break;
 		case R.id.home_yuanliao_ll:
-			intent = new Intent(this.context,GqTwoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			title = getResources().getString(R.string.home_yuanliao);
-			intent.putExtra("title", title);
-			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
+//			intent = new Intent(this.context,GqTwoActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			title = getResources().getString(R.string.home_yuanliao);
+//			intent.putExtra("title", title);
+//			startActivity(intent);
 			break;
 		case R.id.home_tv_more_jingpin:
 			//			intent = new Intent(this.context,GqTwoActivity.class);
@@ -574,6 +584,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 	private void Toproduct(){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//intent.putExtra("productdetaile", value);
 		startActivity(intent);
 	}
 

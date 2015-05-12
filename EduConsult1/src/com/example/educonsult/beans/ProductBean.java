@@ -6,13 +6,15 @@ package com.example.educonsult.beans;
  *
  */
 public class ProductBean extends BaseBean{
-	private String itemid;
-	private String title;
-	private String unit;
-	private String thumb;
-	private String price;
-	private String vip;
-	private String area;
+	private String itemid;//产品id
+	private String title;//产品标题
+	private String unit;//单位
+	private String thumb;//缩略图
+	private String price;//单价
+	private String vip;//
+	private String area;//
+	private String areaname;//区域
+	private String sales;//销量
 	public String getItemid() {
 		return itemid;
 	}
@@ -55,7 +57,18 @@ public class ProductBean extends BaseBean{
 	public void setArea(String area) {
 		this.area = area;
 	}
-	
+	public String getAreaname() {
+		return areaname;
+	}
+	public void setAreaname(String areaname) {
+		this.areaname = areaname;
+	}
+	public String getSales() {
+		return sales;
+	}
+	public void setSales(String sales) {
+		this.sales = sales;
+	}
 	
 	
 }

@@ -5,8 +5,8 @@ package com.example.educonsult.net;
  *
  */
 public class ServiceUrl {
-	public static String Base="http://www.shop.com/app/";
-//	public static String Base="http://192.168.1.190/app/";
+//	public static String Base="http://www.shop.com/app/";
+	public static String Base="http://192.168.1.190/app/";
 	//首页
 	public static String Home_url=Base;
 	//城市
@@ -39,6 +39,19 @@ public class ServiceUrl {
 	//信件首页列表
 	public static String sms_list = "station_sms";
 	public static String sms_deteaile = "sms_detail&itemid=";
+	//绑定银行卡
+	public static String bank  = "bankcard.php?action=";
+	//获取开户行列表
+	public static String bank_list  = "bank";
+	//获取开户行城市
+	public static String bank_city  = "city";
+	//获取开户行县
+	public static String bank_county  = "county";
+	//获取开户行营业网点
+	public static String bank_branch  = "branch";
+	//获取开户行城市
+	public static String bank_bind  = "bind";
+	
 	
 
 	//精选推荐（个人中心）
@@ -46,10 +59,36 @@ public class ServiceUrl {
 	
 	
 	//购物车列表
-	public static String cart_list = "cart.php?authstr=";
+	public static String cart_list = "cart.php?action=list&authstr=";
+	//添加购车
+	public static String cart_add = "cart.php?action=add&itemid=";
+	//删除购车
+	public static String cart_del = "cart.php?action=del";
+	//清空购车
+	public static String cart_clear = "cart.php?action=clear";
 	
-	//购物车列表
-	public static String add_address = "address.php";
+	
+	
+	
+	
+	//单条地址
+	public static String address = "address.php";
+	//地址列表
+	public static String address_list = "?action=list&authstr=";
+	//添加地址
+	public static String address_add = "?action=add&authstr=";
+	
+	//搜索、产品
+	private static String fields = "fields.php?action=";
+	
+	private static String fields_search = "search";
+	
+	
+	
+	//订单列表
+	public static String order = "order.php";
+	
+	
 	
 	
 }

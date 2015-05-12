@@ -3,9 +3,9 @@ package com.example.educonsult.beans;
 import java.util.ArrayList;
 
 public class ProdectDetaileBean extends BaseBean{
-	private MallInfoBean mallinfo;
-	private ArrayList<ProductBean> recommend;
-	private ArrayList<ProductBean> buyedlist;
+	private MallInfoBean mallinfo;//产品详情
+	private ArrayList<ProductBean> recommend;//推荐列表
+	private ArrayList<ProductBean> buyedlist;//购买过的
 	public MallInfoBean getMallinfo() {
 		return mallinfo;
 	}

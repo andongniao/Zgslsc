@@ -18,10 +18,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.LoginActivity.RefeshData;
 import com.example.educonsult.adapters.ShopcartHomeAdapter;
+import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ShopItemBean;
 import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
 public class ShopcartActivity extends BaseActivity implements OnClickListener{
@@ -37,6 +44,10 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private int type,len,cl;
 	private ImageView iv_top_t;
 	private RelativeLayout rl_r;
+	private UserBean bean;
+	private ListShopBean shopbean;
+	private ArrayList<ShopBean> shoplist;
+	private ThreadWithProgressDialog myPDT;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -55,9 +66,14 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		context = this;
-		Util.SetRedNum(context, rl_r, 1);
 		type = 0;
+		Util.SetRedNum(context, rl_r, 1);
+		bean=MyApplication.mp.getUser();
+		myPDT=new ThreadWithProgressDialog();
 		list = new ArrayList<ShopBean>();
+		if(Util.detect(context)){
+			//myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+		}
 		lv = (ListView) findViewById(R.id.shopcart_home_lv);
 		ll_isnull = (LinearLayout) findViewById(R.id.shopcart_home_ll_isnull);
 		ll_jeisuan = (LinearLayout) findViewById(R.id.shopcart_home_ll_show);
@@ -166,7 +182,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		};
 		
 
-		ShopBean b1 = new ShopBean();
+		/*ShopBean b1 = new ShopBean();
 		b1.setIsclick(false);
 		ShopItemBean a1 = new ShopItemBean();
 		a1.setIsclick(false);
@@ -189,7 +205,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		ArrayList<ShopItemBean>l2 = new ArrayList<ShopItemBean>();
 		l2.add(a);
 		b2.setMall(l2);
-		list.add(b2);
+		list.add(b2);*/
 
 
 		adapter = new ShopcartHomeAdapter(context, list,shop);
@@ -264,6 +280,47 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	        return true;   
 	    }
 	    return super.onKeyDown(keyCode, event);
+	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		public RefeshData(){
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// TODO Auto-generated method stub
+			Send s=new Send(context);
+			shopbean=s.getCartlist(bean.getAuthstr());
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(shopbean!=null){
+				String code = shopbean.getCode();
+				String m = shopbean.getMsg();
+				if("200".equals(code)){
+//					
+					list=shopbean.getList();
+					finish();
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		
+		}
+		
 	}
 	
 }

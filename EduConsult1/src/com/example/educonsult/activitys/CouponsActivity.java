@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.educonsult.R;
@@ -18,7 +20,7 @@ import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.tools.Util;
 
 public class CouponsActivity extends BaseActivity {
-	private MyListview list_coupons;
+	private ListView list_coupons;
 	
 	private Context context;
 	private ArrayList<String> list;
@@ -26,24 +28,25 @@ public class CouponsActivity extends BaseActivity {
 	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
 	private CouponsAdapter couponsAdapter;
+	private LinearLayout ll_isno;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		context=this;
 		//topRightLVisible();
-		topRightRVisible();
+		//topRightRVisible();
 		topRightTGone();
 		//rl_l = (RelativeLayout) getTopLightRl();
-		rl_r = (RelativeLayout) getTopRightRl();
+	//	rl_r = (RelativeLayout) getTopRightRl();
 		/*iv_top_l = (ImageView) getTopLightView();
 		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);*/
-		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_xx_bg);
+		//iv_top_t = (ImageView) getTopRightView();
+		//iv_top_t.setBackgroundResource(R.drawable.top_xx_bg);
 		setTopLeftTv(R.string.coupons_title);
 		setContentXml(R.layout.coupons);
 		init();
-		addlistener();
+		//addlistener();
 	}
 
 	private void addlistener() {
@@ -60,10 +63,11 @@ public class CouponsActivity extends BaseActivity {
 		
 	}
 	void init(){
-		
-		list_coupons=(MyListview)findViewById(R.id.coupons_list);
+		ll_isno=(LinearLayout)findViewById(R.id.coupons_ll_isnull);
+		list_coupons=(ListView)findViewById(R.id.coupons_list);
 		couponsAdapter=new CouponsAdapter(this);
 		list_coupons.setAdapter(couponsAdapter);
+		list=new ArrayList<String>();
 		list_coupons.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -73,7 +77,15 @@ public class CouponsActivity extends BaseActivity {
 				Util.ShowToast(context, arg2+"");
 			}
 		});
-		
+		if(list!=null){
+			if(list.size()>0){
+				ll_isno.setVisibility(View.GONE);
+				list_coupons.setVisibility(View.VISIBLE);
+			}else{
+				ll_isno.setVisibility(View.VISIBLE);
+				list_coupons.setVisibility(View.GONE);
+			}
+		}
 		
 		
 		
