@@ -3,35 +3,37 @@ package com.example.educonsult.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.ShopcartActivity.shop;
-import com.example.educonsult.beans.BaseBean;
-import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.activitys.MyOrderActivity.Myorder;
+import com.example.educonsult.beans.OrderBean;
+import com.example.educonsult.tools.Util;
 
 public class MyOrderLvAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Integer>list;
+	private ArrayList<OrderBean>list;
 	private LayoutInflater inflater;
 	private Item item;
+	private OrderBean orderBean;
+	private Myorder myorder;
 
 
-	public MyOrderLvAdapter(Context context,ArrayList<Integer>list){
+	public MyOrderLvAdapter(Context context,ArrayList<OrderBean>list,int index,Myorder myorder){
 		this.context = context;
 		this.list = list;
+		orderBean = list.get(index);
+		this.myorder = myorder;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Integer>list){
+	public void SetData(ArrayList<OrderBean>list){
 		this.list = list;
 	}
 
@@ -67,8 +69,26 @@ public class MyOrderLvAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		
-		
+		Bitmap bmp = null;
+		try {
+			bmp = Util.getBitmapForNet(orderBean.getThumb());
+			if(bmp!=null){
+				item.iv.setImageBitmap(bmp);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		item.tv_title.setText(orderBean.getTitle());
+		item.tv_price.setText(orderBean.getPrice());
+		item.tv_num.setText(orderBean.getNumber());
+		convertView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				myorder.Order_Detaile(orderBean);
+			}
+		});
 		
 		return convertView;
 	}

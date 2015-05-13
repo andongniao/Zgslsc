@@ -31,7 +31,6 @@ import com.example.educonsult.beans.BanksBean;
 import com.example.educonsult.beans.BanksBranchBean;
 import com.example.educonsult.beans.BanksCityBean;
 import com.example.educonsult.beans.BaseBean;
-import com.example.educonsult.beans.CompanyBean;
 import com.example.educonsult.beans.ExpressBean;
 import com.example.educonsult.beans.ListBanksBean;
 import com.example.educonsult.beans.ListBanksBranch;
@@ -42,7 +41,6 @@ import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.OrderCommitBean;
 import com.example.educonsult.beans.OrderDetaileBean;
-import com.example.educonsult.beans.OrderFields;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.QuerenOrderBean;
 import com.example.educonsult.beans.RefundInfoBean;
@@ -56,94 +54,21 @@ import com.google.gson.reflect.TypeToken;
 public class PostHttp {
 	private HttpParams httpParams;  
 	private HttpClient httpClient;  
+	@SuppressWarnings("unused")
 	private Context context;
 	private Gson gson;
+	private static String error="服务器异常，请稍候再试...";
 	public PostHttp(Context context){
 		this.context = context;
 		getHttpClient();
 		gson = new Gson();
-	}
-	/**
-	 * 添加一条地址
-	 * @return
-	 */
-	public BaseBean addAddress() {  
-		BaseBean bean = new BaseBean();
-		String url = ServiceUrl.Base+ServiceUrl.address;
-		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
-		NameValuePair p = new BasicNameValuePair("action","add");
-		list.add(p);
-		NameValuePair p1 = new BasicNameValuePair("post[truename]","000");
-		list.add(p1);
-		NameValuePair p2 = new BasicNameValuePair("post[mobile]","1303030430");
-		list.add(p2);
-		NameValuePair p3 = new BasicNameValuePair("post[postcode]","051530");
-		list.add(p3);
-		NameValuePair p4 = new BasicNameValuePair("post[areaid]","35");
-		list.add(p4);
-		NameValuePair p5 = new BasicNameValuePair("post[address]","ddddd");
-		list.add(p5);
-		NameValuePair p6 = new BasicNameValuePair("authstr","u0v3g87dqn34qvdj7nlosq8hk1");
-		list.add(p6);
-
-		/* 建立HTTPPost对象 */  
-		HttpPost httpRequest = new HttpPost(url);  
-
-		String strResult = "doPostError";  
-
-		try {  
-			/* 添加请求参数到请求对象 */  
-			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
-			/* 发送请求并等待响应 */  
-			HttpResponse httpResponse = httpClient.execute(httpRequest);  
-			/* 若状态码为200 ok */  
-			JSONObject obj= null;
-			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
-				/* 读返回数据 */  
-				strResult = EntityUtils.toString(httpResponse.getEntity());  
-				obj = new JSONObject(strResult);
-				if(obj!=null){
-					bean.setMsg(obj.getString("message"));
-					bean.setCode(obj.getString("code"));
-				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
-					bean.setCode("500");
-				}
-			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
-				bean.setCode("500");
-			}  
-
-			return bean;
-		} catch (ClientProtocolException e) {  
-			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
-			bean.setCode("500");
-			return bean;
-		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
-			e.printStackTrace();  
-			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
-			bean.setCode("500");
-			return bean;
-		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
-			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
-			bean.setCode("500");
-			return bean;
-		}  
 	}  
 
-
 	/**
 	 * 添加一条地址
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public BaseBean addOneAddress(AddressBean ab,String authstr) {  
 		BaseBean bean = new BaseBean();
 		String url = ServiceUrl.Base+ServiceUrl.address;
@@ -183,13 +108,11 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 
@@ -197,20 +120,20 @@ public class PostHttp {
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -223,6 +146,7 @@ public class PostHttp {
 	 * 修改单条地址
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public BaseBean editOneAddress(AddressBean ab,String authstr) {  
 		BaseBean bean = new BaseBean();
 		String url = ServiceUrl.Base+ServiceUrl.address;
@@ -266,13 +190,11 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 
@@ -280,20 +202,20 @@ public class PostHttp {
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -305,6 +227,7 @@ public class PostHttp {
 	 * 设置默认地址
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public BaseBean SetDetaultAddress(AddressBean ab,String authstr) {  
 		BaseBean bean = new BaseBean();
 		String url = ServiceUrl.Base+ServiceUrl.address;
@@ -336,13 +259,11 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 
@@ -350,20 +271,20 @@ public class PostHttp {
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -373,6 +294,7 @@ public class PostHttp {
 	 * 删除单条地址
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public BaseBean DelAddress(AddressBean ab,String authstr) {  
 		BaseBean bean = new BaseBean();
 		String url = ServiceUrl.Base+ServiceUrl.address;
@@ -404,13 +326,11 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 
@@ -418,20 +338,20 @@ public class PostHttp {
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -510,29 +430,27 @@ public class PostHttp {
 					}
 				}
 			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");	
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -587,27 +505,27 @@ public class PostHttp {
 				bean.setMsg(obj.getString("message"));
 				bean.setCode(obj.getString("code"));
 			} else {  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -671,27 +589,27 @@ public class PostHttp {
 				bean.setMsg(obj.getString("message"));
 				bean.setCode(obj.getString("code"));
 			} else {  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -749,29 +667,27 @@ public class PostHttp {
 				bean.setMsg(obj.getString("message"));
 				bean.setCode(obj.getString("code"));
 			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -826,33 +742,31 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				//				strResult = "Error Response: "  
-				//						+ httpResponse.getStatusLine().toString();  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -869,6 +783,7 @@ public class PostHttp {
 	/**
 	 * 结算获取运费模板
 	 */
+	@SuppressWarnings("unused")
 	public QuerenOrderBean Jiesuan(ListShopBean lsb,String authstr) {  
 		QuerenOrderBean bean = new QuerenOrderBean();
 		ArrayList<ShopBean> listshop = lsb.getList();
@@ -906,8 +821,8 @@ public class PostHttp {
 				obj = new JSONObject(strResult);
 				if(obj!=null){
 					JSONObject data = obj.getJSONObject("data");
-					@SuppressWarnings("unchecked")
 					JSONObject li = data.getJSONObject("list");
+					@SuppressWarnings("unchecked")
 					Iterator<String> keys=li.keys();
 					while (keys.hasNext ())
 					{
@@ -949,11 +864,11 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 
@@ -961,20 +876,20 @@ public class PostHttp {
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -982,7 +897,8 @@ public class PostHttp {
 
 
 	/**
-	 *  订单付款(未付给卖家，需要确认收货后再确认支付)
+	 *  订单付款(未付给卖家，需要确认收货后再确认支付)订单预付款 宋 个人中心
+	 *  不使用
 	 * @param itemid		订单ID
 	 * @param password		交易密码
 	 * @param couponid		优惠券ID
@@ -1024,31 +940,31 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1093,39 +1009,39 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
 	} 
 
 	/**
-	 *  确认付款（买家操作）
+	 *  确认付款/确认收货（买家操作） 宋
 	 * @param itemid		订单ID
 	 * @param authstr		唯一标示
 	 * @return
@@ -1161,31 +1077,31 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1230,32 +1146,32 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1273,7 +1189,7 @@ public class PostHttp {
 		BaseBean bean = new BaseBean();
 		String url = ServiceUrl.Base+"order.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
-		NameValuePair p = new BasicNameValuePair("action","confirmpay");
+		NameValuePair p = new BasicNameValuePair("action","comment");
 		list.add(p);
 		NameValuePair p1 = new BasicNameValuePair("itemid",itemid);
 		list.add(p1);
@@ -1304,31 +1220,31 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1361,7 +1277,7 @@ public class PostHttp {
 		}else{
 			t = "false";
 		}
-		NameValuePair p2 = new BasicNameValuePair("submit","true");
+		NameValuePair p2 = new BasicNameValuePair("submit",t);
 		list.add(p2);
 		NameValuePair p3 = new BasicNameValuePair("send_type",send_type);
 		list.add(p3);
@@ -1392,32 +1308,32 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1469,32 +1385,32 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1550,32 +1466,32 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1625,32 +1541,32 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1669,7 +1585,6 @@ public class PostHttp {
 		ListOrderCommit bean = new ListOrderCommit();
 		ArrayList<OrderCommitBean> listorder = new ArrayList<OrderCommitBean>();
 		ArrayList<ShopBean> listshop = lsb.getList();
-		ArrayList<ShopBean>lsp = new ArrayList<ShopBean>();
 		String url = ServiceUrl.Base+"trade.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p = new BasicNameValuePair("action","buy");
@@ -1734,38 +1649,38 @@ public class PostHttp {
 						bean.setCode(obj.getString("code"));
 					}
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
 	} 
 
 	/**
-	 * 结算订单，支付（购物车生成订单后直接支付）
+	 * 结算订单，支付（购物车生成订单后直接支付）高川
 	 * @param lsb		订单实体
 	 * @param authstr	唯一标示
 	 * @param password	password
@@ -1778,7 +1693,6 @@ public class PostHttp {
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p = new BasicNameValuePair("action","confirm");
 		list.add(p);
-		System.out.println("支付时list len="+listshop.size());
 		for(int i=0;i<listshop.size();i++){
 			OrderCommitBean sb = listshop.get(i);
 			NameValuePair p1 = new BasicNameValuePair("coupon["+sb.getTrade()+"]",sb.getCoupon());
@@ -1790,8 +1704,6 @@ public class PostHttp {
 		list.add(po);
 		NameValuePair pl = new BasicNameValuePair("authstr",authstr);
 		list.add(pl);
-		System.out.println("支付时上传的数据" +
-				""+list.toString());
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
 
@@ -1816,31 +1728,31 @@ public class PostHttp {
 						bean.setCode(obj.getString("code"));
 					}
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1849,7 +1761,7 @@ public class PostHttp {
 
 
 	/**
-	 *  结算订单，支付（个人中心订单列表跳转支付）
+	 *  确认支付支付（个人中心订单列表跳转支付）预付款高川
 	 * @param trade			订单ID
 	 * @param coupon		优惠券
 	 * @param authstr		唯一标示
@@ -1870,8 +1782,6 @@ public class PostHttp {
 		list.add(po);
 		NameValuePair pl = new BasicNameValuePair("authstr",authstr);
 		list.add(pl);
-		System.out.println("支付时上传的数据" +
-				""+list.toString());
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
 
@@ -1896,31 +1806,31 @@ public class PostHttp {
 						bean.setCode(obj.getString("code"));
 					}
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -1945,8 +1855,6 @@ public class PostHttp {
 		list.add(po);
 		NameValuePair pl = new BasicNameValuePair("authstr",authstr);
 		list.add(pl);
-		System.out.println("支付时上传的数据" +
-				""+list.toString());
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
 
@@ -1978,31 +1886,31 @@ public class PostHttp {
 						bean.setCode(obj.getString("code"));
 					}
 				}else{
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}
 			} else {  
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}  
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -2052,36 +1960,39 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
 	} 
 
+	
+
+	
 
 	
 	/**
@@ -2154,32 +2065,32 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -2245,11 +2156,11 @@ public class PostHttp {
 		list.add(pl5);
 		//养殖户选填参数
 		NameValuePair ps1 = new BasicNameValuePair("post[bankcard]",bankcard);
-		list.add(pl1);
+		list.add(ps1);
 		NameValuePair ps2 = new BasicNameValuePair("post_fields[yzsl]",yzsl);
-		list.add(pl2);
+		list.add(ps2);
 		NameValuePair ps3 = new BasicNameValuePair("post_fields[tjr]",tjr);
-		list.add(pl3);
+		list.add(ps3);
 		
 
 		/* 建立HTTPPost对象 */  
@@ -2272,32 +2183,32 @@ public class PostHttp {
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));
 				} else {  
-					bean.setMsg("服务器异常，请稍后再试...");
+					bean.setMsg(error);
 					bean.setCode("500");
 				}  
 
 			}else{
-				bean.setMsg("服务器异常，请稍后再试...");
+				bean.setMsg(error);
 				bean.setCode("500");
 			}
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
 			strResult = e.getMessage().toString();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
 			System.out.println("IO异常");
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
 			strResult = e.getMessage().toString();  
 			e.printStackTrace();  
-			bean.setMsg("服务器异常，请稍后再试...");
+			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
@@ -2306,7 +2217,7 @@ public class PostHttp {
 	
 
 
-/******************************************************************************************/
+/******************************************************************************************************************/
 
 	public HttpClient getHttpClient() {  
 

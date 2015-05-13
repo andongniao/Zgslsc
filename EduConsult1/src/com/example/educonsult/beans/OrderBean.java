@@ -12,6 +12,7 @@ public class OrderBean {
 	private String price;	//单价
 	private String number;	//数量
 	private String status;	//状态
+	private String statusid;//状态码 1待付款 2代发货 3待收货 4交易成功
 	private String company;	//企业名称
 	private String unit;	//单位
 	private String money;	//金额
@@ -59,6 +60,12 @@ public class OrderBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getStatusid() {
+		return statusid;
+	}
+	public void setStatusid(String statusid) {
+		this.statusid = statusid;
+	}
 	public String getCompany() {
 		return company;
 	}
@@ -89,6 +96,5 @@ public class OrderBean {
 	public void setCoupons(String coupons) {
 		this.coupons = coupons;
 	}
-	
 
 }

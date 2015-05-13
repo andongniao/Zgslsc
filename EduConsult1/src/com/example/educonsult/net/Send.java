@@ -1025,7 +1025,7 @@ public class Send {
 	 * 获取订单列表 
 	 * @param step		搜索类型1待付款，2待收货，3待收货，4待评价（可选）默认为0
 	 * @param page		页码 
-	 * @param authstr	唯一标示
+	 * @param authstr	唯一标示refundlist
 	 * @return
 	 */
 	public ListOrderBean getOrderList(int step,int page,String authstr) {
@@ -1033,7 +1033,7 @@ public class Send {
 		ArrayList<OrderBean> list_order = new ArrayList<OrderBean>();
 		ArrayList<OrderFields> list_fields = new ArrayList<OrderFields>();
 		String url =  ServiceUrl.Base+ServiceUrl.order
-				+"?step"+step+"&page"+page
+				+"?step="+step+"&page="+page
 				+ServiceUrl.mycenter_footer+authstr
 				;
 		String jsonStr = null;
@@ -1064,6 +1064,7 @@ public class Send {
 							o.setPrice(d.getString("price"));
 							o.setNumber(d.getString("number"));
 							o.setStatus(d.getString("status"));
+							o.setStatusid(d.getString("statusid"));
 							o.setCompany(d.getString("company"));
 							o.setCoupons(d.getString("coupons"));
 							o.setUnit(d.getString("unit"));
@@ -1109,7 +1110,59 @@ public class Send {
 
 	}
 	
-	
+	/**
+	 * 获取退款订单列表 
+	 * @param page		页码 
+	 * @param authstr	唯一标示
+	 * @return
+	 */
+	public ListOrderBean getOrderRefundList(int page,String authstr) {
+		ListOrderBean lb = new ListOrderBean();
+		ArrayList<OrderBean> list_order = new ArrayList<OrderBean>();
+		ArrayList<OrderFields> list_fields = new ArrayList<OrderFields>();
+		String url =  ServiceUrl.Base+ServiceUrl.order
+				+"?action=refundlist&page="+page
+				+ServiceUrl.mycenter_footer+authstr
+				;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					JSONArray data = object.getJSONArray("data");
+					Type type_o = new TypeToken<ArrayList<OrderBean>>() {
+					}.getType();
+					list_order = gson.fromJson(data.toString(), type_o);
+					lb.setList_order(list_order);
+					lb.setList_key(list_fields);
+					return lb;
+				} else {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					return lb;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				lb.setCode("500");
+				lb.setMsg("服务器异常，请稍候再试...");
+				return lb;
+			}
+		} else {
+			lb.setCode("500");
+			lb.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return lb;
+		}
+
+	}
 	
 	
 	
