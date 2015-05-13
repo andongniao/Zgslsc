@@ -20,9 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
@@ -43,7 +45,11 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout lin;
 	public static boolean isrezoom;
 	private TextItemListAdapter adapter_r;
-
+	
+	private ListAreaBean listAreaBean; 
+	private Util u;
+	private String filename;
+	private ArrayList<AreaBean> areaBeans;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -57,6 +63,11 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 
 	}
 	void init(){
+		filename=MyApplication.AreaName;
+		u=new Util(context);
+		/*listAreaBean=(ListAreaBean)u.readObject(filename);
+		areaBeans=listAreaBean.getList();*/
+		
 		ll_carway=(LinearLayout)findViewById(R.id.bdmoneycar_carway_lin);
 		ll_carway.setOnClickListener(this);
 		ll_carwhere=(LinearLayout)findViewById(R.id.bdmoneycar_carwhere_lin);

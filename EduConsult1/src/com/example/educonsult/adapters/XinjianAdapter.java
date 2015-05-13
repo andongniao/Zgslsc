@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.w3c.dom.Text;
 
 import com.example.educonsult.R;
+import com.example.educonsult.beans.XinJianBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,19 +17,18 @@ import android.widget.TextView;
 
 public class XinjianAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Object> list;
+	private ArrayList<XinJianBean> list;
 	private LayoutInflater inflater;
 	private int index;
 	private Itemview itemview;
-	
-	
-	public XinjianAdapter(Context context,ArrayList<Object> list){
+    private XinJianBean xinjian; 	
+	public XinjianAdapter(Context context,ArrayList<XinJianBean> list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		index = -1;
 	}
-	public void SetData(ArrayList<Object>list){
+	public void SetData(ArrayList<XinJianBean> list){
 		this.list = list;
 	}
 	
@@ -38,9 +38,9 @@ public class XinjianAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Object getItem(int position) {
+	public XinJianBean getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return list.get(position);
 	}
 
 	@Override
@@ -60,6 +60,8 @@ public class XinjianAdapter extends BaseAdapter{
 			itemview = (Itemview) convertView.getTag();
 		}
 //		itemview.tv.setText(list.get(position));
+		xinjian=list.get(position);
+		itemview.tv.setText(xinjian.getTitle());
 		return convertView;
 	}
 	class Itemview{

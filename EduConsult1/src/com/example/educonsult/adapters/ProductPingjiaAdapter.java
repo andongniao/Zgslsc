@@ -3,6 +3,7 @@ package com.example.educonsult.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.example.educonsult.beans.CommentBean;
 import com.example.educonsult.beans.CompanyBean;
-import com.example.educonsult.beans.ProductBean;
 
 public class ProductPingjiaAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<ProductBean> list;
+	private ArrayList<CommentBean> list;
 	private LayoutInflater inflater;
 	private Myitem myitem;
-	private int star=3;
+	private String star;
+	
 
 
-	public ProductPingjiaAdapter(Context context,ArrayList<ProductBean> list){
+	public ProductPingjiaAdapter(Context context,ArrayList<CommentBean> list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -31,7 +33,7 @@ public class ProductPingjiaAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 4;//list!=null?list.size():0;
+		return 3;//list!=null?list.size():0;
 	}
 
 	@Override
@@ -63,20 +65,18 @@ public class ProductPingjiaAdapter extends BaseAdapter{
 		}
 		//		ImageView v = new ImageView(context);
 		//myitem.iv.setBackgroundResource(R.drawable.ic_launcher);
-		switch (star) {
-		case 1:
+		myitem.tv_name.setText(list.get(position).getBuyer());
+		myitem.tv_text.setText(list.get(position).getSeller_comment());
+		myitem.tv_time.setText(list.get(position).getSeller_ctime());
+		star=list.get(position).getSeller_star();
+		if(star.equals("1")){
 			myitem.starnum.setBackgroundResource(R.drawable.onestar);
-			break;
-		case 3:
+		}else if(star.equals("2")){
 			myitem.starnum.setBackgroundResource(R.drawable.threestar);
-			break;
-		case 5:
+		}else if(star.equals("3")){
 			myitem.starnum.setBackgroundResource(R.drawable.fivestar);
-			break;
-
-		default:
-			break;
 		}
+		
 		return convertView;
 	}
 

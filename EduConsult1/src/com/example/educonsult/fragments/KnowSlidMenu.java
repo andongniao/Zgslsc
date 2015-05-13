@@ -58,8 +58,8 @@ public class KnowSlidMenu extends Fragment {
 		adapter_l = new KnowFenleiAdapter(context, l);
 		lv_l.setAdapter(adapter_l);
 		lv_r = (ListView) view.findViewById(R.id.know_slid_view_lv_r);
-		adapter_r = new HomeSlidAdapter(context, list,2);
-		lv_r.setAdapter(adapter_r);
+		//adapter_r = new HomeSlidAdapter(context, list,2);
+		//lv_r.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,

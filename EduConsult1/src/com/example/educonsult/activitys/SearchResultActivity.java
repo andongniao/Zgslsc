@@ -16,21 +16,35 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.SearchHomeActivity.RefeshData;
 import com.example.educonsult.adapters.SearchResultAdapter;
+import com.example.educonsult.beans.ListProductBean;
+import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.net.PostHttp;
+import com.example.educonsult.tools.Util;
 
 public class SearchResultActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
 	protected int activityCloseExitAnimation;
 	private ImageView iv_back,iv_num,iv_price,iv_renqi;
 	private EditText et;
-	private LinearLayout ll_zonghe,ll_xiaoliang,ll_price,ll_renqi;
+	private LinearLayout ll_zonghe,ll_xiaoliang,ll_price,ll_renqi,ll_isyes,ll_not;
 	private GridView gv;
 	private Context context;
-	private ArrayList<Integer> list;
+	 private ArrayList<ProductBean> list;
 	private SearchResultAdapter adapter;
 	private ArrayList<View> list_view;
 	private boolean num,price,renqi;
+	private Intent intent;
+	private ThreadWithProgressDialog myPDT;
+	private ListProductBean listProductBean;
+	private int type;
+	private int order;
+	private int page;
+	private String text;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +77,24 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 
 	private void init() {
 		context = this;
-		list = new ArrayList<Integer>();
-		for(int i = 0;i<10;i++){
-			list.add(i);
+		intent=getIntent();
+
+		intent.putExtra("searchtype", type);
+		intent.putExtra("searchorder", order);
+		intent.putExtra("searchpage", page);
+		intent.putExtra("searchtext", text);
+		//list =(ArrayList<ProductBean>)intent.getSerializableExtra("search");
+		type=Integer.parseInt(intent.getStringExtra("searchtype"));
+		order=Integer.parseInt(intent.getStringExtra("searchorder"));
+		page=Integer.parseInt(intent.getStringExtra("searchpage"));
+		text=intent.getStringExtra("searchtext");
+		myPDT=new ThreadWithProgressDialog();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
 		}
+		/*for(int i = 0;i<10;i++){
+			list.add(i);
+		}*/
 		list_view = new ArrayList<View>();
 		iv_back = (ImageView) findViewById(R.id.search_result_iv_back);
 		iv_back.setOnClickListener(this);
@@ -88,10 +116,76 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		list_view.add(iv_renqi);
 
 		gv = (GridView) findViewById(R.id.search_result_gv);
-		adapter = new SearchResultAdapter(context, list);
-		gv.setAdapter(adapter);
+		
 	}
 
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		int type,order,page;
+		String text;
+		public RefeshData(int type,int order,int page,String text) {
+			this.type=type;
+		    this.order=order;
+		    this.page=page;
+		    this.text=text;
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//			Toast.makeText(context, "cancle", 1000).show();
+			finish();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(listProductBean!=null){
+				if("200".equals(listProductBean.getCode())){
+					//TODO	
+						
+					initDate();
+				}else if("300".equals(listProductBean.getCode())){
+					//TODO	
+					Util.ShowToast(context,R.string.login_out_time);
+					intent=new Intent(context, LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					
+					
+				}
+				else{
+					Util.ShowToast(context, listProductBean.getMsg());
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+
+
+
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+		
+			PostHttp p=new PostHttp(context);
+			listProductBean=p.SeanchText(type, order, page, text);
+			
+			return true;
+		}
+	}
+	void initDate(){
+		if(list.size()==0||list==null){
+			
+		}else{
+			
+			list=listProductBean.getList();
+			adapter = new SearchResultAdapter(context, list);
+			gv.setAdapter(adapter);
+		}
+	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -106,17 +200,46 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.search_result_ll_zonghe:
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,0,3,text),R.string.loding);//可取消
+			}
 
 			break;
 		case R.id.search_result_ll_xiaoliang:
 			Change(0);
+			int i=0;
+			if(num){
+				order=2;
+			}else{
+				order=1;
+			}
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			}
 			break;
 		case R.id.search_result_ll_price:
 			Change(1);
+			if(price){
+				order=4;
+			}else{
+				order=3;
+			}
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			}
 			break;
 		case R.id.search_result_ll_renqi:
 			Change(2);
+			if(renqi){
+				order=6;
+			}else{
+				order=5;
+			}
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			}
 			break;
+			
 
 		}
 	}

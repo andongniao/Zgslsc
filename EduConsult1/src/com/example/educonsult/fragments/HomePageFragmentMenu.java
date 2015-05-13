@@ -1,5 +1,8 @@
 package com.example.educonsult.fragments;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -15,15 +18,20 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.example.educonsult.ExampleActivity;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.GqHomeActivity;
 import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.adapters.FenleiAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
+import com.example.educonsult.beans.FenleiBean;
+import com.example.educonsult.beans.ListAreaBean;
+import com.example.educonsult.beans.ListFenleiBean;
+import com.example.educonsult.tools.Util;
 
 public class HomePageFragmentMenu extends Fragment {
 	private View view,v;
@@ -36,6 +44,14 @@ public class HomePageFragmentMenu extends Fragment {
 	private LinearLayout addll,ll_mycenter,ll_about;
 	private String title;
 	private Message msg;
+	private ThreadWithProgressDialog myPDT;
+	//private ListAreaBean listAreaBean;
+	private ListFenleiBean listFenleiBean;
+	private String filename=MyApplication.FenleiName;
+	private Util u;
+	private ArrayList<FenleiBean> fenleilist, listchile;
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -69,6 +85,12 @@ public class HomePageFragmentMenu extends Fragment {
 	private void init() {
 		context = getActivity();
 		list = new ArrayList<String>();
+		u=new Util(context);
+		listFenleiBean=(ListFenleiBean)u.readObject(filename);
+		//fenleilist=listFenleiBean.getList();
+		fenleilist=new ArrayList<FenleiBean>();
+		
+		listchile=new ArrayList<FenleiBean>();
 		ll_mycenter = (LinearLayout) view.findViewById(R.id.slid_view_ll_mycenter);
 		ll_about = (LinearLayout) view.findViewById(R.id.slid_view_ll_about);
 		lv_l = (ListView) view.findViewById(R.id.slid_view_lv_l);
@@ -77,11 +99,13 @@ public class HomePageFragmentMenu extends Fragment {
 		for(int i=0;i<8;i++){
 			l.add(i);
 		}
+//		if(Util.detect(context)){
+//			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+//		}
 		adapter_l = new FenleiAdapter(context, l);
 		lv_l.setAdapter(adapter_l);
 		lv_r = (ListView) view.findViewById(R.id.slid_view_lv_r);
-		adapter_r = new HomeSlidAdapter(context, list,2);
-		lv_r.setAdapter(adapter_r);
+		
 		
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 			Intent intent;
@@ -103,36 +127,78 @@ public class HomePageFragmentMenu extends Fragment {
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="饲料";
+					for(int i=0;i<fenleilist.size();i++){
+						if(fenleilist.get(i).getCatname().equals(title)){
+							listchile=fenleilist.get(i).getChild();
+							adapter_r = new HomeSlidAdapter(context, listchile,2);
+							lv_r.setAdapter(adapter_r);
+						}
+					}
 					break;
 				case 3:
 					ll_r.setVisibility(View.VISIBLE);
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="兽药";
+					for(int i=0;i<fenleilist.size();i++){
+						if(fenleilist.get(i).getCatname().equals(title)){
+							listchile=fenleilist.get(i).getChild();
+							adapter_r = new HomeSlidAdapter(context, listchile,2);
+							lv_r.setAdapter(adapter_r);
+						}
+					}
 					break;
 				case 4:
 					ll_r.setVisibility(View.VISIBLE);
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="养殖设备";
+					for(int i=0;i<fenleilist.size();i++){
+						if(fenleilist.get(i).getCatname().equals(title)){
+							listchile=fenleilist.get(i).getChild();
+							adapter_r = new HomeSlidAdapter(context, listchile,2);
+							lv_r.setAdapter(adapter_r);
+						}
+					}
 					break;
 				case 5:
 					ll_r.setVisibility(View.VISIBLE);
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="畜禽养殖";
+					for(int i=0;i<fenleilist.size();i++){
+						if(fenleilist.get(i).getCatname().equals(title)){
+							listchile=fenleilist.get(i).getChild();
+							adapter_r = new HomeSlidAdapter(context, listchile,2);
+							lv_r.setAdapter(adapter_r);
+						}
+					}
 					break;
 				case 6:
 					ll_r.setVisibility(View.VISIBLE);
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="添加剂";
+					for(int i=0;i<fenleilist.size();i++){
+						if(fenleilist.get(i).getCatname().equals(title)){
+							listchile=fenleilist.get(i).getChild();
+							adapter_r = new HomeSlidAdapter(context, listchile,2);
+							lv_r.setAdapter(adapter_r);
+						}
+					}
 					break;
 				case 7:
 					ll_r.setVisibility(View.VISIBLE);
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="原料";
+					for(int i=0;i<fenleilist.size();i++){
+						if(fenleilist.get(i).getCatname().equals(title)){
+							listchile=fenleilist.get(i).getChild();
+							adapter_r = new HomeSlidAdapter(context, listchile,2);
+							lv_r.setAdapter(adapter_r);
+						}
+					}
 					break;
 				
 
@@ -142,22 +208,24 @@ public class HomePageFragmentMenu extends Fragment {
 				
 			}
 		});
+		
 		lv_r.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent(context,GqTwoActivity.class);
-				//intent.setClass(this, GqTwoActivity.class);
+				/*Intent intent=new Intent(context,GqTwoActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("title", title);
 				intent.putExtra("num", arg2);
-				startActivity(intent);
+				startActivity(intent);*/
+				Util.ShowToast(context, R.string.maimeng);
 			}
 		});
 	}
 
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

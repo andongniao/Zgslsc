@@ -129,7 +129,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		popu.setOutsideTouchable(true);
 		//popu.update();
 		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			//myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 		}
 		
 		moneyQueryAdapter=new MoneyQueryAdapter(context, moneylist);
@@ -157,6 +157,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
 			Send s=new Send(context);
+			//做空指针判断，是否是登陆的用户
 			listmoneybean=s.getMoney(bean.getType(), bean.getAuthstr());
 			return false;
 		}

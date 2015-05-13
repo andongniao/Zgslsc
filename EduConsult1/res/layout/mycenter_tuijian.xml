@@ -7,7 +7,7 @@
     android:background="@color/base_hui">
 
     <GridView
-        android:id="@+id/myzj_gv"
+        android:id="@+id/mycenter_tuijian_gv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:fadingEdge="none"
@@ -20,7 +20,7 @@
         android:verticalSpacing="10dp" >
     </GridView>
     <LinearLayout 
-        android:id="@+id/myzj_ll_isnull"
+        android:id="@+id/mycenter_tuijian_ll_isnull"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

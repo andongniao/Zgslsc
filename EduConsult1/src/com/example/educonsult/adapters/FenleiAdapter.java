@@ -14,7 +14,8 @@ import android.widget.TextView;
 
 import com.example.educonsult.R;
 
-@SuppressLint("ResourceAsColor") public class FenleiAdapter extends BaseAdapter{
+@SuppressLint("ResourceAsColor")
+public class FenleiAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<Integer>list;
 	private LayoutInflater inflater;

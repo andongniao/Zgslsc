@@ -112,6 +112,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		bean = MyApplication.mp.getUser();
+		myPDT=new ThreadWithProgressDialog();
 		ll_head = (LinearLayout) findViewById(R.id.myinfo_ll_head);
 		ll_head.setOnClickListener(this);
 		ll_friend = (LinearLayout) findViewById(R.id.myinfo_ll_friend);
@@ -182,7 +183,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		
 		if(bean.getType()==1){
 			ll_qiye.setVisibility(View.GONE);
-		}else if(bean.getType()==0){
+		}else{
 			ll_geren.setVisibility(View.GONE);
 		}
 		

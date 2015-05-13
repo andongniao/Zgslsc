@@ -4,6 +4,12 @@
     android:background="#e6e6e6"
     android:gravity="center_vertical"
     android:orientation="vertical" >
+    <LinearLayout 
+        android:id="@+id/search_result_isyes"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -162,6 +168,72 @@
             android:horizontalSpacing="10dp"
             android:verticalSpacing="10dp"
             ></GridView>
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout 
+        android:id="search_result_isnoll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        >
+    <ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_not"
+        android:layout_gravity="center_horizontal"/>
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_result_text1"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+        <TextView 
+            android:id="@+id/search_result_guanjiazi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/regist_button_bg"
+            android:text="@string/test"
+            android:textSize="16dp"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_result_text2"
+            android:textColor="@color/black"
+            android:textSize="16dp"/>
+    </LinearLayout>
+    <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_result_text3"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+    <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_result_text4"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"/>
+    <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_result_text5"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"/>
+    <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_result_text6"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"/>
+    
+        
     </LinearLayout>
 
 </LinearLayout>

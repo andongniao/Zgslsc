@@ -247,6 +247,18 @@ public class MallInfoBean {
 	public void setAreaname(String areaname) {
 		this.areaname = areaname;
 	}
+	public String getSales() {
+		return sales;
+	}
+	public void setSales(String sales) {
+		this.sales = sales;
+	}
+	public String getHits() {
+		return hits;
+	}
+	public void setHits(String hits) {
+		this.hits = hits;
+	}
 	
 
 }

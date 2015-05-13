@@ -84,8 +84,8 @@ public class KnowDetaileActivity extends BaseActivity implements OnClickListener
 		tv_price_t = (TextView) findViewById(R.id.know_detaile_tv_price_t_jinxuan);
 		tv_price_r = (TextView) findViewById(R.id.know_detaile_tv_price_r_jinxuan);
 		lv = (MyListview) findViewById(R.id.know_detaile_lv);
-		adapter = new ProductPingjiaAdapter(context, list);
-		lv.setAdapter(adapter);
+	//	adapter = new ProductPingjiaAdapter(context, list);
+	//	lv.setAdapter(adapter);
 		cb = (CheckBox) findViewById(R.id.know_detaile_cb);
 		et = (EditText) findViewById(R.id.know_detaile_et_content);
 		findViewById(R.id.know_detaile_tv_more_jinxuan).setOnClickListener(this);

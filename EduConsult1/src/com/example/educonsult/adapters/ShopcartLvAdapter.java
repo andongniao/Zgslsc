@@ -2,6 +2,8 @@ package com.example.educonsult.adapters;
 
 import java.util.ArrayList;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.educonsult.activitys.ShopcartActivity.shop;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.ShopItemBean;
+import com.example.educonsult.tools.Util;
 
 public class ShopcartLvAdapter extends BaseAdapter{
 	private Context context;
@@ -67,6 +70,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			convertView = inflater.inflate(R.layout.shopcart_lv_lv_item, null);
 			item = new Item();
 			//TODO 
+			item.iv_ic=(ImageView)convertView.findViewById(R.id.shopcart_lv_lv_ic);
 			item.cb = (CheckBox) convertView.findViewById(R.id.shopcart_lv_lv_cb);
 			item.tv_title = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_title);
 			item.tv_price = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_price);
@@ -84,6 +88,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		final ShopItemBean b = (ShopItemBean) l.get(position);
 
 		item.cb.setChecked(b.isIsclick());
+		item.cb.setText(b.getTitle());
 //		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
 //			@Override
@@ -122,12 +127,25 @@ public class ShopcartLvAdapter extends BaseAdapter{
 				}
 			}
 		});
-		item.et_number.setText(list.get(index).getMall().get(position).getAmount());
+		item.et_number.setText(b.getAmount());
+		item.tv_price.setText(b.getPrice());
+		item.tv_title.setText(b.getTitle());
+		int i_num=Integer.parseInt(b.getAmount());
+		int i_price=Integer.parseInt(b.getPrice());
+		int i_allmoney=i_num*i_price;
+		item.tv_zongjia.setText(i_allmoney+"");
+		try {
+			item.iv_ic.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return convertView;
 	}
 	class Item{
 		TextView tv_title,tv_price,tv_zongjia;
-		ImageView iv_jia,iv_jian;
+		ImageView iv_jia,iv_jian,iv_ic;
 		EditText et_number;
 		CheckBox cb;
 	}

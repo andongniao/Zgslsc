@@ -306,11 +306,11 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		for(int i=0;i<8;i++){
 			l.add(i);
 		}
-		adapter_rl = new HomeSlidAdapter(context, ll,2);
-		lv_l.setAdapter(adapter_rl);
-		lv_r = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_r);
-		adapter_r = new HomeSlidAdapter(context, ll,3);
-		lv_r.setAdapter(adapter_r);
+//		adapter_rl = new HomeSlidAdapter(context, ll,2);
+//		lv_l.setAdapter(adapter_rl);
+//		lv_r = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_r);
+//		adapter_r = new HomeSlidAdapter(context, ll,3);
+//		lv_r.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -351,8 +351,8 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		adapter_l = new KnowFenleiAdapter(context, l);
 		lv_l.setAdapter(adapter_l);
 		lv_r = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_r);
-		adapter_r = new HomeSlidAdapter(context, ll,2);
-		lv_r.setAdapter(adapter_r);
+//		adapter_r = new HomeSlidAdapter(context, ll,2);
+//		lv_r.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,

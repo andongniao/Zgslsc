@@ -280,8 +280,12 @@
             android:name=".activitys.PJOrderActivity"
             android:label="@string/app_name" >
         </activity>
-                <activity
+        <activity
             android:name=".activitys.ConfirmTheDeliveryActivity"
+            android:label="@string/app_name" >
+        </activity>
+         <activity
+            android:name=".activitys.MyCenterTuijianActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

@@ -24,6 +24,7 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.BadgeView;
 import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.net.Send;
+import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 
@@ -118,17 +119,19 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		
 		
 		bean=MyApplication.mp.getUser();
-		if(bean.getType()==1){
-			ll_fh.setVisibility(View.GONE);
-		}else if(bean.getType()==0){
-			ll_zhifu.setVisibility(View.GONE);
-			ll_sh.setVisibility(View.GONE);
-			ll_youhuiquan.setVisibility(View.GONE);
+		if(bean!=null){
+			if(bean.getType()==1){
+				ll_fh.setVisibility(View.GONE);
+			}else{
+				ll_zf.setVisibility(View.GONE);
+				ll_sh.setVisibility(View.GONE);
+				//ll_youhuiquan.setVisibility(View.GONE);
+			}
 		}
 		myPDT = new ThreadWithProgressDialog();
 		msg = "加载中...";
 		if(Util.detect(context)){
-			//myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
 		}
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
@@ -190,18 +193,20 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_cp:
-			intent = new Intent(context,SCProductActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			intent = new Intent(context,SCProductActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_dp:
-			intent = new Intent(context,SCStoreActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			intent = new Intent(context,SCStoreActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.myinfo_ll_youhuiquan:
-			intent = new Intent(context,ConfirmTheDeliveryActivity.class);
-			//intent = new Intent(context,CouponsActivity.class);
+			//intent = new Intent(context,ConfirmTheDeliveryActivity.class);
+			intent = new Intent(context,CouponsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
@@ -279,7 +284,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.mycenter_home_ll_tuijian:
 			Toast.makeText(context, "Test", 500).show();
-			intent = new Intent(context,GqHomeActivity.class);
+			intent = new Intent(context,MyCenterTuijianActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;

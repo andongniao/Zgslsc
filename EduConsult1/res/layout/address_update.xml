@@ -49,7 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="10dp" >
+            android:padding="10dp" 
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/address_up_tv_jiedao"
@@ -74,12 +75,14 @@
             android:orientation="vertical"
             android:padding="10dp" >
 
-            <TextView
+            <EditText
                 android:id="@+id/address_up_tv_detaile"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-                android:textColor="@color/black" />
+                android:textColor="@color/black" 
+                android:background="@color/base_hui"
+                android:singleLine="true"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -97,12 +100,14 @@
             android:orientation="vertical"
             android:padding="10dp" >
 
-            <TextView
+            <EditText
                 android:id="@+id/address_up_tv_shouhuoren"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:background="@color/base_hui"
+                android:singleLine="true" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -120,12 +125,15 @@
             android:orientation="vertical"
             android:padding="10dp" >
 
-            <TextView
+            <EditText
                 android:id="@+id/address_up_tv_phone_number"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:background="@color/base_hui"
+                android:singleLine="true"
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -143,12 +151,15 @@
             android:orientation="vertical"
             android:padding="10dp" >
 
-            <TextView
+            <EditText
                 android:id="@+id/address_up_tv_youbian"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:background="@color/base_hui"
+                android:singleLine="true"
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="fill_parent"

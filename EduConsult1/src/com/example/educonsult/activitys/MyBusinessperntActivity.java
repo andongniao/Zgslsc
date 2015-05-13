@@ -127,8 +127,8 @@ public class MyBusinessperntActivity extends BaseActivity implements OnClickList
 		list_2.setVisibility(View.GONE);
 		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
 		ArrayList<String>ll = new ArrayList<String>();
-		adapter_r = new HomeSlidAdapter(context, ll,2);
-		lv_l.setAdapter(adapter_r);
+//		adapter_r = new HomeSlidAdapter(context, ll,2);
+//		lv_l.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
