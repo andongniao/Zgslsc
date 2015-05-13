@@ -5,28 +5,29 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.LoginActivity.RefeshData;
 import com.example.educonsult.adapters.ShopcartHomeAdapter;
+import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListShopBean;
-import com.example.educonsult.beans.ShopItemBean;
 import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.beans.ShopItemBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
@@ -48,6 +49,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private ListShopBean shopbean;
 	private ArrayList<ShopBean> shoplist;
 	private ThreadWithProgressDialog myPDT;
+	private BaseBean besebean;
+	private boolean islist;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -59,8 +62,12 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		iv_top_t.setBackgroundResource(R.drawable.top_xx_bg);
 		setTitleTxt(R.string.shopcart_title);
 		setContentXml(R.layout.shopcart_home_view);
-		init();
+ 		init();
 		addlistener();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+		}
+
 	}
 
 
@@ -70,10 +77,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		Util.SetRedNum(context, rl_r, 1);
 		bean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
-		list = new ArrayList<ShopBean>();
-		if(Util.detect(context)){
-			//myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
-		}
+		//list = new ArrayList<ShopBean>();
+		
 		lv = (ListView) findViewById(R.id.shopcart_home_lv);
 		ll_isnull = (LinearLayout) findViewById(R.id.shopcart_home_ll_isnull);
 		ll_jeisuan = (LinearLayout) findViewById(R.id.shopcart_home_ll_show);
@@ -83,6 +88,68 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		ll_jeisuan.setVisibility(View.GONE);
 		ll_isnull.setVisibility(View.GONE);
 		
+		
+	}
+
+	private void addlistener() {
+		cb_all.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(cl==1){
+					cl=0;
+				}else{
+					
+					for(int i=0;i<list.size();i++){
+						ShopBean s = (ShopBean) list.get(i);
+						s.setIsclick(isChecked);
+						for(int j=0;j<s.getMall().size();j++){
+							ShopItemBean b = (ShopItemBean) s.getMall().get(j);
+							b.setIsclick(isChecked);
+						}
+					}
+					adapter.SetData(list);
+					adapter.notifyDataSetChanged();
+				}
+					
+			}
+		});
+	}
+	
+	public static interface shop{
+		void click(boolean b,int index,int postion);
+		void add1( int index,int postion);
+		void jian1(int index,int postion);
+		void delete(int index,int postion);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.shopcart_home_tv_jiesuan:
+			Intent intent = new Intent(this,OrderActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+
+		}
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+	        if((System.currentTimeMillis()-exitTime) > 2000){  
+	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+	            exitTime = System.currentTimeMillis();   
+	        } else {
+	            finish();
+	            System.exit(0);
+	        }
+	        return true;   
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
+	private void initDate(){
+		Log.i("initDate---------------------------", "fffffffffffffffffffffffffffffffffffff");
 		shop = new shop() {
 			
 			@Override
@@ -154,6 +221,9 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void delete(int index, int postion) {
 				list.get(index).getMall().remove(list.get(index).getMall().get(postion));
+				if(Util.detect(context)){
+					myPDT.Run(context, new deleteRefeshData(list,postion,index),R.string.loding);//不可取消
+				}
 				int size = list.get(index).getMall().size();
 				if(size==0){
 					list.remove(list.get(index));
@@ -208,14 +278,15 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		list.add(b2);*/
 
 
-		adapter = new ShopcartHomeAdapter(context, list,shop);
-		lv.setAdapter(adapter);
-		lv.setEmptyView(ll_isnull);
+		
 		if(list!=null){
-			if(list.size()>0){
+			if(list.size()!=0){
 				ll_jeisuan.setVisibility(View.VISIBLE);
 				ll_isnull.setVisibility(View.GONE);
 				lv.setVisibility(View.VISIBLE);
+				adapter = new ShopcartHomeAdapter(context, list,shop);
+				lv.setAdapter(adapter);
+				lv.setEmptyView(ll_isnull);
 			}else{
 				ll_jeisuan.setVisibility(View.GONE);
 				ll_isnull.setVisibility(View.VISIBLE);
@@ -223,64 +294,76 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			}
 		}
 	}
+	public class deleteRefeshData implements ThreadWithProgressDialogTask {
+		private ArrayList<ShopItemBean> shopitembeanlist;
+		
+		private int position,index;
+		private ArrayList<ShopBean> lists;
+		public deleteRefeshData(ArrayList<ShopBean> lists,int position,int index){
+			this.lists=lists;
+			this.index=index;
+			this.position=position;
+		}
 
-	private void addlistener() {
-		cb_all.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if(cl==1){
-					cl=0;
-				}else{
-					
-					for(int i=0;i<list.size();i++){
-						ShopBean s = (ShopBean) list.get(i);
-						s.setIsclick(isChecked);
-						for(int j=0;j<s.getMall().size();j++){
-							ShopItemBean b = (ShopItemBean) s.getMall().get(j);
-							b.setIsclick(isChecked);
+		@Override
+		public boolean TaskMain() {
+			// TODO Auto-generated method stub
+			Send s=new Send(context);
+			//shopbean=s.getCartlist(bean.getAuthstr());
+			if(position!=-1)
+				besebean=s.CartDel(list.get(index).getMall().get(position).getItemid(), bean.getAuthstr());
+			else
+				besebean=s.CartDel(list.get(index).getCompanyid(), bean.getAuthstr());
+			if(besebean!=null){
+				String code = besebean.getCode();
+				String m = besebean.getMsg();
+				if("200".equals(code)){
+					if(list.get(index).getMall()==null||list.get(index).getMall().size()==0){
+						if(Util.detect(context)){
+							myPDT.Run(context, new deleteRefeshData(list, -1, index),R.string.loding);//不可取消
 						}
 					}
-					adapter.SetData(list);
-					adapter.notifyDataSetChanged();
-				}
 					
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
-		});
-	}
-	
-	public static interface shop{
-		void click(boolean b,int index,int postion);
-		void add1( int index,int postion);
-		void jian1(int index,int postion);
-		void delete(int index,int postion);
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.shopcart_home_tv_jiesuan:
-			Intent intent = new Intent(this,OrderActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			break;
-
+			return false;
 		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(besebean!=null){
+				String code = besebean.getCode();
+				String m = besebean.getMsg();
+				if("200".equals(code)&&position==-1||"200".equals(code)){
+//					
+					Util.ShowToast(context, "删除成功！");
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		
+		}
+		
 	}
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
-	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
-	            exitTime = System.currentTimeMillis();   
-	        } else {
-	            finish();
-	            System.exit(0);
-	        }
-	        return true;   
-	    }
-	    return super.onKeyDown(keyCode, event);
-	}
+
 	public class RefeshData implements ThreadWithProgressDialogTask {
 		public RefeshData(){
 		}
@@ -290,7 +373,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			// TODO Auto-generated method stub
 			Send s=new Send(context);
 			shopbean=s.getCartlist(bean.getAuthstr());
-			return false;
+			return true;
 		}
 
 		@Override
@@ -307,7 +390,10 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				String m = shopbean.getMsg();
 				if("200".equals(code)){
 //					
+					Log.i("shopbean---------------------------", shopbean.getList().toArray().toString());
 					list=shopbean.getList();
+					initDate();
+					
 					finish();
 				}else{
 					if(Util.IsNull(m)){

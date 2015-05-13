@@ -60,7 +60,9 @@ public class MoneyQueryAdapter extends BaseAdapter{
 			myitem = (Myitem) convertView.getTag();
 		}
 		money=list.get(position);
-		//myitem.money.setText(money.get)
+		myitem.money.setText(money.getAmount());
+		myitem.time.setText(money.getAddtime());
+		myitem.queryway.setText(money.getBalance());
 
 		return convertView;
 	}

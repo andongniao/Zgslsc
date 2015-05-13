@@ -131,8 +131,8 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		item.tv_price.setText(b.getPrice());
 		item.tv_title.setText(b.getTitle());
 		int i_num=Integer.parseInt(b.getAmount());
-		int i_price=Integer.parseInt(b.getPrice());
-		int i_allmoney=i_num*i_price;
+		float i_price=Integer.parseInt(b.getPrice());
+		float i_allmoney=i_num*i_price;
 		item.tv_zongjia.setText(i_allmoney+"");
 		try {
 			item.iv_ic.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
