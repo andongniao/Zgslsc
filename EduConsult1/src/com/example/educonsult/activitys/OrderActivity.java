@@ -79,6 +79,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private ListAddressBean listAddressBean;
 	private ArrayList<AddressBean> addressBeans;
 	private AddressBean addressBean;
+	public static boolean isinit;
+	private String money;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -127,9 +129,11 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		Bundle b=intent.getBundleExtra("shopcartbundle");
 		shopbean=(ListShopBean)b.getSerializable("shopcarbean");
 		shoporder=(ListShopBean)b.getSerializable("shopcaroder");
-//		intent.putExtra("shopcartbundle", b);
-//		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
-//		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
+		money = b.getString("money");
+		
+		//		intent.putExtra("shopcartbundle", b);
+		//		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
+		//		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
 		shopBeans=shopbean.getList();
 		myPDT =new  ThreadWithProgressDialog();
 		userBean=MyApplication.mp.bean;
@@ -147,16 +151,18 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		tv_shoujihao= (TextView) findViewById(R.id.order_tv_shoujihao);
 		tv_address = (TextView) findViewById(R.id.order_tv_dizhi);
 		tv_zongjia = (TextView) findViewById(R.id.order_tv_zongjia);
+		tv_zongjia.setText(money);
 		tv_ok = (TextView) findViewById(R.id.order_tv_ok);
 		tv_ok.setOnClickListener(this);
 		lv = (ListView) findViewById(R.id.order_home_lv);
 		lv.setFocusable(false);
 		adapter = new OrderHomeAdapter(context, shopBeans);
 		lv.setAdapter(adapter);
-		
 		inttype=0;
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 
 	}
@@ -174,40 +180,43 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			//TODO 
 			Intent id = new Intent(this,UpAddressActivity.class);
 			id.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			Bundle b=new Bundle();
+			b.putSerializable("orderbundle", listAddressBean);
+			id.putExtra("upaddress", b);
 			startActivity(id);
 			break;
 		case R.id.order_tv_ok:
 			//			ExampleActivity.setCurrentTab(3);
-//			new Thread(){ 
-//				@Override
-//				public void run() {
-//					String tn = null;
-//					InputStream is;
-//					try {
-//
-//						String url = TN_URL_01;
-//
-//						URL myURL = new URL(url);
-//						URLConnection ucon = myURL.openConnection();
-//						ucon.setConnectTimeout(120000);
-//						is = ucon.getInputStream();
-//						int i = -1;
-//						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//						while ((i = is.read()) != -1) {
-//							baos.write(i);
-//						}
-//
-//						tn = baos.toString();
-//						is.close();
-//						baos.close();
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//
-//					Message msg = mHandler.obtainMessage();
-//					msg.obj = tn;
-//					mHandler.sendMessage(msg);
-//				}}.start();  
+			//			new Thread(){ 
+			//				@Override
+			//				public void run() {
+			//					String tn = null;
+			//					InputStream is;
+			//					try {
+			//
+			//						String url = TN_URL_01;
+			//
+			//						URL myURL = new URL(url);
+			//						URLConnection ucon = myURL.openConnection();
+			//						ucon.setConnectTimeout(120000);
+			//						is = ucon.getInputStream();
+			//						int i = -1;
+			//						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			//						while ((i = is.read()) != -1) {
+			//							baos.write(i);
+			//						}
+			//
+			//						tn = baos.toString();
+			//						is.close();
+			//						baos.close();
+			//					} catch (Exception e) {
+			//						e.printStackTrace();
+			//					}
+			//
+			//					Message msg = mHandler.obtainMessage();
+			//					msg.obj = tn;
+			//					mHandler.sendMessage(msg);
+			//				}}.start();  
 			/************************************************* 
 			 * 
 			 *  步骤2：通过银联工具类启动支付插件 
@@ -222,12 +231,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			/*if(listdizhi.size()==0){
 				Util.ShowToast(context, R.string.money_password_noadress);
 			}else{
-				
+
 				setpopuwindow();
 			}*/
-				break;
+			break;
 		case R.id.money_password_no:
-			
+
 			popu.dismiss();
 			ShopcartActivity.ischange=true;
 			finish();
@@ -261,23 +270,30 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public boolean OnTaskDone() {
 			//任务完成后
-			if(listOrderCommit!=null){
-				String code = listOrderCommit.getCode();
-				String m = listOrderCommit.getMsg();
-				if("200".equals(code)){
-//					
-					setpopuwindow();
-					//finish();
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
+			if(inttype==1){
+				if(listOrderCommit!=null){
+					String code = listOrderCommit.getCode();
+					String m = listOrderCommit.getMsg();
+					if("200".equals(code)){
+						//					
+						setpopuwindow();
+						//finish();
+					}else{
+						if(Util.IsNull(m)){
+							Util.ShowToast(context, m);
+						}
 					}
 				}
-			}else if(baseBean!=null){
-				Util.ShowToast(context, "支付成功");
-				ShopcartActivity.ischange=true;
-				finish();
-			}else if(listAddressBean!=null){
+			}
+			if(inttype==2){
+
+				if(baseBean!=null){
+					Util.ShowToast(context, "支付成功");
+					ShopcartActivity.ischange=true;
+					finish();
+				}
+			}
+			if(inttype==0){ if(listAddressBean!=null){
 				String code = listAddressBean.getCode();
 				String m = listAddressBean.getMsg();
 				if("200".equals(code)){
@@ -286,7 +302,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 						ll_add.setVisibility(View.VISIBLE);
 						ll_address.setVisibility(View.GONE);
 					}else{
-						
+
 						for(int i=0;i<addressBeans.size();i++){
 							if("1".equals(addressBeans.get(i).getIsdefault())){
 								addressBean=addressBeans.get(i);
@@ -295,13 +311,14 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 						tv_shouhuoren.setText(addressBean.getTruename());
 						tv_shoujihao.setText(addressBean.getMobile());
 						tv_address.setText(addressBean.getAddress());
-						
+
 					}
 				}else{
 					if(Util.IsNull(m)){
 						Util.ShowToast(context, m);
 					}
 				}
+			}
 			}
 			else{
 				Util.ShowToast(context, R.string.net_is_eor);
@@ -316,10 +333,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			PostHttp p=new PostHttp(context);
 			// ListOrderCommit CommitOrder
 			if(inttype==1){
-				
+
 				listOrderCommit=p.CommitOrder(shopbean, userBean.getAuthstr());
 			}else if(inttype==2){
-				
+
 				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
 			}else if(inttype==0){
 				Send s=new Send(context);
@@ -342,10 +359,29 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		tv_allmoney=(TextView)v_fenlei.findViewById(R.id.money_password_money);
 		et_pass=(EditText)v_fenlei.findViewById(R.id.money_password_edpassword);
 		b_no=(Button)v_fenlei.findViewById(R.id.money_password_no);
-		b_no.setOnClickListener(this);
 		b_yes=(Button)v_fenlei.findViewById(R.id.money_password_yes);
-		b_yes.setOnClickListener(this);
-		
+
+		tv_allmoney.setText(money);
+		b_no.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ShopcartActivity.ischange =true;
+				finish();
+			}
+		});
+		b_yes.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				inttype=2;
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				}
+			}
+		});
+
+
 	}
 
 	@Override
@@ -391,6 +427,18 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		builder.create().show();
 		if(statu==1){
 			finish();
+		}
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isinit){
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			isinit = false;
 		}
 	}
 

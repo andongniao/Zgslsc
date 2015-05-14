@@ -1,12 +1,13 @@
 package com.example.educonsult.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * 购物车店铺实体
  * @author Qzr
  *
  */
-public class ShopBean extends ShopItemBean{
+public class ShopBean extends ShopItemBean implements Serializable{
 	private ArrayList<ShopItemBean>mall;	//商品列表
 	private String company;					//店家名称
 	private String companyid;				//店家ID

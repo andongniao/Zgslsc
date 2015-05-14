@@ -111,15 +111,22 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		u=new Util(context);
 		//isSave=u.readObject(liulanfile);
 		listProductBean=(ListProductBean)u.readObject(liulanfile);
-		liulanlist=listProductBean.getList();
+		if(listProductBean==null){
+			listProductBean=new ListProductBean();
+			liulanlist=new ArrayList<ProductBean>();
+			
+		}else{
+			
+			liulanlist=listProductBean.getList();
+		}
 		liulanlist.add(productBean);
 		listProductBean.setList(liulanlist);
 		isSave=u.saveObject(listProductBean, liulanfile);
-		if(isSave){
+		/*if(isSave){
 			Util.ShowToast(context, "单品保存成功");
 		}else{
 			Util.ShowToast(context, "单品保存失败");
-		}
+		}*/
 		mallinfo=new MallInfoBean();
 		recommend=new ArrayList<ProductBean>();
 		buyedlist=new ArrayList<ProductBean>();
@@ -220,9 +227,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		buymore=(TextView)findViewById(R.id.product_detaile_tv_more_shopped);
 		buymore.setOnClickListener(this);
 
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		}
+		
 
 		tv_title=(TextView)findViewById(R.id.product_detail_tv_title);
 		//		,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
@@ -263,7 +268,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 		//		
 
-
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}
 	}
 	void initDate(){
 		//ll_nobuy.setVisibility(View.GONE);
@@ -295,7 +302,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tv_qidingliang.setText(mallinfo.getQbnum());
 		tv_xiaoliang.setText(mallinfo.getSales());
 		tv_kucun.setText(mallinfo.getAmount());
-		tv_chandi.setText(mallinfo.getAreaid());
+		tv_chandi.setText(mallinfo.getAreaname());
 		tv_computer.setText(mallinfo.getCompany());
 		tv_miaoshu.setText("4.5");
 		tv_taidu.setText("4.5");
@@ -333,11 +340,11 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 				e.printStackTrace();
 			}
 			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-			tb_l.setText(recommend.get(0).getPrice());
+			tt_l.setText("￥"+recommend.get(0).getPrice()+"");
 			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
-			tb_t.setText(recommend.get(1).getPrice());
+			tt_t.setText("￥"+recommend.get(1).getPrice()+"");
 			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
-			tb_r.setText(recommend.get(2).getPrice());
+			tt_r.setText("￥"+recommend.get(2).getPrice()+"");
 		}
 		
 

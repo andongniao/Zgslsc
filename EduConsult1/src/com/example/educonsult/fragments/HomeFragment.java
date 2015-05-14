@@ -48,6 +48,7 @@ import com.example.educonsult.activitys.GqHomeActivity;
 import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.KnowHomeActivity;
+import com.example.educonsult.activitys.LoginActivity;
 import com.example.educonsult.activitys.NewHomeActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
 import com.example.educonsult.activitys.StoreActivity;
@@ -134,20 +135,20 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		ProductBean bean = new ProductBean();
 		mp.SaveSee(bean);
 		mp.GetSee();
-		apkFilter apkFilter=new apkFilter(new isFilesFilter(null));
-		String path = Environment.getExternalStorageDirectory().getPath()+"/"+name;
-		try {
-			boolean b = Tosd(name,  path);
-			//调用osgi插件安装服务安装插件
-
-			boolean a = MyApplication.sp.getBoolean("isinstaed", false); 
-			if(b && !a){
-				install(path,new myinstallCallback());
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		apkFilter apkFilter=new apkFilter(new isFilesFilter(null));
+//		String path = Environment.getExternalStorageDirectory().getPath()+"/"+name;
+//		try {
+//			boolean b = Tosd(name,  path);
+//			//调用osgi插件安装服务安装插件
+//
+//			boolean a = MyApplication.sp.getBoolean("isinstaed", false); 
+//			if(b && !a){
+//				install(path,new myinstallCallback());
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		refreshableView = (RefreshableView) view.findViewById(R.id.home_rview);
 		refreshableView.setRefreshListener(this);
 		sc = (ScrollView) view.findViewById(R.id.home_sc);
@@ -312,9 +313,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		gv_like = (MyGridView) view.findViewById(R.id.home_ulike_gv);
-		likeadapter = new HomeLikeAdapter(context, list);
 		gv_ruzhu = (MyGridView) view.findViewById(R.id.home_ruzhu_gv);
-		gv_like.setAdapter(likeadapter);
 		//		ruzhuadapter = new HomeRuzhuAdapter(context, list);
 		//		gv_ruzhu.setAdapter(ruzhuadapter);
 
@@ -336,7 +335,6 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		/*************测试****************/
 		UserBean b = MyApplication.mp.getUser();
 		if(b!=null){
-		Util.ShowToast(context, b.getAuthstr());
 		System.out.println("MyApplication.mp.bean.getAuthstr()=="+b.getAuthstr());
 		}
 //		if(util.isExistDataCache(MyApplication.AreaName) && util.isReadDataCache(MyApplication.AreaName)){
@@ -858,6 +856,8 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			Util.Getbitmap(iv_ad2, home.getAd().get(1));
 			ruzhuadapter = new HomeRuzhuAdapter(context, home.getCompany());
 			gv_ruzhu.setAdapter(ruzhuadapter);
+			likeadapter = new HomeLikeAdapter(context, home.getMylike());
+			gv_like.setAdapter(likeadapter);
 			sc.scrollTo(0, 1);
 			for(int i =0;i<home.getRecommend().size();i++){
 				String url = home.getRecommend().get(i).getThumb();
@@ -881,6 +881,10 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 				}
 			}
 			u.saveObject(home, filename);
+		}else if("300".equals(home.getCode())){
+			intent = new Intent(context,LoginActivity.class);
+			startActivity(intent);
+		getActivity().finish();
 		}else{
 			if(home!=null){
 				String msg = home.getMsg();

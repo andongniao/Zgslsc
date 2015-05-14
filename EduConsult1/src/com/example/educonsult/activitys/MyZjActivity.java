@@ -96,13 +96,17 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		isread = false;
-		/*myPDT=new ThreadWithProgressDialog();
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		}*/
+		myPDT=new ThreadWithProgressDialog();
+		
 		u=new Util(context);
 		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
-		productBeans=listProductBean.getList();
+		if(listProductBean==null){
+			listProductBean=new ListProductBean();
+			productBeans=new ArrayList<ProductBean>();
+		}else{
+			
+			productBeans=listProductBean.getList();
+		}
 		ll_not=(LinearLayout)findViewById(R.id.myzj_ll_isnull);
 		gridView = (GridView) findViewById(R.id.myzj_gv);
 		if(productBeans==null||productBeans.size()==0){
@@ -123,6 +127,9 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		}
 		//gridView.setFocusable(false);
 		Util.SetRedNum(context, rl_l, 0);
+		/*if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}*/
 
 	}
 

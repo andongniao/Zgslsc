@@ -63,7 +63,7 @@ public class ServiceUrl {
 	//添加购车
 	public static String cart_add = "cart.php?action=add&itemid=";
 	//删除购车
-	public static String cart_del = "cart.php?action=del";
+	public static String cart_del = "cart.php?action=del&itemid=";
 	//清空购车
 	public static String cart_clear = "cart.php?action=clear";
 	

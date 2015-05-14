@@ -41,7 +41,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private ArrayList<ShopBean> list;
 	private ShopcartHomeAdapter adapter;
 	private LinearLayout ll_isnull,ll_jeisuan;
-	private TextView tv_jiesuan;
+	private TextView tv_jiesuan,tv_heji;
 	private CheckBox cb_all;
 	private shop shop;
 	private int type,len,cl;
@@ -54,7 +54,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private BaseBean besebean;
 	private boolean islist,clearb;
 	public static boolean ischange;
-	
+	private float sum,i_price;
 	private int inttype=0;
 	private int clearposition,clearindex,deposition;
 	private QuerenOrderBean querenOrderBean;
@@ -92,6 +92,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		ll_isnull = (LinearLayout) findViewById(R.id.shopcart_home_ll_isnull);
 		ll_jeisuan = (LinearLayout) findViewById(R.id.shopcart_home_ll_show);
 		tv_jiesuan = (TextView) findViewById(R.id.shopcart_home_tv_jiesuan);
+		tv_heji=(TextView)findViewById(R.id.shopcart_home_view_tv_heji);
 		tv_jiesuan.setOnClickListener(this);
 		cb_all = (CheckBox) findViewById(R.id.shopcart_home_cb_all);
 		ll_jeisuan.setVisibility(View.GONE);
@@ -105,9 +106,57 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				clearb=b;
 				clearindex=index;
 				clearposition=postion;
-				if(Util.detect(context)){
+				/*if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				}*/
+
+//				
+				ShopBean s = (ShopBean) list.get(clearindex);
+				int num = 0;
+				if(clearposition!=-1){
+					ShopItemBean bb = s.getMall().get(clearposition);
+					bb.setIsclick(clearb);
+					for(int i=0;i<s.getMall().size();i++){
+							ShopItemBean ba = (ShopItemBean) s.getMall().get(i);;
+							if(ba.isIsclick()){
+								num+=1;
+						}
+					}
+						if(num==s.getMall().size()){
+							s.setIsclick(true);
+							type = 0;
+						}else{
+							type = 1;
+							s.setIsclick(false);
+						}
+				}else{
+					s.setIsclick(clearb);
+					for(int i=0;i<s.getMall().size();i++){
+						ShopItemBean ba = (ShopItemBean) s.getMall().get(i);;
+						ba.setIsclick(clearb);
+					}
 				}
+				adapter.SetData(list);
+				adapter.notifyDataSetChanged();
+				len=0;
+				for(int i=0;i<list.size();i++){
+					ShopItemBean sb = (ShopItemBean) list.get(i);
+					if(sb.isIsclick()){
+						len+=1;
+					}
+				}
+				if(len == list.size()){
+					cl = 1;
+					cb_all.setChecked(true);
+					//TODO
+				}else{
+					cl = 1;
+					cb_all.setChecked(false);
+				}
+				Toast.makeText(context, ""+len, 200).show();
+				//Util.ShowToast(context,"清空购物车");
+				
+			
 				
 			}
 
@@ -115,20 +164,39 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			public void add1(int index, int postion) {
 //				ShopBean s = (ShopBean) list.get(index);
 //				ShopItemBean bean = (ShopItemBean) s.getMall().get(postion);
-				int i = Integer.parseInt(list.get(index).getMall().get(postion).getAmount());
+				int i =list.get(index).getMall().get(postion).getNum();
 				i+=1;
-				list.get(index).getMall().get(postion).setAmount(""+i);
+				list.get(index).getMall().get(postion).setNum(i);
 				adapter.SetData(list);
 				adapter.notifyDataSetChanged();
+				sum=0;
+				int i_num;
+				for(int f=0;f<list.size();f++){
+					for(int j=0;j<list.get(f).getMall().size();j++){
+						i_num=list.get(f).getMall().get(j).getNum();
+						i_price=Float.parseFloat(list.get(f).getMall().get(j).getPrice());
+						sum=i_num*i_price+sum;
+					}
+				}
+				tv_heji.setText(sum+"");
 			}
 
 			@Override
 			public void jian1(int index, int postion) {
-				int i = Integer.parseInt(list.get(index).getMall().get(postion).getAmount());
+				int i = list.get(index).getMall().get(postion).getNum();
 				i-=1;
-				list.get(index).getMall().get(postion).setAmount(""+i);
+				list.get(index).getMall().get(postion).setNum(i);
 				adapter.SetData(list);
 				adapter.notifyDataSetChanged();
+				int i_num;
+				for(int f=0;f<list.size();f++){
+					for(int j=0;j<list.get(f).getMall().size();j++){
+						i_num=list.get(f).getMall().get(j).getNum();
+						i_price=Float.parseFloat(list.get(f).getMall().get(j).getPrice());
+						sum=i_num*i_price+sum;
+					}
+				}
+				tv_heji.setText(sum+"");
 			}
 			@Override
 			public void delete(int index, int postion) {
@@ -242,6 +310,21 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				adapter = new ShopcartHomeAdapter(context, list,shop);
 				lv.setAdapter(adapter);
 				lv.setEmptyView(ll_isnull);
+				
+//				for(int i=0;i<s.getMall().size();i++){
+//					i_num=s.getMall().get(i).getNum();
+//					i_price=Float.parseFloat(s.getMall().get(i).getPrice());
+//					sum=sum+i_num*i_price;
+//				}
+				int i_num;
+				for(int i=0;i<list.size();i++){
+					for(int j=0;j<list.get(i).getMall().size();j++){
+						i_num=list.get(i).getMall().get(j).getNum();
+						i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
+						sum=i_num*i_price+sum;
+					}
+				}
+				tv_heji.setText(sum+"");
 			}else{
 				ll_jeisuan.setVisibility(View.GONE);
 				ll_isnull.setVisibility(View.VISIBLE);
@@ -272,25 +355,25 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			}
 			else{
 				besebean=s.CartDel(lists.get(index).getCompanyid(), bean.getAuthstr());
-			}
-			if(besebean!=null){
-				String code = besebean.getCode();
-				String m = besebean.getMsg();
-				if("200".equals(code)){
-					
-					if(lists.get(index).getMall()==null||lists.get(index).getMall().size()==0){
-						if(Util.detect(context)){
-							myPDT.Run(context, new deleteRefeshData(lists, -1, index),R.string.loding);//不可取消
-						}
-					}
-					
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
-					}
-				}
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
+//			}
+//			if(besebean!=null){
+//				String code = besebean.getCode();
+//				String m = besebean.getMsg();
+//				if("200".equals(code)){
+//					
+//					if(lists.get(index).getMall()==null||lists.get(index).getMall().size()==0){
+//						if(Util.detect(context)){
+//							myPDT.Run(context, new deleteRefeshData(lists, -1, index),R.string.loding);//不可取消
+//						}
+//					}
+//					
+//				}else{
+//					if(Util.IsNull(m)){
+//						Util.ShowToast(context, m);
+//					}
+////				}
+//			}else{
+//				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			return true;
 		}
@@ -307,8 +390,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			if(besebean!=null){
 				String code = besebean.getCode();
 				String m = besebean.getMsg();
-				if("200".equals(code)&&position==-1||"200".equals(code)){
-					list.get(index).getMall().remove(list.get(index).getMall().get(deposition));
+				if("200".equals(code)){
+					list.get(index).getMall().remove(list.get(index).getMall().get(position));
 					int size = list.get(index).getMall().size();
 					if(size==0){
 						list.remove(list.get(index));
@@ -333,6 +416,11 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 					}
 					Util.ShowToast(context, "删除成功！");
+				}
+				else if("300".equals(code)){
+					intent = new Intent(context,LoginActivity.class);
+					startActivity(intent);
+					finish();
 				}else{
 					if(Util.IsNull(m)){
 						Util.ShowToast(context, m);
@@ -376,111 +464,134 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public boolean OnTaskDone() {
+			if(inttype==3){
+				if(querenOrderBean!=null){
+					String code=querenOrderBean.getCode();
+					String m=querenOrderBean.getMsg();
+					if("200".equals(code)){
+//						
+						listShopBean=querenOrderBean.getList();
+						
+						
+						intent = new Intent(context,OrderActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						Bundle b=new Bundle();
+						b.putSerializable("shopcaroder", listShopBean);
+						b.putSerializable("shopcarbean", shopbean);
+						
+						b.putString("money", tv_heji.getText().toString());
+//						intent.putExtra("shopcaroder", listShopBean);
+//						intent.putExtra("shopcarbean", shopbean);
+						intent.putExtra("shopcartbundle", b);
+						startActivity(intent);
+						
+						
+					}else if("300".equals(code)){
+						intent=new Intent(context,LoginActivity.class);
+						startActivity(intent);
+						finish();
+					}
+					else{
+						if(Util.IsNull(m)){
+							Util.ShowToast(context, m);
+						}
+					}
+					
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}
 			//任务完成后
-			if(querenOrderBean!=null){
-				String code=querenOrderBean.getCode();
-				String m=querenOrderBean.getMsg();
-				
-				if("200".equals(code)){
-//					
-					listShopBean=querenOrderBean.getList();
-					
-					intent = new Intent(context,OrderActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					Bundle b=new Bundle();
-					b.putSerializable("shopcaroder", listShopBean);
-					b.putSerializable("shopcarbean", shopbean);
-//					intent.putExtra("shopcaroder", listShopBean);
-//					intent.putExtra("shopcarbean", shopbean);
-					intent.putExtra("shopcartbundle", b);
-					startActivity(intent);
-					
-					
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
-					}
-				}
-				
-			}
 			
-			else if(shopbean!=null){
-				String code = shopbean.getCode();
-				String m = shopbean.getMsg();
-				if("200".equals(code)){
-//					
-					list=shopbean.getList();
-					initDate();
-					
-					
-				}else if("300".equals(code)){
-					Util.ShowToast(context, m);
-					intent = new Intent(context,LoginActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
-					}
-				}
-			}else if(besebean!=null){
-				String code = besebean.getCode();
-				String m = besebean.getMsg();
-				if("200".equals(code)){
-//					
-					ShopBean s = (ShopBean) list.get(clearindex);
-					int num = 0;
-					if(clearposition!=-1){
-						ShopItemBean bb = s.getMall().get(clearposition);
-						bb.setIsclick(clearb);
-						for(int i=0;i<s.getMall().size();i++){
-								ShopItemBean ba = (ShopItemBean) s.getMall().get(i);;
-								if(ba.isIsclick()){
-									num+=1;
+			if(inttype==0){
+				 if(shopbean!=null){
+						String code = shopbean.getCode();
+						String m = shopbean.getMsg();
+						if("200".equals(code)){
+//							
+							list=shopbean.getList();
+							initDate();
+							
+							
+						}else if("300".equals(code)){
+							Util.ShowToast(context, m);
+							intent = new Intent(context,LoginActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+						}else{
+							if(Util.IsNull(m)){
+								Util.ShowToast(context, m);
 							}
 						}
-							if(num==s.getMall().size()){
-								s.setIsclick(true);
-								type = 0;
-							}else{
-								type = 1;
-								s.setIsclick(false);
-							}
-					}else{
-						s.setIsclick(clearb);
-						for(int i=0;i<s.getMall().size();i++){
-							ShopItemBean ba = (ShopItemBean) s.getMall().get(i);;
-							ba.setIsclick(clearb);
-						}
 					}
-					adapter.SetData(list);
-					adapter.notifyDataSetChanged();
-					len=0;
-					for(int i=0;i<list.size();i++){
-						ShopItemBean sb = (ShopItemBean) list.get(i);
-						if(sb.isIsclick()){
-							len+=1;
-						}
+				 else{
+						Util.ShowToast(context, R.string.net_is_eor);
 					}
-					if(len == list.size()){
-						cl = 1;
-						cb_all.setChecked(true);
-						//TODO
-					}else{
-						cl = 1;
-						cb_all.setChecked(false);
-					}
-					Toast.makeText(context, ""+len, 200).show();
-					Util.ShowToast(context,"清空购物车");
-					
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
-					}
-				}
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
 			}
+			if(inttype==1){
+				if(besebean!=null){
+					String code = besebean.getCode();
+					String m = besebean.getMsg();
+					if("200".equals(code)){
+//						
+						ShopBean s = (ShopBean) list.get(clearindex);
+						int num = 0;
+						if(clearposition!=-1){
+							ShopItemBean bb = s.getMall().get(clearposition);
+							bb.setIsclick(clearb);
+							for(int i=0;i<s.getMall().size();i++){
+									ShopItemBean ba = (ShopItemBean) s.getMall().get(i);;
+									if(ba.isIsclick()){
+										num+=1;
+								}
+							}
+								if(num==s.getMall().size()){
+									s.setIsclick(true);
+									type = 0;
+								}else{
+									type = 1;
+									s.setIsclick(false);
+								}
+						}else{
+							s.setIsclick(clearb);
+							for(int i=0;i<s.getMall().size();i++){
+								ShopItemBean ba = (ShopItemBean) s.getMall().get(i);;
+								ba.setIsclick(clearb);
+							}
+						}
+						adapter.SetData(list);
+						adapter.notifyDataSetChanged();
+						len=0;
+						for(int i=0;i<list.size();i++){
+							ShopItemBean sb = (ShopItemBean) list.get(i);
+							if(sb.isIsclick()){
+								len+=1;
+							}
+						}
+						if(len == list.size()){
+							cl = 1;
+							cb_all.setChecked(true);
+							//TODO
+						}else{
+							cl = 1;
+							cb_all.setChecked(false);
+						}
+						Toast.makeText(context, ""+len, 200).show();
+						//Util.ShowToast(context,"清空购物车");
+						
+					}else if("300".equals(code)){
+						intent=new Intent(context,LoginActivity.class);
+						startActivity(intent);
+						finish();
+					}else{
+						if(Util.IsNull(m)){
+							Util.ShowToast(context, m);
+						}
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			} 
 			return true;
 		
 		}
@@ -492,6 +603,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		super.onResume();
 		if(ischange){
 			if(Util.detect(context)){
+				inttype=0;
 				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 			}
 			ischange =false;

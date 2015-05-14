@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="@string/test"
+            android:singleLine="true"
             />
         <TextView 
             android:layout_width="0dp"

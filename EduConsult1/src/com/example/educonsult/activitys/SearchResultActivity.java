@@ -185,7 +185,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		}
 	}
 	void initDate(){
-		if(list.size()==0||list==null){
+		if(list==null||list.size()==0){
 			ll_isnot.setVisibility(View.VISIBLE);
 			ll_isyes.setVisibility(View.GONE);
 			islist=false;

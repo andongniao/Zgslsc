@@ -16,6 +16,7 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.MyCenterTuijianActivity.RefeshData;
+import com.example.educonsult.activitys.ShopcartActivity;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
@@ -37,6 +38,7 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		userbean=MyApplication.mp.getUser();
+		myPDT=new ThreadWithProgressDialog();
 	}
 	public void SetData(ArrayList<ProductBean>list){
 		this.list = list;
@@ -74,16 +76,7 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 					convertView.findViewById(R.id.base_list_item_tv_price);
 			item.tv_add = (TextView) 
 					convertView.findViewById(R.id.base_list_item_tv_add);
-			item.tv_add.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					if(Util.detect(context)){
-						myPDT.Run(context, new RefeshData(position),R.string.loding);//可取消
-					}
-				}
-			});
+			
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -99,6 +92,16 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 		item.tv_address.setText(list.get(position).getAreaname());
 		//item.tv_price.setText("￥170");
 		item.tv_price.setText(list.get(position).getPrice());
+		item.tv_add.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(position),R.string.loding);//可取消
+				}
+			}
+		});
 		return convertView;
 	}
 	class Item{
@@ -126,6 +129,7 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 			if(bean!=null){
 				if("200".equals(bean.getCode())){
 					//TODO	
+					ShopcartActivity.ischange=true;
 					Util.ShowToast(context,"添加成功");
 				}else{
 					Util.ShowToast(context, bean.getMsg());

@@ -101,9 +101,7 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 		context = this;
 		isread = false;
 		myPDT=new ThreadWithProgressDialog();
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		}
+		
         ll_not=(LinearLayout)findViewById(R.id.mycenter_tuijian_ll_isnull);
         ll_not.setVisibility(View.GONE);
 		gridView = (GridView) findViewById(R.id.mycenter_tuijian_gv);
@@ -111,14 +109,10 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 		for(int i=0;i<10;i++){
 			list.add(i);
 		}*/
-		adapter = new MyCenterTuijianAdapter(context, list);
-		gridView.setAdapter(adapter);
-		//gridView.setFocusable(false);
-		if(list==null){
-			gridView.setVisibility(View.GONE);
-		}{
-			ll_not.setVisibility(View.GONE);
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 		}
+		
 		Util.SetRedNum(context, rl_l, 0);
 
 	}
@@ -168,7 +162,14 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 	}
 	private void initDate(){
 		list=listProductBean.getList();
-		
+		adapter = new MyCenterTuijianAdapter(context, list);
+		gridView.setAdapter(adapter);
+		//gridView.setFocusable(false);
+		if(list==null){
+			gridView.setVisibility(View.GONE);
+		}{
+			ll_not.setVisibility(View.GONE);
+		}
 	}
 
 	@Override

@@ -5,16 +5,24 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
@@ -36,13 +44,19 @@ public class OrderHomeAdapter extends BaseAdapter{
 	private LayoutInflater inflater;
 	private Item item;
 	private OrderLvAdapter adapter;
-	private int n;
+	private int n,num;
 	private ArrayList<ExpressBean> express;
+	private ArrayList<String> Strlist;
+	private PopupWindow popu;
+	private View v_fenlei;
+	private ListView list_2,lv_l;
+	private TextItemListAdapter adapter_r;
 
 	public OrderHomeAdapter(Context context,ArrayList<ShopBean>list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
+		express=new ArrayList<ExpressBean>();
 	}
 	public void SetData(ArrayList<ShopBean>list){
 		this.list = list;
@@ -65,6 +79,28 @@ public class OrderHomeAdapter extends BaseAdapter{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	private void setpopuwindow(final ArrayList<String> list,LinearLayout lin){
+		adapter_r = new TextItemListAdapter(context, list);
+		lv_l.setAdapter(adapter_r);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+					num=arg2;
+					popu.dismiss();
+				
+			}
+		});
+		popu = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		popu.setFocusable(true);
+		popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setOutsideTouchable(true);
+		popu.showAsDropDown(lin);
+		
+		
+	}
 
 	@Override
 	public View getView(final int index, View convertView, ViewGroup parent) {
@@ -79,6 +115,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 			item.tv_peisong = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_peisong);
 			item.tv_online = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_on_line);
 			item.tv_qq = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_qq);
+			item.lin=(LinearLayout)convertView.findViewById(R.id.order_home_lv_item_lin_peisong);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -93,7 +130,26 @@ public class OrderHomeAdapter extends BaseAdapter{
 		ShopBean s=list.get(index);
 		item.tv_title.setText(s.getTitle());
 		item.et.setText(s.getNote());
+		
 		express=s.getExpress();//ÔË·ÑÄ£°å
+		if(express!=null && express.size()>=0){
+
+			item.lin.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Strlist=new ArrayList<String>();
+					for(int i=0;i<express.size();i++){
+						Strlist.add(express.get(i).getTitle());
+					}
+					setpopuwindow(Strlist, item.lin);
+					item.tv_peisong.setText(express.get(num).getTitle());
+					popu.dismiss();
+				}
+			});
+		
+		}
 		float sum=0,i_price;
 		int i_num,n=0;
 		
@@ -116,6 +172,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 		TextView tv_title,tv_peisong,tv_heji,tv_num,tv_online,tv_qq;
 		MyListview lv;
 		EditText et;
+		LinearLayout lin;
 	}
 
 }

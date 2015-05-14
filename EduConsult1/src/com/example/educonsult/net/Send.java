@@ -364,7 +364,7 @@ public class Send {
 	 */
 	public ProdectDetaileBean GetProductDetaile(String id) {
 		ProdectDetaileBean bean = new ProdectDetaileBean();
-		String url = ServiceUrl.Base+ServiceUrl.Product_url;
+		String url = ServiceUrl.Base+ServiceUrl.Product_url+id;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 		if (jsonStr != null && !jsonStr.equals("")) {
@@ -735,7 +735,7 @@ public class Send {
 	 */
 	public BaseBean CartAdd(String itemid,int number,String authstr) {
 		BaseBean bean = new BaseBean();
-		String url = ServiceUrl.Base+ServiceUrl.cart_add+itemid+"&num"+number+
+		String url = ServiceUrl.Base+ServiceUrl.cart_add+itemid+"&num="+number+
 				ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
