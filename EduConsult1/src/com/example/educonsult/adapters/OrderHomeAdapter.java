@@ -98,22 +98,15 @@ public class OrderHomeAdapter extends BaseAdapter{
 		int i_num,n=0;
 		
 		
-//		for(int i=0;i<s.getMall().size();i++){
-//			i_num=s.getMall().get(i).getNum();
-//			i_price=Float.parseFloat(s.getMall().get(i).getPrice());
-//			sum=sum+i_num*i_price;
-//			n++;
-//		}
+		for(int i=0;i<s.getMall().size();i++){
+			i_num=s.getMall().get(i).getNum();
+			i_price=Float.parseFloat(s.getMall().get(i).getPrice());
+			sum=sum+i_num*i_price;
+			n++;
+		}
 		item.tv_heji.setText(sum+"");
 		//item.tv_peisong.setText(s.get)
 		//item.
-//		if(position==0){
-//			adapter = new OrderLvAdapter(context, l1);
-//			n = l1.size();
-//		}else{
-//			adapter = new OrderLvAdapter(context, l2);
-//			n = l2.size();
-//		}
 		adapter=new OrderLvAdapter(context, list,index);
 		item.lv.setAdapter(adapter);
 		item.tv_num.setText("共"+n+"件商品");

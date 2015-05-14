@@ -5,13 +5,20 @@ import java.util.ArrayList;
 import javax.crypto.spec.IvParameterSpec;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +29,7 @@ import com.example.educonsult.activitys.ShopcartActivity.shop;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.ShopItemBean;
+import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 public class ShopcartLvAdapter extends BaseAdapter{
@@ -144,6 +152,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		
 		return convertView;
 	}
+
 	class Item{
 		TextView tv_title,tv_price,tv_zongjia;
 		ImageView iv_jia,iv_jian,iv_ic;
