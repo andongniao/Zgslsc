@@ -1418,7 +1418,7 @@ public class PostHttp {
 
 
 	/**
-	 *  申请退货
+	 *  申请退货(退款)
 	 * @param itemid			订单ID
 	 * @param submit			true
 	 * @param content			发货时间（可选），格式如：2015-05-11
@@ -1918,7 +1918,7 @@ public class PostHttp {
 
 
 	/**
-	 *  申请退货
+	 *  退款详情
 	 * @param itemid		订单ID
 	 * @param authstr		唯一标示
 	 * @return
@@ -2108,6 +2108,7 @@ public class PostHttp {
 	 * @param gender		性别 1是男，2是女
 	 * @param areaid		所在地
 	 * @param address		详细地址
+	 * @param mobile		手机号
 	 * 养殖户必填参数
 	 * @param yzpz			养殖品种
 	 * @param syzl			使用饲料
@@ -2121,7 +2122,7 @@ public class PostHttp {
 	 * @return
 	 */
 	public BaseBean Regist(int regid,String username,String password,String truename,int gender
-			,String areaid,String address,
+			,String areaid,String address,String mobile,
 			String yzpz,String syzl,String xsycj,String kjsjw,String catid,
 			String bankcard,String yzsl,String tjr) {  
 		BaseBean bean = new BaseBean();
@@ -2143,6 +2144,8 @@ public class PostHttp {
 		list.add(p6);
 		NameValuePair p7 = new BasicNameValuePair("post_fields[xxdz]",address);
 		list.add(p7);
+		NameValuePair p8 = new BasicNameValuePair("post[mobile]",mobile);
+		list.add(p8);
 		//养殖户必填参数
 		NameValuePair pl1 = new BasicNameValuePair("post_fields[yzpz]",yzpz);
 		list.add(pl1);
@@ -2152,7 +2155,7 @@ public class PostHttp {
 		list.add(pl3);
 		NameValuePair pl4 = new BasicNameValuePair("post_fields[kjsjw]",kjsjw);
 		list.add(pl4);
-		NameValuePair pl5 = new BasicNameValuePair("post_fields[catid]",catid);
+		NameValuePair pl5 = new BasicNameValuePair("post[catid]",catid);
 		list.add(pl5);
 		//养殖户选填参数
 		NameValuePair ps1 = new BasicNameValuePair("post[bankcard]",bankcard);

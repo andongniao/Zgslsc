@@ -47,6 +47,7 @@ public class MyApplication extends Application{
 	public static int money_detaile = 2;
 	public static int money_income = 3;
 	public static int money_pay = 4;
+	public static boolean islogin;
 	
 	
 	
@@ -242,6 +243,13 @@ public class MyApplication extends Application{
 	}
 	public UserBean getUser(){
 		return this.bean;
+	}
+	public void setlogin(boolean islogin){
+		if(islogin){
+		this.islogin = islogin;
+		}else{
+			this.bean.setAuthstr("");
+		}
 	}
 	
 	public void SaveSee(ProductBean bean){

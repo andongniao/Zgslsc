@@ -16,6 +16,10 @@ public class ShopItemBean {
 	private String price;		//价格
 	private String amount;		//库存
 	private int num;			//数量
+	private int number;
+	private String username;
+	private String alt;
+	private String status;
 	private ArrayList<CouponBean> coupon;//优惠券
 	public boolean isIsclick() {
 		return isclick;
@@ -64,6 +68,30 @@ public class ShopItemBean {
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getAlt() {
+		return alt;
+	}
+	public void setAlt(String alt) {
+		this.alt = alt;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public ArrayList<CouponBean> getCoupon() {
 		return coupon;

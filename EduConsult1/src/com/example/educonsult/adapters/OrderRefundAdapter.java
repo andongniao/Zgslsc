@@ -13,22 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.ApplyOrderActivity.MyApply;
 import com.example.educonsult.activitys.MyOrderActivity.Myorder;
 import com.example.educonsult.beans.OrderBean;
 import com.example.educonsult.tools.Util;
 
-public class MyOrderLvAdapter extends BaseAdapter{
+public class OrderRefundAdapter extends BaseAdapter{
 	private Context context;
 	private LayoutInflater inflater;
 	private Item item;
 	private OrderBean orderBean;
-	private Myorder myorder;
+	private MyApply apply;
 
 
-	public MyOrderLvAdapter(Context context,OrderBean orderBean,int index,Myorder myorder){
+	public OrderRefundAdapter(Context context,OrderBean orderBean,MyApply apply){
 		this.context = context;
 		this.orderBean = orderBean;
-		this.myorder = myorder;
+		this.apply = apply;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(OrderBean orderBean){
@@ -87,10 +88,9 @@ public class MyOrderLvAdapter extends BaseAdapter{
 			
 			@Override
 			public void onClick(View v) {
-				myorder.Order_Detaile(orderBean);
+				apply.detaile(orderBean.getItemid());
 			}
 		});
-		
 		return convertView;
 	}
 	class Item{

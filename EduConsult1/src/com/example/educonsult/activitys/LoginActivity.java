@@ -196,6 +196,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 //					MyApplication.bean.setAuthstr(bean.getAuthstr());
 					Intent in = new Intent(context, ExampleActivity.class);
 					MyApplication.mp.setUser(bean);
+					MyApplication.mp.setlogin(true);
 					startActivity(in);
 					finish();
 				}else{

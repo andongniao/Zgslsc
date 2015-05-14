@@ -18,28 +18,30 @@ import android.widget.TextView;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.ShopcartActivity.shop;
 import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.RefundInfoBean;
 import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.tools.Util;
 
 public class CApplyerFundAdapter extends BaseAdapter implements OnClickListener{
 	private Context context;
-	private ArrayList<Integer>list;
+	private RefundInfoBean rebean;
 	private LayoutInflater inflater;
 	private Item item;
 
 
-	public CApplyerFundAdapter(Context context,ArrayList<Integer>list){
+	public CApplyerFundAdapter(Context context,RefundInfoBean rebean){
 		this.context = context;
-		this.list = list;
+		this.rebean = rebean;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Integer>list){
-		this.list = list;
+	public void SetData(RefundInfoBean rebean){
+		this.rebean = rebean;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list!=null?list.size():0;
+		return 1;
 	}
 
 	@Override
@@ -73,7 +75,13 @@ public class CApplyerFundAdapter extends BaseAdapter implements OnClickListener{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		
+		item.tv_talk.setVisibility(View.INVISIBLE);
+		Util.Getbitmap(item.iv, rebean.getThumb());
+		item.tv_pname.setText(rebean.getTitle());
+		item.tv_cname.setText(rebean.getCompany());
+		item.tv_money.setText(rebean.getPrice());
+		item.tv_num.setText("X"+rebean.getNumber());
+		item.tv_orderid.setText(rebean.getItemid());
 		
 		
 		return convertView;

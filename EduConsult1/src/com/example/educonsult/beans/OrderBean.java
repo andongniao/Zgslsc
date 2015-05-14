@@ -18,6 +18,7 @@ public class OrderBean {
 	private String money;	//金额
 	private String fee;		//手续费（运费）
 	private String coupons;	//优惠券
+	private int iscomment;	//是否评论 0未评论1 已经评论
 	public String getItemid() {
 		return itemid;
 	}
@@ -95,6 +96,12 @@ public class OrderBean {
 	}
 	public void setCoupons(String coupons) {
 		this.coupons = coupons;
+	}
+	public int getIscomment() {
+		return iscomment;
+	}
+	public void setIscomment(int iscomment) {
+		this.iscomment = iscomment;
 	}
 
 }

@@ -33,10 +33,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private Intent intent;
 	private LinearLayout ll_zhifu,ll_cp,ll_mima,ll_dp,ll_zj,ll_zf,ll_fh,ll_sh,ll_pj,ll_order,ll_address,
-	ll_qianbao,ll_xinjian,ll_jifen,ll_youhuiquan,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian;
+	ll_qianbao,ll_xinjian,ll_jifen,ll_youhuiquan,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian,ll_logout;
 	private ImageView iv_zhifu,iv_fahuo,iv_shouhuo,iv_pingjia;
 	private CircleImageView icv_head;
-	private TextView tv_version;
+	private TextView tv_version,tv_name;
 	private UserBean bean;
 	private CenterUserBean cbean;
 	private ThreadWithProgressDialog myPDT;
@@ -58,6 +58,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		
 		context = this;
 		tv_version = (TextView) findViewById(R.id.mycenter_home_tv_version);
+		tv_name = (TextView) findViewById(R.id.mycenter_home_tv_name);
 		icv_head = (CircleImageView) findViewById(R.id.mycenter_home_civ_head);
 		icv_head.setOnClickListener(this);
 		iv_zhifu = (ImageView) findViewById(R.id.mycenter_home_btn_zhifu);
@@ -75,6 +76,9 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_sh.setOnClickListener(this);
 		ll_pj = (LinearLayout) findViewById(R.id.mycenter_home_ll_pingjia);
 		ll_pj.setOnClickListener(this);
+		ll_logout = (LinearLayout) findViewById(R.id.mycenter_home_ll_logout);
+		ll_logout.setOnClickListener(this);
+		findViewById(R.id.mycenter_home_ll_shouhou).setOnClickListener(this);
 		ll_order = (LinearLayout) findViewById(R.id.mycenter_home_ll_order);
 		ll_order.setOnClickListener(this);
 		ll_address = (LinearLayout) findViewById(R.id.mycenter_home_ll_address);
@@ -97,13 +101,11 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_tuijian.setOnClickListener(this);
 		ll_youhuiquan = (LinearLayout) findViewById(R.id.myinfo_ll_youhuiquan);
 		ll_youhuiquan.setOnClickListener(this);
+		ll_youhuiquan.setVisibility(View.GONE);
 		ll_mima = (LinearLayout) findViewById(R.id.mycenter_home_ll_mima);
+		ll_mima.setVisibility(View.GONE);
 		ll_mima.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
-		BadgeView badge = new BadgeView(this, ll_zhifu);
-		badge.setText(""+1);
-		badge.show();
-//		badge.toggle();
 		PackageManager manager;
 		PackageInfo info = null;
 		manager = this.getPackageManager();
@@ -116,14 +118,12 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 
 		String vserion = info.versionName;
 		tv_version.setText(vserion);
-		
-		
 		bean=MyApplication.mp.getUser();
 		if(bean!=null){
 			if(bean.getType()==1){
 				ll_fh.setVisibility(View.GONE);
 			}else{
-				ll_zf.setVisibility(View.GONE);
+//				ll_zf.setVisibility(View.GONE);
 				ll_sh.setVisibility(View.GONE);
 				//ll_youhuiquan.setVisibility(View.GONE);
 			}
@@ -147,7 +147,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			// TODO Auto-generated method stub
 			Send s=new Send(context);
 			cbean=s.getMyinfo(type, authstr);
-			return false;
+			return true;
 		}
 
 		@Override
@@ -163,13 +163,14 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 				String code = cbean.getCode();
 				String m = cbean.getMsg();
 				if("200".equals(code)){
-//					Util.ShowToast(context, bean.getAuthstr());
-//					MyApplication.bean.setAuthstr(bean.getAuthstr());
-					/*Intent in = new Intent(context, ExampleActivity.class);
-					MyApplication.mp.setUser(bean);
-					startActivity(in);*/
-					
-					finish();
+					Util.Getbitmap(icv_head, cbean.getImg());
+					tv_name.setText(cbean.getTruename());
+				}else if("300".equals(code)){
+					MyApplication.mp.setlogin(false);
+					intent = new Intent(context,LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					finish(); 
 				}else{
 					if(Util.IsNull(m)){
 						Util.ShowToast(context, m);
@@ -211,30 +212,28 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_zj:
-			intent = new Intent(context,MyZjActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			intent = new Intent(context,MyZjActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
+			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_zhifu:
 			intent = new Intent(context,MyOrderActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("index", 1);
 			startActivity(intent);
-			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_fahuuo:
 			intent = new Intent(context,MyOrderActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("index", 2);
 			startActivity(intent);
-			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_shouhuo:
 			intent = new Intent(context,MyOrderActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("index", 3);
 			startActivity(intent);
-			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_pingjia:
 			intent = new Intent(context,MyOrderActivity.class);
@@ -269,10 +268,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_jifen:
-			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_fenxiang:
-			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_fuwu:
 			intent = new Intent(context,ServiceCenterActivity.class);
@@ -280,15 +277,25 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_update:
-			Toast.makeText(context, "Test", 500).show();
+			Toast.makeText(context, "当前为最新版本", 500).show();
 			break;
 		case R.id.mycenter_home_ll_tuijian:
-			Toast.makeText(context, "Test", 500).show();
 			intent = new Intent(context,MyCenterTuijianActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-
+		case R.id.mycenter_home_ll_shouhou:
+			intent = new Intent(context,ApplyOrderActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+		case R.id.mycenter_home_ll_logout:
+			MyApplication.mp.setlogin(false);
+			intent = new Intent(context,LoginActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
+			break;
 		}
 	}
 	@Override

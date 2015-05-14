@@ -17,5 +17,50 @@
         android:listSelector="#00000000"
         android:scrollbars="none" >
     </ListView>
+    <LinearLayout
+        android:id="@+id/apply_home_ll_isnull"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_order_isnull" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="@string/myorder_order_isnull_up"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/myorder_order_isnull_down"
+            android:textColor="@color/home_hui"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/apply_home_tv_isnull"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="5dp"
+            android:textSize="12dp"
+            android:background="@drawable/order_et_bg_line"
+            android:text="@string/myorder_see"
+            android:textColor="@color/black" />
+    </LinearLayout>
 
 </LinearLayout>

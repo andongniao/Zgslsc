@@ -566,13 +566,10 @@ public class Send {
 	 */
 	public CenterUserBean getMyinfo(int type,String authstr) {
 		CenterUserBean bean = new CenterUserBean();
+		ArrayList<CenterUserBean>list = new ArrayList<CenterUserBean>();
 		String baseurl = ServiceUrl.Base;
 		String url="";
-		if(type==1){
-			url = baseurl+ServiceUrl.Mycenter_home_member+authstr;
-		}else{
-			url = baseurl+ServiceUrl.Mycenter_home_company+authstr;
-		}
+			url = baseurl+"member.php?action=member_detail&authstr="+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -584,10 +581,11 @@ public class Send {
 				String msg = object.getString("message");
 				if (code != null && "200".equals(code)) {
 					JSONArray data = object.getJSONArray("data");
-					JSONArray j = data.getJSONArray(0);
-					Type t = new TypeToken<CenterUserBean>() {
+//					JSONArray j = data.getJSONArray(0);
+					Type t = new TypeToken<ArrayList<CenterUserBean>>() {
 					}.getType();
-					bean = gson.fromJson(j.toString(), t);
+					list = gson.fromJson(data.toString(), t);
+					bean = list.get(0);
 					bean.setCode(code);
 					bean.setMsg(msg);
 					return bean;

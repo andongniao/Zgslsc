@@ -32,6 +32,7 @@
                 android:layout_weight="1" />
 
             <com.example.educonsult.myviews.CircleImageView
+                android:id="@+id/myinfo_iv_head"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

@@ -23,10 +23,18 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.GqTwoActivity.RefeshData;
 import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.beans.AddressBean;
+import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.myviews.BadgeView;
 import com.example.educonsult.tools.UITools;
+import com.example.educonsult.tools.Util;
 
 public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_diqu,ll_jiedao,ll_address,ll_shouhuoren,ll_number,ll_youbian;
@@ -47,6 +55,13 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	private Context context;
+	private ThreadWithProgressDialog myPDT;
+	private AddressBean bean;
+	private ListAreaBean lare;
+	private ArrayList<AreaBean>listsheng,listshi,listxian;
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -60,11 +75,16 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		setTopLeftTv(R.string.address_title);
 		setContentXml(R.layout.address_update);
 		init();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}
 	}
 
 	private void init() {
 		context=this;
-		intent=getIntent();
+		bean = (AddressBean) getIntent().getExtras().get("address");
+		myPDT = new ThreadWithProgressDialog();
+		String  msg = getResources().getString(R.string.loding);
 		num=intent.getStringExtra("addressnum");
 		isok = false;
 		ll_diqu = (LinearLayout) findViewById(R.id.address_up_ll_diqu);
@@ -84,9 +104,13 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 //		tv_jiedao = (TextView) findViewById(R.id.address_up_tv_jiedao);
 //		tv_jiedao.setOnClickListener(this);
 		tv_address = (EditText) findViewById(R.id.address_up_tv_detaile);
+		tv_address.setText(bean.getAddress());
 		tv_shouhuoren = (EditText) findViewById(R.id.address_up_tv_shouhuoren);
+		tv_shouhuoren.setText(bean.getTruename());
 		tv_number = (EditText) findViewById(R.id.address_up_tv_phone_number);
+		tv_number.setText(bean.getMobile());
 		tv_youbian = (EditText) findViewById(R.id.address_up_tv_youbian);
+		tv_youbian.setText(bean.getPostcode());
 		tv_delete = (TextView) findViewById(R.id.address_up_tv_delete);
 		tv_delete.setOnClickListener(this);
 		tv_save = (TextView) findViewById(R.id.address_up_tv_save);
@@ -99,17 +123,19 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 		if(num.equals("1")){//修改
-			
 			tv_delete.setVisibility(View.GONE);
 		}
-//		BadgeView badge = new BadgeView(this, iv_top_l);
-//		badge.setText(""+1);
-//		badge.show();
+		Util u = new Util(context);
+		String filename = MyApplication.AreaName;
+		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
+			lare = (ListAreaBean) u.readObject(filename);
+			listsheng = lare.getList();
+		}
+		
 		list=new ArrayList<String>();
-		list.add("2");
-		list.add("2");
-		list.add("2");
-		list.add("2");
+//		for(int i=0;i<){
+			
+//		}
 	}
 	private void setpopuwindow(Context contexts,ArrayList<String> list,LinearLayout lin){
 		inflater=LayoutInflater.from(contexts);
@@ -122,7 +148,6 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
 				
 				popu.dismiss();
 			}
@@ -132,13 +157,13 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		popu.setFocusable(true);
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
+		popu.setFocusable(true);
 		popu.showAsDropDown(lin);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-
 		case R.id.address_up_ll_diqu:
 			setpopuwindow(context, list, ll_diqu);
 			break;
@@ -167,5 +192,38 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 
+	
+	// 任务
+		public class RefeshData implements ThreadWithProgressDialogTask {
+
+			public RefeshData() {
+			}
+
+			@Override
+			public boolean OnTaskDismissed() {
+				//任务取消
+//				Toast.makeText(context, "cancle", 1000).show();
+				return false;
+			}
+
+			@Override
+			public boolean OnTaskDone() {
+				//任务完成后
+				return true;
+			}
+
+			@Override
+			public boolean TaskMain() {
+				// 访问
+				
+				
+				
+				
+				
+				return true;
+			}
+		}
+
+	
 
 }

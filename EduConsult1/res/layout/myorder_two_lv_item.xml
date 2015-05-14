@@ -10,7 +10,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="fitXY"
-       	android:background="@drawable/ic_launcher"
+       	android:background="@drawable/default_bg"
         />
     <TextView 
         android:id="@+id/myorder_two_lv_item_tv_title"
@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="@string/test"
+        android:layout_marginLeft="5dp"
         />
      <TextView 
         android:layout_width="0dp"
@@ -45,6 +46,7 @@
         android:text="@string/test"
         />
               <TextView 
+                 android:id="@+id/myorder_two_lv_item_tv_unit" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -64,7 +66,8 @@
     <ImageView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_launcher"
+        android:background="@drawable/mycenter_right"
+        android:layout_marginRight="5dp"
         />
      
 </LinearLayout>

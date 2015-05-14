@@ -1,8 +1,11 @@
 package com.example.educonsult.beans;
 
-public class AddressBean {
+import java.io.Serializable;
+
+public class AddressBean implements Serializable{
 	private String itemid;
 	private String areaid;
+	private String area;
 	private String truename;
 	private String address;
 	private String mobile;
@@ -19,6 +22,12 @@ public class AddressBean {
 	}
 	public void setAreaid(String areaid) {
 		this.areaid = areaid;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
 	}
 	public String getTruename() {
 		return truename;

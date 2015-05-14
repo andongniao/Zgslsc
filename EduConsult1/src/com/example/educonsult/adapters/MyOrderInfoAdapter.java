@@ -17,28 +17,27 @@ import android.widget.TextView;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.ShopcartActivity.shop;
 import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.OrderDetaileBean;
 import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.tools.Util;
 
 public class MyOrderInfoAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Integer>list;
+	private OrderDetaileBean bean;
 	private LayoutInflater inflater;
 	private Item item;
 
 
-	public MyOrderInfoAdapter(Context context,ArrayList<Integer>list){
+	public MyOrderInfoAdapter(Context context,OrderDetaileBean bean){
 		this.context = context;
-		this.list = list;
+		this.bean = bean;
 		inflater = LayoutInflater.from(context);
-	}
-	public void SetData(ArrayList<Integer>list){
-		this.list = list;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list!=null?list.size():0;
+		return 1;
 	}
 
 	@Override
@@ -64,17 +63,21 @@ public class MyOrderInfoAdapter extends BaseAdapter{
 			item.tv_price = (TextView) convertView.findViewById(R.id.myorderinfo_item_money);
 			item.tv_num = (TextView) convertView.findViewById(R.id.myorderinfo_item_num);
 			item.tv_title=(TextView)convertView.findViewById(R.id.myorderinfo_item_talk);
+			item.tv_unit = (TextView) convertView.findViewById(R.id.myorderinfo_item_unit);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		
-		item.tv_num.setText("数量"+""+"件");
+		Util.Getbitmap(item.iv , bean.getThumb());
+		item.tv_title.setText(bean.getTitle());
+		item.tv_price.setText(bean.getPrice());
+		item.tv_num.setText("数量"+bean.getNumber()+"件");
+		item.tv_unit.setText(bean.getUnit());
 		
 		return convertView;
 	}
 	class Item{
-		TextView tv_title,tv_price,tv_num,tv_talk;
+		TextView tv_title,tv_price,tv_num,tv_unit;
 		ImageView iv;
 	}
 

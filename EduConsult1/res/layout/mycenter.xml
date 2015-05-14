@@ -51,6 +51,7 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/mycenter_home_tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test"
@@ -675,7 +676,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="40dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -702,6 +703,27 @@
                android:layout_height="wrap_content"
                android:background="@drawable/mycenter_right"/>
         </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/mycenter_home_ll_logout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/orn"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退出登录"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                />
+            
+        </LinearLayout>
+        
     </LinearLayout>
 
 </ScrollView>

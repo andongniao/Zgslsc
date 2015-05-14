@@ -2,6 +2,7 @@ package com.example.educonsult.beans;
 
 public class CenterUserBean extends UserBean{
 	private String username;
+	private String img;
 	private String company;
 	private String truename;
 	private String mobile;
@@ -22,6 +23,12 @@ public class CenterUserBean extends UserBean{
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	public String getCompany() {
 		return company;

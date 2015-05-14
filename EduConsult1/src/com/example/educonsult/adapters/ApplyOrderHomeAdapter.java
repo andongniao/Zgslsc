@@ -8,30 +8,30 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.ApplyOrderActivity.Myorder;
+import com.example.educonsult.activitys.ApplyOrderActivity.MyApply;
+import com.example.educonsult.beans.OrderBean;
 import com.example.educonsult.myviews.MyListview;
 
 public class ApplyOrderHomeAdapter extends BaseAdapter implements
 OnClickListener{
 	private Context context;
-	private ArrayList<Integer>list;
+	private ArrayList<OrderBean>list;
 	private LayoutInflater inflater;
 	private Item item;
-	private MyOrderLvAdapter adapter;
+	private OrderRefundAdapter adapter;
 	private int n;
-	private Myorder myorder;
+	private MyApply apply;
 
-	public ApplyOrderHomeAdapter(Context context,ArrayList<Integer>list,Myorder myorder){
+	public ApplyOrderHomeAdapter(Context context,ArrayList<OrderBean>list,MyApply apply){
 		this.context = context;
 		this.list = list;
-		this.myorder = myorder;
+		this.apply = apply;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Integer>list){
+	public void SetData(ArrayList<OrderBean>list){
 		this.list = list;
 	}
 
@@ -77,18 +77,17 @@ OnClickListener{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		ArrayList<Integer> l1 = new ArrayList<Integer>();
-		l1.add(1);
-		l1.add(2);
-		ArrayList<Integer> l2 = new ArrayList<Integer>();
-		l2.add(1);
-//		if((position/2)==0){
-//			adapter = new MyOrderLvAdapter(context, l1);
-//			n = l1.size();
-//		}else{
-//			adapter = new MyOrderLvAdapter(context, l2);
-//			n = l2.size();
-//		}
+		OrderBean bean = list.get(position);
+		item.tv_title.setText(bean.getCompany());
+		item.tv_orderid.setText(bean.getItemid());
+		item.tv_allmoney.setText("гд"+bean.getMoney());
+		item.tv_xiugai.setVisibility(View.INVISIBLE);
+		item.tv_quxiao.setVisibility(View.INVISIBLE);
+		item.tv_applying.setText(bean.getStatus());
+		
+		
+		
+		adapter = new OrderRefundAdapter(context, bean,apply);
 		item.lv.setAdapter(adapter);
 
 		return convertView;

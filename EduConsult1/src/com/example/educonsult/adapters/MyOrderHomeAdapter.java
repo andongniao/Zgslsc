@@ -86,12 +86,16 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 		item.tv_time.setText(o.getAddtime());
 		item.tv_statu.setText(o.getStatus());
 		item.tv_num.setText("共"+1+"件商品");
-		item.tv_shifu.setText(o.getMoney());
-		adapter = new MyOrderLvAdapter(context, list,position,myorder);
+		int n = Integer.parseInt(o.getNumber());
+		double p = Double.parseDouble(o.getPrice());
+		item.tv_shifu.setText("￥"+String.valueOf(p*n));
+		adapter = new MyOrderLvAdapter(context,o,position,myorder);
 		item.lv.setAdapter(adapter);
 //		item.tv_day.setText("距离确认收货还有2天");
 		type = Integer.parseInt(o.getStatusid());
 		if(type==1){
+			item.btn_l.setVisibility(View.VISIBLE);
+			item.btn_r.setVisibility(View.VISIBLE);
 			item.btn_r.setText("立即付款");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.white));
 			item.btn_r.setBackgroundResource(R.color.orn);
@@ -99,6 +103,8 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 			item.btn_l.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_l.setBackgroundResource(R.drawable.order_et_bg_line);
 		}else if(type == 2){
+			item.btn_l.setVisibility(View.VISIBLE);
+			item.btn_r.setVisibility(View.VISIBLE);
 			item.btn_r.setText("关闭交易");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
@@ -106,6 +112,8 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 		}else if(type == 3){
+			item.btn_l.setVisibility(View.VISIBLE);
+			item.btn_r.setVisibility(View.VISIBLE);
 			item.btn_r.setText("申请退款");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
@@ -113,24 +121,50 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 		}else if(type == 4){
+			int isc = o.getIscomment();
+			if(isc==0){
+			item.btn_l.setVisibility(View.GONE);
+			item.btn_r.setVisibility(View.VISIBLE);
 			item.btn_r.setText("评价订单");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
+			}else{
+				item.btn_l.setVisibility(View.GONE);
+				item.btn_r.setVisibility(View.GONE);
+			}
 //			item.btn_l.setText("确认发货");
 //			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 //			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
+		}else{
 			item.btn_l.setVisibility(View.GONE);
+			item.btn_r.setVisibility(View.GONE);
 		}
 		item.btn_l.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				myorder.Order_Canale(o);
+				if(type == 1){
+					myorder.Order_Canale(o);
+				}else if(type==2){
+					myorder.Order_Fahuo(o);
+				}else if(type==3){
+					myorder.Order_Repay(o);
+				}
 			}
 		});
 		item.btn_r.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				myorder.Order_Canale(o);
+				if(type == 1){
+					myorder.Order_Pay(o);
+				}else if(type==2){
+					myorder.Order_Canale(o);
+				}else if(type==3){
+					myorder.Order_Refund(o);
+				}else if(type==4){
+					if(o.getIscomment()==0){
+						myorder.Order_commit(o);
+					}
+				}
 			}
 		});
 		

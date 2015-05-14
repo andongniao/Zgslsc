@@ -36,6 +36,7 @@
                     android:text="@string/test"
                     android:textColor="@color/black"/>
                  <TextView 
+                     android:id="@+id/myorderinfo_item_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/scproduct_tvmoney"

@@ -3,6 +3,7 @@ package com.example.educonsult.adapters;
 import java.util.ArrayList;
 
 import com.example.educonsult.R;
+import com.example.educonsult.beans.AddressBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,15 +14,19 @@ import android.widget.TextView;
 
 public class AddressHomeAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Object>list;
+	private ArrayList<AddressBean>list;
 	private LayoutInflater inflater;
 	private Item item;
 
 
-	public AddressHomeAdapter(Context context,ArrayList<Object>list){
+	public AddressHomeAdapter(Context context,ArrayList<AddressBean>list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
+	}
+	public void SetData(ArrayList<AddressBean>list){
+		this.list = list;
+
 	}
 
 	@Override
@@ -55,8 +60,16 @@ public class AddressHomeAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-
-
+		AddressBean b = list.get(position);
+		item.tv_name.setText(b.getTruename());
+		int i = Integer.parseInt(b.getIsdefault());
+		if(i==1){
+			item.tv_default.setTextColor(context.getResources().getColor(R.color.white));
+		}else{
+			item.tv_default.setTextColor(context.getResources().getColor(R.color.orn));
+		}
+		item.tv_number.setText(b.getMobile());
+		item.tv_address.setText(b.getAddress());
 		return convertView;
 	}
 	class Item{

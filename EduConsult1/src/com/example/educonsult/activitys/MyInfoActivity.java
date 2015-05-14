@@ -30,6 +30,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.TextItemListAdapter;
 import com.example.educonsult.beans.CenterUserBean;
 import com.example.educonsult.beans.UserBean;
+import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
@@ -54,6 +55,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	private View v_fenlei;
 	private ListView list_2,lv_l;
 	private TextItemListAdapter adapter_r;
+	private CircleImageView icv_head;
 	
 	
 
@@ -113,6 +115,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		context = this;
 		bean = MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
+		icv_head = (CircleImageView) findViewById(R.id.myinfo_iv_head);
 		ll_head = (LinearLayout) findViewById(R.id.myinfo_ll_head);
 		ll_head.setOnClickListener(this);
 		ll_friend = (LinearLayout) findViewById(R.id.myinfo_ll_friend);
@@ -129,7 +132,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		ll_geren=(LinearLayout)findViewById(R.id.myinfo_ll_two_line);
 		mycardNum=(TextView)findViewById(R.id.myinfo_ll_mycard_num);
 		
-		Util.SetRedNum(context, rl_l, 1);
+//		Util.SetRedNum(context, rl_l, 1);
 		
 		tv_cname=(TextView)findViewById(R.id.myinfo_tv_gongsim);
 		tv_cphone=(TextView)findViewById(R.id.myinfo_tv_gongsid);
@@ -252,6 +255,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 				if(centerbean!=null){
 					if("200".equals(centerbean.getCode())){
 						//TODO	
+						Util.Getbitmap(icv_head, centerbean.getImg());
 						tv_name.setText(centerbean.getUsername());
 						
 						
@@ -279,6 +283,12 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 							
 						}
 						
+					}else if("300".equals(centerbean.getCode())){
+						MyApplication.mp.setlogin(false);
+						intent = new Intent(context,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+						finish(); 
 					}else{
 						Util.ShowToast(context, centerbean.getMsg());
 					}

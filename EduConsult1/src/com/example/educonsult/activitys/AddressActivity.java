@@ -15,12 +15,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.AddressHomeAdapter;
-import com.example.educonsult.myviews.BadgeView;
+import com.example.educonsult.beans.AddressBean;
+import com.example.educonsult.beans.ListAddressBean;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
 public class AddressActivity extends BaseActivity implements OnClickListener{
@@ -30,11 +34,13 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private ImageButton ibtn_add;
 	private AddressHomeAdapter adapter;
 	private Context context;
-	private ArrayList<Object>list;
 	private Intent intent;
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
+	private ThreadWithProgressDialog myPDT;
+	private ListAddressBean lisetbean;
+	private ArrayList<AddressBean>list;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -51,6 +57,11 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.address_home);
 		init();
 		addlistener();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+		}
 	}
 	private void addlistener() {
 		rl_l.setOnClickListener(new OnClickListener() {
@@ -74,6 +85,8 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	}
 	private void init() {
 		context = this;
+		myPDT = new ThreadWithProgressDialog();
+		String  msg = getResources().getString(R.string.loding);
 		lv = (ListView) findViewById(R.id.address_home_lv);
 		lv.setEmptyView(ll_show);
 		ll_show = (LinearLayout) findViewById(R.id.address_home_ll_show);
@@ -82,11 +95,6 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		btn_add.setOnClickListener(this);
 		ibtn_add = (ImageButton) findViewById(R.id.address_home_ibtn_add_address);
 		ibtn_add.setOnClickListener(this);
-		list = new ArrayList<Object>();
-		list.add(1);
-		list.add(2);
-		adapter = new AddressHomeAdapter(context, list);
-		lv.setAdapter(adapter);
 		if(list!=null){
 			if(list.size()>0){
 				btn_add.setVisibility(View.VISIBLE);
@@ -103,12 +111,14 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				intent = new Intent(context,AddressGLActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+//				intent = new Intent(context,AddressGLActivity.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				intent.putExtra("address", list.get(arg2));
+//				intent.putExtra("addressnum", "0");
+//				startActivity(intent);
 			}
 		});
-		Util.SetRedNum(context, rl_l, 1);
+//		Util.SetRedNum(context, rl_l, 1);
 	}
 	@Override
 	public void onClick(View v) {
@@ -135,4 +145,67 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 
+	// 任务
+		public class RefeshData implements ThreadWithProgressDialogTask {
+
+			public RefeshData() {
+			}
+
+			@Override
+			public boolean OnTaskDismissed() {
+				//任务取消
+//				Toast.makeText(context, "cancle", 1000).show();
+				return false;
+			}
+
+			@Override
+			public boolean OnTaskDone() {
+				//任务完成后
+				if(lisetbean!=null){
+					if("200".equals(lisetbean.getCode())){
+						list = lisetbean.getList();
+						if(adapter!=null){
+							adapter.SetData(list);
+							adapter.notifyDataSetChanged();
+						}else{
+							adapter = new AddressHomeAdapter(context, list);
+							lv.setAdapter(adapter);
+						}
+						if(list.size()>0){
+							btn_add.setVisibility(View.VISIBLE);
+							lv.setVisibility(View.VISIBLE);
+							ll_show.setVisibility(View.GONE);
+						}else{
+							btn_add.setVisibility(View.GONE);
+							lv.setVisibility(View.GONE);
+							ll_show.setVisibility(View.VISIBLE);
+						}
+					}else if("300".equals(lisetbean.getCode())){
+						MyApplication.mp.setlogin(false);
+						intent = new Intent(context,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+						finish(); 
+					}else{
+						Util.ShowToast(context, lisetbean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+				
+				
+				
+				return true;
+			}
+
+			@Override
+			public boolean TaskMain() {
+				// 访问
+				Send s = new Send(context);
+				lisetbean = s.getAddressList(MyApplication.mp.getUser().getAuthstr());
+				return true;
+			}
+		}
+
+	
 }

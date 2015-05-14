@@ -876,6 +876,7 @@ public class Util {
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				if (msg.what == 1 && msg.obj != null && v!=null) {
+					v.setTag(url);
 					v.setImageBitmap((Bitmap) msg.obj);
 					//					mViewSwitcher.showNext();
 				} else {

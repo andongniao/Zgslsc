@@ -212,25 +212,25 @@ public class WelcomeActivity extends Activity{
 //			ListBanksBranch lbb = p.getBanksBeanchList(104,code , "", authstr);
 //			p.bindBankcart(lbb.getList().get(0).getBanknumber(), "0000000000000000000", "test", authstr, 104);
 //			ListOrderCommit lp = p.CommitOrder(l, authstr);
-			final ListOrderBean lo = s.getOrderList(0,1,authstr);
-			if(lo!=null){
-			id = lo.getList_order().get(4).getItemid();
-			c = lo.getList_order().get(4).getCoupons();
+//			final ListOrderBean lo = s.getOrderList(0,1,authstr);
+//			if(lo!=null){
+//			id = lo.getList_order().get(4).getItemid();
+//			c = lo.getList_order().get(4).getCoupons();
 //			p.Order_refund(, 1, "", authstr);
-p.PayOrder(id,c, authstr,"123456");
+//p.PayOrder(id,c, authstr,"123456");
 //			p.Order_pay(id, "123456", c, authstr);
-			}
-p.Order_sendgoods(id, 1, "", "", "", authstr);
+//			}
+//p.Order_sendgoods(id, 1, "", "", "", authstr);
 //			p.Order_getwuliulist("254", authstr);
 //p.Order_close("261", authstr);
-p.Order_confirmpay(id, authstr);
+//p.Order_confirmpay(id, authstr);
 //			p.Order_refunddata("260", authstr);
 //			p.Order_refund("260", 1, "≤‚ ‘", authstr);
 //			p.Order_refundinfo("260", authstr);
 //			p.getOrderDetaile(lo.getList_order().get(0).getItemid(), authstr);
 //			p.Order_getpay("253", authstr);
 //			p.Order_comment("253", 3, "test", authstr);
-			s.getOrderRefundList(2, authstr);
+//			s.getOrderRefundList(2, authstr);
 			return true;
 		}
 	}
