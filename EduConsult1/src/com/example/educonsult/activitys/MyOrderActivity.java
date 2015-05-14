@@ -80,7 +80,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		init();
 		addlistener();
 		/*************测试******** ********/
-//		myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+		//		myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
 	}
 
 	private void addlistener() {
@@ -110,7 +110,11 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				init = false;
 				add = 3;
 				ob = orderBean;
-				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}
 
 			@Override
@@ -130,7 +134,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				ob = orderBean;
 				init = false;
 				add = 5;
-//				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				//				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
 				intent = new Intent(context,ApplyOrderActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("itemid", orderBean.getItemid());
@@ -161,8 +165,13 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 						init = false;
 						add = 2;
 						popwindow.dismiss();
-						myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
-					}
+						if(Util.detect(context)){
+
+							myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+						}
+						else{
+							Util.ShowToast(context, R.string.net_is_eor);
+						}					}
 				});		
 
 			}
@@ -177,7 +186,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				intent.putExtra("itemid", orderBean.getItemid());
 				intent.putExtra("statusid", orderBean.getStatusid());
 				startActivity(intent);
-//				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				//				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
 			}
 
 			@Override
@@ -185,7 +194,12 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				ob = orderBean;
 				init = false;
 				add= 1;
+				if(Util.detect(context)){
+					
 				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}
 
 			@Override
@@ -239,12 +253,12 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		tv_show_comment = (TextView) findViewById(R.id.myorder_home_tv_comment_show);
 		view_list.add(tv_show_all);
 		view_list.add(tv_show_pay);
-		
+
 		tv_show_send = (TextView) findViewById(R.id.myorder_home_tv_send_show);
 		view_list.add(tv_show_send);
 		tv_show_shouhuo = (TextView) findViewById(R.id.myorder_home_tv_shouhuo_show);
 		view_list.add(tv_show_shouhuo);
-		
+
 		if(userbean.getType()==0){
 			ll_send.setVisibility(View.VISIBLE);
 			ll_shouhuo.setVisibility(View.GONE);
@@ -252,7 +266,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 			ll_shouhuo.setVisibility(View.VISIBLE);
 			ll_send.setVisibility(View.GONE);
 		}
-		
+
 		view_list.add(tv_show_comment);
 		v_pop = LayoutInflater.from(context).inflate(R.layout.money_password, null);
 		popwindow = new PopupWindow(v_pop, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -270,37 +284,37 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 			ll_isnull.setVisibility(View.VISIBLE);
 			lv.setVisibility(View.GONE);
 		}
-//		lv.setOnScrollListener(new OnScrollListener() {   
-//			  
-//		    /**  
-//		     * 滚动状态改变时调用  
-//		     */  
-//		    @Override  
-//		    public void onScrollStateChanged(AbsListView view, int scrollState) {   
-//		        // 不滚动时保存当前滚动到的位置   
-//		        if (scrollState == OnScrollListener.SCROLL_STATE_IDLE) {  
-//		            if (currentMenuInfo != null) {   
-//		                scrolledX = view.getScrollX();   
-//		                scrolledY = view.getScrollY();   
-//		            }   
-//		        }   
-//		    }   
-//		  
-//		    /**  
-//		     * 滚动时调用  
-//		     */  
-//		    @Override  
-//		    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {   
-//		    }   
-//		});  
-//		Util.SetRedNum(context, rl_r, 1);
+		//		lv.setOnScrollListener(new OnScrollListener() {   
+		//			  
+		//		    /**  
+		//		     * 滚动状态改变时调用  
+		//		     */  
+		//		    @Override  
+		//		    public void onScrollStateChanged(AbsListView view, int scrollState) {   
+		//		        // 不滚动时保存当前滚动到的位置   
+		//		        if (scrollState == OnScrollListener.SCROLL_STATE_IDLE) {  
+		//		            if (currentMenuInfo != null) {   
+		//		                scrolledX = view.getScrollX();   
+		//		                scrolledY = view.getScrollY();   
+		//		            }   
+		//		        }   
+		//		    }   
+		//		  
+		//		    /**  
+		//		     * 滚动时调用  
+		//		     */  
+		//		    @Override  
+		//		    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {   
+		//		    }   
+		//		});  
+		//		Util.SetRedNum(context, rl_r, 1);
 		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				if(msg.what==1){
 					if(ppage==1){
-					list = (ArrayList<OrderBean>) msg.obj;
+						list = (ArrayList<OrderBean>) msg.obj;
 					}else{
 						ArrayList<OrderBean> ll = (ArrayList<OrderBean>) msg.obj;
 						list.addAll(ll);
@@ -357,7 +371,11 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				type = i;
 				ttp = i;
 				init = true;
+				if(Util.detect(context)){
 				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}else{
 				view_list.get(i).setVisibility(View.INVISIBLE);
 			}
@@ -462,7 +480,11 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 							Util.ShowToast(context, "确认成功");	
 						}
 						init = true;
+						if(Util.detect(context)){
 						myPDT.Run(context, new RefeshData(init,type,pag,tag),initdataing,false);//可取消
+						}else{
+							Util.ShowToast(context, R.string.net_is_eor);
+						}
 
 					}else if("300".equals(baseBean.getCode())){
 						MyApplication.mp.setlogin(false);
@@ -562,7 +584,11 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		super.onResume();
 		if(isinit){
 			init = true;
+			if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(init,type,pag,tag),initdataing,false);//可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
 			isinit = false;
 		}
 	}

@@ -62,7 +62,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightLVisible();
+//		topRightLVisible();
 		topRightRVisible();
 		topRightTGone();
 		rl_l = (RelativeLayout) getTopLightRl();
@@ -77,6 +77,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		addlistener();
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
+		}
+		else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 		
 		if(cardNum==0){

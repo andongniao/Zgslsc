@@ -78,6 +78,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private String strpass;
 	private ArrayList<ShopBean> shopBeans;
 	private OrderHomeAdapter orderHomeAdapter;
+	public static boolean isinit;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -122,10 +123,11 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		list = new ArrayList<Integer>();
 		list.add(1);
 		list.add(2);
-		intent=getIntent();
-		Bundle b=intent.getBundleExtra("shopcartbundle");
+		Bundle b=getIntent().getBundleExtra("shopcartbundle");
+		if(b!=null){
 		shopbean=(ListShopBean)b.getSerializable("shopcarbean");
 		shoporder=(ListShopBean)b.getSerializable("shopcaroder");
+		}
 //		intent.putExtra("shopcartbundle", b);
 //		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
 //		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");

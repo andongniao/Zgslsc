@@ -312,9 +312,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		gv_like = (MyGridView) view.findViewById(R.id.home_ulike_gv);
-		likeadapter = new HomeLikeAdapter(context, list);
 		gv_ruzhu = (MyGridView) view.findViewById(R.id.home_ruzhu_gv);
-		gv_like.setAdapter(likeadapter);
 		//		ruzhuadapter = new HomeRuzhuAdapter(context, list);
 		//		gv_ruzhu.setAdapter(ruzhuadapter);
 
@@ -840,6 +838,8 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			Util.Getbitmap(iv_ad2, home.getAd().get(1));
 			ruzhuadapter = new HomeRuzhuAdapter(context, home.getCompany());
 			gv_ruzhu.setAdapter(ruzhuadapter);
+			likeadapter = new HomeLikeAdapter(context, home.getMylike());
+			gv_like.setAdapter(likeadapter);
 			sc.scrollTo(0, 1);
 			for(int i =0;i<home.getRecommend().size();i++){
 				String url = home.getRecommend().get(i).getThumb();

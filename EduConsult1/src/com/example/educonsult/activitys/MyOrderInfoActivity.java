@@ -90,7 +90,11 @@ OnClickListener {
 		tv_no.setOnClickListener(this);
 		listview=(MyListview)findViewById(R.id.myorderinfo_list);
 		String ms = getResources().getString(R.string.loding);
+		if(Util.detect(context)){
 		myPDT.Run(context, new RefeshData(),ms,false);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+		}
 	}
 
 	@Override
@@ -118,14 +122,22 @@ OnClickListener {
 					EditText et = (EditText) v_pop.findViewById(R.id.money_password_edpassword);
 					password = et.getText().toString();
 					popwindow.dismiss();
+					if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
 				}
 			});		
 			break;
 		case R.id.myorderinfo_quxiao:
 			initdata = false;
 			tp = 1;
+			if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
 			break;
 		}
 	}

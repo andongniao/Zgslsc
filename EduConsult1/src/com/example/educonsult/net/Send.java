@@ -364,7 +364,7 @@ public class Send {
 	 */
 	public ProdectDetaileBean GetProductDetaile(String id) {
 		ProdectDetaileBean bean = new ProdectDetaileBean();
-		String url = ServiceUrl.Base+ServiceUrl.Product_url;
+		String url = ServiceUrl.Base+ServiceUrl.Product_url+id;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 		if (jsonStr != null && !jsonStr.equals("")) {
@@ -478,13 +478,13 @@ public class Send {
 							Integer.parseInt(c2.getNumn());
 					for(int i=0;i<index;i++){
 						if(data!=null&&!"[]".equals(data.toString())){
-						JSONObject j = data.getJSONObject(i);
-						Type t = new TypeToken<CommentBean>() {
-						}.getType();
-						CommentBean cb = gson.fromJson(j.toString(), t);
-						if(cb!=null){
-							listcomm.add(cb);
-						}
+							JSONObject j = data.getJSONObject(i);
+							Type t = new TypeToken<CommentBean>() {
+							}.getType();
+							CommentBean cb = gson.fromJson(j.toString(), t);
+							if(cb!=null){
+								listcomm.add(cb);
+							}
 						}
 
 					}
@@ -512,9 +512,9 @@ public class Send {
 
 	}
 
-	
-	
-	
+
+
+
 	/**
 	 * 个人中心推荐单品列表
 	 */
@@ -560,8 +560,8 @@ public class Send {
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * 获取我的信息
 	 */
@@ -570,7 +570,7 @@ public class Send {
 		ArrayList<CenterUserBean>list = new ArrayList<CenterUserBean>();
 		String baseurl = ServiceUrl.Base;
 		String url="";
-			url = baseurl+"member.php?action=member_detail&authstr="+authstr;
+		url = baseurl+"member.php?action=member_detail&authstr="+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -582,7 +582,7 @@ public class Send {
 				String msg = object.getString("message");
 				if (code != null && "200".equals(code)) {
 					JSONArray data = object.getJSONArray("data");
-//					JSONArray j = data.getJSONArray(0);
+					//					JSONArray j = data.getJSONArray(0);
 					Type t = new TypeToken<ArrayList<CenterUserBean>>() {
 					}.getType();
 					list = gson.fromJson(data.toString(), t);
@@ -610,7 +610,7 @@ public class Send {
 		}
 
 	}
-	
+
 	/**
 	 * 获取钱包详情
 	 */
@@ -666,8 +666,8 @@ public class Send {
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * 获取购物车列表
 	 */
@@ -676,7 +676,7 @@ public class Send {
 		ArrayList<ShopBean>list = new ArrayList<ShopBean>();
 		String baseurl = ServiceUrl.Base;
 		String url="";
-			url = baseurl+ServiceUrl.cart_list+authstr;
+		url = baseurl+ServiceUrl.cart_list+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -688,23 +688,23 @@ public class Send {
 				String msg = object.getString("message");
 				if (code != null && "200".equals(code)) {
 					if(Util.IsNull(object.getString("data"))){
-					JSONObject data = object.getJSONObject("data");
-					@SuppressWarnings("unchecked")
-					Iterator<String> keys=data.keys();
-					while (keys.hasNext ())
-		            {
-						String k = (String) keys.next() + "";
-						JSONObject js = (JSONObject) data.get(k);
-						Type t = new TypeToken<ShopBean>() {
+						JSONObject data = object.getJSONObject("data");
+						@SuppressWarnings("unchecked")
+						Iterator<String> keys=data.keys();
+						while (keys.hasNext ())
+						{
+							String k = (String) keys.next() + "";
+							JSONObject js = (JSONObject) data.get(k);
+							Type t = new TypeToken<ShopBean>() {
 							}.getType();
-						ShopBean sb = gson.fromJson(js.toString(), t);
-						sb.setCompanyid(k);
-						if(sb!=null){
-							list.add(0,sb);
+							ShopBean sb = gson.fromJson(js.toString(), t);
+							sb.setCompanyid(k);
+							if(sb!=null){
+								list.add(0,sb);
+							}
+
 						}
-						
-		            }
-				}
+					}
 					bean.setList(list);
 					bean.setCode(code);
 					bean.setMsg(msg);
@@ -729,7 +729,7 @@ public class Send {
 		}
 
 	}
-	
+
 	/**
 	 * 添加购物车
 	 */
@@ -748,8 +748,8 @@ public class Send {
 				if (code != null && "200".equals(code)) {
 					bean.setCode(code);
 					bean.setMsg(msg);
-//					JSONObject data = object.getJSONObject("data");
-//					bean.setAuthstr(authstr);
+					//					JSONObject data = object.getJSONObject("data");
+					//					bean.setAuthstr(authstr);
 					return bean;
 				} else {
 					if(Util.IsNull(msg)){
@@ -794,8 +794,8 @@ public class Send {
 				if (code != null && "200".equals(code)) {
 					bean.setCode(code);
 					bean.setMsg(msg);
-//					JSONObject data = object.getJSONObject("data");
-//					bean.setAuthstr(authstr);
+					//					JSONObject data = object.getJSONObject("data");
+					//					bean.setAuthstr(authstr);
 					return bean;
 				} else {
 					if(Util.IsNull(msg)){
@@ -821,7 +821,7 @@ public class Send {
 		}
 
 	}
-	
+
 	/**
 	 *	清空购物车
 	 */
@@ -865,10 +865,10 @@ public class Send {
 		}
 
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * 获取站内信件列表
 	 */
@@ -876,8 +876,8 @@ public class Send {
 		ListXinjianBean bean = new ListXinjianBean();
 		String baseurl = ServiceUrl.Base;
 		String url="";
-			url = baseurl+ServiceUrl.mycenter_hander+ServiceUrl.sms_list+
-					ServiceUrl.mycenter_footer+authstr;
+		url = baseurl+ServiceUrl.mycenter_hander+ServiceUrl.sms_list+
+				ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -916,7 +916,7 @@ public class Send {
 		}
 
 	}
-	
+
 	/**
 	 * 获取站内信件列表
 	 */
@@ -924,8 +924,8 @@ public class Send {
 		XinJianDetaileBean bean = new XinJianDetaileBean();
 		String baseurl = ServiceUrl.Base;
 		String url="";
-			url = baseurl+ServiceUrl.mycenter_hander+ServiceUrl.sms_deteaile+itemid+
-					ServiceUrl.mycenter_footer+authstr;
+		url = baseurl+ServiceUrl.mycenter_hander+ServiceUrl.sms_deteaile+itemid+
+				ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -964,9 +964,9 @@ public class Send {
 		}
 
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 获取地址列表
 	 */
@@ -1012,14 +1012,14 @@ public class Send {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 	/**
 	 * 获取订单列表 
 	 * @param step		搜索类型1待付款，2待收货，3待收货，4待评价（可选）默认为0
@@ -1047,44 +1047,48 @@ public class Send {
 				if (code != null && "200".equals(code)) {
 					lb.setCode(code);
 					lb.setMsg(msg);
-					JSONArray data = object.getJSONArray("data");
-//					Type type_o = new TypeToken<ArrayList<OrderBean>>() {
-//					}.getType();
-//					list_order = gson.fromJson(data.toString(), type_o);
-					for(int i=0;i<10;i++){
-						OrderBean o = new OrderBean();
-						String j = data.getString(i);
-						if(Util.IsNull(j)){			
-							JSONObject d = new JSONObject(j);
-							o.setItemid(d.getString("itemid"));
-							o.setTitle(d.getString("title"));
-							o.setThumb(d.getString("thumb"));
-							o.setAddtime(d.getString("addtime"));
-							o.setPrice(d.getString("price"));
-							o.setNumber(d.getString("number"));
-							o.setStatus(d.getString("status"));
-							o.setStatusid(d.getString("statusid"));
-							o.setCompany(d.getString("company"));
-							o.setCoupons(d.getString("coupons"));
-							o.setUnit(d.getString("unit"));
+					if(Util.IsNull(object.getString("data"))){
+						JSONArray data = object.getJSONArray("data");
+						//					Type type_o = new TypeToken<ArrayList<OrderBean>>() {
+						//					}.getType();
+						//					list_order = gson.fromJson(data.toString(), type_o);
+						for(int i=0;i<10;i++){
+							OrderBean o = new OrderBean();
+							String j = data.getString(i);
+							if(Util.IsNull(j)){			
+								JSONObject d = new JSONObject(j);
+								o.setItemid(d.getString("itemid"));
+								o.setTitle(d.getString("title"));
+								o.setThumb(d.getString("thumb"));
+								o.setAddtime(d.getString("addtime"));
+								o.setPrice(d.getString("price"));
+								o.setNumber(d.getString("number"));
+								o.setStatus(d.getString("status"));
+								o.setStatusid(d.getString("statusid"));
+								o.setCompany(d.getString("company"));
+								o.setCoupons(d.getString("coupons"));
+								o.setUnit(d.getString("unit"));
+							}
+							list_order.add(o);
 						}
-						list_order.add(o);
 					}
+					if(Util.IsNull(object.getString("fields"))){
 					JSONObject fields = object.getJSONObject("fields");
 					@SuppressWarnings("unchecked")
 					Iterator<String> keys=fields.keys();
 					while (keys.hasNext ())
-		            {
+					{
 						String k = (String) keys.next() + "";
 						JSONObject js = (JSONObject) fields.get(k);
 						Type t = new TypeToken<OrderFields>() {
-							}.getType();
-							OrderFields sb = gson.fromJson(js.toString(), t);
+						}.getType();
+						OrderFields sb = gson.fromJson(js.toString(), t);
 						if(sb!=null){
 							list_fields.add(sb);
 						}
-						
-		            }
+
+					}
+					}
 					lb.setList_order(list_order);
 					lb.setList_key(list_fields);
 					return lb;
@@ -1108,7 +1112,7 @@ public class Send {
 		}
 
 	}
-	
+
 	/**
 	 * 获取退款订单列表 
 	 * @param page		页码 
@@ -1162,9 +1166,9 @@ public class Send {
 		}
 
 	}
-	
-	
-	
+
+
+
 
 	//
 	//	/**

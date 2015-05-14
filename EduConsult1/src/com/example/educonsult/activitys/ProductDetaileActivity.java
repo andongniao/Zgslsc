@@ -374,9 +374,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			Toproduct();
 			break;
 		case R.id.product_detaile_ll_pay_now: 
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
-			}
+//			if(Util.detect(context)){
+//				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
+//			}
 			ExampleActivity.setCurrentTab(3);
 			finish();
 			break;

@@ -132,6 +132,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		msg = "加载中...";
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {

@@ -424,6 +424,8 @@ void setrel(){
 								if(Util.isMobileNO(phone)){
 									if(Util.detect(context)){
 										myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+									}else{
+										Util.ShowToast(context, R.string.net_is_eor);
 									}
 									
 								}else{
@@ -451,6 +453,8 @@ void setrel(){
 								if(Util.isMobileNO(phone)){
 									if(Util.detect(context)){
 										myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+									}else{
+										Util.ShowToast(context, R.string.net_is_eor);
 									}
 								}else{
 									Toast.makeText(context, R.string.regist_phone_isfalse, 200).show();

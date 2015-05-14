@@ -6,33 +6,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.GqTwoActivity.RefeshData;
 import com.example.educonsult.adapters.TextItemListAdapter;
 import com.example.educonsult.beans.AddressBean;
 import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListAreaBean;
-import com.example.educonsult.myviews.BadgeView;
+import com.example.educonsult.net.PostHttp;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
@@ -42,10 +44,11 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private EditText tv_address,tv_shouhuoren,tv_number,tv_youbian;
 	private CheckBox cb_set;
 	private boolean isok;
+	private int areaid;
 	//	private ImageView iv_top_l,iv_top_t;
 	private Intent intent;
 	String num;
-
+	private int isdetault;
 	private ArrayList<String> list;
 	private TextItemListAdapter adapter_r;
 	private PopupWindow popu;
@@ -60,7 +63,11 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private ListAreaBean lare;
 	private ArrayList<AreaBean>listsheng,listshi,listxian;
 	private Util u;
+	private int type = 1,ttp;
 	private String filename;
+	private String diqu,dizhi,person,mob,postcode;
+	private BaseBean beanresult;
+	private boolean init;
 
 
 
@@ -82,7 +89,10 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			listsheng = lare.getList();
 		}else{
 			if(Util.detect(context)){
+				init = true;
 				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 		}
 	}
@@ -94,8 +104,8 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		bean = (AddressBean) getIntent().getExtras().get("address");
 		myPDT = new ThreadWithProgressDialog();
 		String  msg = getResources().getString(R.string.loding);
-		num=intent.getStringExtra("addressnum");
-		isok = false;
+		num=getIntent().getStringExtra("addressnum");
+//		isok = false;
 		ll_diqu = (LinearLayout) findViewById(R.id.address_up_ll_diqu);
 		ll_diqu.setOnClickListener(this);
 		ll_jiedao = (LinearLayout) findViewById(R.id.address_up_ll_jiedao);
@@ -113,13 +123,12 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		//		tv_jiedao = (TextView) findViewById(R.id.address_up_tv_jiedao);
 		//		tv_jiedao.setOnClickListener(this);
 		tv_address = (EditText) findViewById(R.id.address_up_tv_detaile);
-		tv_address.setText(bean.getAddress());
 		tv_shouhuoren = (EditText) findViewById(R.id.address_up_tv_shouhuoren);
-		tv_shouhuoren.setText(bean.getTruename());
+
 		tv_number = (EditText) findViewById(R.id.address_up_tv_phone_number);
-		tv_number.setText(bean.getMobile());
+
 		tv_youbian = (EditText) findViewById(R.id.address_up_tv_youbian);
-		tv_youbian.setText(bean.getPostcode());
+
 		tv_delete = (TextView) findViewById(R.id.address_up_tv_delete);
 		tv_delete.setOnClickListener(this);
 		tv_save = (TextView) findViewById(R.id.address_up_tv_save);
@@ -129,22 +138,43 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				isok = isChecked;
+				if(isok){
+					isdetault = 1;
+				}else{
+					isdetault = 0;
+				}
 			}
 		});
 		if(num.equals("1")){//修改
 			tv_delete.setVisibility(View.GONE);
+		}else{
+			tv_delete.setVisibility(View.GONE);
+			if(bean!=null){
+				tv_youbian.setText(bean.getPostcode());
+				tv_number.setText(bean.getMobile());
+				tv_shouhuoren.setText(bean.getTruename());
+				tv_address.setText(bean.getAddress());
+				tv_diqu.setText((Html.fromHtml(bean.getArea())));
+				if("1".equals(bean.getIsdefault())){
+					cb_set.setChecked(true);
+				}else{
+					cb_set.setChecked(false);
+				}
+			}
 		}
 		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
 			lare = (ListAreaBean) u.readObject(filename);
 			listsheng = lare.getList();
 		}
 
-		list=new ArrayList<String>();
-//				for(int i=0;i<){
-//
-//				}
 	}
-	private void setpopuwindow(Context contexts,ArrayList<String> list,LinearLayout lin){
+	private void setpopuwindow(Context contexts,ListAreaBean larea,LinearLayout lin){
+
+		final ArrayList<String> list = new ArrayList<String>(); 
+		listsheng = larea.getList();
+		for(int i=0;i<listsheng.size();i++){
+			list.add(listsheng.get(i).getArename());
+		}
 		inflater=LayoutInflater.from(contexts);
 		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
 		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
@@ -155,8 +185,51 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				listshi = listsheng.get(arg2).getChild(); 
+				areaid = listsheng.get(arg2).getAreaid();
+				tv_diqu.setText(listsheng.get(arg2).getArename());
+				list.clear();
+				for(int i=0;i<listshi.size();i++){
+					list.add(listshi.get(i).getArename());
+				}
+				adapter_r = new TextItemListAdapter(context, list);
+				lv_l.setAdapter(adapter_r);
+				adapter_r.notifyDataSetChanged();
+				lv_l.setOnItemClickListener(new OnItemClickListener() {
 
-				popu.dismiss();
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int ss, long arg3) {
+						listxian = listshi.get(ss).getChild();
+						areaid = listshi.get(ss).getAreaid();
+						String a2 = tv_diqu.getText().toString();
+						tv_diqu.setText(a2+listshi.get(ss).getArename());
+						if(listxian!=null && listxian.size()>0){
+							list.clear();
+							for(int i=0;i<listxian.size();i++){
+								list.add(listxian.get(i).getArename());
+							}
+							adapter_r = new TextItemListAdapter(context, list);
+							lv_l.setAdapter(adapter_r);
+							adapter_r.notifyDataSetChanged();
+							lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+								@Override
+								public void onItemClick(AdapterView<?> arg0,
+										View arg1, int s3, long arg3) {
+									areaid = listxian.get(s3).getAreaid();
+									String a3 = tv_diqu.getText().toString();
+									tv_diqu.setText(a3+listxian.get(s3).getArename());
+									popu.dismiss();
+								}
+							});
+						}else{
+							popu.dismiss();
+						}
+
+					}
+				});
+				//				popu.dismiss();
 			}
 		});
 
@@ -172,7 +245,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.address_up_ll_diqu:
-			setpopuwindow(context, list, ll_diqu);
+			setpopuwindow(context, lare, ll_diqu);
 			break;
 		case R.id.address_up_ll_jiedao:
 
@@ -190,7 +263,29 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 
 			break;
 		case R.id.address_up_tv_save:
-
+			diqu = tv_diqu.getText().toString();
+			dizhi = tv_address.getText().toString();
+			person = tv_shouhuoren.getText().toString();
+			postcode = tv_youbian.getText().toString();
+			mob = tv_number.getText().toString();
+			if(Util.IsNull(diqu) &&Util.IsNull(dizhi) &&Util.IsNull(person) &&Util.IsNull(postcode) &&
+					Util.IsNull(mob)){
+				if(Util.isMobileNO(mob)){
+					if(Util.detect(context)){
+						init = false;
+						if(Util.detect(context)){
+							init = false;
+							myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+						}
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
+				}else{
+					Util.ShowToast(context, "请检查手机号格式");
+				}
+			}else{
+				Util.ShowToast(context, "请保证信息完整");
+			}
 			break;
 		case R.id.address_up_tv_delete:
 
@@ -216,21 +311,82 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public boolean OnTaskDone() {
 			//任务完成后
+			if(init){
+				if(lare!=null){
+					if("200".equals(lare.getCode())){
+						init = false;
+					}else if("300".equals(lare.getCode())){
+						intent = new Intent(context,LoginActivity.class);
+						startActivity(intent);
+						finish();
+					}else{
+						Util.ShowToast(context, beanresult.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}else{
+				if(beanresult!=null){
+					if("200".equals(beanresult.getCode())){
+						if(num.equals("1")){
+							Util.ShowToast(context, "添加成功！");
+						}else if(num.equals("0")){
+							Util.ShowToast(context, "修改成功！");
+						}
+						AddressActivity.isinit = true;
+						finish();
+					}else if("300".equals(beanresult.getCode())){
+						intent = new Intent(context,LoginActivity.class);
+						startActivity(intent);
+						finish();
+					}else{
+						Util.ShowToast(context, beanresult.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+
+			}
 			return true;
 		}
 
 		@Override
 		public boolean TaskMain() {
 			// 访问
-
-
-
-
+			if(!init){
+				PostHttp p = new PostHttp(context);
+				AddressBean ab = new AddressBean();
+				String authstr = MyApplication.mp.getUser().getAuthstr();
+				ab.setAddress(dizhi);
+				ab.setArea(diqu);
+				ab.setIsdefault(""+1);
+				ab.setMobile(mob);
+				ab.setTruename(person);
+				ab.setPostcode(postcode);
+				ab.setIsdefault(""+isdetault);
+				if(num.equals("1")){
+					ab.setAreaid(""+areaid);
+					beanresult = p.addOneAddress(ab,authstr);
+				}else if(num.equals("0")){
+					ab.setAreaid(bean.getAreaid());
+					ab.setItemid(bean.getItemid());
+					ab.setIsdefault(""+isdetault);
+					beanresult = p.editOneAddress(ab, authstr);
+				}
+			}else{
+				Send s  = new Send(context);
+				lare = s.GetArea();
+			}
 
 			return true;
 		}
 	}
 
+
+	public void showpop(){
+		adapter_r = new TextItemListAdapter(context, list);
+		lv_l.setAdapter(adapter_r);
+	}
 
 
 }

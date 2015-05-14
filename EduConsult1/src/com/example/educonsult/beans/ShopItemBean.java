@@ -1,5 +1,6 @@
 package com.example.educonsult.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * @author Qzr
  *
  */
-public class ShopItemBean {
+public class ShopItemBean implements Serializable{
 	private boolean isclick;	//本地属性是否勾选
 	private String itemid;		//商品ID
 	private String title;		//商品名称

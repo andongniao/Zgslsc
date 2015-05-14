@@ -37,7 +37,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private Intent intent;
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
-	public static boolean isread;
+	public static boolean isread,isinit;
 	private ThreadWithProgressDialog myPDT;
 	private ListAddressBean lisetbean;
 	private ArrayList<AddressBean>list;
@@ -45,7 +45,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();
-		topRightLVisible();
+//		topRightLVisible(); 
 		topRightRVisible();
 		rl_l = (RelativeLayout) getTopLightRl();
 		rl_r = (RelativeLayout) getTopRightRl();
@@ -111,11 +111,11 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-//				intent = new Intent(context,AddressGLActivity.class);
-//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				intent.putExtra("address", list.get(arg2));
-//				intent.putExtra("addressnum", "0");
-//				startActivity(intent);
+				intent = new Intent(context,AddressGLActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("address", list.get(arg2));
+				intent.putExtra("addressnum", "0");
+				startActivity(intent);
 			}
 		});
 //		Util.SetRedNum(context, rl_l, 1);
@@ -126,11 +126,13 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		case R.id.address_home_btn_add_address:
 			intent = new Intent(context,AddressGLActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("addressnum", "1");
 			startActivity(intent);
 			break;
 		case R.id.address_home_ibtn_add_address:
 			intent = new Intent(context,AddressGLActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("addressnum", "1");
 			startActivity(intent);
 			break;
 
@@ -142,6 +144,13 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		if(isread){
 			Util.SetRedGone(context, rl_l);
 			isread = false;
+		}else if(isinit){
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			isinit = false;
 		}
 	}
 
@@ -207,5 +216,11 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			}
 		}
 
+		
+		@Override
+		protected void onDestroy() {
+			super.onDestroy();
+				OrderActivity.isinit = true;
+		}
 	
 }

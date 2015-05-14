@@ -64,7 +64,7 @@ public class AddressHomeAdapter extends BaseAdapter{
 		item.tv_name.setText(b.getTruename());
 		int i = Integer.parseInt(b.getIsdefault());
 		if(i==1){
-			item.tv_default.setTextColor(context.getResources().getColor(R.color.white));
+			item.tv_default.setTextColor(context.getResources().getColor(R.color.black));
 		}else{
 			item.tv_default.setTextColor(context.getResources().getColor(R.color.orn));
 		}

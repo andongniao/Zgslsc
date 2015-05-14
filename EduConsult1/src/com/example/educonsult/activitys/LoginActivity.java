@@ -162,6 +162,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 				er.commit();
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(name,pass),msg,false);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}else{
 				Toast.makeText(context, "请检查用户名和密码", 200).show();

@@ -45,7 +45,11 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 		setTopLeftTv(R.string.applyinfo_title);
 		setContentXml(R.layout.applyinfo);
 		init();
+		if(Util.detect(context)){
 		myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+		}
 	}
 
 

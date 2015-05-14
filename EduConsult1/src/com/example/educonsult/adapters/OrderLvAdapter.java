@@ -77,7 +77,6 @@ public class OrderLvAdapter extends BaseAdapter{
 			item.tv_num = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_num);
 			item.tv_zongjia = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_zongjia);
 			item.lin=(LinearLayout)convertView.findViewById(R.id.order_two_lv_item_lin_youhui);
-			
 			item.tv_uhui = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_uhui);
 			convertView.setTag(item);
 		}else{
@@ -88,8 +87,8 @@ public class OrderLvAdapter extends BaseAdapter{
         
 		final ShopItemBean b = (ShopItemBean) l.get(position);
 		
-		coupons=b.getCoupon();
-		item.tv_num.setText(b.getNum());
+		coupons=b.getCoupons();
+		item.tv_num.setText(""+b.getNum());
 		item.tv_price.setText("гд"+b.getPrice());
 		item.tv_title.setText(b.getTitle());
 		int i_num=b.getNum();
@@ -108,12 +107,14 @@ public class OrderLvAdapter extends BaseAdapter{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Strlist=new ArrayList<String>();
+				if(coupons!=null &&coupons.size()>0){
 				for(int i=0;i<coupons.size();i++){
 					Strlist.add(coupons.get(i).getValue());
 				}
 				setpopuwindow(Strlist, item.lin);
 				item.tv_uhui.setText(coupons.get(num).getValue());
 				popu.dismiss();
+				}
 			}
 		});
 		

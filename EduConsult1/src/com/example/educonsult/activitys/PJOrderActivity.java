@@ -88,6 +88,8 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 			if(Util.IsNull(edStr)){
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(edStr),R.string.loding);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}else{
 				Util.ShowToast(context, "评论信息不能为空");

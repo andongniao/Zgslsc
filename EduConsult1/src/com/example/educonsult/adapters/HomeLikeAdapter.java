@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.educonsult.R;
 import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.tools.Util;
 
 public class HomeLikeAdapter extends BaseAdapter{
 	private Context context;
@@ -52,16 +53,23 @@ public class HomeLikeAdapter extends BaseAdapter{
 			myitem.iv = (ImageView) convertView.findViewById(R.id.home_like_iv);
 			myitem.tv_title = (TextView) convertView.findViewById(R.id.home_like_tv_title);
 			myitem.tv_price = (TextView) convertView.findViewById(R.id.home_like_tv_price);
+			myitem.tv_unit = (TextView) convertView.findViewById(R.id.home_like_tv_unit);
 			myitem.tv_address = (TextView) convertView.findViewById(R.id.home_like_tv_address);
 			convertView.setTag(myitem);
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
+		ProductBean p = list.get(position);
+		Util.Getbitmap(myitem.iv, p.getThumb());
+		myitem.tv_title.setText(p.getTitle());
+		myitem.tv_price.setText(p.getPrice());
+		myitem.tv_unit.setText(p.getUnit());
+		myitem.tv_address.setText(p.getAreaname());
 		return convertView;
 	}
 	
 class Myitem{
-	TextView tv_price,tv_title,tv_address;
+	TextView tv_price,tv_title,tv_address,tv_unit;
 	ImageView iv;
 }
 }
