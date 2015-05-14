@@ -562,12 +562,12 @@ void setrel(){
 //			yzsl 养殖数量
 //			tjr 推荐人
 
-			if(tp==1){
-				bean=p.Regist(6, name, pass, rname, type, numdiqu+"", dizhi, phone,cname, ctype, cphone);
-			}else{
-				bean=p.Regist(5, name, pass, rname, type, numdiqu+"", dizhi,phone, pingzhongString, siliao, computer,
-						price, numproduct+"", "",num ,person);
-			}
+//			if(tp==1){
+//				bean=p.Regist(6, name, pass, rname, type, numdiqu+"", dizhi, phone,cname, ctype, cphone);
+//			}else{
+//				bean=p.Regist(5, name, pass, rname, type, numdiqu+"", dizhi,phone, pingzhongString, siliao, computer,
+//						price, numproduct+"", "",num ,person);
+//			}
 			
 
 			return true;

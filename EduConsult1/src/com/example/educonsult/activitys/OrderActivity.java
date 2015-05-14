@@ -289,7 +289,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 				listOrderCommit=p.CommitOrder(shopbean, userBean.getAuthstr());
 			}else if(inttype==2){
 				
-				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
+//				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
 			}
 
 			return true;
