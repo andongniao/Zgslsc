@@ -105,6 +105,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 	private RefreshableView refreshableView;
 	private Handler handler;
 	private String filename = "home";
+	private ProductBean productBean;
 
 
 	@Override

@@ -88,7 +88,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		final ShopItemBean b = (ShopItemBean) l.get(position);
 
 		item.cb.setChecked(b.isIsclick());
-		item.cb.setText(b.getTitle());
+		
 //		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
 //			@Override
@@ -127,12 +127,13 @@ public class ShopcartLvAdapter extends BaseAdapter{
 				}
 			}
 		});
-		item.et_number.setText(b.getAmount());
+		//item.et_number.setText(b.getNum());
+		//item.et_number.setText(b.getNum());
 		item.tv_price.setText(b.getPrice());
 		item.tv_title.setText(b.getTitle());
-		int i_num=Integer.parseInt(b.getAmount());
-		int i_price=Integer.parseInt(b.getPrice());
-		int i_allmoney=i_num*i_price;
+		int i_num=b.getNum();
+		float i_price=Float.parseFloat(b.getPrice());
+		float i_allmoney=i_num*i_price;
 		item.tv_zongjia.setText(i_allmoney+"");
 		try {
 			item.iv_ic.setImageBitmap(Util.getBitmapForNet(b.getThumb()));

@@ -40,6 +40,8 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	private String strstar="";
 	private Intent intent;
 	private String itemid;
+	private boolean isall,isgood,isok,isno;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -56,6 +58,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		itemid=intent.getStringExtra("qingjiamore");
 		list=new ArrayList<ProductBean>();
 		listview=(ListView)findViewById(R.id.product_detail_more_list);
+		myPDT=new ThreadWithProgressDialog();
 		
 		li_all=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia_costperformace);
 		li_good=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia_zhiliang);
@@ -73,6 +76,10 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 		}
+		isall=true;
+		isgood=false;
+		isok=false;
+		isno=false;
 	}
 	private void setRedText(LinearLayout li,TextView tv){
 		li.setBackgroundResource(R.drawable.search_lv_notnull_btn_bg);
@@ -84,21 +91,27 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	}
 	private void setpingjiaDate(){
 		
-		pingjiaAdapter=new ProductPingjiaAdapter(context, commentBeans);
+		pingjiaAdapter=new ProductPingjiaAdapter(context, commentBeans,-1);
 		listview.setAdapter(pingjiaAdapter);
+		
 	}
 	private void setStarDate(){
-		for(int i=0;i<commentBeans.size();i++){
-			if(commentBeans.get(i).getSeller_star().equals("")){
-				tv_all.setText(commentBeans.get(i).getNumn());
-			}else if(commentBeans.get(i).getSeller_star().equals("1")){
-				tv_no.setText(commentBeans.get(i).getNumn());
-			}else if(commentBeans.get(i).getSeller_star().equals("2")){
-				tv_ok.setText(commentBeans.get(i).getNumn());
-			}else if(commentBeans.get(i).getSeller_star().equals("3")){
-				tv_good.setText(commentBeans.get(i).getNumn());
+		int starnum=0;
+		for(int i=0;i<comstar.size();i++){
+			
+				
+			 if(comstar.get(i).getStar().equals("1")){
+				tv_no.setText("差评("+comstar.get(i).getNumn()+")");
+				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
+			}else if(comstar.get(i).getStar().equals("2")){
+				tv_ok.setText("中评("+comstar.get(i).getNumn()+")");
+				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
+			}else if(comstar.get(i).getStar().equals("3")){
+				tv_good.setText("好评("+comstar.get(i).getNumn()+")");
+				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
 			}
 		}
+		tv_all.setText("总评("+starnum+")");
 		
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
@@ -123,7 +136,11 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 				if("200".equals(listComment.getCode())){
 					commentBeans=listComment.getComlist();
 					comstar=listComment.getComstar();
-					setStarDate();
+					if(comstar.size()!=0||comstar!=null){
+						setStarDate();
+						setpingjiaDate();
+					}
+					
 				}else{
 					Util.ShowToast(context, listComment.getMsg());
 				}
@@ -168,6 +185,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 					commentBeans=listComment.getComlist();
 					comstar=listComment.getComstar();
 					setpingjiaDate();
+					
 				}else{
 					Util.ShowToast(context, listComment.getMsg());
 				}
@@ -202,9 +220,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_no,tv_no);
 			strstar="";
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			if(!isall){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+				}
+				isall=true;
 			}
+			
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_zhiliang:
 			type=2;
@@ -213,9 +235,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_no,tv_no);
 			strstar="3";
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			if(!isgood){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+				}
+				isgood=true;
 			}
+			
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_fuwu:
 			type=3;
@@ -224,9 +250,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_all,tv_all);
 			setWhiteText(li_no,tv_no);
 			strstar="2";
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			if(!isok){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+				}
+				isok=true;
 			}
+			
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_xiaoguo:
 			type=4;
@@ -235,9 +265,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_all,tv_all);
 			strstar="1";
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			if(!isno){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+				}
+				isno=true;
 			}
+			
 			break;
 
 		default:

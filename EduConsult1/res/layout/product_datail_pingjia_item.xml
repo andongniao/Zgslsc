@@ -86,7 +86,8 @@
                 android:layout_alignParentLeft="true"
                 android:textSize="10dp"
                 android:text="@string/test"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:visibility="gone"/>
             <TextView 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

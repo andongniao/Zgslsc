@@ -30,12 +30,15 @@ import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
+import com.example.educonsult.adapters.MyCenterTuijianAdapter.RefeshData;
+import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.CommentBean;
 import com.example.educonsult.beans.CommentStar;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.MallInfoBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.ImageCycleView;
 import com.example.educonsult.myviews.ImageCycleView.ImageCycleViewListener;
 import com.example.educonsult.myviews.MyListview;
@@ -75,7 +78,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ProductBean productBean;
 	private String liulanfile;
 	private Util u;
-	private boolean isSave;
+	private boolean isSave,ispingjia;
+	private UserBean userbean;
+	private BaseBean bean;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -94,6 +99,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		intent=getIntent();
 		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");
 		liulanfile=MyApplication.Seejilu;
+		userbean=MyApplication.mp.getUser();
 		u=new Util(context);
 		isSave=u.saveObject(productBean, liulanfile);
 		if(isSave){
@@ -114,7 +120,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		add=(TextView)findViewById(R.id.product_detaile_adds);
 		add.setOnClickListener(this);
 		imageview=(ImageCycleView)findViewById(R.id.product_detail_icv);
-
+		ispingjia=false;
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		findViewById(R.id.product_detaile_ll_into_dianpu).setOnClickListener(this);
@@ -266,7 +272,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			}
 		});
 		tv_title.setText(mallinfo.getKeyword());
-		if(!mallinfo.getPrice2().equals("")){
+		if(!"".equals(mallinfo.getPrice2())){
 			tv_shangcheng.setText(mallinfo.getPrice2());
 		}else{
 			tv_shangcheng.setText(mallinfo.getPrice());
@@ -368,11 +374,17 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			Toproduct();
 			break;
 		case R.id.product_detaile_ll_pay_now: 
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
+			}
 			ExampleActivity.setCurrentTab(3);
 			finish();
 			break;
 		case R.id.product_detaile_ll_add_shopcart:
-			Toast.makeText(context, "ok", 1000).show();
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
+			}
+			//Toast.makeText(context, "ok", 1000).show();
 			break;
 		case R.id.product_detaile_ll_chanpin:
 			ll_add_view_chanpin.setVisibility(View.VISIBLE);
@@ -389,9 +401,14 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			chanpin.setTextColor(getResources().getColor(R.color.black));
 			pingjia.setTextColor(getResources().getColor(R.color.orn));
 			dianpu.setTextColor(getResources().getColor(R.color.black));
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
+			if(!ispingjia){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
+				}
 			}
+			ispingjia=true;
+			
+			
 			break;
 		case R.id.product_detaile_ll_dianputuijian:
 			ll_add_view_chanpin.setVisibility(View.GONE);
@@ -404,7 +421,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		case R.id.product_detaile_ll_add_View_xiangqing_more:
 			intent = new Intent(context,ProductDetaileMoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("qingjiamore", mallinfo.getItemid());
+			//intent.putExtra("qingjiamore", mallinfo.getItemid());
+			intent.putExtra("qingjiamore","53");
 			startActivity(intent);
 			
 			break;
@@ -422,6 +440,48 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+	}
+	public class RefeshData2 implements ThreadWithProgressDialogTask {
+		int postion;
+		public RefeshData2() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//			Toast.makeText(context, "cancle", 1000).show();
+			Util.ShowToast(context,"添加失败");
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(bean!=null){
+				if("200".equals(bean.getCode())){
+					//TODO	
+					ShopcartActivity.ischange = true;
+					Util.ShowToast(context,"添加成功");
+				}else{
+					Util.ShowToast(context, bean.getMsg());
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			Send s = new Send(context);
+			//productdetailbean = s.GetProductDetaile();
+			// listProductBean=s.getCenterRecommend();
+			//bean=s.CartAdd(mallinfo.getItemid(), 1,userbean.getAuthstr());
+			bean=s.CartAdd("53", 1,userbean.getAuthstr());
+			return true;
+		}
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
 
@@ -441,10 +501,6 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			//任务完成后
 			if(productdetailbean!=null){
 				if("200".equals(productdetailbean.getCode())){
-					//TODO	
-					//					private MallInfoBean mallinfo;
-					//					private ArrayList<ProductBean> recommend;
-					//					private ArrayList<ProductBean> buyedlist;
 					mallinfo=productdetailbean.getMallinfo();
 					recommend=productdetailbean.getRecommend();
 					buyedlist=productdetailbean.getBuyedlist();
@@ -472,7 +528,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	}
 	private void setpingjiaDate(){
 	
-			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist);
+			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
 			listView.setAdapter(pingjiaAdapter);
 			if(comlist.size()==0){
 				pingjiamore.setVisibility(View.GONE);

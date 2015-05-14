@@ -26,8 +26,20 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.ExampleActivity;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.LoginActivity.RefeshData;
 import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.FenleiBean;
+import com.example.educonsult.beans.ListAreaBean;
+import com.example.educonsult.beans.ListFenleiBean;
+import com.example.educonsult.net.PostHttp;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
@@ -39,7 +51,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	private RadioButton rb_man,rb_woman;
 	private Button btn_regist;
 	private CheckBox cb_read;
-	private int type,tp;
+	private int type,tp,tpopu;
 	private boolean isread;
 	private LinearLayout ll_diqu,ll_pingzhong,ll_siliao,ll_product,ll_ctype,ll_qiye,ll_geren;
 	private ArrayList<String> list;
@@ -51,7 +63,17 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	private int mscreenwidth;
 	private DisplayMetrics dm;
 	private boolean isdiqu,isctype,ispingzhong,issiliao,isproduct;
-	private int ndiqu=0,nctype=0,npingzhong=0,nsiliao=0,nproduct=0,nums;
+	private int ndiqu=0,diquid=-1,numdiqu,productid=-1,numproduct,nproduct=0;
+	private ListAreaBean listareaBean;
+	private Util u;
+	private ArrayList<AreaBean> areaBeans,areaBean;
+	private ThreadWithProgressDialog myPDT;
+	private String name,pass,pass_re,phone,diqu,rname,dizhi,siliao,pingzhongString,
+	computer,price,product,num,person,cname,ctype,cphone,catid;
+	private BaseBean bean;
+	String s="" ,p="";
+	private ListFenleiBean listFenleiBean;
+	private ArrayList<FenleiBean> fenleiBeans,fenleiBeans2;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -68,9 +90,23 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		dm = new DisplayMetrics();
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		 myPDT=new ThreadWithProgressDialog();
 		context = this;
-		type = 2;
+		type = 1;
 		tp = 2;
+		u=new Util(context);
+		listareaBean=(ListAreaBean)u.readObject(MyApplication.AreaName);
+		listFenleiBean=(ListFenleiBean)u.readObject(MyApplication.FenleiName);
+		if(listareaBean==null){
+			areaBean=new ArrayList<AreaBean>();
+		}else{
+			areaBean=listareaBean.getList();
+		}
+		if(listFenleiBean==null){
+			fenleiBeans=new ArrayList<FenleiBean>();
+		}else{
+			fenleiBeans=listFenleiBean.getList();
+		}
 		isread = false;
 		tv_qiye = (TextView) findViewById(R.id.regist_tv_qiye);
 		tv_qiye.setOnClickListener(this);
@@ -134,18 +170,45 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 
 
 	}
-	private 	boolean setpopuwindow(ArrayList<String> list,LinearLayout lin,final int num){
+	private void setpopuwindow(final ArrayList<String> list,LinearLayout lin){
 		adapter_r = new TextItemListAdapter(context, list);
 		lv_l.setAdapter(adapter_r);
-		this.nums=num;
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				nums=1;
-				popu.dismiss();
+				if(tpopu==1){
+					isproduct=true;	
+					/*tv_product.setText(list.get(arg2));
+					catid=arg2+"";*/
+					nproduct=arg2;
+					productid=productid+1;
+					p=p+list.get(arg2);
+					tv_product.setText(p);
+					popu.dismiss();
+				}else if(tpopu==2){
+					isdiqu=true;
+					ndiqu=arg2;
+					diquid=diquid+1;
+					s=s+list.get(arg2);
+					tv_diqu.setText(s);
+					popu.dismiss();
+				}else if(tpopu==3){
+					ispingzhong=true;
+					tv_pingzhong.setText(list.get(arg2));
+					popu.dismiss();
+				}else if(tpopu==4){
+					issiliao=true;
+					tv_siliao.setText(list.get(arg2));
+					popu.dismiss();
+				}else if(tpopu==5){
+					isctype=true;
+					tv_ctype.setText(list.get(arg2));
+					popu.dismiss();
+				}
+				
 			}
 		});
 		mscreenwidth=dm.widthPixels;
@@ -154,10 +217,8 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
 		popu.showAsDropDown(lin);
-		if(nums==1){
-			return true;
-		}
-		return false;
+		
+		
 	}
 	private void addlistener() {
 		rb_man.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -187,75 +248,183 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		});
 
 	}
-
+void setrel(){
+	for(int i=0;;i++){
+		areaBeans=areaBeans.get(ndiqu).getChild();
+		if(areaBeans!=null||areaBeans.size()!=0){
+			for(int j=0;j<areaBeans.size();j++){
+				list.add(areaBeans.get(j).getArename());
+			}
+			tpopu=2;
+			setpopuwindow(list,ll_diqu);
+			//popu.showAsDropDown(ll_diqu);
+			s=s+list.get(ndiqu);
+			numdiqu=areaBeans.get(ndiqu).getAreaid();
+		}else{
+			tv_diqu.setText(s);
+			popu.dismiss();
+			break;
+		}
+	}
+	tv_diqu.setText(s);
+	popu.dismiss();
+}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.regist_ll_geren_product:
 			list = new ArrayList<String>();
-			list.add("全部收支");
-			list.add("收入");
-			list.add("支出");
-			isproduct=setpopuwindow(list,ll_product,nproduct);
+			//setpopuwindow(list,ll_product);
+			if(productid==-1){
+				fenleiBeans2=fenleiBeans;
+				p="";
+				if(fenleiBeans2!=null||fenleiBeans2.size()!=0){
+					for(int i=0;i<fenleiBeans2.size();i++){
+						String ss=fenleiBeans2.get(i).getCatname();
+						list.add(ss);
+					}
+					tpopu=1;
+					setpopuwindow(list,ll_product);
+					//popu.showAsDropDown(ll_diqu);
+					numproduct=fenleiBeans2.get(nproduct).getCatid();
+
+				}
+			}else{
+				fenleiBeans2=fenleiBeans2.get(nproduct).getChild();
+				if(fenleiBeans2!=null){
+					if(fenleiBeans2.size()!=0){
+						for(int j=0;j<fenleiBeans2.size();j++){
+							list.add(fenleiBeans2.get(j).getCatname());
+						}
+						tpopu=1;
+						setpopuwindow(list,ll_product);
+						//popu.showAsDropDown(ll_diqu);
+						adapter_r.notifyDataSetChanged();
+						numproduct=fenleiBeans2.get(nproduct).getCatid();
+					}else{
+						productid=-1;
+					}
+
+				}else{
+					productid=-1;
+				}
+
+			}
 			break;
 		case R.id.regist_ll_geren_diqu:
 			list = new ArrayList<String>();
-			list.add("全部收支");
+			/*list.add("全部收支");
 			list.add("收入");
-			list.add("支出");
-			isdiqu=setpopuwindow(list,ll_diqu,ndiqu);
+			list.add("支出");*/
+			
+			
+			if(diquid==-1){
+				areaBeans=areaBean;
+				s="";
+				if(areaBean!=null||areaBean.size()!=0){
+					for(int i=0;i<areaBean.size();i++){
+						String ss=areaBean.get(i).getArename();
+						list.add(ss);
+					}
+					tpopu=2;
+					setpopuwindow(list,ll_diqu);
+					//popu.showAsDropDown(ll_diqu);
+					numdiqu=areaBean.get(ndiqu).getAreaid();
+
+				}
+			}else{
+				areaBeans=areaBeans.get(ndiqu).getChild();
+				if(areaBeans!=null){
+					if(areaBeans.size()!=0){
+						for(int j=0;j<areaBeans.size();j++){
+							list.add(areaBeans.get(j).getArename());
+						}
+						tpopu=2;
+						setpopuwindow(list,ll_diqu);
+						//popu.showAsDropDown(ll_diqu);
+						adapter_r.notifyDataSetChanged();
+						numdiqu=areaBeans.get(ndiqu).getAreaid();
+					}else{
+						diquid=-1;
+					}
+
+				}else{
+					diquid=-1;
+				}
+
+			}
+			
 			break;
 		case R.id.regist_ll_geren_pingzhong:
 			list = new ArrayList<String>();
-			list.add("全部收支");
-			list.add("收入");
-			list.add("支出");
-			ispingzhong=setpopuwindow(list,ll_pingzhong,npingzhong);
+			list.add("猪");
+			list.add("蛋鸡");
+			list.add("土鸡");
+			list.add("肉鸡");
+			list.add("牛");
+			list.add("肉鸭");
+			list.add("蛋鸭");
+			list.add("鹌鹑");
+			list.add("羊");
+			list.add("犬");
+			list.add("鱼");
+			list.add("兔子");
+			list.add("皮毛动物");
+			list.add("其他经济动物");
+			tpopu=3;
+			setpopuwindow(list,ll_pingzhong);
 			break;
 		case R.id.regist_ll_geren_siliao:
 			list = new ArrayList<String>();
-			list.add("全部收支");
-			list.add("收入");
-			list.add("支出");
-			issiliao=setpopuwindow(list,ll_siliao,nsiliao);
+			list.add("全价料");
+			list.add("预混料");
+			list.add("浓缩料");
+			list.add("精料补充料料");
+			list.add("自配");
+			tpopu=4;
+			setpopuwindow(list,ll_siliao);
 			break;
 		case R.id.regist_ll_qiye_ctype:
 			list = new ArrayList<String>();
-			list.add("全部收支");
-			list.add("收入");
-			list.add("支出");
-			isctype=setpopuwindow(list,ll_ctype,nctype);
+			list.add("企业单位");
+			list.add("事业单位或社会团体");
+			list.add("个人经营出");
+			list.add("其他");
+			tpopu=5;
+			setpopuwindow(list,ll_ctype);
 			break;
 		case R.id.regist_btn_regist:
-			String name = et_name.getText().toString().trim();
-			String pass = et_pass.getText().toString();
-			String pass_re = et_pass_re.getText().toString();
-			String phone = et_phone.getText().toString().trim();
-			String diqu=tv_diqu.getText().toString().trim();
-			String rname=et_rname.getText().toString().trim();
-			String dizhi=et_dizhi.getText().toString().trim();
+			name = et_name.getText().toString().trim();
+			pass = et_pass.getText().toString();
+			pass_re = et_pass_re.getText().toString();
+			phone = et_phone.getText().toString().trim();
+			diqu=tv_diqu.getText().toString().trim();
+			rname=et_rname.getText().toString().trim();
+			dizhi=et_dizhi.getText().toString().trim();
 
-			String siliao=tv_siliao.getText().toString().trim();
-			String pingzhongString=tv_pingzhong.toString().trim();
-			String computer=et_compute.toString().trim();
-			String price=et_price.toString().trim();
-			String product=tv_product.toString().trim();
-			String num=et_num.toString().trim();
-			String person=et_person.toString().trim();
+			siliao=tv_siliao.getText().toString().trim();
+			pingzhongString=tv_pingzhong.getText().toString().trim();
+			computer=et_compute.getText().toString().trim();
+			price=et_price.getText().toString().trim();
+			product=tv_product.getText().toString().trim();
+			num=et_num.getText().toString().trim();
+			person=et_person.getText().toString().trim();
 
-			String cname=et_cname.toString().trim();
-			String ctype=tv_ctype.toString().trim();
-			String cphone=et_cphone.toString().trim();
+			cname=et_cname.getText().toString().trim();
+			ctype=tv_ctype.getText().toString().trim();
+			cphone=et_cphone.getText().toString().trim();
 
-			if(Util.IsNull(name) && Util.IsNull(pass) && Util.IsNull(pass_re) 
-					&& Util.IsNull(phone)&&isdiqu){
+			if(Util.IsNull(name) && Util.IsNull(pass) && Util.IsNull(pass_re)&& Util.IsNull(rname)
+					&& Util.IsNull(phone)&&isdiqu&& Util.IsNull(dizhi)){
 				if(tp==1){
 					if (Util.IsNull(cname)&&isctype&&Util.IsNull(cphone)) {
 						if(Util.ispassword(pass)){
 							if(pass.equals(pass_re)){
 								if(Util.isMobileNO(phone)){
-									
+									if(Util.detect(context)){
+										myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+									}
 									
 								}else{
 									Toast.makeText(context, R.string.regist_phone_isfalse, 200).show();
@@ -280,8 +449,9 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 						if(Util.ispassword(pass)){
 							if(pass.equals(pass_re)){
 								if(Util.isMobileNO(phone)){
-									
-									
+									if(Util.detect(context)){
+										myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+									}
 								}else{
 									Toast.makeText(context, R.string.regist_phone_isfalse, 200).show();
 								}
@@ -321,9 +491,6 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 			tp = 1;
 			tv_qiye.setBackgroundResource(R.drawable.regist_clikeed);
 			tv_qiye.setTextColor(getResources().getColor(R.color.white));
-			//tv_qiye.setBackgroundResource(R.drawable.regist_butten_bg);
-			//tv_qiye.setBackgroundResource(R.drawable.regist_button_bg);
-			//				tv_geren.setBackgroundResource(R.drawable.regist_unclick);
 			tv_geren.setTextColor(getResources().getColor(R.color.black));
 			tv_geren.setBackgroundResource(R.drawable.zcbq1);
 			ll_geren.setVisibility(View.GONE);
@@ -342,5 +509,70 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 			break;
 		}
 	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		public RefeshData() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false; 
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(bean!=null){
+				String code = bean.getCode();
+				String m = bean.getMsg();
+				if("200".equals(code)){
+//		
+					finish();
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		}
+
+
+
+		@Override
+		public boolean TaskMain() {
+
+//			Send s = new Send(context);
+//			bean = s.Login(username, password);
+			PostHttp p=new PostHttp(context);
+//			password 密码
+//			truename 真实姓名
+//			gender 性别 1是男，2是女
+//			areaid 所在地
+//			address 详细地址 养殖户必填参数
+//			yzpz 养殖品种
+//			syzl 使用饲料
+//			xsycj 现在使用哪个厂家饲料
+//			kjsjw 可以接受的价格
+//			catid 急需产品分类 养殖户选填参数
+//			bankcard 所用银行卡
+//			yzsl 养殖数量
+//			tjr 推荐人
+
+//			if(tp==1){
+//				bean=p.Regist(6, name, pass, rname, type, numdiqu+"", dizhi, phone,cname, ctype, cphone);
+//			}else{
+//				bean=p.Regist(5, name, pass, rname, type, numdiqu+"", dizhi,phone, pingzhongString, siliao, computer,
+//						price, numproduct+"", "",num ,person);
+//			}
+			
+
+			return true;
+		}
+	}
+
 
 }

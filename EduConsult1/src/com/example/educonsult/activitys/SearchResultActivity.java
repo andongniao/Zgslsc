@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.SearchHomeActivity.RefeshData;
 import com.example.educonsult.adapters.SearchResultAdapter;
 import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ProductBean;
@@ -31,7 +30,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	protected int activityCloseExitAnimation;
 	private ImageView iv_back,iv_num,iv_price,iv_renqi;
 	private EditText et;
-	private LinearLayout ll_zonghe,ll_xiaoliang,ll_price,ll_renqi,ll_isyes,ll_not;
+	private LinearLayout ll_zonghe,ll_xiaoliang,ll_price,ll_renqi,ll_isyes,ll_isnot;
 	private GridView gv;
 	private Context context;
 	 private ArrayList<ProductBean> list;
@@ -45,6 +44,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private int order;
 	private int page;
 	private String text;
+	private boolean islist;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
 		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
 		activityStyle.recycle();
+//		topRightTGone();
+//		setTopLeftTv(R.string.search_title);
 		setContentView(R.layout.search_result_layout);
 		init();
 		addlisteners();
@@ -70,6 +72,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 					long arg3) {
 				Intent intent = new Intent(context,ProductDetaileActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("productdetaile",list.get(arg2) );
 				startActivity(intent);
 			}
 		});
@@ -79,19 +82,18 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		context = this;
 		intent=getIntent();
 
-		intent.putExtra("searchtype", type);
+		/*intent.putExtra("searchtype", type);
 		intent.putExtra("searchorder", order);
 		intent.putExtra("searchpage", page);
-		intent.putExtra("searchtext", text);
+		intent.putExtra("searchtext", text);*/
 		//list =(ArrayList<ProductBean>)intent.getSerializableExtra("search");
 		type=Integer.parseInt(intent.getStringExtra("searchtype"));
 		order=Integer.parseInt(intent.getStringExtra("searchorder"));
 		page=Integer.parseInt(intent.getStringExtra("searchpage"));
 		text=intent.getStringExtra("searchtext");
 		myPDT=new ThreadWithProgressDialog();
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
-		}
+		
+		
 		/*for(int i = 0;i<10;i++){
 			list.add(i);
 		}*/
@@ -114,9 +116,12 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		list_view.add(iv_num);
 		list_view.add(iv_price);
 		list_view.add(iv_renqi);
-
+		ll_isyes=(LinearLayout)findViewById(R.id.search_result_isyes);
+		ll_isnot=(LinearLayout)findViewById(R.id.search_result_isnoll);
 		gv = (GridView) findViewById(R.id.search_result_gv);
-		
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
+		}
 	}
 
 	public class RefeshData implements ThreadWithProgressDialogTask {
@@ -178,12 +183,16 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	}
 	void initDate(){
 		if(list.size()==0||list==null){
-			
+			ll_isnot.setVisibility(View.VISIBLE);
+			ll_isyes.setVisibility(View.GONE);
+			islist=false;
 		}else{
-			
+			ll_isnot.setVisibility(View.GONE);
+			ll_isyes.setVisibility(View.VISIBLE);
 			list=listProductBean.getList();
 			adapter = new SearchResultAdapter(context, list);
 			gv.setAdapter(adapter);
+			islist=true;
 		}
 	}
 	@Override
@@ -200,8 +209,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.search_result_ll_zonghe:
-			if(Util.detect(context)){
+			if(Util.detect(context)||islist){
 				myPDT.Run(context, new RefeshData(type,0,3,text),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, "关键词错误！");
 			}
 
 			break;
@@ -213,8 +224,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			}else{
 				order=1;
 			}
-			if(Util.detect(context)){
+			if(Util.detect(context)||islist){
 				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, "关键词错误！");
 			}
 			break;
 		case R.id.search_result_ll_price:
@@ -224,8 +237,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			}else{
 				order=3;
 			}
-			if(Util.detect(context)){
+			if(Util.detect(context)||islist){
 				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, "关键词错误！");
 			}
 			break;
 		case R.id.search_result_ll_renqi:
@@ -235,8 +250,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			}else{
 				order=5;
 			}
-			if(Util.detect(context)){
+			if(Util.detect(context)||islist){
 				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, "关键词错误！");
 			}
 			break;
 			

@@ -182,7 +182,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		public boolean OnTaskDismissed() {
 			//任务取消
 			//				Toast.makeText(context, "cancle", 1000).show();
-			return false;
+			return false; 
 		}
 
 		@Override

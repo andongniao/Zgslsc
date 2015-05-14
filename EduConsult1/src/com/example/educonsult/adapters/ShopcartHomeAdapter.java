@@ -77,10 +77,18 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 			item = (Item) convertView.getTag();
 		}
 		final ShopBean s = (ShopBean) list.get(index);
+		float sum=0,i_price;
+		int i_num;
+		
+		for(int i=0;i<s.getMall().size();i++){
+			i_num=s.getMall().get(i).getNum();
+			i_price=Float.parseFloat(s.getMall().get(i).getPrice());
+			sum=sum+i_num*i_price;
+		}
 
 		item.cb.setChecked(s.isIsclick());
 		item.cb.setText(s.getCompany());
-		item.heji.setText(s.getNote());
+		item.heji.setText(sum+"");
 //		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
 //			@Override

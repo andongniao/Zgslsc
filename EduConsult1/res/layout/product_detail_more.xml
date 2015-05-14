@@ -27,7 +27,7 @@
                 
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/product_detaile_ll_add_view_pingjia_costper_formace"
+                android:text="@string/test"
                 android:textColor="@color/red"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/product_detaile_ll_add_view_pingjia_yuanliaozhiliang"
+                android:text="@string/test"
                 android:textColor="@color/red"
                 android:textSize="10dp" />
         </LinearLayout>
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/product_detaile_ll_add_view_pingjia_fuwutaidu"
+                android:text="@string/test"
                 android:textColor="@color/red"
                 android:textSize="10dp"
              />
@@ -91,13 +91,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="@string/product_detaile_ll_add_view_pingjia_effect"
+                android:text="@string/test"
                 android:textColor="@color/red"
                 android:textSize="10dp" />
         </LinearLayout>
     </LinearLayout>
 <LinearLayout 
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/white">

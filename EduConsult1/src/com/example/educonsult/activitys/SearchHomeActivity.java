@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +94,13 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 				/*if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(Integer.parseInt(tp),0,3,l.get(arg2)),R.string.loding);//可取消
 				}*/
-				initDate(Integer.parseInt(tp),0,3,l.get(arg2));
+				int i_tp=0;
+				if(!Util.IsNull(tp)){
+					i_tp=0;
+				}else{
+					i_tp=Integer.parseInt(tp);
+				}
+				initDate(i_tp,0,3,l.get(arg2));
 			}
 		});
 	}
@@ -101,7 +108,8 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		myPDT=new ThreadWithProgressDialog();
-		t = getIntent().getIntExtra("t", -1);
+		//t = getIntent().getIntExtra("t", -1);
+		
 		er = MyApplication.sp.edit();
 		sp = (TextView) findViewById(R.id.search_home_sp);
 		sp.setOnClickListener(this);
@@ -248,7 +256,9 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 					er.commit();
 					ishave = false;
 					et.setText("");
+					Log.i("tttttttttttttttttttttttt", t+","+s);
 					initDate(t,0,3,s);
+					
 					/*if(Util.detect(context)){
 						myPDT.Run(context, new RefeshData(t,0,3,s),R.string.loding);//可取消
 					}*/
@@ -331,7 +341,8 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 	void initDate(int type,int order,int page,String text){
-		list=listProductBean.getList();
+		//list=listProductBean.getList();
+		type+=1;
 		intent=new Intent(context, SearchResultActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtype", type+"");
