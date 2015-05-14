@@ -384,7 +384,8 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toproduct();
+				productBean=home.getMylike().get(arg2);
+				Toproduct(productBean);
 			}
 		});
 	}
@@ -521,28 +522,36 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		case R.id.home_ll_tuijian_l:
-			Toproduct();
+			productBean=home.getRecommend().get(0);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_one:
-			Toproduct();
+			productBean=home.getRecommend().get(1);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_two:
-			Toproduct();
+			productBean=home.getRecommend().get(2);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_three:
-			Toproduct();
+			productBean=home.getRecommend().get(3);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_four:
-			Toproduct();
+			productBean=home.getRecommend().get(4);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_b_l:
-			Toproduct();
+			productBean=home.getRecommend().get(5);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_b_t:
-			Toproduct();
+			productBean=home.getRecommend().get(6);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_b_r:
-			Toproduct();
+			productBean=home.getRecommend().get(7);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_top_search:
 			ExampleActivity.setCurrentTab(1);
@@ -554,23 +563,29 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		case R.id.home_ll_hot_l:
-			Toproduct();
+			productBean=home.getHot().get(0);
+			Toproduct(productBean);
 			break;
 
 		case R.id.home_ll_hot_t:
-			Toproduct();
+			productBean=home.getHot().get(1);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_r:
-			Toproduct();
+			productBean=home.getHot().get(2);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_b_l:
-			Toproduct();
+			productBean=home.getHot().get(3);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_b_t:
-			Toproduct();
+			productBean=home.getHot().get(4);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_b_r:
-			Toproduct();
+			productBean=home.getHot().get(5);
+			Toproduct(productBean);
 			break;
 
 
@@ -582,10 +597,13 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 	}
 
 
-	private void Toproduct(){
+	private void Toproduct(ProductBean productBean){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		//intent.putExtra("productdetaile", value);
+		Bundle b=new Bundle();
+		b.putSerializable("product", productBean);
+		intent.putExtra("productbundle", b);
 		startActivity(intent);
 	}
 

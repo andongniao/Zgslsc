@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.style.BulletSpan;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,18 +25,17 @@ import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
-import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.ShopcartActivity.RefeshData;
 import com.example.educonsult.adapters.OrderHomeAdapter;
 import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.beans.AddressBean;
 import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.ListAddressBean;
 import com.example.educonsult.beans.ListOrderCommit;
 import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.UserBean;
-import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
@@ -78,6 +76,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private String strpass;
 	private ArrayList<ShopBean> shopBeans;
 	private OrderHomeAdapter orderHomeAdapter;
+	private ListAddressBean listAddressBean;
+	private ArrayList<AddressBean> addressBeans;
+	private AddressBean addressBean;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -152,9 +153,10 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		lv.setFocusable(false);
 		adapter = new OrderHomeAdapter(context, shopBeans);
 		lv.setAdapter(adapter);
-		if(listdizhi.size()==0){
-			ll_add.setVisibility(View.VISIBLE);
-			ll_address.setVisibility(View.GONE);
+		
+		inttype=0;
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 		}
 
 	}
@@ -275,6 +277,31 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 				Util.ShowToast(context, "支付成功");
 				ShopcartActivity.ischange=true;
 				finish();
+			}else if(listAddressBean!=null){
+				String code = listAddressBean.getCode();
+				String m = listAddressBean.getMsg();
+				if("200".equals(code)){
+					addressBeans=listAddressBean.getList();
+					if(addressBeans.size()==0){
+						ll_add.setVisibility(View.VISIBLE);
+						ll_address.setVisibility(View.GONE);
+					}else{
+						
+						for(int i=0;i<addressBeans.size();i++){
+							if("1".equals(addressBeans.get(i).getIsdefault())){
+								addressBean=addressBeans.get(i);
+							}
+						}
+						tv_shouhuoren.setText(addressBean.getTruename());
+						tv_shoujihao.setText(addressBean.getMobile());
+						tv_address.setText(addressBean.getAddress());
+						
+					}
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
 			}
 			else{
 				Util.ShowToast(context, R.string.net_is_eor);
@@ -294,6 +321,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			}else if(inttype==2){
 				
 				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
+			}else if(inttype==0){
+				Send s=new Send(context);
+				listAddressBean=s.getAddressList(userBean.getAuthstr());
 			}
 
 			return true;

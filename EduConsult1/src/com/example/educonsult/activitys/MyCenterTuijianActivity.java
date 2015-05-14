@@ -179,7 +179,9 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 	private void Toproduct(ProductBean bean){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.putExtra("productdetaile", bean);
+		Bundle b=new Bundle();
+		b.putSerializable("product", bean);
+		intent.putExtra("productbundle", b);
 		startActivity(intent);
 	}
 	
