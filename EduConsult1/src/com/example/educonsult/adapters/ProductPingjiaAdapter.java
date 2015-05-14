@@ -35,7 +35,11 @@ public class ProductPingjiaAdapter extends BaseAdapter{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		if(num==3){
+			if(list!=null &&list.size()>=3){
 			return 3;
+			}else{
+				return list!=null?list.size():0;
+			}
 		}else{
 			return list!=null?list.size():0;
 		}
