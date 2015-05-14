@@ -20,7 +20,7 @@
 	        android:id="@+id/shopcart_lv_lv_ic"
 	        android:layout_width="80dp"
 	        android:layout_height="80dp"
-	        android:background="@drawable/ic_launcher"
+	        android:background="@drawable/default_bg"
 	        android:layout_gravity="center_vertical"
 	        />
 	    <LinearLayout 
@@ -73,8 +73,8 @@
 	            >
 	            <ImageView 
 	                android:id="@+id/shopcart_lv_lv_iv_jian"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
 	                android:background="@drawable/shop_jian"
 	                />
 	            <EditText 
@@ -93,8 +93,8 @@
 	                />
 	            <ImageView 
 	                android:id="@+id/shopcart_lv_lv_iv_jia"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
+	                android:layout_width="40dp"
+	                android:layout_height="40dp"
 	                android:background="@drawable/shop_jia"
 	                />
 	        </LinearLayout>
@@ -108,7 +108,7 @@
 	        android:textColor="@color/orn"
 	        android:layout_gravity="center_vertical"
 	        android:text="@string/test"
-	        android:layout_margin="20dp"
+	        android:layout_margin="10dp"
 	        />
 	</LinearLayout>
     

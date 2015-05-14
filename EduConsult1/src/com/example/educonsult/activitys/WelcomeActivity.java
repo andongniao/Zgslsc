@@ -13,12 +13,14 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.beans.AreaBean;
-import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.beans.ListMoneyBean;
+import com.example.educonsult.beans.ListOrderBean;
+import com.example.educonsult.beans.ListOrderCommit;
 import com.example.educonsult.beans.ListProductBean;
+import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
@@ -42,6 +44,7 @@ public class WelcomeActivity extends Activity{
 	ListComment lbn;
 	ListProductBean l;
 	ListMoneyBean lmoney;
+	String id,c;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class WelcomeActivity extends Activity{
 		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
 		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
 		activityStyle.recycle();
-		setContentView(R.layout.welcome);
+		setContentView(R.layout.welcome); 
 		hand = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -77,12 +80,12 @@ public class WelcomeActivity extends Activity{
 		myPDT = new ThreadWithProgressDialog();
 		String msg = "初始化...";
 		u = new Util(context);
-		if(u.isExistDataCache(filename)&& u.isReadDataCache(filename)){
-			Finish2min();
-		}else{
-			//myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		    myPDT.Run(context, new RefeshData(),msg,false);//不可取消
-		}
+		//		if(u.isExistDataCache(filename)&& u.isReadDataCache(filename)){
+		//			Finish2min();
+		//		}else{
+		//			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		myPDT.Run(context, new RefeshData(),msg,false);//不可取消
+		//		}
 	}
 	private void Finish2min(){
 		new Thread() {
@@ -116,7 +119,6 @@ public class WelcomeActivity extends Activity{
 		@Override
 		public boolean OnTaskDone() {
 			//任务完成后
-			
 			if(lb!=null){
 				if("200".equals(lb.getCode())){
 					u.saveObject(lb, filename);
@@ -125,7 +127,6 @@ public class WelcomeActivity extends Activity{
 					Util.ShowToast(context, lb.getMsg());
 				}
 			}
-			
 			//if(bean!=null){
 			//	if("200".equals(bean.getCode())){
 			//		Intent intent = new Intent(WelcomeActivity.this,
@@ -137,11 +138,10 @@ public class WelcomeActivity extends Activity{
 			//}
 			if(lf!=null){
 				if("200".equals(lf.getCode())){
-					u.saveObject(lf, filename);
+					u.saveObject(lf, MyApplication.FenleiName);
 					fl = true;			
 				}else{
 					Util.ShowToast(context, lf.getMsg());
-					
 				}
 			}
 //			if(ct && fl){
@@ -183,13 +183,54 @@ public class WelcomeActivity extends Activity{
 			// 访问
 			Send s = new Send(context);
 			lb = s.GetArea();
-			//bean = s.GetProductDetaile("512");
 			lf = s.GetFenlei();
+			PostHttp p = new PostHttp(context);
+			String authstr = "6p2uau4j93ahcfil0181adt8k4";
+			//			bean = s.GetProductDetaile("512");
 //			lbn = s.GetComment("53", 1,"2");
-	//		l = s.getCenterRecommend();
+//			l = s.getCenterRecommend();
 //			s.getXinjianDetaile("1057", auth);
-//			PostHttp p = new PostHttp(context);
-//			basebean=p.addAddress();
+//			s.CartAdd("53",1, authstr);
+//						ListShopBean l = s.getCartlist(authstr);
+//			p.Jiesuan(l, authstr);
+//			ListAddressBean l = s.getAddressList(authstr);
+//			AddressBean ab = l.getList().get(0);
+//			AddressBean ab = new AddressBean();
+//			p.addOneAddress(ab, authstr);
+//			p.editOneAddress(ab,authstr);
+//			p.SetDetaultAddress(ab,authstr);
+//			p.DelAddress(ab,authstr);
+//			ListBanksBean l = p.getBanksList(authstr);
+//			ListBanksCity lc = p.getBanksCityList(1,l.getProvince().get(0), authstr);
+//			ListBanksCity lxian = p.getBanksCityList(2,lc.getList().get(0).getCity(), authstr);
+//			String code  = "";
+//			if(lxian.getList().size()>0){
+//				code = lxian.getList().get(0).getAreacode();
+//			}else{
+//				code = lc.getList().get(0).getAreacode();
+//			}
+//			ListBanksBranch lbb = p.getBanksBeanchList(104,code , "", authstr);
+//			p.bindBankcart(lbb.getList().get(0).getBanknumber(), "0000000000000000000", "test", authstr, 104);
+//			ListOrderCommit lp = p.CommitOrder(l, authstr);
+			/*final ListOrderBean lo = s.getOrderList(0,1,authstr);
+			if(lo!=null){
+			id = lo.getList_order().get(4).getItemid();
+			c = lo.getList_order().get(4).getCoupons();*/
+//			p.Order_refund(, 1, "", authstr);
+/*p.PayOrder(id,c, authstr,"123456");*/
+//			p.Order_pay(id, "123456", c, authstr);
+			/*}*/
+/*p.Order_sendgoods(id, 1, "", "", "", authstr);*/
+//			p.Order_getwuliulist("254", authstr);
+//p.Order_close("261", authstr);
+/*p.Order_confirmpay(id, authstr);*/
+//			p.Order_refunddata("260", authstr);
+//			p.Order_refund("260", 1, "测试", authstr);
+//			p.Order_refundinfo("260", authstr);
+//			p.getOrderDetaile(lo.getList_order().get(0).getItemid(), authstr);
+//			p.Order_getpay("253", authstr);
+//			p.Order_comment("253", 3, "test", authstr);
+			/*s.getOrderRefundList(2, authstr);*/
 			return true;
 		}
 	}

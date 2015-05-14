@@ -21,17 +21,17 @@ import com.example.educonsult.beans.ShopBean;
 
 public class OrderLvAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Integer>list;
+	private ArrayList<ShopBean>list;
 	private LayoutInflater inflater;
 	private Item item;
 
 
-	public OrderLvAdapter(Context context,ArrayList<Integer>list){
+	public OrderLvAdapter(Context context,ArrayList<ShopBean>list, int index){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Integer>list){
+	public void SetData(ArrayList<ShopBean>list){
 		this.list = list;
 	}
 

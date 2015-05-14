@@ -12,8 +12,8 @@ public class ShopItemBean {
 	private String itemid;		//商品ID
 	private String title;		//商品名称
 	private String unit;		//单位
-	private String price;		//价格
 	private String thumb;		//图片
+	private String price;		//价格
 	private String amount;		//库存
 	private int num;			//数量
 	private ArrayList<CouponBean> coupon;//优惠券

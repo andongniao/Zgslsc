@@ -72,6 +72,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 					long arg3) {
 				Intent intent = new Intent(context,ProductDetaileActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("productdetaile",list.get(arg2) );
 				startActivity(intent);
 			}
 		});

@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,12 +22,23 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.ExampleActivity;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.ShopcartActivity.RefeshData;
 import com.example.educonsult.adapters.OrderHomeAdapter;
 import com.example.educonsult.adapters.TextItemListAdapter;
+import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.ListOrderCommit;
+import com.example.educonsult.beans.ListShopBean;
+import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.net.PostHttp;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 import com.unionpay.UPPayAssistEx;
@@ -39,7 +49,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private LinearLayout ll_address,ll_add;
 	private Button button;
-	private MyListview lv;
+	private ListView lv;
 	private TextView tv_shouhuoren,tv_shoujihao,tv_address,tv_zongjia,tv_ok;
 	private ArrayList<Integer>list,listdizhi;
 	private OrderHomeAdapter adapter;
@@ -58,6 +68,15 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private TextView tv_allmoney;
 	private EditText et_pass;
 	private Button b_no,b_yes;
+	private ListShopBean shopbean,shoporder;
+	private ThreadWithProgressDialog myPDT;
+	private BaseBean baseBean;
+	private UserBean userBean;
+	private ListOrderCommit listOrderCommit;
+	private int inttype;
+	private String strpass;
+	private ArrayList<ShopBean> shopBeans;
+	private OrderHomeAdapter orderHomeAdapter;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -102,6 +121,13 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		list = new ArrayList<Integer>();
 		list.add(1);
 		list.add(2);
+		intent=getIntent();
+		
+		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
+		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
+		shopBeans=shopbean.getList();
+		myPDT =new  ThreadWithProgressDialog();
+		userBean=MyApplication.mp.bean;
 		dm = new DisplayMetrics();
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		listdizhi = new ArrayList<Integer>();
@@ -118,9 +144,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		tv_zongjia = (TextView) findViewById(R.id.order_tv_zongjia);
 		tv_ok = (TextView) findViewById(R.id.order_tv_ok);
 		tv_ok.setOnClickListener(this);
-		lv = (MyListview) findViewById(R.id.order_home_lv);
+		lv = (ListView) findViewById(R.id.order_home_lv);
 		lv.setFocusable(false);
-		adapter = new OrderHomeAdapter(context, list);
+		adapter = new OrderHomeAdapter(context, shopBeans);
 		lv.setAdapter(adapter);
 		if(listdizhi.size()==0){
 			ll_add.setVisibility(View.VISIBLE);
@@ -183,20 +209,30 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			 ************************************************/
 			/*UPPayAssistEx.startPayByJAR(OrderActivity.this, PayActivity.class, null, null,
 					Tn, mMode);*/
-			if(listdizhi.size()==0){
+			inttype=1;
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+			}
+			/*if(listdizhi.size()==0){
 				Util.ShowToast(context, R.string.money_password_noadress);
 			}else{
 				
 				setpopuwindow();
-			}
+			}*/
 				break;
 		case R.id.money_password_no:
+			
 			popu.dismiss();
+			ShopcartActivity.ischange=true;
+			finish();
 			break;
 		case R.id.money_password_yes:
-			String strpass=et_pass.getText().toString();
+			inttype=2;
+			strpass=et_pass.getText().toString();
 			if(Util.IsNull(strpass)){
-				
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				}
 			}else{
 				Util.ShowToast(context, R.string.money_password_nopass);
 			}
@@ -204,6 +240,60 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 
 		}
 
+	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		public RefeshData() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false; 
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(listOrderCommit!=null){
+				String code = listOrderCommit.getCode();
+				String m = listOrderCommit.getMsg();
+				if("200".equals(code)){
+//					
+					setpopuwindow();
+					//finish();
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}
+			}else if(baseBean!=null){
+				Util.ShowToast(context, "支付成功");
+				ShopcartActivity.ischange=true;
+				finish();
+			}
+			else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		}
+
+
+
+		@Override
+		public boolean TaskMain() {
+			PostHttp p=new PostHttp(context);
+			// ListOrderCommit CommitOrder
+			if(inttype==1){
+				
+				listOrderCommit=p.CommitOrder(shopbean, userBean.getAuthstr());
+			}else if(inttype==2){
+				
+				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
+			}
+
+			return true;
+		}
 	}
 	private void setpopuwindow(){
 		inflater=LayoutInflater.from(context);

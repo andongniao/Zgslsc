@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.ShopcartActivity;
 import com.example.educonsult.activitys.ShopcartActivity.shop;
+import com.example.educonsult.beans.ExpressBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenu;
@@ -31,18 +32,19 @@ import com.example.educonsult.tools.Util;
 
 public class OrderHomeAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Integer>list;
+	private ArrayList<ShopBean>list;
 	private LayoutInflater inflater;
 	private Item item;
 	private OrderLvAdapter adapter;
 	private int n;
+	private ArrayList<ExpressBean> express;
 
-	public OrderHomeAdapter(Context context,ArrayList<Integer>list){
+	public OrderHomeAdapter(Context context,ArrayList<ShopBean>list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<Integer>list){
+	public void SetData(ArrayList<ShopBean>list){
 		this.list = list;
 	}
 
@@ -88,6 +90,14 @@ public class OrderHomeAdapter extends BaseAdapter{
 		l1.add(2);
 		ArrayList<Integer> l2 = new ArrayList<Integer>();
 		l2.add(1);
+		ShopBean s=list.get(position);
+		item.tv_title.setText(s.getTitle());
+		item.et.setText(s.getNote());
+		express=s.getExpress();//ÔË·ÑÄ£°å
+		
+		
+		//item.tv_peisong.setText(s.get)
+		//item.
 		if(position==0){
 			adapter = new OrderLvAdapter(context, l1);
 			n = l1.size();

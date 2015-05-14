@@ -82,13 +82,13 @@ OnClickListener{
 		l1.add(2);
 		ArrayList<Integer> l2 = new ArrayList<Integer>();
 		l2.add(1);
-		if((position/2)==0){
-			adapter = new MyOrderLvAdapter(context, l1);
-			n = l1.size();
-		}else{
-			adapter = new MyOrderLvAdapter(context, l2);
-			n = l2.size();
-		}
+//		if((position/2)==0){
+//			adapter = new MyOrderLvAdapter(context, l1);
+//			n = l1.size();
+//		}else{
+//			adapter = new MyOrderLvAdapter(context, l2);
+//			n = l2.size();
+//		}
 		item.lv.setAdapter(adapter);
 
 		return convertView;

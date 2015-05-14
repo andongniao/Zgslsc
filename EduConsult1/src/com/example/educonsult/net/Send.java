@@ -93,19 +93,10 @@ public class Send {
 					Type type_ad = new TypeToken<ArrayList<String>>() {
 					}.getType();
 					ArrayList<String> list_ad = gson.fromJson(ad.toString(), type_ad);
-					//new ArrayList<ProductBean>();
-					//					for (int i = 1; i < 9; i++) {
-					//						String json = data.getString("ad_" + i).toString();
-					//						ArrayList<GoodsBean> s = gson.fromJson(json, type);
-					//						l.add(s);
-					//					}
-					//					List.setList(l);
 					home.setRecommend(list_recommend);
 					home.setHot(list_hot);
 					home.setCompany(list_com);
 					home.setAd(list_ad);
-					//					home.setCode(code);
-					//					home.setMsg(msg);
 					return home;
 				} else {
 					home.setMsg(msg);
@@ -147,8 +138,8 @@ public class Send {
 					bean.setMsg(msg);
 					JSONObject data = object.getJSONObject("data");
 					String authstr = data.getString("authstr");
-//					int type = data.getInt("type");
-//					bean.setType(type);
+					int type = data.getInt("type");
+					bean.setType(type);
 					bean.setAuthstr(authstr);
 					return bean;
 				} else {
@@ -745,7 +736,7 @@ public class Send {
 	 */
 	public BaseBean CartAdd(String itemid,int number,String authstr) {
 		BaseBean bean = new BaseBean();
-		String url = ServiceUrl.Base+ServiceUrl.cart_add+itemid+"&number"+number+
+		String url = ServiceUrl.Base+ServiceUrl.cart_add+itemid+"&num"+number+
 				ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
@@ -1031,13 +1022,18 @@ public class Send {
 	
 	
 	/**
-	 * 获取订单列表
+	 * 获取订单列表 
+	 * @param step		搜索类型1待付款，2待收货，3待收货，4待评价（可选）默认为0
+	 * @param page		页码 
+	 * @param authstr	唯一标示refundlist
+	 * @return
 	 */
-	public ListOrderBean getOrderList(String authstr) {
+	public ListOrderBean getOrderList(int step,int page,String authstr) {
 		ListOrderBean lb = new ListOrderBean();
 		ArrayList<OrderBean> list_order = new ArrayList<OrderBean>();
 		ArrayList<OrderFields> list_fields = new ArrayList<OrderFields>();
 		String url =  ServiceUrl.Base+ServiceUrl.order
+				+"?step="+step+"&page="+page
 				+ServiceUrl.mycenter_footer+authstr
 				;
 		String jsonStr = null;
@@ -1053,9 +1049,28 @@ public class Send {
 					lb.setCode(code);
 					lb.setMsg(msg);
 					JSONArray data = object.getJSONArray("data");
-					Type type_o = new TypeToken<ArrayList<OrderBean>>() {
-					}.getType();
-					list_order = gson.fromJson(data.toString(), type_o);
+//					Type type_o = new TypeToken<ArrayList<OrderBean>>() {
+//					}.getType();
+//					list_order = gson.fromJson(data.toString(), type_o);
+					for(int i=0;i<10;i++){
+						OrderBean o = new OrderBean();
+						String j = data.getString(i);
+						if(Util.IsNull(j)){			
+							JSONObject d = new JSONObject(j);
+							o.setItemid(d.getString("itemid"));
+							o.setTitle(d.getString("title"));
+							o.setThumb(d.getString("thumb"));
+							o.setAddtime(d.getString("addtime"));
+							o.setPrice(d.getString("price"));
+							o.setNumber(d.getString("number"));
+							o.setStatus(d.getString("status"));
+							o.setStatusid(d.getString("statusid"));
+							o.setCompany(d.getString("company"));
+							o.setCoupons(d.getString("coupons"));
+							o.setUnit(d.getString("unit"));
+						}
+						list_order.add(o);
+					}
 					JSONObject fields = object.getJSONObject("fields");
 					@SuppressWarnings("unchecked")
 					Iterator<String> keys=fields.keys();
@@ -1067,7 +1082,7 @@ public class Send {
 							}.getType();
 							OrderFields sb = gson.fromJson(js.toString(), t);
 						if(sb!=null){
-							list_fields.add(0,sb);
+							list_fields.add(sb);
 						}
 						
 		            }
@@ -1095,7 +1110,59 @@ public class Send {
 
 	}
 	
-	
+	/**
+	 * 获取退款订单列表 
+	 * @param page		页码 
+	 * @param authstr	唯一标示
+	 * @return
+	 */
+	public ListOrderBean getOrderRefundList(int page,String authstr) {
+		ListOrderBean lb = new ListOrderBean();
+		ArrayList<OrderBean> list_order = new ArrayList<OrderBean>();
+		ArrayList<OrderFields> list_fields = new ArrayList<OrderFields>();
+		String url =  ServiceUrl.Base+ServiceUrl.order
+				+"?action=refundlist&page="+page
+				+ServiceUrl.mycenter_footer+authstr
+				;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					JSONArray data = object.getJSONArray("data");
+					Type type_o = new TypeToken<ArrayList<OrderBean>>() {
+					}.getType();
+					list_order = gson.fromJson(data.toString(), type_o);
+					lb.setList_order(list_order);
+					lb.setList_key(list_fields);
+					return lb;
+				} else {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					return lb;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				lb.setCode("500");
+				lb.setMsg("服务器异常，请稍候再试...");
+				return lb;
+			}
+		} else {
+			lb.setCode("500");
+			lb.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return lb;
+		}
+
+	}
 	
 	
 	

@@ -374,6 +374,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			Toproduct();
 			break;
 		case R.id.product_detaile_ll_pay_now: 
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
+			}
 			ExampleActivity.setCurrentTab(3);
 			finish();
 			break;
@@ -381,7 +384,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			if(Util.detect(context)){
 				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
 			}
-			Toast.makeText(context, "ok", 1000).show();
+			//Toast.makeText(context, "ok", 1000).show();
 			break;
 		case R.id.product_detaile_ll_chanpin:
 			ll_add_view_chanpin.setVisibility(View.VISIBLE);
@@ -457,6 +460,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			if(bean!=null){
 				if("200".equals(bean.getCode())){
 					//TODO	
+					ShopcartActivity.ischange = true;
 					Util.ShowToast(context,"添加成功");
 				}else{
 					Util.ShowToast(context, bean.getMsg());
@@ -497,10 +501,6 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			//任务完成后
 			if(productdetailbean!=null){
 				if("200".equals(productdetailbean.getCode())){
-					//TODO	
-					//					private MallInfoBean mallinfo;
-					//					private ArrayList<ProductBean> recommend;
-					//					private ArrayList<ProductBean> buyedlist;
 					mallinfo=productdetailbean.getMallinfo();
 					recommend=productdetailbean.getRecommend();
 					buyedlist=productdetailbean.getBuyedlist();
