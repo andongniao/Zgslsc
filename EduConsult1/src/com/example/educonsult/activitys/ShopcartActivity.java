@@ -360,7 +360,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			}else if(inttype==1){
 				besebean=s.CartClear(bean.getAuthstr());
 			}else if(inttype==3){
-//				querenOrderBean=p.Jiesuan(shopbean, bean.getAuthstr());
+				querenOrderBean=p.Jiesuan(shopbean, bean.getAuthstr());
 			}
 			
 			return true;

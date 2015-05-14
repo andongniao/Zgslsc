@@ -31,6 +31,7 @@ import com.example.educonsult.beans.BanksBean;
 import com.example.educonsult.beans.BanksBranchBean;
 import com.example.educonsult.beans.BanksCityBean;
 import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.CouponBean;
 import com.example.educonsult.beans.ExpressBean;
 import com.example.educonsult.beans.ListBanksBean;
 import com.example.educonsult.beans.ListBanksBranch;
@@ -834,6 +835,17 @@ public class PostHttp {
 						Type t = new TypeToken<ArrayList<ShopItemBean>>() {
 						}.getType();
 						mall = gson.fromJson(m.toString(), t);
+						int len = mall.size();
+						for(int i=0;i<len;i++){
+						ArrayList<CouponBean> l = new ArrayList<CouponBean>();
+						JSONObject ja = (JSONObject) m.get(i);
+						if(Util.IsNull(ja.getString("coupon"))){
+							Type tt = new TypeToken<ArrayList<CouponBean>>() {
+							}.getType();
+							l = gson.fromJson(m.toString(), tt);
+						}
+						mall.get(i).setCoupons(l);
+						}
 
 						ArrayList<ExpressBean>  expre = new ArrayList<ExpressBean>();
 						if(Util.IsNull(js.get("express").toString())){

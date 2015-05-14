@@ -20,7 +20,7 @@ public class ShopItemBean {
 	private String username;
 	private String alt;
 	private String status;
-	private ArrayList<CouponBean> coupon;//”≈ª›»Ø
+	private ArrayList<CouponBean> coupons;//”≈ª›»Ø
 	public boolean isIsclick() {
 		return isclick;
 	}
@@ -93,11 +93,11 @@ public class ShopItemBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public ArrayList<CouponBean> getCoupon() {
-		return coupon;
+	public ArrayList<CouponBean> getCoupons() {
+		return coupons;
 	}
-	public void setCoupon(ArrayList<CouponBean> coupon) {
-		this.coupon = coupon;
+	public void setCoupons(ArrayList<CouponBean> coupons) {
+		this.coupons = coupons;
 	}
-
+	
 }

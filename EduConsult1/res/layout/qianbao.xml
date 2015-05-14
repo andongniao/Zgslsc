@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/test"
+                android:text="钱包总额"
                 android:textColor="@color/black" />
 
             <TextView
@@ -62,6 +62,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/qianbao_tv_keyong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -90,6 +91,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/qianbao_tv_tixian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"

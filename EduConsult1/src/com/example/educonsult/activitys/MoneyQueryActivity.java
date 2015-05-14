@@ -158,7 +158,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 			// TODO Auto-generated method stub
 			Send s=new Send(context);
 			//做空指针判断，是否是登陆的用户
-			listmoneybean=s.getMoney(bean.getType(), bean.getAuthstr());
+//			listmoneybean=s.getMoney(bean.getType(), bean.getAuthstr());
 			return false;
 		}
 
