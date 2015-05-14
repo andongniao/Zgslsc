@@ -58,6 +58,7 @@ public class MyApplication extends Application{
 		mp = this;
 		sp = getSharedPreferences("mysp", Context.MODE_PRIVATE);
 		bean = new UserBean();
+		bean.setAuthstr("");
 		util = new Util(context);
 		List<BundleActivator> list = new ArrayList<BundleActivator>();
 		SimpleBundle s= new SimpleBundle();

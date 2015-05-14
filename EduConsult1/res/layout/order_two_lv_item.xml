@@ -14,7 +14,7 @@
 	        android:id="@+id/order_two_lv_item_iv"
 	        android:layout_width="80dp"
 	        android:layout_height="80dp"
-	        android:background="@drawable/ic_launcher"
+	        android:background="@drawable/default_bg"
 	        android:layout_gravity="center_vertical"
 	        />
 	    <LinearLayout 
@@ -98,6 +98,7 @@
 	    />
     
 	<LinearLayout
+	    android:id="@+id/order_two_lv_item_lin_youhui"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"

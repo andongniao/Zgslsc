@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.style.BulletSpan;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -122,9 +123,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		list.add(1);
 		list.add(2);
 		intent=getIntent();
-		
-		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
-		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
+		Bundle b=intent.getBundleExtra("shopcartbundle");
+		shopbean=(ListShopBean)b.getSerializable("shopcarbean");
+		shoporder=(ListShopBean)b.getSerializable("shopcaroder");
+//		intent.putExtra("shopcartbundle", b);
+//		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
+//		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
 		shopBeans=shopbean.getList();
 		myPDT =new  ThreadWithProgressDialog();
 		userBean=MyApplication.mp.bean;
@@ -289,7 +293,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 				listOrderCommit=p.CommitOrder(shopbean, userBean.getAuthstr());
 			}else if(inttype==2){
 				
-//				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
+				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
 			}
 
 			return true;

@@ -59,6 +59,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private int clearposition,clearindex,deposition;
 	private QuerenOrderBean querenOrderBean;
 	private ListShopBean listShopBean; 
+	private Intent intent;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -356,11 +357,12 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			Send s=new Send(context);
 			PostHttp p=new PostHttp(context);
 			if(inttype==0){
+				
 				shopbean=s.getCartlist(bean.getAuthstr());
 			}else if(inttype==1){
 				besebean=s.CartClear(bean.getAuthstr());
 			}else if(inttype==3){
-//				querenOrderBean=p.Jiesuan(shopbean, bean.getAuthstr());
+				querenOrderBean=p.Jiesuan(shopbean, bean.getAuthstr());
 			}
 			
 			return true;
@@ -383,10 +385,14 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 //					
 					listShopBean=querenOrderBean.getList();
 					
-					Intent intent = new Intent(context,OrderActivity.class);
+					intent = new Intent(context,OrderActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent.putExtra("shopcaroder", listShopBean);
-					intent.putExtra("shopcarbean", shopbean);
+					Bundle b=new Bundle();
+					b.putSerializable("shopcaroder", listShopBean);
+					b.putSerializable("shopcarbean", shopbean);
+//					intent.putExtra("shopcaroder", listShopBean);
+//					intent.putExtra("shopcarbean", shopbean);
+					intent.putExtra("shopcartbundle", b);
 					startActivity(intent);
 					
 					
@@ -407,6 +413,11 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					initDate();
 					
 					
+				}else if("300".equals(code)){
+					Util.ShowToast(context, m);
+					intent = new Intent(context,LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
 				}else{
 					if(Util.IsNull(m)){
 						Util.ShowToast(context, m);
