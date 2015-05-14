@@ -128,6 +128,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		ll_two_diqu.setOnClickListener(this);
 		button=(Button)findViewById(R.id.myinfo_ok);
 		button.setOnClickListener(this);
+		button.setVisibility(View.GONE);
 		ll_qiye=(LinearLayout)findViewById(R.id.myinfo_ll_one_line);
 		ll_geren=(LinearLayout)findViewById(R.id.myinfo_ll_two_line);
 		mycardNum=(TextView)findViewById(R.id.myinfo_ll_mycard_num);
@@ -143,6 +144,8 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		tv_rname=(TextView)findViewById(R.id.myinfo_tv_email);
 		ed_dizhi=(EditText)findViewById(R.id.myinfo_tv_people);
 		ed_phone=(EditText)findViewById(R.id.myinfo_tv_lianxidianhua);
+		ed_dizhi.setFocusable(false);
+		ed_phone.setFocusable(false);
 		
 //		t_rname,t_diqu,t_phone,t_pingzhong,t_siliao,t_person;
 //		private EditText ed_dizhi,ed_phone,e_dizhi,e_computer,e_price,e_product,e_num;
@@ -200,16 +203,16 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.myinfo_ll_qq:
 			//地区
-			popu.showAsDropDown(ll_diqu);
+//			popu.showAsDropDown(ll_diqu);
 			break;
 		case R.id.myinfo_ll_two_diqu:
 			//地区
-			popu.showAsDropDown(ll_two_diqu);
+//			popu.showAsDropDown(ll_two_diqu);
 			break;
 		case R.id.myinfo_ll_mycard:
-			intent = new Intent(context,BDCardActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			intent = new Intent(context,BDCardActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 			break;
 		case R.id.myinfo_ll_friend:
 			intent = new Intent(context,MyBusinessperntActivity.class);

@@ -42,10 +42,10 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private EditText tv_address,tv_shouhuoren,tv_number,tv_youbian;
 	private CheckBox cb_set;
 	private boolean isok;
-//	private ImageView iv_top_l,iv_top_t;
+	//	private ImageView iv_top_l,iv_top_t;
 	private Intent intent;
 	String num;
-	
+
 	private ArrayList<String> list;
 	private TextItemListAdapter adapter_r;
 	private PopupWindow popu;
@@ -59,29 +59,38 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private AddressBean bean;
 	private ListAreaBean lare;
 	private ArrayList<AreaBean>listsheng,listshi,listxian;
-	
-	
-	
+	private Util u;
+	private String filename;
+
+
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();
-//		topRightLVisible();
-//		topRightRVisible();
-//		iv_top_l = (ImageView) getTopLightView();
-//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-//		iv_top_t = (ImageView) getTopRightView();
-//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+		//		topRightLVisible();
+		//		topRightRVisible();
+		//		iv_top_l = (ImageView) getTopLightView();
+		//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+		//		iv_top_t = (ImageView) getTopRightView();
+		//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTopLeftTv(R.string.address_title);
 		setContentXml(R.layout.address_update);
 		init();
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
+			lare = (ListAreaBean) u.readObject(filename);
+			listsheng = lare.getList();
+		}else{
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}
 		}
 	}
 
 	private void init() {
 		context=this;
+		filename = MyApplication.AreaName;
+		u = new Util(context);
 		bean = (AddressBean) getIntent().getExtras().get("address");
 		myPDT = new ThreadWithProgressDialog();
 		String  msg = getResources().getString(R.string.loding);
@@ -101,8 +110,8 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		ll_youbian.setOnClickListener(this);
 		tv_diqu = (TextView) findViewById(R.id.address_up_tv_diqu);
 		//tv_diqu.setOnClickListener(this);
-//		tv_jiedao = (TextView) findViewById(R.id.address_up_tv_jiedao);
-//		tv_jiedao.setOnClickListener(this);
+		//		tv_jiedao = (TextView) findViewById(R.id.address_up_tv_jiedao);
+		//		tv_jiedao.setOnClickListener(this);
 		tv_address = (EditText) findViewById(R.id.address_up_tv_detaile);
 		tv_address.setText(bean.getAddress());
 		tv_shouhuoren = (EditText) findViewById(R.id.address_up_tv_shouhuoren);
@@ -125,17 +134,15 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		if(num.equals("1")){//修改
 			tv_delete.setVisibility(View.GONE);
 		}
-		Util u = new Util(context);
-		String filename = MyApplication.AreaName;
 		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
 			lare = (ListAreaBean) u.readObject(filename);
 			listsheng = lare.getList();
 		}
-		
+
 		list=new ArrayList<String>();
-//		for(int i=0;i<){
-			
-//		}
+//				for(int i=0;i<){
+//
+//				}
 	}
 	private void setpopuwindow(Context contexts,ArrayList<String> list,LinearLayout lin){
 		inflater=LayoutInflater.from(contexts);
@@ -148,11 +155,11 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				
+
 				popu.dismiss();
 			}
 		});
-		
+
 		popu = new PopupWindow(v_fenlei,LayoutParams.FILL_PARENT , UITools.dip2px(context, 300f));
 		popu.setFocusable(true);
 		popu.setBackgroundDrawable(new BitmapDrawable());
@@ -192,38 +199,38 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 
-	
+
 	// 任务
-		public class RefeshData implements ThreadWithProgressDialogTask {
+	public class RefeshData implements ThreadWithProgressDialogTask {
 
-			public RefeshData() {
-			}
-
-			@Override
-			public boolean OnTaskDismissed() {
-				//任务取消
-//				Toast.makeText(context, "cancle", 1000).show();
-				return false;
-			}
-
-			@Override
-			public boolean OnTaskDone() {
-				//任务完成后
-				return true;
-			}
-
-			@Override
-			public boolean TaskMain() {
-				// 访问
-				
-				
-				
-				
-				
-				return true;
-			}
+		public RefeshData() {
 		}
 
-	
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+
+
+
+
+
+			return true;
+		}
+	}
+
+
 
 }

@@ -34,6 +34,7 @@ import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ListXinjianBean;
 import com.example.educonsult.beans.MallInfoBean;
+import com.example.educonsult.beans.MoneyBagBean;
 import com.example.educonsult.beans.MoneyDetaileBean;
 import com.example.educonsult.beans.OrderBean;
 import com.example.educonsult.beans.OrderFields;
@@ -613,8 +614,8 @@ public class Send {
 	/**
 	 * 获取钱包详情
 	 */
-	public ListMoneyBean getMoney(int type,String authstr) {
- 		ListMoneyBean list = new ListMoneyBean();
+	public MoneyBagBean getMoney(int type,String authstr) {
+		MoneyBagBean bean = new MoneyBagBean();
 		String baseurl = ServiceUrl.Base;
 		String url=baseurl+ServiceUrl.money_hand;
 		if(type==MyApplication.money_home){
@@ -637,31 +638,31 @@ public class Send {
 				String code = object.getString("code");
 				String msg = object.getString("message");
 				if (code != null && "200".equals(code)) {
-					list.setCode(code);
-					list.setMsg(msg);
 					JSONArray data = object.getJSONArray("data");
-					Type t = new TypeToken<ArrayList<MoneyDetaileBean>>() {
+					JSONObject js = data.getJSONObject(0);
+					Type t = new TypeToken<MoneyBagBean>() {
 					}.getType();
-					ArrayList<MoneyDetaileBean>l = gson.fromJson(data.toString(), t);
-					list.setList(l);
-					return list;
+					bean = gson.fromJson(js.toString(), t);
+					bean.setMsg(msg);
+					bean.setCode(code);
+					return bean;
 				} else {
-					list.setMsg(msg);
-					list.setCode(code);
-					return list;
+					bean.setMsg(msg);
+					bean.setCode(code);
+					return bean;
 
 				}
 
 			} catch (JSONException e) {
 				e.printStackTrace();
-				list.setCode("500");
-				list.setMsg("服务器异常，请稍候再试...");
-				return list;
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
 			}
 		} else {
-			list.setCode("500");
-			list.setMsg(context.getResources().getString(R.string.net_is_eor));
-			return list;
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
 		}
 
 	}

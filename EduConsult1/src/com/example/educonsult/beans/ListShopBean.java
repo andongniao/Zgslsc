@@ -1,8 +1,9 @@
 package com.example.educonsult.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ListShopBean extends BaseBean{
+public class ListShopBean extends BaseBean implements Serializable{
 	private ArrayList<ShopBean>list;
 
 	public ArrayList<ShopBean> getList() {
