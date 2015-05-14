@@ -86,6 +86,7 @@
         android:background="@color/home_hui" />
 
     <LinearLayout
+        android:id="@+id/order_home_lv_item_lin_peisong"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -93,6 +94,7 @@
         android:padding="5dp" >
 
         <TextView
+            
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

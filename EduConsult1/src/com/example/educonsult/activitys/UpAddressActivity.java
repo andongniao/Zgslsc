@@ -12,8 +12,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.UpaddressAdapter;
+import com.example.educonsult.beans.AddressBean;
+import com.example.educonsult.beans.AreaBean;
+import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.ListAddressBean;
+import com.example.educonsult.beans.ListAreaBean;
+import com.example.educonsult.net.PostHttp;
+import com.example.educonsult.tools.Util;
 
 public class UpAddressActivity extends BaseActivity{
 	private ListView lv;
@@ -22,8 +32,15 @@ public class UpAddressActivity extends BaseActivity{
 	private UpaddressAdapter adapter;
 	private ImageView iv_top_right;
 	private Intent intent; 
-	
-	
+	private Util u;
+	private String filename;
+	private ListAreaBean lare;
+	private ArrayList<AreaBean>listsheng,listshi,listxian;
+	private ThreadWithProgressDialog myPDT;
+	private ListAddressBean listAddressBean;
+	private ArrayList<AddressBean> addressBeans;
+	private UpAddress upAddress;
+	private BaseBean bean;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -35,21 +52,45 @@ public class UpAddressActivity extends BaseActivity{
 		setContentXml(R.layout.up_address_layout);
 		init();
 		addlistener();
+
 	}
 
 
 	private void init() {
 		context = this;
+		myPDT=new ThreadWithProgressDialog();
+		upAddress = new UpAddress() {
+
+			@Override
+			public void setAddidde(int index) {
+				
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(index),R.string.loding);//可取消
+				}
+			}
+		};
 		list = new ArrayList<Integer>();
 		list.add(1);
 		list.add(2);
+		//		le b=new Bundle();
+		//		b.putSerializable("orderbundle", listAddressBean);
+		//		id.putExtra("upaddress", b);
+		intent=getIntent();
+		Bundle b=intent.getBundleExtra("upaddress");
+
+		listAddressBean=(ListAddressBean)b.getSerializable("orderbundle");
+		if(listAddressBean==null){
+			addressBeans=new ArrayList<AddressBean>();
+		}else{
+			addressBeans=listAddressBean.getList();
+		}
 		lv = (ListView) findViewById(R.id.up_address_lv);
-		adapter = new UpaddressAdapter(context, list, 0);
+		adapter = new UpaddressAdapter(context, addressBeans, 0,upAddress);
 		lv.setAdapter(adapter);
 	}
 	private void addlistener() {
 		iv_top_right.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				intent = new Intent(context,AddressActivity.class);
@@ -57,13 +98,78 @@ public class UpAddressActivity extends BaseActivity{
 				startActivity(intent);
 			}
 		});
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				adapter.SetData(arg2);
-				adapter.notifyDataSetChanged();
-			}
-		});
+//		lv.setOnItemClickListener(new OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//					long arg3) {
+//				adapter.SetData(arg2);
+//				adapter.notifyDataSetChanged();
+//			}
+//		});
 	}
+
+	public interface UpAddress{
+		void setAddidde(int index);
+	}
+	
+	
+	// 任务
+		public class RefeshData implements ThreadWithProgressDialogTask {
+			private int index;
+			
+			public RefeshData(int index) {
+				this.index = index;
+			}
+
+			@Override
+			public boolean OnTaskDismissed() {
+				//任务取消
+				//				Toast.makeText(context, "cancle", 1000).show();
+				return false;
+			}
+
+			@Override
+			public boolean OnTaskDone() {
+				//任务完成后
+				if(bean!=null){
+					if("200".equals(bean.getCode())){
+						OrderActivity.isinit =true;
+						for(int i=0;i<addressBeans.size();i++){
+							addressBeans.get(i).setIsdefault("0");
+						}
+						addressBeans.get(index).setIsdefault("1");
+						if(adapter!=null){
+						adapter.SetData(addressBeans);
+						adapter.notifyDataSetChanged();
+						}else{
+							adapter = new UpaddressAdapter(context, addressBeans, 0,upAddress);
+							lv.setAdapter(adapter);
+						}
+						
+					}else if("300".equals(bean.getCode())){
+						intent = new Intent(context,LoginActivity.class);
+						startActivity(intent);
+						finish();
+					}else{
+						Util.ShowToast(context, bean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+				
+				
+				
+				return true;
+			}
+
+			@Override
+			public boolean TaskMain() {
+				// 访问
+				PostHttp p = new PostHttp(context);
+				bean = p.SetDetaultAddress(addressBeans.get(index), MyApplication.mp.getUser().getAuthstr());
+
+				return true;
+			}
+		}
+
 }

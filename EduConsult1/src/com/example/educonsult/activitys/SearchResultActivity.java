@@ -72,7 +72,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 					long arg3) {
 				Intent intent = new Intent(context,ProductDetaileActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("productdetaile",list.get(arg2) );
+				//intent.putExtra("productdetaile",list.get(arg2) );
+				Bundle b=new Bundle();
+				b.putSerializable("product", list.get(arg2));
+				intent.putExtra("productbundle", b);
 				startActivity(intent);
 			}
 		});
@@ -182,7 +185,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		}
 	}
 	void initDate(){
-		if(list.size()==0||list==null){
+		if(list==null||list.size()==0){
 			ll_isnot.setVisibility(View.VISIBLE);
 			ll_isyes.setVisibility(View.GONE);
 			islist=false;

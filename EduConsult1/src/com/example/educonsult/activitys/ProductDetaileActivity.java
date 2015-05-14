@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -21,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
@@ -30,11 +28,12 @@ import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeLikeAdapter;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
-import com.example.educonsult.adapters.MyCenterTuijianAdapter.RefeshData;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.CommentBean;
 import com.example.educonsult.beans.CommentStar;
+import com.example.educonsult.beans.HomeBean;
 import com.example.educonsult.beans.ListComment;
+import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.MallInfoBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
 import com.example.educonsult.beans.ProductBean;
@@ -61,7 +60,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
-	private ArrayList<ProductBean> list;
+	private ArrayList<ProductBean> list,liulanlist;
 	private HomeLikeAdapter homeLikeAdapter;
 	private ProdectDetaileBean productdetailbean;
 	private ThreadWithProgressDialog myPDT;
@@ -81,6 +80,11 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private boolean isSave,ispingjia;
 	private UserBean userbean;
 	private BaseBean bean;
+	private HomeBean home;
+	private TextView[] tvtuijian;
+	private ImageView[] imtuijian;
+	private ListProductBean listProductBean;
+	
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -97,16 +101,32 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private void init() {
 		context = this;
 		intent=getIntent();
-		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");
+//		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");
+//		/*izable("product", productBean);
+//		intent.putE*/xtra("productbundle", b);
+		Bundle b=intent.getBundleExtra("productbundle");
+		productBean=(ProductBean)b.getSerializable("product");
 		liulanfile=MyApplication.Seejilu;
 		userbean=MyApplication.mp.getUser();
 		u=new Util(context);
-		isSave=u.saveObject(productBean, liulanfile);
-		if(isSave){
+		//isSave=u.readObject(liulanfile);
+		listProductBean=(ListProductBean)u.readObject(liulanfile);
+		if(listProductBean==null){
+			listProductBean=new ListProductBean();
+			liulanlist=new ArrayList<ProductBean>();
+			
+		}else{
+			
+			liulanlist=listProductBean.getList();
+		}
+		liulanlist.add(productBean);
+		listProductBean.setList(liulanlist);
+		isSave=u.saveObject(listProductBean, liulanfile);
+		/*if(isSave){
 			Util.ShowToast(context, "单品保存成功");
 		}else{
 			Util.ShowToast(context, "单品保存失败");
-		}
+		}*/
 		mallinfo=new MallInfoBean();
 		recommend=new ArrayList<ProductBean>();
 		buyedlist=new ArrayList<ProductBean>();
@@ -207,9 +227,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		buymore=(TextView)findViewById(R.id.product_detaile_tv_more_shopped);
 		buymore.setOnClickListener(this);
 
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		}
+		
 
 		tv_title=(TextView)findViewById(R.id.product_detail_tv_title);
 		//		,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
@@ -242,6 +260,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tt_t=(TextView)findViewById(R.id.product_detaile_tv_tonglei_t);
 		t_r=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_r);
 		tt_r=(TextView)findViewById(R.id.product_detaile_tv_tonglei_r);
+	
 		//b_l.setBackgroundDrawable(getResources().)
 
 
@@ -249,7 +268,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 		//		
 
-
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}
 	}
 	void initDate(){
 		//ll_nobuy.setVisibility(View.GONE);
@@ -281,7 +302,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tv_qidingliang.setText(mallinfo.getQbnum());
 		tv_xiaoliang.setText(mallinfo.getSales());
 		tv_kucun.setText(mallinfo.getAmount());
-		tv_chandi.setText(mallinfo.getAreaid());
+		tv_chandi.setText(mallinfo.getAreaname());
 		tv_computer.setText(mallinfo.getCompany());
 		tv_miaoshu.setText("4.5");
 		tv_taidu.setText("4.5");
@@ -319,11 +340,11 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 				e.printStackTrace();
 			}
 			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-			tb_l.setText(recommend.get(0).getPrice());
+			tt_l.setText("￥"+recommend.get(0).getPrice()+"");
 			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
-			tb_t.setText(recommend.get(1).getPrice());
+			tt_t.setText("￥"+recommend.get(1).getPrice()+"");
 			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
-			tb_r.setText(recommend.get(2).getPrice());
+			tt_r.setText("￥"+recommend.get(2).getPrice()+"");
 		}
 		
 
@@ -334,7 +355,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toproduct();
+				
+				//Toproduct();
 			}
 		});
 	}
@@ -356,22 +378,23 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.product_detaile_ll_tonglei_l:
-			Toproduct();
+			
+			Toproduct(recommend.get(0));
 			break;
 		case R.id.product_detaile_ll_tonglei_t:
-			Toproduct();
+			Toproduct(recommend.get(1));
 			break;
 		case R.id.product_detaile_ll_tonglei_r:
-			Toproduct();
+			Toproduct(recommend.get(2));
 			break;
 		case R.id.product_detaile_ll_shopped_l:
-			Toproduct();
+			Toproduct(buyedlist.get(0));
 			break;
 		case R.id.product_detaile_ll_shopped_t:
-			Toproduct();
+			Toproduct(buyedlist.get(1));
 			break;
 		case R.id.product_detaile_ll_shopped_r:
-			Toproduct();
+			Toproduct(buyedlist.get(2));
 			break;
 		case R.id.product_detaile_ll_pay_now: 
 //			if(Util.detect(context)){
@@ -422,7 +445,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			intent = new Intent(context,ProductDetaileMoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			//intent.putExtra("qingjiamore", mallinfo.getItemid());
-			intent.putExtra("qingjiamore","53");
+			intent.putExtra("qingjiamore",productBean.getTitle());
 			startActivity(intent);
 			
 			break;
@@ -436,9 +459,13 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 		}
 	}
-	private void Toproduct(){
+	private void Toproduct(ProductBean productBean){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//intent.putExtra("productdetaile", value);
+		Bundle b=new Bundle();
+		b.putSerializable("product", productBean);
+		intent.putExtra("productbundle", b);
 		startActivity(intent);
 	}
 	public class RefeshData2 implements ThreadWithProgressDialogTask {
@@ -479,10 +506,26 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			//productdetailbean = s.GetProductDetaile();
 			// listProductBean=s.getCenterRecommend();
 			//bean=s.CartAdd(mallinfo.getItemid(), 1,userbean.getAuthstr());
-			bean=s.CartAdd("53", 1,userbean.getAuthstr());
+			bean=s.CartAdd(productBean.getItemid(), 1,userbean.getAuthstr());
 			return true;
 		}
 	}
+	void initTuijian(){
+		try {
+			t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
+			t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
+			t_r.setImageBitmap(Util.getBitmapForNet(recommend.get(2).getThumb()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tt_l.setText(recommend.get(0).getTitle());
+		tt_t.setText(recommend.get(1).getTitle());
+		tt_r.setText(recommend.get(2).getTitle());
+		
+	}
+	
+	
 	public class RefeshData implements ThreadWithProgressDialogTask {
 
 		public RefeshData() {
@@ -505,12 +548,25 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 					recommend=productdetailbean.getRecommend();
 					buyedlist=productdetailbean.getBuyedlist();
 					initDate();
-				}else{
+				
+				}
+				else{
 					Util.ShowToast(context, productdetailbean.getMsg());
 				}
+				
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
+			/*if(home!=null){
+				if("200".equals(home.getCode())){
+					initTuijian();
+				}else{
+					Util.ShowToast(context, home.getMsg());
+				}
+				
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}*/
 
 
 
@@ -521,7 +577,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		public boolean TaskMain() {
 			// 访问
 			Send s = new Send(context);
-			productdetailbean = s.GetProductDetaile("53");
+			productdetailbean = s.GetProductDetaile(productBean.getItemid());
+			//home = s.RequestHome();
 			//productdetailbean = s.GetProductDetaile();
 			return true;
 		}
@@ -572,7 +629,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		public boolean TaskMain() {
 			// 访问
 			Send s = new Send(context);
-			listComment=s.GetComment("53", 1, "");
+			listComment=s.GetComment(productBean.getItemid(), 1, "");
 			return true;
 		}
 	}

@@ -48,6 +48,7 @@ import com.example.educonsult.activitys.GqHomeActivity;
 import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.KnowHomeActivity;
+import com.example.educonsult.activitys.LoginActivity;
 import com.example.educonsult.activitys.NewHomeActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
 import com.example.educonsult.activitys.StoreActivity;
@@ -134,20 +135,20 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		ProductBean bean = new ProductBean();
 		mp.SaveSee(bean);
 		mp.GetSee();
-		apkFilter apkFilter=new apkFilter(new isFilesFilter(null));
-		String path = Environment.getExternalStorageDirectory().getPath()+"/"+name;
-		try {
-			boolean b = Tosd(name,  path);
-			//调用osgi插件安装服务安装插件
-
-			boolean a = MyApplication.sp.getBoolean("isinstaed", false); 
-			if(b && !a){
-				install(path,new myinstallCallback());
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		apkFilter apkFilter=new apkFilter(new isFilesFilter(null));
+//		String path = Environment.getExternalStorageDirectory().getPath()+"/"+name;
+//		try {
+//			boolean b = Tosd(name,  path);
+//			//调用osgi插件安装服务安装插件
+//
+//			boolean a = MyApplication.sp.getBoolean("isinstaed", false); 
+//			if(b && !a){
+//				install(path,new myinstallCallback());
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		refreshableView = (RefreshableView) view.findViewById(R.id.home_rview);
 		refreshableView.setRefreshListener(this);
 		sc = (ScrollView) view.findViewById(R.id.home_sc);
@@ -334,7 +335,6 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		/*************测试****************/
 		UserBean b = MyApplication.mp.getUser();
 		if(b!=null){
-		Util.ShowToast(context, b.getAuthstr());
 		System.out.println("MyApplication.mp.bean.getAuthstr()=="+b.getAuthstr());
 		}
 //		if(util.isExistDataCache(MyApplication.AreaName) && util.isReadDataCache(MyApplication.AreaName)){
@@ -382,7 +382,8 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toproduct();
+				productBean=home.getMylike().get(arg2);
+				Toproduct(productBean);
 			}
 		});
 	}
@@ -519,28 +520,36 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		case R.id.home_ll_tuijian_l:
-			Toproduct();
+			productBean=home.getRecommend().get(0);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_one:
-			Toproduct();
+			productBean=home.getRecommend().get(1);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_two:
-			Toproduct();
+			productBean=home.getRecommend().get(2);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_three:
-			Toproduct();
+			productBean=home.getRecommend().get(3);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_l_four:
-			Toproduct();
+			productBean=home.getRecommend().get(4);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_b_l:
-			Toproduct();
+			productBean=home.getRecommend().get(5);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_b_t:
-			Toproduct();
+			productBean=home.getRecommend().get(6);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_tuijian_b_r:
-			Toproduct();
+			productBean=home.getRecommend().get(7);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_top_search:
 			ExampleActivity.setCurrentTab(1);
@@ -552,23 +561,29 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		case R.id.home_ll_hot_l:
-			Toproduct();
+			productBean=home.getHot().get(0);
+			Toproduct(productBean);
 			break;
 
 		case R.id.home_ll_hot_t:
-			Toproduct();
+			productBean=home.getHot().get(1);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_r:
-			Toproduct();
+			productBean=home.getHot().get(2);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_b_l:
-			Toproduct();
+			productBean=home.getHot().get(3);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_b_t:
-			Toproduct();
+			productBean=home.getHot().get(4);
+			Toproduct(productBean);
 			break;
 		case R.id.home_ll_hot_b_r:
-			Toproduct();
+			productBean=home.getHot().get(5);
+			Toproduct(productBean);
 			break;
 
 
@@ -580,10 +595,13 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 	}
 
 
-	private void Toproduct(){
+	private void Toproduct(ProductBean productBean){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		//intent.putExtra("productdetaile", value);
+		Bundle b=new Bundle();
+		b.putSerializable("product", productBean);
+		intent.putExtra("productbundle", b);
 		startActivity(intent);
 	}
 
@@ -863,6 +881,10 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 				}
 			}
 			u.saveObject(home, filename);
+		}else if("300".equals(home.getCode())){
+			intent = new Intent(context,LoginActivity.class);
+			startActivity(intent);
+		getActivity().finish();
 		}else{
 			if(home!=null){
 				String msg = home.getMsg();

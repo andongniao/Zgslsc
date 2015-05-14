@@ -122,21 +122,27 @@ public class ShopcartLvAdapter extends BaseAdapter{
 //				int i = Integer.parseInt(item.et_number.getText().toString());
 //				i+=1;
 //				item.et_number.setText(""+i);
-				shop.add1(index, position);
+				int amount=Integer.parseInt(b.getAmount());
+				int i = b.getNum();
+				if(i>=1&&i<amount){
+					shop.add1(index, position);
+				}
+				//Util.ShowToast(context, "jia");
 			}
 		});
 		item.iv_jian.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				int i = Integer.parseInt(b.getAmount());
-				if(i>0){
+				int amount=Integer.parseInt(b.getAmount());;
+				int i = b.getNum();
+				if(i>1&&i<=amount){
 					shop.jian1(index, position);
 				}
 			}
 		});
 		//item.et_number.setText(b.getNum());
-		//item.et_number.setText(b.getNum());
+		item.et_number.setText(b.getNum()+"");
 		item.tv_price.setText(b.getPrice());
 		item.tv_title.setText(b.getTitle());
 		int i_num=b.getNum();

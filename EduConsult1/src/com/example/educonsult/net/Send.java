@@ -735,7 +735,7 @@ public class Send {
 	 */
 	public BaseBean CartAdd(String itemid,int number,String authstr) {
 		BaseBean bean = new BaseBean();
-		String url = ServiceUrl.Base+ServiceUrl.cart_add+itemid+"&num"+number+
+		String url = ServiceUrl.Base+ServiceUrl.cart_add+itemid+"&num="+number+
 				ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);

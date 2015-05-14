@@ -33,6 +33,7 @@ import com.example.educonsult.adapters.GqAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.KnowFenleiAdapter;
 import com.example.educonsult.adapters.MyZjAdapter;
+import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.Send;
@@ -51,6 +52,7 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_not;
 	private ThreadWithProgressDialog myPDT;
 	private ArrayList<ProductBean> productBeans;
+	private ListProductBean listProductBean;
 	private Util u;
 
 	@Override
@@ -94,13 +96,17 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		isread = false;
-		/*myPDT=new ThreadWithProgressDialog();
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-		}*/
-		u=new Util(context);
+		myPDT=new ThreadWithProgressDialog();
 		
-		productBeans=(ArrayList<ProductBean>)u.readObject(MyApplication.Seejilu);
+		u=new Util(context);
+		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
+		if(listProductBean==null){
+			listProductBean=new ListProductBean();
+			productBeans=new ArrayList<ProductBean>();
+		}else{
+			
+			productBeans=listProductBean.getList();
+		}
 		ll_not=(LinearLayout)findViewById(R.id.myzj_ll_isnull);
 		gridView = (GridView) findViewById(R.id.myzj_gv);
 		if(productBeans==null||productBeans.size()==0){
@@ -121,6 +127,9 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		}
 		//gridView.setFocusable(false);
 		Util.SetRedNum(context, rl_l, 0);
+		/*if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}*/
 
 	}
 
@@ -133,7 +142,9 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private void Toproduct(ProductBean bean){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.putExtra("productdetaile", bean);
+		Bundle b=new Bundle();
+		b.putSerializable("product", bean);
+		intent.putExtra("productbundle", b);
 		startActivity(intent);
 	}
 	

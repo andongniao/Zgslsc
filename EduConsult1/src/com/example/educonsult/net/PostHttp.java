@@ -832,7 +832,7 @@ public class PostHttp {
 						JSONObject js = (JSONObject) li.get(k);
 						JSONArray m = js.getJSONArray("mall");
 						ArrayList<ShopItemBean>  mall = new ArrayList<ShopItemBean>();
-						Type t = new TypeToken<ArrayList<ShopItemBean>>() {
+						Type t = new TypeToken<ArrayList<ShopItemBean>>() {	
 						}.getType();
 						mall = gson.fromJson(m.toString(), t);
 						int len = mall.size();

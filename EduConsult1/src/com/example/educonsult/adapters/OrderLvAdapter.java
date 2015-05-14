@@ -41,6 +41,7 @@ public class OrderLvAdapter extends BaseAdapter{
 		this.list = list;
 		this.index=index;
 		inflater = LayoutInflater.from(context);
+		coupons=new ArrayList<CouponBean>();
 	}
 	public void SetData(ArrayList<ShopBean>list){
 		this.list = list;
@@ -77,6 +78,7 @@ public class OrderLvAdapter extends BaseAdapter{
 			item.tv_num = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_num);
 			item.tv_zongjia = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_zongjia);
 			item.lin=(LinearLayout)convertView.findViewById(R.id.order_two_lv_item_lin_youhui);
+			
 			item.tv_uhui = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_uhui);
 			convertView.setTag(item);
 		}else{
@@ -87,7 +89,7 @@ public class OrderLvAdapter extends BaseAdapter{
         
 		final ShopItemBean b = (ShopItemBean) l.get(position);
 		
-		coupons=b.getCoupons();
+		
 		item.tv_num.setText(""+b.getNum());
 		item.tv_price.setText("гд"+b.getPrice());
 		item.tv_title.setText(b.getTitle());
@@ -101,22 +103,26 @@ public class OrderLvAdapter extends BaseAdapter{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		item.lin.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Strlist=new ArrayList<String>();
-				if(coupons!=null &&coupons.size()>0){
-				for(int i=0;i<coupons.size();i++){
-					Strlist.add(coupons.get(i).getValue());
+		coupons=b.getCoupons();
+		if(coupons!=null&&coupons.size()>=0){
+			item.lin.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					Strlist=new ArrayList<String>();
+					for(int i=0;i<coupons.size();i++){
+						Strlist.add(coupons.get(i).getValue());
+					}
+					setpopuwindow(Strlist, item.lin);
+					item.tv_uhui.setText(coupons.get(num).getValue());
+					popu.dismiss();
 				}
-				setpopuwindow(Strlist, item.lin);
-				item.tv_uhui.setText(coupons.get(num).getValue());
-				popu.dismiss();
-				}
-			}
-		});
+			});
+		}else{
+			item.tv_uhui.setText("");
+		}
+		
 		
 		return convertView;
 	}

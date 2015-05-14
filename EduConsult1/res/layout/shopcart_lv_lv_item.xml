@@ -38,6 +38,7 @@
 	            android:layout_height="wrap_content"
 	            android:textColor="@color/black"
 	            android:text="@string/test"
+	            android:singleLine="true"
 	            />
 	        <LinearLayout 
 	            android:layout_width="wrap_content"

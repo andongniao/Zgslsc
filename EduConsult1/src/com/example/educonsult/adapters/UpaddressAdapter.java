@@ -5,36 +5,34 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.ShopcartActivity.shop;
-import com.example.educonsult.beans.BaseBean;
-import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.activitys.UpAddressActivity.UpAddress;
+import com.example.educonsult.beans.AddressBean;
 
 public class UpaddressAdapter extends BaseAdapter{
 	private Context context;
-	private ArrayList<Integer>list;
+	private ArrayList<AddressBean> list;
 	private LayoutInflater inflater;
 	private Item item;
 	private int index;
+	private UpAddress upAddress;
+	
 
-
-	public UpaddressAdapter(Context context,ArrayList<Integer>list,int index){
+	public UpaddressAdapter(Context context,ArrayList<AddressBean> list,int index,UpAddress upAddress){
 		this.context = context;
 		this.list = list;
 		this.index = index;
+		this.upAddress = upAddress;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(int index){
-		this.index = index;
+	public void SetData(ArrayList<AddressBean> list){
+		this.list = list;
 	}
 
 	@Override
@@ -68,12 +66,23 @@ public class UpaddressAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		if(index == position){
+		item.tv_name.setText(list.get(position).getTruename());
+		item.tv_phone.setText(list.get(position).getMobile());
+		item.tv_address.setText(list.get(position).getAddress());
+		int num=Integer.parseInt(list.get(position).getIsdefault());
+		
+		if(num == 1){
 			item.iv.setVisibility(View.VISIBLE);
 		}else{
 			item.iv.setVisibility(View.INVISIBLE);
 		}
-		
+		convertView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				upAddress.setAddidde(position);
+			}
+		});
 		
 		return convertView;
 	}
