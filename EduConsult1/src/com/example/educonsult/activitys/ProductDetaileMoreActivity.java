@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.ProductDetaileActivity.RefeshData1;
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
@@ -140,7 +141,12 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 						setStarDate();
 						setpingjiaDate();
 					}
-					
+				}else if("300".equals(listComment.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
 				}else{
 					Util.ShowToast(context, listComment.getMsg());
 				}
@@ -186,6 +192,12 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 					comstar=listComment.getComstar();
 					setpingjiaDate();
 					
+				}else if("300".equals(listComment.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
 				}else{
 					Util.ShowToast(context, listComment.getMsg());
 				}

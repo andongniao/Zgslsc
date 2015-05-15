@@ -24,7 +24,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_launcher" />
+                />
 
             <RelativeLayout
                 android:layout_width="50dp"
@@ -37,6 +37,7 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
+                    android:visibility="gone"
                     android:background="@drawable/v1" />
             </RelativeLayout>
         </FrameLayout>

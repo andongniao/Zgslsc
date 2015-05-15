@@ -82,6 +82,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item.cb = (CheckBox) convertView.findViewById(R.id.shopcart_lv_lv_cb);
 			item.tv_title = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_title);
 			item.tv_price = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_price);
+			item.tv_unit = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_uint);
 			item.tv_zongjia = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_zongjia);
 			item.iv_jia = (ImageView) convertView.findViewById(R.id.shopcart_lv_lv_iv_jia);
 			item.iv_jian = (ImageView) convertView.findViewById(R.id.shopcart_lv_lv_iv_jian);
@@ -143,12 +144,13 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		});
 		//item.et_number.setText(b.getNum());
 		item.et_number.setText(b.getNum()+"");
-		item.tv_price.setText(b.getPrice());
+		item.tv_price.setText("гд"+b.getPrice());
+		item.tv_unit.setText(b.getUnit());
 		item.tv_title.setText(b.getTitle());
 		int i_num=b.getNum();
 		float i_price=Float.parseFloat(b.getPrice());
 		float i_allmoney=i_num*i_price;
-		item.tv_zongjia.setText(i_allmoney+"");
+		item.tv_zongjia.setText("гд"+i_allmoney);
 		try {
 			item.iv_ic.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
 		} catch (Exception e) {
@@ -160,7 +162,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 	}
 
 	class Item{
-		TextView tv_title,tv_price,tv_zongjia;
+		TextView tv_title,tv_price,tv_zongjia,tv_unit;
 		ImageView iv_jia,iv_jian,iv_ic;
 		EditText et_number;
 		CheckBox cb;

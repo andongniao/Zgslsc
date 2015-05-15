@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.educonsult.activitys.AboutActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
+import com.example.educonsult.activitys.LoginActivity;
 import com.example.educonsult.activitys.MyCenterActivity;
 import com.example.educonsult.activitys.SearchHomeActivity;
 import com.example.educonsult.activitys.ShopcartActivity;

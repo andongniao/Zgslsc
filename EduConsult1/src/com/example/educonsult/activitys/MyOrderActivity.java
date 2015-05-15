@@ -66,6 +66,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 	private int ttp,ppage;
 	private Handler handler;
 	public static boolean isinit;
+	private EditText et_pass;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -99,6 +100,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		userbean = MyApplication.mp.getUser();
 		pag = 1;
 		type=0;
+		ppage = 1;
 		tag = userbean.getAuthstr();
 		initdataing = "更新数据中...";
 		myPDT = new ThreadWithProgressDialog();
@@ -146,7 +148,9 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 			public void Order_Pay(OrderBean orderBean) {
 				ob = orderBean;
 				TextView money = (TextView) v_pop.findViewById(R.id.money_password_money);
-				money.setText(ob.getMoney());
+				et_pass = (EditText) v_pop.findViewById(R.id.money_password_edpassword);
+				double mo = Double.parseDouble(ob.getPrice())*Integer.parseInt(ob.getNumber());
+				money.setText(""+mo);
 				popwindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER,0, 0);
 				Button btn_pay = (Button) v_pop.findViewById(R.id.money_password_yes);
 				Button btn_cancle = (Button) v_pop.findViewById(R.id.money_password_no);	
@@ -155,16 +159,18 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 					@Override
 					public void onClick(View v) {
 						popwindow.dismiss();
+						et_pass.setText("");
 					}
 				});
 				btn_pay.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						EditText et = (EditText) v_pop.findViewById(R.id.money_password_edpassword);
-						password = et.getText().toString();
+//						EditText et 
+						password = et_pass.getText().toString();
 						init = false;
 						add = 2;
 						popwindow.dismiss();
+						et_pass.setText("");
 						if(Util.detect(context)){
 
 							myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
@@ -181,7 +187,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				ob = orderBean;
 				init = false;
 				add = 4;
-				intent = new Intent(context,ApplyInfoActivity.class);
+				intent = new Intent(context,ConfirmTheDeliveryActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("itemid", orderBean.getItemid());
 				intent.putExtra("statusid", orderBean.getStatusid());
@@ -230,6 +236,8 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		tv_isnull = (TextView) findViewById(R.id.myorder_home_tv_isnull);
 		tv_isnull.setOnClickListener(this);
 		lv = (XListView) findViewById(R.id.myorder_home_lv);
+		lv.setPullRefreshEnable(true);
+		lv.setPullLoadEnable(true);
 		lv.setXListViewListener(this);
 		lv.setEmptyView(ll_isnull);
 		ll_all = (LinearLayout) findViewById(R.id.myorder_home_ll_all);
@@ -238,6 +246,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		ll_pay.setOnClickListener(this);
 		ll_send = (LinearLayout) findViewById(R.id.myorder_home_ll_send);
 		ll_send.setOnClickListener(this);
+		ll_send.setVisibility(View.GONE);
 		ll_shouhuo = (LinearLayout) findViewById(R.id.myorder_home_ll_shouhuo);
 		ll_shouhuo.setOnClickListener(this);
 		ll_comment = (LinearLayout) findViewById(R.id.myorder_home_ll_comment);
@@ -269,7 +278,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 
 		view_list.add(tv_show_comment);
 		v_pop = LayoutInflater.from(context).inflate(R.layout.money_password, null);
-		popwindow = new PopupWindow(v_pop, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		popwindow = new PopupWindow(v_pop, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 		popwindow.setOutsideTouchable(true);
 		popwindow.setFocusable(true);
 		popwindow.setBackgroundDrawable(new BitmapDrawable());
@@ -330,6 +339,10 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 						adapter = new MyOrderHomeAdapter(context, list, myorder);
 						lv.setAdapter(adapter);
 					}
+				}else if(msg.what==2){
+					intent = new Intent(context,LoginActivity.class);
+					startActivity(intent);
+					finish();
 				}else{
 					String s = (String) msg.obj;
 					Util.ShowToast(context, s);
@@ -454,6 +467,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 							lv.setAdapter(adapter);
 						}else if("300".equals(listbean.getCode())){
 							MyApplication.mp.setlogin(false);
+							Util.ShowToast(context, R.string.login_out_time);
 							intent = new Intent(context,LoginActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							startActivity(intent);
@@ -485,16 +499,18 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 						}else{
 							Util.ShowToast(context, R.string.net_is_eor);
 						}
-
 					}else if("300".equals(baseBean.getCode())){
 						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
 						intent = new Intent(context,LoginActivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(intent);
 						finish(); 
 					}else{
-						Util.ShowToast(context, R.string.net_is_eor);
+						Util.ShowToast(context, baseBean.getMsg());
 					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
 			return true;

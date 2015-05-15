@@ -194,6 +194,7 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 						
 					}else if("300".equals(rebean.getCode())){
 						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
 						intent = new Intent(context,LoginActivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(intent);
@@ -213,6 +214,7 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 						finish();
 					}else if("300".equals(bean.getCode())){
 						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
 						intent = new Intent(context,LoginActivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(intent);

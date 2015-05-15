@@ -1,14 +1,15 @@
 package com.example.educonsult.activitys;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,15 +20,18 @@ import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.ApplyOrderHomeAdapter;
+import com.example.educonsult.adapters.MyOrderHomeAdapter;
 import com.example.educonsult.beans.ListOrderBean;
 import com.example.educonsult.beans.OrderBean;
+import com.example.educonsult.myviews.xlistview.XListView;
+import com.example.educonsult.myviews.xlistview.XListView.IXListViewListener;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
-public class ApplyOrderActivity extends BaseActivity{
+public class ApplyOrderActivity extends BaseActivity implements IXListViewListener{
 	private Context context;
-	private ListView lv;
+	private XListView lv;
 	private ApplyOrderHomeAdapter adapter;
 	private Intent intent;
 	private ThreadWithProgressDialog myPDT;
@@ -37,6 +41,8 @@ public class ApplyOrderActivity extends BaseActivity{
 	private LinearLayout ll_isnull;
 	private ArrayList<OrderBean> list;
 	private TextView see;
+	private int addtype,page;
+	private Handler handler;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -80,11 +86,15 @@ public class ApplyOrderActivity extends BaseActivity{
 
 	private void init() {
 		context = this;
+		page =1;
 		itemid = getIntent().getStringExtra("itemid");
 		authstr = MyApplication.mp.getUser().getAuthstr();
 		myPDT = new ThreadWithProgressDialog();
 		String  msg = getResources().getString(R.string.loding);
-		lv = (ListView) findViewById(R.id.apply_home_lv);
+		lv = (XListView) findViewById(R.id.apply_home_lv);
+		lv.setPullRefreshEnable(true);
+		lv.setPullLoadEnable(true);
+		lv.setXListViewListener(this);
 		ll_isnull = (LinearLayout) findViewById(R.id.apply_home_ll_isnull);
 		lv.setEmptyView(ll_isnull);
 		see = (TextView) findViewById(R.id.apply_home_tv_isnull);
@@ -96,6 +106,39 @@ public class ApplyOrderActivity extends BaseActivity{
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("itemid", itemid);
 				startActivity(intent);
+			}
+		};
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				if(msg.what==1){
+					if(page==1){
+						list = (ArrayList<OrderBean>) msg.obj;
+					}else{
+						ArrayList<OrderBean> ll = (ArrayList<OrderBean>) msg.obj;
+						list.addAll(ll);
+						if(ll.size()==0){
+							Util.ShowToast(context, R.string.page_is_final);
+							page-=1;
+						}
+					}
+					if(adapter!=null){
+						adapter.SetData(list);
+						adapter.notifyDataSetChanged();
+					}else{
+						adapter = new ApplyOrderHomeAdapter(context, list, apply);
+						lv.setAdapter(adapter);
+					}
+				}else if(msg.what==2){
+					intent = new Intent(context,LoginActivity.class);
+					startActivity(intent);
+					finish();
+				}else{
+					String s = (String) msg.obj;
+					Util.ShowToast(context, s);
+				}
+				onLoad();
 			}
 		};
 	}
@@ -128,6 +171,7 @@ public class ApplyOrderActivity extends BaseActivity{
 					}
 				}else if("300".equals(lb.getCode())){
 					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
 					intent = new Intent(context,LoginActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
@@ -149,7 +193,7 @@ public class ApplyOrderActivity extends BaseActivity{
 			// ทรฮส
 			PostHttp p = new PostHttp(context);
 			Send s = new Send(context);
-			lb = s.getOrderRefundList(1, authstr);
+			lb = s.getOrderRefundList(page, authstr);
 			return true;
 		}
 	}
@@ -158,5 +202,57 @@ public class ApplyOrderActivity extends BaseActivity{
 		void detaile(String itemid);
 	}
 
+	@Override
+	public void onRefresh() {
+		page=1;
+		addtype = 2;
+		getData();
+	}
+
+
+
+	@Override
+	public void onLoadMore() {
+		page+=1;
+		addtype = 2;
+		getData();
+	}
+
+	private void getData(){
+		new Thread(){public void run() {
+			Send s = new Send(context);
+			lb = s.getOrderRefundList(page, authstr);
+			Message msg = handler.obtainMessage();
+			if(lb!=null){
+				if("200".equals(lb.getCode())){
+					ArrayList<OrderBean>lt = lb.getList_order();
+					msg.what=1;
+					msg.obj = lt;
+				}else if("200".equals(lb.getCode())){
+					msg.what=3;
+				}else{
+					msg.what=2;
+					msg.obj = lb.getMsg();
+				}
+			}else{
+				String ss = context.getResources().getString(R.string.net_is_eor);
+				msg.what=2;
+				msg.obj = ss;
+			}
+			handler.sendMessage(msg);
+		};}.start();
+	}
+	
+	
+	private void onLoad() {
+		lv.stopRefresh();
+		lv.stopLoadMore();
+		if(addtype==1){
+			SimpleDateFormat sDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd   hh:mm:ss");
+			String date = sDateFormat.format(new java.util.Date());
+			lv.setRefreshTime(date);
+		}
+	}
 
 }

@@ -259,10 +259,13 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		ll_yuanliao.setOnClickListener(this);
 		tv_m_jingpin = (TextView) view.findViewById(R.id.home_tv_more_jingpin);
 		tv_m_jingpin.setOnClickListener(this);
+		tv_m_jingpin.setVisibility(View.GONE);
 		tv_m_hot = (TextView) view.findViewById(R.id.home_tv_more_hot);
 		tv_m_hot.setOnClickListener(this);
+		tv_m_hot.setVisibility(View.GONE);
 		tv_m_ruzhu = (TextView) view.findViewById(R.id.home_tv_more_ruzhu);
 		tv_m_ruzhu.setOnClickListener(this);
+		tv_m_ruzhu.setVisibility(View.GONE);
 
 
 		ll_tuijian_l = (LinearLayout) view.findViewById(R.id.home_ll_tuijian_l);
@@ -321,8 +324,8 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		if(util.isNetworkConnected()){
 			myPDT = new ThreadWithProgressDialog();
 			String  msg = getResources().getString(R.string.loding);
-			//		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-			myPDT.Run(context, new RefeshData(),msg,false);//不可取消
+					myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+//			myPDT.Run(context, new RefeshData(),msg,false);//不可取消
 		}else{
 			if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
 				home = (HomeBean) util.readObject(filename);
@@ -382,8 +385,10 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				if(home!=null && home.getMylike()!=null && home.getMylike().size()>0){
 				productBean=home.getMylike().get(arg2);
 				Toproduct(productBean);
+				}
 			}
 		});
 	}
@@ -399,10 +404,10 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.title_left_iv:
-			Util.ShowToast(context, R.string.maimeng);
-//			msg = HomePagerActivity.handler.obtainMessage();
-//			msg.obj = HomePagerActivity.SlidTag;
-//			HomePagerActivity.handler.sendMessage(msg);
+//			Util.ShowToast(context, R.string.maimeng);
+			msg = HomePagerActivity.handler.obtainMessage();
+			msg.obj = HomePagerActivity.SlidTag;
+			HomePagerActivity.handler.sendMessage(msg);
 			break;
 		case R.id.home_gongqiu_ll:
 			Util.ShowToast(context, R.string.maimeng);
@@ -521,36 +526,52 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		case R.id.home_ll_tuijian_l:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(0);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_tuijian_l_one:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(1);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_tuijian_l_two:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(2);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_tuijian_l_three:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(3);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_tuijian_l_four:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(4);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_tuijian_b_l:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(5);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_tuijian_b_t:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(6);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_tuijian_b_r:
+			if(home!=null && home.getRecommend()!=null && home.getRecommend().size()>0){
 			productBean=home.getRecommend().get(7);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_top_search:
 			ExampleActivity.setCurrentTab(1);
@@ -562,29 +583,41 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 
 		case R.id.home_ll_hot_l:
+			if(home!=null && home.getHot()!=null && home.getHot().size()>0){
 			productBean=home.getHot().get(0);
 			Toproduct(productBean);
+			}
 			break;
 
 		case R.id.home_ll_hot_t:
+			if(home!=null && home.getHot()!=null && home.getHot().size()>0){
 			productBean=home.getHot().get(1);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_hot_r:
+			if(home!=null && home.getHot()!=null && home.getHot().size()>0){
 			productBean=home.getHot().get(2);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_hot_b_l:
+			if(home!=null && home.getHot()!=null && home.getHot().size()>0){
 			productBean=home.getHot().get(3);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_hot_b_t:
+			if(home!=null && home.getHot()!=null && home.getHot().size()>0){
 			productBean=home.getHot().get(4);
 			Toproduct(productBean);
+			}
 			break;
 		case R.id.home_ll_hot_b_r:
+			if(home!=null && home.getHot()!=null && home.getHot().size()>0){
 			productBean=home.getHot().get(5);
 			Toproduct(productBean);
+			}
 			break;
 
 

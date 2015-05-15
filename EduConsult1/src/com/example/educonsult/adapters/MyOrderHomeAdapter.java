@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.MyOrderActivity.Myorder;
 import com.example.educonsult.beans.OrderBean;
@@ -76,7 +77,7 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 					convertView.findViewById(R.id.myorder_home_lv_item_btn_l);
 			item.btn_r = (Button) 
 					convertView.findViewById(R.id.myorder_home_lv_item_btn_r);
-			
+
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -91,7 +92,7 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 		item.tv_shifu.setText("￥"+String.valueOf(p*n));
 		adapter = new MyOrderLvAdapter(context,o,position,myorder);
 		item.lv.setAdapter(adapter);
-//		item.tv_day.setText("距离确认收货还有2天");
+		//		item.tv_day.setText("距离确认收货还有2天");
 		type = Integer.parseInt(o.getStatusid());
 		if(type==1){
 			item.btn_l.setVisibility(View.VISIBLE);
@@ -108,9 +109,14 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 			item.btn_r.setText("关闭交易");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
-			item.btn_l.setText("确认发货");
-			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
-			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
+			item.btn_l.setVisibility(View.GONE);
+			if(MyApplication.mp.getUser().getType()==0){
+//				item.btn_l.setVisibility(View.VISIBLE);
+				item.btn_l.setText("确认发货");
+				item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
+				item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
+			}else{
+			}
 		}else if(type == 3){
 			item.btn_l.setVisibility(View.VISIBLE);
 			item.btn_r.setVisibility(View.VISIBLE);
@@ -123,18 +129,18 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 		}else if(type == 4){
 			int isc = o.getIscomment();
 			if(isc==0){
-			item.btn_l.setVisibility(View.GONE);
-			item.btn_r.setVisibility(View.VISIBLE);
-			item.btn_r.setText("评价订单");
-			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
-			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
+				item.btn_l.setVisibility(View.GONE);
+				item.btn_r.setVisibility(View.VISIBLE);
+				item.btn_r.setText("评价订单");
+				item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
+				item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
 			}else{
 				item.btn_l.setVisibility(View.GONE);
 				item.btn_r.setVisibility(View.GONE);
 			}
-//			item.btn_l.setText("确认发货");
-//			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
-//			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
+			//			item.btn_l.setText("确认发货");
+			//			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
+			//			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 		}else{
 			item.btn_l.setVisibility(View.GONE);
 			item.btn_r.setVisibility(View.GONE);
@@ -167,7 +173,7 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 				}
 			}
 		});
-		
+
 		return convertView;
 	}
 	class Item{

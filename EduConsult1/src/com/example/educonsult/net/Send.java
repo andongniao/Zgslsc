@@ -874,6 +874,7 @@ public class Send {
 	 */
 	public ListXinjianBean getXinjianlist(String authstr) {
 		ListXinjianBean bean = new ListXinjianBean();
+		ArrayList<XinJianBean> list = new ArrayList<XinJianBean>();
 		String baseurl = ServiceUrl.Base;
 		String url="";
 		url = baseurl+ServiceUrl.mycenter_hander+ServiceUrl.sms_list+
@@ -887,21 +888,18 @@ public class Send {
 				object = new JSONObject(jsonStr);
 				String code = object.getString("code");
 				String msg = object.getString("message");
-				if (code != null && "200".equals(code)) {
-					JSONArray data = object.getJSONArray("data");
-					Type t = new TypeToken<ArrayList<XinJianBean>>() {
-					}.getType();
-					ArrayList<XinJianBean> list = gson.fromJson(data.toString(), t);
-					bean.setList(list);
-					bean.setCode(code);
-					bean.setMsg(msg);
-					return bean;
-				} else {
-					bean.setMsg(msg);
-					bean.setCode(code);
-					return bean;
-
+				if(Util.IsNull(object.getString("data"))){
+					if (code != null && "200".equals(code)) {
+						JSONArray data = object.getJSONArray("data");
+						Type t = new TypeToken<ArrayList<XinJianBean>>() {
+						}.getType();
+						list = gson.fromJson(data.toString(), t);
+					}
 				}
+				bean.setList(list);
+				bean.setMsg(msg);
+				bean.setCode(code);
+				return bean;
 
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -1073,21 +1071,21 @@ public class Send {
 						}
 					}
 					if(Util.IsNull(object.getString("fields"))){
-					JSONObject fields = object.getJSONObject("fields");
-					@SuppressWarnings("unchecked")
-					Iterator<String> keys=fields.keys();
-					while (keys.hasNext ())
-					{
-						String k = (String) keys.next() + "";
-						JSONObject js = (JSONObject) fields.get(k);
-						Type t = new TypeToken<OrderFields>() {
-						}.getType();
-						OrderFields sb = gson.fromJson(js.toString(), t);
-						if(sb!=null){
-							list_fields.add(sb);
-						}
+						JSONObject fields = object.getJSONObject("fields");
+						@SuppressWarnings("unchecked")
+						Iterator<String> keys=fields.keys();
+						while (keys.hasNext ())
+						{
+							String k = (String) keys.next() + "";
+							JSONObject js = (JSONObject) fields.get(k);
+							Type t = new TypeToken<OrderFields>() {
+							}.getType();
+							OrderFields sb = gson.fromJson(js.toString(), t);
+							if(sb!=null){
+								list_fields.add(sb);
+							}
 
-					}
+						}
 					}
 					lb.setList_order(list_order);
 					lb.setList_key(list_fields);

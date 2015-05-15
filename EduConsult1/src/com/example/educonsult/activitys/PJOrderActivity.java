@@ -1,6 +1,7 @@
 package com.example.educonsult.activitys;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -101,44 +102,50 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 		}
 	}
 	// 任务
-		public class RefeshData implements ThreadWithProgressDialogTask {
-			private String edStr;
-			public RefeshData(String edStr) {
-				this.edStr =edStr;
-			}
-
-			@Override
-			public boolean OnTaskDismissed() {
-				//任务取消
-//				Toast.makeText(context, "cancle", 1000).show();
-				return false;
-			}
-
-			@Override
-			public boolean OnTaskDone() {
-				//任务完成后
-				if(bean!=null){
-					if("200".equals(bean.getCode())){
-						Util.ShowToast(context, "评价完成！");	
-					}else{
-						Util.ShowToast(context, bean.getMsg());	
-					}
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
-				return true;
-			}
-
-			@Override
-			public boolean TaskMain() {
-				// 访问
-				PostHttp p  = new PostHttp(context);
-				if(Util.IsNull(itemid)){
-				bean = p.Order_comment(itemid, star, edStr, MyApplication.mp.getUser().getAuthstr());
-				}
-				
-				
-				return true;
-			}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		private String edStr;
+		public RefeshData(String edStr) {
+			this.edStr =edStr;
 		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(bean!=null){
+				if("200".equals(bean.getCode())){
+					Util.ShowToast(context, "评价完成！");	
+				}else if("300".equals(bean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
+				}else{
+					Util.ShowToast(context, bean.getMsg());	
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			PostHttp p  = new PostHttp(context);
+			if(Util.IsNull(itemid)){
+				bean = p.Order_comment(itemid, star, edStr, MyApplication.mp.getUser().getAuthstr());
+			}
+
+
+			return true;
+		}
+	}
 }

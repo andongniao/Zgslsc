@@ -213,9 +213,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 //			popu.showAsDropDown(ll_two_diqu);
 			break;
 		case R.id.myinfo_ll_mycard:
-//			intent = new Intent(context,BDCardActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			intent = new Intent(context,BDCardActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			break;
 		case R.id.myinfo_ll_friend:
 			intent = new Intent(context,MyBusinessperntActivity.class);
@@ -291,6 +291,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 						
 					}else if("300".equals(centerbean.getCode())){
 						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
 						intent = new Intent(context,LoginActivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(intent);

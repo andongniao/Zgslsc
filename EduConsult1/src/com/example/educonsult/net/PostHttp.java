@@ -461,7 +461,7 @@ public class PostHttp {
 
 
 	/**
-	 * 绑定银行卡界面
+	 * 绑定银行卡界面（获取银行信息）
 	 */
 	public ListBanksBean getBanksList(String authstr) {  
 		ListBanksBean bean = new ListBanksBean();
@@ -555,12 +555,16 @@ public class PostHttp {
 		NameValuePair p = null;
 		if(type==1){
 			p = new BasicNameValuePair("action","city");
+			list.add(p);
+			NameValuePair p1 = new BasicNameValuePair("province",province);
+			list.add(p1);
 		}else{
 			p = new BasicNameValuePair("action","county");	
+			list.add(p);
+			NameValuePair p1 = new BasicNameValuePair("city",province);
+			list.add(p1);
 		}
 		list.add(p);
-		NameValuePair p1 = new BasicNameValuePair("province",province);
-		list.add(p1);
 		NameValuePair pl = new BasicNameValuePair("authstr",authstr);
 		list.add(pl);
 
@@ -1387,12 +1391,14 @@ public class PostHttp {
 				strResult = EntityUtils.toString(httpResponse.getEntity());  
 				if(Util.IsNull(strResult)){
 					obj = new JSONObject(strResult);
+					if("200".equals(obj.getString("code"))){
 					JSONObject data = obj.getJSONObject("data");
 					JSONArray send_types = data.getJSONArray("send_types");
 					Type t = new TypeToken<ArrayList<String>>() {
 					}.getType();
 					listtype  = gson.fromJson(send_types.toString(), t);
 					bean.setSend_time(data.getString("send_time"));
+					}
 					bean.setSend_types(listtype);
 					bean.setMsg(obj.getString("message"));
 					bean.setCode(obj.getString("code"));

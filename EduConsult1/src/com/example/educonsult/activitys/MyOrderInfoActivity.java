@@ -176,6 +176,7 @@ OnClickListener {
 							listview.setAdapter(myOrderInfoAdapter);
 						}else if("300".equals(ordebean.getCode())){
 							MyApplication.mp.setlogin(false);
+							Util.ShowToast(context, R.string.login_out_time);
 							Intent intent = new Intent(context,LoginActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							startActivity(intent);
@@ -193,6 +194,7 @@ OnClickListener {
 						}
 						else if("300".equals(baseBean.getCode())){
 							MyApplication.mp.setlogin(false);
+							Util.ShowToast(context, R.string.login_out_time);
 							Intent intent = new Intent(context,LoginActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							startActivity(intent);

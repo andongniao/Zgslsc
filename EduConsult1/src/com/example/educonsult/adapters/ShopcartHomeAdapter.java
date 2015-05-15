@@ -88,7 +88,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 
 		item.cb.setChecked(s.isIsclick());
 		item.cb.setText(s.getCompany());
-		item.heji.setText(sum+"");
+		item.heji.setText("гд"+sum);
 //		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
 //			@Override

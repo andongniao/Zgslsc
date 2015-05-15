@@ -155,6 +155,7 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 					tv_why.setText(bean.getContent());
 				}else if("300".equals(bean.getCode())){
 					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
 					intent = new Intent(context,LoginActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);

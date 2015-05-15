@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:gravity="center_vertical"
             android:focusable="false"
             android:textColor="@color/white" />
     </LinearLayout>
