@@ -89,16 +89,6 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void addlistener() {
-		rl_l.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				intent = new Intent(context,XinjianActivity.class);
-				intent.putExtra("flag", "myinfo");
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
-		});
 		rl_r.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -187,7 +177,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		
 		if(bean.getType()==1){
 			ll_qiye.setVisibility(View.GONE);
+			ll_geren.setVisibility(View.VISIBLE);
 		}else{
+			ll_qiye.setVisibility(View.VISIBLE);
 			ll_geren.setVisibility(View.GONE);
 		}
 		
