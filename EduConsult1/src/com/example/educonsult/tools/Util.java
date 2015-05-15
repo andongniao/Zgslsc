@@ -875,9 +875,13 @@ public class Util {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				if (msg.what == 1 && msg.obj != null && v!=null) {
+				if (msg.what == 1  && v!=null) {
 					v.setTag(url);
+					if(msg.obj != null){
 					v.setImageBitmap((Bitmap) msg.obj);
+					}else{
+						v.setBackgroundResource(R.drawable.default_bg);
+					}
 					//					mViewSwitcher.showNext();
 				} else {
 					//yToastMessage(ImageDialog.this, ErrMsg);

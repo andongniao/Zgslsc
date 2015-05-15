@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		list_tv_hot_price = new ArrayList<TextView>();
 		frame=MyApplication.frame;
 		top_rl = (RelativeLayout) view.findViewById(R.id.home_top_rl_right);
-		Util.SetRedNum(context, top_rl, 1);
+//		Util.SetRedNum(context, top_rl, 1);
 		mp = MyApplication.mp;
 		ProductBean bean = new ProductBean();
 		mp.SaveSee(bean);
@@ -371,9 +371,9 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 			@Override
 			public void onClick(View v) {
-				intent = new Intent(context,XinjianActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				context.startActivity(intent);
+//				intent = new Intent(context,XinjianActivity.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				context.startActivity(intent);
 
 			}
 		});
@@ -399,9 +399,10 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.title_left_iv:
-			msg = HomePagerActivity.handler.obtainMessage();
-			msg.obj = HomePagerActivity.SlidTag;
-			HomePagerActivity.handler.sendMessage(msg);
+			Util.ShowToast(context, R.string.maimeng);
+//			msg = HomePagerActivity.handler.obtainMessage();
+//			msg.obj = HomePagerActivity.SlidTag;
+//			HomePagerActivity.handler.sendMessage(msg);
 			break;
 		case R.id.home_gongqiu_ll:
 			Util.ShowToast(context, R.string.maimeng);

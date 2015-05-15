@@ -38,7 +38,7 @@ public class HomeSlidAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 10;//list!=null?list.size():0;
+		return list!=null?list.size():0;
 	}
 
 	@Override
@@ -63,6 +63,7 @@ public class HomeSlidAdapter extends BaseAdapter{
 			myitem.ll = (LinearLayout) convertView.findViewById(R.id.home_slid_view_l_ll);
 			convertView.setTag(myitem);
 		}else{
+			myitem.tv_title.setText(list.get(position).getCatname());
 			myitem = (Myitem) convertView.getTag();
 		}
 		if(type==1){

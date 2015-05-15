@@ -1,10 +1,13 @@
 package com.example.educonsult.beans;
+
+import java.io.Serializable;
+
 /**
  * ÔË·ÑÄ£°å
  * @author Qzr
  *
  */
-public class ExpressBean {
+public class ExpressBean implements Serializable{
 	private String itemid;
 	private String parenid;
 	private String areaid;

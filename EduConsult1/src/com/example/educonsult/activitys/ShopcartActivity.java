@@ -83,7 +83,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		context = this;
 		type = 0;
-		Util.SetRedNum(context, rl_r, 1);
+//		Util.SetRedNum(context, rl_r, 1);
 		bean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
 		//list = new ArrayList<ShopBean>();

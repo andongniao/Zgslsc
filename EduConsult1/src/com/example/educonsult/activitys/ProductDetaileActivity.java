@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -70,7 +71,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ImageCycleView imageview;
 	private ArrayList<String> images;
 	private ImageView b_l,b_t,b_r,t_l,t_t,t_r;
-	private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r;
+	private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r,tv_content;
 	private ListComment listComment;
 	private ArrayList<CommentBean> comlist;
 	private ArrayList<CommentStar> comstar;
@@ -174,6 +175,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		ll_add_view_chanpin=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_chanpin);
 		ll_add_view_pingjia=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia);
 		ll_add_view_dianpu=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_dianputuijian);
+		tv_content = (TextView) findViewById(R.id.product_detaile_product_main_ingredients_edit);
 		chanpin=(TextView)findViewById(R.id.product_detaile_tv_chanpin);
 		pingjia=(TextView)findViewById(R.id.product_detaile_tv_pingjia);
 		dianpu=(TextView)findViewById(R.id.product_detaile_tv_dianutuijian );
@@ -278,6 +280,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		images.add(mallinfo.getThumb());
 		images.add(mallinfo.getThumb1());
 		images.add(mallinfo.getThumb2());
+//		imageview.set
 		imageview.setImageResources(images, new ImageCycleViewListener() {
 
 			@Override
@@ -288,8 +291,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 			@Override
 			public void displayImage(String imageURL, ImageView imageView) {
-				// TODO Auto-generated method stub
-
+				Util.Getbitmap(imageView, imageURL);
 			}
 		});
 		tv_title.setText(mallinfo.getKeyword());
@@ -307,6 +309,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tv_miaoshu.setText("4.5");
 		tv_taidu.setText("4.5");
 		tv_fahuo.setText("4.5");
+		tv_content.setText(Html.fromHtml(mallinfo.getContent()));
 
 		if(buyedlist.size()==0){
 			//ll_buy.setVisibility(View.GONE);

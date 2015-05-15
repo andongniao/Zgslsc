@@ -5,9 +5,12 @@ import java.util.List;
 import org.jivesoftware.smack.ChatManager;
 import org.osgi.framework.BundleContext;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -116,7 +119,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_zhuce_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuce_1_qq = (TextView) findViewById(R.id.service_center_tv_regist_one_qq);
-		tv_zhuce_1_qq.setOnClickListener(this);
+		tv_zhuce_1_qq.setOnClickListener(new MyOnclickListener());
 		tv_zhuce_1_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuce_2_online = (TextView) findViewById(R.id.service_center_tv_regist_two_line);
@@ -124,7 +127,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_zhuce_2_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuce_2_qq = (TextView) findViewById(R.id.service_center_tv_regist_two_qq);
-		tv_zhuce_2_qq.setOnClickListener(this);
+		tv_zhuce_2_qq.setOnClickListener(new MyOnclickListener());
 		tv_zhuce_2_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 
@@ -133,15 +136,15 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_shangjia_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_shangjia_1_qq = (TextView) findViewById(R.id.service_center_tv_shangjia_one_qq);
-		tv_shangjia_1_qq.setOnClickListener(this);
+		tv_shangjia_1_qq.setOnClickListener(new MyOnclickListener());
 		tv_shangjia_1_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_shangjia_2_online = (TextView) findViewById(R.id.service_center_tv_shangjia_two_line);
-		tv_shangjia_2_online.setOnClickListener(this);
+		tv_shangjia_2_online.setOnClickListener(new MyOnclickListener());
 		tv_shangjia_2_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_shangjia_2_qq = (TextView) findViewById(R.id.service_center_tv_shangjia_two_qq);
-		tv_shangjia_2_qq.setOnClickListener(this);
+		tv_shangjia_2_qq.setOnClickListener(new MyOnclickListener());
 		tv_shangjia_2_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 
@@ -150,7 +153,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_buy_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_buy_1_qq = (TextView) findViewById(R.id.service_center_tv_buy_one_qq);
-		tv_buy_1_qq.setOnClickListener(this);
+		tv_buy_1_qq.setOnClickListener(new MyOnclickListener());
 		tv_buy_1_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_buy_2_online = (TextView) findViewById(R.id.service_center_tv_buy_two_line);
@@ -158,7 +161,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_buy_2_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_buy_2_qq = (TextView) findViewById(R.id.service_center_tv_buy_two_qq);
-		tv_buy_2_qq.setOnClickListener(this);
+		tv_buy_2_qq.setOnClickListener(new MyOnclickListener());
 		tv_buy_2_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 
@@ -167,7 +170,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_zhuanjia_1_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuanjia_1_qq = (TextView) findViewById(R.id.service_center_tv_zhuanjia_one_qq);
-		tv_zhuanjia_1_qq.setOnClickListener(this);
+		tv_zhuanjia_1_qq.setOnClickListener(new MyOnclickListener());
 		tv_zhuanjia_1_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuanjia_2_online = (TextView) findViewById(R.id.service_center_tv_zhuanjia_two_line);
@@ -175,7 +178,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		tv_zhuanjia_2_online.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 		tv_zhuanjia_2_qq = (TextView) findViewById(R.id.service_center_tv_zhuanjia_two_qq);
-		tv_zhuanjia_2_qq.setOnClickListener(this);
+		tv_zhuanjia_2_qq.setOnClickListener(new MyOnclickListener());
 		tv_zhuanjia_2_qq.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 
@@ -264,17 +267,18 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 
 		@Override
 		public void onClick(View v) {
-			//已安装插件列表
-			List<org.osgi.framework.Bundle> bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
-			BundleContext context =MyApplication.frame.getSystemBundleContext();
-			for(int i=0;i<context.getBundles().length;i++)
-			{
-				//获取已安装插件
-				bundles.add(context.getBundles()[i]);        	        
-			}
-
-			//				BundleContext context =frame.getSystemBundleContext();
-			startor(bundles);
+//			//已安装插件列表
+//			List<org.osgi.framework.Bundle> bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
+//			BundleContext context =MyApplication.frame.getSystemBundleContext();
+//			for(int i=0;i<context.getBundles().length;i++)
+//			{
+//				//获取已安装插件
+//				bundles.add(context.getBundles()[i]);        	        
+//			}
+//
+//			//				BundleContext context =frame.getSystemBundleContext();
+//			startor(bundles);
+			ShowDialog();
 		}
 
 	}
@@ -316,5 +320,42 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 		intent.putExtra("title", title);
 		startActivity(intent);
 
+	}
+	
+	private void ShowDialog() {
+		AlertDialog alertDialog;
+		String title = "";
+			title = "是否拨打电话?";
+		alertDialog = new AlertDialog.Builder(this)
+		.setTitle(title)
+		.setIcon(null)
+		.setPositiveButton("取消",
+				new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+			}
+		})
+		.setNegativeButton("确定",
+				new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+					Intent phoneIntent = new Intent(
+							"android.intent.action.CALL",
+							Uri.parse("tel:"
+									+ "14730409666"));
+					startActivity(phoneIntent);
+//					Uri uri = Uri.parse("smsto:"
+//							+ MyApplication.smsnumber);
+//					Intent ii = new Intent(
+//							Intent.ACTION_SENDTO, uri);
+//					ii.putExtra("sms_body", "");
+//					startActivity(ii);
+			}
+		}).create();
+		alertDialog.show();
 	}
 }

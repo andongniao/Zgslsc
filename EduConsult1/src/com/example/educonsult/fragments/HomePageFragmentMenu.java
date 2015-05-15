@@ -87,8 +87,8 @@ public class HomePageFragmentMenu extends Fragment {
 		list = new ArrayList<String>();
 		u=new Util(context);
 		listFenleiBean=(ListFenleiBean)u.readObject(filename);
-		//fenleilist=listFenleiBean.getList();
-		fenleilist=new ArrayList<FenleiBean>();
+		fenleilist=listFenleiBean.getList();
+//		fenleilist=new ArrayList<FenleiBean>();
 		
 		listchile=new ArrayList<FenleiBean>();
 		ll_mycenter = (LinearLayout) view.findViewById(R.id.slid_view_ll_mycenter);
@@ -119,8 +119,8 @@ public class HomePageFragmentMenu extends Fragment {
 					HomePagerActivity.handler.sendMessage(msg);
 					break;
 				case 1:
-					intent=new Intent(context, GqHomeActivity.class);
-					startActivity(intent);
+//					intent=new Intent(context, GqHomeActivity.class);
+//					startActivity(intent);
 					break;
 				case 2:
 					ll_r.setVisibility(View.VISIBLE);
@@ -145,6 +145,15 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
+							lv_r.setOnItemClickListener(new OnItemClickListener() {
+
+								@Override
+								public void onItemClick(AdapterView<?> arg0,
+										View arg1, int arg2, long arg3) {
+									// TODO Auto-generated method stub
+									
+								}
+							});
 						}
 					}
 					break;

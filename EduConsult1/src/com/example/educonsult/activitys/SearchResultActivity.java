@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
@@ -45,6 +46,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private int page;
 	private String text;
 	private boolean islist;
+	private TextView tv_guanjian;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +102,13 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		/*for(int i = 0;i<10;i++){
 			list.add(i);
 		}*/
+		tv_guanjian = (TextView) findViewById(R.id.search_result_guanjiazi);
 		list_view = new ArrayList<View>();
 		iv_back = (ImageView) findViewById(R.id.search_result_iv_back);
 		iv_back.setOnClickListener(this);
 		et = (EditText) findViewById(R.id.search_result_et);
 		et.setOnClickListener(this);
+		et.setText(text);
 		ll_zonghe = (LinearLayout) findViewById(R.id.search_result_ll_zonghe);
 		ll_zonghe.setOnClickListener(this);
 		ll_xiaoliang = (LinearLayout) findViewById(R.id.search_result_ll_xiaoliang);
@@ -121,6 +125,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		list_view.add(iv_renqi);
 		ll_isyes=(LinearLayout)findViewById(R.id.search_result_isyes);
 		ll_isnot=(LinearLayout)findViewById(R.id.search_result_isnoll);
+		ll_isyes.setVisibility(View.GONE);
 		gv = (GridView) findViewById(R.id.search_result_gv);
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//¿ÉÈ¡Ïû
@@ -186,6 +191,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	}
 	void initDate(){
 		if(list==null||list.size()==0){
+			tv_guanjian.setText(text);
 			ll_isnot.setVisibility(View.VISIBLE);
 			ll_isyes.setVisibility(View.GONE);
 			islist=false;

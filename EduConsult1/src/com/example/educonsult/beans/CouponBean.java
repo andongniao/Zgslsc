@@ -1,10 +1,13 @@
 package com.example.educonsult.beans;
+
+import java.io.Serializable;
+
 /**
  *	优惠券实体 
  * @author Qzr
  *
  */
-public class CouponBean {
+public class CouponBean implements Serializable{
 	private String id;//优惠券iD
 	private String userid;
 	private String couponid;

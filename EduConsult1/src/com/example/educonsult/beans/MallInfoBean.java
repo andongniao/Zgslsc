@@ -37,6 +37,7 @@ public class MallInfoBean {
 	private String productsize;
 	private String price2;
 	private String areaname;
+	private String content;
 	public String getItemid() {
 		return itemid;
 	}
@@ -258,6 +259,12 @@ public class MallInfoBean {
 	}
 	public void setHits(String hits) {
 		this.hits = hits;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 

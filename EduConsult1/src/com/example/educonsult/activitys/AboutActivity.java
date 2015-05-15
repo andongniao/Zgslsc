@@ -36,7 +36,7 @@ public class AboutActivity extends BaseActivity{
 
 	private void init() {
 		context = this;
-		Util.SetRedNum(context, rl_r, 1);
+//		Util.SetRedNum(context, rl_r, 1);
 		
 	}
 	@Override

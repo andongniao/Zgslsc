@@ -226,7 +226,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked){
 					type = 1;
-					Toast.makeText(context, "type=="+type, 200).show();
+//					Toast.makeText(context, "type=="+type, 200).show();
 				}
 			}
 		});
@@ -235,7 +235,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked){
 					type = 2;
-					Toast.makeText(context, "type=="+type, 200).show();
+//					Toast.makeText(context, "type=="+type, 200).show();
 				}
 			}
 		});
