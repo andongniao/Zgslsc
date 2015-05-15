@@ -40,7 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:orientation="vertical" >
+            android:orientation="vertical" 
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/money_withdrawal_name"

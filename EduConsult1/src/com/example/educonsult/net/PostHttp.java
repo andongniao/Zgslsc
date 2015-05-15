@@ -555,12 +555,17 @@ public class PostHttp {
 		NameValuePair p = null;
 		if(type==1){
 			p = new BasicNameValuePair("action","city");
+			list.add(p);
+			NameValuePair p1 = new BasicNameValuePair("province",province);
+			list.add(p1);
 		}else{
-			p = new BasicNameValuePair("action","county");	
+			p = new BasicNameValuePair("action","county");
+			list.add(p);
+			NameValuePair p1 = new BasicNameValuePair("city",province);
+			list.add(p1);
 		}
-		list.add(p);
-		NameValuePair p1 = new BasicNameValuePair("province",province);
-		list.add(p1);
+//		NameValuePair p1 = new BasicNameValuePair("province",province);
+//		list.add(p1);
 		NameValuePair pl = new BasicNameValuePair("authstr",authstr);
 		list.add(pl);
 

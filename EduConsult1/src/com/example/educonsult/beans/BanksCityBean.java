@@ -6,6 +6,13 @@ package com.example.educonsult.beans;
  */
 public class BanksCityBean {
 	private String city;
+	private String areaname;
+	public String getAreaname() {
+		return areaname;
+	}
+	public void setAreaname(String areaname) {
+		this.areaname = areaname;
+	}
 	private String areacode;
 	public String getCity() {
 		return city;
