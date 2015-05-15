@@ -73,8 +73,9 @@ public class MyZjAdapter extends BaseAdapter{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		item.tv_address.setText(list.get(position).getAreaname());
-		item.tv_price.setText(list.get(position).getPrice());
+		item.tv_address.setText(list.get(position).getArea());
+		item.tv_price.setText("гд"+list.get(position).getPrice());
+		item.tv_title.setText(list.get(position).getTitle());
 		return convertView;
 	}
 	class Item{

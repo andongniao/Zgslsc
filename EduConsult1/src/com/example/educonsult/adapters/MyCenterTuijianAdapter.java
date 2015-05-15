@@ -89,7 +89,7 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 			e.printStackTrace();
 		}
 		item.tv_title.setText(list.get(position).getTitle());
-		item.tv_address.setText(list.get(position).getAreaname());
+		item.tv_address.setText(list.get(position).getArea());
 		//item.tv_price.setText("гд170");
 		item.tv_price.setText(list.get(position).getPrice());
 		item.tv_add.setOnClickListener(new OnClickListener() {
