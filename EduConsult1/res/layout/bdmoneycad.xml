@@ -175,7 +175,7 @@
         android:background="@color/home_hui" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/bdmoneycard_button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/bdmoneycar_tvokbd" 

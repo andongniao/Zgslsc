@@ -82,28 +82,13 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
 		
-		if(cardNum==0){
-			mycardNum.setText("未绑定");
-			mycardNum.setTextColor(getResources().getColor(R.color.red));
-		}else{
-			mycardNum.setText(cardNum+"张");
-		}
+		
 		
 		
 		
 	}
 
 	private void addlistener() {
-		rl_l.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				intent = new Intent(context,XinjianActivity.class);
-				intent.putExtra("flag", "myinfo");
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
-		});
 		rl_r.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -192,7 +177,9 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		
 		if(bean.getType()==1){
 			ll_qiye.setVisibility(View.GONE);
+			ll_geren.setVisibility(View.VISIBLE);
 		}else{
+			ll_qiye.setVisibility(View.VISIBLE);
 			ll_geren.setVisibility(View.GONE);
 		}
 		
@@ -213,9 +200,16 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 //			popu.showAsDropDown(ll_two_diqu);
 			break;
 		case R.id.myinfo_ll_mycard:
-			intent = new Intent(context,BDCardActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			if(cardNum==0){
+				intent = new Intent(context,BDCardActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}else{
+//				intent = new Intent(context,BDCardActivity.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+			}
+			
 			break;
 		case R.id.myinfo_ll_friend:
 			intent = new Intent(context,MyBusinessperntActivity.class);
@@ -234,6 +228,12 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		super.onResume();
 		if(isread){
 			Util.SetRedGone(context, rl_l);
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}
+			else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
 			isread = false;
 		}
 	}
@@ -263,7 +263,13 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 						//TODO	
 						Util.Getbitmap(icv_head, centerbean.getImg());
 						tv_name.setText(centerbean.getUsername());
-						
+						//cardNum=Integer.getInteger(centerbean.getCatid());
+						if(cardNum==0){
+							mycardNum.setText("未绑定");
+							mycardNum.setTextColor(getResources().getColor(R.color.red));
+						}else{
+							mycardNum.setText(cardNum+"张");
+						}
 						
 						if(bean.getType()==1){
 							t_rname.setText(centerbean.getTruename());

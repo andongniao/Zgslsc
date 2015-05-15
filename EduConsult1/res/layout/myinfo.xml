@@ -1,7 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="none" >
+    android:layout_height="fill_parent"
+    android:scrollbars="none" 
+    android:background="#e6e6e6">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -37,7 +38,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
-                />
+                android:src="@drawable/ic_launcher" />
 
             <ImageView
                 android:layout_width="5dp"
@@ -159,7 +160,6 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:visibility="gone"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -287,6 +287,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
+                    android:hint="@string/test"
                     android:singleLine="true" 
                     android:textSize="14dp"
                     android:textColor="@color/black"
@@ -321,6 +322,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
+                    android:hint="@string/test"
                     android:inputType="number"
                     android:singleLine="true" 
                     android:textSize="14dp"
@@ -449,7 +451,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical" 
-            android:visibility="gone">
+            android:visibility="gone"
+            >
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -540,7 +543,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
-                    android:hint="fdsafdsafd"
+                    android:hint="@string/test"
                     android:singleLine="true"
                     android:background="@color/white" />
 
@@ -675,7 +678,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
-                    android:hint="fdsafdsafd"
+                    android:hint="@string/test"
                     android:inputType="number"
                     android:singleLine="true"
                     android:background="@color/white" />
@@ -711,7 +714,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
-                    android:hint="fdsafdsafd"
+                    android:hint="@string/test"
                     android:singleLine="true" 
                     android:background="@color/white" />
 
@@ -745,7 +748,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
-                    android:hint="fdsafdsafd"
+                    android:hint="@string/test"
                     android:singleLine="true" 
                     android:background="@color/white"/>
                 <ImageView
@@ -778,7 +781,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:gravity="right|center_vertical"
-                    android:hint="fdsafdsafd"
+                    android:hint="@string/test"
                     android:singleLine="true"
                     android:inputType="number"
                     android:background="@color/white"/>

@@ -12,6 +12,7 @@
         android:layout_gravity="center"
         android:scaleType="fitXY"
         android:background="@drawable/default_bg"
+        
         />
     <LinearLayout 
         android:layout_width="fill_parent"
@@ -26,6 +27,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:text="@string/test"
+            android:maxEms="4"
+            android:ellipsize="end"
             android:singleLine="true"
             />
         <TextView 

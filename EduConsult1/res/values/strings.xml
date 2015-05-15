@@ -510,7 +510,7 @@
     <string name="recharge_title">充值</string>
     <string name="recharge_tvmoney">充值金额</string>
     <string name="recharge_tvmoneytext">请输入充值金额</string>
-    <string name="recharge_tvok">确定支付</string>
+    <string name="recharge_tvok">确定充值</string>
     <!-- 密码修改 -->
     <string name="possword_title">密码修改</string>
     <string name="possword_tvlogin">登录密码修改</string>
