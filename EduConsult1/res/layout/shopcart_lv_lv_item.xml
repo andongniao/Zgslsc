@@ -55,11 +55,11 @@
 	                android:textSize="10dp"
 	                android:text="@string/test"
 	                />
-	            <TextView 
+	            <TextView
+	                android:id="@+id/shopcart_lv_lv_tv_uint" 
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:textColor="@color/home_hui"
-	                android:text="@string/gq_two_dw"
 	                android:textSize="10dp"
 	                android:layout_marginLeft="3dp"
 	                />

@@ -85,7 +85,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private TextView[] tvtuijian;
 	private ImageView[] imtuijian;
 	private ListProductBean listProductBean;
-	
+
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -102,9 +102,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private void init() {
 		context = this;
 		intent=getIntent();
-//		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");
-//		/*izable("product", productBean);
-//		intent.putE*/xtra("productbundle", b);
+		//		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");
+		//		/*izable("product", productBean);
+		//		intent.putE*/xtra("productbundle", b);
 		Bundle b=intent.getBundleExtra("productbundle");
 		productBean=(ProductBean)b.getSerializable("product");
 		liulanfile=MyApplication.Seejilu;
@@ -115,9 +115,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		if(listProductBean==null){
 			listProductBean=new ListProductBean();
 			liulanlist=new ArrayList<ProductBean>();
-			
+
 		}else{
-			
+
 			liulanlist=listProductBean.getList();
 		}
 		liulanlist.add(productBean);
@@ -181,7 +181,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		dianpu=(TextView)findViewById(R.id.product_detaile_tv_dianutuijian );
 		list=new ArrayList<ProductBean>();
 		listView=(MyListview)findViewById(R.id.product_detaile_ll_add_view_list);
-		
+
 		gridView=(GridView)findViewById(R.id.product_detaile_all_view_dianputuijian_gv);
 		homeLikeAdapter = new HomeLikeAdapter(context, list);
 		gridView.setAdapter(homeLikeAdapter);
@@ -229,7 +229,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		buymore=(TextView)findViewById(R.id.product_detaile_tv_more_shopped);
 		buymore.setOnClickListener(this);
 
-		
+
 
 		tv_title=(TextView)findViewById(R.id.product_detail_tv_title);
 		//		,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
@@ -255,14 +255,14 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tb_t=(TextView)findViewById(R.id.product_detaile_tv_bui_t);
 		b_r=(ImageView)findViewById(R.id.product_detaile_ima_bui_4);
 		tb_r=(TextView)findViewById(R.id.product_detaile_tv_bui_r);
-		
+
 		t_l=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_l);
 		tt_l=(TextView)findViewById(R.id.product_detaile_tv_tonglei_l);
 		t_t=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_t);
 		tt_t=(TextView)findViewById(R.id.product_detaile_tv_tonglei_t);
 		t_r=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_r);
 		tt_r=(TextView)findViewById(R.id.product_detaile_tv_tonglei_r);
-	
+
 		//b_l.setBackgroundDrawable(getResources().)
 
 
@@ -277,10 +277,16 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	void initDate(){
 		//ll_nobuy.setVisibility(View.GONE);
 		images=new ArrayList<String>();
-		images.add(mallinfo.getThumb());
-		images.add(mallinfo.getThumb1());
-		images.add(mallinfo.getThumb2());
-//		imageview.set
+		if(Util.IsNull(mallinfo.getThumb())){
+			images.add(mallinfo.getThumb());
+		}
+		if(Util.IsNull(mallinfo.getThumb1())){
+			images.add(mallinfo.getThumb1());
+		}
+		if(Util.IsNull(mallinfo.getThumb2())){
+			images.add(mallinfo.getThumb2());
+		}
+		//		imageview.set
 		imageview.setImageResources(images, new ImageCycleViewListener() {
 
 			@Override
@@ -337,7 +343,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			tb_r.setText(buyedlist.get(2).getPrice());
 		}
 		if(recommend.size()!=0){
-		
+
 			try {
 //				t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
 //				t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
@@ -356,7 +362,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
 			tt_r.setText("￥"+recommend.get(2).getPrice()+"");
 		}
-		
+
 
 	}
 	private void addlistener() {
@@ -365,7 +371,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				
+
 				//Toproduct();
 			}
 		});
@@ -382,13 +388,13 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			startActivity(intent);
 			break;
 		case R.id.product_detaile_ll_into_dianpu:
-//			intent = new Intent(context,StoreActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			//			intent = new Intent(context,StoreActivity.class);
+			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			startActivity(intent);
 			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.product_detaile_ll_tonglei_l:
-			
+
 			Toproduct(recommend.get(0));
 			break;
 		case R.id.product_detaile_ll_tonglei_t:
@@ -407,17 +413,27 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			Toproduct(buyedlist.get(2));
 			break;
 		case R.id.product_detaile_ll_pay_now: 
-//			if(Util.detect(context)){
-//				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
-//			}
-			ExampleActivity.setCurrentTab(3);
-			finish();
+			if(MyApplication.mp.islogin){
+				ExampleActivity.setCurrentTab(3);
+				finish();
+			}else{
+				intent = new Intent(context,LoginActivity.class);
+				startActivity(intent);
+				finish();
+			}
 			break;
 		case R.id.product_detaile_ll_add_shopcart:
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
+			if(MyApplication.mp.islogin){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData2(),R.string.loding);//可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}else{
+				intent = new Intent(context,LoginActivity.class);
+				startActivity(intent);
+				finish();
 			}
-			//Toast.makeText(context, "ok", 1000).show();
 			break;
 		case R.id.product_detaile_ll_chanpin:
 			ll_add_view_chanpin.setVisibility(View.VISIBLE);
@@ -440,8 +456,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 				}
 			}
 			ispingjia=true;
-			
-			
+
+
 			break;
 		case R.id.product_detaile_ll_dianputuijian:
 			ll_add_view_chanpin.setVisibility(View.GONE);
@@ -457,7 +473,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			//intent.putExtra("qingjiamore", mallinfo.getItemid());
 			intent.putExtra("qingjiamore",productBean.getTitle());
 			startActivity(intent);
-			
+
 			break;
 		case R.id.product_detaile_adds:
 			intent=new Intent(context, BusinesspartnersInfoActivity.class);
@@ -499,6 +515,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 					//TODO	
 					ShopcartActivity.ischange = true;
 					Util.ShowToast(context,"添加成功");
+				}else if("300".equals(bean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
 				}else{
 					Util.ShowToast(context, bean.getMsg());
 				}
@@ -532,10 +554,10 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tt_l.setText(recommend.get(0).getTitle());
 		tt_t.setText(recommend.get(1).getTitle());
 		tt_r.setText(recommend.get(2).getTitle());
-		
+
 	}
-	
-	
+
+
 	public class RefeshData implements ThreadWithProgressDialogTask {
 
 		public RefeshData() {
@@ -558,12 +580,17 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 					recommend=productdetailbean.getRecommend();
 					buyedlist=productdetailbean.getBuyedlist();
 					initDate();
-				
-				}
-				else{
+
+				}else if("300".equals(productdetailbean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
+				}else{
 					Util.ShowToast(context, productdetailbean.getMsg());
 				}
-				
+
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
@@ -573,7 +600,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 				}else{
 					Util.ShowToast(context, home.getMsg());
 				}
-				
+
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}*/
@@ -594,13 +621,13 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		}
 	}
 	private void setpingjiaDate(){
-	
-			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
-			listView.setAdapter(pingjiaAdapter);
-			if(comlist.size()==0){
-				pingjiamore.setVisibility(View.GONE);
-			}
-		
+
+		pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
+		listView.setAdapter(pingjiaAdapter);
+		if(comlist.size()==0){
+			pingjiamore.setVisibility(View.GONE);
+		}
+
 	}
 	public class RefeshData1 implements ThreadWithProgressDialogTask {
 
@@ -623,6 +650,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 					comlist=listComment.getComlist();
 					comstar=listComment.getComstar();
 					setpingjiaDate();
+				}else if("300".equals(listComment.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
 				}else{
 					Util.ShowToast(context, listComment.getMsg());
 				}

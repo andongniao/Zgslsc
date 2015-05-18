@@ -278,6 +278,13 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 						//					
 						setpopuwindow();
 						//finish();
+					}else if("300".equals(code)){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+						
 					}else{
 						if(Util.IsNull(m)){
 							Util.ShowToast(context, m);
@@ -313,6 +320,12 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 						tv_address.setText(addressBean.getAddress());
 
 					}
+				}else if("300".equals(code)){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
 				}else{
 					if(Util.IsNull(m)){
 						Util.ShowToast(context, m);

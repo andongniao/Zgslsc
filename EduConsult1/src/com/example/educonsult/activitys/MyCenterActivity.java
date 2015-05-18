@@ -18,13 +18,10 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.LoginActivity.RefeshData;
 import com.example.educonsult.beans.CenterUserBean;
 import com.example.educonsult.beans.UserBean;
-import com.example.educonsult.myviews.BadgeView;
 import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.net.Send;
-import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 
@@ -72,6 +69,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_zf.setOnClickListener(this);
 		ll_fh = (LinearLayout) findViewById(R.id.mycenter_home_ll_fahuuo);
 		ll_fh.setOnClickListener(this);
+		ll_fh.setVisibility(View.GONE);
 		ll_sh = (LinearLayout) findViewById(R.id.mycenter_home_ll_shouhuo);
 		ll_sh.setOnClickListener(this);
 		ll_pj = (LinearLayout) findViewById(R.id.mycenter_home_ll_pingjia);
@@ -130,10 +128,17 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		}
 		myPDT = new ThreadWithProgressDialog();
 		msg = "加载中...";
+		if(MyApplication.mp.islogin){
 		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
+		}
+		}else{
+			Intent i = new Intent(context,LoginActivity.class);
+			startActivity(i);
+			finish();
 		}
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
@@ -169,6 +174,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 					tv_name.setText(cbean.getTruename());
 				}else if("300".equals(code)){
 					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
 					intent = new Intent(context,LoginActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);

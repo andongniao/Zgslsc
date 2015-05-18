@@ -47,15 +47,16 @@ public class MyApplication extends Application{
 	public static int money_detaile = 2;
 	public static int money_income = 3;
 	public static int money_pay = 4;
-	public static boolean islogin;
-	
-	
-	
+	public boolean islogin;
+
+
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		context = this;
 		mp = this;
+		islogin =false;
 		sp = getSharedPreferences("mysp", Context.MODE_PRIVATE);
 		bean = new UserBean();
 		bean.setAuthstr("");
@@ -65,86 +66,86 @@ public class MyApplication extends Application{
 		list.add(s);
 		EMChat.getInstance().init(context);
 		// 获取到EMChatOptions对象
-		
-//		//只有注册了广播才能接收到新消息，目前离线消息，在线消息都是走接收消息的广播（离线消息目前无法监听，在登录以后，接收消息广播会执行一次拿到所有的离线消息）
-//		NewMessageBroadcastReceiver msgReceiver = new NewMessageBroadcastReceiver();
-//		IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
-//		intentFilter.setPriority(3);
-//		registerReceiver(msgReceiver, intentFilter);
 
-		
-//		EMChatManager.getInstance().getChatOptions().setRequireAck(flag);
-//		//如果用到已读的回执需要把这个flag设置成true
-//
-//		IntentFilter ackMessageIntentFilter = new IntentFilter(EMChatManager.getInstance().getAckMessageBroadcastAction());
-//		ackMessageIntentFilter.setPriority(3);
-//		registerReceiver(ackMessageReceiver, ackMessageIntentFilter);
-//		EMChat.getInstance().setAppInited();
-	
+		//		//只有注册了广播才能接收到新消息，目前离线消息，在线消息都是走接收消息的广播（离线消息目前无法监听，在登录以后，接收消息广播会执行一次拿到所有的离线消息）
+		//		NewMessageBroadcastReceiver msgReceiver = new NewMessageBroadcastReceiver();
+		//		IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
+		//		intentFilter.setPriority(3);
+		//		registerReceiver(msgReceiver, intentFilter);
 
-		 try
-	        {
-	        	//启动框架
-				//文档见 http://www.apkplug.com/javadoc/Maindoc1.4.6/
-				//org.apkplug.app 
-			 	//     接口 FrameworkInstance
-			 	Log.e("start", "fsfsdafasfsa");
-//				frame=FrameworkFactory.getInstance().start(list, context);
-				frame=FrameworkFactory.getInstance().start(null,this);
-//				System.out.println("ProxyApplication1");
-//				BundleContext context =frame.getSystemBundleContext();
-//				// InstallBundler 是2.7.0版本内置与框架中的
-//				InstallBundler ib=new InstallBundler(context);
-//				ib.installForAssets("chatdemo-ui.apk", "1.0.0", null,
-//						new installCallback(){
-//						@Override
-//						public void callback(int arg0, Bundle arg1) {
-//							if(arg0==installCallback.stutas5||arg0==installCallback.stutas7){
-//								Log.d("",String.format("插件安装 %s ： %d",arg1.getName(),arg0));
-//								return;
-//							}
-//							else{
-//								Log.d("","插件安装失败 ：%d"+arg0);
-//							}
-//						}
-//						});
-//				ib.installForAssets("BundleDemoShow.apk", "1.0.0", null,null);
-//				ib.installForAssets("BundleDemoStartActivity1.apk", "1.0.0", null,null);
-	        }
-	        catch (Exception ex)
-	        {
-	            System.err.println("Could not create : " + ex);
-//	            ex.printStackTrace();
-//	            int nPid = android.os.Process.myPid();
-//				android.os.Process.killProcess(nPid);
-	        }
-		 
-		 
-		 EMChatOptions options = EMChatManager.getInstance().getChatOptions();
-			//设置notification点击listener
-			options.setOnNotificationClickListener(new OnNotificationClickListener() {
 
-				@Override
-				public Intent onNotificationClick(EMMessage message) {
-					Intent i=new Intent();
-//					i.setClassName(MyApplication.this.context.getPackageName(), bundle.getBundleActivity().split(",")[0]);
-//					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					i = new Intent(MyApplication.this.context,HomePagerActivity.class);
-					isopen = true;
-					
-//					ChatType chatType = message.getChatType();
-//					if(chatType == ChatType.Chat){ //单聊信息
-//						intent.putExtra("userId", message.getFrom());
-////						intent.putExtra("chatType", ChatActivity.CHATTYPE_SINGLE);
-//					}else{ //群聊信息
-//						//message.getTo()为群聊id
-//						intent.putExtra("groupId", message.getTo());
-////						intent.putExtra("chatType", ChatActivity.CHATTYPE_GROUP);
-//					}
-					return i;
-				}
-			});
-		
+		//		EMChatManager.getInstance().getChatOptions().setRequireAck(flag);
+		//		//如果用到已读的回执需要把这个flag设置成true
+		//
+		//		IntentFilter ackMessageIntentFilter = new IntentFilter(EMChatManager.getInstance().getAckMessageBroadcastAction());
+		//		ackMessageIntentFilter.setPriority(3);
+		//		registerReceiver(ackMessageReceiver, ackMessageIntentFilter);
+		//		EMChat.getInstance().setAppInited();
+
+
+		try
+		{
+			//启动框架
+			//文档见 http://www.apkplug.com/javadoc/Maindoc1.4.6/
+			//org.apkplug.app 
+			//     接口 FrameworkInstance
+			Log.e("start", "fsfsdafasfsa");
+			//				frame=FrameworkFactory.getInstance().start(list, context);
+			frame=FrameworkFactory.getInstance().start(null,this);
+			//				System.out.println("ProxyApplication1");
+			//				BundleContext context =frame.getSystemBundleContext();
+			//				// InstallBundler 是2.7.0版本内置与框架中的
+			//				InstallBundler ib=new InstallBundler(context);
+			//				ib.installForAssets("chatdemo-ui.apk", "1.0.0", null,
+			//						new installCallback(){
+			//						@Override
+			//						public void callback(int arg0, Bundle arg1) {
+			//							if(arg0==installCallback.stutas5||arg0==installCallback.stutas7){
+			//								Log.d("",String.format("插件安装 %s ： %d",arg1.getName(),arg0));
+			//								return;
+			//							}
+			//							else{
+			//								Log.d("","插件安装失败 ：%d"+arg0);
+			//							}
+			//						}
+			//						});
+			//				ib.installForAssets("BundleDemoShow.apk", "1.0.0", null,null);
+			//				ib.installForAssets("BundleDemoStartActivity1.apk", "1.0.0", null,null);
+		}
+		catch (Exception ex)
+		{
+			System.err.println("Could not create : " + ex);
+			//	            ex.printStackTrace();
+			//	            int nPid = android.os.Process.myPid();
+			//				android.os.Process.killProcess(nPid);
+		}
+
+
+		EMChatOptions options = EMChatManager.getInstance().getChatOptions();
+		//设置notification点击listener
+		options.setOnNotificationClickListener(new OnNotificationClickListener() {
+
+			@Override
+			public Intent onNotificationClick(EMMessage message) {
+				Intent i=new Intent();
+				//					i.setClassName(MyApplication.this.context.getPackageName(), bundle.getBundleActivity().split(",")[0]);
+				//					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				i = new Intent(MyApplication.this.context,HomePagerActivity.class);
+				isopen = true;
+
+				//					ChatType chatType = message.getChatType();
+				//					if(chatType == ChatType.Chat){ //单聊信息
+				//						intent.putExtra("userId", message.getFrom());
+				////						intent.putExtra("chatType", ChatActivity.CHATTYPE_SINGLE);
+				//					}else{ //群聊信息
+				//						//message.getTo()为群聊id
+				//						intent.putExtra("groupId", message.getTo());
+				////						intent.putExtra("chatType", ChatActivity.CHATTYPE_GROUP);
+				//					}
+				return i;
+			}
+		});
+
 	}
 	public FrameworkInstance getFrame() {
 		return frame;
@@ -153,7 +154,7 @@ public class MyApplication extends Application{
 	private class NewMessageBroadcastReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-		    // 注销广播
+			// 注销广播
 			abortBroadcast();
 
 			// 消息id（每条消息都会生成唯一的一个id，目前是SDK生成）
@@ -174,7 +175,7 @@ public class MyApplication extends Application{
 		}
 	}
 	private BroadcastReceiver ackMessageReceiver = new BroadcastReceiver() {
-		
+
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			abortBroadcast();
@@ -190,7 +191,7 @@ public class MyApplication extends Application{
 			}
 		}
 	};
-	
+
 	private String getAppName(int pID) {
 		String processName = null;
 		ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);
@@ -214,7 +215,7 @@ public class MyApplication extends Application{
 		}
 		return processName;
 	}
-	
+
 	public void startor(List<org.osgi.framework.Bundle> list){
 		org.osgi.framework.Bundle bundle=list.get(1);
 		if(bundle.getState()!=bundle.ACTIVE){
@@ -228,15 +229,15 @@ public class MyApplication extends Application{
 		}
 		if(bundle.getBundleActivity()!=null){
 			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
-				     Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();
 			Intent i=new Intent();
 			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
 			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);
 		}else{
-			
+
 			Toast.makeText(context, "该插件没有配置BundleActivity",
-				     Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();
 		}
 	}
 	public void setUser(UserBean bean){
@@ -247,12 +248,13 @@ public class MyApplication extends Application{
 	}
 	public void setlogin(boolean islogin){
 		if(islogin){
-		this.islogin = islogin;
+			this.islogin = islogin;
 		}else{
+			this.islogin = islogin;
 			this.bean.setAuthstr("");
 		}
 	}
-	
+
 	public void SaveSee(ProductBean bean){
 		ListProductBean lb;
 		ArrayList<ProductBean> list = GetSee();
@@ -276,5 +278,5 @@ public class MyApplication extends Application{
 		}
 		return list;
 	}
-	
+
 }

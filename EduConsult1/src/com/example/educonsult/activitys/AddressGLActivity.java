@@ -316,6 +316,8 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 					if("200".equals(lare.getCode())){
 						init = false;
 					}else if("300".equals(lare.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
 						intent = new Intent(context,LoginActivity.class);
 						startActivity(intent);
 						finish();
@@ -336,6 +338,8 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 						AddressActivity.isinit = true;
 						finish();
 					}else if("300".equals(beanresult.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
 						intent = new Intent(context,LoginActivity.class);
 						startActivity(intent);
 						finish();

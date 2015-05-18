@@ -128,7 +128,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 //		ArrayList<Integer> l2 = new ArrayList<Integer>();
 //		l2.add(1);
 		ShopBean s=list.get(index);
-		item.tv_title.setText(s.getTitle());
+		item.tv_title.setText(s.getCompany());
 		item.et.setText(s.getNote());
 		
 		express=s.getExpress();//ÔË·ÑÄ£°å
@@ -160,7 +160,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 			sum=sum+i_num*i_price;
 			n++;
 		}
-		item.tv_heji.setText(sum+"");
+		item.tv_heji.setText("£¤"+sum);
 		//item.tv_peisong.setText(s.get)
 		//item.
 		adapter=new OrderLvAdapter(context, list,index);

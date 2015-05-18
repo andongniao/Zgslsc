@@ -243,7 +243,6 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				isread = isChecked;
-				Toast.makeText(context, "isread=="+isread, 200).show();
 			}
 		});
 
@@ -531,7 +530,8 @@ void setrel(){
 				String code = bean.getCode();
 				String m = bean.getMsg();
 				if("200".equals(code)){
-//		
+					Intent i = new Intent(context,RegistOKActivity.class);
+					startActivity(i);
 					finish();
 				}else{
 					if(Util.IsNull(m)){

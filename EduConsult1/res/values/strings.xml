@@ -132,7 +132,7 @@
     <string name="mycenter_mimaxiugai">密码修改</string>
     <!-- 我收藏的产品 -->
     <string name="scproduct_title">我收藏的产品</string>
-    <string name="scproduct_tvmoney">元/件</string>
+    <string name="scproduct_tvmoney"></string>
     <string name="scprodcut_tvqxsc">取消收藏</string>
     <string name="scproduct_instore">进入店铺</string>
     <!-- 我收藏的店铺 -->

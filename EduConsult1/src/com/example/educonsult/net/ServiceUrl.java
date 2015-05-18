@@ -5,9 +5,9 @@ package com.example.educonsult.net;
  *
  */
 public class ServiceUrl {
-	//public static String Base="http://www.zgslsc.com/app/";
-//	public static String Base="http://www.shop.com/app/";
-	public static String Base="http://192.168.1.252/app/";
+//	public static String Base="http://www.zgslsc.com/app/";
+	public static String Base="http://www.shop.com/app/";
+//	public static String Base="http://192.168.1.190/app/";
 	//Ê×Ò³
 	public static String Home_url=Base;
 	//³ÇÊÐ

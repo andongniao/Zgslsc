@@ -75,6 +75,7 @@ public class OrderLvAdapter extends BaseAdapter{
 			item.iv_uhui = (ImageView) convertView.findViewById(R.id.order_two_lv_item_iv_uhui);
 			item.tv_title = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_title);
 			item.tv_price = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_price);
+			item.tv_unit = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_unit);
 			item.tv_num = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_num);
 			item.tv_zongjia = (TextView) convertView.findViewById(R.id.order_two_lv_item_tv_zongjia);
 			item.lin=(LinearLayout)convertView.findViewById(R.id.order_two_lv_item_lin_youhui);
@@ -90,8 +91,9 @@ public class OrderLvAdapter extends BaseAdapter{
 		final ShopItemBean b = (ShopItemBean) l.get(position);
 		
 		
-		item.tv_num.setText(""+b.getNum());
+		item.tv_num.setText("X"+b.getNum());
 		item.tv_price.setText("гд"+b.getPrice());
+		item.tv_unit.setText(b.getUnit());
 		item.tv_title.setText(b.getTitle());
 		int i_num=b.getNum();
 		float i_price=Float.parseFloat(b.getPrice());
@@ -149,7 +151,7 @@ public class OrderLvAdapter extends BaseAdapter{
 		
 	}
 	class Item{
-		TextView tv_title,tv_price,tv_zongjia,tv_num,tv_uhui;
+		TextView tv_title,tv_price,tv_zongjia,tv_num,tv_uhui,tv_unit;
 		ImageView iv,iv_uhui;
 		LinearLayout lin;
 	}

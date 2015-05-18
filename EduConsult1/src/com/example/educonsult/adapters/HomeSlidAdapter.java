@@ -67,7 +67,7 @@ public class HomeSlidAdapter extends BaseAdapter{
 			myitem = (Myitem) convertView.getTag();
 		}
 		if(type==1){
-			for(int i=0;i<6;i++){
+			for(int i=0;i<list.size();i++){
 				if(i==position){
 					myitem.ll.setBackgroundResource(R.color.base_top_title_bg);
 					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.white));//R.color.white);
@@ -80,16 +80,16 @@ public class HomeSlidAdapter extends BaseAdapter{
 				myitem.tv_r.setVisibility(View.VISIBLE);
 			}
 		}else if(type==2){
-			for(int i=0;i<6;i++){
+			for(int i=0;i<list.size();i++){
 				if(index==position){
-					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
+//					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
 					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.base_top_title_bg));
 				}else{
-					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
+//					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.black));
 				}
-				
 			}
+			myitem.tv_title.setText(list.get(position).getCatname());
 		}
 		return convertView;
 	}

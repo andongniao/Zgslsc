@@ -136,15 +136,15 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 				//任务完成后
 				if(bagBean!=null){
 					if("200".equals(bagBean.getCode())){
-						
 						tv_all.setText("￥"+bagBean.getAll_money());
 						tv_keyong.setText("￥"+bagBean.getMoney());
 						tv_tixian.setText("￥"+bagBean.getAmount());
 						
 					}else if("300".equals(bagBean.getCode())){
-						intent = new Intent(context,LoginActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
 						finish();
 					}else{
 						
