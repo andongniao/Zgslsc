@@ -93,7 +93,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		 myPDT=new ThreadWithProgressDialog();
 		context = this;
 		type = 1;
-		tp = 2;
+		tp = 1;
 		u=new Util(context);
 		listareaBean=(ListAreaBean)u.readObject(MyApplication.AreaName);
 		listFenleiBean=(ListFenleiBean)u.readObject(MyApplication.FenleiName);
@@ -416,7 +416,7 @@ void setrel(){
 
 			if(Util.IsNull(name) && Util.IsNull(pass) && Util.IsNull(pass_re)&& Util.IsNull(rname)
 					&& Util.IsNull(phone)&&isdiqu&& Util.IsNull(dizhi)){
-				if(tp==1){
+				if(tp==0){
 					if (Util.IsNull(cname)&&isctype&&Util.IsNull(cphone)) {
 						if(Util.ispassword(pass)){
 							if(pass.equals(pass_re)){
@@ -444,7 +444,7 @@ void setrel(){
 					}
 
 
-				}else if(tp==2){
+				}else if(tp==1){
 					if(ispingzhong&&issiliao&&Util.IsNull(computer)
 							&&Util.IsNull(price)&&isproduct&&Util.IsNull(num)&&Util.IsNull(person)){
 						if(Util.ispassword(pass)){
@@ -491,7 +491,7 @@ void setrel(){
 
 			break;
 		case R.id.regist_tv_qiye:
-			tp = 1;
+			tp = 0;
 			tv_qiye.setBackgroundResource(R.drawable.regist_clikeed);
 			tv_qiye.setTextColor(getResources().getColor(R.color.white));
 			tv_geren.setTextColor(getResources().getColor(R.color.black));
@@ -500,7 +500,7 @@ void setrel(){
 			ll_qiye.setVisibility(View.VISIBLE);
 			break;
 		case R.id.regist_tv_geren:
-			tp = 2;
+			tp = 1;
 			tv_geren.setBackgroundResource(R.drawable.regist_clikeed);
 			tv_geren.setTextColor(getResources().getColor(R.color.white));
 			tv_qiye.setBackgroundResource(R.color.regist_bg);
@@ -567,10 +567,10 @@ void setrel(){
 //			tjr ÍÆ¼öÈË
 
 			if(tp==1){
-				bean=p.Regist(6, name, pass, rname, type, numdiqu+"", dizhi, phone,cname, ctype, cphone);
-			}else{
 				bean=p.Regist(5, name, pass, rname, type, numdiqu+"", dizhi,phone, pingzhongString, siliao, computer,
 						price, numproduct+"", "",num ,person);
+			}else{
+				bean=p.Regist(6, name, pass, rname, type, numdiqu+"", dizhi, phone,cname, ctype, cphone);
 			}
 			
 

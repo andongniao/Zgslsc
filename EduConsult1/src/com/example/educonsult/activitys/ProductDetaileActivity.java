@@ -308,7 +308,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			tv_shangcheng.setText(mallinfo.getPrice());
 		}
 		tv_danjia.setText(mallinfo.getPrice());
-		tv_qidingliang.setText(mallinfo.getQbnum());
+		if(Util.IsNull(mallinfo.getQbnum())){
+			tv_qidingliang.setText(mallinfo.getQbnum());
+		}else{
+			tv_qidingliang.setText("1");
+		}
+		
 		tv_xiaoliang.setText(mallinfo.getSales());
 		tv_kucun.setText(mallinfo.getAmount());
 		tv_chandi.setText(mallinfo.getAreaname());
