@@ -90,20 +90,7 @@ public class XinjianActivity extends BaseActivity{
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
 		}
-		adapter = new XinjianAdapter(context, xinjianlist);
-		lv.setAdapter(adapter);
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				intent=new Intent(context,XinJianInfoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("xinjianid",xinjianlist.get(arg2).getItemid());
-				startActivity(intent);
-			}
-		});
+
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
 
@@ -125,6 +112,20 @@ public class XinjianActivity extends BaseActivity{
 				if("200".equals(xinjianbean.getCode())){
 					//TODO	
 					xinjianlist=xinjianbean.getList();
+					adapter = new XinjianAdapter(context, xinjianlist);
+					lv.setAdapter(adapter);
+					lv.setOnItemClickListener(new OnItemClickListener() {
+						
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+								long arg3) {
+							// TODO Auto-generated method stub
+							intent=new Intent(context,XinJianInfoActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							intent.putExtra("xinjianid",xinjianlist.get(arg2).getItemid());
+							startActivity(intent);
+						}
+					});
 				}else{
 					Util.ShowToast(context, xinjianbean.getMsg());
 				}
