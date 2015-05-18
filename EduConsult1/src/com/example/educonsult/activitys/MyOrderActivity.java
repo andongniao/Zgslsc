@@ -52,7 +52,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 	private RelativeLayout rl_r;
 	private Intent intent;
 	private ThreadWithProgressDialog myPDT;
-	private int type,addtype,pag,index,scrolledX,scrolledY;
+	private int addtype,pag,index,scrolledX,scrolledY;
 	private String tag;
 	private UserBean userbean;
 	private ListOrderBean listbean;
@@ -99,7 +99,6 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		init = true;
 		userbean = MyApplication.mp.getUser();
 		pag = 1;
-		type=0;
 		step = 0;
 		ppage = 1;
 		tag = userbean.getAuthstr();
@@ -114,7 +113,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				add = 3;
 				ob = orderBean;
 				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+					myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -138,7 +137,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				init = false;
 				add = 5;
 				//				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
-				intent = new Intent(context,ApplyOrderActivity.class);
+				intent = new Intent(context,ApplyerFundActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("itemid", orderBean.getItemid());
 				intent.putExtra("statusid", orderBean.getItemid());
@@ -174,7 +173,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 						et_pass.setText("");
 						if(Util.detect(context)){
 
-							myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+							myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
 						}
 						else{
 							Util.ShowToast(context, R.string.net_is_eor);
@@ -203,7 +202,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				add= 1;
 				if(Util.detect(context)){
 					
-				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -357,18 +356,22 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.myorder_home_ll_all:
+			step = 0;
 			change(0);
 			break;
 		case R.id.myorder_home_ll_pay:
+			step = 1;
 			change(1);
 			break;
 		case R.id.myorder_home_ll_send:
 //			change(2);
 			break;
 		case R.id.myorder_home_ll_shouhuo:
+			step = 3;
 			change(2);
 			break;
 		case R.id.myorder_home_ll_comment:
+			step = 4;
 			change(3);
 			break;
 		case R.id.myorder_home_tv_isnull:
@@ -382,15 +385,15 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		for(int i=0;i<view_list.size();i++){
 			if(index==i){
 				view_list.get(i).setVisibility(View.VISIBLE);
-				if(i==0 ||i==1 || i==2){
-				type = i;
-				}else if(i==3){
-					type=4;
-				}
+//				if(i==0 ||i==1 || i==2){
+//				type = i;
+//				}else if(i==3){
+//					type=4;
+//				}
 				ttp = i;
 				init = true;
 				if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
+				myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -441,14 +444,14 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 
 	// 任务
 	public class RefeshData implements ThreadWithProgressDialogTask {
-		private int step;
+//		private int step;
 		private int page;
 		private String authstr;
 		private boolean init;
 
-		public RefeshData(boolean init,int step,int page,String authstr) {
+		public RefeshData(boolean init,int page,String authstr) {
 			this.init = init;
-			this.step = step;
+//			this.step = step;
 			this.page = page; 
 			this.authstr = authstr;
 		}
@@ -500,7 +503,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 						}
 						init = true;
 						if(Util.detect(context)){
-						myPDT.Run(context, new RefeshData(init,type,pag,tag),initdataing,false);//可取消
+						myPDT.Run(context, new RefeshData(init,pag,tag),initdataing,false);//可取消
 						}else{
 							Util.ShowToast(context, R.string.net_is_eor);
 						}
@@ -606,7 +609,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		if(isinit){
 			init = true;
 			if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(init,type,pag,tag),initdataing,false);//可取消
+			myPDT.Run(context, new RefeshData(init,pag,tag),initdataing,false);//可取消
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
