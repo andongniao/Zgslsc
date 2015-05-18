@@ -130,7 +130,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		shopbean=(ListShopBean)b.getSerializable("shopcarbean");
 		shoporder=(ListShopBean)b.getSerializable("shopcaroder");
 		money = b.getString("money");
-		
+
 		//		intent.putExtra("shopcartbundle", b);
 		//		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
 		//		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
@@ -284,12 +284,14 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 						Intent i= new Intent(context,LoginActivity.class);
 						startActivity(i);
 						finish();
-						
+
 					}else{
 						if(Util.IsNull(m)){
 							Util.ShowToast(context, m);
 						}
 					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
 			if(inttype==2){
@@ -298,44 +300,47 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 					Util.ShowToast(context, "Ö§¸¶³É¹¦");
 					ShopcartActivity.ischange=true;
 					finish();
-				}
-			}
-			if(inttype==0){ if(listAddressBean!=null){
-				String code = listAddressBean.getCode();
-				String m = listAddressBean.getMsg();
-				if("200".equals(code)){
-					addressBeans=listAddressBean.getList();
-					if(addressBeans.size()==0){
-						ll_add.setVisibility(View.VISIBLE);
-						ll_address.setVisibility(View.GONE);
-					}else{
-
-						for(int i=0;i<addressBeans.size();i++){
-							if("1".equals(addressBeans.get(i).getIsdefault())){
-								addressBean=addressBeans.get(i);
-							}
-						}
-						tv_shouhuoren.setText(addressBean.getTruename());
-						tv_shoujihao.setText(addressBean.getMobile());
-						tv_address.setText(addressBean.getAddress());
-
-					}
-				}else if("300".equals(code)){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					Intent i= new Intent(context,LoginActivity.class);
-					startActivity(i);
-					finish();
 				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
-					}
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
+			if(inttype==0){
+				if(listAddressBean!=null){
+					String code = listAddressBean.getCode();
+					String m = listAddressBean.getMsg();
+					if("200".equals(code)){
+						addressBeans=listAddressBean.getList();
+						if(addressBeans.size()==0){
+							ll_add.setVisibility(View.VISIBLE);
+							ll_address.setVisibility(View.GONE);
+						}else{
+
+							for(int i=0;i<addressBeans.size();i++){
+								if("1".equals(addressBeans.get(i).getIsdefault())){
+									addressBean=addressBeans.get(i);
+								}
+							}
+							tv_shouhuoren.setText(addressBean.getTruename());
+							tv_shoujihao.setText(addressBean.getMobile());
+							tv_address.setText(addressBean.getAddress());
+
+						}
+					}else if("300".equals(code)){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+					}else{
+						if(Util.IsNull(m)){
+							Util.ShowToast(context, m);
+						}
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}
-			else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
+
 			return true;
 		}
 
