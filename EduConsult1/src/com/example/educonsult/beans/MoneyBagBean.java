@@ -7,7 +7,7 @@ package com.example.educonsult.beans;
 public class MoneyBagBean extends BaseBean{
 	private String money;		//可以用的金额
 	private String username;
-	private int amount;			//体现中金额
+	private double amount;			//体现中金额
 	private String all_money;	//总金额
 	public String getMoney() {
 		return money;
@@ -21,10 +21,10 @@ public class MoneyBagBean extends BaseBean{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	public String getAll_money() {

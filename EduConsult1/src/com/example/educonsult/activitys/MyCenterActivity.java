@@ -248,7 +248,6 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("index", 4);
 			startActivity(intent);
-			Toast.makeText(context, "Test", 500).show();
 			break;
 		case R.id.mycenter_home_ll_order:
 			intent = new Intent(context,MyOrderActivity.class);

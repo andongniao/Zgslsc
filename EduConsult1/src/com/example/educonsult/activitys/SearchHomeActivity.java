@@ -263,7 +263,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 						myPDT.Run(context, new RefeshData(t,0,3,s),R.string.loding);//可取消
 					}*/
 				}else{
-					Toast.makeText(SearchHomeActivity.this, "error", 500).show();
+					Toast.makeText(SearchHomeActivity.this, "关键字不能为空", 500).show();
 					ishave = false;
 				}
 			}

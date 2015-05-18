@@ -37,7 +37,7 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-//		topRightLVisible();
+		//		topRightLVisible();
 		topRightRVisible();
 		topRightTGone();
 		rl_l = (RelativeLayout) getTopLightRl();
@@ -51,7 +51,7 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		init();
 		addlistener();
 		if(Util.detect(context)){
-		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
@@ -89,23 +89,23 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		tv_all = (TextView) findViewById(R.id.qianbao_tv_zonge);
 		tv_keyong = (TextView) findViewById(R.id.qianbao_tv_keyong);
 		tv_tixian = (TextView) findViewById(R.id.qianbao_tv_tixian);
-//		Util.SetRedNum(context, rl_l, 1);
+		//		Util.SetRedNum(context, rl_l, 1);
 	}
-	
+
 
 	@Override
 	public void onClick(View v) {
 		//Intent intent;
 		switch (v.getId()) {
 		case R.id.qianbao_ll_chaxun:
-//			intent = new Intent(this,MoneyQueryActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			//			intent = new Intent(this,MoneyQueryActivity.class);
+			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			startActivity(intent);
 			break;
 		case R.id.qianbao_ll_tixian:
-//			intent = new Intent(this,MoneyWithdrawalActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			//			intent = new Intent(this,MoneyWithdrawalActivity.class);
+			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			startActivity(intent);
 			break;
 
 		}
@@ -119,52 +119,52 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 	// 任务
-		public class RefeshData implements ThreadWithProgressDialogTask {
+	public class RefeshData implements ThreadWithProgressDialogTask {
 
-			public RefeshData() {
-			}
-
-			@Override
-			public boolean OnTaskDismissed() {
-				//任务取消
-//				Toast.makeText(context, "cancle", 1000).show();
-				return false;
-			}
-
-			@Override
-			public boolean OnTaskDone() {
-				//任务完成后
-				if(bagBean!=null){
-					if("200".equals(bagBean.getCode())){
-						tv_all.setText("￥"+bagBean.getAll_money());
-						tv_keyong.setText("￥"+bagBean.getMoney());
-						tv_tixian.setText("￥"+bagBean.getAmount());
-						
-					}else if("300".equals(bagBean.getCode())){
-						MyApplication.mp.setlogin(false);
-						Util.ShowToast(context, R.string.login_out_time);
-						Intent i= new Intent(context,LoginActivity.class);
-						startActivity(i);
-						finish();
-					}else{
-						
-					}
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
-				
-				
-				return true;
-			}
-
-			@Override
-			public boolean TaskMain() {
-				// 访问
-				Send s = new Send(context);
-				bagBean = s.getMoney(MyApplication.money_home, MyApplication.mp.getUser().getAuthstr());
-				
-				return true;
-			}
+		public RefeshData() {
 		}
-	
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(bagBean!=null){
+				if("200".equals(bagBean.getCode())){
+					tv_all.setText("￥"+bagBean.getAll_money());
+					tv_keyong.setText("￥"+bagBean.getMoney());
+					tv_tixian.setText("￥"+bagBean.getAmount());
+
+				}else if("300".equals(bagBean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
+				}else{
+
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+
+
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			Send s = new Send(context);
+			bagBean = s.getMoney(MyApplication.money_home, MyApplication.mp.getUser().getAuthstr());
+
+			return true;
+		}
+	}
+
 }

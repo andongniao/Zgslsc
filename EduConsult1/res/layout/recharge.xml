@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/base_hui" >
-    <ImageView 
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
         android:background="@color/home_hui"
@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -26,34 +27,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:visibility="gone"
             android:background="@drawable/ic_launcher" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical"
-            android:visibility="gone" >
-
-            <ImageView
-                android:id="@+id/recharge_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_launcher" />
-            <TextView
-                android:id="@+id/recharge_carid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/test"
-                android:textColor="@color/black" 
-                android:visibility="gone"/>
-        </LinearLayout>
 
         <TextView
+            android:id="@+id/recharge_tv_bankname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             android:layout_weight="1" />
 
         <ImageView

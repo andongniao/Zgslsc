@@ -650,9 +650,7 @@ public class Send {
 					bean.setMsg(msg);
 					bean.setCode(code);
 					return bean;
-
 				}
-
 			} catch (JSONException e) {
 				e.printStackTrace();
 				bean.setCode("500");

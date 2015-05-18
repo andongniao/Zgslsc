@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import android.text.TextUtils;
+
 /** 
  * 字符串操作工具包
  * @author liux (http://my.oschina.net/liux)
@@ -189,4 +191,23 @@ public class StringUtils
 		}catch(Exception e){}
 		return false;
 	}
+	
+	
+	/**
+	 * 处理得到的JSON php BOM情况
+	 * @param in
+	 * @return
+	 */
+	public static final String removeBOM(String data) {
+		if (TextUtils.isEmpty(data)) {
+		return data;
+		}
+
+		if (data.startsWith("\ufeff")) {
+		return data.substring(1);
+		} else {
+		return data;
+		}
+		}
+	
 }

@@ -31,11 +31,13 @@ import com.example.educonsult.beans.BanksBean;
 import com.example.educonsult.beans.BanksBranchBean;
 import com.example.educonsult.beans.BanksCityBean;
 import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.ChargeBankBean;
 import com.example.educonsult.beans.CouponBean;
 import com.example.educonsult.beans.ExpressBean;
 import com.example.educonsult.beans.ListBanksBean;
 import com.example.educonsult.beans.ListBanksBranch;
 import com.example.educonsult.beans.ListBanksCity;
+import com.example.educonsult.beans.ListChargeBankBean;
 import com.example.educonsult.beans.ListOrderCommit;
 import com.example.educonsult.beans.ListOrderWuliu;
 import com.example.educonsult.beans.ListProductBean;
@@ -48,6 +50,8 @@ import com.example.educonsult.beans.RefundInfoBean;
 import com.example.educonsult.beans.RefundInfoDetaileBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.ShopItemBean;
+import com.example.educonsult.beans.TnResultBean;
+import com.example.educonsult.tools.StringUtils;
 import com.example.educonsult.tools.Util;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -120,19 +124,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -202,19 +206,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -271,19 +275,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -338,19 +342,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -437,19 +441,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -512,19 +516,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -600,19 +604,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+			//			 
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -678,19 +682,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -757,19 +761,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -841,14 +845,14 @@ public class PostHttp {
 						mall = gson.fromJson(m.toString(), t);
 						int len = mall.size();
 						for(int i=0;i<len;i++){
-						ArrayList<CouponBean> l = new ArrayList<CouponBean>();
-						JSONObject ja = (JSONObject) m.get(i);
-						if(Util.IsNull(ja.getString("coupon"))){
-							Type tt = new TypeToken<ArrayList<CouponBean>>() {
-							}.getType();
-							l = gson.fromJson(m.toString(), tt);
-						}
-						mall.get(i).setCoupons(l);
+							ArrayList<CouponBean> l = new ArrayList<CouponBean>();
+							JSONObject ja = (JSONObject) m.get(i);
+							if(Util.IsNull(ja.getString("coupon"))){
+								Type tt = new TypeToken<ArrayList<CouponBean>>() {
+								}.getType();
+								l = gson.fromJson(m.toString(), tt);
+							}
+							mall.get(i).setCoupons(l);
 						}
 
 						ArrayList<ExpressBean>  expre = new ArrayList<ExpressBean>();
@@ -891,19 +895,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -966,19 +970,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -986,7 +990,7 @@ public class PostHttp {
 		}  
 	} 
 
-	
+
 
 	/**
 	 *  关闭订单
@@ -1036,19 +1040,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1103,28 +1107,28 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		}  
 	} 
-	
-	
-	
+
+
+
 	/**
 	 *  确认收款（卖家订单直接收取付款（卖家收钱操作））
 	 * @param itemid		订单ID
@@ -1173,19 +1177,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1246,19 +1250,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1335,19 +1339,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1392,12 +1396,12 @@ public class PostHttp {
 				if(Util.IsNull(strResult)){
 					obj = new JSONObject(strResult);
 					if("200".equals(obj.getString("code"))){
-					JSONObject data = obj.getJSONObject("data");
-					JSONArray send_types = data.getJSONArray("send_types");
-					Type t = new TypeToken<ArrayList<String>>() {
-					}.getType();
-					listtype  = gson.fromJson(send_types.toString(), t);
-					bean.setSend_time(data.getString("send_time"));
+						JSONObject data = obj.getJSONObject("data");
+						JSONArray send_types = data.getJSONArray("send_types");
+						Type t = new TypeToken<ArrayList<String>>() {
+						}.getType();
+						listtype  = gson.fromJson(send_types.toString(), t);
+						bean.setSend_time(data.getString("send_time"));
 					}
 					bean.setSend_types(listtype);
 					bean.setMsg(obj.getString("message"));
@@ -1414,19 +1418,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1495,19 +1499,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1570,19 +1574,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1677,19 +1681,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1756,19 +1760,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1834,19 +1838,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1914,19 +1918,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -1988,19 +1992,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -2008,11 +2012,11 @@ public class PostHttp {
 		}  
 	} 
 
-	
 
-	
 
-	
+
+
+
 	/**
 	 * 企业注册
 	 * @param regid			会员分组，企业会员6，养殖户5
@@ -2060,8 +2064,8 @@ public class PostHttp {
 		list.add(p10);
 		NameValuePair p11 = new BasicNameValuePair("post[telephone]",telephone);
 		list.add(p11);
-		
-		
+
+
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
@@ -2094,19 +2098,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -2115,7 +2119,7 @@ public class PostHttp {
 	} 
 
 
-	
+
 	/**
 	 * 
 	 * 养殖户注册
@@ -2182,7 +2186,7 @@ public class PostHttp {
 		list.add(ps2);
 		NameValuePair ps3 = new BasicNameValuePair("post_fields[tjr]",tjr);
 		list.add(ps3);
-		
+
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
@@ -2215,19 +2219,19 @@ public class PostHttp {
 			return bean;
 		} catch (ClientProtocolException e) {  
 			e.printStackTrace(); 
-			strResult = e.getMessage().toString();  
+
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (IOException e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			System.out.println("IO异常");
 			bean.setMsg(error);
 			bean.setCode("500");
 			return bean;
 		} catch (Exception e) {  
-			strResult = e.getMessage().toString();  
+
 			e.printStackTrace();  
 			bean.setMsg(error);
 			bean.setCode("500");
@@ -2235,10 +2239,176 @@ public class PostHttp {
 		}  
 	} 
 
-	
 
 
-/******************************************************************************************************************/
+
+	/**
+	 * 获取充值界面银行列表
+	 * @param authstr
+	 * @return
+	 */
+	public ListChargeBankBean getBanks(String authstr) {  
+		ListChargeBankBean bean = new ListChargeBankBean();
+		ArrayList<ChargeBankBean> li = new ArrayList<ChargeBankBean>();
+		String url = ServiceUrl.Base+"charge.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p = new BasicNameValuePair("action","pay");
+		list.add(p);
+		NameValuePair pl = new BasicNameValuePair("authstr",authstr);
+		list.add(pl);
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if("200".equals(obj.getString("code"))){
+							if(Util.IsNull(obj.getString("data"))){
+								JSONObject data = obj.getJSONObject("data");
+								@SuppressWarnings("unchecked")
+								Iterator<String> keys=data.keys();
+								while (keys.hasNext ())
+								{
+									ChargeBankBean b = new ChargeBankBean(); 
+									String k = (String) keys.next() + "";
+									b.setId(k);
+									b.setName(data.getString(k));
+									li.add(b);
+								}
+							}
+						}
+						bean.setList(li);
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}
+				}else{
+					bean.setMsg(error);
+					bean.setCode("500");
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	} 
+
+	/**
+	 * 获取Tn
+	 * @param authstr
+	 * @return
+	 */
+	public TnResultBean getTn(String bank,String amount,String authstr) {  
+		TnResultBean bean = new TnResultBean();
+		String url = ServiceUrl.Base+"charge.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p = new BasicNameValuePair("action","confirm");
+		list.add(p);
+		NameValuePair p1 = new BasicNameValuePair("bank",bank);
+		list.add(p1);
+		NameValuePair p2 = new BasicNameValuePair("amount",amount);
+		list.add(p2);
+		NameValuePair pl = new BasicNameValuePair("authstr",authstr);
+		list.add(pl);
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+//				StringUtils.removeBOM(strResult);
+//				if(strResult != null && strResult.startsWith("\ufeff"))
+//				{
+//					strResult =  strResult.substring(1);
+//					strResult.replace("\\\\u", "");
+//				}
+				if(Util.IsNull(strResult)){
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if(obj.getInt("code")==200){
+							bean.setTn(obj.getString("tn"));
+						}else{
+							bean.setTn("");
+						}
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(""+obj.getInt("code"));
+					}
+				}else{
+					bean.setMsg(error);
+					bean.setCode("500");
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	} 
+
+
+
+
+
+	/******************************************************************************************************************/
 
 	public HttpClient getHttpClient() {  
 

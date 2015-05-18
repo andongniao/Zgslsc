@@ -188,10 +188,6 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 						applyerFundAdapter=new CApplyerFundAdapter(context, rebean);
 						listview.setAdapter(applyerFundAdapter);
 						}
-						
-						
-						
-						
 					}else if("300".equals(rebean.getCode())){
 						MyApplication.mp.setlogin(false);
 						Util.ShowToast(context, R.string.login_out_time);
