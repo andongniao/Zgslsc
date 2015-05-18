@@ -58,16 +58,16 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void addlistener() {
-		rl_l.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				intent = new Intent(context,XinjianActivity.class);
-				intent.putExtra("flag", "qianbao");
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
-		});
+//		rl_l.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				intent = new Intent(context,XinjianActivity.class);
+//				intent.putExtra("flag", "qianbao");
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+//			}
+//		});
 		rl_r.setOnClickListener(new OnClickListener() {
 
 			@Override

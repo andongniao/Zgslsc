@@ -37,8 +37,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_launcher" />
+                android:layout_marginRight="10dp"/>
 
             <ImageView
                 android:layout_width="5dp"
@@ -73,7 +72,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="@string/test" />
+                android:textSize="14dp"
+                android:text="@string/test" 
+                />
 
             <ImageView
                 android:layout_width="5dp"
@@ -108,7 +109,9 @@
                 android:id="@+id/myinfo_ll_mycard_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/test" />
+                android:text="@string/test" 
+                android:textColor="@color/black"
+                android:textSize="14dp"/>
 
             <ImageView
                 android:layout_width="5dp"
@@ -185,7 +188,9 @@
                     android:id="@+id/myinfo_tv_live"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test" />
+                    android:text="@string/test"
+                    android:textColor="@color/black"
+                android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="5dp"
@@ -220,8 +225,9 @@
                     android:id="@+id/myinfo_tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/test" 
                     android:textColor="@color/black"
-                    android:text="@string/test" />
+                android:textSize="14dp"/>
 
                 <ImageView
                     android:layout_width="5dp"
@@ -245,19 +251,22 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="@string/myinfo_tvdiqu"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black" 
+                    android:textSize="14dp"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <TextView
+               
+                <TextView 
                     android:id="@+id/myinfo_tv_qq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/test" 
                     android:textColor="@color/black"
-                    android:text="@string/test" />
+                    />
 
                 <ImageView
                     android:layout_width="5dp"
@@ -362,8 +371,9 @@
                     android:id="@+id/myinfo_tv_gongsim"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/test" 
                     android:textColor="@color/black"
-                    android:text="@string/test" />
+                android:textSize="14dp"/>
 
                 <ImageView
                     android:layout_width="5dp"
@@ -398,8 +408,9 @@
                     android:id="@+id/myinfo_tv_gongsitype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/test" 
                     android:textColor="@color/black"
-                    android:text="@string/test" />
+                android:textSize="14dp"/>
 
                 <ImageView
                     android:layout_width="5dp"
@@ -434,8 +445,9 @@
                     android:id="@+id/myinfo_tv_gongsid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/test" 
                     android:textColor="@color/black"
-                    android:text="@string/test" />
+                android:textSize="14dp"/>
 
                 <ImageView
                     android:layout_width="5dp"
@@ -478,7 +490,9 @@
                     android:id="@+id/myinfo_two_tv_rname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test" />
+                    android:text="@string/test" 
+                    android:textColor="@color/black"
+                android:textSize="14dp"/>
 
                 <ImageView
                     android:layout_width="5dp"
@@ -513,7 +527,9 @@
                     android:id="@+id/myinfo_two_tv_diqu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test" />
+                    android:text="@string/test" 
+                    android:textColor="@color/black"
+                android:textSize="14dp"/>
 
                 <ImageView
                     android:layout_width="5dp"
@@ -546,7 +562,9 @@
                     android:gravity="right|center_vertical"
                     android:hint="@string/test"
                     android:singleLine="true"
-                    android:background="@color/white" />
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="5dp"
@@ -579,7 +597,9 @@
                     android:id="@+id/myinfo_two_tv_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test" />
+                    android:text="@string/test" 
+                    android:textColor="@color/black"
+                android:textSize="14dp"/>
 
                 <ImageView
                     android:layout_width="5dp"
@@ -613,7 +633,9 @@
                     android:id="@+id/myinfo_two_tv_pingzhong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test" />
+                    android:text="@string/test"
+                    android:textColor="@color/black"
+                android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="5dp"
@@ -647,7 +669,9 @@
                     android:id="@+id/myinfo_two_tv_usesiliao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test" />
+                    android:text="@string/test"
+                    android:textColor="@color/black"
+                android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="5dp"
@@ -682,7 +706,9 @@
                     android:hint="@string/test"
                     android:inputType="number"
                     android:singleLine="true"
-                    android:background="@color/white" />
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="5dp"
@@ -717,7 +743,9 @@
                     android:gravity="right|center_vertical"
                     android:hint="@string/test"
                     android:singleLine="true" 
-                    android:background="@color/white" />
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="5dp"
@@ -751,7 +779,9 @@
                     android:gravity="right|center_vertical"
                     android:hint="@string/test"
                     android:singleLine="true" 
-                    android:background="@color/white"/>
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                android:textSize="14dp"/>
                 <ImageView
                 android:layout_width="5dp"
                 android:layout_height="10dp"
@@ -785,7 +815,9 @@
                     android:hint="@string/test"
                     android:singleLine="true"
                     android:inputType="number"
-                    android:background="@color/white"/>
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                android:textSize="14dp"/>
                 <ImageView
                 android:layout_width="5dp"
                 android:layout_height="10dp"
@@ -818,7 +850,9 @@
                     android:id="@+id/myinfo_two_tv_person"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test" />
+                    android:text="@string/test"
+                    android:textColor="@color/black"
+                android:textSize="14dp" />
 
                 <ImageView
                     android:layout_width="5dp"

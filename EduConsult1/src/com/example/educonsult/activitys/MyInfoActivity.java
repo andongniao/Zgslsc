@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -174,7 +175,6 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
 		
-		
 		if(bean.getType()==1){
 			ll_qiye.setVisibility(View.GONE);
 			ll_geren.setVisibility(View.VISIBLE);
@@ -275,13 +275,14 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 							t_rname.setText(centerbean.getTruename());
 							t_diqu.setText(centerbean.getAreaid());
 							e_dizhi.setText(centerbean.getXxdz());
-							e_product.setText(centerbean.getMobile());
+							t_phone.setText(centerbean.getMobile());
 							t_pingzhong.setText(centerbean.getYzpz());
 							t_siliao.setText(centerbean.getSyzl());
 							e_computer.setText(centerbean.getXsycj());
 							e_price.setText(centerbean.getKjsjw());
 							e_product.setText(centerbean.getAvatar());///??¼±Ðè²úÆ·
 							t_person.setText(centerbean.getTjr());
+							
 							e_num.setText("");//
 						}else if(bean.getType()==0){
 							tv_level.setText(centerbean.getVip());

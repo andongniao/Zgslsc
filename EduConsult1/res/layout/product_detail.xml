@@ -121,8 +121,8 @@
                         android:layout_marginLeft="3dp"
                         android:text="@string/product_detaile_dw_qiding"
                         android:textColor="@color/black"
-                        android:visibility="gone"
-                        android:textSize="12dp" />
+                        android:textSize="12dp" 
+                        android:visibility="gone"/>
                 </LinearLayout>
 
                 <TextView
