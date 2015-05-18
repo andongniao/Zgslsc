@@ -63,7 +63,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 	private BaseBean baseBean;
 	private String initdataing,password;
 	private View v_pop;
-	private int ttp,ppage;
+	private int ttp,ppage,step;
 	private Handler handler;
 	public static boolean isinit;
 	private EditText et_pass;
@@ -100,6 +100,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		userbean = MyApplication.mp.getUser();
 		pag = 1;
 		type=0;
+		step = 0;
 		ppage = 1;
 		tag = userbean.getAuthstr();
 		initdataing = "更新数据中...";
@@ -264,17 +265,17 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		view_list.add(tv_show_pay);
 
 		tv_show_send = (TextView) findViewById(R.id.myorder_home_tv_send_show);
-		view_list.add(tv_show_send);
+//		view_list.add(tv_show_send);
 		tv_show_shouhuo = (TextView) findViewById(R.id.myorder_home_tv_shouhuo_show);
 		view_list.add(tv_show_shouhuo);
 
-		if(userbean.getType()==0){
-			ll_send.setVisibility(View.VISIBLE);
-			ll_shouhuo.setVisibility(View.GONE);
-		}else{
-			ll_shouhuo.setVisibility(View.VISIBLE);
-			ll_send.setVisibility(View.GONE);
-		}
+//		if(userbean.getType()==0){
+//			ll_send.setVisibility(View.VISIBLE);
+//			ll_shouhuo.setVisibility(View.GONE);
+//		}else{
+//			ll_shouhuo.setVisibility(View.VISIBLE);
+//			ll_send.setVisibility(View.GONE);
+//		}
 
 		view_list.add(tv_show_comment);
 		v_pop = LayoutInflater.from(context).inflate(R.layout.money_password, null);
@@ -362,13 +363,13 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 			change(1);
 			break;
 		case R.id.myorder_home_ll_send:
-			change(2);
+//			change(2);
 			break;
 		case R.id.myorder_home_ll_shouhuo:
-			change(3);
+			change(2);
 			break;
 		case R.id.myorder_home_ll_comment:
-			change(4);
+			change(3);
 			break;
 		case R.id.myorder_home_tv_isnull:
 			ExampleActivity.setCurrentTab(0);
@@ -381,7 +382,11 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		for(int i=0;i<view_list.size();i++){
 			if(index==i){
 				view_list.get(i).setVisibility(View.VISIBLE);
+				if(i==0 ||i==1 || i==2){
 				type = i;
+				}else if(i==3){
+					type=4;
+				}
 				ttp = i;
 				init = true;
 				if(Util.detect(context)){

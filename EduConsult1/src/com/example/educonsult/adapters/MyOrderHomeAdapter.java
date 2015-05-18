@@ -16,7 +16,6 @@ import com.example.educonsult.R;
 import com.example.educonsult.activitys.MyOrderActivity.Myorder;
 import com.example.educonsult.beans.OrderBean;
 import com.example.educonsult.myviews.MyListview;
-import com.example.educonsult.tools.Util;
 
 public class MyOrderHomeAdapter extends BaseAdapter{
 	private Context context;
@@ -27,6 +26,7 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 	private int n;
 	private Myorder myorder;
 	private int type;
+	private OrderBean o;
 
 	public MyOrderHomeAdapter(Context context,ArrayList<OrderBean>list,Myorder myorder){
 		this.context = context;
@@ -82,7 +82,7 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		final OrderBean o = list.get(position);
+		o = list.get(position);
 		item.tv_title.setText(o.getCompany());
 		item.tv_time.setText(o.getAddtime());
 		item.tv_statu.setText(o.getStatus());
@@ -93,25 +93,56 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 		adapter = new MyOrderLvAdapter(context,o,position,myorder);
 		item.lv.setAdapter(adapter);
 		//		item.tv_day.setText("距离确认收货还有2天");
+		item.btn_l.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				OrderBean b = list.get(position);
+				int t = Integer.parseInt(b.getStatusid());
+				if(t == 1){
+					myorder.Order_Canale(b);
+				}else if(t==2){
+					myorder.Order_Fahuo(b);
+				}else if(t==3){
+					myorder.Order_Repay(b);
+				}
+			}
+		});
+		item.btn_r.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				OrderBean b = list.get(position);
+				int t = Integer.parseInt(b.getStatusid());
+				if(t == 1){
+					myorder.Order_Pay(b);
+				}else if(t==2){
+					myorder.Order_Canale(b);
+				}else if(t==3){
+					myorder.Order_Refund(b);
+				}else if(t==4){
+					if(b.getIscomment()==0){
+						myorder.Order_commit(b);
+					}
+				}
+			}
+		});
 		type = Integer.parseInt(o.getStatusid());
 		if(type==1){
 			item.btn_l.setVisibility(View.VISIBLE);
 			item.btn_r.setVisibility(View.VISIBLE);
 			item.btn_r.setText("立即付款");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.white));
-			item.btn_r.setBackgroundResource(R.color.orn);
+			item.btn_r.setBackgroundResource(R.drawable.orn_bg_line);
 			item.btn_l.setText("取消订单");
 			item.btn_l.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_l.setBackgroundResource(R.drawable.order_et_bg_line);
 		}else if(type == 2){
-			item.btn_l.setVisibility(View.VISIBLE);
+			item.btn_l.setVisibility(View.GONE);
 			item.btn_r.setVisibility(View.VISIBLE);
 			item.btn_r.setText("关闭交易");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
-			item.btn_l.setVisibility(View.GONE);
 			if(MyApplication.mp.getUser().getType()==0){
-//				item.btn_l.setVisibility(View.VISIBLE);
+				//				item.btn_l.setVisibility(View.VISIBLE);
 				item.btn_l.setText("确认发货");
 				item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 				item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
@@ -145,34 +176,7 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 			item.btn_l.setVisibility(View.GONE);
 			item.btn_r.setVisibility(View.GONE);
 		}
-		item.btn_l.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(type == 1){
-					myorder.Order_Canale(o);
-				}else if(type==2){
-					myorder.Order_Fahuo(o);
-				}else if(type==3){
-					myorder.Order_Repay(o);
-				}
-			}
-		});
-		item.btn_r.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(type == 1){
-					myorder.Order_Pay(o);
-				}else if(type==2){
-					myorder.Order_Canale(o);
-				}else if(type==3){
-					myorder.Order_Refund(o);
-				}else if(type==4){
-					if(o.getIscomment()==0){
-						myorder.Order_commit(o);
-					}
-				}
-			}
-		});
+
 
 		return convertView;
 	}
