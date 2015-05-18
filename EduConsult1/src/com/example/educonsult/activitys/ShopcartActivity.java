@@ -48,8 +48,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private ImageView iv_top_t;
 	private RelativeLayout rl_r;
 	private UserBean bean;
-	private ListShopBean shopbean;
-	private ArrayList<ShopBean> shoplist;
+	private ListShopBean shopbean,shopbean2;
+	private ArrayList<ShopBean> shoplist,shoplist2;
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean besebean;
 	private boolean islist,clearb;
@@ -95,7 +95,9 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		bean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
 		//list = new ArrayList<ShopBean>();
-
+//		shoplist2=new ArrayList<ShopBean>();
+		
+		shopbean2=new ListShopBean();
 		lv = (ListView) findViewById(R.id.shopcart_home_lv);
 		ll_isnull = (LinearLayout) findViewById(R.id.shopcart_home_ll_isnull);
 		ll_jeisuan = (LinearLayout) findViewById(R.id.shopcart_home_ll_show);
@@ -110,7 +112,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void click(boolean b,int index,int postion) {
 				inttype=1;
-
 				clearb=b;
 				clearindex=index;
 				clearposition=postion;
@@ -118,14 +119,15 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 				}*/
 
-				//				
+				//	
+				
 				ShopBean s = (ShopBean) list.get(clearindex);
 				int num = 0;
 				if(clearposition!=-1){
 					ShopItemBean bb = s.getMall().get(clearposition);
 					bb.setIsclick(clearb);
 					for(int i=0;i<s.getMall().size();i++){
-						ShopItemBean ba = (ShopItemBean) s.getMall().get(i);;
+						ShopItemBean ba = (ShopItemBean) s.getMall().get(i);
 						if(ba.isIsclick()){
 							num+=1;
 						}
@@ -161,7 +163,20 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					cl = 1;
 					cb_all.setChecked(false);
 				}
-				Toast.makeText(context, ""+len, 200).show();
+				sum=0;
+				int i_num;
+				for(int i=0;i<list.size();i++){
+					for(int j=0;j<list.get(i).getMall().size();j++){
+						if(list.get(i).getMall().get(j).isIsclick()){
+							
+							i_num=list.get(i).getMall().get(j).getNum();
+							i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
+							sum=i_num*i_price+sum;
+						}
+					}
+				}
+				tv_heji.setText("￥"+sum);
+				//Toast.makeText(context, ""+len, 200).show();
 				//Util.ShowToast(context,"清空购物车");
 
 
@@ -181,9 +196,12 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				int i_num;
 				for(int f=0;f<list.size();f++){
 					for(int j=0;j<list.get(f).getMall().size();j++){
-						i_num=list.get(f).getMall().get(j).getNum();
-						i_price=Float.parseFloat(list.get(f).getMall().get(j).getPrice());
-						sum=i_num*i_price+sum;
+						if(list.get(f).getMall().get(j).isIsclick()){
+
+							i_num=list.get(f).getMall().get(j).getNum();
+							i_price=Float.parseFloat(list.get(f).getMall().get(j).getPrice());
+							sum=i_num*i_price+sum;
+						}
 					}
 				}
 				tv_heji.setText("￥"+sum);
@@ -199,9 +217,12 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				int i_num;
 				for(int f=0;f<list.size();f++){
 					for(int j=0;j<list.get(f).getMall().size();j++){
-						i_num=list.get(f).getMall().get(j).getNum();
-						i_price=Float.parseFloat(list.get(f).getMall().get(j).getPrice());
-						sum=i_num*i_price+sum;
+						if(list.get(f).getMall().get(j).isIsclick()){
+
+							i_num=list.get(i).getMall().get(j).getNum();
+							i_price=Float.parseFloat(list.get(f).getMall().get(j).getPrice());
+							sum=i_num*i_price+sum;
+						}
 					}
 				}
 				tv_heji.setText("￥"+sum);
@@ -211,6 +232,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				deposition=postion;
 				if(Util.detect(context)){
 					myPDT.Run(context, new deleteRefeshData(list,postion,index),R.string.loding);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 
 			}
@@ -257,8 +280,24 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.shopcart_home_tv_jiesuan:
 			inttype=3;
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+			shoplist2=new ArrayList<ShopBean>();
+			for(int i=0;i<shopbean.getList().size();i++){
+				if(shopbean.getList().get(i).isIsclick()){
+					shoplist2.add(shopbean.getList().get(i));
+				}
+			}
+			shopbean2.setList(shoplist2);
+			if(shoplist2!=null&&shoplist2.size()>=1){
+				
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}else {
+				Util.ShowToast(context, "请选择物品！");
+				
+				
 			}
 
 			break;
@@ -324,15 +363,15 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				//					i_price=Float.parseFloat(s.getMall().get(i).getPrice());
 				//					sum=sum+i_num*i_price;
 				//				}
-				int i_num;
-				for(int i=0;i<list.size();i++){
-					for(int j=0;j<list.get(i).getMall().size();j++){
-						i_num=list.get(i).getMall().get(j).getNum();
-						i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
-						sum=i_num*i_price+sum;
-					}
-				}
-				tv_heji.setText("￥"+sum);
+//				int i_num;
+//				for(int i=0;i<list.size();i++){
+//					for(int j=0;j<list.get(i).getMall().size();j++){
+//						i_num=list.get(i).getMall().get(j).getNum();
+//						i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
+//						sum=i_num*i_price+sum;
+//					}
+//				}
+//				tv_heji.setText("￥"+sum);
 			}else{
 				ll_jeisuan.setVisibility(View.GONE);
 				ll_isnull.setVisibility(View.VISIBLE);
@@ -457,7 +496,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			}else if(inttype==1){
 				besebean=s.CartClear(bean.getAuthstr());
 			}else if(inttype==3){
-				querenOrderBean=p.Jiesuan(shopbean, bean.getAuthstr());
+				querenOrderBean=p.Jiesuan(shopbean2, bean.getAuthstr());
 			}
 
 			return true;
@@ -484,7 +523,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						Bundle b=new Bundle();
 						b.putSerializable("shopcaroder", listShopBean);
-						b.putSerializable("shopcarbean", shopbean);
+						b.putSerializable("shopcarbean", shopbean2);
 
 						b.putString("money", tv_heji.getText().toString());
 						//						intent.putExtra("shopcaroder", listShopBean);
@@ -612,6 +651,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			if(Util.detect(context)){
 				inttype=0;
 				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			ischange =false;
 		}

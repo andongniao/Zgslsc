@@ -301,7 +301,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			}
 		});
 		tv_title.setText(mallinfo.getKeyword());
-		if(!"".equals(mallinfo.getPrice2())){
+		if(!"".equals(mallinfo.getPrice2())&& mallinfo.getPrice2()!=null){
+			
 			tv_shangcheng.setText(mallinfo.getPrice2());
 		}else{
 			tv_shangcheng.setText(mallinfo.getPrice());
@@ -324,9 +325,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			ll_nobuy.setVisibility(View.GONE);
 			ll_buy.setVisibility(View.VISIBLE);
 			try {
-				b_l.setImageBitmap(Util.getBitmapForNet(buyedlist.get(0).getThumb()));
-				b_t.setImageBitmap(Util.getBitmapForNet(buyedlist.get(1).getThumb()));
-				b_r.setImageBitmap(Util.getBitmapForNet(buyedlist.get(2).getThumb()));
+//				b_l.setImageBitmap(Util.getBitmapForNet(buyedlist.get(0).getThumb()));
+//				b_t.setImageBitmap(Util.getBitmapForNet(buyedlist.get(1).getThumb()));
+//				b_r.setImageBitmap(Util.getBitmapForNet(buyedlist.get(2).getThumb()));
+				Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
+				Util.Getbitmap(b_r, buyedlist.get(1).getThumb());
+				Util.Getbitmap(b_r, buyedlist.get(2).getThumb());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -341,9 +345,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		if(recommend.size()!=0){
 
 			try {
-				t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
-				t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
-				t_r.setImageBitmap(Util.getBitmapForNet(recommend.get(2).getThumb()));
+//				t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
+//				t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
+//				t_r.setImageBitmap(Util.getBitmapForNet(recommend.get(2).getThumb()));
+				Util.Getbitmap(t_l, recommend.get(0).getThumb());
+				Util.Getbitmap(t_t, recommend.get(1).getThumb());
+				Util.Getbitmap(t_r, recommend.get(2).getThumb());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

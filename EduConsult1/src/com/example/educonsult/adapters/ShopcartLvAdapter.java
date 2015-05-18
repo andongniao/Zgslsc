@@ -33,7 +33,7 @@ import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 public class ShopcartLvAdapter extends BaseAdapter{
-	private Context context;
+	private Context context;	
 	private ArrayList<ShopBean>list;
 	private LayoutInflater inflater;
 	private Item item;
@@ -151,12 +151,13 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		float i_price=Float.parseFloat(b.getPrice());
 		float i_allmoney=i_num*i_price;
 		item.tv_zongjia.setText("гд"+i_allmoney);
-		try {
-			item.iv_ic.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Util.Getbitmap(item.iv_ic, b.getThumb());
+//		try {
+//			item.iv_ic.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		return convertView;
 	}

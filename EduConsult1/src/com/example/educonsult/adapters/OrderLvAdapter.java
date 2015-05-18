@@ -50,7 +50,7 @@ public class OrderLvAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list!=null?list.size():0;
+		return list!=null?list.get(index).getMall().size():0;
 	}
 
 	@Override
@@ -99,12 +99,13 @@ public class OrderLvAdapter extends BaseAdapter{
 		float i_price=Float.parseFloat(b.getPrice());
 		float i_allmoney=i_num*i_price;
 		item.tv_zongjia.setText("гд"+i_allmoney);
-		try {
-			item.iv.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Util.Getbitmap(item.iv, b.getThumb());
+//		try {
+////			item.iv.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		coupons=b.getCoupons();
 		if(coupons!=null&&coupons.size()>=0){
 			item.lin.setOnClickListener(new OnClickListener() {
