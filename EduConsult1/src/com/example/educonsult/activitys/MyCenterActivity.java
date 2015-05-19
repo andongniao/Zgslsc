@@ -240,13 +240,13 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		case R.id.mycenter_home_ll_shouhuo:
 			intent = new Intent(context,MyOrderActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("index", 3);
+			intent.putExtra("index", 2);
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_pingjia:
 			intent = new Intent(context,MyOrderActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("index", 4);
+			intent.putExtra("index", 3);
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_order:

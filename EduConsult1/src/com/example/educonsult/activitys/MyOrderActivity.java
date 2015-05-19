@@ -387,11 +387,11 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		for(int i=0;i<view_list.size();i++){
 			if(index==i){
 				view_list.get(i).setVisibility(View.VISIBLE);
-//				if(i==0 ||i==1 || i==2){
-//				type = i;
-//				}else if(i==3){
-//					type=4;
-//				}
+				if(i==0 ||i==1){
+					step = i;
+				}else if(i==2 ||i==3){
+					step=i+1;
+				}
 				ttp = i;
 				init = true;
 				if(Util.detect(context)){
