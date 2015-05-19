@@ -31,6 +31,7 @@ import com.example.educonsult.adapters.MyOrderHomeAdapter;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListOrderBean;
 import com.example.educonsult.beans.OrderBean;
+import com.example.educonsult.beans.PayBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.xlistview.XListView;
 import com.example.educonsult.myviews.xlistview.XListView.IXListViewListener;
@@ -61,6 +62,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 	private int add;//1关闭订单 2买家支付 3确认收货（确认支付）4确认发货5申请退款6评价订单
 	private PopupWindow popwindow;
 	private BaseBean baseBean;
+	private PayBean paybean;
 	private String initdataing,password;
 	private View v_pop;
 	private int ttp,ppage,step;
@@ -491,13 +493,20 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 					lv.setAdapter(adapter);	
 				}
 			}else{
-				if(baseBean!=null){
-					if("200".equals(baseBean.getCode())){
+				if(paybean!=null){
+					if("200".equals(paybean.getCode())){
 
 						if(add==1){
 							Util.ShowToast(context, "关闭成功");
 						}else if(add==2){
+							if("0".equals(paybean.getType())){
 							Util.ShowToast(context, "支付成功");
+							}else{
+								Util.ShowToast(context, paybean.getMsg());
+								intent = new Intent(context,RechargeActivity.class);
+								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								startActivity(intent);
+							}
 						}else if(add==3){
 							Util.ShowToast(context, "确认成功");	
 						}
@@ -546,7 +555,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				if(add==1){
 					baseBean = p.Order_close(ob.getItemid(), authstr);
 				}else if(add==2){
-					baseBean = p.PayOrder(ob.getItemid(), ob.getCoupons(), authstr, password);
+					paybean = p.PayOrder(ob.getItemid(), ob.getCoupons(), authstr, password);
 				}else if(add==3){
 					baseBean = p.Order_confirmpay(ob.getItemid(), authstr);
 				}

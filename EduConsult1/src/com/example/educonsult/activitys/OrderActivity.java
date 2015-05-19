@@ -34,6 +34,7 @@ import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListAddressBean;
 import com.example.educonsult.beans.ListOrderCommit;
 import com.example.educonsult.beans.ListShopBean;
+import com.example.educonsult.beans.PayBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.PostHttp;
@@ -69,7 +70,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private Button b_no,b_yes;
 	private ListShopBean shopbean,shoporder;
 	private ThreadWithProgressDialog myPDT;
-	private BaseBean baseBean;
+	private PayBean baseBean;
 	private UserBean userBean;
 	private ListOrderCommit listOrderCommit;
 	private int inttype;
@@ -186,13 +187,13 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			startActivity(id);
 			break;
 		case R.id.order_tv_ok:
-//			inttype=1;
-//			if(Util.detect(context)){
-//				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
-//			}else{
-//				Util.ShowToast(context, R.string.net_is_eor);
-//			}
-			startActivity(new Intent(context,RechargeActivity.class));
+			inttype=1;
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			//			startActivity(new Intent(context,RechargeActivity.class));
 			break;
 		case R.id.money_password_no:
 
@@ -234,7 +235,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 					String code = listOrderCommit.getCode();
 					String m = listOrderCommit.getMsg();
 					if("200".equals(code)){
-						//					
+						ShopcartActivity.ischange=true;
 						setpopuwindow();
 						//finish();
 					}else if("300".equals(code)){
@@ -256,9 +257,25 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			if(inttype==2){
 
 				if(baseBean!=null){
-					Util.ShowToast(context, "支付成功");
-					ShopcartActivity.ischange=true;
-					finish();
+					if("200".equals(baseBean.getCode())){
+						if("0".equals(baseBean.getType())){
+							Util.ShowToast(context, "支付成功");
+							finish();
+						}else{
+							Util.ShowToast(context, baseBean.getMsg());
+							intent = new Intent(context,RechargeActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+						}
+					}else if("300".equals(baseBean.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						intent = new Intent(context,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}else{
+						Util.ShowToast(context, baseBean.getMsg());
+					}
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -279,9 +296,11 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 									addressBean=addressBeans.get(i);
 								}
 							}
-							tv_shouhuoren.setText(addressBean.getTruename());
-							tv_shoujihao.setText(addressBean.getMobile());
-							tv_address.setText(addressBean.getAddress());
+							if(addressBean!=null){
+								tv_shouhuoren.setText(addressBean.getTruename());
+								tv_shoujihao.setText(addressBean.getMobile());
+								tv_address.setText(addressBean.getAddress());
+							}
 
 						}
 					}else if("300".equals(code)){
@@ -313,7 +332,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 
 				listOrderCommit=p.CommitOrder(shopbean, userBean.getAuthstr());
 			}else if(inttype==2){
-
 				baseBean=p.PayOrder(listOrderCommit,userBean.getAuthstr() , strpass);
 			}else if(inttype==0){
 				Send s=new Send(context);
@@ -337,7 +355,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		et_pass=(EditText)v_fenlei.findViewById(R.id.money_password_edpassword);
 		b_no=(Button)v_fenlei.findViewById(R.id.money_password_no);
 		b_yes=(Button)v_fenlei.findViewById(R.id.money_password_yes);
-
 		tv_allmoney.setText(money);
 		b_no.setOnClickListener(new OnClickListener() {
 
@@ -351,6 +368,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 
 			@Override
 			public void onClick(View v) {
+				strpass = et_pass.getText().toString();
 				inttype=2;
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消

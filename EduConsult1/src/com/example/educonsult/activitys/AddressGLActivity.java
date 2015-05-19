@@ -335,6 +335,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 						}else if(num.equals("0")){
 							Util.ShowToast(context, "ÐÞ¸Ä³É¹¦£¡");
 						}
+						OrderActivity.isinit = true;
 						AddressActivity.isinit = true;
 						finish();
 					}else if("300".equals(beanresult.getCode())){

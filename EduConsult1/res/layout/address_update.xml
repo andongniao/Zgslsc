@@ -80,6 +80,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
+                android:textCursorDrawable="@null"
                 android:textColor="@color/black" 
                 android:background="@color/base_hui"
                 android:singleLine="true"/>
@@ -105,6 +106,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
+                android:textCursorDrawable="@null"
                 android:textColor="@color/black"
                 android:background="@color/base_hui"
                 android:singleLine="true" />
@@ -133,6 +135,7 @@
                 android:textColor="@color/black"
                 android:background="@color/base_hui"
                 android:singleLine="true"
+                android:textCursorDrawable="@null"
                 android:inputType="number" />
 
             <TextView
@@ -159,6 +162,7 @@
                 android:textColor="@color/black"
                 android:background="@color/base_hui"
                 android:singleLine="true"
+                android:textCursorDrawable="@null"
                 android:inputType="number" />
 
             <TextView

@@ -44,6 +44,7 @@ import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.OrderCommitBean;
 import com.example.educonsult.beans.OrderDetaileBean;
+import com.example.educonsult.beans.PayBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.QuerenOrderBean;
 import com.example.educonsult.beans.RefundInfoBean;
@@ -386,7 +387,7 @@ public class PostHttp {
 			key = "category";
 			break;
 		}
-		String url = ServiceUrl.Base+"fields.php";
+		String url = ServiceUrl.Base+"search.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p = new BasicNameValuePair("action",key);
 		list.add(p);
@@ -1708,8 +1709,8 @@ public class PostHttp {
 	 * @param password	password
 	 * @return
 	 */
-	public BaseBean PayOrder(ListOrderCommit lsb,String authstr,String password) {  
-		BaseBean bean = new BaseBean();
+	public PayBean PayOrder(ListOrderCommit lsb,String authstr,String password) {  
+		PayBean bean = new PayBean();
 		ArrayList<OrderCommitBean> listshop = lsb.getList();
 		String url = ServiceUrl.Base+"trade.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
@@ -1744,8 +1745,9 @@ public class PostHttp {
 				if(Util.IsNull(strResult)){
 					obj = new JSONObject(strResult);
 					if(obj!=null){
-						//						if("200".equals(obj.getString("code"))){
-						//						}
+						if("200".equals(obj.getString("code"))){
+							bean.setType(obj.getString("type"));
+						}
 						bean.setMsg(obj.getString("message"));
 						bean.setCode(obj.getString("code"));
 					}
@@ -1790,8 +1792,8 @@ public class PostHttp {
 	 * @param password		password
 	 * @return
 	 */
-	public BaseBean PayOrder(String trade,String coupon,String authstr,String password) {  
-		BaseBean bean = new BaseBean();
+	public PayBean PayOrder(String trade,String coupon,String authstr,String password) {  
+		PayBean bean = new PayBean();
 		String url = ServiceUrl.Base+"trade.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p = new BasicNameValuePair("action","confirm");
@@ -1822,8 +1824,9 @@ public class PostHttp {
 				if(Util.IsNull(strResult)){
 					obj = new JSONObject(strResult);
 					if(obj!=null){
-						//						if("200".equals(obj.getString("code"))){
-						//						}
+						if("200".equals(obj.getString("code"))){
+							bean.setType(obj.getString("type"));
+						}
 						bean.setMsg(obj.getString("message"));
 						bean.setCode(obj.getString("code"));
 					}
@@ -2356,12 +2359,12 @@ public class PostHttp {
 			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
 				/* ¶Á·µ»ØÊý¾Ý */  
 				strResult = EntityUtils.toString(httpResponse.getEntity());  
-//				StringUtils.removeBOM(strResult);
-//				if(strResult != null && strResult.startsWith("\ufeff"))
-//				{
-//					strResult =  strResult.substring(1);
-//					strResult.replace("\\\\u", "");
-//				}
+				//				StringUtils.removeBOM(strResult);
+				//				if(strResult != null && strResult.startsWith("\ufeff"))
+				//				{
+				//					strResult =  strResult.substring(1);
+				//					strResult.replace("\\\\u", "");
+				//				}
 				if(Util.IsNull(strResult)){
 					obj = new JSONObject(strResult);
 					if(obj!=null){

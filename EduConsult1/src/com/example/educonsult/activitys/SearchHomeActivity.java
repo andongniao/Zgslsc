@@ -248,7 +248,9 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 						}
 					}
 				}
-				if(!ishave && Util.IsNull(s)){
+				if(Util.IsNull(s)){
+					if(!ishave){
+						
 					er.putString("search"+(l.size()),et.getText().toString().trim());
 					er.putString("s_fenlei"+(l.size()),t+"");
 					l.add(s);
@@ -258,13 +260,16 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 					et.setText("");
 					Log.i("tttttttttttttttttttttttt", t+","+s);
 					initDate(t,0,3,s);
+					}else{
+						ishave = false;
+						Toast.makeText(SearchHomeActivity.this, "关键字已经搜索过", 500).show();
+					}
 					
 					/*if(Util.detect(context)){
 						myPDT.Run(context, new RefeshData(t,0,3,s),R.string.loding);//可取消
 					}*/
 				}else{
 					Toast.makeText(SearchHomeActivity.this, "关键字不能为空", 500).show();
-					ishave = false;
 				}
 			}
 			if(l.size()>0){

@@ -69,23 +69,21 @@ public class SearchResultAdapter extends BaseAdapter{
 					convertView.findViewById(R.id.search_result_item_tv_price);
 			item.tv_fukuan = (TextView) 
 					convertView.findViewById(R.id.search_result_item_tv_fukuan);
+			item.tv_unit = (TextView) 
+					convertView.findViewById(R.id.search_result_item_tv_unit);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		try {
-			item.iv.setImageBitmap(Util.getBitmapForNet(list.get(position).getThumb()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Util.Getbitmap(item.iv, list.get(position).getThumb());
 		item.tv_title.setText(list.get(position).getTitle());
 		item.tv_address.setText(list.get(position).getAreaname());
 		item.tv_price.setText(list.get(position).getPrice());
+		item.tv_unit.setText(list.get(position).getUnit());
 		return convertView;
 	}
 	class Item{
-		TextView tv_title,tv_price,tv_address,tv_fukuan;
+		TextView tv_title,tv_price,tv_address,tv_fukuan,tv_unit;
 		ImageView iv;
 	}
 

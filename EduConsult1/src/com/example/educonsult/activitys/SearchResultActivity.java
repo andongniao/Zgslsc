@@ -86,7 +86,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private void init() {
 		context = this;
 		intent=getIntent();
-
+		order = 0;
 		/*intent.putExtra("searchtype", type);
 		intent.putExtra("searchorder", order);
 		intent.putExtra("searchpage", page);
@@ -94,7 +94,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		//list =(ArrayList<ProductBean>)intent.getSerializableExtra("search");
 		type=Integer.parseInt(intent.getStringExtra("searchtype"));
 		order=Integer.parseInt(intent.getStringExtra("searchorder"));
-		page=Integer.parseInt(intent.getStringExtra("searchpage"));
+		page=1;//=Integer.parseInt(intent.getStringExtra("searchpage"));
 		text=intent.getStringExtra("searchtext");
 		myPDT=new ThreadWithProgressDialog();
 		
@@ -129,6 +129,8 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		gv = (GridView) findViewById(R.id.search_result_gv);
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 	}
 
@@ -156,7 +158,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			if(listProductBean!=null){
 				if("200".equals(listProductBean.getCode())){
 					//TODO	
-						
+					list = 	listProductBean.getList();
 					initDate();
 				}else if("300".equals(listProductBean.getCode())){
 					//TODO	
@@ -218,10 +220,11 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.search_result_ll_zonghe:
-			if(Util.detect(context)||islist){
-				myPDT.Run(context, new RefeshData(type,0,3,text),R.string.loding);//可取消
+			order = 0;
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
 			}else{
-				Util.ShowToast(context, "关键词错误！");
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 
 			break;
@@ -233,10 +236,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			}else{
 				order=1;
 			}
-			if(Util.detect(context)||islist){
-				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
 			}else{
-				Util.ShowToast(context, "关键词错误！");
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			break;
 		case R.id.search_result_ll_price:
@@ -246,10 +249,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			}else{
 				order=3;
 			}
-			if(Util.detect(context)||islist){
-				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
 			}else{
-				Util.ShowToast(context, "关键词错误！");
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			break;
 		case R.id.search_result_ll_renqi:
@@ -259,10 +262,10 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			}else{
 				order=5;
 			}
-			if(Util.detect(context)||islist){
-				myPDT.Run(context, new RefeshData(type,order,3,text),R.string.loding);//可取消
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
 			}else{
-				Util.ShowToast(context, "关键词错误！");
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			break;
 			
