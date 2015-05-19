@@ -1616,13 +1616,29 @@ public class PostHttp {
 			ShopBean sb = listshop.get(i);
 			for(int j=0;j<sb.getMall().size();j++){
 				ShopItemBean sib = sb.getMall().get(j);
-				NameValuePair p1 = new BasicNameValuePair("post["+sib.getItemid()+"][num]","1");
+				NameValuePair p1 = new BasicNameValuePair("post["+sib.getItemid()+"][num]",""+sib.getNum());
 				list.add(p1);
-				NameValuePair p2 = new BasicNameValuePair("post["+sib.getItemid()+"][coupon]","");
+				String c = "";
+				for(int k =0;k<sib.getCoupons().size();k++){
+					if(sib.getCoupons().get(k).isIsck()){
+						c = sib.getCoupons().get(k).getCouponid();
+					}
+				}
+				NameValuePair p2 = new BasicNameValuePair("post["+sib.getItemid()+"][coupon]",c);
 				list.add(p2);
-				NameValuePair p3 = new BasicNameValuePair("post["+sb.getCompanyid()+"][note]","");
+				String not = "";
+				if(Util.IsNull(sb.getNote())){
+					not = sb.getNote();
+				}
+				NameValuePair p3 = new BasicNameValuePair("post["+sb.getCompanyid()+"][note]",not);
 				list.add(p3);
-				NameValuePair p4 = new BasicNameValuePair("post["+sb.getCompanyid()+"][express]","39");
+				String e = "";
+				for(int k =0;k<sb.getExpress().size();k++){
+					if(sb.getExpress().get(k).isIsck()){
+						e = sb.getExpress().get(k).getExpress();
+					}
+				}
+				NameValuePair p4 = new BasicNameValuePair("post["+sb.getCompanyid()+"][express]",e);
 				list.add(p4);
 			}
 		}
