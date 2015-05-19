@@ -129,8 +129,8 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 		Util.setListViewHeightBasedOnChildren(item.lv);
 		item.lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
-			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
-				switch (index) {
+			public void onMenuItemClick(int position, SwipeMenu menu, int i) {
+				switch (i) {
 				case 0:
 					if (Util.detect(context)) {
 						shop.delete(index, position);
