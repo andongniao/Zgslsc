@@ -107,6 +107,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		cb_all = (CheckBox) findViewById(R.id.shopcart_home_cb_all);
 		ll_jeisuan.setVisibility(View.GONE);
 		ll_isnull.setVisibility(View.GONE);
+		tv_heji.setText("￥"+sum);
 		shop = new shop() {
 
 			@Override
@@ -245,11 +246,12 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 	private void addlistener() {
 		cb_all.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				sum=0;
 				if(cl==1){
 					cl=0;
+					tv_heji.setText("￥"+sum);
 				}else{
 
 					for(int i=0;i<list.size();i++){
@@ -260,6 +262,18 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 							b.setIsclick(isChecked);
 						}
 					}
+					int i_num;
+					for(int i=0;i<list.size();i++){
+						for(int j=0;j<list.get(i).getMall().size();j++){
+							if(list.get(i).getMall().get(j).isIsclick()){
+								
+								i_num=list.get(i).getMall().get(j).getNum();
+								i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
+								sum=i_num*i_price+sum;
+							}
+						}
+					}
+					tv_heji.setText("￥"+sum);
 					adapter.SetData(list);
 					adapter.notifyDataSetChanged();
 				}
@@ -649,6 +663,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		super.onResume();
 		if(ischange){
 			if(Util.detect(context)){
+				cb_all.setChecked(false);
 				inttype=0;
 				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 			}else{
