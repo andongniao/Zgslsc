@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  */
 public class ExpressBean implements Serializable{
+	private boolean isck;
 	private String itemid;
 	private String parenid;
 	private String areaid;
@@ -20,6 +21,12 @@ public class ExpressBean implements Serializable{
 	private String items;
 	private String listorder;
 	private String note;
+	public boolean isIsck() {
+		return isck;
+	}
+	public void setIsck(boolean isck) {
+		this.isck = isck;
+	}
 	public String getItemid() {
 		return itemid;
 	}

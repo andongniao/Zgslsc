@@ -8,6 +8,7 @@ import java.io.Serializable;
  *
  */
 public class CouponBean implements Serializable{
+	private boolean isck;
 	private String id;//优惠券iD
 	private String userid;
 	private String couponid;
@@ -18,6 +19,12 @@ public class CouponBean implements Serializable{
 	private String expiretime;//时间格式2015-08-05
 	private String used;
 	private String itemid;
+	public boolean isIsck() {
+		return isck;
+	}
+	public void setIsck(boolean isck) {
+		this.isck = isck;
+	}
 	public String getId() {
 		return id;
 	}
