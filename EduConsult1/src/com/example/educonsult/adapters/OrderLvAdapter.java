@@ -107,12 +107,13 @@ public class OrderLvAdapter extends BaseAdapter{
 //			e.printStackTrace();
 //		}
 		coupons=b.getCoupons();
-		if(coupons!=null&&coupons.size()>=0){
+		
 			item.lin.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					if(coupons!=null&&coupons.size()>=0){
 					Strlist=new ArrayList<String>();
 					for(int i=0;i<coupons.size();i++){
 						Strlist.add(coupons.get(i).getValue());
@@ -120,11 +121,13 @@ public class OrderLvAdapter extends BaseAdapter{
 					setpopuwindow(Strlist, item.lin);
 					item.tv_uhui.setText(coupons.get(num).getValue());
 					popu.dismiss();
+					}else{
+						item.tv_uhui.setText("");
+						Util.ShowToast(context, "您还没有优惠券哦！");
+					}
 				}
 			});
-		}else{
-			item.tv_uhui.setText("");
-		}
+		
 		
 		
 		return convertView;

@@ -144,6 +144,7 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 					long arg3) {
 				// TODO Auto-generated method stub
 				if(intype==0){
+					isdizhi=true;
 					bankKey=banks.get(arg2).getKey();
 					tv_carway.setText(list1.get(arg2));
 					popu.dismiss();
@@ -205,7 +206,7 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 			}
 			//popu_carway.showAsDropDown(ll_carway);
 			//Toast.makeText(this,"11",500).show();
-			isdizhi=true;
+			
 
 			break;
 		case R.id.bdmoneycar_carwhere_lin:

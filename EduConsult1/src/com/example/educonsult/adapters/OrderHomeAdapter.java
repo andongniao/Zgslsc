@@ -36,6 +36,7 @@ import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuCreator;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuItem;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuListView;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuListView.OnMenuItemClickListener;
+import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
 
 public class OrderHomeAdapter extends BaseAdapter{
@@ -149,6 +150,8 @@ public class OrderHomeAdapter extends BaseAdapter{
 				}
 			});
 		
+		}else{
+			item.tv_peisong.setText("√‚‘À∑—");
 		}
 		float sum=0,i_price;
 		int i_num,n=0;
