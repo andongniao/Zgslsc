@@ -114,13 +114,13 @@ public class OrderLvAdapter extends BaseAdapter{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					if(coupons!=null&&coupons.size()>=0){
-					Strlist=new ArrayList<String>();
-					for(int i=0;i<coupons.size();i++){
-						Strlist.add(coupons.get(i).getValue());
-					}
-					setpopuwindow(Strlist, item.lin);
-					item.tv_uhui.setText(coupons.get(num).getValue());
-					popu.dismiss();
+						Strlist=new ArrayList<String>();
+						for(int i=0;i<coupons.size();i++){
+							Strlist.add(coupons.get(i).getValue());
+						}
+						setpopuwindow(Strlist, item.lin);
+						item.tv_uhui.setText(coupons.get(num).getValue());
+						popu.dismiss();
 					}else{
 						item.tv_uhui.setText("");
 						Util.ShowToast(context, "您还没有优惠券哦！");
@@ -142,6 +142,10 @@ public class OrderLvAdapter extends BaseAdapter{
 					long arg3) {
 				// TODO Auto-generated method stub
 					num=arg2;
+					for(int i=0;i<coupons.size();i++){
+						coupons.get(i).setIsck(false);
+					}
+					coupons.get(arg2).setIsck(true);
 					popu.dismiss();
 				
 			}

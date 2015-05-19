@@ -90,6 +90,10 @@ public class OrderHomeAdapter extends BaseAdapter{
 					long arg3) {
 				// TODO Auto-generated method stub
 					num=arg2;
+					for(int i=0;i<express.size();i++){
+						express.get(i).setIsck(false);
+					}
+					express.get(arg2).setIsck(true);
 					popu.dismiss();
 				
 			}
