@@ -193,7 +193,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
-			//			startActivity(new Intent(context,RechargeActivity.class));
+//						startActivity(new Intent(context,RechargeActivity.class));
 			break;
 		case R.id.money_password_no:
 

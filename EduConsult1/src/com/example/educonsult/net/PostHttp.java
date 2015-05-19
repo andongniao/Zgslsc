@@ -1619,9 +1619,11 @@ public class PostHttp {
 				NameValuePair p1 = new BasicNameValuePair("post["+sib.getItemid()+"][num]",""+sib.getNum());
 				list.add(p1);
 				String c = "";
-				for(int k =0;k<sib.getCoupons().size();k++){
-					if(sib.getCoupons().get(k).isIsck()){
-						c = sib.getCoupons().get(k).getCouponid();
+				if(sib.getCoupons()!=null){
+					for(int k =0;k<sib.getCoupons().size();k++){
+						if(sib.getCoupons().get(k).isIsck()){
+							c = sib.getCoupons().get(k).getId();
+						}
 					}
 				}
 				NameValuePair p2 = new BasicNameValuePair("post["+sib.getItemid()+"][coupon]",c);
@@ -1633,9 +1635,11 @@ public class PostHttp {
 				NameValuePair p3 = new BasicNameValuePair("post["+sb.getCompanyid()+"][note]",not);
 				list.add(p3);
 				String e = "";
-				for(int k =0;k<sb.getExpress().size();k++){
-					if(sb.getExpress().get(k).isIsck()){
-						e = sb.getExpress().get(k).getExpress();
+				if(sb.getExpress()!=null){
+					for(int k =0;k<sb.getExpress().size();k++){
+						if(sb.getExpress().get(k).isIsck()){
+							e = sb.getExpress().get(k).getItemid();
+						}
 					}
 				}
 				NameValuePair p4 = new BasicNameValuePair("post["+sb.getCompanyid()+"][express]",e);
