@@ -107,24 +107,27 @@ public class OrderLvAdapter extends BaseAdapter{
 //			e.printStackTrace();
 //		}
 		coupons=b.getCoupons();
-		if(coupons!=null&&coupons.size()>=0){
+		
 			item.lin.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Strlist=new ArrayList<String>();
-					for(int i=0;i<coupons.size();i++){
-						Strlist.add(coupons.get(i).getValue());
+					if(coupons!=null&&coupons.size()>=0){
+						Strlist=new ArrayList<String>();
+						for(int i=0;i<coupons.size();i++){
+							Strlist.add(coupons.get(i).getValue());
+						}
+						setpopuwindow(Strlist, item.lin);
+						item.tv_uhui.setText(coupons.get(num).getValue());
+						popu.dismiss();
+					}else{
+						item.tv_uhui.setText("");
+						Util.ShowToast(context, "您还没有优惠券哦！");
 					}
-					setpopuwindow(Strlist, item.lin);
-					item.tv_uhui.setText(coupons.get(num).getValue());
-					popu.dismiss();
 				}
 			});
-		}else{
-			item.tv_uhui.setText("");
-		}
+		
 		
 		
 		return convertView;
@@ -139,6 +142,10 @@ public class OrderLvAdapter extends BaseAdapter{
 					long arg3) {
 				// TODO Auto-generated method stub
 					num=arg2;
+					for(int i=0;i<coupons.size();i++){
+						coupons.get(i).setIsck(false);
+					}
+					coupons.get(arg2).setIsck(true);
 					popu.dismiss();
 				
 			}

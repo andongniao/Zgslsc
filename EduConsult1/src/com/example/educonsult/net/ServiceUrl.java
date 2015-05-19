@@ -1,7 +1,7 @@
 package com.example.educonsult.net;
 /**
  * 
- * @author Qzr
+ * @author Qzr 
  *
  */
 public class ServiceUrl {

@@ -160,7 +160,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					cl = 1;
 					cb_all.setChecked(true);
 					//TODO
-				}else{
+				}
+				else{
 					cl = 1;
 					cb_all.setChecked(false);
 				}
@@ -245,39 +246,33 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void addlistener() {
-		cb_all.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		sum=0;
+		cb_all.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				sum=0;
-				if(cl==1){
-					cl=0;
-					tv_heji.setText("гд"+sum);
-				}else{
-
-					for(int i=0;i<list.size();i++){
-						ShopBean s = (ShopBean) list.get(i);
-						s.setIsclick(isChecked);
-						for(int j=0;j<s.getMall().size();j++){
-							ShopItemBean b = (ShopItemBean) s.getMall().get(j);
-							b.setIsclick(isChecked);
-						}
+			public void onClick(View v) {
+				boolean isChecked  = cb_all.isChecked();
+				for(int i=0;i<list.size();i++){
+					ShopBean s = (ShopBean) list.get(i);
+					s.setIsclick(isChecked);
+					for(int j=0;j<s.getMall().size();j++){
+						ShopItemBean b = (ShopItemBean) s.getMall().get(j);
+						b.setIsclick(isChecked);
 					}
-					int i_num;
-					for(int i=0;i<list.size();i++){
-						for(int j=0;j<list.get(i).getMall().size();j++){
-							if(list.get(i).getMall().get(j).isIsclick()){
-								
-								i_num=list.get(i).getMall().get(j).getNum();
-								i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
-								sum=i_num*i_price+sum;
-							}
-						}
-					}
-					tv_heji.setText("гд"+sum);
-					adapter.SetData(list);
-					adapter.notifyDataSetChanged();
 				}
-
+				int i_num;
+				for(int i=0;i<list.size();i++){
+					for(int j=0;j<list.get(i).getMall().size();j++){
+						if(list.get(i).getMall().get(j).isIsclick()){
+							
+							i_num=list.get(i).getMall().get(j).getNum();
+							i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
+							sum=i_num*i_price+sum;
+						}
+					}
+				}
+				tv_heji.setText("гд"+sum);
+				adapter.SetData(list);
+				adapter.notifyDataSetChanged();
 			}
 		});
 	}
