@@ -10,6 +10,7 @@ import android.os.Message;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.beans.AreaBean;
@@ -63,8 +64,14 @@ public class WelcomeActivity extends Activity{
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				if (msg.what == 1) {
-					Intent intent = new Intent(WelcomeActivity.this,
+					Intent intent;
+					if(!MyApplication.mp.islogin){
+					intent = new Intent(WelcomeActivity.this,
 							LoginActivity.class);
+					}else{
+						intent = new Intent(WelcomeActivity.this,
+								ExampleActivity.class);
+					}
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 					finish();

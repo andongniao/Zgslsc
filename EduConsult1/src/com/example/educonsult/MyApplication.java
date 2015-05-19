@@ -15,6 +15,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class MyApplication extends Application{
 	public static int money_income = 3;
 	public static int money_pay = 4;
 	public boolean islogin;
+	private String authstr;
 
 
 
@@ -56,10 +58,11 @@ public class MyApplication extends Application{
 		super.onCreate();
 		context = this;
 		mp = this;
-		islogin =false;
 		sp = getSharedPreferences("mysp", Context.MODE_PRIVATE);
+		islogin = sp.getBoolean("islogin", false);
+		authstr = sp.getString("authstr", "");
 		bean = new UserBean();
-		bean.setAuthstr("");
+		bean.setAuthstr(authstr);
 		util = new Util(context);
 		List<BundleActivator> list = new ArrayList<BundleActivator>();
 		SimpleBundle s= new SimpleBundle();
@@ -242,6 +245,9 @@ public class MyApplication extends Application{
 	}
 	public void setUser(UserBean bean){
 		this.bean = bean;
+		Editor er = sp.edit();
+		er.putString("authstr", bean.getAuthstr());
+		er.commit();
 	}
 	public UserBean getUser(){
 		return this.bean;
@@ -249,9 +255,16 @@ public class MyApplication extends Application{
 	public void setlogin(boolean islogin){
 		if(islogin){
 			this.islogin = islogin;
+			Editor er = sp.edit();
+			er.putBoolean("islogin", islogin);
+			er.commit();
 		}else{
 			this.islogin = islogin;
 			this.bean.setAuthstr("");
+			Editor er = sp.edit();
+			er.putBoolean("islogin", islogin);
+			er.putString("authstr", "");
+			er.commit();
 		}
 	}
 
