@@ -50,9 +50,10 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private UserBean bean;
 	private ListShopBean shopbean,shopbean2;
 	private ArrayList<ShopBean> shoplist,shoplist2;
+	private ArrayList<ShopItemBean> shopitemlist;
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean besebean;
-	private boolean islist,clearb;
+	private boolean islist,clearb,ischoose;
 	public static boolean ischange;
 	private float sum,i_price;
 	private int inttype=0;
@@ -60,12 +61,15 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private QuerenOrderBean querenOrderBean;
 	private ListShopBean listShopBean; 
 	private Intent intent;
+	private ShopBean shopbeansil;
+	private String strsum;
+
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		goneTopLeft();
-//		topRightRVisible();
+		//		topRightRVisible();
 		topRightTGone();
 		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_t = (ImageView) getTopRightView();
@@ -95,9 +99,9 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		//		Util.SetRedNum(context, rl_r, 1);
 		bean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
-		//list = new ArrayList<ShopBean>();
-//		shoplist2=new ArrayList<ShopBean>();
-		
+		list = new ArrayList<ShopBean>();
+		shoplist2=new ArrayList<ShopBean>();
+
 		shopbean2=new ListShopBean();
 		lv = (ListView) findViewById(R.id.shopcart_home_lv);
 		ll_isnull = (LinearLayout) findViewById(R.id.shopcart_home_ll_isnull);
@@ -122,7 +126,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				}*/
 
 				//	
-				
+
 				ShopBean s = (ShopBean) list.get(clearindex);
 				int num = 0;
 				if(clearposition!=-1){
@@ -171,14 +175,16 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				for(int i=0;i<list.size();i++){
 					for(int j=0;j<list.get(i).getMall().size();j++){
 						if(list.get(i).getMall().get(j).isIsclick()){
-							
+
 							i_num=list.get(i).getMall().get(j).getNum();
 							i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
 							sum=i_num*i_price+sum;
 						}
 					}
 				}
-				tv_heji.setText("￥"+sum);
+				strsum=sum+"";
+				strsum=strsum.substring(0,strsum.indexOf(".")+2);
+				tv_heji.setText("￥"+strsum);
 				//Toast.makeText(context, ""+len, 200).show();
 				//Util.ShowToast(context,"清空购物车");
 
@@ -207,7 +213,9 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						}
 					}
 				}
-				tv_heji.setText("￥"+sum);
+				strsum=sum+"";
+				strsum=strsum.substring(0,strsum.indexOf(".")+2);
+				tv_heji.setText("￥"+strsum);
 			}
 
 			@Override
@@ -228,7 +236,9 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						}
 					}
 				}
-				tv_heji.setText("￥"+sum);
+				strsum=sum+"";
+				strsum=strsum.substring(0,strsum.indexOf(".")+2);
+				tv_heji.setText("￥"+strsum);
 			}
 			@Override
 			public void delete(int index, int postion) {
@@ -264,14 +274,16 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				for(int i=0;i<list.size();i++){
 					for(int j=0;j<list.get(i).getMall().size();j++){
 						if(list.get(i).getMall().get(j).isIsclick()){
-							
+
 							i_num=list.get(i).getMall().get(j).getNum();
 							i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
 							sum=i_num*i_price+sum;
 						}
 					}
 				}
-				tv_heji.setText("￥"+sum);
+				strsum=sum+"";
+				strsum=strsum.substring(0,strsum.indexOf(".")+2);
+				tv_heji.setText("￥"+strsum);
 				adapter.SetData(list);
 				adapter.notifyDataSetChanged();
 			}
@@ -290,24 +302,49 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.shopcart_home_tv_jiesuan:
 			inttype=3;
-			shoplist2=new ArrayList<ShopBean>();
-			for(int i=0;i<shopbean.getList().size();i++){
-				if(shopbean.getList().get(i).isIsclick()){
-					shoplist2.add(shopbean.getList().get(i));
+			//			shoplist2=new ArrayList();
+			//			shopitmelist=new ArrayList<ShopItemBean>();
+
+			for(int i=0;i<shoplist2.size();i++){
+				for(int j=0;j<shoplist2.get(i).getMall().size();j++){
+					if(shoplist2.get(i).getMall().get(j).isIsclick()){
+						ischoose=true;
+					}
 				}
 			}
-			shopbean2.setList(shoplist2);
-			if(shoplist2!=null&&shoplist2.size()>=1){
-				
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
+			if(ischoose){
+
+				for(int i=0;i<shoplist2.size();i++){
+					for(int j=0;j<shoplist2.get(i).getMall().size();j++){
+						if(!shoplist2.get(i).getMall().get(j).isIsclick()){
+							shoplist2.get(i).getMall().remove(shoplist2.get(i).getMall().get(j));
+							j=-1;
+						}
+						if(shoplist2.get(i).getMall()!=null&&shoplist2.get(i).getMall().size()==0){
+							shoplist2.remove(shoplist2.get(i));
+							i=0;
+							j=-1;
+						}
+					}
 				}
+				shopbean2.setList(shoplist2);
+				if(shoplist2!=null&&shoplist2.size()>=1){
+
+					if(Util.detect(context)){
+						myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
+				}else {
+					Util.ShowToast(context, "请选择物品！");
+
+
+				}
+				ischoose=false;
 			}else {
 				Util.ShowToast(context, "请选择物品！");
-				
-				
+
+
 			}
 
 			break;
@@ -367,21 +404,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				adapter = new ShopcartHomeAdapter(context, list,shop);
 				lv.setAdapter(adapter);
 				lv.setEmptyView(ll_isnull);
-
-				//				for(int i=0;i<s.getMall().size();i++){
-				//					i_num=s.getMall().get(i).getNum();
-				//					i_price=Float.parseFloat(s.getMall().get(i).getPrice());
-				//					sum=sum+i_num*i_price;
-				//				}
-//				int i_num;
-//				for(int i=0;i<list.size();i++){
-//					for(int j=0;j<list.get(i).getMall().size();j++){
-//						i_num=list.get(i).getMall().get(j).getNum();
-//						i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
-//						sum=i_num*i_price+sum;
-//					}
-//				}
-//				tv_heji.setText("￥"+sum);
 			}else{
 				ll_jeisuan.setVisibility(View.GONE);
 				ll_isnull.setVisibility(View.VISIBLE);
@@ -412,25 +434,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			}
 			else{
 				besebean=s.CartDel(lists.get(index).getCompanyid(), bean.getAuthstr());
-				//			}
-				//			if(besebean!=null){
-				//				String code = besebean.getCode();
-				//				String m = besebean.getMsg();
-				//				if("200".equals(code)){
-				//					
-				//					if(lists.get(index).getMall()==null||lists.get(index).getMall().size()==0){
-				//						if(Util.detect(context)){
-				//							myPDT.Run(context, new deleteRefeshData(lists, -1, index),R.string.loding);//不可取消
-				//						}
-				//					}
-				//					
-				//				}else{
-				//					if(Util.IsNull(m)){
-				//						Util.ShowToast(context, m);
-				//					}
-				////				}
-				//			}else{
-				//				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			return true;
 		}
@@ -535,8 +538,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						b.putSerializable("shopcarbean", shopbean2);
 
 						b.putString("money", tv_heji.getText().toString());
-						//						intent.putExtra("shopcaroder", listShopBean);
-						//						intent.putExtra("shopcarbean", shopbean);
 						intent.putExtra("shopcartbundle", b);
 						startActivity(intent);
 
@@ -565,6 +566,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					if("200".equals(code)){
 						//							
 						list=shopbean.getList();
+						shoplist2.addAll(shopbean.getList());
 						initDate();
 
 
@@ -656,16 +658,22 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		inttype=0;
 		if(ischange){
 			if(Util.detect(context)){
 				cb_all.setChecked(false);
-				inttype=0;
 				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			ischange =false;
 		}
+		//		if(Util.detect(context)){
+		////			cb_all.setChecked(false);
+		//			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+		//		}else{
+		//			Util.ShowToast(context, R.string.net_is_eor);
+		//		}
 	}
 
 }

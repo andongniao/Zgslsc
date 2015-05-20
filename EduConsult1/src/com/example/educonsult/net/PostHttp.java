@@ -1674,7 +1674,6 @@ public class PostHttp {
 							Type t = new TypeToken<ArrayList<Integer>>() {
 							}.getType();
 							ArrayList<Integer>	lin  = gson.fromJson(trade.toString(), t);
-							System.out.println("提交订单后得到的list len="+lin.size());
 							for(int i=0;i<lin.size();i++){
 								String key = ""+lin.get(i);
 								a.setTrade(lin.get(i));
