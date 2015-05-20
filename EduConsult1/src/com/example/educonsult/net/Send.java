@@ -886,8 +886,8 @@ public class Send {
 				object = new JSONObject(jsonStr);
 				String code = object.getString("code");
 				String msg = object.getString("message");
-				if(Util.IsNull(object.getString("data"))){
-					if (code != null && "200".equals(code)) {
+				if (code != null && "200".equals(code)) {
+					if(Util.IsNull(object.getString("data"))){
 						JSONArray data = object.getJSONArray("data");
 						Type t = new TypeToken<ArrayList<XinJianBean>>() {
 						}.getType();

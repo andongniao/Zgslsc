@@ -126,6 +126,12 @@ public class XinjianActivity extends BaseActivity{
 							startActivity(intent);
 						}
 					});
+				}else if("300".equals(xinjianbean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					intent = new Intent(context,LoginActivity.class);
+					startActivity(intent);
+					finish();
 				}else{
 					Util.ShowToast(context, xinjianbean.getMsg());
 				}

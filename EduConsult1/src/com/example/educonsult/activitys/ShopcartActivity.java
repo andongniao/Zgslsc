@@ -65,7 +65,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		goneTopLeft();
-		topRightRVisible();
+//		topRightRVisible();
+		topRightTGone();
 		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.top_xx_bg);

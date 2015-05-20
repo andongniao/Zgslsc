@@ -374,10 +374,9 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 			@Override
 			public void onClick(View v) {
-//				intent = new Intent(context,XinjianActivity.class);
-//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				context.startActivity(intent);
-
+				intent = new Intent(context,XinjianActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				context.startActivity(intent);
 			}
 		});
 		gv_like.setOnItemClickListener(new OnItemClickListener() {
