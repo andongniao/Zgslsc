@@ -1,6 +1,13 @@
 package com.example.educonsult.activitys;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +17,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -26,13 +31,13 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.ShopcartHomeAdapter;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListShopBean;
+import com.example.educonsult.beans.QuerenOrderBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.ShopItemBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
-import com.example.educonsult.beans.QuerenOrderBean;
 
 public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
@@ -185,8 +190,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				strsum=sum+"";
 				strsum=strsum.substring(0,strsum.indexOf(".")+2);
 				tv_heji.setText("￥"+strsum);
-				//Toast.makeText(context, ""+len, 200).show();
-				//Util.ShowToast(context,"清空购物车");
 
 
 
@@ -305,14 +308,24 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			//			shoplist2=new ArrayList();
 			//			shopitmelist=new ArrayList<ShopItemBean>();
 
-			for(int i=0;i<shoplist2.size();i++){
-				for(int j=0;j<shoplist2.get(i).getMall().size();j++){
-					if(shoplist2.get(i).getMall().get(j).isIsclick()){
+			for(int i=0;i<list.size();i++){
+				for(int j=0;j<list.get(i).getMall().size();j++){
+					if(list.get(i).getMall().get(j).isIsclick()){
 						ischoose=true;
+						break;
 					}
 				}
 			}
 			if(ischoose){
+				try {
+					shoplist2= (ArrayList<ShopBean>) deepCopy(list);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				for(int i=0;i<shoplist2.size();i++){
 					for(int j=0;j<shoplist2.get(i).getMall().size();j++){
@@ -366,44 +379,19 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		return super.onKeyDown(keyCode, event);
 	}
 	private void initDate(){
-		Log.i("initDate---------------------------", "fffffffffffffffffffffffffffffffffffff");
-
-
-		/*ShopBean b1 = new ShopBean();
-		b1.setIsclick(false);
-		ShopItemBean a1 = new ShopItemBean();
-		a1.setIsclick(false);
-		a1.setAmount(""+0);
-		ShopItemBean a2 = new ShopItemBean();
-		a2.setIsclick(false);
-		a2.setAmount(""+0);
-		ArrayList<ShopItemBean >l = new ArrayList<ShopItemBean>();
-		l.add(a1);
-		l.add(a2);
-		b1.setMall(l);
-		list.add(b1);
-
-
-		ShopBean b2= new ShopBean();
-		b2.setIsclick(false);
-		ShopItemBean a = new ShopItemBean();
-		a.setAmount(""+0);
-		a.setIsclick(false);
-		ArrayList<ShopItemBean>l2 = new ArrayList<ShopItemBean>();
-		l2.add(a);
-		b2.setMall(l2);
-		list.add(b2);*/
-
-
-
 		if(list!=null){
 			if(list.size()!=0){
 				ll_jeisuan.setVisibility(View.VISIBLE);
 				ll_isnull.setVisibility(View.GONE);
 				lv.setVisibility(View.VISIBLE);
-				adapter = new ShopcartHomeAdapter(context, list,shop);
-				lv.setAdapter(adapter);
-				lv.setEmptyView(ll_isnull);
+				if(adapter!=null){
+					adapter.SetData(list);
+					adapter.notifyDataSetChanged();
+				}else{
+					adapter = new ShopcartHomeAdapter(context, list,shop);
+					lv.setAdapter(adapter);
+					lv.setEmptyView(ll_isnull);
+				}
 			}else{
 				ll_jeisuan.setVisibility(View.GONE);
 				ll_isnull.setVisibility(View.VISIBLE);
@@ -566,7 +554,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					if("200".equals(code)){
 						//							
 						list=shopbean.getList();
-						shoplist2.addAll(shopbean.getList());
 						initDate();
 
 
@@ -633,9 +620,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 							cl = 1;
 							cb_all.setChecked(false);
 						}
-						Toast.makeText(context, ""+len, 200).show();
-						//Util.ShowToast(context,"清空购物车");
-
 					}else if("300".equals(code)){
 						intent=new Intent(context,LoginActivity.class);
 						startActivity(intent);
@@ -655,6 +639,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -668,12 +653,28 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			}
 			ischange =false;
 		}
-		//		if(Util.detect(context)){
-		////			cb_all.setChecked(false);
-		//			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
-		//		}else{
-		//			Util.ShowToast(context, R.string.net_is_eor);
-		//		}
+		if(list!=null){
+			try {
+				shoplist2= (ArrayList<ShopBean>) deepCopy(list);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+	@SuppressWarnings("rawtypes")
+	public List deepCopy(List src) throws IOException, ClassNotFoundException{ 
+		ByteArrayOutputStream byteOut = new ByteArrayOutputStream(); 
+		ObjectOutputStream out = new ObjectOutputStream(byteOut); 
+		out.writeObject(src); 
+		ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray()); 
+		ObjectInputStream in =new ObjectInputStream(byteIn); 
+		List dest = (List)in.readObject(); 
+		return dest; 
 	}
 
 }
