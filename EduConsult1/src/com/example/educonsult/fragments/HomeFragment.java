@@ -51,6 +51,7 @@ import com.example.educonsult.activitys.KnowHomeActivity;
 import com.example.educonsult.activitys.LoginActivity;
 import com.example.educonsult.activitys.NewHomeActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
+import com.example.educonsult.activitys.SearchResultActivity;
 import com.example.educonsult.activitys.StoreActivity;
 import com.example.educonsult.activitys.XinjianActivity;
 import com.example.educonsult.activitys.ZhanhuiHomeActivity;
@@ -409,7 +410,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			HomePagerActivity.handler.sendMessage(msg);
 			break;
 		case R.id.home_gongqiu_ll:
-			Util.ShowToast(context, R.string.maimeng);
+			Util.ShowToast(context, "请搜索您想要的产品~");
 //			intent = new Intent(context,GqHomeActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			startActivity(intent);
@@ -462,52 +463,58 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 			break;
 		case R.id.home_siliao_ll:
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);
 //			intent = new Intent(this.context,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			title = getResources().getString(R.string.home_siliao);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
+			ToSearch("饲料");
 			break;
 		case R.id.home_shouyao_ll:
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);
 //			intent = new Intent(this.context,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			title = getResources().getString(R.string.home_shouyao);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
+			ToSearch("兽药");
 			break;
 		case R.id.home_yangzhi_ll:
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);
 //			intent = new Intent(this.context,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			title = getResources().getString(R.string.home_yangzhishebei);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
+			ToSearch("养殖设备");
 			break;
 		case R.id.home_chuqin_ll:
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);
 //			intent = new Intent(this.context,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			title = getResources().getString(R.string.home_chuqinyangzhi);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
+			ToSearch("畜禽养殖");
 			break;
 		case R.id.home_tianjiaji_ll:
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);
 //			intent = new Intent(this.context,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			title = getResources().getString(R.string.home_tianjiaji);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
+			ToSearch("添加剂");
 			break;
 		case R.id.home_yuanliao_ll:
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);
 //			intent = new Intent(this.context,GqTwoActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			title = getResources().getString(R.string.home_yuanliao);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
+			ToSearch("原料");
 			break;
 		case R.id.home_tv_more_jingpin:
 			//			intent = new Intent(this.context,GqTwoActivity.class);
@@ -626,7 +633,14 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 
 		}
 	}
-
+ private void ToSearch(String text){
+	 intent=new Intent(context, SearchResultActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("searchtype", "1");
+		intent.putExtra("searchorder", "0");
+		intent.putExtra("searchtext", text);
+		startActivity(intent);
+ }
 
 	private void Toproduct(ProductBean productBean){
 		intent = new Intent(context,ProductDetaileActivity.class);

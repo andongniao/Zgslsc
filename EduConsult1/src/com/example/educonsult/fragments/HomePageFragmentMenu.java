@@ -28,6 +28,7 @@ import com.example.educonsult.activitys.GqHomeActivity;
 import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.LoginActivity;
+import com.example.educonsult.activitys.SearchResultActivity;
 import com.example.educonsult.activitys.WelcomeActivity;
 import com.example.educonsult.adapters.FenleiAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
@@ -143,7 +144,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick());
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
 						}
 					}
 					break;
@@ -158,7 +159,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick());
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
 						}
 					}
 					break;
@@ -173,7 +174,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick());
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
 						}
 					}
 					break;
@@ -188,7 +189,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick());
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
 						}
 					}
 					break;
@@ -203,7 +204,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick());
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
 						}
 					}
 					break;
@@ -218,7 +219,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick());
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
 						}
 					}
 					break;
@@ -255,9 +256,9 @@ public class HomePageFragmentMenu extends Fragment {
 	}
 
 	class OnItemoclick implements OnItemClickListener{
-		
-		public OnItemoclick(){
-			
+		private ArrayList<FenleiBean> listchile;
+		public OnItemoclick(ArrayList<FenleiBean> listchile){
+			this.listchile=listchile;
 		}
 
 		@Override
@@ -266,7 +267,10 @@ public class HomePageFragmentMenu extends Fragment {
 			msg = HomePagerActivity.handler.obtainMessage();
 			msg.obj = HomePagerActivity.SlidTag;
 			HomePagerActivity.handler.sendMessage(msg);
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);
+			String name = listchile.get(arg2).getCatname();
+			ToSearch(name);
+			
 		}
 		
 	}
@@ -313,5 +317,13 @@ public class HomePageFragmentMenu extends Fragment {
 			return true;
 		}
 	}
+	 private void ToSearch(String text){
+		 Intent intent=new Intent(context, SearchResultActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("searchtype", "1");
+			intent.putExtra("searchorder", "0");
+			intent.putExtra("searchtext", text);
+			startActivity(intent);
+	 }
 	
 }

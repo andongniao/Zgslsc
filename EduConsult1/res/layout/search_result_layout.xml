@@ -38,7 +38,8 @@
             android:focusable="false"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white" 
+            android:background="@color/base_top_title_bg"/>
     </LinearLayout>
 
     <LinearLayout
