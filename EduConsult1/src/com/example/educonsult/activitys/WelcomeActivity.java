@@ -136,15 +136,6 @@ public class WelcomeActivity extends Activity{
 					Util.ShowToast(context, lb.getMsg());
 				}
 			}
-			//			if(bean!=null){
-			//				if("200".equals(bean.getCode())){
-			//					Intent intent = new Intent(WelcomeActivity.this,
-			//							LoginActivity.class);
-			//					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			//					startActivity(intent);
-			//					finish();
-			//				}
-			//			}
 			if(lf!=null){
 				if("200".equals(lf.getCode())){
 					u.saveObject(lf, filename_fen);
@@ -159,31 +150,10 @@ public class WelcomeActivity extends Activity{
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
+				Tologin();
 			}else{
-				Util.ShowToast(context, "初始化失败,请保证网络通畅");
+				Util.ShowToast(context, "初始化失败,请保证网络通畅后重试");
 			}
-			//			if(lbn!=null){
-			//				if("200".equals(lbn.getCode())){
-			//					Tologin();
-			//				}
-			//			}
-			//			if(l!=null){
-			//				if("200".equals(l.getCode())){
-			//					
-			//			if(lf!=null){
-			//				if("200".equals(lf.getCode())){
-			//					u.saveObject(lf, filename);
-			//					fl = true;			
-			//				}else{
-			//					Util.ShowToast(context, lf.getMsg());
-			//				}
-			//			}
-			//			if(lmoney!=null){
-			//				if("200".equals(lmoney.getCode())){
-			//					
-			//				}
-			//			}
-			Tologin();
 			return true;
 		}
 
@@ -193,53 +163,6 @@ public class WelcomeActivity extends Activity{
 			Send s = new Send(context);
 			lb = s.GetArea();
 			lf = s.GetFenlei();
-			PostHttp p = new PostHttp(context);
-			String authstr = "6p2uau4j93ahcfil0181adt8k4";
-			//			bean = s.GetProductDetaile("512");
-			//			lbn = s.GetComment("53", 1,"2");
-			//			l = s.getCenterRecommend();
-			//			s.getXinjianDetaile("1057", auth);
-			//			s.CartAdd("53",1, authstr);
-			//						ListShopBean l = s.getCartlist(authstr);
-			//			p.Jiesuan(l, authstr);
-			//			ListAddressBean l = s.getAddressList(authstr);
-			//			AddressBean ab = l.getList().get(0);
-			//			AddressBean ab = new AddressBean();
-			//			p.addOneAddress(ab, authstr);
-			//			p.editOneAddress(ab,authstr);
-			//			p.SetDetaultAddress(ab,authstr);
-			//			p.DelAddress(ab,authstr);
-			//			ListBanksBean l = p.getBanksList(authstr);
-			//			ListBanksCity lc = p.getBanksCityList(1,l.getProvince().get(0), authstr);
-			//			ListBanksCity lxian = p.getBanksCityList(2,lc.getList().get(0).getCity(), authstr);
-			//			String code  = "";
-			//			if(lxian.getList().size()>0){
-			//				code = lxian.getList().get(0).getAreacode();
-			//			}else{
-			//				code = lc.getList().get(0).getAreacode();
-			//			}
-			//			ListBanksBranch lbb = p.getBanksBeanchList(104,code , "", authstr);
-			//			p.bindBankcart(lbb.getList().get(0).getBanknumber(), "0000000000000000000", "test", authstr, 104);
-			//			ListOrderCommit lp = p.CommitOrder(l, authstr);
-			//			final ListOrderBean lo = s.getOrderList(0,1,authstr);
-			//			if(lo!=null){
-			//			id = lo.getList_order().get(4).getItemid();
-			//			c = lo.getList_order().get(4).getCoupons();
-			//			p.Order_refund(, 1, "", authstr);
-			//p.PayOrder(id,c, authstr,"123456");
-			//			p.Order_pay(id, "123456", c, authstr);
-			//			}
-			//p.Order_sendgoods(id, 1, "", "", "", authstr);
-			//			p.Order_getwuliulist("254", authstr);
-			//p.Order_close("261", authstr);
-			//p.Order_confirmpay(id, authstr);
-			//			p.Order_refunddata("260", authstr);
-			//			p.Order_refund("260", 1, "测试", authstr);
-			//			p.Order_refundinfo("260", authstr);
-			//			p.getOrderDetaile(lo.getList_order().get(0).getItemid(), authstr);
-			//			p.Order_getpay("253", authstr);
-			//			p.Order_comment("253", 3, "test", authstr);
-			//			s.getOrderRefundList(2, authstr);
 			return true;
 		}
 	}

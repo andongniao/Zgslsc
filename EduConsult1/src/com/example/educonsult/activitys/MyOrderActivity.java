@@ -503,9 +503,9 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 							Util.ShowToast(context, "支付成功");
 							}else{
 								Util.ShowToast(context, paybean.getMsg());
-								intent = new Intent(context,RechargeActivity.class);
-								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-								startActivity(intent);
+//								intent = new Intent(context,RechargeActivity.class);
+//								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//								startActivity(intent);
 							}
 						}else if(add==3){
 							Util.ShowToast(context, "确认成功");	

@@ -67,7 +67,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private String filename;
 	private String diqu,dizhi,person,mob,postcode;
 	private BaseBean beanresult;
-	private boolean init;
+	private boolean init,isture;
 
 
 
@@ -84,17 +84,6 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		setTopLeftTv(R.string.address_title);
 		setContentXml(R.layout.address_update);
 		init();
-		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
-			lare = (ListAreaBean) u.readObject(filename);
-			listsheng = lare.getList();
-		}else{
-			if(Util.detect(context)){
-				init = true;
-				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
-		}
 	}
 
 	private void init() {
@@ -105,7 +94,8 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		myPDT = new ThreadWithProgressDialog();
 		String  msg = getResources().getString(R.string.loding);
 		num=getIntent().getStringExtra("addressnum");
-//		isok = false;
+		isture = getIntent().getBooleanExtra("isture", false);
+		//		isok = false;
 		ll_diqu = (LinearLayout) findViewById(R.id.address_up_ll_diqu);
 		ll_diqu.setOnClickListener(this);
 		ll_jiedao = (LinearLayout) findViewById(R.id.address_up_ll_jiedao);
@@ -134,14 +124,22 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		tv_save = (TextView) findViewById(R.id.address_up_tv_save);
 		tv_save.setOnClickListener(this);
 		cb_set = (CheckBox) findViewById(R.id.address_up_cb_set_default);
-		cb_set.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		cb_set.setChecked(true);
+		cb_set.setOnClickListener(new OnClickListener() {
+
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				isok = isChecked;
-				if(isok){
-					isdetault = 1;
+			public void onClick(View v) {
+				if(!isture){
+					if(cb_set.isChecked()){
+						cb_set.setChecked(true);
+						isdetault = 1;
+					}else{
+						cb_set.setChecked(false);
+						isdetault = 0;
+					}
 				}else{
-					isdetault = 0;
+					isdetault = 1;
+					cb_set.setChecked(true);
 				}
 			}
 		});
@@ -162,14 +160,9 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				}
 			}
 		}
-		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
-			lare = (ListAreaBean) u.readObject(filename);
-			listsheng = lare.getList();
-		}
-
 	}
 	private void setpopuwindow(Context contexts,ListAreaBean larea,LinearLayout lin){
-
+//		listsheng = lare.getList();
 		final ArrayList<String> list = new ArrayList<String>(); 
 		listsheng = larea.getList();
 		for(int i=0;i<listsheng.size();i++){
@@ -315,6 +308,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				if(lare!=null){
 					if("200".equals(lare.getCode())){
 						init = false;
+						u.saveObject(lare, filename);
 					}else if("300".equals(lare.getCode())){
 						MyApplication.mp.setlogin(false);
 						Util.ShowToast(context, R.string.login_out_time);
@@ -392,6 +386,20 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		adapter_r = new TextItemListAdapter(context, list);
 		lv_l.setAdapter(adapter_r);
 	}
-
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
+			lare = (ListAreaBean) u.readObject(filename);
+			listsheng = lare.getList();
+		}else{
+			if(Util.detect(context)){
+				init = true;
+				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+		}
+	}
 
 }

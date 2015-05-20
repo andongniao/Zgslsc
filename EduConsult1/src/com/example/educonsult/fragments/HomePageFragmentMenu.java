@@ -20,17 +20,21 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.GqHomeActivity;
 import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
+import com.example.educonsult.activitys.LoginActivity;
+import com.example.educonsult.activitys.WelcomeActivity;
 import com.example.educonsult.adapters.FenleiAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.beans.FenleiBean;
 import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListFenleiBean;
+import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
 public class HomePageFragmentMenu extends Fragment {
@@ -86,8 +90,14 @@ public class HomePageFragmentMenu extends Fragment {
 		context = getActivity();
 		list = new ArrayList<String>();
 		u=new Util(context);
-		listFenleiBean=(ListFenleiBean)u.readObject(filename);
-		fenleilist=listFenleiBean.getList();
+		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
+			listFenleiBean=(ListFenleiBean)u.readObject(filename);
+			fenleilist=listFenleiBean.getList();
+		}else{
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}
+		}
 //		fenleilist=new ArrayList<FenleiBean>();
 		
 		listchile=new ArrayList<FenleiBean>();
@@ -99,9 +109,6 @@ public class HomePageFragmentMenu extends Fragment {
 		for(int i=0;i<8;i++){
 			l.add(i);
 		}
-//		if(Util.detect(context)){
-//			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-//		}
 		adapter_l = new FenleiAdapter(context, l);
 		lv_l.setAdapter(adapter_l);
 		lv_r = (ListView) view.findViewById(R.id.slid_view_lv_r);
@@ -262,6 +269,49 @@ public class HomePageFragmentMenu extends Fragment {
 			Util.ShowToast(context, R.string.maimeng);
 		}
 		
+	}
+	
+	// 任务
+	public class RefeshData implements ThreadWithProgressDialogTask {
+
+		public RefeshData() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+			if(listFenleiBean!=null){
+				if("200".equals(listFenleiBean.getCode())){
+					u.saveObject(listFenleiBean, filename);
+				}else if("300".equals(listFenleiBean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i = new Intent(getActivity(),LoginActivity.class);
+					startActivity(i);
+					getActivity().finish();
+				}else{
+					Util.ShowToast(context, listFenleiBean.getMsg());
+				}
+			}else{
+				Util.ShowToast(context, "初始化失败,请保证网络通畅后重试");
+			}
+			return true;
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			Send s = new Send(context);
+			listFenleiBean = s.GetFenlei();
+			return true;
+		}
 	}
 	
 }

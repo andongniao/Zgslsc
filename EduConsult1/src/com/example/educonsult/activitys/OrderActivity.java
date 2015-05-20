@@ -175,6 +175,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			intent = new Intent(context,AddressGLActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("addressnum", "1");
+			intent.putExtra("isture", true);
 			startActivity(intent);
 			break;
 		case R.id.order_home_ll_address:
@@ -187,13 +188,17 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			startActivity(id);
 			break;
 		case R.id.order_tv_ok:
-			inttype=1;
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+			if(addressBean!=null){
+				inttype=1;
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
+				Util.ShowToast(context, "收货地址不能为空");
 			}
-//						startActivity(new Intent(context,RechargeActivity.class));
+			//						startActivity(new Intent(context,RechargeActivity.class));
 			break;
 		case R.id.money_password_no:
 
@@ -263,9 +268,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 							finish();
 						}else{
 							Util.ShowToast(context, baseBean.getMsg());
-							intent = new Intent(context,RechargeActivity.class);
-							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-							startActivity(intent);
+//							intent = new Intent(context,RechargeActivity.class);
+//							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//							startActivity(intent);
 						}
 					}else if("300".equals(baseBean.getCode())){
 						MyApplication.mp.setlogin(false);
