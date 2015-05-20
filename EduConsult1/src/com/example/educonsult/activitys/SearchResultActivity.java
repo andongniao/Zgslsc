@@ -6,7 +6,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -25,6 +28,10 @@ import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.Util;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshGridView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 
 public class SearchResultActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
@@ -32,9 +39,9 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private ImageView iv_back,iv_num,iv_price,iv_renqi;
 	private EditText et;
 	private LinearLayout ll_zonghe,ll_xiaoliang,ll_price,ll_renqi,ll_isyes,ll_isnot;
-	private GridView gv;
+	private PullToRefreshGridView gv;
 	private Context context;
-	 private ArrayList<ProductBean> list;
+	private ArrayList<ProductBean> list;
 	private SearchResultAdapter adapter;
 	private ArrayList<View> list_view;
 	private boolean num,price,renqi;
@@ -43,7 +50,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private ListProductBean listProductBean;
 	private int type;
 	private int order;
-	private int page;
+	private int page,addtype;
 	private String text;
 	private boolean islist;
 	private TextView tv_guanjian;
@@ -58,8 +65,8 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
 		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
 		activityStyle.recycle();
-//		topRightTGone();
-//		setTopLeftTv(R.string.search_title);
+		//		topRightTGone();
+		//		setTopLeftTv(R.string.search_title);
 		setContentView(R.layout.search_result_layout);
 		init();
 		addlisteners();
@@ -81,12 +88,44 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 				startActivity(intent);
 			}
 		});
+		gv.setOnRefreshListener(new OnRefreshListener2<GridView>()
+				{
+
+			@Override
+			public void onPullDownToRefresh(
+					PullToRefreshBase<GridView> refreshView)
+			{
+				Log.e("TAG", "onPullDownToRefresh"); // Do work to
+				String label = DateUtils.formatDateTime(
+						getApplicationContext(),
+						System.currentTimeMillis(),
+						DateUtils.FORMAT_SHOW_TIME
+						| DateUtils.FORMAT_SHOW_DATE
+						| DateUtils.FORMAT_ABBREV_ALL);
+
+				// Update the LastUpdatedLabel
+				refreshView.getLoadingLayoutProxy()
+				.setLastUpdatedLabel(label);
+				page = 1;
+				new GetDataTask().execute();
+			}
+
+			@Override
+			public void onPullUpToRefresh(
+					PullToRefreshBase<GridView> refreshView)
+			{
+				addtype=1;
+				page +=1;
+				new GetDataTask().execute();
+			}
+				});
 	}
 
 	private void init() {
 		context = this;
 		intent=getIntent();
 		order = 0;
+		list = new ArrayList<ProductBean>();
 		/*intent.putExtra("searchtype", type);
 		intent.putExtra("searchorder", order);
 		intent.putExtra("searchpage", page);
@@ -97,11 +136,6 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		page=1;//=Integer.parseInt(intent.getStringExtra("searchpage"));
 		text=intent.getStringExtra("searchtext");
 		myPDT=new ThreadWithProgressDialog();
-		
-		
-		/*for(int i = 0;i<10;i++){
-			list.add(i);
-		}*/
 		tv_guanjian = (TextView) findViewById(R.id.search_result_guanjiazi);
 		list_view = new ArrayList<View>();
 		iv_back = (ImageView) findViewById(R.id.search_result_iv_back);
@@ -126,22 +160,38 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		ll_isyes=(LinearLayout)findViewById(R.id.search_result_isyes);
 		ll_isnot=(LinearLayout)findViewById(R.id.search_result_isnoll);
 		ll_isyes.setVisibility(View.GONE);
-		gv = (GridView) findViewById(R.id.search_result_gv);
+		gv = (PullToRefreshGridView) findViewById(R.id.search_result_gv);
+		initIndicator();
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
 	}
+	private void initIndicator()
+	{
+		ILoadingLayout startLabels = gv
+				.getLoadingLayoutProxy(true, false);
+		startLabels.setPullLabel("下拉刷新");// 刚下拉时，显示的提示
+		startLabels.setRefreshingLabel("正在刷新...");// 刷新时
+		startLabels.setReleaseLabel("松开刷新...");// 下来达到一定距离时，显示的提示
+
+		ILoadingLayout endLabels = gv.getLoadingLayoutProxy(
+				false, true);
+		endLabels.setPullLabel("获取更多");// 刚下拉时，显示的提示
+		endLabels.setRefreshingLabel("正在刷新...");// 刷新时
+		endLabels.setReleaseLabel("松开刷新...");// 下来达到一定距离时，显示的提示
+	}
+
 
 	public class RefeshData implements ThreadWithProgressDialogTask {
 		int type,order,page;
 		String text;
 		public RefeshData(int type,int order,int page,String text) {
 			this.type=type;
-		    this.order=order;
-		    this.page=page;
-		    this.text=text;
+			this.order=order;
+			this.page=page;
+			this.text=text;
 		}
 
 		@Override
@@ -158,7 +208,6 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			if(listProductBean!=null){
 				if("200".equals(listProductBean.getCode())){
 					//TODO	
-					list = 	listProductBean.getList();
 					initDate();
 				}else if("300".equals(listProductBean.getCode())){
 					//TODO	
@@ -166,8 +215,6 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 					intent=new Intent(context, LoginActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
-					
-					
 				}
 				else{
 					Util.ShowToast(context, listProductBean.getMsg());
@@ -184,10 +231,21 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		@Override
 		public boolean TaskMain() {
 			// 访问
-		
+
 			PostHttp p=new PostHttp(context);
-			listProductBean=p.SeanchText(type, order, page, text);
-			
+			addtype = 2;
+			if(page==1){
+				listProductBean=p.SeanchText(type, order, page, text);
+				list = new ArrayList<ProductBean>();
+				list = 	listProductBean.getList();
+			}else{
+				list = new ArrayList<ProductBean>();
+				for(int in=1;in<page+1;in++){
+					listProductBean=p.SeanchText(type, order, in, text);
+					list.addAll(listProductBean.getList());
+				}
+			}
+
 			return true;
 		}
 	}
@@ -200,9 +258,19 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		}else{
 			ll_isnot.setVisibility(View.GONE);
 			ll_isyes.setVisibility(View.VISIBLE);
-			list=listProductBean.getList();
-			adapter = new SearchResultAdapter(context, list);
-			gv.setAdapter(adapter);
+			//			list=listProductBean.getList();
+			if(adapter==null){
+				adapter = new SearchResultAdapter(context, list);
+				gv.setAdapter(adapter);
+			}else{
+				if(addtype==1){
+					adapter.SetData(list);
+					adapter.notifyDataSetChanged();
+				}else{
+					adapter = new SearchResultAdapter(context, list);
+					gv.setAdapter(adapter);
+				}
+			}
 			islist=true;
 		}
 	}
@@ -268,7 +336,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			break;
-			
+
 
 		}
 	}
@@ -309,6 +377,63 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.finish();
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
+	}
+
+	private class GetDataTask extends AsyncTask<Void, Void, Void>
+	{
+
+		@Override
+		protected Void doInBackground(Void... params)
+		{
+
+			PostHttp p=new PostHttp(context);
+			listProductBean=p.SeanchText(type, order, page, text);
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result)
+		{
+
+			gv.onRefreshComplete();
+			if(listProductBean!=null){
+				if("200".equals(listProductBean.getCode())){
+					//TODO	
+					ArrayList<ProductBean> l = new ArrayList<ProductBean>();
+					if(page==1){
+						list = 	listProductBean.getList();
+						initDate();
+					}else{
+						l = listProductBean.getList();
+						list.addAll(l);
+						if(l.size()>0){
+							initDate();
+						}else{
+							Util.ShowToast(context, R.string.page_is_final);
+						}
+					}
+				}else if("300".equals(listProductBean.getCode())){
+					//TODO	
+					Util.ShowToast(context,R.string.login_out_time);
+					intent=new Intent(context, LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+				}
+				else{
+					if(page>1){
+						page-=1;
+					}
+					Util.ShowToast(context, listProductBean.getMsg());
+				}
+			}else{
+				if(page>1){
+					page-=1;
+				}
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+
+		}
 	}
 
 }

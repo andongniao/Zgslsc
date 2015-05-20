@@ -112,11 +112,6 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		/************************************************* 
-		 * 
-		 *  步骤3：处理银联手机支付控件返回的支付结果 
-		 *  
-		 ************************************************/
 		if (data == null) {
 			return;
 		}

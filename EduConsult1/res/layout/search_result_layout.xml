@@ -4,15 +4,13 @@
     android:background="#e6e6e6"
     android:gravity="center_vertical"
     android:orientation="vertical" >
-   
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/base_top_title_bg"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -37,9 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:gravity="center_vertical"
             android:focusable="false"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -84,12 +82,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search_result_xiaoliang"
                 android:textColor="@color/black" />
-              <ImageView
-                android:id="@+id/search_result_iv_xiaoliang" 
+
+            <ImageView
+                android:id="@+id/search_result_iv_xiaoliang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/jiantou_down"
-                />
+                android:background="@drawable/jiantou_down" />
         </LinearLayout>
 
         <TextView
@@ -110,12 +108,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search_result_price"
                 android:textColor="@color/black" />
-              <ImageView
-                android:id="@+id/search_result_iv_price" 
+
+            <ImageView
+                android:id="@+id/search_result_iv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/jiantou_down"
-                />
+                android:background="@drawable/jiantou_down" />
         </LinearLayout>
 
         <TextView
@@ -136,103 +134,118 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search_result_renqi"
                 android:textColor="@color/black" />
-              <ImageView
-                android:id="@+id/search_result_iv_renqi" 
+
+            <ImageView
+                android:id="@+id/search_result_iv_renqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/jiantou_down"
-                />
+                android:background="@drawable/jiantou_down" />
         </LinearLayout>
     </LinearLayout>
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/search_result_isyes"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:visibility="gone"
-        >
-        <GridView 
+        android:visibility="gone" >
+
+        <com.handmark.pulltorefresh.library.PullToRefreshGridView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
             android:id="@+id/search_result_gv"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="2"
-            android:listSelector="#00000000"
+            android:layout_height="fill_parent"
             android:fadingEdge="none"
-            android:scrollbars="none"
+            android:footerDividersEnabled="false"
+            android:gravity="center_horizontal"
+            android:headerDividersEnabled="false"
             android:horizontalSpacing="10dp"
+            android:listSelector="#00000000"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
             android:verticalSpacing="10dp"
-            ></GridView>
+            ptr:ptrAnimationStyle="flip"
+            ptr:ptrHeaderSubTextColor="@color/black"
+            ptr:ptrHeaderTextColor="@color/black"
+            ptr:ptrListViewExtrasEnabled="false"
+            ptr:ptrMode="both"
+            ptr:ptrScrollingWhileRefreshingEnabled="true"
+            ptr:ptrShowIndicator="false" />
     </LinearLayout>
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/search_result_isnoll"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dp"
         android:gravity="center"
-        >
-    <ImageView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/search_not"
-        />
-    <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <TextView 
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/search_result_text1"
-            android:textColor="@color/black"
-            android:textSize="16dp"/>
-        <TextView 
-            android:id="@+id/search_result_guanjiazi"
+            android:background="@drawable/search_not" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/regist_button_bg"
-            android:text="@string/test"
-            android:textSize="16dp"
-            />
-        <TextView 
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_result_text1"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/search_result_guanjiazi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/test"
+                android:textColor="@color/regist_button_bg"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_result_text2"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/search_result_text2"
-            android:textColor="@color/black"
-            android:textSize="16dp"/>
-    </LinearLayout>
-    <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/search_result_text3"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"/>
-    <TextView 
+            android:textColor="@color/black" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@string/search_result_text4"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"/>
-    <TextView 
+            android:textColor="@color/black" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@string/search_result_text5"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"/>
-    <TextView 
+            android:textColor="@color/black" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@string/search_result_text6"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"/>
-    
-        
+            android:textColor="@color/black" />
     </LinearLayout>
-    
 
 </LinearLayout>

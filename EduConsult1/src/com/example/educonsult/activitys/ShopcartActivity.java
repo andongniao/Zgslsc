@@ -437,7 +437,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public boolean OnTaskDismissed() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
@@ -514,7 +513,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public boolean OnTaskDismissed() {
-			// TODO Auto-generated method stub
+			ischange = true;
 			return false;
 		}
 

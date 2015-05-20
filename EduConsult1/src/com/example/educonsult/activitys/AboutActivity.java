@@ -24,7 +24,7 @@ public class AboutActivity extends BaseActivity{
 		super.onCreate(arg0);
 		goneTopLeft();
 		topRightTGone();
-		topRightRVisible();
+//		topRightRVisible();
 		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_r = (ImageView) getTopRightView();
 		iv_top_r.setBackgroundResource(R.drawable.top_xx_bg);
