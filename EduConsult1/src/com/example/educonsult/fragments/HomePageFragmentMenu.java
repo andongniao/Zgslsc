@@ -1,8 +1,5 @@
 package com.example.educonsult.fragments;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -24,20 +21,17 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.GqHomeActivity;
-import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.LoginActivity;
 import com.example.educonsult.activitys.SearchResultActivity;
-import com.example.educonsult.activitys.WelcomeActivity;
 import com.example.educonsult.adapters.FenleiAdapter;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.beans.FenleiBean;
-import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
+@SuppressWarnings("unused")
 public class HomePageFragmentMenu extends Fragment {
 	private View view,v;
 	private ListView lv_l,lv_r;
