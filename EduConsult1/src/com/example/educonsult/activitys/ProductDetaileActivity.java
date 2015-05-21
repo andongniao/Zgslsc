@@ -449,12 +449,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			dianpu.setTextColor(getResources().getColor(R.color.black));
 			break;
 		case R.id.product_detaile_ll_pingjia:
-			ll_add_view_chanpin.setVisibility(View.GONE);
-			ll_add_view_pingjia.setVisibility(View.VISIBLE);
-			ll_add_view_dianpu.setVisibility(View.GONE);
-			chanpin.setTextColor(getResources().getColor(R.color.black));
-			pingjia.setTextColor(getResources().getColor(R.color.orn));
-			dianpu.setTextColor(getResources().getColor(R.color.black));
+	 
 			if(!ispingjia){
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData1(),R.string.loding);//¿ÉÈ¡Ïû
