@@ -78,7 +78,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 		addlistener();
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
-		}
+		} 
 		else{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}

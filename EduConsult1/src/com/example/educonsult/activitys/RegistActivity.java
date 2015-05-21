@@ -38,6 +38,7 @@ import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.FenleiBean;
 import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListFenleiBean;
+import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
@@ -74,6 +75,9 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	String s="" ,p="";
 	private ListFenleiBean listFenleiBean;
 	private ArrayList<FenleiBean> fenleiBeans,fenleiBeans2;
+	private ArrayList<AreaBean>listsheng,listshi,listxian;
+	private ArrayList<FenleiBean>fenleiBeanone,fenleiBeanTwo,fenleiBeanThree;
+	private int areaid;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -187,6 +191,10 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 					productid=productid+1;
 					p=p+list.get(arg2);
 					tv_product.setText(p);
+					adapter_r = new TextItemListAdapter(context, list);
+					lv_l.setAdapter(adapter_r);
+					
+					
 					popu.dismiss();
 				}else if(tpopu==2){
 					isdiqu=true;
@@ -220,6 +228,155 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		
 		
 	}
+	private void setpopuwindow(Context contexts,ListAreaBean larea,LinearLayout lin){
+//		listsheng = lare.getList();
+		final ArrayList<String> list = new ArrayList<String>(); 
+		listsheng = larea.getList();
+		for(int i=0;i<listsheng.size();i++){
+			list.add(listsheng.get(i).getArename());
+		}
+		inflater=LayoutInflater.from(contexts);
+		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
+		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
+		adapter_r = new TextItemListAdapter(context, list);
+		lv_l.setAdapter(adapter_r);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				isdiqu=true;
+				listshi = listsheng.get(arg2).getChild(); 
+				areaid = listsheng.get(arg2).getAreaid();
+				tv_diqu.setText(listsheng.get(arg2).getArename());
+				list.clear();
+				for(int i=0;i<listshi.size();i++){
+					list.add(listshi.get(i).getArename());
+				}
+				adapter_r = new TextItemListAdapter(context, list);
+				lv_l.setAdapter(adapter_r);
+				adapter_r.notifyDataSetChanged();
+				lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int ss, long arg3) {
+						listxian = listshi.get(ss).getChild();
+						areaid = listshi.get(ss).getAreaid();
+						String a2 = tv_diqu.getText().toString();
+						tv_diqu.setText(a2+listshi.get(ss).getArename());
+						if(listxian!=null && listxian.size()>0){
+							list.clear();
+							for(int i=0;i<listxian.size();i++){
+								list.add(listxian.get(i).getArename());
+							}
+							adapter_r = new TextItemListAdapter(context, list);
+							lv_l.setAdapter(adapter_r);
+							adapter_r.notifyDataSetChanged();
+							lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+								@Override
+								public void onItemClick(AdapterView<?> arg0,
+										View arg1, int s3, long arg3) {
+									areaid = listxian.get(s3).getAreaid();
+									String a3 = tv_diqu.getText().toString();
+									tv_diqu.setText(a3+listxian.get(s3).getArename());
+									popu.dismiss();
+								}
+							});
+						}else{
+							popu.dismiss();
+						}
+
+					}
+				});
+				//				popu.dismiss();
+			}
+		});
+
+		mscreenwidth=dm.widthPixels;
+		popu = new PopupWindow(v_fenlei, mscreenwidth-UITools.dip2px(context, 30), LayoutParams.WRAP_CONTENT);
+		popu.setFocusable(true);
+		popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setOutsideTouchable(true);
+		popu.setFocusable(true);
+		popu.showAsDropDown(lin);
+	}
+	private void setpopuwindow(Context contexts,ListFenleiBean listFenleiBean,LinearLayout lin){
+//		listsheng = lare.getList();
+		final ArrayList<String> list = new ArrayList<String>(); 
+		fenleiBeanone = listFenleiBean.getList();
+		for(int i=0;i<fenleiBeanone.size();i++){
+			list.add(fenleiBeanone.get(i).getCatname());
+		}
+		inflater=LayoutInflater.from(contexts);
+		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
+		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
+		adapter_r = new TextItemListAdapter(context, list);
+		lv_l.setAdapter(adapter_r);
+		lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				isproduct=true;
+				fenleiBeanTwo = fenleiBeanone.get(arg2).getChild(); 
+				numproduct = fenleiBeanone.get(arg2).getCatid();
+				tv_product.setText(fenleiBeanone.get(arg2).getCatname());
+				list.clear();
+				for(int i=0;i<fenleiBeanTwo.size();i++){
+					list.add(fenleiBeanTwo.get(i).getCatname());
+				}
+				adapter_r = new TextItemListAdapter(context, list);
+				lv_l.setAdapter(adapter_r);
+				adapter_r.notifyDataSetChanged();
+				lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int ss, long arg3) {
+						fenleiBeanThree = fenleiBeanTwo.get(ss).getChild();
+						nproduct = fenleiBeanTwo.get(ss).getCatid();
+						String a2 = tv_product.getText().toString();
+						tv_product.setText(a2+fenleiBeanTwo.get(ss).getCatname());
+						if(fenleiBeanThree!=null && fenleiBeanThree.size()>0){
+							list.clear();
+							for(int i=0;i<fenleiBeanThree.size();i++){
+								list.add(fenleiBeanThree.get(i).getCatname());
+							}
+							adapter_r = new TextItemListAdapter(context, list);
+							lv_l.setAdapter(adapter_r);
+							adapter_r.notifyDataSetChanged();
+							lv_l.setOnItemClickListener(new OnItemClickListener() {
+
+								@Override
+								public void onItemClick(AdapterView<?> arg0,
+										View arg1, int s3, long arg3) {
+									nproduct = fenleiBeanThree.get(s3).getCatid();
+									String a3 = tv_product.getText().toString();
+									tv_product.setText(a3+fenleiBeanThree.get(s3).getCatname());
+									popu.dismiss();
+								}
+							});
+						}else{
+							popu.dismiss();
+						}
+
+					}
+				});
+				//				popu.dismiss();
+			}
+		});
+
+		mscreenwidth=dm.widthPixels;
+		popu = new PopupWindow(v_fenlei, mscreenwidth-UITools.dip2px(context, 30), LayoutParams.WRAP_CONTENT);
+		popu.setFocusable(true);
+		popu.setBackgroundDrawable(new BitmapDrawable());
+		popu.setOutsideTouchable(true);
+		popu.setFocusable(true);
+		popu.showAsDropDown(lin);
+	}
+
 	private void addlistener() {
 		rb_man.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
@@ -273,86 +430,10 @@ void setrel(){
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.regist_ll_geren_product:
-			list = new ArrayList<String>();
-			//setpopuwindow(list,ll_product);
-			if(productid==-1){
-				fenleiBeans2=fenleiBeans;
-				p="";
-				if(fenleiBeans2!=null||fenleiBeans2.size()!=0){
-					for(int i=0;i<fenleiBeans2.size();i++){
-						String ss=fenleiBeans2.get(i).getCatname();
-						list.add(ss);
-					}
-					tpopu=1;
-					setpopuwindow(list,ll_product);
-					//popu.showAsDropDown(ll_diqu);
-					numproduct=fenleiBeans2.get(nproduct).getCatid();
-
-				}
-			}else{
-				fenleiBeans2=fenleiBeans2.get(nproduct).getChild();
-				if(fenleiBeans2!=null){
-					if(fenleiBeans2.size()!=0){
-						for(int j=0;j<fenleiBeans2.size();j++){
-							list.add(fenleiBeans2.get(j).getCatname());
-						}
-						tpopu=1;
-						setpopuwindow(list,ll_product);
-						//popu.showAsDropDown(ll_diqu);
-						adapter_r.notifyDataSetChanged();
-						numproduct=fenleiBeans2.get(nproduct).getCatid();
-					}else{
-						productid=-1;
-					}
-
-				}else{
-					productid=-1;
-				}
-
-			}
+			setpopuwindow(context, listFenleiBean, ll_product);
 			break;
 		case R.id.regist_ll_geren_diqu:
-			list = new ArrayList<String>();
-			/*list.add("全部收支");
-			list.add("收入");
-			list.add("支出");*/
-			
-			
-			if(diquid==-1){
-				areaBeans=areaBean;
-				s="";
-				if(areaBean!=null||areaBean.size()!=0){
-					for(int i=0;i<areaBean.size();i++){
-						String ss=areaBean.get(i).getArename();
-						list.add(ss);
-					}
-					tpopu=2;
-					setpopuwindow(list,ll_diqu);
-					//popu.showAsDropDown(ll_diqu);
-					numdiqu=areaBean.get(ndiqu).getAreaid();
-
-				}
-			}else{
-				areaBeans=areaBeans.get(ndiqu).getChild();
-				if(areaBeans!=null){
-					if(areaBeans.size()!=0){
-						for(int j=0;j<areaBeans.size();j++){
-							list.add(areaBeans.get(j).getArename());
-						}
-						tpopu=2;
-						setpopuwindow(list,ll_diqu);
-						//popu.showAsDropDown(ll_diqu);
-						adapter_r.notifyDataSetChanged();
-						numdiqu=areaBeans.get(ndiqu).getAreaid();
-					}else{
-						diquid=-1;
-					}
-
-				}else{
-					diquid=-1;
-				}
-
-			}
+			setpopuwindow(context, listareaBean, ll_diqu);
 			
 			break;
 		case R.id.regist_ll_geren_pingzhong:
@@ -567,10 +648,10 @@ void setrel(){
 //			tjr 推荐人
 
 			if(tp==1){
-				bean=p.Regist(5, name, pass, rname, type, numdiqu+"", dizhi,phone, pingzhongString, siliao, computer,
+				bean=p.Regist(5, name, pass, rname, type, areaid+"", dizhi,phone, pingzhongString, siliao, computer,
 						price, numproduct+"", "",num ,person);
 			}else{
-				bean=p.Regist(6, name, pass, rname, type, numdiqu+"", dizhi, phone,cname, ctype, cphone);
+				bean=p.Regist(6, name, pass, rname, type, areaid+"", dizhi, phone,cname, ctype, cphone);
 			}
 			
 
