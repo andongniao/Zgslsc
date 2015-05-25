@@ -411,6 +411,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			break;
 		case R.id.home_gongqiu_ll:
 			Util.ShowToast(context, "请搜索您想要的产品~");
+			ExampleActivity.setCurrentTab(1);
 //			intent = new Intent(context,GqHomeActivity.class);
 //			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //			startActivity(intent);
