@@ -15,7 +15,7 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.ProductDetaileActivity.RefeshData1;
+
 import com.example.educonsult.adapters.ProductPingjiaAdapter;
 import com.example.educonsult.beans.CommentBean;
 import com.example.educonsult.beans.CommentStar;

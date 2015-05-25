@@ -78,13 +78,14 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ProductBean productBean;
 	private String liulanfile;
 	private Util u;
-	private boolean isSave,ispingjia;
+	private boolean isSave,ispingjia,iserror;
 	private UserBean userbean;
 	private BaseBean bean;
 	private HomeBean home;
 	private TextView[] tvtuijian;
 	private ImageView[] imtuijian;
 	private ListProductBean listProductBean;
+	
 
 
 	@Override
@@ -272,6 +273,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}else {
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 	}
 	void initDate(){
@@ -450,13 +453,13 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			break;
 		case R.id.product_detaile_ll_pingjia:
 	 
-			if(!ispingjia){
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
-				}
-			}
+//			if(!ispingjia){
+//				if(Util.detect(context)){
+//					myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
+//				}
+//			}
 			ispingjia=true;
-
+			setpingjiaDate();
 
 			break;
 		case R.id.product_detaile_ll_dianputuijian:
@@ -471,7 +474,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			intent = new Intent(context,ProductDetaileMoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			//intent.putExtra("qingjiamore", mallinfo.getItemid());
-			intent.putExtra("qingjiamore",productBean.getTitle());
+			intent.putExtra("qingjiamore",productBean.getItemid());
 			startActivity(intent);
 
 			break;
@@ -591,6 +594,21 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 					Util.ShowToast(context, productdetailbean.getMsg());
 				}
 
+			}
+			if(listComment!=null){
+				if("200".equals(listComment.getCode())){
+					comlist=listComment.getComlist();
+					comstar=listComment.getComstar();
+					
+				}else if("300".equals(listComment.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					Intent i= new Intent(context,LoginActivity.class);
+					startActivity(i);
+					finish();
+				}else{
+					Util.ShowToast(context, listComment.getMsg());
+				}
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
@@ -617,64 +635,26 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			productdetailbean = s.GetProductDetaile(productBean.getItemid());
 			//home = s.RequestHome();
 			//productdetailbean = s.GetProductDetaile();
+			listComment=s.GetComment(productBean.getItemid(), 1, "");
 			return true;
 		}
 	}
 	private void setpingjiaDate(){
-
-		pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
-		listView.setAdapter(pingjiaAdapter);
-		if(comlist.size()==0){
+      
+		if(comlist!=null&&comlist.size()>0){
+			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
+			listView.setAdapter(pingjiaAdapter);
+		}else {
 			pingjiamore.setVisibility(View.GONE);
+			Util.ShowToast(context, "暂无评价");
 		}
+		ll_add_view_chanpin.setVisibility(View.GONE);
+		ll_add_view_pingjia.setVisibility(View.VISIBLE);
+		ll_add_view_dianpu.setVisibility(View.GONE);
+		chanpin.setTextColor(getResources().getColor(R.color.black));
+		pingjia.setTextColor(getResources().getColor(R.color.orn));
+		dianpu.setTextColor(getResources().getColor(R.color.black));
 
-	}
-	public class RefeshData1 implements ThreadWithProgressDialogTask {
-
-		public RefeshData1() {
-		}
-
-		@Override
-		public boolean OnTaskDismissed() {
-			//任务取消
-			//			Toast.makeText(context, "cancle", 1000).show();
-			finish();
-			return false;
-		}
-
-		@Override
-		public boolean OnTaskDone() {
-			//任务完成后
-			if(listComment!=null){
-				if("200".equals(listComment.getCode())){
-					comlist=listComment.getComlist();
-					comstar=listComment.getComstar();
-					setpingjiaDate();
-				}else if("300".equals(listComment.getCode())){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					Intent i= new Intent(context,LoginActivity.class);
-					startActivity(i);
-					finish();
-				}else{
-					Util.ShowToast(context, listComment.getMsg());
-				}
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
-
-
-
-			return true;
-		}
-
-		@Override
-		public boolean TaskMain() {
-			// 访问
-			Send s = new Send(context);
-			listComment=s.GetComment(productBean.getItemid(), 1, "");
-			return true;
-		}
 	}
 
 

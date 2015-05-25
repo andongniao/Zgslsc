@@ -52,7 +52,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private int order;
 	private int page,addtype;
 	private String text;
-	private boolean islist;
+	private boolean islist,isfinish,isnext;
 	private TextView tv_guanjian;
 
 	@Override
@@ -79,6 +79,8 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				if(isnext){
+					
 				Intent intent = new Intent(context,ProductDetaileActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				//intent.putExtra("productdetaile",list.get(arg2) );
@@ -86,6 +88,9 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 				b.putSerializable("product", list.get(arg2));
 				intent.putExtra("productbundle", b);
 				startActivity(intent);
+				}else{
+					Util.ShowToast(context, "正在加载数据，请稍后。。。");
+				}
 			}
 		});
 		gv.setOnRefreshListener(new OnRefreshListener2<GridView>()
@@ -107,6 +112,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 				refreshView.getLoadingLayoutProxy()
 				.setLastUpdatedLabel(label);
 				page = 1;
+				isnext=false;
 				new GetDataTask().execute();
 			}
 
@@ -116,6 +122,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			{
 				addtype=1;
 				page +=1;
+				isnext=false;
 				new GetDataTask().execute();
 			}
 				});
@@ -126,6 +133,8 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		intent=getIntent();
 		order = 0;
 		list = new ArrayList<ProductBean>();
+		isfinish=true;
+		isnext=true;
 		/*intent.putExtra("searchtype", type);
 		intent.putExtra("searchorder", order);
 		intent.putExtra("searchpage", page);
@@ -198,13 +207,17 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		public boolean OnTaskDismissed() {
 			//任务取消
 			//			Toast.makeText(context, "cancle", 1000).show();
-			finish();
+			if(isfinish){
+				
+				finish();
+			}
 			return false;
 		}
 
 		@Override
 		public boolean OnTaskDone() {
 			//任务完成后
+			isfinish=false;
 			if(listProductBean!=null){
 				if("200".equals(listProductBean.getCode())){
 					//TODO	
@@ -273,6 +286,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			}
 			islist=true;
 		}
+		
 	}
 	@Override
 	public void onClick(View v) {
@@ -281,11 +295,14 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			finish();
 			break;
 		case R.id.search_result_et:
+			
+				
 			Intent intent = new Intent(this,SearchHomeActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("type", 1);
 			intent.putExtra("t", 1);
 			startActivity(intent);
+			
 			break;
 		case R.id.search_result_ll_zonghe:
 			order = 0;
@@ -385,7 +402,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		@Override
 		protected Void doInBackground(Void... params)
 		{
-
+			
 			PostHttp p=new PostHttp(context);
 			listProductBean=p.SeanchText(type, order, page, text);
 
@@ -432,6 +449,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 				}
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
+			isnext=true;
 
 		}
 	}

@@ -250,7 +250,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public boolean OnTaskDismissed() {
 				//任务取消
-//				Toast.makeText(context, "cancle", 1000).show();
+
 				finish();
 				return false;
 			}

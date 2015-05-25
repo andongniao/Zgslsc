@@ -61,7 +61,7 @@ OnClickListener {
 		};
 		// ÉèÖÃ²à»¬Ğ§¹û
 		setBehindContentView(R.layout.homepage_menu);
-		setMenuFragment();
+		setMenuFragment(); 
 		setSilMenu();
 
 		setContentView(R.layout.activity_home_pager);
