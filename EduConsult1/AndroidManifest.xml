@@ -23,7 +23,9 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
 
     <application
         android:name=".MyApplication"
@@ -38,11 +40,19 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="xunbowangluo#zgslsc" />
+        <!-- 设置AppKey -->
+        <meta-data
+            android:name="TESTIN_APPKEY"
+            android:value="cb499fd37e38667222baa4dd5def39ec" />
+        <!-- 设置渠道信息 -->
+        <meta-data
+            android:name="TESTIN_CHANNEL"
+            android:value="Channel_ID" />
 
         <activity
             android:name=".activitys.WelcomeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,159 +61,160 @@
         </activity>
         <activity
             android:name=".ExampleActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.HomePagerActivity"
+            android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Sherlock.Light"
-            android:label="@string/app_name" >
+            android:theme="@style/Theme.Sherlock.Light" >
         </activity>
         <activity
             android:name=".activitys.LoginActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.SearchHomeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MyCenterActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.GqTwoActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.RegistActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ProductDetaileActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ServiceCenterActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.AboutActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.AddressActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.AddressGLActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ShopcartActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.QianBaoActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MyInfoActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.XinjianActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.OrderActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.UpAddressActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.SearchResultActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MyOrderActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.GqHomeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ZhanhuiHomeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ZhanhuiDetaileActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.KnowHomeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.RegistOKActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MyQuestionActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.PutQuestionActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.KnowDetaileActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-          <activity
+        <activity
             android:name=".activitys.StoreActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
 
         <!-- 银联支付 -->
-        <activity android:name="com.unionpay.uppay.PayActivity" 
+        <activity
+            android:name="com.unionpay.uppay.PayActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="org.apkplug.app.apkplugActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" 
+            android:screenOrientation="portrait"
             android:theme="@style/android:Theme.Light" />
 
         <service android:name="com.easemob.chat.EMChatService" >
@@ -214,139 +225,138 @@
 
         <activity
             android:name=".activitys.MoneyQueryActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MoneyQueryInfoActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MoneyWithdrawalActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.CouponsActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ProductDetaileMoreActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.XinJianInfoActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.ServiceQuestionHomeActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-          <activity
+        <activity
             android:name=".activitys.ServiceQuestionDetaileActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.MyBusinessperntActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.BusinesspartnersInfoActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.SCProductActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-        
-         <activity
+        <activity
             android:name=".activitys.SCStoreActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MyZjActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.MoneyCarListActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.BDCardActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.NewHomeActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.NewDetaileActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ApplyerFundActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ApplyInfoActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.RechargeActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ApplyOrderActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.PasswordActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.PasswordXGActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.MyOrderInfoActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.PJOrderActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activitys.ConfirmTheDeliveryActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name=".activitys.MyCenterTuijianActivity"
-            android:screenOrientation="portrait" 
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

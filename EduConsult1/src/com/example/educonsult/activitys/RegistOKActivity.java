@@ -9,6 +9,7 @@ import android.os.Message;
 
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
+import com.testin.agent.TestinAgent;
 
 public class RegistOKActivity extends Activity{
 	protected int activityCloseEnterAnimation;
@@ -20,6 +21,7 @@ public class RegistOKActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		TestinAgent.init(this);
 		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
 		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
 		activityStyle.recycle();

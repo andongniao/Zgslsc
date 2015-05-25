@@ -8,6 +8,7 @@ import com.example.educonsult.adapters.ZhanhuiDetaileLvAdapter;
 import com.example.educonsult.adapters.ZhanhuiHomeAdapter;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class NewDetaileActivity extends BaseActivity{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		list = new ArrayList<Integer>();
 		for(int i = 0;i<5;i++){

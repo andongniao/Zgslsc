@@ -34,6 +34,7 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_head,ll_friend,ll_mycard,ll_diqu,ll_qiye,ll_geren,ll_two_diqu;
@@ -101,6 +102,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		bean = MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();

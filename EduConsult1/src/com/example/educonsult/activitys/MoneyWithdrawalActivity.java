@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.R;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class MoneyWithdrawalActivity extends BaseActivity implements OnClickListener{
 	private TextView carId,allMoney,num;
@@ -71,6 +72,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		});
 	}
 	void init(){
+		TestinAgent.init(this);
 		carId=(TextView)findViewById(R.id.money_withdrawal_carid);
 		allMoney=(TextView)findViewById(R.id.money_withdrawal_allmoney);
 		num=(TextView)findViewById(R.id.money_withdrawal_num);

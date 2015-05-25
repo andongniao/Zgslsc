@@ -24,6 +24,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.ProductAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class SCProductActivity extends BaseActivity implements OnClickListener{
 	private RelativeLayout reaLayout;
@@ -57,6 +58,7 @@ public class SCProductActivity extends BaseActivity implements OnClickListener{
 		
 	}
 	void init(){
+		TestinAgent.init(this);
 		/*reaLayout=(RelativeLayout)findViewById(R.id.mybusinesspartners_rela);
 		reaLayout.setOnClickListener(this);*/
 		product_list=(ListView)findViewById(R.id.scproduct_list);

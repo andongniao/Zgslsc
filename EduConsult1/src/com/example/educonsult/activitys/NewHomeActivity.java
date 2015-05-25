@@ -28,6 +28,7 @@ import com.example.educonsult.adapters.ZhanhuiHomeAdapter;
 import com.example.educonsult.adapters.ZhanhuilvAdapter;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class NewHomeActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -69,7 +70,7 @@ public class NewHomeActivity extends BaseActivity implements OnClickListener{
 	
 
 	private void init() {
-
+		TestinAgent.init(this);
 		list = new ArrayList<Integer>();
 		list.add(1);
 		list.add(2);

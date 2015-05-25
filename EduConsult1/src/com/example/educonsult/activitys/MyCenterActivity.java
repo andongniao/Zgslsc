@@ -23,6 +23,7 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 
 public class MyCenterActivity extends BaseActivity implements OnClickListener{
@@ -51,7 +52,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
-		
+		TestinAgent.init(this);
 		
 		context = this;
 		tv_version = (TextView) findViewById(R.id.mycenter_home_tv_version);

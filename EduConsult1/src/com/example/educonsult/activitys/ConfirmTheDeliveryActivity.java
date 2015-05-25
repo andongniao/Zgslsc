@@ -30,6 +30,7 @@ import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ListOrderWuliu;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class ConfirmTheDeliveryActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_way,ll_time;
@@ -65,6 +66,7 @@ public class ConfirmTheDeliveryActivity extends BaseActivity implements OnClickL
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context=this;
 		ll = new ArrayList<String>();
 		authstr = MyApplication.mp.getUser().getAuthstr();

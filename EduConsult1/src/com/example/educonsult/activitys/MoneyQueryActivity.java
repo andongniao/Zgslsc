@@ -33,6 +33,7 @@ import com.example.educonsult.beans.ListMoneyBean;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout reaLayout;
@@ -96,6 +97,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		});
 	}
 	void init(){
+		TestinAgent.init(this);
 		reaLayout=(LinearLayout)findViewById(R.id.qianbao_query_rela);
 		reaLayout.setOnClickListener(this);
 		image=(ImageView)findViewById(R.id.qianbao_query_image);

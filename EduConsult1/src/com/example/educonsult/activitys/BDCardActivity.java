@@ -39,6 +39,7 @@ import com.example.educonsult.beans.ListBanksCity;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class BDCardActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_carway,ll_carwhere,ll_carzhihang;
@@ -96,6 +97,7 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 
 	}
 	void init(){
+		TestinAgent.init(this);
 		filename=MyApplication.AreaName;
 		u=new Util(context);
 		/*listAreaBean=(ListAreaBean)u.readObject(filename);

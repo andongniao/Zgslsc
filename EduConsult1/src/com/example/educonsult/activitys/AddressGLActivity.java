@@ -37,6 +37,7 @@ import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_diqu,ll_jiedao,ll_address,ll_shouhuoren,ll_number,ll_youbian;
@@ -87,6 +88,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context=this;
 		filename = MyApplication.AreaName;
 		u = new Util(context);

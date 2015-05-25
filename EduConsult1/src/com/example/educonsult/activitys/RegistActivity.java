@@ -43,6 +43,7 @@ import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class RegistActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -92,6 +93,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 
 
 	private void init() {
+		TestinAgent.init(this);
 		dm = new DisplayMetrics();
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		 myPDT=new ThreadWithProgressDialog();

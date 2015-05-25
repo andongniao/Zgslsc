@@ -23,6 +23,7 @@ import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 
 
@@ -55,6 +56,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		init();
 	}
 	void init(){
+		TestinAgent.init(this);
 		intent=getIntent();
 		itemid=intent.getStringExtra("qingjiamore");
 		list=new ArrayList<ProductBean>();

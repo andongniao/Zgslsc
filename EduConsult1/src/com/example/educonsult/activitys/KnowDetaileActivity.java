@@ -19,6 +19,7 @@ import com.example.educonsult.adapters.ProductPingjiaAdapter;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class KnowDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -63,6 +64,7 @@ public class KnowDetaileActivity extends BaseActivity implements OnClickListener
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		type = false;
 		list = new ArrayList<ProductBean>();

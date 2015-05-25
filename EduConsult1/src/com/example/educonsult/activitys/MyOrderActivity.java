@@ -39,6 +39,7 @@ import com.example.educonsult.myviews.xlistview.XListView.IXListViewListener;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 import com.unionpay.mobile.android.nocard.views.ad;
 
 @SuppressWarnings("unused")
@@ -102,6 +103,7 @@ import com.unionpay.mobile.android.nocard.views.ad;
 
 	@SuppressWarnings("deprecation")
 	private void init() {
+		TestinAgent.init(this);
 		isloding = false;
 		context = this;
 		init = true;

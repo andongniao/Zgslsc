@@ -22,6 +22,7 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.beans.XinJianBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class XinjianActivity extends BaseActivity{
 	private ListView lv;
@@ -67,6 +68,7 @@ public class XinjianActivity extends BaseActivity{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		bean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();

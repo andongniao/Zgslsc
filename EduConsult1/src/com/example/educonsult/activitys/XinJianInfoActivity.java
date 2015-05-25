@@ -14,6 +14,7 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.beans.XinJianDetaileBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class XinJianInfoActivity extends BaseActivity{
 	private Intent intent;
@@ -33,6 +34,7 @@ public class XinJianInfoActivity extends BaseActivity{
 		init();
 	}
 	void init(){
+		TestinAgent.init(this);
 		context=this;
 		intent=getIntent();
 		xinjianid=intent.getStringExtra("xinjianid");

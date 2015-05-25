@@ -31,6 +31,7 @@ import com.example.educonsult.adapters.ZhanhuiHomeAdapter;
 import com.example.educonsult.adapters.ZhanhuilvAdapter;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class ZhanhuiHomeActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
@@ -56,6 +57,7 @@ public class ZhanhuiHomeActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		TestinAgent.init(this);
 		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
 		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
 		activityStyle.recycle();

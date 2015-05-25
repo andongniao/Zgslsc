@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.tools.UITools;
+import com.testin.agent.TestinAgent;
 
 public class BusinesspartnersInfoActivity extends BaseActivity implements
 OnClickListener{
@@ -65,6 +66,7 @@ OnClickListener{
 		addlistener();
 	}
 	private void init() {
+		TestinAgent.init(this);
 		// TODO Auto-generated method stub
 		//		private LinearLayout fenlei;
 		//		private TextView username,name,computername;

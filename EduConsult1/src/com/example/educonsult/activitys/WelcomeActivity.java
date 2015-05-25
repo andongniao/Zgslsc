@@ -18,14 +18,11 @@ import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.beans.ListComment;
 import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.beans.ListMoneyBean;
-import com.example.educonsult.beans.ListOrderBean;
-import com.example.educonsult.beans.ListOrderCommit;
 import com.example.educonsult.beans.ListProductBean;
-import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ProdectDetaileBean;
-import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class WelcomeActivity extends Activity{
 	protected int activityCloseEnterAnimation;
@@ -82,6 +79,7 @@ public class WelcomeActivity extends Activity{
 
 	}
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		ct = false;
 		fl = false;

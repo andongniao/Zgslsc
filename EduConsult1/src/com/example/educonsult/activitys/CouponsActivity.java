@@ -18,6 +18,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.CouponsAdapter;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class CouponsActivity extends BaseActivity {
 	private ListView list_coupons;
@@ -63,6 +64,7 @@ public class CouponsActivity extends BaseActivity {
 		
 	}
 	void init(){
+		TestinAgent.init(this);
 		ll_isno=(LinearLayout)findViewById(R.id.coupons_ll_isnull);
 		list_coupons=(ListView)findViewById(R.id.coupons_list);
 		couponsAdapter=new CouponsAdapter(this);

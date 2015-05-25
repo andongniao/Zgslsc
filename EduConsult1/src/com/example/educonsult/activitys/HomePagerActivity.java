@@ -31,6 +31,7 @@ import com.example.educonsult.tools.StringUtils;
 import com.example.educonsult.tools.Util;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.testin.agent.TestinAgent;
 
 public class HomePagerActivity extends SlidingFragmentActivity implements
 OnClickListener {
@@ -50,6 +51,7 @@ OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		TestinAgent.init(this);
 		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {

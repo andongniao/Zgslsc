@@ -40,6 +40,7 @@ import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class MyCenterTuijianActivity extends BaseActivity implements OnClickListener{
 	
@@ -98,6 +99,7 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		isread = false;
 		myPDT=new ThreadWithProgressDialog();

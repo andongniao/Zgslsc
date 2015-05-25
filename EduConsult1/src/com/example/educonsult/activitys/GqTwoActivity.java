@@ -37,6 +37,7 @@ import com.example.educonsult.adapters.KnowFenleiAdapter;
 import com.example.educonsult.beans.CompanyBean;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -191,6 +192,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 
 	}
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		l = new ArrayList<View>();
 		list = new ArrayList<CompanyBean>();
