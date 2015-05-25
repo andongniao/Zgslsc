@@ -845,7 +845,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			if(home!=null){
 			initdata(home);
 			}else{
-				Util.ShowToast(context, "error");
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			return true;
 		}
@@ -909,7 +909,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			for(int i =0;i<home.getRecommend().size();i++){
 				String url = home.getRecommend().get(i).getThumb();
 				Util.Getbitmap(list_rem.get(i), url);
-				if(i>=5){
+				if(i>=5){	
 					String t = home.getRecommend().get(i).getTitle();
 					String p = home.getRecommend().get(i).getPrice();
 					list_tv_rem_title.get((i-5)).setText(t);

@@ -28,7 +28,11 @@ import com.example.educonsult.myviews.xlistview.XListView.IXListViewListener;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
-
+/**
+ * 退货订单列表
+ * @author Qzr
+ *
+ */
 public class ApplyOrderActivity extends BaseActivity implements IXListViewListener{
 	private Context context;
 	private XListView lv;
@@ -43,6 +47,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 	private TextView see;
 	private int addtype,page;
 	private Handler handler;
+	private boolean isloding;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -86,6 +91,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 
 	private void init() {
 		context = this;
+		isloding = false;
 		page =1;
 		itemid = getIntent().getStringExtra("itemid");
 		authstr = MyApplication.mp.getUser().getAuthstr();
@@ -127,7 +133,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 						adapter.SetData(list);
 						adapter.notifyDataSetChanged();
 					}else{
-						adapter = new ApplyOrderHomeAdapter(context, list, apply);
+						adapter = new ApplyOrderHomeAdapter(context, list, apply,isloding);
 						lv.setAdapter(adapter);
 					}
 				}else if(msg.what==2){
@@ -166,7 +172,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 						adapter.SetData(list);
 						adapter.notifyDataSetChanged();
 					}else{
-						adapter = new ApplyOrderHomeAdapter(context, list, apply);
+						adapter = new ApplyOrderHomeAdapter(context, list, apply,isloding);
 						lv.setAdapter(adapter);
 					}
 				}else if("300".equals(lb.getCode())){
@@ -206,6 +212,8 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 	public void onRefresh() {
 		page=1;
 		addtype = 2;
+		isloding = true;
+		adapter.SetBoolean(isloding);
 		getData();
 	}
 
@@ -215,6 +223,8 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 	public void onLoadMore() {
 		page+=1;
 		addtype = 2;
+		isloding = true;
+		adapter.SetBoolean(isloding);
 		getData();
 	}
 
@@ -226,7 +236,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 			if(lb!=null){
 				if("200".equals(lb.getCode())){
 					ArrayList<OrderBean>lt = lb.getList_order();
-					msg.what=1;
+					msg.what=1; 
 					msg.obj = lt;
 				}else if("200".equals(lb.getCode())){
 					msg.what=3;
@@ -247,6 +257,8 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 	private void onLoad() {
 		lv.stopRefresh();
 		lv.stopLoadMore();
+		isloding = false;
+		adapter.SetBoolean(isloding);
 		if(addtype==1){
 			SimpleDateFormat sDateFormat = new SimpleDateFormat(
 					"yyyy-MM-dd   hh:mm:ss");

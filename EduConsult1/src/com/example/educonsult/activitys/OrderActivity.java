@@ -214,6 +214,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			if(Util.IsNull(strpass)){
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}else{
 				Util.ShowToast(context, R.string.money_password_nopass);
@@ -379,6 +381,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 				inttype=2;
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
 		});

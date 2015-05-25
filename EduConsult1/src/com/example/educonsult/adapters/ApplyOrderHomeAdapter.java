@@ -24,17 +24,24 @@ OnClickListener{
 	private OrderRefundAdapter adapter;
 	private int n;
 	private MyApply apply;
+	private boolean isloding;
 
-	public ApplyOrderHomeAdapter(Context context,ArrayList<OrderBean>list,MyApply apply){
+	public ApplyOrderHomeAdapter(Context context,ArrayList<OrderBean>list,MyApply apply,boolean isloding){
 		this.context = context;
 		this.list = list;
+		this.isloding = isloding;
 		this.apply = apply;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(ArrayList<OrderBean>list){
 		this.list = list;
 	}
-
+	public void SetBoolean(boolean isloding){
+		this.isloding = isloding;
+		if(adapter!=null){
+			adapter.SetBoolean(isloding);
+		}
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -87,7 +94,7 @@ OnClickListener{
 		
 		
 		
-		adapter = new OrderRefundAdapter(context, bean,apply);
+		adapter = new OrderRefundAdapter(context, bean,apply,isloding);
 		item.lv.setAdapter(adapter);
 
 		return convertView;

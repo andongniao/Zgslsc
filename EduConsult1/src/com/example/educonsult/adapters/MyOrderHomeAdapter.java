@@ -16,6 +16,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.activitys.MyOrderActivity.Myorder;
 import com.example.educonsult.beans.OrderBean;
 import com.example.educonsult.myviews.MyListview;
+import com.example.educonsult.tools.Util;
 
 public class MyOrderHomeAdapter extends BaseAdapter{
 	private Context context;
@@ -27,15 +28,20 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 	private Myorder myorder;
 	private int type;
 	private OrderBean o;
+	private boolean isloding;
 
-	public MyOrderHomeAdapter(Context context,ArrayList<OrderBean>list,Myorder myorder){
+	public MyOrderHomeAdapter(Context context,ArrayList<OrderBean>list,Myorder myorder,boolean isloding){
 		this.context = context;
 		this.list = list;
+		this.isloding = isloding;
 		this.myorder = myorder;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(ArrayList<OrderBean>list){
 		this.list = list;
+	}
+	public void SetBoolean(boolean isloding){
+		this.isloding = isloding;
 	}
 
 	@Override
@@ -90,38 +96,46 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 		int n = Integer.parseInt(o.getNumber());
 		double p = Double.parseDouble(o.getPrice());
 		item.tv_shifu.setText("￥"+String.valueOf(p*n));
-		adapter = new MyOrderLvAdapter(context,o,position,myorder);
+		adapter = new MyOrderLvAdapter(context,o,position,myorder,isloding);
 		item.lv.setAdapter(adapter);
 		//		item.tv_day.setText("距离确认收货还有2天");
 		item.btn_l.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OrderBean b = list.get(position);
-				int t = Integer.parseInt(b.getStatusid());
-				if(t == 1){
-					myorder.Order_Canale(b);
-				}else if(t==2){
-					myorder.Order_Fahuo(b);
-				}else if(t==3){
-					myorder.Order_Repay(b);
+				if(!isloding){
+					OrderBean b = list.get(position);
+					int t = Integer.parseInt(b.getStatusid());
+					if(t == 1){
+						myorder.Order_Canale(b);
+					}else if(t==2){
+						myorder.Order_Fahuo(b);
+					}else if(t==3){
+						myorder.Order_Repay(b);
+					}
+				}else{
+					Util.ShowToast(context, "正在加载，请稍后...");
 				}
 			}
 		});
 		item.btn_r.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OrderBean b = list.get(position);
-				int t = Integer.parseInt(b.getStatusid());
-				if(t == 1){
-					myorder.Order_Pay(b);
-				}else if(t==2){
-					myorder.Order_Canale(b);
-				}else if(t==3){
-					myorder.Order_Refund(b);
-				}else if(t==4){
-					if(b.getIscomment()==0){
-						myorder.Order_commit(b);
+				if(!isloding){
+					OrderBean b = list.get(position);
+					int t = Integer.parseInt(b.getStatusid());
+					if(t == 1){
+						myorder.Order_Pay(b);
+					}else if(t==2){
+						myorder.Order_Canale(b);
+					}else if(t==3){
+						myorder.Order_Refund(b);
+					}else if(t==4){
+						if(b.getIscomment()==0){
+							myorder.Order_commit(b);
+						}
 					}
+				}else{
+					Util.ShowToast(context, "正在加载，请稍后...");
 				}
 			}
 		});

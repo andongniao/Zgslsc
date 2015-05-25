@@ -23,12 +23,14 @@ public class MyOrderLvAdapter extends BaseAdapter{
 	private Item item;
 	private OrderBean orderBean;
 	private Myorder myorder;
+	private boolean isloding;
 
 
-	public MyOrderLvAdapter(Context context,OrderBean orderBean,int index,Myorder myorder){
+	public MyOrderLvAdapter(Context context,OrderBean orderBean,int index,Myorder myorder,boolean isloding){
 		this.context = context;
 		this.orderBean = orderBean;
 		this.myorder = myorder;
+		this.isloding = isloding;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(OrderBean orderBean){
@@ -87,7 +89,11 @@ public class MyOrderLvAdapter extends BaseAdapter{
 			
 			@Override
 			public void onClick(View v) {
+				if(!isloding){
 				myorder.Order_Detaile(orderBean);
+				}else{
+					Util.ShowToast(context, "正在加载，请稍后...");
+				}
 			}
 		});
 		

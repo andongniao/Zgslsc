@@ -39,6 +39,7 @@ import com.example.educonsult.myviews.xlistview.XListView.IXListViewListener;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.unionpay.mobile.android.nocard.views.ad;
 
 @SuppressWarnings("unused")
 @SuppressLint("InflateParams") public class MyOrderActivity extends BaseActivity implements OnClickListener,IXListViewListener{
@@ -71,6 +72,7 @@ import com.example.educonsult.tools.Util;
 	private Handler handler;
 	public static boolean isinit;
 	private EditText et_pass;
+	private boolean isloding;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -84,7 +86,7 @@ import com.example.educonsult.tools.Util;
 		setContentXml(R.layout.myorder_home_layout);
 		init();
 		addlistener();
-		/*************≤‚ ‘******** ********/
+		/*************≤‚ ‘****************/
 		//		myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//ø…»°œ˚
 	}
 
@@ -100,6 +102,7 @@ import com.example.educonsult.tools.Util;
 
 	@SuppressWarnings("deprecation")
 	private void init() {
+		isloding = false;
 		context = this;
 		init = true;
 		userbean = MyApplication.mp.getUser();
@@ -341,7 +344,7 @@ import com.example.educonsult.tools.Util;
 						adapter.SetData(list);
 						adapter.notifyDataSetChanged();
 					}else{
-						adapter = new MyOrderHomeAdapter(context, list, myorder);
+						adapter = new MyOrderHomeAdapter(context, list, myorder,isloding);
 						lv.setAdapter(adapter);
 					}
 				}else if(msg.what==2){
@@ -476,7 +479,7 @@ import com.example.educonsult.tools.Util;
 					if(listbean!=null){
 						if("200".equals(listbean.getCode())){
 							list = listbean.getList_order();
-							adapter = new MyOrderHomeAdapter(context, list,myorder);
+							adapter = new MyOrderHomeAdapter(context, list,myorder,isloding);
 							lv.setAdapter(adapter);
 						}else if("300".equals(listbean.getCode())){
 							MyApplication.mp.setlogin(false);
@@ -492,8 +495,13 @@ import com.example.educonsult.tools.Util;
 						Util.ShowToast(context, R.string.net_is_eor);
 					}
 				}else{
-					adapter = new MyOrderHomeAdapter(context, list,myorder);
+					if(adapter==null){
+					adapter = new MyOrderHomeAdapter(context, list,myorder,isloding);
 					lv.setAdapter(adapter);	
+					}else{
+						adapter.SetData(list);
+						adapter.notifyDataSetChanged();
+					}
 				}
 			}else{
 				if(paybean!=null){
@@ -572,6 +580,8 @@ import com.example.educonsult.tools.Util;
 	public void onRefresh() {
 		ppage=1;
 		addtype = 1;
+		isloding =	true;
+		adapter.SetBoolean(isloding);
 		getData();
 	}
 
@@ -579,6 +589,8 @@ import com.example.educonsult.tools.Util;
 	public void onLoadMore() {
 		ppage+=1;
 		addtype = 2;
+		isloding = true;
+		adapter.SetBoolean(isloding);
 		getData();
 	}
 
@@ -606,6 +618,8 @@ import com.example.educonsult.tools.Util;
 		};}.start();
 	}
 	private void onLoad() {
+		isloding = false;
+		adapter.SetBoolean(isloding);
 		lv.stopRefresh();
 		lv.stopLoadMore();
 		if(addtype==1){

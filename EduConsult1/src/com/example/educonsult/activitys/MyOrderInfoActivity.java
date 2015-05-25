@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -86,6 +89,11 @@ OnClickListener {
 		}else{
 			ll_isshow.setVisibility(View.GONE);
 		}
+		v_pop = LayoutInflater.from(context).inflate(R.layout.money_password, null);
+		popwindow = new PopupWindow(v_pop, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		popwindow.setOutsideTouchable(true);
+		popwindow.setFocusable(true);
+		popwindow.setBackgroundDrawable(new BitmapDrawable());
 		tv_ok.setOnClickListener(this);
 		tv_no.setOnClickListener(this);
 		listview=(MyListview)findViewById(R.id.myorderinfo_list);
@@ -105,7 +113,9 @@ OnClickListener {
 			initdata = false;
 			tp = 2;
 			TextView money = (TextView) v_pop.findViewById(R.id.money_password_money);
-			money.setText(ordebean.getMoney());
+			EditText et = (EditText) v_pop.findViewById(R.id.money_password_edpassword);
+			money.setText("гд"+ordebean.getMoney());
+			et.setText("");
 			popwindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER,0, 0);
 			Button btn_pay = (Button) v_pop.findViewById(R.id.money_password_yes);
 			Button btn_cancle = (Button) v_pop.findViewById(R.id.money_password_no);	

@@ -24,16 +24,21 @@ public class OrderRefundAdapter extends BaseAdapter{
 	private Item item;
 	private OrderBean orderBean;
 	private MyApply apply;
+	private boolean isloding;
 
 
-	public OrderRefundAdapter(Context context,OrderBean orderBean,MyApply apply){
+	public OrderRefundAdapter(Context context,OrderBean orderBean,MyApply apply,boolean isloding){
 		this.context = context;
 		this.orderBean = orderBean;
 		this.apply = apply;
+		this.isloding = isloding;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(OrderBean orderBean){
 		this.orderBean = orderBean;
+	}
+	public void SetBoolean(boolean isloding){
+		this.isloding = isloding;
 	}
 
 	@Override
@@ -71,10 +76,10 @@ public class OrderRefundAdapter extends BaseAdapter{
 		}
 		Bitmap bmp = null;
 		try {
-//			bmp = Util.getBitmapForNet(orderBean.getThumb());
-//			if(bmp!=null){
-//				item.iv.setImageBitmap(bmp);
-//			}
+			//			bmp = Util.getBitmapForNet(orderBean.getThumb());
+			//			if(bmp!=null){
+			//				item.iv.setImageBitmap(bmp);
+			//			}
 			Util.Getbitmap(item.iv, orderBean.getThumb());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -85,10 +90,14 @@ public class OrderRefundAdapter extends BaseAdapter{
 		item.tv_unit.setText(orderBean.getUnit());
 		item.tv_num.setText("X"+orderBean.getNumber());
 		convertView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				apply.detaile(orderBean.getItemid());
+				if(!isloding){
+					apply.detaile(orderBean.getItemid());
+				}else{
+					Util.ShowToast(context, "正在加载，请稍后...");
+				}
 			}
 		});
 		return convertView;

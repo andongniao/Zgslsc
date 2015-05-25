@@ -1843,7 +1843,9 @@ public class PostHttp {
 					obj = new JSONObject(strResult);
 					if(obj!=null){
 						if("200".equals(obj.getString("code"))){
+							if(Util.IsNull(obj.getString("type"))){
 							bean.setType(obj.getString("type"));
+							}
 						}
 						bean.setMsg(obj.getString("message"));
 						bean.setCode(obj.getString("code"));

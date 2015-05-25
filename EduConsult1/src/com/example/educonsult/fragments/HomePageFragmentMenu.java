@@ -49,8 +49,8 @@ public class HomePageFragmentMenu extends Fragment {
 	private String filename=MyApplication.FenleiName;
 	private Util u;
 	private ArrayList<FenleiBean> fenleilist, listchile;
-	
-	
+
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -84,6 +84,7 @@ public class HomePageFragmentMenu extends Fragment {
 	private void init() {
 		context = getActivity();
 		list = new ArrayList<String>();
+		myPDT = new ThreadWithProgressDialog();
 		u=new Util(context);
 		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
 			listFenleiBean=(ListFenleiBean)u.readObject(filename);
@@ -91,24 +92,26 @@ public class HomePageFragmentMenu extends Fragment {
 		}else{
 			if(Util.detect(context)){
 				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
 			}
 		}
-//		fenleilist=new ArrayList<FenleiBean>();
-		
+		//		fenleilist=new ArrayList<FenleiBean>();
+
 		listchile=new ArrayList<FenleiBean>();
 		ll_mycenter = (LinearLayout) view.findViewById(R.id.slid_view_ll_mycenter);
 		ll_about = (LinearLayout) view.findViewById(R.id.slid_view_ll_about);
 		lv_l = (ListView) view.findViewById(R.id.slid_view_lv_l);
 		ll_r = (LinearLayout) view.findViewById(R.id.slid_view_ll_r);
-		ArrayList<Integer> l = new ArrayList<Integer>();
+		final ArrayList<Integer> l = new ArrayList<Integer>();
 		for(int i=0;i<8;i++){
 			l.add(i);
 		}
 		adapter_l = new FenleiAdapter(context, l);
 		lv_l.setAdapter(adapter_l);
 		lv_r = (ListView) view.findViewById(R.id.slid_view_lv_r);
-		
-		
+
+
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 			Intent intent;
 			@Override
@@ -121,14 +124,18 @@ public class HomePageFragmentMenu extends Fragment {
 					HomePagerActivity.handler.sendMessage(msg);
 					break;
 				case 1:
-//					intent=new Intent(context, GqHomeActivity.class);
-//					startActivity(intent);
+					//					intent=new Intent(context, GqHomeActivity.class);
+					//					startActivity(intent);
 					msg = HomePagerActivity.handler.obtainMessage();
 					msg.obj = HomePagerActivity.SlidTag;
 					HomePagerActivity.handler.sendMessage(msg);
 					break;
 				case 2:
 					ll_r.setVisibility(View.VISIBLE);
+					if(adapter_l==null){
+						adapter_l = new FenleiAdapter(context, l);
+						lv_l.setAdapter(adapter_l);
+					}
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="饲料";
@@ -144,6 +151,10 @@ public class HomePageFragmentMenu extends Fragment {
 					break;
 				case 3:
 					ll_r.setVisibility(View.VISIBLE);
+					if(adapter_l==null){
+						adapter_l = new FenleiAdapter(context, l);
+						lv_l.setAdapter(adapter_l);
+					}
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="兽药";
@@ -159,6 +170,10 @@ public class HomePageFragmentMenu extends Fragment {
 					break;
 				case 4:
 					ll_r.setVisibility(View.VISIBLE);
+					if(adapter_l==null){
+						adapter_l = new FenleiAdapter(context, l);
+						lv_l.setAdapter(adapter_l);
+					}
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="养殖设备与机械";
@@ -174,6 +189,10 @@ public class HomePageFragmentMenu extends Fragment {
 					break;
 				case 5:
 					ll_r.setVisibility(View.VISIBLE);
+					if(adapter_l==null){
+						adapter_l = new FenleiAdapter(context, l);
+						lv_l.setAdapter(adapter_l);
+					}
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="畜禽养殖";
@@ -189,6 +208,10 @@ public class HomePageFragmentMenu extends Fragment {
 					break;
 				case 6:
 					ll_r.setVisibility(View.VISIBLE);
+					if(adapter_l==null){
+						adapter_l = new FenleiAdapter(context, l);
+						lv_l.setAdapter(adapter_l);
+					}
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="添加剂";
@@ -204,6 +227,10 @@ public class HomePageFragmentMenu extends Fragment {
 					break;
 				case 7:
 					ll_r.setVisibility(View.VISIBLE);
+					if(adapter_l==null){
+						adapter_l = new FenleiAdapter(context, l);
+						lv_l.setAdapter(adapter_l);
+					}
 					adapter_l.SetData(arg2);
 					adapter_l.notifyDataSetChanged();
 					title="饲料原料";
@@ -217,32 +244,17 @@ public class HomePageFragmentMenu extends Fragment {
 						}
 					}
 					break;
-				
+
 
 				default:
 					break;
 				}
-				
-			}
-		});
-		
-		lv_r.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				/*Intent intent=new Intent(context,GqTwoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("title", title);
-				intent.putExtra("num", arg2);
-				startActivity(intent);*/
-				Util.ShowToast(context, R.string.maimeng);
 			}
 		});
 	}
 
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -261,14 +273,14 @@ public class HomePageFragmentMenu extends Fragment {
 			msg = HomePagerActivity.handler.obtainMessage();
 			msg.obj = HomePagerActivity.SlidTag;
 			HomePagerActivity.handler.sendMessage(msg);
-//			Util.ShowToast(context, R.string.maimeng);
+			//			Util.ShowToast(context, R.string.maimeng);
 			String name = listchile.get(arg2).getCatname();
 			ToSearch(name);
-			
+
 		}
-		
+
 	}
-	
+
 	// 任务
 	public class RefeshData implements ThreadWithProgressDialogTask {
 
@@ -279,6 +291,9 @@ public class HomePageFragmentMenu extends Fragment {
 		public boolean OnTaskDismissed() {
 			//任务取消
 			//				Toast.makeText(context, "cancle", 1000).show();
+			msg = HomePagerActivity.handler.obtainMessage();
+			msg.obj = HomePagerActivity.SlidTag;
+			HomePagerActivity.handler.sendMessage(msg);
 			return false;
 		}
 
@@ -288,6 +303,7 @@ public class HomePageFragmentMenu extends Fragment {
 			if(listFenleiBean!=null){
 				if("200".equals(listFenleiBean.getCode())){
 					u.saveObject(listFenleiBean, filename);
+					fenleilist=listFenleiBean.getList();
 				}else if("300".equals(listFenleiBean.getCode())){
 					MyApplication.mp.setlogin(false);
 					Util.ShowToast(context, R.string.login_out_time);
@@ -311,13 +327,13 @@ public class HomePageFragmentMenu extends Fragment {
 			return true;
 		}
 	}
-	 private void ToSearch(String text){
-		 Intent intent=new Intent(context, SearchResultActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("searchtype", "1");
-			intent.putExtra("searchorder", "0");
-			intent.putExtra("searchtext", text);
-			startActivity(intent);
-	 }
-	
+	private void ToSearch(String text){
+		Intent intent=new Intent(context, SearchResultActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("searchtype", "1");
+		intent.putExtra("searchorder", "0");
+		intent.putExtra("searchtext", text);
+		startActivity(intent);
+	}
+
 }
