@@ -28,6 +28,7 @@ import com.example.educonsult.myviews.xlistview.XListView.IXListViewListener;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 /**
  * 退货订单列表
  * @author Qzr
@@ -90,6 +91,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		isloding = false;
 		page =1;

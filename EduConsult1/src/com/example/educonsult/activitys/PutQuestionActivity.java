@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.testin.agent.TestinAgent;
 
 /**
  * 我要提问
@@ -42,6 +43,7 @@ public class PutQuestionActivity extends Activity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		findViewById(R.id.put_question_et_top).setOnClickListener(this);
 		findViewById(R.id.put_question_ll_back).setOnClickListener(this);

@@ -27,6 +27,7 @@ import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class ServiceCenterActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_zx_regist,ll_zx_shangjia,ll_zx_buy,ll_zx_zhuanjia,
@@ -84,6 +85,7 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		regist = true;
 		shangjia = true;

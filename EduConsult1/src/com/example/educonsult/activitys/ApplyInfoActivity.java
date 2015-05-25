@@ -24,6 +24,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.beans.RefundInfoDetaileBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -55,6 +56,7 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		itemid = getIntent().getStringExtra("itemid");
 		authstr = MyApplication.mp.getUser().getAuthstr();

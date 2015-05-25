@@ -42,6 +42,7 @@ import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 
@@ -124,6 +125,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		list = new ArrayList<Integer>();
 		list.add(1);

@@ -6,6 +6,7 @@ import com.example.educonsult.fragments.KnowFragment;
 import com.example.educonsult.fragments.KnowSlidMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.testin.agent.TestinAgent;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -28,6 +29,7 @@ public class KnowHomeActivity extends SlidingFragmentActivity implements OnClick
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		TestinAgent.init(this);
 		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
 		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
 		activityStyle.recycle();

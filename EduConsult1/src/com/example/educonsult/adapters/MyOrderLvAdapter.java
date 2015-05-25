@@ -1,6 +1,5 @@
 package com.example.educonsult.adapters;
 
-import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -74,10 +73,10 @@ public class MyOrderLvAdapter extends BaseAdapter{
 		}
 		Bitmap bmp = null;
 		try {
-//			bmp = Util.getBitmapForNet(orderBean.getThumb());
-//			if(bmp!=null){
-//				item.iv.setImageBitmap(bmp);
-//			}
+			//			bmp = Util.getBitmapForNet(orderBean.getThumb());
+			//			if(bmp!=null){
+			//				item.iv.setImageBitmap(bmp);
+			//			}
 			Util.Getbitmap(item.iv, orderBean.getThumb());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -88,17 +87,17 @@ public class MyOrderLvAdapter extends BaseAdapter{
 		item.tv_unit.setText(orderBean.getUnit());
 		item.tv_num.setText("X"+orderBean.getNumber());
 		convertView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				if(!isloding){
-				myorder.Order_Detaile(orderBean);
+					myorder.Order_Detaile(orderBean);
 				}else{
 					Util.ShowToast(context, "正在加载，请稍后...");
 				}
 			}
 		});
-		
+
 		return convertView;
 	}
 	class Item{

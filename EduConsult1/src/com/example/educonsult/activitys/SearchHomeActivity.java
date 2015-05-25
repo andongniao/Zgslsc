@@ -40,6 +40,7 @@ import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
@@ -106,6 +107,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		myPDT=new ThreadWithProgressDialog();
 		//t = getIntent().getIntExtra("t", -1);

@@ -24,6 +24,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.SCStoreAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class PasswordActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_login,ll_zhifu;
@@ -44,6 +45,7 @@ public class PasswordActivity extends BaseActivity implements OnClickListener{
 
 	}
 	void init(){
+		TestinAgent.init(this);
 		ll_login=(LinearLayout)findViewById(R.id.possword_login_lin);
 		ll_login.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.possword_zhifu_lin);

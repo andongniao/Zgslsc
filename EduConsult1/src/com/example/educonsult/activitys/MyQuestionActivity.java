@@ -21,6 +21,7 @@ import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.KnowMyQuestionAdapter;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class MyQuestionActivity extends BaseActivity{
 	private Context context;
@@ -68,6 +69,7 @@ public class MyQuestionActivity extends BaseActivity{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		list = new ArrayList<String>();
 		list.add("1");

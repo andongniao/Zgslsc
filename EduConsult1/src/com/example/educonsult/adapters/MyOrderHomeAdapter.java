@@ -2,6 +2,7 @@ package com.example.educonsult.adapters;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,8 @@ import com.example.educonsult.beans.OrderBean;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.tools.Util;
 
-public class MyOrderHomeAdapter extends BaseAdapter{
+@SuppressWarnings("unused")
+@SuppressLint("InflateParams") public class MyOrderHomeAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<OrderBean>list;
 	private LayoutInflater inflater;

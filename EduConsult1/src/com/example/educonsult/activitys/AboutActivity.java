@@ -3,6 +3,7 @@ package com.example.educonsult.activitys;
 import com.example.educonsult.R;
 import com.example.educonsult.myviews.BadgeView;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class AboutActivity extends BaseActivity{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 //		Util.SetRedNum(context, rl_r, 1);
 		

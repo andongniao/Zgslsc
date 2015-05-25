@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.MoneyCarListAdapter;
 import com.example.educonsult.adapters.UpaddressAdapter;
+import com.testin.agent.TestinAgent;
 
 public class MoneyCarListActivity extends BaseActivity{
 	private ListView lv;
@@ -38,6 +39,7 @@ public class MoneyCarListActivity extends BaseActivity{
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		list = new ArrayList<Integer>();
 		list.add(1);

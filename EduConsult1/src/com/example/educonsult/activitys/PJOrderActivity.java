@@ -18,6 +18,7 @@ import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 
 public class PJOrderActivity extends BaseActivity implements OnClickListener {
@@ -42,6 +43,7 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 		init();
 	}
 	void init(){
+		TestinAgent.init(this);
 		context=this;
 		myPDT = new ThreadWithProgressDialog();
 		ll_l=(LinearLayout)findViewById(R.id.pjorder_one_lin);

@@ -26,6 +26,7 @@ import com.example.educonsult.beans.AddressBean;
 import com.example.educonsult.beans.ListAddressBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class AddressActivity extends BaseActivity implements OnClickListener{
 	private ListView lv;
@@ -85,6 +86,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		});
 	}
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		myPDT = new ThreadWithProgressDialog();
 		lv = (ListView) findViewById(R.id.address_home_lv);

@@ -27,6 +27,7 @@ import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.MoneyQueryAdapter;
 import com.example.educonsult.adapters.MyBusinessperAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class MyBusinessperntActivity extends BaseActivity implements OnClickListener{
 	private RelativeLayout reaLayout;
@@ -89,6 +90,7 @@ public class MyBusinessperntActivity extends BaseActivity implements OnClickList
 		});
 	}
 	void init(){
+		TestinAgent.init(this);
 		reaLayout=(RelativeLayout)findViewById(R.id.mybusinesspartners_rela);
 		reaLayout.setOnClickListener(this);
 		list_money=(ListView)findViewById(R.id.mybusinesspartners_list);

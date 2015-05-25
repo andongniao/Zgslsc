@@ -26,6 +26,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.SCStoreAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class PasswordXGActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -55,6 +56,7 @@ public class PasswordXGActivity extends BaseActivity implements OnClickListener{
 
 	}
 	void init(){
+		TestinAgent.init(this);
 		ed_old=(EditText)findViewById(R.id.possword_xiugai_oldpow);
 		ed_new=(EditText)findViewById(R.id.possword_xiugai_newpow);
 		ed_two=(EditText)findViewById(R.id.possword_xiugai_newpowtwo);

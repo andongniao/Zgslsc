@@ -32,6 +32,7 @@ import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import com.testin.agent.TestinAgent;
 
 public class SearchResultActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
@@ -129,6 +130,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		intent=getIntent();
 		order = 0;

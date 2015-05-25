@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import com.example.educonsult.R;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +45,7 @@ public class ServiceQuestionDetaileActivity extends BaseActivity{
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		tv_title = (TextView) findViewById(R.id.service_question_detaile_tv_title);
 		tv_content = (TextView) findViewById(R.id.service_question_detaile_tv_content);

@@ -6,6 +6,7 @@ import com.easemob.chat.core.e.c;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.ZhanhuiDetaileLvAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class ZhanhuiDetaileActivity extends BaseActivity{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		list = new ArrayList<Integer>();
 		for(int i = 0;i<5;i++){

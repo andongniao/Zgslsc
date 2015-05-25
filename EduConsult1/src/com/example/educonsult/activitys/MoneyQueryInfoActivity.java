@@ -26,6 +26,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.MoneyQueryAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class MoneyQueryInfoActivity extends BaseActivity {
 	private RelativeLayout reaLayout;
@@ -89,6 +90,7 @@ public class MoneyQueryInfoActivity extends BaseActivity {
 		});
 	}
 	void init(){
+		TestinAgent.init(this);
 		//tvid,tvway,tvwaymoney,tvmoneyway,tvtime
 		//,tvmoney;
 		

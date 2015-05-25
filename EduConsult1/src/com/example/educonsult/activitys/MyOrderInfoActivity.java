@@ -28,6 +28,7 @@ import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class MyOrderInfoActivity extends BaseActivity implements
 OnClickListener {
@@ -62,6 +63,7 @@ OnClickListener {
 		init();
 	}
 	private void init(){
+		TestinAgent.init(this);
 		context = this;
 		initdata = true;
 		authstr = MyApplication.mp.getUser().getAuthstr();

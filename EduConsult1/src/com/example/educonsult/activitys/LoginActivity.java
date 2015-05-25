@@ -36,6 +36,7 @@ import com.example.educonsult.activitys.GqTwoActivity.RefeshData;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 
@@ -66,6 +67,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		er = MyApplication.sp.edit();
 		isremb = MyApplication.sp.getBoolean("isremb", false);

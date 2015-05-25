@@ -34,6 +34,7 @@ import com.example.educonsult.adapters.StoreFenleiAdapter;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class StoreActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
@@ -74,6 +75,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		addInterface = new AddInterface() {
 

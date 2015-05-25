@@ -20,6 +20,7 @@ import com.example.educonsult.beans.MoneyDetaileBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class QianBaoActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_chaxun,ll_tixian;
@@ -78,6 +79,7 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		});
 	}
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		myPDT = new ThreadWithProgressDialog();
 		String  msg = getResources().getString(R.string.loding);

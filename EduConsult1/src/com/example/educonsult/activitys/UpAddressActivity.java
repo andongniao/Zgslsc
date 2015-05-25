@@ -24,6 +24,7 @@ import com.example.educonsult.beans.ListAddressBean;
 import com.example.educonsult.beans.ListAreaBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class UpAddressActivity extends BaseActivity{
 	private ListView lv;
@@ -57,6 +58,7 @@ public class UpAddressActivity extends BaseActivity{
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		myPDT=new ThreadWithProgressDialog();
 		upAddress = new UpAddress() {

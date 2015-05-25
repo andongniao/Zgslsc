@@ -38,6 +38,7 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
@@ -99,6 +100,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		type = 0;
 		//		Util.SetRedNum(context, rl_r, 1);

@@ -37,6 +37,7 @@ import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.MyGridView;
 import com.example.educonsult.tools.UITools;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	private TextView tv_more_tuijian,tv_more_paied,
@@ -185,6 +186,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		isread = false;
 		zhinenglist=new ArrayList<String>();

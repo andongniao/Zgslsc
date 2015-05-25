@@ -27,6 +27,7 @@ import com.example.educonsult.beans.RefundInfoBean;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class ApplyerFundActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -65,6 +66,7 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		initdata = true;
 		itemid = getIntent().getStringExtra("itemid");

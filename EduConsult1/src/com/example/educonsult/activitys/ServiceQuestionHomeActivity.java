@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.StoreFenleiAdapter;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 
 public class ServiceQuestionHomeActivity extends BaseActivity{
 	private Context context;
@@ -50,6 +51,7 @@ public class ServiceQuestionHomeActivity extends BaseActivity{
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		lv = (ListView) findViewById(R.id.service_question_home_lv);
 		/************************/

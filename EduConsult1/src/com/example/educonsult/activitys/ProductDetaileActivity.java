@@ -44,6 +44,7 @@ import com.example.educonsult.myviews.ImageCycleView.ImageCycleViewListener;
 import com.example.educonsult.myviews.MyListview;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private ScrollView scrollView;
@@ -101,6 +102,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	}
 
 	private void init() {
+		TestinAgent.init(this);
 		context = this;
 		intent=getIntent();
 		//		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");

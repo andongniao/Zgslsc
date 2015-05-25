@@ -24,6 +24,7 @@ import com.example.educonsult.R;
 import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.SCStoreAdapter;
 import com.example.educonsult.myviews.MyListview;
+import com.testin.agent.TestinAgent;
 
 public class SCStoreActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout reaLayout;
@@ -57,6 +58,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener{
 		
 	}
 	void init(){
+		TestinAgent.init(this);
 		reaLayout=(LinearLayout)findViewById(R.id.scstore_allway_lin);
 		reaLayout.setOnClickListener(SCStoreActivity.this);
 		product_list=(ListView)findViewById(R.id.scstore_list);

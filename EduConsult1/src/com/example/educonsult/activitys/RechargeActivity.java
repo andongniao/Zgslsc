@@ -23,6 +23,7 @@ import com.example.educonsult.beans.ListChargeBankBean;
 import com.example.educonsult.beans.TnResultBean;
 import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.Util;
+import com.testin.agent.TestinAgent;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 
@@ -62,6 +63,7 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 	void init(){
+		TestinAgent.init(this);
 		context =this;
 		init =true;
 		bank = "chinapay";

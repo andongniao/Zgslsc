@@ -75,3 +75,8 @@
 # Don't warn about those in case this app is linking against an older
 # platform version.  We know about them, and they are safe.
 -dontwarn android.support.**
+
+
+-libraryjars /libs/testinagent.jar
+-dontwarn com.testin.agent.**
+-keep class com.testin.agent.** {*;}

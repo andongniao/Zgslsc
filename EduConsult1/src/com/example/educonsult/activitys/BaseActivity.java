@@ -14,6 +14,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.testin.agent.TestinAgent;
 
 /**
  * »ù±¾Àà
@@ -37,6 +38,7 @@ public abstract class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		TestinAgent.init(this);
 		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
 		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
 		activityStyle.recycle();
