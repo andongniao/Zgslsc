@@ -52,7 +52,6 @@ import com.example.educonsult.beans.RefundInfoDetaileBean;
 import com.example.educonsult.beans.ShopBean;
 import com.example.educonsult.beans.ShopItemBean;
 import com.example.educonsult.beans.TnResultBean;
-import com.example.educonsult.tools.StringUtils;
 import com.example.educonsult.tools.Util;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

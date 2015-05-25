@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,6 +45,7 @@ import com.example.educonsult.tools.Util;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
 
+@SuppressWarnings("unused")
 public class OrderActivity extends BaseActivity implements OnClickListener{
 	private ScrollView scrollView;
 	private Context context;
@@ -346,7 +348,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			return true;
 		}
 	}
-	private void setpopuwindow(){
+	@SuppressLint("InflateParams") private void setpopuwindow(){
 		inflater=LayoutInflater.from(context);
 		v_fenlei = inflater.inflate(R.layout.money_password, null);
 		mscreenwidth=dm.widthPixels;
@@ -386,20 +388,11 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		/************************************************* 
-		 * 
-		 *  步骤3：处理银联手机支付控件返回的支付结果 
-		 *  
-		 ************************************************/
 		if (data == null) {
 			return;
 		}
 
 		String msg = "";
-		/*
-		 * 支付控件返回字符串:success、fail、cancel
-		 *      分别代表支付成功，支付失败，支付取消
-		 */
 		int statu=-1;
 		String str = data.getExtras().getString("pay_result");
 		if (str.equalsIgnoreCase("success")) {

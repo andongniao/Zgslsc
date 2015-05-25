@@ -3,6 +3,7 @@ package com.example.educonsult.activitys;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -39,7 +40,8 @@ import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 
-public class MyOrderActivity extends BaseActivity implements OnClickListener,IXListViewListener{
+@SuppressWarnings("unused")
+@SuppressLint("InflateParams") public class MyOrderActivity extends BaseActivity implements OnClickListener,IXListViewListener{
 	private Context context;
 	private LinearLayout ll_all,ll_pay,ll_send,ll_shouhuo,ll_comment,ll_isnull;
 	private TextView tv_all,tv_show_all,tv_pay,tv_show_pay,tv_send,tv_show_send,
@@ -96,6 +98,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	private void init() {
 		context = this;
 		init = true;
@@ -167,7 +170,6 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 				btn_pay.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-//						EditText et 
 						password = et_pass.getText().toString();
 						init = false;
 						add = 2;
@@ -320,6 +322,7 @@ public class MyOrderActivity extends BaseActivity implements OnClickListener,IXL
 		//		});  
 		//		Util.SetRedNum(context, rl_r, 1);
 		handler = new Handler(){
+			@SuppressWarnings("unchecked")
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
