@@ -42,6 +42,9 @@ public class MyOrderHomeAdapter extends BaseAdapter{
 	}
 	public void SetBoolean(boolean isloding){
 		this.isloding = isloding;
+		if(adapter!=null){
+			adapter.SetBoolean(isloding);
+		}
 	}
 
 	@Override

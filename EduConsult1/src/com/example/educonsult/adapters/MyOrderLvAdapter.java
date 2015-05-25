@@ -36,7 +36,9 @@ public class MyOrderLvAdapter extends BaseAdapter{
 	public void SetData(OrderBean orderBean){
 		this.orderBean = orderBean;
 	}
-
+	public void SetBoolean(boolean isloding){
+		this.isloding = isloding;
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
