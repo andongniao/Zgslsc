@@ -54,6 +54,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private int page,addtype;
 	private String text;
 	private boolean islist,isfinish,isnext;
+	public static boolean isproductfinish;
 	private TextView tv_guanjian;
 
 	@Override
@@ -72,6 +73,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		init();
 		addlisteners();
 	}
+	
 
 	private void addlisteners() {
 
@@ -192,6 +194,15 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		endLabels.setPullLabel("获取更多");// 刚下拉时，显示的提示
 		endLabels.setRefreshingLabel("正在刷新...");// 刷新时
 		endLabels.setReleaseLabel("松开刷新...");// 下来达到一定距离时，显示的提示
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if(isproductfinish){
+			isproductfinish=false;
+			finish();
+		}
 	}
 
 

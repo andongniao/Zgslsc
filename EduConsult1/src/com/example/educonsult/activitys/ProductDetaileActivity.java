@@ -86,6 +86,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private TextView[] tvtuijian;
 	private ImageView[] imtuijian;
 	private ListProductBean listProductBean;
+	private LinearLayout dianpulin;
 	
 
 
@@ -147,7 +148,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		ispingjia=false;
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
-		findViewById(R.id.product_detaile_ll_into_dianpu).setOnClickListener(this);
+		dianpulin=(LinearLayout)findViewById(R.id.product_detaile_ll_into_dianpu);
+        dianpulin.setOnClickListener(this);
+        dianpulin.setVisibility(View.GONE);
 		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
 		ll_kefu=(LinearLayout)findViewById(R.id.product_detail_ll_kefu);
 		ll_kefu.setOnClickListener(this);
@@ -249,7 +252,6 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tv_fahuo=(TextView)findViewById(R.id.product_detaile_tv_fahuo);
 
 
-
 		//		b_l,b_t,b_r,t_l,t_t,t_r;
 		//		private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r;
 		b_l=(ImageView)findViewById(R.id.product_detaile_ima_bui_l);
@@ -296,6 +298,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 			@Override
 			public void onImageClick(int position, View imageView) {
+				
 				// TODO Auto-generated method stub
 
 			}
@@ -401,7 +404,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			//			intent = new Intent(context,StoreActivity.class);
 			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			//			startActivity(intent);
-			Util.ShowToast(context, R.string.maimeng);
+//			Util.ShowToast(context, R.string.maimeng);''
+			
 			break;
 		case R.id.product_detaile_ll_tonglei_l:
 
@@ -424,6 +428,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			break;
 		case R.id.product_detaile_ll_pay_now: 
 			if(MyApplication.mp.islogin){
+//				ShopcartActivity.ischange=true;
+				SearchResultActivity.isproductfinish=true;
 				ExampleActivity.setCurrentTab(3);
 				finish();
 			}else{
