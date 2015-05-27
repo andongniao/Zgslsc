@@ -93,7 +93,7 @@ public class MyOrderLvAdapter extends BaseAdapter{
 				if(!isloding){
 					myorder.Order_Detaile(orderBean);
 				}else{
-					Util.ShowToast(context, "正在加载，请稍后...");
+					Util.ShowToast(context, R.string.please_wait);
 				}
 			}
 		});

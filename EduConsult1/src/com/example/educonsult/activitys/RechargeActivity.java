@@ -35,7 +35,7 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 	private Intent intent;
 	private ImageView carIc;
 	private Button submit;
-	private String mMode = "00";
+	private String mMode = "01";
 	private String Tn = "";
 	private String authstr;
 	private ThreadWithProgressDialog myPDT;

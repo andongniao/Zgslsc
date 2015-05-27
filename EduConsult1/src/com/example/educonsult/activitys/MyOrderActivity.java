@@ -529,7 +529,7 @@ import com.unionpay.mobile.android.nocard.views.ad;
 						}else{
 							Util.ShowToast(context, R.string.net_is_eor);
 						}
-					}else if("300".equals(baseBean.getCode())){
+					}else if("300".equals(paybean.getCode())){
 						MyApplication.mp.setlogin(false);
 						Util.ShowToast(context, R.string.login_out_time);
 						intent = new Intent(context,LoginActivity.class);

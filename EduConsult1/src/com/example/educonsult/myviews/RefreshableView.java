@@ -34,7 +34,7 @@ public class RefreshableView extends LinearLayout {
 	private Scroller scroller;
 	private View refreshView;
 	private ImageView refreshIndicatorView;
-	private int refreshTargetTop = -60;
+	private int refreshTargetTop = -100;
 	private ProgressBar bar;
 	private TextView downTextView;
 	private TextView timeTextView;

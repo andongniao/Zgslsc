@@ -160,7 +160,6 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 		@Override
 		public boolean OnTaskDismissed() {
 			//任务取消
-			//			Toast.makeText(context, "cancle", 1000).show();
 			return false;
 		}
 

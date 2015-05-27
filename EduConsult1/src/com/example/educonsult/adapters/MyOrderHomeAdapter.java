@@ -51,13 +51,11 @@ import com.example.educonsult.tools.Util;
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return list!=null?list.size():0;
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -118,7 +116,7 @@ import com.example.educonsult.tools.Util;
 						myorder.Order_Repay(b);
 					}
 				}else{
-					Util.ShowToast(context, "正在加载，请稍后...");
+					Util.ShowToast(context, R.string.please_wait);
 				}
 			}
 		});
@@ -126,7 +124,7 @@ import com.example.educonsult.tools.Util;
 			@Override
 			public void onClick(View v) {
 				if(!isloding){
-					OrderBean b = list.get(position);
+					OrderBean b = list.get(position);	
 					int t = Integer.parseInt(b.getStatusid());
 					if(t == 1){
 						myorder.Order_Pay(b);
@@ -140,7 +138,7 @@ import com.example.educonsult.tools.Util;
 						}
 					}
 				}else{
-					Util.ShowToast(context, "正在加载，请稍后...");
+					Util.ShowToast(context, R.string.please_wait);
 				}
 			}
 		});
