@@ -38,7 +38,7 @@ public class ImageCycleView extends LinearLayout {
 	/**
 	 * Õº∆¨¬÷≤• ”Õº
 	 */
-	private ViewPager mAdvPager = null;
+	private InsideViewPager mAdvPager = null;
 
 	/**
 	 * πˆ∂ØÕº∆¨ ”Õº  ≈‰∆˜
@@ -86,7 +86,7 @@ public class ImageCycleView extends LinearLayout {
 		mContext = context;
 		mScale = context.getResources().getDisplayMetrics().density;
 		LayoutInflater.from(context).inflate(R.layout.ad_cycle_view, this);
-		mAdvPager = (ViewPager) findViewById(R.id.adv_pager);
+		mAdvPager = (InsideViewPager) findViewById(R.id.adv_pager);
 		mAdvPager.setOnPageChangeListener(new GuidePageChangeListener());
 		mAdvPager.setOnTouchListener(new OnTouchListener() {
 

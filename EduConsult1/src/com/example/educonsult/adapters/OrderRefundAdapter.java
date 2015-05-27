@@ -96,7 +96,7 @@ public class OrderRefundAdapter extends BaseAdapter{
 				if(!isloding){
 					apply.detaile(orderBean.getItemid());
 				}else{
-					Util.ShowToast(context, "正在加载，请稍后...");
+					Util.ShowToast(context,R.string.please_wait);
 				}
 			}
 		});

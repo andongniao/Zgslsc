@@ -145,6 +145,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		add=(TextView)findViewById(R.id.product_detaile_adds);
 		add.setOnClickListener(this);
 		imageview=(ImageCycleView)findViewById(R.id.product_detail_icv);
+		imageview.stopImageTimerTask();
+		imageview.settime(999999999);
 		ispingjia=false;
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);

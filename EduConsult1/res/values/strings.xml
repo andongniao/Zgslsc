@@ -12,6 +12,7 @@
     <string name="net_is_eor">网络异常，请检查网络后再试</string>
     <string name="notbuy">亲，您还没有买过任何产品哦！</string>
     <string name="login_out_time">登陆超时</string>
+     <string name="please_wait">正在加载，请稍后...</string>
     
 
     <!-- 首页 -->
