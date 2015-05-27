@@ -81,9 +81,12 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 		int i_num;
 		
 		for(int i=0;i<s.getMall().size();i++){
-			i_num=s.getMall().get(i).getNum();
-			i_price=Float.parseFloat(s.getMall().get(i).getPrice());
-			sum=sum+i_num*i_price;
+			if(s.getMall().get(i).isIsclick()){
+				
+				i_num=s.getMall().get(i).getNum();
+				i_price=Float.parseFloat(s.getMall().get(i).getPrice());
+				sum=sum+i_num*i_price;
+			}
 		}
 
 		item.cb.setChecked(s.isIsclick());
