@@ -273,23 +273,15 @@ public class MyApplication extends Application{
 		ArrayList<ProductBean> list = GetSee();
 		if(list!=null){
 			if(list.size()>=0 && list.size()<30){
-				boolean ishave = false;
 				for(int i=0;i<list.size();i++){
 					String id = list.get(i).getItemid();
 					if(Util.IsNull(bean.getItemid())){
-						if(!bean.getItemid().equals(id)){
-							ishave = false;
-						}else{
-							ishave = true;
+						if(bean.getItemid().equals(id)){
 							list.remove(list.get(i));
 							break;
 						}
 					}
 				}
-//				if(!ishave){
-//					list.add(0, bean);
-//				}else{
-//				}
 				list.add(0, bean);
 			}else if(list.size()==30){
 				boolean ishave = false;
