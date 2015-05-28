@@ -1,5 +1,7 @@
 package com.example.educonsult.activitys;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -19,6 +21,8 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.beans.CenterUserBean;
+import com.example.educonsult.beans.ListProductBean;
+import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.net.Send;
@@ -39,7 +43,11 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private CenterUserBean cbean;
 	private ThreadWithProgressDialog myPDT;
 	private String msg;
-	
+	private String zjnum;
+	private Util u;
+	private ListProductBean listProductBean;
+	private ArrayList<ProductBean> productBeans;
+	private TextView tv_zuji;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -55,6 +63,17 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		TestinAgent.init(this);
 		
 		context = this;
+		u=new Util(context);
+		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
+		if(listProductBean==null){
+			listProductBean=new ListProductBean();
+			productBeans=new ArrayList<ProductBean>();
+			zjnum="0";
+		}else{
+			
+			productBeans=listProductBean.getList();
+			zjnum=productBeans.size()+"";
+		}
 		tv_version = (TextView) findViewById(R.id.mycenter_home_tv_version);
 		tv_name = (TextView) findViewById(R.id.mycenter_home_tv_name);
 		icv_head = (CircleImageView) findViewById(R.id.mycenter_home_civ_head);
@@ -105,6 +124,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_mima.setVisibility(View.GONE);
 		ll_mima.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
+		
+		tv_zuji=(TextView)findViewById(R.id.mycenter_home_tv_zj);
+		tv_zuji.setText(zjnum);
+		
 		PackageManager manager;
 		PackageInfo info = null;
 		manager = this.getPackageManager();
