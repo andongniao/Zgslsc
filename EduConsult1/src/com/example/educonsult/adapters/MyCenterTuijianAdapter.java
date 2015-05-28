@@ -82,13 +82,13 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 			item = (Item) convertView.getTag();
 		}
 		
-		try {
+//		try {
 			Util.Getbitmap(item.iv, list.get(position).getThumb());
 			//item.iv.setImageBitmap(Util.getBitmapForNet(list.get(position).getThumb()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		item.tv_title.setText(list.get(position).getTitle());
 		item.tv_address.setText(list.get(position).getArea());

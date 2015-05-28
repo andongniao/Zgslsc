@@ -120,6 +120,7 @@
                     android:padding="5dp" >
 
                     <TextView
+                        android:id="@+id/mycenter_home_tv_zj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
