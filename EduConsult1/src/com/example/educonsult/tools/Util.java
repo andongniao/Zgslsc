@@ -87,7 +87,7 @@ public class Util {
 	private static ListView list_2,lv_l;
 	private static TextItemListAdapter adapter_r;
 	private static TextItemCenterListAdapter textItemCenterListAdapter;
-    private static int postion;
+	private static int postion;
 
 	public Util(Context context){
 		this.context = context;
@@ -749,7 +749,10 @@ public class Util {
 		Toast.makeText(context, i, 1000).show();
 	}
 
-
+	/**
+	 * 重新计算子listview高度
+	 * @param listView
+	 */
 	public static void setListViewHeightBasedOnChildren(ListView listView) {
 		// 获取ListView对应的Adapter
 		ListAdapter listAdapter = listView.getAdapter();
@@ -865,9 +868,9 @@ public class Util {
 		}
 	}
 
-/**
- * 得到并缓存图片
- */
+	/**
+	 * 得到并缓存图片
+	 */
 	public static void Getbitmap(final ImageView v,final String url){
 		Thread thread;
 		final Handler handler;
@@ -878,7 +881,7 @@ public class Util {
 				if (msg.what == 1  && v!=null) {
 					v.setTag(url);
 					if(msg.obj != null){
-					v.setImageBitmap((Bitmap) msg.obj);
+						v.setImageBitmap((Bitmap) msg.obj);
 					}else{
 						v.setBackgroundResource(R.drawable.default_bg);
 					}
@@ -898,12 +901,12 @@ public class Util {
 				}
 				String filename = FileUtils.getFileName(url);
 				try {
-					//					// 读取本地图片
-					//					if (imgURL.endsWith("portrait.gif")
-					//							|| StringUtils.isEmpty(imgURL)) {
-					//						bmp = BitmapFactory.decodeResource(
-					//								mImage.getResources(), R.drawable.widget_dface);
-					//					}
+					// 读取本地图片
+//					if (imgURL.endsWith("portrait.gif")
+//							|| StringUtils.isEmpty(imgURL)) {
+//						bmp = BitmapFactory.decodeResource(
+//								mImage.getResources(), R.drawable.widget_dface);
+//					}
 					if (bmp == null) {
 						// 是否有缓存图片
 						// Environment.getExternalStorageDirectory();返回/sdcard
@@ -974,7 +977,7 @@ public class Util {
 								filename, bmp);
 					} catch (IOException e) {
 						e.printStackTrace();
-					}
+					}	
 					// 缩放图片
 					bmp = ImageUtils.reDrawBitMap((Activity) context, bmp);
 					//						return true;

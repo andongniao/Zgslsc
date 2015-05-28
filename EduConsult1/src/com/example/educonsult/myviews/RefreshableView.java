@@ -19,6 +19,7 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.example.educonsult.tools.Util;
 
 
 /**
@@ -39,6 +40,7 @@ public class RefreshableView extends LinearLayout {
 	private TextView downTextView;
 	private TextView timeTextView;
 	private LinearLayout timell;
+	private String time;
 
 	private RefreshListener refreshListener;
 
@@ -56,40 +58,40 @@ public class RefreshableView extends LinearLayout {
 	// 在刷新中标记
 	@SuppressWarnings("unused")
 	private boolean isRefreshing = false;
-	
-	
+
+
 	private Context mContext;
 	public RefreshableView(Context context) {
 		super(context);
 		mContext = context;
-		
+
 	}
 	public RefreshableView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
 		init();
-		
+
 	}
 	@SuppressWarnings("deprecation")
 	private void init() {
 		// TODO Auto-generated method stub
 		//滑动对象，
 		scroller = new Scroller(mContext);
-		
+
 		//刷新视图顶端的的view
-		 refreshView = LayoutInflater.from(mContext).inflate(R.layout.refresh_top_item, null);
+		refreshView = LayoutInflater.from(mContext).inflate(R.layout.refresh_top_item, null);
 		//指示器view
-		 refreshIndicatorView = (ImageView) refreshView.findViewById(R.id.indicator);
+		refreshIndicatorView = (ImageView) refreshView.findViewById(R.id.indicator);
 		//刷新bar
 		bar = (ProgressBar) refreshView.findViewById(R.id.progress);
 		//下拉显示text
-		 downTextView = (TextView) refreshView.findViewById(R.id.refresh_hint);
+		downTextView = (TextView) refreshView.findViewById(R.id.refresh_hint);
 		//下来显示时间
-		 timeTextView = (TextView) refreshView.findViewById(R.id.refresh_time);
-		 timell = (LinearLayout) refreshView.findViewById(R.id.refresh_time_ll);
-		 timeTextView.setVisibility(View.VISIBLE);
-		 timell.setVisibility(View.GONE);
-		
+		timeTextView = (TextView) refreshView.findViewById(R.id.refresh_time);
+		timell = (LinearLayout) refreshView.findViewById(R.id.refresh_time_ll);
+		timeTextView.setVisibility(View.VISIBLE);
+		timell.setVisibility(View.GONE);
+
 		LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, -refreshTargetTop);
 		lp.topMargin = refreshTargetTop;
 		lp.gravity = Gravity.CENTER;
@@ -108,17 +110,23 @@ public class RefreshableView extends LinearLayout {
 		SimpleDateFormat sDateFormat = new SimpleDateFormat(
 				"yyyy-MM-dd   hh:mm:ss");
 		String date = sDateFormat.format(new java.util.Date());
-		timeTextView.setText(date);
+		if(!Util.IsNull(time)){
+			timeTextView.setText(date);
+			time = date;
+		}else{
+			timeTextView.setText(time);
+			time = date;
+		}
 	}
 
 
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		
+
 		int y= (int) event.getRawY();
-		
-		
+
+
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			//记录下y坐标
@@ -129,16 +137,16 @@ public class RefreshableView extends LinearLayout {
 			//y移动坐标
 			int m = y - lastY;
 			if(((m < 6) && (m > -1)) || (!isDragging )){
-				 doMovement(m);
+				doMovement(m);
 			}
 			//记录下此刻y坐标
 			this.lastY = y;
 			break;
-			
+
 		case MotionEvent.ACTION_UP:
-			
+
 			fling();
-			
+
 			break;
 		}
 		return true;
@@ -158,33 +166,33 @@ public class RefreshableView extends LinearLayout {
 			returnInitState();
 		}
 	}
-	
 
-	
+
+
 	private void returnInitState() {
 		// TODO Auto-generated method stub
-		 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
-		 int i = lp.topMargin;
-		 scroller.startScroll(0, i, 0, refreshTargetTop);
-		 invalidate();
+		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
+		int i = lp.topMargin;
+		scroller.startScroll(0, i, 0, refreshTargetTop);
+		invalidate();
 	}
 	private void refresh() {
 		// TODO Auto-generated method stub
-		 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
-		 int i = lp.topMargin;
-		 refreshIndicatorView.setVisibility(View.GONE);
-		 bar.setVisibility(View.VISIBLE);
-//		 timeTextView.setVisibility(View.VISIBLE);
-		 timell.setVisibility(View.VISIBLE);
-		 downTextView.setVisibility(View.GONE);
-		 scroller.startScroll(0, i, 0, 0-i);
-		 invalidate();
-		 if(refreshListener !=null){
-			 refreshListener.onRefresh(this);
-			 isRefreshing = true;
-		 }
+		LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
+		int i = lp.topMargin;
+		refreshIndicatorView.setVisibility(View.GONE);
+		bar.setVisibility(View.VISIBLE);
+		//		 timeTextView.setVisibility(View.VISIBLE);
+		timell.setVisibility(View.VISIBLE);
+		downTextView.setVisibility(View.GONE);
+		scroller.startScroll(0, i, 0, 0-i);
+		invalidate();
+		if(refreshListener !=null){
+			refreshListener.onRefresh(this);
+			isRefreshing = true;
+		}
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -193,12 +201,12 @@ public class RefreshableView extends LinearLayout {
 		// TODO Auto-generated method stub
 		if(scroller.computeScrollOffset()){
 			int i = this.scroller.getCurrY();
-		      LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
-		      int k = Math.max(i, refreshTargetTop);
-		      lp.topMargin = k;
-		      this.refreshView.setLayoutParams(lp);
-		      this.refreshView.invalidate();
-		      invalidate();
+			LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
+			int k = Math.max(i, refreshTargetTop);
+			lp.topMargin = k;
+			this.refreshView.setLayoutParams(lp);
+			this.refreshView.invalidate();
+			invalidate();
 		}
 	}
 	/**
@@ -223,7 +231,7 @@ public class RefreshableView extends LinearLayout {
 		setRefreshText();
 		timell.setVisibility(View.GONE);
 		downTextView.setVisibility(View.VISIBLE);
-		
+
 		bar.setVisibility(View.GONE);
 		refreshIndicatorView.setVisibility(View.VISIBLE);
 		if(lp.topMargin >  0){
@@ -233,7 +241,7 @@ public class RefreshableView extends LinearLayout {
 			downTextView.setText(R.string.xlistview_header_hint_normal);
 			refreshIndicatorView.setImageResource(R.drawable.xlistview_arrow);
 		}
-			
+
 	}
 
 	public void setRefreshEnabled(boolean b) {
@@ -248,17 +256,17 @@ public class RefreshableView extends LinearLayout {
 	 * 结束刷新事件
 	 */
 	public void finishRefresh(){
-		 LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
-		    int i = lp.topMargin;
-		    bar.setVisibility(View.GONE);
-		    refreshIndicatorView.setVisibility(View.VISIBLE);
-		    timeTextView.setVisibility(View.VISIBLE);
-		    scroller.startScroll(0, i, 0, refreshTargetTop);
-		    invalidate();
-		    isRefreshing = false;  
+		LinearLayout.LayoutParams lp= (LinearLayout.LayoutParams)this.refreshView.getLayoutParams();
+		int i = lp.topMargin;
+		bar.setVisibility(View.GONE);
+		refreshIndicatorView.setVisibility(View.VISIBLE);
+		timeTextView.setVisibility(View.VISIBLE);
+		scroller.startScroll(0, i, 0, refreshTargetTop);
+		invalidate();
+		isRefreshing = false;  
 	}
 
-	
+
 	/*该方法一般和ontouchEvent 一起用
 	 * (non-Javadoc)
 	 * @see android.view.ViewGroup#onInterceptTouchEvent(android.view.MotionEvent)
@@ -279,16 +287,16 @@ public class RefreshableView extends LinearLayout {
 
 			//记录下此刻y坐标
 			this.lastY = y;
-		     if(m > 6 &&  canScroll()){
-		    	 return true;
-		     }
+			if(m > 6 &&  canScroll()){
+				return true;
+			}
 			break;
 		case MotionEvent.ACTION_UP:
-			
+
 			break;
-			
-	case MotionEvent.ACTION_CANCEL:
-			
+
+		case MotionEvent.ACTION_CANCEL:
+
 			break;
 		}
 		return false;
@@ -314,7 +322,7 @@ public class RefreshableView extends LinearLayout {
 					return false;
 				}
 			}
-			
+
 		}
 		return false;
 	}

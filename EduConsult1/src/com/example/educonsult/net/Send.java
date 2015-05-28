@@ -120,7 +120,10 @@ public class Send {
 
 	}
 	/**
-	 * 登录
+	 *  登录
+	 * @param username 	用户名
+	 * @param password	密码
+	 * @return
 	 */
 	public UserBean Login(String username,String password) {
 		UserBean bean = new UserBean();
@@ -361,6 +364,8 @@ public class Send {
 
 	/**
 	 * 获取产品详情
+	 * @param id	产品id
+	 * @return
 	 */
 	public ProdectDetaileBean GetProductDetaile(String id) {
 		ProdectDetaileBean bean = new ProdectDetaileBean();
@@ -425,6 +430,10 @@ public class Send {
 
 	/**
 	 * 获取单品全部评论
+	 * @param id	产品id
+	 * @param page	页码
+	 * @param s		好评，中评，差评
+	 * @return
 	 */
 	public ListComment GetComment(String id,int page,String s) {
 		ListComment bean = new ListComment();
@@ -564,6 +573,9 @@ public class Send {
 
 	/**
 	 * 获取我的信息
+	 * @param type		会员类型
+	 * @param authstr	唯一标示
+	 * @return
 	 */
 	public CenterUserBean getMyinfo(int type,String authstr) {
 		CenterUserBean bean = new CenterUserBean();
@@ -613,6 +625,9 @@ public class Send {
 
 	/**
 	 * 获取钱包详情
+	 * @param type		会员类型
+	 * @param authstr	唯一标示
+	 * @return
 	 */
 	public MoneyBagBean getMoney(int type,String authstr) {
 		MoneyBagBean bean = new MoneyBagBean();
@@ -668,6 +683,8 @@ public class Send {
 
 	/**
 	 * 获取购物车列表
+	 * @param authstr	唯一标示
+	 * @return
 	 */
 	public ListShopBean getCartlist(String authstr) {
 		ListShopBean bean = new ListShopBean();
@@ -730,6 +747,10 @@ public class Send {
 
 	/**
 	 * 添加购物车
+	 * @param itemid
+	 * @param number
+	 * @param authstr
+	 * @return
 	 */
 	public BaseBean CartAdd(String itemid,int number,String authstr) {
 		BaseBean bean = new BaseBean();
