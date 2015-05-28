@@ -132,10 +132,10 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		frame=MyApplication.frame;
 		top_rl = (RelativeLayout) view.findViewById(R.id.home_top_rl_right);
 //		Util.SetRedNum(context, top_rl, 1);
-		mp = MyApplication.mp;
-		ProductBean bean = new ProductBean();
-		mp.SaveSee(bean);
-		mp.GetSee();
+//		mp = MyApplication.mp;
+//		ProductBean bean = new ProductBean();
+//		mp.SaveSee(bean);
+//		mp.GetSee();
 //		apkFilter apkFilter=new apkFilter(new isFilesFilter(null));
 //		String path = Environment.getExternalStorageDirectory().getPath()+"/"+name;
 //		try {

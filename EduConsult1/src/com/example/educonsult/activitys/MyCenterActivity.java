@@ -48,7 +48,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private ListProductBean listProductBean;
 	private ArrayList<ProductBean> productBeans;
 	private TextView tv_zuji;
-	
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -61,7 +61,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		TestinAgent.init(this);
-		
+
 		context = this;
 		u=new Util(context);
 		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
@@ -70,7 +70,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			productBeans=new ArrayList<ProductBean>();
 			zjnum="0";
 		}else{
-			
+
 			productBeans=listProductBean.getList();
 			zjnum=productBeans.size()+"";
 		}
@@ -124,18 +124,18 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_mima.setVisibility(View.GONE);
 		ll_mima.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
-		
+
 		tv_zuji=(TextView)findViewById(R.id.mycenter_home_tv_zj);
 		tv_zuji.setText(zjnum);
-		
+
 		PackageManager manager;
 		PackageInfo info = null;
 		manager = this.getPackageManager();
 		try {
-		info = manager.getPackageInfo(this.getPackageName(), 0);
+			info = manager.getPackageInfo(this.getPackageName(), 0);
 		} catch (NameNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		String vserion = info.versionName;
@@ -145,7 +145,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			if(bean.getType()==1){
 				ll_fh.setVisibility(View.GONE);
 			}else{
-//				ll_zf.setVisibility(View.GONE);
+				//				ll_zf.setVisibility(View.GONE);
 				ll_sh.setVisibility(View.GONE);
 				//ll_youhuiquan.setVisibility(View.GONE);
 			}
@@ -153,12 +153,12 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		myPDT = new ThreadWithProgressDialog();
 		msg = "加载中...";
 		if(MyApplication.mp.islogin){
-		if(Util.detect(context)){
-//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
-			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
-		}else{
-			Util.ShowToast(context, R.string.net_is_eor);
-		}
+			if(Util.detect(context)){
+				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+				myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
 		}else{
 			Intent i = new Intent(context,LoginActivity.class);
 			startActivity(i);
@@ -212,9 +212,9 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			return true;
-		
+
 		}
-		
+
 	}
 
 	@Override
@@ -226,15 +226,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_cp:
-//			intent = new Intent(context,SCProductActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			//			intent = new Intent(context,SCProductActivity.class);
+			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			startActivity(intent);
 			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_dp:
-//			intent = new Intent(context,SCStoreActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			//			intent = new Intent(context,SCStoreActivity.class);
+			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			startActivity(intent);
 			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.myinfo_ll_youhuiquan:
@@ -247,7 +247,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			intent = new Intent(context,MyZjActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-//			Util.ShowToast(context, R.string.maimeng);
+			//			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_zhifu:
 			intent = new Intent(context,MyOrderActivity.class);
@@ -331,17 +331,32 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
-	        if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
-	            exitTime = System.currentTimeMillis();   
-	        } else {
-	            finish();
-	            System.exit(0);
-	        }
-	        return true;   
-	    }
-	    return super.onKeyDown(keyCode, event);
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+			if((System.currentTimeMillis()-exitTime) > 2000){  
+				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+				exitTime = System.currentTimeMillis();   
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;   
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
+		if(listProductBean==null){
+			listProductBean=new ListProductBean();
+			productBeans=new ArrayList<ProductBean>();
+			zjnum="0";
+		}else{
+			
+			productBeans=listProductBean.getList();
+			zjnum=productBeans.size()+"";
+		}
+		tv_zuji.setText(zjnum);
 	}
 
 }

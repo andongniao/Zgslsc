@@ -111,22 +111,23 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		//		intent.putE*/xtra("productbundle", b);
 		Bundle b=intent.getBundleExtra("productbundle");
 		productBean=(ProductBean)b.getSerializable("product");
-		liulanfile=MyApplication.Seejilu;
-		userbean=MyApplication.mp.getUser();
-		u=new Util(context);
-		//isSave=u.readObject(liulanfile);
-		listProductBean=(ListProductBean)u.readObject(liulanfile);
-		if(listProductBean==null){
-			listProductBean=new ListProductBean();
-			liulanlist=new ArrayList<ProductBean>();
-
-		}else{
-
-			liulanlist=listProductBean.getList();
-		}
-		liulanlist.add(productBean);
-		listProductBean.setList(liulanlist);
-		isSave=u.saveObject(listProductBean, liulanfile);
+		MyApplication.mp.SaveSee(productBean);
+//		liulanfile=MyApplication.Seejilu;
+//		userbean=MyApplication.mp.getUser();
+//		u=new Util(context);
+//		//isSave=u.readObject(liulanfile);
+//		listProductBean=(ListProductBean)u.readObject(liulanfile);
+//		if(listProductBean==null){
+//			listProductBean=new ListProductBean();
+//			liulanlist=new ArrayList<ProductBean>();
+//
+//		}else{
+//
+//			liulanlist=listProductBean.getList();
+//		}
+//		liulanlist.add(productBean);
+//		listProductBean.setList(liulanlist);
+//		isSave=u.saveObject(listProductBean, liulanfile);
 		/*if(isSave){
 			Util.ShowToast(context, "单品保存成功");
 		}else{

@@ -268,19 +268,53 @@ public class MyApplication extends Application{
 		}
 	}
 
-	public void SaveSee(ProductBean bean){
-		ListProductBean lb;
+	public static void SaveSee(ProductBean bean){
+		ListProductBean lb = new ListProductBean();
 		ArrayList<ProductBean> list = GetSee();
 		if(list!=null){
-			if(list.size()>0 && list.size()<=30){
-				list.set(0, bean);
+			if(list.size()>=0 && list.size()<30){
+				boolean ishave = false;
+				for(int i=0;i<list.size();i++){
+					String id = list.get(i).getItemid();
+					if(Util.IsNull(bean.getItemid())){
+						if(!bean.getItemid().equals(id)){
+							ishave = false;
+						}else{
+							ishave = true;
+							list.remove(list.get(i));
+							break;
+						}
+					}
+				}
+//				if(!ishave){
+//					list.add(0, bean);
+//				}else{
+//				}
+				list.add(0, bean);
 			}else if(list.size()==30){
-				list.set(0, bean);
-				list.remove(30);
+				boolean ishave = false;
+				for(int i=0;i<list.size();i++){
+					String id = list.get(i).getItemid();
+					if(Util.IsNull(bean.getItemid())){
+						if(!bean.getItemid().equals(id)){
+							ishave = false;
+						}else{
+							ishave = true;
+							list.remove(list.get(i));
+							break;
+						}
+					}
+				}
+				if(!ishave){
+					list.remove(list.get(29));
+				}
+				list.add(0, bean);
 			}
 		}
+		lb.setList(list);
+		util.saveObject(lb,Seejilu);
 	}
-	public ArrayList<ProductBean> GetSee(){
+	public static ArrayList<ProductBean> GetSee(){
 		ListProductBean bean;
 		ArrayList<ProductBean> list = new ArrayList<ProductBean>();
 		if(util.isExistDataCache(Seejilu) && util.isReadDataCache(Seejilu)){
