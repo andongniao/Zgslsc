@@ -91,15 +91,16 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item.iv_jian = (ImageView) convertView.findViewById(R.id.shopcart_lv_lv_iv_jian);
 			item.et_number = (EditText) convertView.findViewById(R.id.shopcart_lv_lv_et_number);
 			item.tv_delete = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_delete);
+			item.ll_del = (LinearLayout) convertView.findViewById(R.id.shopcart_lv_lv_ll_delete);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
 		}
 		if(type==1){
-			item.tv_delete.setVisibility(View.VISIBLE);
+			item.ll_del.setVisibility(View.VISIBLE);
 			item.cb.setVisibility(View.VISIBLE);
 		}else{
-			item.tv_delete.setVisibility(View.GONE);
+			item.ll_del.setVisibility(View.GONE);
 			item.cb.setVisibility(View.GONE);
 		}
 		if(type==0){
@@ -151,7 +152,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 				}
 			}
 		});
-		item.tv_delete.setOnClickListener(new OnClickListener() {
+		item.ll_del.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -178,9 +179,10 @@ public class ShopcartLvAdapter extends BaseAdapter{
 
 	class Item{
 		TextView tv_title,tv_price,tv_zongjia,tv_unit,tv_delete;
-		ImageView iv_jia,iv_jian,iv_ic;
+		ImageView iv_jia,iv_jian,iv_ic,iv_del;
 		EditText et_number;
 		CheckBox cb;
+		LinearLayout ll_del;
 	}
 
 }

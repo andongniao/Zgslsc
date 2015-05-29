@@ -203,6 +203,8 @@ OnClickListener {
 					if(baseBean!=null){
 						if("200".equals(baseBean.getCode())){
 							Util.ShowToast(context, "²Ù×÷³É¹¦£¡");
+							MyOrderActivity.isinit =true;
+							finish();
 						}
 						else if("300".equals(baseBean.getCode())){
 							MyApplication.mp.setlogin(false);

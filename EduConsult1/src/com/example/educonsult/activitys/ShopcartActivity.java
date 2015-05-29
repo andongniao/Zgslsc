@@ -270,11 +270,13 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				if(showtp==0){
 					showtp=1;
 					cb_all.setVisibility(View.GONE);
+					ll_jeisuan.setVisibility(View.GONE);
 					adapter.SetData(list, showtp);
 					adapter.notifyDataSetChanged();
 				}else{
 					showtp=0;
 					cb_all.setVisibility(View.VISIBLE);
+					ll_jeisuan.setVisibility(View.VISIBLE);
 					adapter.SetData(list, showtp);
 					adapter.notifyDataSetChanged();
 				}
@@ -498,6 +500,12 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					strsum=sum+"";
 					strsum=strsum.substring(0,strsum.indexOf(".")+2);
 					tv_heji.setText("гд"+strsum);
+					if(list!=null && list.size()==0){
+						showtp=0;
+						cb_all.setVisibility(View.VISIBLE);
+						adapter.SetData(list, showtp);
+						adapter.notifyDataSetChanged();
+					}
 				}
 				else if("300".equals(code)){
 					intent = new Intent(context,LoginActivity.class);
