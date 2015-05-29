@@ -141,15 +141,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		String vserion = info.versionName;
 		tv_version.setText(vserion);
 		bean=MyApplication.mp.getUser();
-		if(bean!=null){
-			if(bean.getType()==1){
-				ll_fh.setVisibility(View.GONE);
-			}else{
-				//				ll_zf.setVisibility(View.GONE);
-				ll_sh.setVisibility(View.GONE);
-				//ll_youhuiquan.setVisibility(View.GONE);
-			}
-		}
+//		if(bean!=null){
+//			if(bean.getType()==1){
+//				ll_fh.setVisibility(View.GONE);
+//			}else{
+//				//				ll_zf.setVisibility(View.GONE);
+//				ll_sh.setVisibility(View.GONE);
+//				//ll_youhuiquan.setVisibility(View.GONE);
+//			}
+//		}
 		myPDT = new ThreadWithProgressDialog();
 		msg = "Мгдижа...";
 		if(MyApplication.mp.islogin){

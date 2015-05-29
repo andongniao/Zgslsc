@@ -210,8 +210,8 @@ import com.unionpay.mobile.android.nocard.views.ad;
 				init = false;
 				add= 1;
 				if(Util.detect(context)){
-					
-				myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
+
+					myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -273,17 +273,17 @@ import com.unionpay.mobile.android.nocard.views.ad;
 		view_list.add(tv_show_pay);
 
 		tv_show_send = (TextView) findViewById(R.id.myorder_home_tv_send_show);
-//		view_list.add(tv_show_send);
+		//		view_list.add(tv_show_send);
 		tv_show_shouhuo = (TextView) findViewById(R.id.myorder_home_tv_shouhuo_show);
 		view_list.add(tv_show_shouhuo);
 
-//		if(userbean.getType()==0){
-//			ll_send.setVisibility(View.VISIBLE);
-//			ll_shouhuo.setVisibility(View.GONE);
-//		}else{
-//			ll_shouhuo.setVisibility(View.VISIBLE);
-//			ll_send.setVisibility(View.GONE);
-//		}
+		//		if(userbean.getType()==0){
+		//			ll_send.setVisibility(View.VISIBLE);
+		//			ll_shouhuo.setVisibility(View.GONE);
+		//		}else{
+		//			ll_shouhuo.setVisibility(View.VISIBLE);
+		//			ll_send.setVisibility(View.GONE);
+		//		}
 
 		view_list.add(tv_show_comment);
 		v_pop = LayoutInflater.from(context).inflate(R.layout.money_password, null);
@@ -374,7 +374,7 @@ import com.unionpay.mobile.android.nocard.views.ad;
 			change(1);
 			break;
 		case R.id.myorder_home_ll_send:
-//			change(2);
+			//			change(2);
 			break;
 		case R.id.myorder_home_ll_shouhuo:
 			step = 3;
@@ -403,7 +403,7 @@ import com.unionpay.mobile.android.nocard.views.ad;
 				ttp = i;
 				init = true;
 				if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
+					myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//可取消
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -454,14 +454,14 @@ import com.unionpay.mobile.android.nocard.views.ad;
 
 	// 任务
 	public class RefeshData implements ThreadWithProgressDialogTask {
-//		private int step;
+		//		private int step;
 		private int page;
 		private String authstr;
 		private boolean init;
 
 		public RefeshData(boolean init,int page,String authstr) {
 			this.init = init;
-//			this.step = step;
+			//			this.step = step;
 			this.page = page; 
 			this.authstr = authstr;
 		}
@@ -498,47 +498,76 @@ import com.unionpay.mobile.android.nocard.views.ad;
 					}
 				}else{
 					if(adapter==null){
-					adapter = new MyOrderHomeAdapter(context, list,myorder,isloding);
-					lv.setAdapter(adapter);	
+						adapter = new MyOrderHomeAdapter(context, list,myorder,isloding);
+						lv.setAdapter(adapter);	
 					}else{
 						adapter.SetData(list);
 						adapter.notifyDataSetChanged();
 					}
 				}
 			}else{
-				if(paybean!=null){
-					if("200".equals(paybean.getCode())){
-
-						if(add==1){
+				if(add==1){
+					if(baseBean!=null){
+						if("200".equals(baseBean.getCode())){
 							Util.ShowToast(context, "关闭成功");
-						}else if(add==2){
+						}else if("300".equals(baseBean.getCode())){
+							MyApplication.mp.setlogin(false);
+							Util.ShowToast(context, R.string.login_out_time);
+							intent = new Intent(context,LoginActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+							finish(); 
+						}else{
+							Util.ShowToast(context, baseBean.getMsg());
+						}
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
+				}else if(add==2){
+					if(paybean!=null){
+						if("200".equals(paybean.getCode())){
 							if("0".equals(paybean.getType())){
-							Util.ShowToast(context, "支付成功");
+								Util.ShowToast(context, "支付成功");
 							}else{
 								Util.ShowToast(context, paybean.getMsg());
-//								intent = new Intent(context,RechargeActivity.class);
-//								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//								startActivity(intent);
+								//								intent = new Intent(context,RechargeActivity.class);
+								//								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								//								startActivity(intent);
 							}
-						}else if(add==3){
-							Util.ShowToast(context, "确认成功");	
-						}
-						init = true;
-						if(Util.detect(context)){
-						myPDT.Run(context, new RefeshData(init,pag,tag),initdataing,false);//可取消
+						}else if("300".equals(paybean.getCode())){
+							MyApplication.mp.setlogin(false);
+							Util.ShowToast(context, R.string.login_out_time);
+							intent = new Intent(context,LoginActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+							finish(); 
 						}else{
-							Util.ShowToast(context, R.string.net_is_eor);
+							Util.ShowToast(context, paybean.getMsg());
 						}
-					}else if("300".equals(paybean.getCode())){
-						MyApplication.mp.setlogin(false);
-						Util.ShowToast(context, R.string.login_out_time);
-						intent = new Intent(context,LoginActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
-						finish(); 
 					}else{
-						Util.ShowToast(context, baseBean.getMsg());
+						Util.ShowToast(context, R.string.net_is_eor);
 					}
+				}else if(add==3){
+					if(baseBean!=null){
+						if("200".equals(baseBean.getCode())){
+							Util.ShowToast(context, "确认成功");	
+						}else if("300".equals(baseBean.getCode())){
+							MyApplication.mp.setlogin(false);
+							Util.ShowToast(context, R.string.login_out_time);
+							intent = new Intent(context,LoginActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+							finish(); 
+						}else{
+							Util.ShowToast(context, baseBean.getMsg());
+						}
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
+				}
+				init = true;
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(init,pag,tag),initdataing,false);//可取消
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -637,7 +666,7 @@ import com.unionpay.mobile.android.nocard.views.ad;
 		if(isinit){
 			init = true;
 			if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(init,pag,tag),initdataing,false);//可取消
+				myPDT.Run(context, new RefeshData(init,pag,tag),initdataing,false);//可取消
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}

@@ -15,6 +15,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <ImageView
@@ -125,8 +126,25 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="删除"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="16dp" />
+        <LinearLayout 
+            android:id="@+id/shopcart_lv_lv_ll_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            >
+             <ImageView 
+            android:id="@+id/shopcart_lv_lv_iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/delete_bg"
+            android:padding="10dp"
+            />
+        </LinearLayout>
+       
     </LinearLayout>
 
 </LinearLayout>
