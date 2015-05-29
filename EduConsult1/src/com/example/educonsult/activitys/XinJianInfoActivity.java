@@ -43,6 +43,8 @@ public class XinJianInfoActivity extends BaseActivity{
 		content=(TextView)findViewById(R.id.xinjianinfo_content);
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 		
 	}
@@ -64,9 +66,14 @@ public class XinJianInfoActivity extends BaseActivity{
 			//任务完成后
 			if(xinjianbean!=null){
 				if("200".equals(xinjianbean.getCode())){
-					//TODO	
 					title.setText(xinjianbean.getTitle());
 					content.setText(xinjianbean.getContent());
+				}else if("300".equals(xinjianbean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					intent = new Intent(context,LoginActivity.class);
+					startActivity(intent);
+					finish();
 				}else{
 					Util.ShowToast(context, xinjianbean.getMsg());
 				}

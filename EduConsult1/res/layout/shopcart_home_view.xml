@@ -84,7 +84,7 @@
         <TextView
             android:id="@+id/shopcart_home_tv_jiesuan"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:background="@color/orn"
             android:gravity="center"
             android:paddingTop="10dp"

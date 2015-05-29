@@ -39,17 +39,20 @@ public class ShopcartLvAdapter extends BaseAdapter{
 	private Item item;
 	private int index;
 	private shop shop;
+	private int type;
 
 
-	public ShopcartLvAdapter(Context context,ArrayList<ShopBean>list, int index,shop shop){
+	public ShopcartLvAdapter(Context context,ArrayList<ShopBean>list, int index,shop shop,int type){
 		this.context = context;
 		this.list = list;
 		this.index = index;
 		this.shop = shop;
+		this.type = type;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<ShopBean>list){
+	public void SetData(ArrayList<ShopBean>list,int type){
 		this.list = list;
+		this.type = type;
 	}
 
 	@Override
@@ -87,9 +90,22 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item.iv_jia = (ImageView) convertView.findViewById(R.id.shopcart_lv_lv_iv_jia);
 			item.iv_jian = (ImageView) convertView.findViewById(R.id.shopcart_lv_lv_iv_jian);
 			item.et_number = (EditText) convertView.findViewById(R.id.shopcart_lv_lv_et_number);
+			item.tv_delete = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_delete);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
+		}
+		if(type==1){
+			item.tv_delete.setVisibility(View.VISIBLE);
+			item.cb.setVisibility(View.VISIBLE);
+		}else{
+			item.tv_delete.setVisibility(View.GONE);
+			item.cb.setVisibility(View.GONE);
+		}
+		if(type==0){
+			item.cb.setVisibility(View.VISIBLE);
+		}else{
+			item.cb.setVisibility(View.GONE);
 		}
 		ShopBean sb = (ShopBean) list.get(index);
 		ArrayList<ShopItemBean> l = sb.getMall();
@@ -98,13 +114,6 @@ public class ShopcartLvAdapter extends BaseAdapter{
 
 		item.cb.setChecked(b.isIsclick());
 		
-//		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//			
-//			@Override
-//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//				shop.click(isChecked, index, position);
-//			}
-//		});
 		item.cb.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -142,6 +151,17 @@ public class ShopcartLvAdapter extends BaseAdapter{
 				}
 			}
 		});
+		item.tv_delete.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (Util.detect(context)) {
+					shop.delete(index, position);
+				} else {
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}
+		});
 		//item.et_number.setText(b.getNum());
 		item.et_number.setText(b.getNum()+"");
 		item.tv_price.setText("гд"+b.getPrice());
@@ -152,18 +172,12 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		float i_allmoney=i_num*i_price;
 		item.tv_zongjia.setText("гд"+i_allmoney);
 		Util.Getbitmap(item.iv_ic, b.getThumb());
-//		try {
-//			item.iv_ic.setImageBitmap(Util.getBitmapForNet(b.getThumb()));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		return convertView;
 	}
 
 	class Item{
-		TextView tv_title,tv_price,tv_zongjia,tv_unit;
+		TextView tv_title,tv_price,tv_zongjia,tv_unit,tv_delete;
 		ImageView iv_jia,iv_jian,iv_ic;
 		EditText et_number;
 		CheckBox cb;

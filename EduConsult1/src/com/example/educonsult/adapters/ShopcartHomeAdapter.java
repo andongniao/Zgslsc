@@ -12,8 +12,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
@@ -24,6 +22,7 @@ import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuCreator;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuItem;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuListView;
 import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuListView.OnMenuItemClickListener;
+import com.example.educonsult.myviews.SwipeMenuListView.SwipeMenuListView.OnSwipeListener;
 import com.example.educonsult.tools.Util;
 
 public class ShopcartHomeAdapter extends BaseAdapter{
@@ -34,15 +33,21 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 	private ShopcartLvAdapter adapter;
 	private shop shop;
 	private ShopBean shopbean;
+	private int type;
 
-	public ShopcartHomeAdapter(Context context,ArrayList<ShopBean>list, shop shop){
+	public ShopcartHomeAdapter(Context context,ArrayList<ShopBean>list, shop shop,int type){
 		this.context = context;
 		this.list = list;
 		this.shop = shop;
+		this.type = type;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<ShopBean>list){
+	public void SetData(ArrayList<ShopBean>list,int type){
 		this.list = list;
+		this.type = type;
+		if(adapter!=null){
+			adapter.SetData(list, type);
+		}
 	}
 
 	@Override
@@ -70,6 +75,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 			item = new Item();
 			//TODO 
 			item.heji=(TextView)convertView.findViewById(R.id.shopcart_home_tv_heji);
+			item.title=(TextView)convertView.findViewById(R.id.shopcart_home_lv_tv_title);
 			item.cb = (CheckBox) convertView.findViewById(R.id.shopcart_home_lv_cb);
 			item.lv = (SwipeMenuListView) convertView.findViewById(R.id.shopcart_home_lv_lv);
 			convertView.setTag(item);
@@ -88,9 +94,13 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 				sum=sum+i_num*i_price;
 			}
 		}
-
+		if(type==0){
+			item.cb.setVisibility(View.VISIBLE);
+		}else{
+			item.cb.setVisibility(View.GONE);
+		}
 		item.cb.setChecked(s.isIsclick());
-		item.cb.setText(s.getCompany());
+		item.title.setText(s.getCompany()+">");
 		item.heji.setText("гд"+sum);
 //		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 //			
@@ -124,24 +134,31 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 				menu.addMenuItem(deleteItem);
 			}
 		};
-		item.lv.setMenuCreator(creator);
+//		item.lv.setMenuCreator(creator);
 //		ShopBean sb = (ShopBean) list.get(position);
 //		ArrayList<Object> l = sb.getList();
-		adapter = new ShopcartLvAdapter(context,list,index, shop);
+		adapter = new ShopcartLvAdapter(context,list,index, shop,type);
 		item.lv.setAdapter(adapter);
-		Util.setListViewHeightBasedOnChildren(item.lv);
-		item.lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public void onMenuItemClick(int position, SwipeMenu menu, int i) {
-				switch (i) {
-				case 0:
-					if (Util.detect(context)) {
-						shop.delete(index, position);
-					} else {
+//		Util.setListViewHeightBasedOnChildren(item.lv);
+//		item.lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//			@Override
+//			public void onMenuItemClick(int position, SwipeMenu menu, int i) {
+//				switch (i) {
+//				case 0:
+//					break;
+//				}
+//			}
+//		});
+		item.lv.setOnSwipeListener(new OnSwipeListener() {
 
-					}
-					break;
-				}
+			@Override
+			public void onSwipeStart(int position) {
+				// swipe start
+			}
+
+			@Override
+			public void onSwipeEnd(int position) {
+				// swipe end
 			}
 		});
 		return convertView;
@@ -149,7 +166,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 	class Item{
 		CheckBox cb;
 		SwipeMenuListView lv;
-		TextView heji,computer;
+		TextView heji,computer,title;
 	}
 
 	private int dp2px(int dp) {

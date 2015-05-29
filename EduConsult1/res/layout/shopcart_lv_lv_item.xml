@@ -2,115 +2,131 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:padding="5dp"
     android:gravity="center_vertical"
-    android:orientation="horizontal" >
-    <CheckBox 
+    android:orientation="horizontal"
+    android:padding="5dp" >
+
+    <CheckBox
         android:id="@+id/shopcart_lv_lv_cb"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        />
-	<LinearLayout 
-	    android:layout_width="0dp"
-	    android:layout_weight="1"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal"
-	    >
-	    <ImageView 
-	        android:id="@+id/shopcart_lv_lv_ic"
-	        android:layout_width="80dp"
-	        android:layout_height="80dp"
-	        android:background="@drawable/default_bg"
-	        android:layout_gravity="center_vertical"
-	        />
-	    <LinearLayout 
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	        android:layout_height="wrap_content"
-	        android:gravity="center_vertical"
-	        android:orientation="vertical"
-	        android:layout_margin="5dp"
-	        android:layout_gravity="center_vertical"
-	        >
-	        <TextView
-	             android:id="@+id/shopcart_lv_lv_tv_title"
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content"
-	            android:textColor="@color/black"
-	            android:text="@string/test"
-	            android:singleLine="true"
-	            />
-	        <LinearLayout 
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:orientation="horizontal"
-	            android:layout_marginTop="5dp"
-	            android:layout_gravity="center_vertical"
-	            >
-	            <TextView 
-	                android:id="@+id/shopcart_lv_lv_tv_price"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:textColor="@color/orn"
-	                android:textSize="10dp"
-	                android:text="@string/test"
-	                />
-	            <TextView
-	                android:id="@+id/shopcart_lv_lv_tv_uint" 
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:textColor="@color/home_hui"
-	                android:textSize="10dp"
-	                android:layout_marginLeft="3dp"
-	                />
-	        </LinearLayout>
-	        
-	        <LinearLayout 
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content"
-	            android:orientation="horizontal"
-	            android:gravity="center_vertical"
-	            android:layout_marginTop="5dp"
-	            >
-	            <ImageView 
-	                android:id="@+id/shopcart_lv_lv_iv_jian"
-	                android:layout_width="40dp"
-	                android:layout_height="40dp"
-	                android:background="@drawable/shop_jian"
-	                />
-	            <EditText 
-	                android:id="@+id/shopcart_lv_lv_et_number"
-	                android:padding="5dp"
-	                android:gravity="center"
-	                android:layout_width="0dp"
-	                android:layout_weight="1"
-	                android:layout_height="fill_parent"
-	                android:background="@drawable/order_et_bg_line"
-	                android:text="0"
-	                android:focusable="false"
-	                android:textColor="@color/black"
-	                android:textSize="18dp"
-	                
-	                />
-	            <ImageView 
-	                android:id="@+id/shopcart_lv_lv_iv_jia"
-	                android:layout_width="40dp"
-	                android:layout_height="40dp"
-	                android:background="@drawable/shop_jia"
-	                />
-	        </LinearLayout>
-	        
-	        
-	    </LinearLayout>
-	    <TextView 
-	        android:id="@+id/shopcart_lv_lv_tv_zongjia"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:textColor="@color/orn"
-	        android:layout_gravity="center_vertical"
-	        android:text="@string/test"
-	        android:layout_margin="10dp"
-	        />
-	</LinearLayout>
-    
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/shopcart_lv_lv_ic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/default_bg" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/shopcart_lv_lv_tv_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/test"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/shopcart_lv_lv_tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test"
+                    android:textColor="@color/orn"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/shopcart_lv_lv_tv_uint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/home_hui"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/shopcart_lv_lv_tv_zongjia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:text="@string/test"
+                    android:textColor="@color/orn" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/shopcart_lv_lv_iv_jian"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shop_jian" />
+
+                <EditText
+                    android:id="@+id/shopcart_lv_lv_et_number"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/order_et_bg_line"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/shopcart_lv_lv_iv_jia"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shop_jia" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/shopcart_lv_lv_tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/orn"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
+
 </LinearLayout>

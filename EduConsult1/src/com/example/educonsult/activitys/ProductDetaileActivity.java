@@ -113,7 +113,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		productBean=(ProductBean)b.getSerializable("product");
 		MyApplication.mp.SaveSee(productBean);
 //		liulanfile=MyApplication.Seejilu;
-//		userbean=MyApplication.mp.getUser();
+		userbean=MyApplication.mp.getUser();
 //		u=new Util(context);
 //		//isSave=u.readObject(liulanfile);
 //		listProductBean=(ListProductBean)u.readObject(liulanfile);

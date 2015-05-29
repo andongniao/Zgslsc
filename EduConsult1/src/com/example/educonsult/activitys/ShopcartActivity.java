@@ -63,7 +63,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	public static boolean ischange;
 	private float sum,i_price;
 	private int inttype=0;
-	private int clearposition,clearindex,deposition;
+	private int clearposition,clearindex,deposition,showtp;
 	private QuerenOrderBean querenOrderBean;
 	private ListShopBean listShopBean; 
 	private Intent intent;
@@ -75,11 +75,11 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		goneTopLeft();
-		//		topRightRVisible();
+		topRightRVisible();
 		topRightTGone();
 		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_xx_bg);
+		iv_top_t.setBackgroundResource(R.drawable.del_icon_normal);
 		setTitleTxt(R.string.shopcart_title);
 		setContentXml(R.layout.shopcart_home_view);
 		init();
@@ -103,6 +103,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		TestinAgent.init(this);
 		context = this;
 		type = 0;
+		showtp = 0;
 		//		Util.SetRedNum(context, rl_r, 1);
 		bean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
@@ -159,7 +160,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						ba.setIsclick(clearb);
 					}
 				}
-				adapter.SetData(list);
+				adapter.SetData(list,showtp);
 				adapter.notifyDataSetChanged();
 				len=0;
 				for(int i=0;i<list.size();i++){
@@ -204,7 +205,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				int i =list.get(index).getMall().get(postion).getNum();
 				i+=1;
 				list.get(index).getMall().get(postion).setNum(i);
-				adapter.SetData(list);
+				adapter.SetData(list,showtp);
 				adapter.notifyDataSetChanged();
 				sum=0;
 				int i_num;
@@ -228,14 +229,14 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				int i = list.get(index).getMall().get(postion).getNum();
 				i-=1;
 				list.get(index).getMall().get(postion).setNum(i);
-				adapter.SetData(list);
+				adapter.SetData(list,showtp);
 				adapter.notifyDataSetChanged();
 				int i_num;
 				for(int f=0;f<list.size();f++){
 					for(int j=0;j<list.get(f).getMall().size();j++){
 						if(list.get(f).getMall().get(j).isIsclick()){
 
-							i_num=list.get(i).getMall().get(j).getNum();
+							i_num=list.get(f).getMall().get(j).getNum();
 							i_price=Float.parseFloat(list.get(f).getMall().get(j).getPrice());
 							sum=i_num*i_price+sum;
 						}
@@ -262,7 +263,23 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void addlistener() {
-		sum=0;
+		iv_top_t.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(showtp==0){
+					showtp=1;
+					cb_all.setVisibility(View.GONE);
+					adapter.SetData(list, showtp);
+					adapter.notifyDataSetChanged();
+				}else{
+					showtp=0;
+					cb_all.setVisibility(View.VISIBLE);
+					adapter.SetData(list, showtp);
+					adapter.notifyDataSetChanged();
+				}
+			}
+		});
 		cb_all.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -275,6 +292,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						b.setIsclick(isChecked);
 					}
 				}
+				sum=0;
 				int i_num;
 				for(int i=0;i<list.size();i++){
 					for(int j=0;j<list.get(i).getMall().size();j++){
@@ -289,7 +307,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				strsum=sum+"";
 				strsum=strsum.substring(0,strsum.indexOf(".")+2);
 				tv_heji.setText("£¤"+strsum);
-				adapter.SetData(list);
+				adapter.SetData(list,showtp);
 				adapter.notifyDataSetChanged();
 			}
 		});
@@ -387,10 +405,10 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				ll_isnull.setVisibility(View.GONE);
 				lv.setVisibility(View.VISIBLE);
 				if(adapter!=null){
-					adapter.SetData(list);
+					adapter.SetData(list,showtp);
 					adapter.notifyDataSetChanged();
 				}else{
-					adapter = new ShopcartHomeAdapter(context, list,shop);
+					adapter = new ShopcartHomeAdapter(context, list,shop,showtp);
 					lv.setAdapter(adapter);
 					lv.setEmptyView(ll_isnull);
 				}
@@ -445,7 +463,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 					if(size==0){
 						list.remove(list.get(index));
 					}
-					adapter.SetData(list);
+					adapter.SetData(list,showtp);
 					adapter.notifyDataSetChanged();
 					if(list!=null){
 						if(list.size()>0){
@@ -465,6 +483,21 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 					}
 					Util.ShowToast(context, "É¾³ý³É¹¦£¡");
+					sum=0;
+					int i_num;
+					for(int i=0;i<list.size();i++){
+						for(int j=0;j<list.get(i).getMall().size();j++){
+							if(list.get(i).getMall().get(j).isIsclick()){
+
+								i_num=list.get(i).getMall().get(j).getNum();
+								i_price=Float.parseFloat(list.get(i).getMall().get(j).getPrice());
+								sum=i_num*i_price+sum;
+							}
+						}
+					}
+					strsum=sum+"";
+					strsum=strsum.substring(0,strsum.indexOf(".")+2);
+					tv_heji.setText("£¤"+strsum);
 				}
 				else if("300".equals(code)){
 					intent = new Intent(context,LoginActivity.class);
@@ -605,7 +638,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 								ba.setIsclick(clearb);
 							}
 						}
-						adapter.SetData(list);
+						adapter.SetData(list,showtp);
 						adapter.notifyDataSetChanged();
 						len=0;
 						for(int i=0;i<list.size();i++){
