@@ -109,7 +109,6 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
-		myPDT=new ThreadWithProgressDialog();
 		//t = getIntent().getIntExtra("t", -1);
 		
 		er = MyApplication.sp.edit();

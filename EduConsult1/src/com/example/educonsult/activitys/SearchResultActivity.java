@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
@@ -72,6 +73,12 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.search_result_layout);
 		init();
 		addlisteners();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+				}
+		
 	}
 	
 
@@ -175,11 +182,6 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 		ll_isyes.setVisibility(View.GONE);
 		gv = (PullToRefreshGridView) findViewById(R.id.search_result_gv);
 		initIndicator();
-		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//可取消
-		}else{
-			Util.ShowToast(context, R.string.net_is_eor);
-		}
 	}
 	private void initIndicator()
 	{

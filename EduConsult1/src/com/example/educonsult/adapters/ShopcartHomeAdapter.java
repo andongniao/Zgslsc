@@ -149,18 +149,6 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 //				}
 //			}
 //		});
-		item.lv.setOnSwipeListener(new OnSwipeListener() {
-
-			@Override
-			public void onSwipeStart(int position) {
-				// swipe start
-			}
-
-			@Override
-			public void onSwipeEnd(int position) {
-				// swipe end
-			}
-		});
 		return convertView;
 	}
 	class Item{
