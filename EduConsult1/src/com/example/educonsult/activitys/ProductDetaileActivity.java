@@ -432,8 +432,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		case R.id.product_detaile_ll_pay_now: 
 			if(MyApplication.mp.islogin){
 //				ShopcartActivity.ischange=true;
-				SearchResultActivity.isproductfinish=true;
 				ExampleActivity.setCurrentTab(3);
+				SearchResultActivity.isproductfinish=true;
 				finish();
 			}else{
 				intent = new Intent(context,LoginActivity.class);

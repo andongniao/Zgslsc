@@ -109,7 +109,6 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
-		myPDT=new ThreadWithProgressDialog();
 		//t = getIntent().getIntExtra("t", -1);
 		
 		er = MyApplication.sp.edit();
@@ -350,6 +349,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	void initDate(int type,int order,int page,String text){
 		//list=listProductBean.getList();
 		type+=1;
+		SearchResultActivity.isproductfinish=false;
 		intent=new Intent(context, SearchResultActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtype", type+"");
