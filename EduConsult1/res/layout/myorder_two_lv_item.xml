@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="@string/test"
-        android:ems="10"
+        android:ems="8"
         android:ellipsize="end"
+        android:maxLines="3"
         android:layout_marginLeft="5dp"
         />
      <TextView 

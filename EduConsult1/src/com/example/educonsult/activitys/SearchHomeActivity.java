@@ -176,7 +176,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
 		textItemCenterListAdapter = new TextItemCenterListAdapter(context, list);
 		lv_l.setAdapter(textItemCenterListAdapter);
-		
+	
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -350,6 +350,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	void initDate(int type,int order,int page,String text){
 		//list=listProductBean.getList();
 		type+=1;
+		SearchResultActivity.isproductfinish=false;
 		intent=new Intent(context, SearchResultActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtype", type+"");
