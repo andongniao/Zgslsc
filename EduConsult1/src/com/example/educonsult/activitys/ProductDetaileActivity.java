@@ -19,6 +19,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -87,6 +88,8 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ImageView[] imtuijian;
 	private ListProductBean listProductBean;
 	private LinearLayout dianpulin;
+	private ImageView iv_top_t;
+	private RelativeLayout rl_r;
 	
 
 
@@ -94,9 +97,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		//		topRightLVisible();
-		//		topRightRVisible();
+		topRightRVisible();
 		topRightTGone();
 		setTopLeftTv(R.string.product_detaile_title);
+		rl_r = (RelativeLayout) getTopRightRl();
+		iv_top_t = (ImageView) getTopRightView();
+		iv_top_t.setBackgroundResource(R.drawable.top_shop_bg);
 		setContentXml(R.layout.product_detail);
 		init();
 		addlistener();
@@ -382,6 +388,15 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 	}
 	private void addlistener() {
+		iv_top_t.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				SearchResultActivity.isproductfinish=true;
+				ExampleActivity.setCurrentTab(3);
+				finish();
+			}
+		});
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -434,6 +449,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 //				ShopcartActivity.ischange=true;
 				ExampleActivity.setCurrentTab(3);
 				SearchResultActivity.isproductfinish=true;
+				MyZjActivity.isfinish=true;
 				finish();
 			}else{
 				intent = new Intent(context,LoginActivity.class);

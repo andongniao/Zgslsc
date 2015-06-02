@@ -328,6 +328,7 @@ public class HomePageFragmentMenu extends Fragment {
 		}
 	}
 	private void ToSearch(String text){
+		 SearchResultActivity.isproductfinish=false;
 		Intent intent=new Intent(context, SearchResultActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtype", "1");

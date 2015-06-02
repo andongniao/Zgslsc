@@ -55,6 +55,7 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private ArrayList<ProductBean> productBeans;
 	private ListProductBean listProductBean;
 	private Util u;
+	public static boolean isfinish;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -98,6 +99,7 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		TestinAgent.init(this);
 		context = this;
 		isread = false;
+		isfinish=false;
 		myPDT=new ThreadWithProgressDialog();
 		
 		u=new Util(context);
@@ -156,6 +158,10 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		if(isread){
 			Util.SetRedGone(context, rl_l);
 			isread = false;
+		}
+		if(isfinish){
+			isfinish=false;
+			finish();
 		}
 	}
 	

@@ -139,7 +139,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 //		ArrayList<Object> l = sb.getList();
 		adapter = new ShopcartLvAdapter(context,list,index, shop,type);
 		item.lv.setAdapter(adapter);
-//		Util.setListViewHeightBasedOnChildren(item.lv);
+		Util.setListViewHeightBasedOnChildren(item.lv);
 //		item.lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 //			@Override
 //			public void onMenuItemClick(int position, SwipeMenu menu, int i) {

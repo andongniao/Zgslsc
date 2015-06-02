@@ -635,6 +635,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		}
 	}
  private void ToSearch(String text){
+	 SearchResultActivity.isproductfinish=false;
 	 intent=new Intent(context, SearchResultActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtype", "1");
@@ -644,6 +645,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
  }
 
 	private void Toproduct(ProductBean productBean){
+		
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		//intent.putExtra("productdetaile", value);
