@@ -77,9 +77,13 @@ public class SearchResultAdapter extends BaseAdapter{
 		}
 		Util.Getbitmap(item.iv, list.get(position).getThumb());
 		item.tv_title.setText(list.get(position).getTitle());
-		item.tv_address.setText(list.get(position).getAreaname());
+		item.tv_address.setText(list.get(position).getAreaname()); 
+		String s ="";
+		if(Util.IsNull(list.get(position).getUnit())){
+			s=list.get(position).getUnit();
+		}
 		item.tv_price.setText("гд"+list.get(position).getPrice());
-		item.tv_unit.setText(list.get(position).getUnit());
+		item.tv_unit.setText(s);
 		return convertView;
 	}
 	class Item{
