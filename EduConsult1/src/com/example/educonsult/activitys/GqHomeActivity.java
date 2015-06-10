@@ -247,8 +247,8 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		for(int i=0;i<10;i++){
 			list.add(i);
 		}
-		adapter = new GqAdapter(context, list);
-		gridView.setAdapter(adapter);
+//		adapter = new GqAdapter(context, list);
+//		gridView.setAdapter(adapter);
 		gridView.setFocusable(false);
 		Util.SetRedNum(context, rl_l, 0);
 		

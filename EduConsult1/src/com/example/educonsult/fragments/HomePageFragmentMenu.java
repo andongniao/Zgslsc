@@ -21,6 +21,7 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.HomePagerActivity;
 import com.example.educonsult.activitys.LoginActivity;
 import com.example.educonsult.activitys.SearchResultActivity;
@@ -49,6 +50,7 @@ public class HomePageFragmentMenu extends Fragment {
 	private String filename=MyApplication.FenleiName;
 	private Util u;
 	private ArrayList<FenleiBean> fenleilist, listchile;
+	private int num;
 
 
 	@Override
@@ -275,6 +277,7 @@ public class HomePageFragmentMenu extends Fragment {
 			HomePagerActivity.handler.sendMessage(msg);
 			//			Util.ShowToast(context, R.string.maimeng);
 			String name = listchile.get(arg2).getCatname();
+			num=arg2;
 			ToSearch(name);
 
 		}
@@ -329,11 +332,10 @@ public class HomePageFragmentMenu extends Fragment {
 	}
 	private void ToSearch(String text){
 		 SearchResultActivity.isproductfinish=false;
-		Intent intent=new Intent(context, SearchResultActivity.class);
+		Intent intent=new Intent(context, GqTwoActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.putExtra("searchtype", "1");
-		intent.putExtra("searchorder", "0");
-		intent.putExtra("searchtext", text);
+		intent.putExtra("searchtext", title);
+		intent.putExtra("num", num);
 		startActivity(intent);
 	}
 

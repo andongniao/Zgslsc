@@ -284,6 +284,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						}
 					}
 				}
+				
 			}
 		});
 		cb_all.setOnClickListener(new OnClickListener() {

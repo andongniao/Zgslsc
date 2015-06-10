@@ -470,7 +470,8 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 //			title = getResources().getString(R.string.home_siliao);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
-			ToSearch("饲料");
+			//ToSearch("饲料");
+			ToGqTwo("饲料");
 			break;
 		case R.id.home_shouyao_ll:
 //			Util.ShowToast(context, R.string.maimeng);
@@ -479,7 +480,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 //			title = getResources().getString(R.string.home_shouyao);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
-			ToSearch("兽药");
+			ToGqTwo("兽药");
 			break;
 		case R.id.home_yangzhi_ll:
 //			Util.ShowToast(context, R.string.maimeng);
@@ -488,7 +489,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 //			title = getResources().getString(R.string.home_yangzhishebei);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
-			ToSearch("养殖设备");
+			ToGqTwo("养殖设备");
 			break;
 		case R.id.home_chuqin_ll:
 //			Util.ShowToast(context, R.string.maimeng);
@@ -497,7 +498,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 //			title = getResources().getString(R.string.home_chuqinyangzhi);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
-			ToSearch("畜禽养殖");
+			ToGqTwo("畜禽养殖");
 			break;
 		case R.id.home_tianjiaji_ll:
 //			Util.ShowToast(context, R.string.maimeng);
@@ -506,7 +507,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 //			title = getResources().getString(R.string.home_tianjiaji);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
-			ToSearch("添加剂");
+			ToGqTwo("添加剂");
 			break;
 		case R.id.home_yuanliao_ll:
 //			Util.ShowToast(context, R.string.maimeng);
@@ -515,7 +516,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 //			title = getResources().getString(R.string.home_yuanliao);
 //			intent.putExtra("title", title);
 //			startActivity(intent);
-			ToSearch("原料");
+			ToGqTwo("原料");
 			break;
 		case R.id.home_tv_more_jingpin:
 			//			intent = new Intent(this.context,GqTwoActivity.class);
@@ -641,6 +642,13 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 		intent.putExtra("searchtype", "1");
 		intent.putExtra("searchorder", "0");
 		intent.putExtra("searchtext", text);
+		startActivity(intent);
+ }
+ private void ToGqTwo(String text){
+	 intent=new Intent(context, GqTwoActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("searchtext", text);
+		intent.putExtra("num", 0);
 		startActivity(intent);
  }
 
