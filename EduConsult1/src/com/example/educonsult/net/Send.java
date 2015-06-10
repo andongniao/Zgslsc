@@ -3,7 +3,6 @@ package com.example.educonsult.net;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +14,6 @@ import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.beans.AddressBean;
 import com.example.educonsult.beans.AreaBean;
-import com.example.educonsult.beans.BanksBean;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.CenterUserBean;
 import com.example.educonsult.beans.CommentBean;
@@ -25,17 +23,15 @@ import com.example.educonsult.beans.FenleiBean;
 import com.example.educonsult.beans.HomeBean;
 import com.example.educonsult.beans.ListAddressBean;
 import com.example.educonsult.beans.ListAreaBean;
-import com.example.educonsult.beans.ListBanksBean;
 import com.example.educonsult.beans.ListComment;
+import com.example.educonsult.beans.ListCompanyBean;
 import com.example.educonsult.beans.ListFenleiBean;
-import com.example.educonsult.beans.ListMoneyBean;
 import com.example.educonsult.beans.ListOrderBean;
 import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ListShopBean;
 import com.example.educonsult.beans.ListXinjianBean;
 import com.example.educonsult.beans.MallInfoBean;
 import com.example.educonsult.beans.MoneyBagBean;
-import com.example.educonsult.beans.MoneyDetaileBean;
 import com.example.educonsult.beans.OrderBean;
 import com.example.educonsult.beans.OrderFields;
 import com.example.educonsult.beans.ProdectDetaileBean;
@@ -1185,5 +1181,102 @@ public class Send {
 
 	}
 
+	
+	/**
+	 * 供求二级精品推荐
+	 * @return
+	 */
+	public ListProductBean getGQRecommend() {
+		ListProductBean lb = new ListProductBean();
+		String url =  ServiceUrl.Base+"?action=recommend";
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;	
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					lb.setCode(code);
+					lb.setMsg(msg);
+					JSONArray data = object.getJSONArray("data");
+//					JSONArray j = data.getJSONArray(0);
+					Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+					}.getType();
+					ArrayList<ProductBean> list_recommend = gson.fromJson(data.toString(), type_re);
+					lb.setList(list_recommend);
+					return lb;
+				} else {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					return lb;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				lb.setCode("500");
+				lb.setMsg("服务器异常，请稍候再试...");
+				return lb;
+			}
+		} else {
+			lb.setCode("500");
+			lb.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return lb;
+		}
+
+	}
+	/**
+	 *  供求二级品牌
+	 * @return
+	 */
+	public ListCompanyBean getGQbrand() {
+		ListCompanyBean lb = new ListCompanyBean();
+		ArrayList<CompanyBean> list = new ArrayList<CompanyBean>();
+		String url =  ServiceUrl.Base+"?action=brand";
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;	
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					lb.setCode(code);
+					lb.setMsg(msg);
+					JSONArray data = object.getJSONArray("data");
+//					JSONArray j = data.getJSONArray(0);
+					Type type_re = new TypeToken<ArrayList<CompanyBean>>() {
+					}.getType();
+					list = gson.fromJson(data.toString(), type_re);
+					lb.setList(list);
+					return lb;
+				} else {
+					lb.setMsg(msg);
+					lb.setCode(code);
+					return lb;
+
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				lb.setCode("500");
+				lb.setMsg("服务器异常，请稍候再试...");
+				return lb;
+			}
+		} else {
+			lb.setCode("500");
+			lb.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return lb;
+		}
+
+	}
+
+	
+	
 
 }

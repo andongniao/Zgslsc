@@ -31,17 +31,21 @@ import com.example.educonsult.beans.BanksBean;
 import com.example.educonsult.beans.BanksBranchBean;
 import com.example.educonsult.beans.BanksCityBean;
 import com.example.educonsult.beans.BaseBean;
+import com.example.educonsult.beans.CenterCountBean;
+import com.example.educonsult.beans.CenterShopBean;
 import com.example.educonsult.beans.ChargeBankBean;
 import com.example.educonsult.beans.CouponBean;
 import com.example.educonsult.beans.ExpressBean;
 import com.example.educonsult.beans.ListBanksBean;
 import com.example.educonsult.beans.ListBanksBranch;
 import com.example.educonsult.beans.ListBanksCity;
+import com.example.educonsult.beans.ListCenterShopBean;
 import com.example.educonsult.beans.ListChargeBankBean;
 import com.example.educonsult.beans.ListOrderCommit;
 import com.example.educonsult.beans.ListOrderWuliu;
 import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ListShopBean;
+import com.example.educonsult.beans.ListShopHomeBean;
 import com.example.educonsult.beans.OrderCommitBean;
 import com.example.educonsult.beans.OrderDetaileBean;
 import com.example.educonsult.beans.PayBean;
@@ -50,6 +54,7 @@ import com.example.educonsult.beans.QuerenOrderBean;
 import com.example.educonsult.beans.RefundInfoBean;
 import com.example.educonsult.beans.RefundInfoDetaileBean;
 import com.example.educonsult.beans.ShopBean;
+import com.example.educonsult.beans.ShopInfoBean;
 import com.example.educonsult.beans.ShopItemBean;
 import com.example.educonsult.beans.TnResultBean;
 import com.example.educonsult.tools.Util;
@@ -1844,7 +1849,7 @@ public class PostHttp {
 					if(obj!=null){
 						if("200".equals(obj.getString("code"))){
 							if(Util.IsNull(obj.getString("type"))){
-							bean.setType(obj.getString("type"));
+								bean.setType(obj.getString("type"));
 							}
 						}
 						bean.setMsg(obj.getString("message"));
@@ -2426,6 +2431,623 @@ public class PostHttp {
 			return bean;
 		}  
 	} 
+
+
+	/**
+	 * 供求首页
+	 * @param type  	1分类 2地区 3综合排序 4 筛选
+	 * @param order		排序 0综合 1销量降序 2销量升序 3、4价格 5、6VIP
+	 * @param page 		页数
+	 * @param catid		产品id
+	 * @param areaid	地区id
+	 * @param minprice	最小价格
+	 * @param maxprice	最大价格
+	 * @return
+	 */
+	public ListProductBean SeanchForGQ(int type,int order,int page,int catid,int areaid,
+			float minprice,float maxprice) {  
+		ListProductBean bean = new ListProductBean();
+		ArrayList<ProductBean> lp = new ArrayList<ProductBean>();
+		String url = ServiceUrl.Base+"search.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		if(type==1){
+			NameValuePair p1 = new BasicNameValuePair("catid",""+catid);
+			list.add(p1);
+		}else if(type==2){
+			NameValuePair p1 = new BasicNameValuePair("areaid",""+areaid);
+			list.add(p1);
+		}else if(type==3){
+			NameValuePair p1 = new BasicNameValuePair("order",""+order);
+			list.add(p1);
+		}else if(type==4){
+			NameValuePair pp1 = new BasicNameValuePair("minprice",""+minprice);
+			list.add(pp1);
+			NameValuePair pp2 = new BasicNameValuePair("maxprice",""+maxprice);
+			list.add(pp2);
+		}
+		NameValuePair p2 = new BasicNameValuePair("page",""+page);
+		list.add(p2);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					if(!"[]".equals(strResult)){
+						obj = new JSONObject(strResult);
+						if(obj!=null){
+							String code = obj.getString("code");
+							String msg = obj.getString("message");
+							if("200".equals(code)){
+								JSONArray data = obj.getJSONArray("data");
+								Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+								}.getType();
+								lp = gson.fromJson(data.toString(), type_re);
+							}
+							bean.setList(lp);
+							bean.setMsg(msg);
+							bean.setCode(code);
+						}
+					}else{
+						bean.setList(lp);
+						bean.setMsg("暂无搜索结果");
+						bean.setCode("200");	
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
+
+
+	/**
+	 * 收藏/取消
+	 * @param t		1收藏 2取消收藏
+	 * @param type	1(产品)，2商铺
+	 * @param id	产品或者商铺的id
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public BaseBean Shoucang(int t,int type,int id) {  
+		BaseBean bean = new BaseBean();
+		String url = ServiceUrl.Base+"personal_center.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		if(t==1){
+			NameValuePair p1 = new BasicNameValuePair("action","collect");
+			list.add(p1);
+		}else if(t==2){
+			NameValuePair p1 = new BasicNameValuePair("action","cancle");
+			list.add(p1);
+		}
+		NameValuePair p = new BasicNameValuePair("type",""+type);
+		list.add(p);
+		NameValuePair p2 = new BasicNameValuePair("id",""+id);
+		list.add(p2);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
+
+
+
+	/**
+	 *  获取收藏产品，收藏店铺，待付款，待收货，待评价，待退款数量
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public CenterCountBean getCenterCount() {  
+		CenterCountBean bean = new CenterCountBean();
+		String url = ServiceUrl.Base+"personal_center.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p1 = new BasicNameValuePair("action","count");
+		list.add(p1);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if("200".equals(obj.getString("code"))){
+							JSONObject data = obj.getJSONObject("data");
+							Type type_re = new TypeToken<CenterCountBean>() {
+							}.getType();
+							bean = gson.fromJson(data.toString(), type_re);
+						}
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
+
+
+	/**
+	 * 获取收藏产品列表
+	 * @param page	页码
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public ListProductBean getCenterProduct(int page) {  
+		ListProductBean bean = new ListProductBean();
+		ArrayList<ProductBean> lp = new ArrayList<ProductBean>();
+		String url = ServiceUrl.Base+"personal_center.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p1 = new BasicNameValuePair("action","product");
+		list.add(p1);
+		NameValuePair p = new BasicNameValuePair("Page ",""+page);
+		list.add(p);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if("200".equals(obj.getString("code"))
+								&&!obj.getString("data").equals("[]")){
+							JSONObject data = obj.getJSONObject("data");
+							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+							}.getType();
+							lp = gson.fromJson(data.toString(), type_re);
+						}
+						bean.setList(lp);
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
+
+	/**
+	 * 获取收藏店铺列表
+	 * @param page	页码
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public ListCenterShopBean getCenterShop(int page) {  
+		ListCenterShopBean bean = new ListCenterShopBean();
+		ArrayList<CenterShopBean> lp = new ArrayList<CenterShopBean>();
+		String url = ServiceUrl.Base+"personal_center.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p1 = new BasicNameValuePair("action","shop");
+		list.add(p1);
+		NameValuePair p = new BasicNameValuePair("Page ",""+page);
+		list.add(p);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if("200".equals(obj.getString("code"))
+								&&!obj.getString("data").equals("[]")){
+							JSONArray data = obj.getJSONArray("data");
+							Type type_re = new TypeToken<ArrayList<CenterShopBean>>() {
+							}.getType();
+							lp = gson.fromJson(data.toString(), type_re);
+						}
+						bean.setList(lp);
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
+
+	
+	/**
+	 * 获取店铺首页
+	 * @param page	页码
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public ListShopHomeBean getShopHomeData(int page) {  
+		ListShopHomeBean bean = new ListShopHomeBean();
+		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
+		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
+		ShopInfoBean infobean = new ShopInfoBean();
+		String url = ServiceUrl.Base+"shop.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p1 = new BasicNameValuePair("action","shop");
+		list.add(p1);
+		NameValuePair p = new BasicNameValuePair("Page ",""+page);
+		list.add(p);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						
+						if("200".equals(obj.getString("code"))
+								&&!obj.getString("recommend").equals("[]")){
+							JSONObject data = obj.getJSONObject("shopinfo");
+							infobean.setUserid(data.getString("userid"));
+							infobean.setUsername(data.getString("username"));
+							infobean.setCompany(data.getString("company"));
+							infobean.setCollect(data.getInt("collect"));
+							infobean.setGrade(data.getInt("grade"));
+							infobean.setDescribe(data.getInt("describe"));
+							infobean.setService(data.getInt("service"));
+							infobean.setLogistics(data.getInt("logistics"));
+						}
+						if("200".equals(obj.getString("code"))
+								&&!obj.getString("recommend").equals("[]")){
+							JSONArray data = obj.getJSONArray("recommend");
+							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+							}.getType();
+							list_re = gson.fromJson(data.toString(), type_re);
+						}
+						if("200".equals(obj.getString("code"))
+								&&!obj.getString("list").equals("[]")){
+							JSONArray data = obj.getJSONArray("list");
+							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+							}.getType();
+							list_re = gson.fromJson(data.toString(), type_re);
+						}
+						bean.setShopInfoBean(infobean);
+						bean.setRecommend(list_re);
+						bean.setList(list_data);
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
+	
+	
+
+
+//	/**
+//	 * 获取店铺首页
+//	 * @param page	页码
+//	 * @return
+//	 */
+//	@SuppressWarnings("unused")
+//	public ListShopHomeBean getShopHomeData(int page) {  
+//		ListShopHomeBean bean = new ListShopHomeBean();
+//		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
+//		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
+//		ShopInfoBean infobean = new ShopInfoBean();
+//		String url = ServiceUrl.Base+"shop.php";
+//		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+//		NameValuePair p1 = new BasicNameValuePair("action","shop");
+//		list.add(p1);
+//		NameValuePair p = new BasicNameValuePair("Page ",""+page);
+//		list.add(p);
+//
+//		/* 建立HTTPPost对象 */  
+//		HttpPost httpRequest = new HttpPost(url);  
+//
+//		String strResult = "doPostError";  
+//
+//		try {  
+//			/* 添加请求参数到请求对象 */  
+//			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+//			/* 发送请求并等待响应 */  
+//			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+//			/* 若状态码为200 ok */  
+//			JSONObject obj= null;
+//			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+//				/* 读返回数据 */  
+//				strResult = EntityUtils.toString(httpResponse.getEntity());  
+//				if(Util.IsNull(strResult)){
+//					/* 读返回数据 */  
+//					obj = new JSONObject(strResult);
+//					if(obj!=null){
+//						
+//						if("200".equals(obj.getString("code"))
+//								&&!obj.getString("recommend").equals("[]")){
+//							JSONObject data = obj.getJSONObject("shopinfo");
+//							infobean.setUserid(data.getString("userid"));
+//							infobean.setUsername(data.getString("username"));
+//							infobean.setCompany(data.getString("company"));
+//							infobean.setCollect(data.getInt("collect"));
+//							infobean.setGrade(data.getInt("grade"));
+//							infobean.setDescribe(data.getInt("describe"));
+//							infobean.setService(data.getInt("service"));
+//							infobean.setLogistics(data.getInt("logistics"));
+//						}
+//						if("200".equals(obj.getString("code"))
+//								&&!obj.getString("recommend").equals("[]")){
+//							JSONArray data = obj.getJSONArray("recommend");
+//							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+//							}.getType();
+//							list_re = gson.fromJson(data.toString(), type_re);
+//						}
+//						if("200".equals(obj.getString("code"))
+//								&&!obj.getString("list").equals("[]")){
+//							JSONArray data = obj.getJSONArray("list");
+//							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+//							}.getType();
+//							list_re = gson.fromJson(data.toString(), type_re);
+//						}
+//						bean.setShopInfoBean(infobean);
+//						bean.setRecommend(list_re);
+//						bean.setList(list_data);
+//						bean.setMsg(obj.getString("message"));
+//						bean.setCode(obj.getString("code"));
+//					}else{
+//						bean.setMsg(error);
+//						bean.setCode("500");
+//					}
+//				}
+//			} else {  
+//				bean.setMsg(error);
+//				bean.setCode("500");	
+//			}  
+//			return bean;
+//		} catch (ClientProtocolException e) {  
+//			e.printStackTrace(); 
+//
+//			bean.setMsg(error);
+//			bean.setCode("500");
+//			return bean;
+//		} catch (IOException e) {  
+//
+//			e.printStackTrace();  
+//			System.out.println("IO异常");
+//			bean.setMsg(error);
+//			bean.setCode("500");
+//			return bean;
+//		} catch (Exception e) {  
+//
+//			e.printStackTrace();  
+//			bean.setMsg(error);
+//			bean.setCode("500");
+//			return bean;
+//		}  
+//	}
+//	
+//	
+//	
+//	
+
 
 
 

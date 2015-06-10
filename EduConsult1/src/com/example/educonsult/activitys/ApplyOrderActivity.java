@@ -117,6 +117,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 			}
 		};
 		handler = new Handler(){
+			@SuppressWarnings("unchecked")
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
@@ -151,7 +152,6 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 		};
 	}
 
-	// 任务
 	public class RefeshData implements ThreadWithProgressDialogTask {
 
 		public RefeshData() {
@@ -159,13 +159,11 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 
 		@Override
 		public boolean OnTaskDismissed() {
-			//任务取消
 			return false;
 		}
 
 		@Override
 		public boolean OnTaskDone() {
-			//任务完成后
 			if(lb!=null){
 				if("200".equals(lb.getCode())){
 					list = lb.getList_order();
@@ -197,7 +195,6 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 
 		@Override
 		public boolean TaskMain() {
-			// 访问
 			PostHttp p = new PostHttp(context);
 			Send s = new Send(context);
 			lb = s.getOrderRefundList(page, authstr);

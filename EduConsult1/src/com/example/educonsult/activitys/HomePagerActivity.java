@@ -40,11 +40,6 @@ OnClickListener {
 	public static String SlidTag="finish";
 	public static Handler handler;
 	private Util util;
-	private String filename = "test";
-	private ListUserBean listUserBean;
-	private DiskLruCache mDiskLruCache;
-	private String url1 = "http://pica.nipic.com/2007-12-18/200712189215503_2.jpg";
-	private String url2 = "http://tupian.enterdesk.com/2012/0621/gha/10/www.enterdesk.comq3.jpg.680.510.jpg";
 
 
 
@@ -77,36 +72,6 @@ OnClickListener {
 		.replace(R.id.fragmentlinear, new HomeFragment()).commit();
 		context = this;
 		util = new Util(context);
-		listUserBean = new ListUserBean();
-		File file = util.getDiskCacheDir(context, "bitmap");
-		if (!file.exists()) {
-			file.mkdirs();
-		}
-		try {
-			mDiskLruCache = DiskLruCache.open(file, util.getAppVersion(context), 1, 10 * 1024 * 1024);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-//		if(util.isExistDataCache(filename) && util.isReadDataCache(filename)){
-//			listUserBean = (ListUserBean) util.readObject(filename);
-//			MyApplication.bean = listUserBean.getList().get(0);
-//		}else{
-//			final ArrayList<UserBean> l = new ArrayList<UserBean>();
-//			UserBean b1 = new UserBean();
-//			b1.setName("0.0");
-//			b1.setBmp(url1);
-//			UserBean b2 = new UserBean();
-//			b2.setName("0.0");
-//			b2.setBmp(url2);
-//			l.add(b1);
-//			l.add(b2);
-//			listUserBean.setList(l);
-//			util.saveObject(listUserBean, filename);
-////			final String imgURL = url1;
-//		}
-
 	}
 
 

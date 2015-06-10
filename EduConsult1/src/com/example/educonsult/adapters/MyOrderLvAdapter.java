@@ -84,7 +84,11 @@ public class MyOrderLvAdapter extends BaseAdapter{
 		}
 		item.tv_title.setText(orderBean.getTitle());
 		item.tv_price.setText(orderBean.getPrice());
-		item.tv_unit.setText(orderBean.getUnit());
+		String s = "";
+		if(Util.IsNull(orderBean.getUnit())){
+			s = orderBean.getUnit();
+		}
+		item.tv_unit.setText(s);
 		item.tv_num.setText("X"+orderBean.getNumber());
 		convertView.setOnClickListener(new OnClickListener() {
 

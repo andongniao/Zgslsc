@@ -267,18 +267,22 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 			
 			@Override
 			public void onClick(View v) {
-				if(showtp==0){
-					showtp=1;
-					cb_all.setVisibility(View.GONE);
-					ll_jeisuan.setVisibility(View.GONE);
-					adapter.SetData(list, showtp);
-					adapter.notifyDataSetChanged();
-				}else{
-					showtp=0;
-					cb_all.setVisibility(View.VISIBLE);
-					ll_jeisuan.setVisibility(View.VISIBLE);
-					adapter.SetData(list, showtp);
-					adapter.notifyDataSetChanged();
+				if(list!=null){
+					if(list.size()>0){
+						if(showtp==0){
+							showtp=1;
+							cb_all.setVisibility(View.GONE);
+							ll_jeisuan.setVisibility(View.GONE);
+							adapter.SetData(list, showtp);
+							adapter.notifyDataSetChanged();
+						}else{
+							showtp=0;
+							cb_all.setVisibility(View.VISIBLE);
+							ll_jeisuan.setVisibility(View.VISIBLE);
+							adapter.SetData(list, showtp);
+							adapter.notifyDataSetChanged();
+						}
+					}
 				}
 			}
 		});

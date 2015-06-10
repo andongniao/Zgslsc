@@ -141,15 +141,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		String vserion = info.versionName;
 		tv_version.setText(vserion);
 		bean=MyApplication.mp.getUser();
-//		if(bean!=null){
-//			if(bean.getType()==1){
-//				ll_fh.setVisibility(View.GONE);
-//			}else{
-//				//				ll_zf.setVisibility(View.GONE);
-//				ll_sh.setVisibility(View.GONE);
-//				//ll_youhuiquan.setVisibility(View.GONE);
-//			}
-//		}
+		//		if(bean!=null){
+		//			if(bean.getType()==1){
+		//				ll_fh.setVisibility(View.GONE);
+		//			}else{
+		//				//				ll_zf.setVisibility(View.GONE);
+		//				ll_sh.setVisibility(View.GONE);
+		//				//ll_youhuiquan.setVisibility(View.GONE);
+		//			}
+		//		}
 		myPDT = new ThreadWithProgressDialog();
 		msg = "加载中...";
 		if(MyApplication.mp.islogin){
@@ -189,7 +189,6 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public boolean OnTaskDone() {
-			//任务完成后
 			if(cbean!=null){
 				String code = cbean.getCode();
 				String m = cbean.getMsg();
@@ -207,7 +206,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 					if(Util.IsNull(m)){
 						Util.ShowToast(context, m);
 					}
-				}
+				}	
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
@@ -221,9 +220,13 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.mycenter_home_civ_head:
-			intent = new Intent(context,MyInfoActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+			if(cbean!=null){
+				if("200".equals(cbean.getCode())){
+					intent = new Intent(context,MyInfoActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+				}
+			}
 			break;
 		case R.id.mycenter_home_ll_cp:
 			//			intent = new Intent(context,SCProductActivity.class);
@@ -352,7 +355,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			productBeans=new ArrayList<ProductBean>();
 			zjnum="0";
 		}else{
-			
+
 			productBeans=listProductBean.getList();
 			zjnum=productBeans.size()+"";
 		}

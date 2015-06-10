@@ -10,7 +10,10 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
 
         <TextView
             android:id="@+id/myorder_home_lv_item_tv_title"
@@ -27,11 +30,10 @@
             android:text=">"
             android:textColor="@color/black" />
 
-        <TextView 
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/myorder_home_lv_item_tv_statu"
@@ -41,28 +43,31 @@
             android:textColor="@color/orn"
             android:textSize="16dp" />
     </LinearLayout>
+
     <LinearLayout
-            android:layout_width="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:orientation="horizontal" >
+            android:text="@string/myorder_time"
+            android:textColor="@color/home_hui"
+            android:textSize="12dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/myorder_time"
-                android:textColor="@color/home_hui"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/myorder_home_lv_item_tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/test"
-                android:textColor="@color/home_hui"
-                android:textSize="12dp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/myorder_home_lv_item_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test"
+            android:textColor="@color/home_hui"
+            android:textSize="12dp" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
@@ -156,8 +161,8 @@
             android:background="@drawable/order_et_bg_line"
             android:padding="5dp"
             android:text="@string/myorder_comment_order"
-            android:textColor="@color/black" 
-            android:textSize="16dp"/>
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </LinearLayout>
 
 </LinearLayout>

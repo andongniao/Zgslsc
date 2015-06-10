@@ -53,7 +53,7 @@ public class CouponsActivity extends BaseActivity {
 	private void addlistener() {
 		rl_r.setOnClickListener(new OnClickListener() {
 
-			@Override
+			@Override	
 			public void onClick(View v) {
 				intent = new Intent(context,XinjianActivity.class);
 				intent.putExtra("flag", "qianbao");
@@ -76,7 +76,6 @@ public class CouponsActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				Util.ShowToast(context, arg2+"");
 			}
 		});
 		if(list!=null){
