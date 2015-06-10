@@ -61,12 +61,13 @@
             android:text="@string/test"
             />
         <TextView 
+             android:id="@+id/base_list_item_tv_uilt"
             android:layout_width="wrap_content"
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="8dp"
-            android:text="@string/product_detaile_dw_danjia"
+            android:text="@string/test"
             />
          <TextView 
             android:layout_width="0dp"

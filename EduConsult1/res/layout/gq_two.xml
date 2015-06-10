@@ -2,6 +2,7 @@
     android:id="@+id/gq_two_sc"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:fillViewport="true"
     android:fadingEdge="none"
     android:scrollbars="none" >
 
@@ -9,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#e6e6e6"
-        android:gravity="center_vertical"
+       
         android:orientation="vertical"
         android:padding="5dp" >
 
@@ -110,9 +111,9 @@
                     android:padding="3dp" >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_launcher"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/default_bg"
                         android:scaleType="fitXY" />
 
                     <LinearLayout
@@ -130,11 +131,12 @@
                             android:textSize="12dp" />
 
                         <TextView
+                            android:id="@+id/gq_two_tv_util_l"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:textSize="10dp"
-                            android:text="@string/gq_two_dw" />
+                            android:text="@string/test" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -148,9 +150,9 @@
                     android:padding="3dp" >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_launcher"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/default_bg"
                         android:scaleType="fitXY" />
 
                     <LinearLayout
@@ -168,11 +170,12 @@
                             android:textSize="12dp" />
 
                         <TextView
+                            android:id="@+id/gq_two_tv_util_r"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:textSize="10dp"
-                            android:text="@string/gq_two_dw" />
+                            android:text="@string/test" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -186,9 +189,9 @@
                     android:padding="3dp" >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_launcher"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/default_bg"
                         android:scaleType="fitXY" />
 
                     <LinearLayout
@@ -206,11 +209,12 @@
                             android:textSize="12dp" />
 
                         <TextView
+                            android:id="@+id/gq_two_tv_util_t"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:textSize="10dp"
-                            android:text="@string/gq_two_dw" />
+                            android:text="@string/test" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
