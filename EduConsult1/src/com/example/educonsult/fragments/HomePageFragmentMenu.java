@@ -51,6 +51,7 @@ public class HomePageFragmentMenu extends Fragment {
 	private Util u;
 	private ArrayList<FenleiBean> fenleilist, listchile;
 	private int num;
+	private Intent intent;
 
 
 	@Override
@@ -278,7 +279,7 @@ public class HomePageFragmentMenu extends Fragment {
 			//			Util.ShowToast(context, R.string.maimeng);
 			String name = listchile.get(arg2).getCatname();
 			num=arg2;
-			ToSearch(name);
+			ToSearch(name,1);
 
 		}
 
@@ -331,11 +332,20 @@ public class HomePageFragmentMenu extends Fragment {
 		}
 	}
 	private void ToSearch(String text){
-		 SearchResultActivity.isproductfinish=false;
+//		 SearchResultActivity.isproductfinish=false;
 		Intent intent=new Intent(context, GqTwoActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtext", title);
 		intent.putExtra("num", num);
+		startActivity(intent);
+	}
+	private void ToSearch(String text,int num){
+		SearchResultActivity.isproductfinish=false;
+		intent=new Intent(context, SearchResultActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.putExtra("searchtype", "1");
+		intent.putExtra("searchorder", "0");
+		intent.putExtra("searchtext", text);
 		startActivity(intent);
 	}
 

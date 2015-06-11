@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:background="@color/base_hui">
+   
     <LinearLayout 
         android:id="@+id/scstore_allway_lin"
         android:layout_width="fill_parent"
@@ -14,7 +15,8 @@
         android:paddingRight="10dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:visibility="gone">
         <TextView 
             android:id="@+id/scstore_allway"
             android:layout_width="wrap_content"
@@ -36,13 +38,29 @@
         android:layout_height="0.5dp"
         android:background="@color/home_hui"
         />
-    <ListView 
-         android:id="@+id/scstore_list"
+    <com.example.educonsult.myviews.xlistview.XListView
+        android:id="@+id/scstore_lv"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="10dp">
-        
-    </ListView>
-    
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:divider="#00000000"
+        android:dividerHeight="10dp"
+        android:listSelector="#00000000"
+        android:scrollbars="none" >
+    </com.example.educonsult.myviews.xlistview.XListView>
+    <LinearLayout
+        android:id="@+id/scstore_isnull"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_order_isnull" />
+    </LinearLayout>
 
 </LinearLayout>

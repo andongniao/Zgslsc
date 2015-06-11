@@ -56,6 +56,7 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 	private ThreadWithProgressDialog myPDT;
 	private ListProductBean listProductBean;
 	private ArrayList<ProductBean> list;
+	private MyCenterTuijian myCenterTuijian;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -115,7 +116,20 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
 		}
 		
-		Util.SetRedNum(context, rl_l, 0);
+		//Util.SetRedNum(context, rl_l, 0);
+		myCenterTuijian=new MyCenterTuijian() {
+			
+			@Override
+			public void finish() {
+				// TODO Auto-generated method stub
+				MyApplication.mp.setlogin(false);
+				Util.ShowToast(context, R.string.login_out_time);
+				intent = new Intent(context,LoginActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				finish(); 
+			}
+		};
 
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
@@ -164,7 +178,7 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 	}
 	private void initDate(){
 		list=listProductBean.getList();
-		adapter = new MyCenterTuijianAdapter(context, list);
+		adapter = new MyCenterTuijianAdapter(context, list,myCenterTuijian);
 		gridView.setAdapter(adapter);
 		//gridView.setFocusable(false);
 		if(list==null){
@@ -195,6 +209,10 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 			Util.SetRedGone(context, rl_l);
 			isread = false;
 		}
+	}
+	public interface MyCenterTuijian{
+		void finish();
+		
 	}
 	
 	
