@@ -530,9 +530,10 @@ import com.unionpay.mobile.android.nocard.views.ad;
 								Util.ShowToast(context, "支付成功");
 							}else{
 								Util.ShowToast(context, paybean.getMsg());
-								//								intent = new Intent(context,RechargeActivity.class);
-								//								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-								//								startActivity(intent);
+								//跳转充值
+																intent = new Intent(context,RechargeActivity.class);
+																intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+																startActivity(intent);
 							}
 						}else if("300".equals(paybean.getCode())){
 							MyApplication.mp.setlogin(false);

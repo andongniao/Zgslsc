@@ -202,7 +202,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			}else{
 				Util.ShowToast(context, "收货地址不能为空");
 			}
-			//						startActivity(new Intent(context,RechargeActivity.class));
+			//跳转充值
+									startActivity(new Intent(context,RechargeActivity.class));
 			break;
 		case R.id.money_password_no:
 
