@@ -76,6 +76,7 @@
                     android:padding="5dp" >
 
                     <TextView
+                         android:id="@+id/mycenter_home_tv_cp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -98,6 +99,7 @@
                     android:padding="5dp" >
 
                     <TextView
+                        android:id="@+id/mycenter_home_tv_dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -195,6 +197,7 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                    android:id="@+id/mycenter_home_btn_fahuo_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -233,6 +236,7 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                    android:id="@+id/mycenter_home_btn_shouhuo_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -271,6 +275,7 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                    android:id="@+id/mycenter_home_btn_pingjia_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -309,6 +314,7 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                    android:id="@+id/mycenter_home_btn_shouhou_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"

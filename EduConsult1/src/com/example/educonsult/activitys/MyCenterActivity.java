@@ -20,11 +20,13 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
+import com.example.educonsult.beans.CenterCountBean;
 import com.example.educonsult.beans.CenterUserBean;
 import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ProductBean;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.myviews.CircleImageView;
+import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 import com.testin.agent.TestinAgent;
@@ -35,10 +37,11 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private Intent intent;
 	private LinearLayout ll_zhifu,ll_cp,ll_mima,ll_dp,ll_zj,ll_zf,ll_fh,ll_sh,ll_pj,ll_order,ll_address,
-	ll_qianbao,ll_xinjian,ll_jifen,ll_youhuiquan,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian,ll_logout;
+	ll_qianbao,ll_xinjian,ll_jifen,ll_youhuiquan,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian,ll_logout
+	,ll_ll_fahuo,ll_ll_shouhou,ll_ll_shouhuo,ll_ll_pingjia;
 	private ImageView iv_zhifu,iv_fahuo,iv_shouhuo,iv_pingjia;
 	private CircleImageView icv_head;
-	private TextView tv_version,tv_name;
+	private TextView tv_version,tv_name,tv_cp,tv_dp;
 	private UserBean bean;
 	private CenterUserBean cbean;
 	private ThreadWithProgressDialog myPDT;
@@ -48,6 +51,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private ListProductBean listProductBean;
 	private ArrayList<ProductBean> productBeans;
 	private TextView tv_zuji;
+	private CenterCountBean centerCountBean;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -124,9 +128,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_mima.setVisibility(View.GONE);
 		ll_mima.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
-
+		ll_ll_fahuo=(LinearLayout)findViewById(R.id.mycenter_home_btn_fahuo_lin);
+		ll_ll_pingjia=(LinearLayout)findViewById(R.id.mycenter_home_btn_pingjia_lin);
+		ll_ll_shouhou=(LinearLayout)findViewById(R.id.mycenter_home_btn_shouhou_lin);
+		ll_ll_shouhuo=(LinearLayout)findViewById(R.id.mycenter_home_btn_shouhuo_lin);
+		
 		tv_zuji=(TextView)findViewById(R.id.mycenter_home_tv_zj);
 		tv_zuji.setText(zjnum);
+		tv_cp=(TextView)findViewById(R.id.mycenter_home_tv_cp);
+		tv_dp=(TextView)findViewById(R.id.mycenter_home_tv_dp);
 
 		PackageManager manager;
 		PackageInfo info = null;
@@ -178,6 +188,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			// TODO Auto-generated method stub
 			Send s=new Send(context);
 			cbean=s.getMyinfo(type, authstr);
+			PostHttp p=new PostHttp(context);
+			centerCountBean=p.getCenterCount();
 			return true;
 		}
 
@@ -189,6 +201,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public boolean OnTaskDone() {
+			int num=0;
 			if(cbean!=null){
 				String code = cbean.getCode();
 				String m = cbean.getMsg();
@@ -208,12 +221,49 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 					}
 				}	
 			}else{
+				num=1;
 				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			if(centerCountBean!=null){
+				String code = centerCountBean.getCode();
+				String m = centerCountBean.getMsg();
+				if("200".equals(code)){
+//					
+					initDate();
+					
+					
+				}else if("300".equals(code)){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					intent = new Intent(context,LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					finish(); 
+				}else{
+					if(Util.IsNull(m)){
+						Util.ShowToast(context, m);
+					}
+				}	
+			}else{
+				if(num!=1){
+					
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}
 			return true;
 
 		}
 
+	}
+	private void initDate(){
+		//Util.SetRedNum(context, rl_l, 0);
+		tv_cp.setText(centerCountBean.getProduct());
+		tv_dp.setText(centerCountBean.getShop());
+		Util.SetRedNum(context, ll_zhifu,Integer.parseInt( centerCountBean.getPaying()));
+//		Util.SetRedNum(context, ll_ll_fahuo,Integer.parseInt( centerCountBean.getReceiving()));
+		Util.SetRedNum(context, ll_ll_pingjia,Integer.parseInt( centerCountBean.getPingjia()));
+		Util.SetRedNum(context, ll_ll_shouhou,Integer.parseInt( centerCountBean.getReceiving()));
+		Util.SetRedNum(context, ll_ll_shouhuo,Integer.parseInt( centerCountBean.getTuikuan()));	
 	}
 
 	@Override
@@ -235,10 +285,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_dp:
-			//			intent = new Intent(context,SCStoreActivity.class);
-			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			//			startActivity(intent);
-			Util.ShowToast(context, R.string.maimeng);
+			intent = new Intent(context,SCStoreActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+//			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.myinfo_ll_youhuiquan:
 			//intent = new Intent(context,ConfirmTheDeliveryActivity.class);

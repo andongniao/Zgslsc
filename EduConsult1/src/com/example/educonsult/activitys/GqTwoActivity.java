@@ -35,6 +35,7 @@ import com.example.educonsult.adapters.HomeSlidAdapter;
 import com.example.educonsult.adapters.KnowFenleiAdapter;
 import com.example.educonsult.beans.CompanyBean;
 import com.example.educonsult.beans.FenleiBean;
+import com.example.educonsult.beans.ListCompanyBean;
 import com.example.educonsult.beans.ListFenleiBean;
 import com.example.educonsult.beans.ListProductBean;
 import com.example.educonsult.beans.ProductBean;
@@ -55,7 +56,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private ArrayList<CompanyBean>list;
 	private PagerSlidingTabStrip tabs;
 	private ViewPager pager;
-	private LinearLayout add_ll;
+	private LinearLayout add_ll,jp_ll;
 	private TextView tv_b,tv_text,tv_l,tv_t,tv_r,util_l,util_t,util_r;
 	private ArrayList<View> l;
 	private int pos = 0;
@@ -65,7 +66,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	public View ll_gqtwo_popu;
 	private LinearLayout ll_jingxuan_l,ll_jingxuan_t,ll_jingxuan_r;
 	//public LinearLayout ll_gqtwo_popu;
-	private ImageView iv_top_l,iv_top_t,gqtwo_1,gqtwo_2;
+	private ImageView iv_top_l,iv_top_t,gqtwo_1,gqtwo_2,ima_l,ima_r,ima_t;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	private ThreadWithProgressDialog myPDT;
@@ -77,8 +78,10 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private Util u;
 	private int page,num;
 	private String text,gqtext;
-	private ListProductBean listProductBean;
-	private ArrayList<ProductBean> ProductBeans;
+	private ListProductBean listProductBean,ProductBeanJP;
+	private ArrayList<ProductBean> ProductBeans,productBeansJP;
+	private ListCompanyBean listCompanyBean;
+	private ArrayList<CompanyBean> companyBeans;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -197,7 +200,6 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		page=1;
 		l = new ArrayList<View>();
 		list = new ArrayList<CompanyBean>();
-		adapter = new HomeRuzhuAdapter(context, list);
 		scrollView = (ScrollView) findViewById(R.id.gq_two_sc);
 		ll_jingxuan_l = (LinearLayout) findViewById(R.id.gq_two_ll_jingxuan_l);
 		ll_jingxuan_l.setOnClickListener(this);
@@ -212,11 +214,14 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		util_t=(TextView)findViewById(R.id.gq_two_tv_util_t);
 		tv_r=(TextView)findViewById(R.id.gq_two_tv_jx_r);
 		util_r=(TextView)findViewById(R.id.gq_two_tv_util_r);
+		ima_l=(ImageView)findViewById(R.id.gq_two_ima_jx_l);
+		ima_r=(ImageView)findViewById(R.id.gq_two_ima_jx_r);
+		ima_t=(ImageView)findViewById(R.id.gq_two_ima_jx_t);
 		
-		
+		jp_ll=(LinearLayout)findViewById(R.id.gq_two_ll_jingxuan);
 		add_ll = (LinearLayout) findViewById(R.id.gq_two_ll_addview);
 		gv_pp = (MyGridView) findViewById(R.id.gq_two_gv_pp);
-		gv_pp.setAdapter(adapter);
+		
 		gv_dh_xq = (MyGridView) findViewById(R.id.gq_two_gv_dh_xq);
 		
 		u=new Util(context);
@@ -324,12 +329,13 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public boolean OnTaskDismissed() {
 			//任务取消
+			finish();
 			return false;
 		}
 
 		@Override
 		public boolean OnTaskDone() {
-			int toastnum = 0;
+			int toastnum = 0,toastnum2=0;
 			//任务完成后
 			
 			if(num==0){
@@ -350,7 +356,7 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 					}
 				}else{
 					toastnum=1;
-					Util.ShowToast(context, "初始化失败,请保证网络通畅后重试");
+					//Util.ShowToast(context, "初始化失败,请保证网络通畅后重试");
 				}
 				if(listProductBean!=null){
 					if("200".equals(listProductBean.getCode())){
@@ -367,10 +373,58 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 						Util.ShowToast(context, listProductBean.getMsg());
 					}
 				}else{
-					if(toastnum!=1){
-						
-					Util.ShowToast(context, R.string.net_is_eor);
+//					if(toastnum!=1){
+//					Util.ShowToast(context, R.string.net_is_eor);
+//					}else{
+						toastnum=1;
+//					}
+				}
+				if(ProductBeanJP!=null){
+					if("200".equals(ProductBeanJP.getCode())){
+						//TODO	
+						initDateJP();
+					}else if("300".equals(ProductBeanJP.getCode())){
+						//TODO	
+						Util.ShowToast(context,R.string.login_out_time);
+						intent=new Intent(context, LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
 					}
+					else{
+						Util.ShowToast(context, ProductBeanJP.getMsg());
+					}	
+				}else{
+//					if(toastnum!=2){
+//						
+//					Util.ShowToast(context, R.string.net_is_eor);
+//					}else {
+						toastnum=1;
+//					}
+				}
+				if(listCompanyBean!=null){
+					if("200".equals(listCompanyBean.getCode())){
+						//TODO	
+						initDatePP();
+					}else if("300".equals(listCompanyBean.getCode())){
+						//TODO	
+						Util.ShowToast(context,R.string.login_out_time);
+						intent=new Intent(context, LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}
+					else{
+						Util.ShowToast(context, listCompanyBean.getMsg());
+					}	
+				}else{
+//					if(toastnum!=2){
+//						
+//					Util.ShowToast(context, R.string.net_is_eor);
+//					}else {
+						toastnum=1;
+//					}
+				}
+				if(toastnum==1){
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 				
 			}
@@ -387,9 +441,57 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 						startActivity(intent);
 					}
 					else{
-						Util.ShowToast(context, listProductBean.getMsg());
+						toastnum2=1;
+						//Util.ShowToast(context, listProductBean.getMsg());
 					}
 				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+				if(ProductBeanJP!=null){
+					if("200".equals(ProductBeanJP.getCode())){
+						//TODO	
+						initDateJP();
+					}else if("300".equals(ProductBeanJP.getCode())){
+						//TODO	
+						Util.ShowToast(context,R.string.login_out_time);
+						intent=new Intent(context, LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}
+					else{
+						Util.ShowToast(context, ProductBeanJP.getMsg());
+					}	
+				}else{
+//					if(toastnum!=2){
+//						
+//					Util.ShowToast(context, R.string.net_is_eor);
+//					}else {
+						toastnum2=1;
+//					}
+				}
+				if(listCompanyBean!=null){
+					if("200".equals(listCompanyBean.getCode())){
+						//TODO	
+						initDatePP();
+					}else if("300".equals(listCompanyBean.getCode())){
+						//TODO	
+						Util.ShowToast(context,R.string.login_out_time);
+						intent=new Intent(context, LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+					}
+					else{
+						Util.ShowToast(context, listCompanyBean.getMsg());
+					}	
+				}else{
+//					if(toastnum!=2){
+//						
+//					Util.ShowToast(context, R.string.net_is_eor);
+//					}else {
+						toastnum2=1;
+//					}
+				}
+				if(toastnum2==1){
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
 				
@@ -399,14 +501,8 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 
 		@Override
 		public boolean TaskMain() {
+			Send s = new Send(context);
 			if(num==0){
-				// 访问
-				Send s = new Send(context);
-				listFenleiBean = s.GetFenlei();
-				
-			}
-			else if(num==1){
-				Send s = new Send(context);
 				listFenleiBean = s.GetFenlei();
 				PostHttp p=new PostHttp(context);
 				if(page==1){
@@ -421,6 +517,22 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 					}
 				}
 			}
+			else if(num==1){
+				PostHttp p=new PostHttp(context);
+				if(page==1){
+					listProductBean=p.SeanchText(1, 0, 1, gqtext);
+					ProductBeans = new ArrayList<ProductBean>();
+					ProductBeans = 	listProductBean.getList();
+				}else{
+					ProductBeans = new ArrayList<ProductBean>();
+					for(int in=1;in<page+1;in++){
+						listProductBean=p.SeanchText(3, 0, in, gqtext);
+						ProductBeans.addAll(listProductBean.getList());
+					}
+				}
+			}
+			ProductBeanJP=s.getGQRecommend();
+			listCompanyBean=s.getGQbrand();
 			return true;
 		}
 	}
@@ -428,6 +540,26 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		gqAdapter = new GqAdapter(context, ProductBeans);
 		gv_dh_xq.setAdapter(gqAdapter);
 		gqAdapter.notifyDataSetChanged();
+	}
+	private void initDateJP(){
+		productBeansJP=ProductBeanJP.getList();
+		if(productBeansJP.size()>0){
+			jp_ll.setVisibility(View.VISIBLE);
+			Util.Getbitmap(ima_l, productBeansJP.get(0).getThumb());
+			Util.Getbitmap(ima_r, productBeansJP.get(1).getThumb());
+			Util.Getbitmap(ima_t, productBeansJP.get(2).getThumb());
+			tv_l.setText(productBeansJP.get(0).getPrice());
+			util_l.setText(productBeansJP.get(0).getUnit());
+			tv_r.setText(productBeansJP.get(1).getPrice());
+			util_r.setText(productBeansJP.get(1).getUnit());
+			tv_t.setText(productBeansJP.get(2).getPrice());
+			util_t.setText(productBeansJP.get(2).getUnit());
+		}
+	}
+	private void initDatePP(){
+		companyBeans=listCompanyBean.getList();
+		adapter = new HomeRuzhuAdapter(context, companyBeans);
+		gv_pp.setAdapter(adapter);
 	}
 
 

@@ -3,6 +3,7 @@ package com.example.educonsult.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +16,9 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.MyCenterTuijianActivity.RefeshData;
+import com.example.educonsult.activitys.LoginActivity;
+import com.example.educonsult.activitys.MyCenterActivity;
+import com.example.educonsult.activitys.MyCenterTuijianActivity.MyCenterTuijian;
 import com.example.educonsult.activitys.ShopcartActivity;
 import com.example.educonsult.beans.BaseBean;
 import com.example.educonsult.beans.ProductBean;
@@ -31,11 +34,14 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean bean;
 	private UserBean userbean;
+	private Intent intent;
+	private MyCenterTuijian myCenterTuijian;
 
 
-	public MyCenterTuijianAdapter(Context context,ArrayList<ProductBean>list){
+	public MyCenterTuijianAdapter(Context context,ArrayList<ProductBean>list,MyCenterTuijian myCenterTuijian){
 		this.context = context;
 		this.list = list;
+		this.myCenterTuijian=myCenterTuijian;
 		inflater = LayoutInflater.from(context);
 		userbean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
@@ -133,6 +139,8 @@ public class MyCenterTuijianAdapter extends BaseAdapter {
 					//TODO	
 					ShopcartActivity.ischange=true;
 					Util.ShowToast(context,"Ìí¼Ó³É¹¦");
+				}else if("300".equals(bean.getCode())){
+					myCenterTuijian.finish();
 				}else{
 					Util.ShowToast(context, bean.getMsg());
 				}
