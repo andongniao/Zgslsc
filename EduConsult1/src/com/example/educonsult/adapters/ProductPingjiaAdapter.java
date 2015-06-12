@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.educonsult.R;
 import com.example.educonsult.beans.CommentBean;
 import com.example.educonsult.beans.CompanyBean;
+import com.example.educonsult.tools.Util;
 
 public class ProductPingjiaAdapter extends BaseAdapter{
 	private Context context;
@@ -75,6 +76,7 @@ public class ProductPingjiaAdapter extends BaseAdapter{
 		}
 		//		ImageView v = new ImageView(context);
 		//myitem.iv.setBackgroundResource(R.drawable.ic_launcher);
+		Util.Getbitmap(myitem.iv, list.get(position).getAvatar());
 		myitem.tv_name.setText(list.get(position).getBuyer());
 		myitem.tv_text.setText(list.get(position).getSeller_comment());
 		myitem.tv_time.setText(list.get(position).getSeller_ctime());

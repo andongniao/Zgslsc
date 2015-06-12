@@ -1,21 +1,12 @@
 package com.example.educonsult.activitys;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,13 +23,10 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.ExampleActivity;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
-import com.example.educonsult.activitys.GqTwoActivity.RefeshData;
 import com.example.educonsult.beans.UserBean;
 import com.example.educonsult.net.Send;
 import com.example.educonsult.tools.Util;
 import com.testin.agent.TestinAgent;
-import com.unionpay.UPPayAssistEx;
-import com.unionpay.uppay.PayActivity;
 
 public class LoginActivity extends BaseActivity implements OnClickListener{
 	private Context context;
@@ -170,7 +158,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			}else{
 				Toast.makeText(context, "请检查用户名和密码", 200).show();
 			}
-			break;
+			break; 
 		}
 	}
 
