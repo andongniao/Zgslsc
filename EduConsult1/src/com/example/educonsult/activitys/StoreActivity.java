@@ -27,12 +27,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.MyApplication;
 import com.example.educonsult.R;
 import com.example.educonsult.adapters.StoreAdapter;
 import com.example.educonsult.adapters.StoreFenleiAdapter;
+import com.example.educonsult.beans.ListShopHomeBean;
 import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.myviews.CircleImageView;
 import com.example.educonsult.myviews.MyGridView;
+import com.example.educonsult.net.PostHttp;
 import com.example.educonsult.tools.Util;
 import com.testin.agent.TestinAgent;
 
@@ -45,8 +50,10 @@ public class StoreActivity extends Activity implements OnClickListener{
 	private RelativeLayout rl_l;
 	private View v_fenlei,v_home,v_result;
 	private LayoutInflater inflater;
-	private TextView tv_h_title,tv_h_name,tv_h_comment,tv_h_number,tv_h_miaoshu,tv_h_service,tv_h_wuliu,tv_result_title;
-	private ImageView iv_home_shoucang,iv_home_head;
+	private TextView tv_h_title,tv_h_name,tv_h_comment,tv_h_number,
+	tv_h_miaoshu,tv_h_service,tv_h_wuliu,tv_result_title
+	,tv_pro_name,tv_price,tv_unit;
+	private ImageView iv_home_shoucang,iv_home_head,iv_rem;
 	private ScrollView home_sc;
 	private List<org.osgi.framework.Bundle> bundles=null;
 	private int showstatu;
@@ -58,6 +65,11 @@ public class StoreActivity extends Activity implements OnClickListener{
 	private StoreAdapter home_adapter;
 	private  ListView fenlei_lv;
 	private StoreFenleiAdapter fenleiadapter;
+	private ThreadWithProgressDialog myPDT;
+	private int page,index,len;
+	private String authstr,storeid,url;
+	private ListShopHomeBean bean;
+	private CircleImageView hean_iv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +84,17 @@ public class StoreActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.store_base_layout);
 		init();
 		addlistener();
+		if(Util.detect(context)){
+			//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+		}
 	}
 
 	private void init() {
 		TestinAgent.init(this);
+		myPDT = new ThreadWithProgressDialog();
 		context = this;
 		addInterface = new AddInterface() {
 
@@ -84,6 +103,11 @@ public class StoreActivity extends Activity implements OnClickListener{
 				//TODO 
 			}
 		};
+		page = 1;
+		index = 0;
+		storeid = getIntent().getStringExtra("storeid");
+		url = getIntent().getStringExtra("url");
+		authstr = MyApplication.mp.getUser().getAuthstr();
 		showstatu = 1;
 		ll_addview = (LinearLayout) findViewById(R.id.store_base_ll_addview);
 		findViewById(R.id.sotre_base_tv_fenlei).setOnClickListener(this);
@@ -110,7 +134,14 @@ public class StoreActivity extends Activity implements OnClickListener{
 		tv_h_miaoshu = (TextView) v_home.findViewById(R.id.store_home_tv_miaoshu);
 		tv_h_service = (TextView) v_home.findViewById(R.id.store_home_tv_service);
 		tv_h_wuliu = (TextView) v_home.findViewById(R.id.store_home_tv_wuliu);
+		tv_price = (TextView) v_home.findViewById(R.id.store_home_tv_price);
+		tv_pro_name = (TextView) v_home.findViewById(R.id.store_home_tv_pro_name);
+		tv_unit = (TextView) v_home.findViewById(R.id.store_home_tv_danwei);
+		iv_rem = (ImageView) v_home.findViewById(R.id.store_home_iv_title);
+		
+		
 		home_sc = (ScrollView) v_home.findViewById(R.id.store_home_sc);
+		hean_iv = (CircleImageView) v_home.findViewById(R.id.mycenter_home_civ_head);
 		v_home.findViewById(R.id.store_home_ll_top_pro).setOnClickListener(this);
 		
 		
@@ -141,10 +172,6 @@ public class StoreActivity extends Activity implements OnClickListener{
 		list.add(p3);
 		ProductBean p4 = new ProductBean();
 		list.add(p4);
-		home_adapter = new StoreAdapter(context, list, 1, addInterface);
-		gv_home.setAdapter(home_adapter);
-		gv_home.setFocusable(false);
-		home_sc.scrollTo(0, 1);
 		Util.SetRedNum(context, rl_l, 1);
 		showView(1);
 		gv_result.setAdapter(home_adapter);
@@ -226,10 +253,20 @@ public class StoreActivity extends Activity implements OnClickListener{
 			break;
 
 		case R.id.store_home_iv_left:
-
+			if(index==0){
+				index=len-1;
+			}else{
+				index-=1;
+			}
+			showre();
 			break;
 		case R.id.store_home_iv_right:
-
+			if(index==len-1){
+				index=0;
+			}else{
+				index+=1;
+			}
+			showre();
 			break;
 //		case R.id.sotre_base_ll_back:
 //			finish();
@@ -288,11 +325,6 @@ public class StoreActivity extends Activity implements OnClickListener{
 			Util.SetRedGone(context, rl_l);
 			isread = false;
 		}
-	}
-	private void Toproduct(){
-		intent = new Intent(context,ProductDetaileActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
 	}
 	public interface AddInterface{
 		void Add2Shopcart(int index);
@@ -354,4 +386,78 @@ public class StoreActivity extends Activity implements OnClickListener{
 		super.finish();
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
+	
+	
+	
+	
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		public RefeshData(){
+		}
+
+		@Override
+		public boolean TaskMain() {
+			// TODO Auto-generated method stub
+			PostHttp p=new PostHttp(context);
+			bean = p.getShopHomeData(storeid,page);
+			return true;
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			if(bean!=null){
+				if("200".equals(bean.getCode())){
+					Util.Getbitmap(hean_iv,url);
+					tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
+					tv_h_miaoshu.setText(""+bean.getShopInfoBean().getDescribe());
+					tv_h_service.setText(""+bean.getShopInfoBean().getService());
+					tv_h_wuliu.setText(""+bean.getShopInfoBean().getLogistics());
+					len = bean.getRecommend().size();
+					showre();	
+					home_adapter = new StoreAdapter(context, bean.getList());
+					gv_home.setAdapter(home_adapter);
+					gv_home.setFocusable(false);
+					home_sc.scrollTo(0, 1);
+					
+				}else if("300".equals(bean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					intent = new Intent(context,LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					finish(); 
+				}else{
+					Util.ShowToast(context, bean.getMsg());
+				}
+				
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+
+		}
+
+	}
+	private void showre(){
+		tv_pro_name.setText(bean.getRecommend().get(index).getTitle());
+		tv_price.setText(bean.getRecommend().get(index).getPrice());
+		tv_unit.setText(bean.getRecommend().get(index).getUnit());
+		Util.Getbitmap(iv_rem, bean.getRecommend().get(index).getThumb());
+	}
+	
+private void Toproduct(){
+		intent = new Intent(context,ProductDetaileActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		//intent.putExtra("productdetaile", value);
+		Bundle b=new Bundle();
+		b.putSerializable("product", bean.getRecommend().get(index));
+		intent.putExtra("productbundle", b);
+		startActivity(intent);
+	}
+	
 }

@@ -2617,12 +2617,14 @@ public class PostHttp {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public CenterCountBean getCenterCount() {  
+	public CenterCountBean getCenterCount(String authstr) {  
 		CenterCountBean bean = new CenterCountBean();
 		String url = ServiceUrl.Base+"personal_center.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","count");
 		list.add(p1);
+		NameValuePair p = new BasicNameValuePair("authstr",authstr);
+		list.add(p);
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
@@ -2690,7 +2692,7 @@ public class PostHttp {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListProductBean getCenterProduct(int page) {  
+	public ListProductBean getCenterProduct(int page,String authstr) {  
 		ListProductBean bean = new ListProductBean();
 		ArrayList<ProductBean> lp = new ArrayList<ProductBean>();
 		String url = ServiceUrl.Base+"personal_center.php";
@@ -2699,6 +2701,9 @@ public class PostHttp {
 		list.add(p1);
 		NameValuePair p = new BasicNameValuePair("Page ",""+page);
 		list.add(p);
+
+		NameValuePair pp = new BasicNameValuePair("authstr",authstr);
+		list.add(pp);
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
@@ -2767,7 +2772,7 @@ public class PostHttp {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListCenterShopBean getCenterShop(int page) {  
+	public ListCenterShopBean getCenterShop(int page,String authstr) {  
 		ListCenterShopBean bean = new ListCenterShopBean();
 		ArrayList<CenterShopBean> lp = new ArrayList<CenterShopBean>();
 		String url = ServiceUrl.Base+"personal_center.php";
@@ -2777,6 +2782,10 @@ public class PostHttp {
 		NameValuePair p = new BasicNameValuePair("Page ",""+page);
 		list.add(p);
 
+		NameValuePair pp = new BasicNameValuePair("authstr",authstr);
+		list.add(pp);
+
+		
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
 
@@ -2797,7 +2806,7 @@ public class PostHttp {
 					obj = new JSONObject(strResult);
 					if(obj!=null){
 						if("200".equals(obj.getString("code"))
-								&&!obj.getString("data").equals("[]")){
+								&&!obj.getString("data").equals("[]")&&Util.IsNull(obj.getString("data"))){
 							JSONArray data = obj.getJSONArray("data");
 							Type type_re = new TypeToken<ArrayList<CenterShopBean>>() {
 							}.getType();
@@ -2845,7 +2854,7 @@ public class PostHttp {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListShopHomeBean getShopHomeData(int page) {  
+	public ListShopHomeBean getShopHomeData(String id,int page) {  
 		ListShopHomeBean bean = new ListShopHomeBean();
 		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
 		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
@@ -2854,8 +2863,13 @@ public class PostHttp {
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","shop");
 		list.add(p1);
-		NameValuePair p = new BasicNameValuePair("Page ",""+page);
+		NameValuePair p2 = new BasicNameValuePair("id",""+id);
+		list.add(p2);
+		NameValuePair p = new BasicNameValuePair("page",""+page);
 		list.add(p);
+//		NameValuePair pp = new BasicNameValuePair("authstr",authstr);
+//		list.add(pp);
+
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
@@ -2878,30 +2892,38 @@ public class PostHttp {
 					if(obj!=null){
 						
 						if("200".equals(obj.getString("code"))
-								&&!obj.getString("recommend").equals("[]")){
-							JSONObject data = obj.getJSONObject("shopinfo");
-							infobean.setUserid(data.getString("userid"));
-							infobean.setUsername(data.getString("username"));
-							infobean.setCompany(data.getString("company"));
-							infobean.setCollect(data.getInt("collect"));
-							infobean.setGrade(data.getInt("grade"));
-							infobean.setDescribe(data.getInt("describe"));
-							infobean.setService(data.getInt("service"));
-							infobean.setLogistics(data.getInt("logistics"));
+								&&!obj.getString("data").equals("[]") && Util.IsNull(obj.getString("data"))){
+							JSONObject data = obj.getJSONObject("data");
+							JSONObject shop = data.getJSONObject("shopinfo");
+							infobean.setUserid(shop.getString("userid"));
+							infobean.setUsername(shop.getString("username"));
+							infobean.setCompany(shop.getString("company"));
+							infobean.setCollect(shop.getInt("collect"));
+							infobean.setGrade(shop.getInt("grade"));
+							infobean.setDescribe(shop.getInt("describe"));
+							infobean.setService(shop.getInt("service"));
+							infobean.setLogistics(shop.getInt("logistics"));
 						}
 						if("200".equals(obj.getString("code"))
-								&&!obj.getString("recommend").equals("[]")){
-							JSONArray data = obj.getJSONArray("recommend");
+								 && Util.IsNull(obj.getString("data"))){
+							JSONObject data = obj.getJSONObject("data");
+							if(!data.getString("recommend").equals("[]")){
+							JSONArray recommend = data.getJSONArray("recommend");
 							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
 							}.getType();
-							list_re = gson.fromJson(data.toString(), type_re);
+							list_re = gson.fromJson(recommend.toString(), type_re);
+							}
 						}
 						if("200".equals(obj.getString("code"))
-								&&!obj.getString("list").equals("[]")){
-							JSONArray data = obj.getJSONArray("list");
+								 && Util.IsNull(obj.getString("data"))){
+//							JSONArray data = obj.getJSONArray("list");
+							JSONObject data = obj.getJSONObject("data");
+							if(!data.getString("list").equals("[]")){
+							JSONArray l = data.getJSONArray("list");
 							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
 							}.getType();
-							list_re = gson.fromJson(data.toString(), type_re);
+							list_data = gson.fromJson(l.toString(), type_re);
+							}
 						}
 						bean.setShopInfoBean(infobean);
 						bean.setRecommend(list_re);

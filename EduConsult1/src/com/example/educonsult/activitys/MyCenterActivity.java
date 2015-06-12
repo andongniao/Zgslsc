@@ -132,7 +132,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_ll_pingjia=(LinearLayout)findViewById(R.id.mycenter_home_btn_pingjia_lin);
 		ll_ll_shouhou=(LinearLayout)findViewById(R.id.mycenter_home_btn_shouhou_lin);
 		ll_ll_shouhuo=(LinearLayout)findViewById(R.id.mycenter_home_btn_shouhuo_lin);
-		
+
 		tv_zuji=(TextView)findViewById(R.id.mycenter_home_tv_zj);
 		tv_zuji.setText(zjnum);
 		tv_cp=(TextView)findViewById(R.id.mycenter_home_tv_cp);
@@ -189,12 +189,29 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			Send s=new Send(context);
 			cbean=s.getMyinfo(type, authstr);
 			PostHttp p=new PostHttp(context);
-			centerCountBean=p.getCenterCount();
+			if(cbean!=null){
+				if("200".equals(cbean.getCode())){
+					centerCountBean=p.getCenterCount(authstr);
+				}else if("300".equals(cbean.getCode())){
+					MyApplication.mp.setlogin(false);
+					Util.ShowToast(context, R.string.login_out_time);
+					intent = new Intent(context,LoginActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					finish(); 
+				}else{
+					if(Util.IsNull(cbean.getMsg())){
+						Util.ShowToast(context, cbean.getMsg());
+					}
+				}
+
+			}
+
 			return true;
 		}
 
 		@Override
-		public boolean OnTaskDismissed() {
+		public boolean OnTaskDismissed() {	
 			// TODO Auto-generated method stub
 			return false;
 		}
@@ -228,10 +245,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 				String code = centerCountBean.getCode();
 				String m = centerCountBean.getMsg();
 				if("200".equals(code)){
-//					
+					//					
 					initDate();
-					
-					
+
+
 				}else if("300".equals(code)){
 					MyApplication.mp.setlogin(false);
 					Util.ShowToast(context, R.string.login_out_time);
@@ -246,7 +263,6 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 				}	
 			}else{
 				if(num!=1){
-					
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
@@ -259,11 +275,24 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		//Util.SetRedNum(context, rl_l, 0);
 		tv_cp.setText(centerCountBean.getProduct());
 		tv_dp.setText(centerCountBean.getShop());
-		Util.SetRedNum(context, ll_zhifu,Integer.parseInt( centerCountBean.getPaying()));
-//		Util.SetRedNum(context, ll_ll_fahuo,Integer.parseInt( centerCountBean.getReceiving()));
-		Util.SetRedNum(context, ll_ll_pingjia,Integer.parseInt( centerCountBean.getPingjia()));
-		Util.SetRedNum(context, ll_ll_shouhou,Integer.parseInt( centerCountBean.getReceiving()));
-		Util.SetRedNum(context, ll_ll_shouhuo,Integer.parseInt( centerCountBean.getTuikuan()));	
+		if(!"0".equals(centerCountBean.getPaying())){
+
+			Util.SetRedNum(context, ll_zhifu,Integer.parseInt( centerCountBean.getPaying()));
+		}
+
+		//		Util.SetRedNum(context, ll_ll_fahuo,Integer.parseInt( centerCountBean.getReceiving()));
+		if(!"0".equals(centerCountBean.getPingjia())){
+
+			Util.SetRedNum(context, ll_ll_pingjia,Integer.parseInt( centerCountBean.getPingjia()));
+		}
+		if(!"0".equals(centerCountBean.getReceiving())){
+
+			Util.SetRedNum(context, ll_ll_shouhou,Integer.parseInt( centerCountBean.getReceiving()));
+		}
+		if(!"0".equals(centerCountBean.getTuikuan())){
+
+			Util.SetRedNum(context, ll_ll_shouhuo,Integer.parseInt( centerCountBean.getTuikuan()));	
+		}
 	}
 
 	@Override
@@ -288,7 +317,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			intent = new Intent(context,SCStoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-//			Util.ShowToast(context, R.string.maimeng);
+			//			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.myinfo_ll_youhuiquan:
 			//intent = new Intent(context,ConfirmTheDeliveryActivity.class);
@@ -405,7 +434,6 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			productBeans=new ArrayList<ProductBean>();
 			zjnum="0";
 		}else{
-
 			productBeans=listProductBean.getList();
 			zjnum=productBeans.size()+"";
 		}
