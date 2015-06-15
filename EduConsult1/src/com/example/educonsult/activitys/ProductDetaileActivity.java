@@ -1,5 +1,6 @@
 package com.example.educonsult.activitys;
 
+import java.nio.MappedByteBuffer;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -112,33 +113,13 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		TestinAgent.init(this);
 		context = this;
 		intent=getIntent();
-		//		productBean=(ProductBean)intent.getSerializableExtra("productdetaile");
-		//		/*izable("product", productBean);
-		//		intent.putE*/xtra("productbundle", b);
 		Bundle b=intent.getBundleExtra("productbundle");
 		productBean=(ProductBean)b.getSerializable("product");
-		MyApplication.mp.SaveSee(productBean);
-//		liulanfile=MyApplication.Seejilu;
+		if(MyApplication.mp.islogin){
+			
+			MyApplication.mp.SaveSee(productBean);
+		}
 		userbean=MyApplication.mp.getUser();
-//		u=new Util(context);
-//		//isSave=u.readObject(liulanfile);
-//		listProductBean=(ListProductBean)u.readObject(liulanfile);
-//		if(listProductBean==null){
-//			listProductBean=new ListProductBean();
-//			liulanlist=new ArrayList<ProductBean>();
-//
-//		}else{
-//
-//			liulanlist=listProductBean.getList();
-//		}
-//		liulanlist.add(productBean);
-//		listProductBean.setList(liulanlist);
-//		isSave=u.saveObject(listProductBean, liulanfile);
-		/*if(isSave){
-			Util.ShowToast(context, "单品保存成功");
-		}else{
-			Util.ShowToast(context, "单品保存失败");
-		}*/
 		mallinfo=new MallInfoBean();
 		recommend=new ArrayList<ProductBean>();
 		buyedlist=new ArrayList<ProductBean>();
