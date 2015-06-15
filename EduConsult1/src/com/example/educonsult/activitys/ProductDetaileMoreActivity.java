@@ -234,12 +234,12 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_no,tv_no);
 			strstar="";
-			if(!isall){
+//			if(!isall){
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
 				}
-				isall=true;
-			}
+//				isall=true;
+//			}
 			
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_zhiliang:
@@ -249,12 +249,12 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_no,tv_no);
 			strstar="3";
-			if(!isgood){
+//			if(!isgood){
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
 				}
-				isgood=true;
-			}
+//				isgood=true;
+//			}
 			
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_fuwu:
@@ -264,12 +264,12 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_all,tv_all);
 			setWhiteText(li_no,tv_no);
 			strstar="2";
-			if(!isok){
+//			if(!isok){
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
 				}
-				isok=true;
-			}
+//				isok=true;
+//			}
 			
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_xiaoguo:
@@ -279,12 +279,12 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_all,tv_all);
 			strstar="1";
-			if(!isno){
+//			if(!isno){
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
 				}
-				isno=true;
-			}
+//				isno=true;
+//			}
 			
 			break;
 

@@ -570,7 +570,7 @@
                     android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="10dp" >
+                    >
 
                     <LinearLayout
                         android:id="@+id/product_detaile_ll_add_view_chanpin"
@@ -578,11 +578,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:textColor="@color/base_top_title_bg" />
+                       
 
                         <TextView
                             android:id="@+id/product_detaile_product_main_ingredients_edit"
@@ -590,6 +586,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:lineSpacingExtra="5dp"
+                             android:padding="10dp"
                             android:text="@string/product_detaile_product_main_ingredients_text"
                             android:textColor="@color/black"
                             android:textScaleX="1.0" />
@@ -609,7 +606,10 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:dividerHeight="0.5dp"
-                            android:divider="@color/base_hui" >
+                            android:divider="@color/base_hui" 
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            >
                         </com.example.educonsult.myviews.MyListview>
                         <TextView 
                             android:id="@+id/product_detaile_ll_add_View_xiangqing_more"

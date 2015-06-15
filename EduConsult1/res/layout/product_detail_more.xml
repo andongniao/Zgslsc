@@ -109,7 +109,9 @@
         android:layout_height="wrap_content"
         android:divider="@color/base_hui"
         android:dividerHeight="0.5dp"
-        android:padding="10dp" >
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+         >
     </ListView>
     </LinearLayout>
 
