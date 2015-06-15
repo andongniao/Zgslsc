@@ -683,7 +683,8 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="@string/home_more"
-                        android:textColor="@color/home_hui" />
+                        android:textColor="@color/home_hui"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout

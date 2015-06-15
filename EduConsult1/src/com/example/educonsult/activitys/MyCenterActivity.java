@@ -326,6 +326,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_zj:
+			MyZjActivity.isfinish=false;
 			intent = new Intent(context,MyZjActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
