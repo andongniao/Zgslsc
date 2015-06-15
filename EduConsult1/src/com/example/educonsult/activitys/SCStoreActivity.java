@@ -65,6 +65,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	private ArrayList<CenterShopBean> centerShopBeans,centerShopBeans2;
 	private XListView lv;
 	private Handler handler;
+	private String authstr;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -80,6 +81,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	}
 	void init(){
 		TestinAgent.init(this);
+		authstr = MyApplication.mp.getUser().getAuthstr();
 		page=1;
 		ppage=1;
 		reaLayout=(LinearLayout)findViewById(R.id.scstore_allway_lin);
@@ -215,13 +217,12 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 			// TODO Auto-generated method stub
 			PostHttp p=new PostHttp(context);
 			if(page==1){
-				
-				listCenterShopBean=p.getCenterShop(page);
+				listCenterShopBean=p.getCenterShop(page,authstr);
 			}else{
-				listCenterShopBean=p.getCenterShop(1);
+				listCenterShopBean=p.getCenterShop(1,authstr);
 				centerShopBeans=listCenterShopBean.getList();
 				for(int i=1;i<page+1;i++){
-					listCenterShopBean=p.getCenterShop(page);
+					listCenterShopBean=p.getCenterShop(page,authstr);
 					ArrayList<CenterShopBean> s=listCenterShopBean.getList();
 					centerShopBeans.addAll(s);
 				}
@@ -325,7 +326,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 
 		new Thread(){public void run() {
 			PostHttp p=new PostHttp(context);
-			listCenterShopBean=p.getCenterShop(ppage);
+			listCenterShopBean=p.getCenterShop(ppage,authstr);
 			Message msg=handler.obtainMessage();
 			if(listCenterShopBean!=null){
 				if("200".equals(listCenterShopBean.getCode())){

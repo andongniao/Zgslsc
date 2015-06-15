@@ -8,16 +8,14 @@
         android:layout_height="wrap_content"
         android:background="#e6e6e6"
         android:gravity="center_vertical"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/mycenter_bg"
             android:gravity="center"
-            android:orientation="vertical"
-             >
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -33,8 +31,7 @@
                         android:id="@+id/mycenter_home_civ_head"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_gravity="center"
-                         />
+                        android:layout_gravity="center" />
 
                     <RelativeLayout
                         android:layout_width="100dp"
@@ -46,8 +43,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentTop="true"
-                            android:visibility="gone"
-                            android:background="@drawable/v1" />
+                            android:background="@drawable/v1"
+                            android:visibility="gone" />
                     </RelativeLayout>
                 </FrameLayout>
 
@@ -76,7 +73,7 @@
                     android:padding="5dp" >
 
                     <TextView
-                         android:id="@+id/mycenter_home_tv_cp"
+                        android:id="@+id/mycenter_home_tv_cp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -141,72 +138,68 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal" >
 
             <LinearLayout
                 android:id="@+id/mycenter_home_ll_zhifu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:background="@color/white"
                 android:layout_marginRight="1dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:orientation="vertical" >
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
 
                 <LinearLayout
-                     android:id="@+id/mycenter_home_btn_zhifu_lin"
+                    android:id="@+id/mycenter_home_btn_zhifu_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    
-                    android:paddingTop="5dp"
-                   android:paddingBottom="5dp"
-                   android:paddingRight="10dp"
-                   android:paddingLeft="10dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp" >
 
                     <ImageView
                         android:id="@+id/mycenter_home_btn_zhifu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/mycenter_zhifu"
-                        />
+                        android:src="@drawable/mycenter_zhifu" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:text="@string/mycenger_zhifu"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="3dp" />
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/mycenter_home_ll_fahuuo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                 android:background="@color/white"
                 android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@color/white"
                 android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
 
                 <LinearLayout
                     android:id="@+id/mycenter_home_btn_fahuo_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    
-                   android:paddingRight="10dp"
-                   android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp" >
 
                     <ImageView
                         android:id="@+id/mycenter_home_btn_fahuo"
@@ -218,34 +211,33 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:text="@string/mycenger_fahuo"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="3dp" />
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/mycenter_home_ll_shouhuo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                 android:background="@color/white"
                 android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@color/white"
                 android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
 
                 <LinearLayout
                     android:id="@+id/mycenter_home_btn_shouhuo_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    
-                    android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                   android:paddingRight="10dp"
-                   android:paddingLeft="10dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp" >
 
                     <ImageView
                         android:id="@+id/mycenter_home_btn_shouhuo"
@@ -257,33 +249,33 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:text="@string/mycenger_shouhuo"
-                    android:textColor="@color/black" 
-                    android:layout_marginTop="3dp"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/mycenter_home_ll_pingjia"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                 android:background="@color/white"
                 android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@color/white"
                 android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="5dp"
+                 >
 
                 <LinearLayout
                     android:id="@+id/mycenter_home_btn_pingjia_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                   android:paddingRight="10dp"
-                   android:paddingLeft="10dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp" >
 
                     <ImageView
                         android:id="@+id/mycenter_home_btn_pingjia"
@@ -295,9 +287,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:text="@string/mycenger_pingjia"
-                    android:textColor="@color/black" 
-                    android:layout_marginTop="3dp"/>
+                    android:textColor="@color/black" />
             </LinearLayout>
             <!--  -->
 
@@ -306,23 +298,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                 android:background="@color/white"
+                android:background="@color/white"
                 android:gravity="center"
-                
-                    android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="5dp"
+                >
 
                 <LinearLayout
                     android:id="@+id/mycenter_home_btn_shouhou_lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                   android:paddingRight="10dp"
-                   android:paddingLeft="10dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="5dp" >
 
                     <ImageView
                         android:id="@+id/mycenter_home_btn_shouhou"
@@ -334,10 +325,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:singleLine="true"
                     android:text="@string/mycenger_shouhou"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="3dp" />
+                    android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
 
@@ -345,10 +336,10 @@
             android:id="@+id/mycenter_home_ll_order"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-             android:background="@color/white"
-                android:layout_marginTop="1dp"
             android:padding="10dp" >
 
             <ImageView
@@ -382,7 +373,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-             android:background="@color/white"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp" >
@@ -403,19 +394,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-           <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/mycenter_home_ll_qianbao"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp" >
 
@@ -435,18 +427,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-            <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
-         <LinearLayout
+
+        <LinearLayout
             android:id="@+id/mycenter_home_ll_mima"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp" >
 
@@ -466,24 +460,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-            <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/myinfo_ll_youhuiquan"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp" >
-<ImageView
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/mycenter_youhuijuan" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -495,18 +493,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-            <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/mycenter_home_ll_xinjian"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp" >
 
@@ -526,10 +526,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-            <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
 
         <!--  -->
@@ -538,12 +539,12 @@
             android:id="@+id/mycenter_home_ll_jifen"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10dp" 
-            android:visibility="gone">
+            android:padding="10dp"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -574,12 +575,12 @@
             android:id="@+id/mycenter_home_ll_fenxiang"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10dp" 
-            android:visibility="gone">
+            android:padding="10dp"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -597,10 +598,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-            <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
 
         <!--  -->
@@ -609,8 +611,8 @@
             android:id="@+id/mycenter_home_ll_fuwu"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp" >
@@ -631,18 +633,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-            <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/mycenter_home_ll_update"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="10dp" >
@@ -683,8 +686,8 @@
             android:id="@+id/mycenter_home_ll_tuijian"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="40dp"
+            android:layout_marginTop="20dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -706,32 +709,31 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-            <ImageView 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:background="@drawable/mycenter_right"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mycenter_right" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:id="@+id/mycenter_home_ll_logout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/orn"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp" >
-            <TextView 
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="退出登录"
                 android:textColor="@color/white"
-                android:textSize="16dp"
-                />
-            
+                android:textSize="16dp" />
         </LinearLayout>
-        
     </LinearLayout>
 
 </ScrollView>

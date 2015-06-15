@@ -15,20 +15,17 @@ import android.widget.TextView;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.StoreActivity.AddInterface;
 import com.example.educonsult.beans.ProductBean;
+import com.example.educonsult.tools.Util;
 
 public class StoreAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<ProductBean> list;
 	private LayoutInflater inflater;
-	private int type;
 	private Item item;
-	private AddInterface addInterface;
 	
-	public StoreAdapter(Context context,ArrayList<ProductBean> list,int type,AddInterface addInterface){
+	public StoreAdapter(Context context,ArrayList<ProductBean> list){
 		this.context = context;
 		this.list = list;
-		this.type = type;
-		this.addInterface = addInterface;
 		inflater = LayoutInflater.from(context);
 	}
 
@@ -66,22 +63,22 @@ public class StoreAdapter extends BaseAdapter{
 		}else{
 			item = (Item) v.getTag();
 		}
-		item.tv_add.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				addInterface.Add2Shopcart(position);
-			}
-		});
-		if(type==1){
+//		if(type==1){
 			item.tv_type.setTextColor(context.getResources().getColor(R.color.black));
 			item.tv_add.setVisibility(View.GONE);
 			item.ll.setBackgroundResource(R.color.base_hui);
-		}else{
-			item.tv_type.setTextColor(context.getResources().getColor(R.color.orn));
-			item.tv_add.setVisibility(View.VISIBLE);
-			item.ll.setBackgroundResource(R.color.orn);
-		}
+//		}else{
+//			item.tv_type.setTextColor(context.getResources().getColor(R.color.orn));
+//			item.tv_add.setVisibility(View.VISIBLE);
+//			item.ll.setBackgroundResource(R.color.orn);
+//		}
+		Util.Getbitmap(item.iv, list.get(position).getThumb());
+		item.tv_title.setText(list.get(position).getTitle());
+		item.tv_price.setText(list.get(position).getPrice());
+		item.tv_danwei.setText(list.get(position).getUnit());
+//		item.tv_title.setText(list.get(position).getTitle());
+		
+		
 		
 		return v;
 	}

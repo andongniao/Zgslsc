@@ -88,8 +88,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:orientation="horizontal"
-                            android:padding="3dp"
-                             >
+                            android:padding="3dp" >
 
                             <TextView
                                 android:id="@+id/store_home_tv_name"
@@ -266,72 +265,76 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/store_left" />
-            <LinearLayout 
-                android:id="@+id/store_home_ll_top_pro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginRight="5dp"
-                >
-
-            <ImageView
-                android:id="@+id/store_home_iv_title"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@drawable/default_bg" />
 
             <LinearLayout
+                android:id="@+id/store_home_ll_top_pro"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="5dp" >
+                android:gravity="center"
+                android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="@string/test"
-                    android:textColor="@color/black"
-                    android:textSize="16dp" />
+                <ImageView
+                    android:id="@+id/store_home_iv_title"
+                    android:layout_width="100dp"
+                    android:layout_height="75dp"
+                    android:background="@drawable/default_bg" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical"
+                    android:padding="5dp" >
 
                     <TextView
+                        android:id="@+id/store_home_tv_pro_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="￥"
+                        android:ellipsize="end"
+                        android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="14dp" />
+                        android:textSize="16dp" />
 
-                    <TextView
-                        android:id="@+id/store_home_tv_price"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginRight="3dp"
-                        android:text="@string/test"
-                        android:textColor="@color/orn"
-                        android:textSize="15dp" />
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:id="@+id/store_home_tv_danwei"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/test"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="￥"
+                            android:textColor="@color/black"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/store_home_tv_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textColor="@color/orn"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/store_home_tv_danwei"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+                    </LinearLayout>
                 </LinearLayout>
-  </LinearLayout>
+
                 <TextView
                     android:id="@+id/store_home_tv_detaile"
                     android:layout_width="wrap_content"
@@ -368,9 +371,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:horizontalSpacing="10dp"
-                android:scrollbars="none"
                 android:listSelector="#00000000"
                 android:numColumns="3"
+                android:scrollbars="none"
                 android:verticalSpacing="10dp" >
             </com.example.educonsult.myviews.MyGridView>
         </LinearLayout>
