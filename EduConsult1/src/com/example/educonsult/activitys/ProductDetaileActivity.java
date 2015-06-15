@@ -374,6 +374,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void onClick(View v) {
 				SearchResultActivity.isproductfinish=true;
+				MyZjActivity.isfinish=true;
 				ExampleActivity.setCurrentTab(3);
 				finish();
 			}
