@@ -590,8 +590,8 @@
 
                         <ImageView
                             android:id="@+id/home_iv_tuijian_l"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="52dp"
+                            android:layout_height="38dp"
                             android:background="@drawable/default_bg" />
 
                         <LinearLayout
@@ -653,8 +653,8 @@
 
                         <ImageView
                             android:id="@+id/home_iv_tuijian_t"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="52dp"
+                             android:layout_height="38dp"
                             android:background="@drawable/default_bg" />
 
                         <LinearLayout
@@ -714,8 +714,8 @@
 
                         <ImageView
                             android:id="@+id/home_iv_tuijian_r"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="52dp"
+                             android:layout_height="38dp"
                             android:background="@drawable/default_bg" />
 
                         <LinearLayout
@@ -901,8 +901,8 @@
 
                         <ImageView
                             android:id="@+id/home_iv_hot_b_l"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="52dp"
+                             android:layout_height="38dp"
                             android:background="@drawable/default_bg" />
 
                         <LinearLayout
@@ -964,8 +964,8 @@
 
                         <ImageView
                             android:id="@+id/home_iv_hot_b_t"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="52dp"
+                             android:layout_height="38dp"
                             android:background="@drawable/default_bg" />
 
                         <LinearLayout
@@ -1025,8 +1025,8 @@
 
                         <ImageView
                             android:id="@+id/home_iv_hot_b_r"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="52dp"
+                             android:layout_height="38dp"
                             android:background="@drawable/default_bg" />
 
                         <LinearLayout
