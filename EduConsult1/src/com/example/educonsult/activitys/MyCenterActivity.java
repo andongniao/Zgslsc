@@ -189,23 +189,23 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			Send s=new Send(context);
 			cbean=s.getMyinfo(type, authstr);
 			PostHttp p=new PostHttp(context);
-			if(cbean!=null){
-				if("200".equals(cbean.getCode())){
-					centerCountBean=p.getCenterCount(authstr);
-				}else if("300".equals(cbean.getCode())){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					intent = new Intent(context,LoginActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish(); 
-				}else{
-					if(Util.IsNull(cbean.getMsg())){
-						Util.ShowToast(context, cbean.getMsg());
-					}
-				}
-
-			}
+//			if(cbean!=null){
+//				if("200".equals(cbean.getCode())){
+//					centerCountBean=p.getCenterCount(authstr);
+//				}else if("300".equals(cbean.getCode())){
+//					MyApplication.mp.setlogin(false);
+//					Util.ShowToast(context, R.string.login_out_time);
+//					intent = new Intent(context,LoginActivity.class);
+//					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//					startActivity(intent);
+//					finish(); 
+//				}else{
+//					if(Util.IsNull(cbean.getMsg())){
+//						Util.ShowToast(context, cbean.getMsg());
+//					}
+//				}
+//
+//			}
 
 			return true;
 		}
@@ -241,31 +241,31 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 				num=1;
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
-			if(centerCountBean!=null){
-				String code = centerCountBean.getCode();
-				String m = centerCountBean.getMsg();
-				if("200".equals(code)){
-					//					
-					initDate();
-
-
-				}else if("300".equals(code)){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					intent = new Intent(context,LoginActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish(); 
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
-					}
-				}	
-			}else{
-				if(num!=1){
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
-			}
+//			if(centerCountBean!=null){
+//				String code = centerCountBean.getCode();
+//				String m = centerCountBean.getMsg();
+//				if("200".equals(code)){
+//					//					
+//					initDate();
+//
+//
+//				}else if("300".equals(code)){
+//					MyApplication.mp.setlogin(false);
+//					Util.ShowToast(context, R.string.login_out_time);
+//					intent = new Intent(context,LoginActivity.class);
+//					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//					startActivity(intent);
+//					finish(); 
+//				}else{
+//					if(Util.IsNull(m)){
+//						Util.ShowToast(context, m);
+//					}
+//				}	
+//			}else{
+//				if(num!=1){
+//					Util.ShowToast(context, R.string.net_is_eor);
+//				}
+//			}
 			return true;
 
 		}
