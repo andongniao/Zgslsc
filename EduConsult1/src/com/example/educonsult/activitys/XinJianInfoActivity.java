@@ -3,6 +3,7 @@ package com.example.educonsult.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -36,6 +37,7 @@ public class XinJianInfoActivity extends BaseActivity{
 	void init(){
 		TestinAgent.init(this);
 		context=this;
+		myPDT = new ThreadWithProgressDialog();
 		intent=getIntent();
 		xinjianid=intent.getStringExtra("xinjianid");
 		bean=MyApplication.mp.getUser();
@@ -67,7 +69,7 @@ public class XinJianInfoActivity extends BaseActivity{
 			if(xinjianbean!=null){
 				if("200".equals(xinjianbean.getCode())){
 					title.setText(xinjianbean.getTitle());
-					content.setText(xinjianbean.getContent());
+					content.setText(Html.fromHtml(xinjianbean.getContent()));
 				}else if("300".equals(xinjianbean.getCode())){
 					MyApplication.mp.setlogin(false);
 					Util.ShowToast(context, R.string.login_out_time);

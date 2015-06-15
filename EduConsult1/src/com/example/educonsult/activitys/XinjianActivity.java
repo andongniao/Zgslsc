@@ -122,10 +122,10 @@ public class XinjianActivity extends BaseActivity{
 						public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 								long arg3) {
 							// TODO Auto-generated method stub
-//							intent=new Intent(context,XinJianInfoActivity.class);
-//							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//							intent.putExtra("xinjianid",xinjianlist.get(arg2).getItemid());
-//							startActivity(intent);
+							intent=new Intent(context,XinJianInfoActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							intent.putExtra("xinjianid",xinjianlist.get(arg2).getItemid());
+							startActivity(intent);
 						}
 					});
 				}else if("300".equals(xinjianbean.getCode())){
