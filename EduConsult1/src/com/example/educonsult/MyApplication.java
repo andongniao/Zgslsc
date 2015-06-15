@@ -36,13 +36,14 @@ import com.example.educonsult.tools.Util;
 public class MyApplication extends Application{
 	private Context context;
 	public static SharedPreferences sp;
-	public UserBean bean;
+	public UserBean userbean;
 	private static Util util;
 	public static FrameworkInstance frame=null;
 	public static boolean isopen;
 	public static String AreaName = "Area";
 	public static String FenleiName = "Fenlei";
 	public static String Seejilu = "Seejilu";
+	private static String Username ="";
 	public static MyApplication mp;
 	public static int money_home = 1;
 	public static int money_detaile = 2;
@@ -61,8 +62,8 @@ public class MyApplication extends Application{
 		sp = getSharedPreferences("mysp", Context.MODE_PRIVATE);
 		islogin = sp.getBoolean("islogin", false);
 		authstr = sp.getString("authstr", "");
-		bean = new UserBean();
-		bean.setAuthstr(authstr);
+		userbean = new UserBean();
+		userbean.setAuthstr(authstr);
 		util = new Util(context);
 		List<BundleActivator> list = new ArrayList<BundleActivator>();
 		SimpleBundle s= new SimpleBundle();
@@ -244,13 +245,14 @@ public class MyApplication extends Application{
 		}
 	}
 	public void setUser(UserBean bean){
-		this.bean = bean;
+		this.userbean = bean;
 		Editor er = sp.edit();
 		er.putString("authstr", bean.getAuthstr());
 		er.commit();
+		Seejilu = bean.getUsername();
 	}
 	public UserBean getUser(){
-		return this.bean;
+		return this.userbean;
 	}
 	public void setlogin(boolean islogin){
 		if(islogin){
@@ -260,7 +262,7 @@ public class MyApplication extends Application{
 			er.commit();
 		}else{
 			this.islogin = islogin;
-			this.bean.setAuthstr("");
+			this.userbean.setAuthstr("");
 			Editor er = sp.edit();
 			er.putBoolean("islogin", islogin);
 			er.putString("authstr", "");

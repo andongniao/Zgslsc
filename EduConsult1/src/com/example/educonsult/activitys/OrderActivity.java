@@ -141,7 +141,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		//		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
 		shopBeans=shopbean.getList();
 		myPDT =new  ThreadWithProgressDialog();
-		userBean=MyApplication.mp.bean;
+		userBean=MyApplication.mp.userbean;
 		dm = new DisplayMetrics();
 		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		listdizhi = new ArrayList<Integer>();

@@ -35,7 +35,7 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 	private Intent intent;
 	private ImageView carIc;
 	private Button submit;
-	private String mMode = "01";
+	private String mMode = "00";
 	private String Tn = "";
 	private String authstr;
 	private ThreadWithProgressDialog myPDT;
@@ -86,9 +86,9 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 		case R.id.money_withdrawal_edmoney:
 			break;
 		case R.id.recharge_car:
-//			intent = new Intent(context,MoneyCarListActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			//			intent = new Intent(context,MoneyCarListActivity.class);
+			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//			startActivity(intent);
 			break;
 		case R.id.recharge_up:
 			amount=money.getText().toString().trim();
@@ -100,8 +100,6 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
-//								UPPayAssistEx.startPayByJAR(RechargeActivity.this, PayActivity.class, null, null,
-//										"201505181716561050548", mMode);
 			}else{
 				Util.ShowToast(context, "请保证信息完整");
 			}
