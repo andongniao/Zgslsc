@@ -51,7 +51,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 
 	protected int activityCloseExitAnimation;
 	private Context context;
-	private LinearLayout ll_addview;
+	private LinearLayout ll_addview,ll_rem;
 	private RelativeLayout rl_l;
 	private View v_fenlei,v_home,v_result;
 	private LayoutInflater inflater;
@@ -94,7 +94,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.store_base_layout);
 		init();
 		addlistener();
-		
+
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);
 		}else{
@@ -139,6 +139,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 		ll_addview.addView(v_result);
 		v_home.findViewById(R.id.store_home_iv_left).setOnClickListener(this);
 		v_home.findViewById(R.id.store_home_iv_right).setOnClickListener(this);
+		ll_rem = (LinearLayout) v_home.findViewById(R.id.store_home_ll_rem);
 		gv_home = (MyGridView) v_home.findViewById(R.id.store_home_gv);
 		tv_h_title = (TextView) v_home.findViewById(R.id.store_home_tv_title);
 		tv_h_name = (TextView) v_home.findViewById(R.id.store_home_tv_name);
@@ -161,11 +162,11 @@ public class StoreActivity extends Activity implements OnClickListener{
 
 
 		fenlei_lv = (ListView) v_fenlei.findViewById(R.id.store_fenlei_lv); 
-	
+
 
 		gv_result = (MyGridView) v_result.findViewById(R.id.store_result_gv);
 		tv_result_title = (TextView) v_result.findViewById(R.id.store_result_tv_title);
-		
+
 		isshow = false;
 		v = new ImageView(context);
 		v.setBackgroundResource(R.drawable.base_to_top);
@@ -228,7 +229,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-//				Toproduct();
+				//				Toproduct();
 			}
 		});
 		home_sc.setOnTouchListener(new OnTouchListener() {
@@ -253,7 +254,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 				return false;
 			}
 		});
-		
+
 		v.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -266,7 +267,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 				}
 			}
 		});
-		
+
 
 	}
 
@@ -286,21 +287,21 @@ public class StoreActivity extends Activity implements OnClickListener{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
-			
-			
+
+
 			break;
 		case R.id.sotre_base_tv_online:
-//			//已安装插件列表
-//			bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
-//			BundleContext context =MyApplication.frame.getSystemBundleContext();
-//			for(int i=0;i<context.getBundles().length;i++)
-//			{
-//				//获取已安装插件
-//				bundles.add(context.getBundles()[i]);        	        
-//			}
-//
-//			//			BundleContext context =frame.getSystemBundleContext();
-//			startor(bundles);
+			//			//已安装插件列表
+			//			bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
+			//			BundleContext context =MyApplication.frame.getSystemBundleContext();
+			//			for(int i=0;i<context.getBundles().length;i++)
+			//			{
+			//				//获取已安装插件
+			//				bundles.add(context.getBundles()[i]);        	        
+			//			}
+			//
+			//			//			BundleContext context =frame.getSystemBundleContext();
+			//			startor(bundles);
 			break;
 		case R.id.sotre_base_tv_call:
 			ShowDialog();
@@ -319,7 +320,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 			break;
 
 		case R.id.store_home_iv_left:
-			if(len!=0){
+			if(len>0){
 				if(index==0){
 					index=len-1;
 				}else{
@@ -329,7 +330,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 			}
 			break;
 		case R.id.store_home_iv_right:
-			if(len!=0){
+			if(len>0){
 				if(index==len-1){
 					index=0;
 				}else{
@@ -346,7 +347,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			break;
-			
+
 			//		case R.id.sotre_base_ll_back:
 			//			finish();
 			//			break;
@@ -480,9 +481,9 @@ public class StoreActivity extends Activity implements OnClickListener{
 			PostHttp p=new PostHttp(context);
 			if(type==1){
 				if(Util.IsNull(storeid)){
-					bean = p.getShopHomeData(storeid,page);
+					bean = p.getShopHomeData(storeid,1,page);
 				}else{
-					bean = p.getShopHomeData(storename,page);
+					bean = p.getShopHomeData(storename,2,page);
 				}
 			}else if(type==2){
 				catbean = p.getShopCat(storeid, "");
@@ -502,62 +503,65 @@ public class StoreActivity extends Activity implements OnClickListener{
 		@Override
 		public boolean OnTaskDone() {
 			if(type==1){
-			if(bean!=null){
-				if("200".equals(bean.getCode())){
-					tv_more.setVisibility(View.VISIBLE);
-					if(page==1){
-					Util.Getbitmap(hean_iv,url);
-					list_pro = bean.getList();
-					home_adapter = new StoreAdapter(context, list_pro);
-					gv_home.setAdapter(home_adapter);
-					gv_home.setFocusable(false);
-					tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
-					tv_h_miaoshu.setText(""+bean.getShopInfoBean().getDescribe());
-					tv_h_service.setText(""+bean.getShopInfoBean().getService());
-					tv_h_wuliu.setText(""+bean.getShopInfoBean().getLogistics());
-					list_rem = bean.getRecommend();
-					len = list_rem.size();
-					showre();	
-					home_sc.scrollTo(0, 1);
+				if(bean!=null){
+					if("200".equals(bean.getCode())){
+						tv_more.setVisibility(View.VISIBLE);
+						if(page==1){
+							Util.Getbitmap(hean_iv,url);
+							list_pro = bean.getList();
+							home_adapter = new StoreAdapter(context, list_pro);
+							gv_home.setAdapter(home_adapter);
+							gv_home.setFocusable(false);
+							tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
+							tv_h_miaoshu.setText(""+bean.getShopInfoBean().getDescribe());
+							tv_h_service.setText(""+bean.getShopInfoBean().getService());
+							tv_h_wuliu.setText(""+bean.getShopInfoBean().getLogistics());
+							list_rem = bean.getRecommend();
+							len = list_rem.size();
+							if(len>0){
+								ll_rem.setVisibility(View.VISIBLE);
+								showre();	
+							}
+							home_sc.scrollTo(0, 1);
+						}else{
+							if(bean.getList().size()>0){
+								list_pro.addAll(bean.getList());
+								if(home_adapter==null){
+									home_adapter = new StoreAdapter(context, list_pro);
+									gv_home.setAdapter(home_adapter);
+								}else{
+									home_adapter.setData(list_pro);
+									home_adapter.notifyDataSetChanged();
+								}
+							}else{
+								Util.ShowToast(context, R.string.page_is_final);
+							}
+							//						gv_home.setFocusable(false);
+						}
+
+					}else if("300".equals(bean.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						intent = new Intent(context,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+						finish(); 
 					}else{
-						if(bean.getList().size()>0){
-						list_pro.addAll(bean.getList());
-						if(home_adapter==null){
-						home_adapter = new StoreAdapter(context, list_pro);
-						gv_home.setAdapter(home_adapter);
-						}else{
-							home_adapter.setData(list_pro);
-							home_adapter.notifyDataSetChanged();
+						if(page!=1){
+							page-=1;
 						}
-						}else{
-							Util.ShowToast(context, R.string.page_is_final);
-						}
-//						gv_home.setFocusable(false);
+						Util.ShowToast(context, bean.getMsg());
 					}
 
-				}else if("300".equals(bean.getCode())){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					intent = new Intent(context,LoginActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish(); 
 				}else{
-					if(page!=1){
-						page-=1;
-					}
-					Util.ShowToast(context, bean.getMsg());
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
-
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
 			}else if(type==2){
 				if(catbean!=null){
 					if("200".equals(catbean.getCode())){
 						if(catbean.getList().size()>0){
-						fenleiadapter = new StoreFenleiAdapter(context, catbean.getList());
-						fenlei_lv.setAdapter(fenleiadapter);
+							fenleiadapter = new StoreFenleiAdapter(context, catbean.getList());
+							fenlei_lv.setAdapter(fenleiadapter);
 						}else{
 							Util.ShowToast(context, "商家尚未定义分类");
 						}
