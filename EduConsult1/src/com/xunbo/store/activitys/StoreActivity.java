@@ -72,7 +72,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 	private StoreFenleiAdapter fenleiadapter;
 	private ThreadWithProgressDialog myPDT;
 	private int page,index,len,w,h;
-	private String authstr,storeid,url;
+	private String authstr,storeid,storename,url;
 	private ListShopHomeBean bean;
 	private CircleImageView hean_iv;
 	private ArrayList<ProductBean> list_pro,list_rem;
@@ -116,6 +116,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 		page = 1;
 		index = 0;
 		storeid = getIntent().getStringExtra("storeid");
+		storename = getIntent().getStringExtra("storename");
 		url = getIntent().getStringExtra("url");
 		authstr = MyApplication.mp.getUser().getAuthstr();
 		showstatu = 1;
@@ -478,7 +479,11 @@ public class StoreActivity extends Activity implements OnClickListener{
 			// TODO Auto-generated method stub
 			PostHttp p=new PostHttp(context);
 			if(type==1){
-			bean = p.getShopHomeData(storeid,page);
+				if(Util.IsNull(storeid)){
+					bean = p.getShopHomeData(storeid,page);
+				}else{
+					bean = p.getShopHomeData(storename,page);
+				}
 			}else if(type==2){
 				catbean = p.getShopCat(storeid, "");
 			}
