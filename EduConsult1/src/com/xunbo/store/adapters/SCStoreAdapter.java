@@ -38,14 +38,16 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 	private Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean baseBean;
+	private String authstr;
 
-	public SCStoreAdapter(Context context,ArrayList<CenterShopBean> list,Myorder myorder2){
+	public SCStoreAdapter(Context context,ArrayList<CenterShopBean> list,Myorder myorder2,String authstr){
 		this.contexts = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		frame = MyApplication.frame;
 		myPDT = new ThreadWithProgressDialog();
 		this.myorder = myorder2;
+		this.authstr=authstr;
 	}
 	public void SetData(ArrayList<CenterShopBean> list){
 		this.list = list;
@@ -187,7 +189,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
 			PostHttp p=new PostHttp(contexts);
-			baseBean=p.Shoucang(2,2,Integer.parseInt(list.get(position).getCid()));
+			baseBean=p.Shoucang(2,2,Integer.parseInt(list.get(position).getCid()),authstr);
 			return true;
 		}
 

@@ -18,10 +18,12 @@ import android.widget.TextView;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.activitys.SCProductActivity.Myorder;
+import com.xunbo.store.beans.ProductBean;
+import com.xunbo.store.tools.Util;
 
 public class ProductAdapter extends BaseAdapter implements OnClickListener{
 	private Context contexts;
-	private ArrayList<String> list;
+	private ArrayList<ProductBean> list;
 	private LayoutInflater inflater;
 	private Myitem myitem;
 	private List<org.osgi.framework.Bundle> bundles=null;
@@ -29,14 +31,14 @@ public class ProductAdapter extends BaseAdapter implements OnClickListener{
 	private Intent intent;
 	private Myorder myorder;
 
-	public ProductAdapter(Context context,ArrayList<String> list,Myorder myorder){
+	public ProductAdapter(Context context,ArrayList<ProductBean> list,Myorder myorder){
 		this.contexts = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		frame = MyApplication.frame;
 		this.myorder = myorder;
 	}
-	public void SetData(ArrayList<String> list){
+	public void SetData(ArrayList<ProductBean> list){
 		this.list = list;
 	}
 
@@ -65,18 +67,7 @@ public class ProductAdapter extends BaseAdapter implements OnClickListener{
 			myitem = new Myitem();
 			myitem.ic=(ImageView)convertView.findViewById(R.id.scproduct_item_ic);
 			myitem.instore=(TextView)convertView.findViewById(R.id.scproduct_instores);
-			myitem.instore.setOnClickListener(this);
-			
 			myitem.qxsc=(TextView)convertView.findViewById(R.id.scproduct_qxsc);
-			myitem.qxsc.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					myorder.delte(position);
-				}
-			});
-		
 			myitem.computername = (TextView) convertView.findViewById(R.id.scproduct_item_computername);
 			myitem.productname = (TextView) convertView.findViewById(R.id.scproduct_item_productname);
 			myitem.money = (TextView) convertView.findViewById(R.id.scproduct_item_money);
@@ -85,6 +76,20 @@ public class ProductAdapter extends BaseAdapter implements OnClickListener{
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
+		Util.Getbitmap(myitem.ic, list.get(position).getThumb());
+//		myitem.computername.setText(list.get(position).get)
+		myitem.productname.setText(list.get(position).getTitle());
+		myitem.money.setText(list.get(position).getPrice());
+		myitem.instore.setOnClickListener(this);
+		myitem.qxsc.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				myorder.delte(position);
+			}
+		});
 
 		return convertView;
 	}

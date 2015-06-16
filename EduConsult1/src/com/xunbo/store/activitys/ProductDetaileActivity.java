@@ -44,6 +44,7 @@ import com.xunbo.store.beans.UserBean;
 import com.xunbo.store.myviews.ImageCycleView;
 import com.xunbo.store.myviews.ImageCycleView.ImageCycleViewListener;
 import com.xunbo.store.myviews.MyListview;
+import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
@@ -82,7 +83,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private Util u;
 	private boolean isSave,ispingjia,iserror;
 	private UserBean userbean;
-	private BaseBean bean;
+	private BaseBean bean,bean2;
 	private HomeBean home;
 	private TextView[] tvtuijian;
 	private ImageView[] imtuijian;
@@ -90,7 +91,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private LinearLayout dianpulin;
 	private ImageView iv_top_t;
 	private RelativeLayout rl_r;
-	
+	private int refeshDatatype;
 
 
 	@Override
@@ -262,6 +263,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 
 		//		
+		refeshDatatype=1;
 
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
@@ -392,6 +394,12 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.product_detail_ll_shoucang:
+			refeshDatatype=2;
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}else {
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
 			break;
 		case R.id.product_detail_ll_kefu:
 			intent = new Intent(context,ServiceCenterActivity.class);
@@ -585,43 +593,45 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 		@Override
 		public boolean OnTaskDone() {
-			//任务完成后
-			if(productdetailbean!=null){
-				if("200".equals(productdetailbean.getCode())){
-					mallinfo=productdetailbean.getMallinfo();
-					recommend=productdetailbean.getRecommend();
-					buyedlist=productdetailbean.getBuyedlist();
-					initDate();
+			if(refeshDatatype==1){
 
-				}else if("300".equals(productdetailbean.getCode())){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					Intent i= new Intent(context,LoginActivity.class);
-					startActivity(i);
-					finish();
-				}else{
-					Util.ShowToast(context, productdetailbean.getMsg());
-				}
+				//任务完成后
+				if(productdetailbean!=null){
+					if("200".equals(productdetailbean.getCode())){
+						mallinfo=productdetailbean.getMallinfo();
+						recommend=productdetailbean.getRecommend();
+						buyedlist=productdetailbean.getBuyedlist();
+						initDate();
 
-			}
-			if(listComment!=null){
-				if("200".equals(listComment.getCode())){
-					comlist=listComment.getComlist();
-					comstar=listComment.getComstar();
-					
-				}else if("300".equals(listComment.getCode())){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					Intent i= new Intent(context,LoginActivity.class);
-					startActivity(i);
-					finish();
-				}else{
-					Util.ShowToast(context, listComment.getMsg());
+					}else if("300".equals(productdetailbean.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+					}else{
+						Util.ShowToast(context, productdetailbean.getMsg());
+					}
+
 				}
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
-			/*if(home!=null){
+				if(listComment!=null){
+					if("200".equals(listComment.getCode())){
+						comlist=listComment.getComlist();
+						comstar=listComment.getComstar();
+
+					}else if("300".equals(listComment.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+					}else{
+						Util.ShowToast(context, listComment.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+				/*if(home!=null){
 				if("200".equals(home.getCode())){
 					initTuijian();
 				}else{
@@ -633,18 +643,41 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			}*/
 
 
-
+			}
+			else if(refeshDatatype==2){
+				if(bean2!=null){
+					if("200".equals(bean2.getCode())){
+						Util.ShowToast(context, bean2.getMsg());
+					}else if("300".equals(bean2.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+					}else{
+						Util.ShowToast(context, bean2.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}
 			return true;
 		}
 
 		@Override
 		public boolean TaskMain() {
 			// 访问
-			Send s = new Send(context);
-			productdetailbean = s.GetProductDetaile(productBean.getItemid());
-			//home = s.RequestHome();
-			//productdetailbean = s.GetProductDetaile();
-			listComment=s.GetComment(productBean.getItemid(), 1, "");
+			if(refeshDatatype==1){
+				Send s = new Send(context);
+				productdetailbean = s.GetProductDetaile(productBean.getItemid());
+				//home = s.RequestHome();
+				//productdetailbean = s.GetProductDetaile();
+				listComment=s.GetComment(productBean.getItemid(), 1, "");
+			}else if(refeshDatatype==2){
+				PostHttp p=new PostHttp(context);
+//				BaseBean Shoucang(int t,int type,int id)
+				bean2=p.Shoucang(1, 1,Integer.parseInt(productBean.getItemid()),userbean.getAuthstr());
+			}
 			return true;
 		}
 	}

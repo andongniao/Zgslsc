@@ -2543,7 +2543,7 @@ public class PostHttp {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public BaseBean Shoucang(int t,int type,int id) {  
+	public BaseBean Shoucang(int t,int type,int id,String authstr) {  
 		BaseBean bean = new BaseBean();
 		String url = ServiceUrl.Base+"personal_center.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
@@ -2558,6 +2558,8 @@ public class PostHttp {
 		list.add(p);
 		NameValuePair p2 = new BasicNameValuePair("id",""+id);
 		list.add(p2);
+		NameValuePair p3 = new BasicNameValuePair("authstr",""+authstr);
+		list.add(p3);
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
