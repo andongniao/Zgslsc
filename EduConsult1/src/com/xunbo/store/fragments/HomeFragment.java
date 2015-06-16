@@ -397,6 +397,7 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 						id = home.getCompany().get(arg2).getCompany();
 					}
 					intent.putExtra("storeid", id);
+					intent.putExtra("storename", "");
 					intent.putExtra("url", home.getCompany().get(arg2).getThumb());
 					startActivity(intent);
 				}
