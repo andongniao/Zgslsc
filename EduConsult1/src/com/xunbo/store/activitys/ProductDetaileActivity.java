@@ -78,7 +78,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ArrayList<CommentBean> comlist;
 	private ArrayList<CommentStar> comstar;
 	private ProductBean productBean;
-	private String liulanfile;
+	private String liulanfile,storename;
 	private Util u;
 	private boolean isSave,ispingjia,iserror;
 	private UserBean userbean;
@@ -139,7 +139,6 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		pingjiamore.setOnClickListener(this);
 		dianpulin=(LinearLayout)findViewById(R.id.product_detaile_ll_into_dianpu);
         dianpulin.setOnClickListener(this);
-        dianpulin.setVisibility(View.GONE);
 		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
 		ll_kefu=(LinearLayout)findViewById(R.id.product_detail_ll_kefu);
 		ll_kefu.setOnClickListener(this);
@@ -310,7 +309,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		}else{
 			tv_qidingliang.setText("1");
 		}
-		
+		storename=mallinfo.getCompany();
 		tv_xiaoliang.setText(mallinfo.getSales());
 		tv_kucun.setText(mallinfo.getAmount());
 		tv_chandi.setText(mallinfo.getAreaname());
@@ -400,9 +399,11 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 			startActivity(intent);
 			break;
 		case R.id.product_detaile_ll_into_dianpu:
-			//			intent = new Intent(context,StoreActivity.class);
-			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			//			startActivity(intent);
+			intent = new Intent(context,StoreActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("storeid", "");
+			intent.putExtra("storename", storename);
+			startActivity(intent);
 //			Util.ShowToast(context, R.string.maimeng);''
 			
 			break;
