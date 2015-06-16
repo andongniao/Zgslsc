@@ -59,12 +59,12 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
-                    <com.example.educonsult.myviews.CircleImageView
+                    <com.xunbo.store.myviews.CircleImageView
                         android:id="@+id/mycenter_home_civ_head"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_launcher" />
+                        />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -306,12 +306,6 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal" >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="￥"
-                            android:textColor="@color/black"
-                            android:textSize="14dp" />
 
                         <TextView
                             android:id="@+id/store_home_tv_price"
@@ -365,8 +359,8 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dp" >
-<!-- 
-            <com.example.educonsult.myviews.MyGridView
+
+            <com.xunbo.store.myviews.MyGridView
                 android:id="@+id/store_home_gv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -374,34 +368,28 @@
                 android:listSelector="#00000000"
                 android:numColumns="3"
                 android:scrollbars="none"
-                android:verticalSpacing="10dp" 
-                >
-            </com.example.educonsult.myviews.MyGridView>
-             -->
-            <com.handmark.pulltorefresh.library.PullToRefreshGridView
-            xmlns:ptr="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/store_home_gv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:fadingEdge="none"
-            android:footerDividersEnabled="false"
-            android:gravity="center_horizontal"
-            android:headerDividersEnabled="false"
-            android:horizontalSpacing="10dp"
-            android:listSelector="#00000000"
-            android:numColumns="3"
-            android:scrollbars="none"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp"
-            ptr:ptrAnimationStyle="flip"
-            ptr:ptrHeaderSubTextColor="@color/black"
-            ptr:ptrHeaderTextColor="@color/black"
-            ptr:ptrListViewExtrasEnabled="false"
-            ptr:ptrMode="both"
-            ptr:ptrScrollingWhileRefreshingEnabled="true"
-            ptr:ptrShowIndicator="false" />
+                android:verticalSpacing="10dp" >
+            </com.xunbo.store.myviews.MyGridView>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+             >
+            <TextView 
+                android:id="@+id/store_home_tv_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/xlistview_footer_hint_normal"
+                android:padding="10dp"
+                android:textSize="15dp"
+                android:visibility="gone"
+                android:textColor="@color/home_hui"
+                />
+            
+        </LinearLayout>
         <!--  -->
     </LinearLayout>
 

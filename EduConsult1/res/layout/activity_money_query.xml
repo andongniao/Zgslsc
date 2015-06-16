@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/base_hui"
     android:orientation="vertical"
-    tools:context="com.example.educonsult.MoneyQueryActivity" >
+    tools:context="com.xunbo.store.MoneyQueryActivity" >
 
     <LinearLayout
         android:id="@+id/qianbao_query_rela"

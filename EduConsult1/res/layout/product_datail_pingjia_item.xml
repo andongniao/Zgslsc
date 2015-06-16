@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.example.educonsult.myviews.CircleImageView
+            <com.xunbo.store.myviews.CircleImageView
                 android:id="@+id/product_datail_pingjia_time_head"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

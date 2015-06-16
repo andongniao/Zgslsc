@@ -4,40 +4,41 @@
     android:background="#e6e6e6"
     android:gravity="center_vertical"
     android:orientation="vertical" >
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="10dp"
-        >
-        <TextView 
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
             android:id="@+id/store_result_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16dp"
             android:text="@string/test"
-            />
+            android:textColor="@color/black"
+            android:textSize="16dp" />
     </LinearLayout>
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
         android:gravity="center"
-        >
-         <com.example.educonsult.myviews.MyGridView
-                android:id="@+id/store_result_gv"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:horizontalSpacing="10dp"
-                android:scrollbars="none"
-                android:listSelector="#00000000"
-                android:numColumns="2"
-                android:verticalSpacing="10dp" >
-            </com.example.educonsult.myviews.MyGridView>
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <com.xunbo.store.myviews.MyGridView
+            android:id="@+id/store_result_gv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="10dp"
+            android:listSelector="#00000000"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:verticalSpacing="10dp" >
+        </com.xunbo.store.myviews.MyGridView>
     </LinearLayout>
-    
+
 </LinearLayout>

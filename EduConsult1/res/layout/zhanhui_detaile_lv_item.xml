@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <com.example.educonsult.myviews.CircleImageView
+            <com.xunbo.store.myviews.CircleImageView
                 android:id="@+id/zhanhui_detaile_lv_item_iv_head"
                 android:layout_width="80dp"
                 android:layout_height="80dp"

@@ -136,7 +136,7 @@
                 android:orientation="horizontal"
                 android:padding="10dp" >
 
-                <com.example.educonsult.myviews.MyGridView
+                <com.xunbo.store.myviews.MyGridView
                     android:id="@+id/new_home_gv_hot"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                     android:numColumns="3"
                     android:scrollbars="none"
                     android:verticalSpacing="10dp" >
-                </com.example.educonsult.myviews.MyGridView>
+                </com.xunbo.store.myviews.MyGridView>
             </LinearLayout>
         </LinearLayout>
 
@@ -213,7 +213,7 @@
                 android:padding="10dp"
                 android:visibility="gone" >
 
-                <com.example.educonsult.myviews.MyGridView
+                <com.xunbo.store.myviews.MyGridView
                     android:id="@+id/new_home_gv_tuijian"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                     android:numColumns="3"
                     android:scrollbars="none"
                     android:verticalSpacing="10dp" >
-                </com.example.educonsult.myviews.MyGridView>
+                </com.xunbo.store.myviews.MyGridView>
             </LinearLayout>
 
             <LinearLayout
@@ -402,7 +402,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <com.example.educonsult.myviews.CustomHScrollView
+            <com.xunbo.store.myviews.CustomHScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/black"
@@ -416,9 +416,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
                 </LinearLayout>
-            </com.example.educonsult.myviews.CustomHScrollView>
+            </com.xunbo.store.myviews.CustomHScrollView>
 
-            <com.example.educonsult.myviews.MyListview
+            <com.xunbo.store.myviews.MyListview
                 android:id="@+id/new_home_lv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -426,7 +426,7 @@
                 android:fadingEdge="none"
                 android:listSelector="#00000000"
                 android:scrollbars="none" >
-            </com.example.educonsult.myviews.MyListview>
+            </com.xunbo.store.myviews.MyListview>
 
             <!--  -->
 

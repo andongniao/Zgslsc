@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" >
 
-                        <com.example.educonsult.myviews.CircleImageView
+                        <com.xunbo.store.myviews.CircleImageView
                             android:id="@+id/know_home_iv_head"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
@@ -440,7 +440,7 @@
                     android:orientation="horizontal"
                     android:padding="10dp" >
 
-                    <com.example.educonsult.myviews.MyGridView
+                    <com.xunbo.store.myviews.MyGridView
                         android:id="@+id/know_home_gv"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -450,7 +450,7 @@
                         android:numColumns="3"
                         android:scrollbars="none"
                         android:verticalSpacing="10dp" >
-                    </com.example.educonsult.myviews.MyGridView>
+                    </com.xunbo.store.myviews.MyGridView>
                 </LinearLayout>
             </LinearLayout>
 
@@ -543,13 +543,13 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <com.example.educonsult.myviews.MyListview
+            <com.xunbo.store.myviews.MyListview
                 android:id="@+id/know_home_lv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:listSelector="#00000000"
                 android:scrollbars="none" >
-            </com.example.educonsult.myviews.MyListview>
+            </com.xunbo.store.myviews.MyListview>
 
             <LinearLayout
                 android:layout_width="fill_parent"
