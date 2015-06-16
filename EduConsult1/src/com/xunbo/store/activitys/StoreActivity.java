@@ -319,7 +319,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 			break;
 
 		case R.id.store_home_iv_left:
-			if(len!=0){
+			if(len>0){
 				if(index==0){
 					index=len-1;
 				}else{
@@ -329,7 +329,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 			}
 			break;
 		case R.id.store_home_iv_right:
-			if(len!=0){
+			if(len>0){
 				if(index==len-1){
 					index=0;
 				}else{
@@ -480,9 +480,9 @@ public class StoreActivity extends Activity implements OnClickListener{
 			PostHttp p=new PostHttp(context);
 			if(type==1){
 				if(Util.IsNull(storeid)){
-					bean = p.getShopHomeData(storeid,page);
+					bean = p.getShopHomeData(storeid,1,page);
 				}else{
-					bean = p.getShopHomeData(storename,page);
+					bean = p.getShopHomeData(storename,2,page);
 				}
 			}else if(type==2){
 				catbean = p.getShopCat(storeid, "");
@@ -517,7 +517,10 @@ public class StoreActivity extends Activity implements OnClickListener{
 					tv_h_wuliu.setText(""+bean.getShopInfoBean().getLogistics());
 					list_rem = bean.getRecommend();
 					len = list_rem.size();
+					if(len>0){
+						
 					showre();	
+					}
 					home_sc.scrollTo(0, 1);
 					}else{
 						if(bean.getList().size()>0){
