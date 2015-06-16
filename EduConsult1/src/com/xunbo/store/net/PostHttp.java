@@ -2701,7 +2701,7 @@ public class PostHttp {
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","product");
 		list.add(p1);
-		NameValuePair p = new BasicNameValuePair("Page ",""+page);
+		NameValuePair p = new BasicNameValuePair("page",""+page);
 		list.add(p);
 
 		NameValuePair pp = new BasicNameValuePair("authstr",authstr);
