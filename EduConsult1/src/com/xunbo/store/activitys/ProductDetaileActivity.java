@@ -311,14 +311,14 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		}else{
 			tv_qidingliang.setText("1");
 		}
-		storename=mallinfo.getCompany();
+		storename=mallinfo.getUsername();
 		tv_xiaoliang.setText(mallinfo.getSales());
 		tv_kucun.setText(mallinfo.getAmount());
 		tv_chandi.setText(mallinfo.getAreaname());
 		tv_computer.setText(mallinfo.getCompany());
-		tv_miaoshu.setText("4.5");
-		tv_taidu.setText("4.5");
-		tv_fahuo.setText("4.5");
+		tv_miaoshu.setText("5");
+		tv_taidu.setText("5");
+		tv_fahuo.setText("5");
 		tv_content.setText(Html.fromHtml(mallinfo.getContent()));
 
 		if(buyedlist.size()==0){

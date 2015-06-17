@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -78,8 +79,9 @@ public class StoreActivity extends Activity implements OnClickListener{
 	private ArrayList<ProductBean> list_pro,list_rem;
 	private ListStoreCatBean catbean;
 	private PopupWindow popupWindow;
-	private boolean isshow;
+	private boolean isshow,isshoucang;
 	private View v;
+	private int num;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +115,10 @@ public class StoreActivity extends Activity implements OnClickListener{
 				//TODO 
 			}
 		};
+		isshoucang=false;
 		page = 1;
 		index = 0;
+		num=1;
 		storeid = getIntent().getStringExtra("storeid");
 		storename = getIntent().getStringExtra("storename");
 		url = getIntent().getStringExtra("url");
@@ -128,7 +132,8 @@ public class StoreActivity extends Activity implements OnClickListener{
 		findViewById(R.id.sotre_base_tv_call).setOnClickListener(this);
 		findViewById(R.id.store_base_ll_back).setOnClickListener(this);
 
-
+		iv_home_shoucang=(ImageView)findViewById(R.id.base_top_right_image_l);
+		iv_home_shoucang.setOnClickListener(this);
 
 		inflater = LayoutInflater.from(context);
 		v_home = inflater.inflate(R.layout.store_home_layout, null);
@@ -353,6 +358,14 @@ public class StoreActivity extends Activity implements OnClickListener{
 			//			break;
 
 
+		case R.id.base_top_right_image_l:
+//			type=3;
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData(),R.string.loding);
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			break;
 		}
 	}
 	public void startor(List<org.osgi.framework.Bundle> list){
@@ -488,6 +501,8 @@ public class StoreActivity extends Activity implements OnClickListener{
 			}else if(type==2){
 				catbean = p.getShopCat(storeid, "");
 			}
+			
+			
 			return true;
 		}
 
@@ -512,12 +527,17 @@ public class StoreActivity extends Activity implements OnClickListener{
 							home_adapter = new StoreAdapter(context, list_pro);
 							gv_home.setAdapter(home_adapter);
 							gv_home.setFocusable(false);
+							tv_h_number.setText(bean.getShopInfoBean().getTotalgoods());
 							tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
 							tv_h_miaoshu.setText(""+bean.getShopInfoBean().getDescribe());
 							tv_h_service.setText(""+bean.getShopInfoBean().getService());
 							tv_h_wuliu.setText(""+bean.getShopInfoBean().getLogistics());
 							list_rem = bean.getRecommend();
 							len = list_rem.size();
+							if(bean.getShopInfoBean().getCollect()==2){
+								iv_home_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
+								isshoucang=true;
+							}
 							if(len>0){
 								ll_rem.setVisibility(View.VISIBLE);
 								showre();	

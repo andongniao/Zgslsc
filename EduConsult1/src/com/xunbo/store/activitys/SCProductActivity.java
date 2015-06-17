@@ -21,14 +21,12 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
-import com.xunbo.store.activitys.ProductDetaileActivity.RefeshData2;
 import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.adapters.ProductAdapter;
-import com.xunbo.store.beans.ListProductBean;
-import com.xunbo.store.beans.ProductBean;
+import com.xunbo.store.beans.ListSCProductBean;
+import com.xunbo.store.beans.SCProductBean;
 import com.xunbo.store.myviews.MyListview;
 import com.xunbo.store.net.PostHttp;
-import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
 public class SCProductActivity extends BaseActivity implements OnClickListener{
@@ -50,9 +48,9 @@ public class SCProductActivity extends BaseActivity implements OnClickListener{
 	public static boolean isrezoom;
 	public Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
-	private ListProductBean listProductBean;
+	private ListSCProductBean listProductBean;
 	private String authstr;
-	private ArrayList<ProductBean> list;
+	private ArrayList<SCProductBean> list;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -83,6 +81,16 @@ public class SCProductActivity extends BaseActivity implements OnClickListener{
 				list.remove(index);
 				productAdapter.SetData(list);
 				productAdapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void finish() {
+				// TODO Auto-generated method stub
+				MyApplication.mp.setlogin(false);
+				Util.ShowToast(context, R.string.login_out_time);
+				Intent i= new Intent(context,LoginActivity.class);
+				startActivity(i);
+				finish();
 			}
 		};
 		
@@ -150,6 +158,7 @@ public class SCProductActivity extends BaseActivity implements OnClickListener{
 	}
 	public interface Myorder{
 		void delte(int index);
+		void finish();
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
 
@@ -167,7 +176,7 @@ public class SCProductActivity extends BaseActivity implements OnClickListener{
 			if(listProductBean!=null){
 				if("200".equals(listProductBean.getCode())){
 					list=listProductBean.getList();
-					productAdapter=new ProductAdapter(context, list,myorder);
+					productAdapter=new ProductAdapter(context, list,myorder,authstr);
 					product_list.setAdapter(productAdapter);
 				}else if("300".equals(listProductBean.getCode())){
 					MyApplication.mp.setlogin(false);
