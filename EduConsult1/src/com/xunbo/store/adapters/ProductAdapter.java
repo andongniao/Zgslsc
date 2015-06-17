@@ -15,28 +15,41 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
+import com.xunbo.store.activitys.LoginActivity;
+import com.xunbo.store.activitys.StoreActivity;
 import com.xunbo.store.activitys.SCProductActivity.Myorder;
+import com.xunbo.store.activitys.SCProductActivity.RefeshData;
+import com.xunbo.store.beans.BaseBean;
+import com.xunbo.store.beans.SCProductBean;
+import com.xunbo.store.net.PostHttp;
+import com.xunbo.store.tools.Util;
 
-public class ProductAdapter extends BaseAdapter implements OnClickListener{
+public class ProductAdapter extends BaseAdapter{
 	private Context contexts;
-	private ArrayList<String> list;
+	private ArrayList<SCProductBean> list;
 	private LayoutInflater inflater;
 	private Myitem myitem;
 	private List<org.osgi.framework.Bundle> bundles=null;
 	private FrameworkInstance frame=null;
 	private Intent intent;
 	private Myorder myorder;
-
-	public ProductAdapter(Context context,ArrayList<String> list,Myorder myorder){
+	private ThreadWithProgressDialog myPDT;
+	private BaseBean baseBean;
+	private String authstr;
+	public ProductAdapter(Context context,ArrayList<SCProductBean> list,Myorder myorder,String authstr){
 		this.contexts = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		frame = MyApplication.frame;
 		this.myorder = myorder;
+		myPDT=new ThreadWithProgressDialog();
+		this.authstr=authstr;
 	}
-	public void SetData(ArrayList<String> list){
+	public void SetData(ArrayList<SCProductBean> list){
 		this.list = list;
 	}
 
@@ -65,18 +78,7 @@ public class ProductAdapter extends BaseAdapter implements OnClickListener{
 			myitem = new Myitem();
 			myitem.ic=(ImageView)convertView.findViewById(R.id.scproduct_item_ic);
 			myitem.instore=(TextView)convertView.findViewById(R.id.scproduct_instores);
-			myitem.instore.setOnClickListener(this);
-			
 			myitem.qxsc=(TextView)convertView.findViewById(R.id.scproduct_qxsc);
-			myitem.qxsc.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					myorder.delte(position);
-				}
-			});
-		
 			myitem.computername = (TextView) convertView.findViewById(R.id.scproduct_item_computername);
 			myitem.productname = (TextView) convertView.findViewById(R.id.scproduct_item_productname);
 			myitem.money = (TextView) convertView.findViewById(R.id.scproduct_item_money);
@@ -85,6 +87,36 @@ public class ProductAdapter extends BaseAdapter implements OnClickListener{
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
+		Util.Getbitmap(myitem.ic, list.get(position).getThumb());
+		myitem.computername.setText(list.get(position).getCompany());
+		myitem.productname.setText(list.get(position).getTitle());
+		myitem.money.setText(list.get(position).getPrice());
+		myitem.time.setText(list.get(position).getTime());
+		myitem.instore.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				intent = new Intent(contexts,StoreActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("storeid", "");
+				intent.putExtra("storename", list.get(position).getShopname());
+				contexts.startActivity(intent);
+			}
+		});
+		myitem.qxsc.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(Util.detect(contexts)){
+					myPDT.Run(contexts, new RefeshData(position),R.string.loding);//可取消
+				}else{
+					Util.ShowToast(contexts, R.string.net_is_eor);
+				}
+				
+			}
+		});
 
 		return convertView;
 	}
@@ -94,28 +126,43 @@ public class ProductAdapter extends BaseAdapter implements OnClickListener{
 		TextView computername,productname,money,time,qxsc,instore;
 		
 	}
-	
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		private int position;
+		public RefeshData(int position) {
+			this.position=position;
+		}
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.scproduct_instores:
-//			intent = new Intent(context,MoneyQueryInfoActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
-
-			break;
-		
-		
-		/*case R.id.mybusinesspartners_itme_dele:
+		@Override
+		public boolean OnTaskDismissed() {
 			
+			return false;
+		}
 
-			break;*/
+		@Override
+		public boolean OnTaskDone() {
+			if(baseBean!=null){
+				if("200".equals(baseBean.getCode())){
+					myorder.delte(position);
+				}else if("300".equals(baseBean.getCode())){
+					myorder.finish();
+				}else{
+					Util.ShowToast(contexts, baseBean.getMsg());
+				}
+			
+			}else{
+				Util.ShowToast(contexts, R.string.net_is_eor);
+			}
+			return true;
+		}
 
-		default:
-			break;
+		@Override
+		public boolean TaskMain() {
+			// 访问
+			PostHttp p=new PostHttp(contexts);
+			baseBean=p.Shoucang(2, 1, Integer.parseInt(list.get(position).getCollected()), authstr);
+			return true;
 		}
 	}
 	
+
 }

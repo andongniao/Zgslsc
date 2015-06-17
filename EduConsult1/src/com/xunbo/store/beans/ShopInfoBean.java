@@ -9,10 +9,17 @@ public class ShopInfoBean {
 	private String username;
 	private String company;
 	private int collect;		//是否收藏1为是0为否
-	private int grade;			//好评率
+	private String grade;			//好评率
 	private int describe;		//描述评分
 	private int service;		//服务评分
 	private int logistics;		//物流评分
+	private String totalgoods;
+	public String getTotalgoods() {
+		return totalgoods;
+	}
+	public void setTotalgoods(String totalgoods) {
+		this.totalgoods = totalgoods;
+	}
 	public String getUserid() {
 		return userid;
 	}
@@ -37,10 +44,10 @@ public class ShopInfoBean {
 	public void setCollect(int collect) {
 		this.collect = collect;
 	}
-	public int getGrade() {
+	public String getGrade() {
 		return grade;
 	}
-	public void setGrade(int grade) {
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
 	public int getDescribe() {

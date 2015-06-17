@@ -187,7 +187,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 						scStoreAdapter.SetData(centerShopBeans);
 						scStoreAdapter.notifyDataSetChanged();
 					}else{
-						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder);
+						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,authstr);
 						lv.setAdapter(scStoreAdapter);
 					}
 				}else if(msg.what==2){
@@ -244,11 +244,11 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 					if(page==1){
 						
 						centerShopBeans=listCenterShopBean.getList();
-						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder);
+						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,authstr);
 						lv.setAdapter(scStoreAdapter);
 					}else{
 						if(scStoreAdapter==null){
-							scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder);
+							scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,authstr);
 							lv.setAdapter(scStoreAdapter);	
 						}else{
 							scStoreAdapter.SetData(centerShopBeans);

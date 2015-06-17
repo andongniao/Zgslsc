@@ -46,6 +46,7 @@ import com.xunbo.store.beans.ListChargeBankBean;
 import com.xunbo.store.beans.ListOrderCommit;
 import com.xunbo.store.beans.ListOrderWuliu;
 import com.xunbo.store.beans.ListProductBean;
+import com.xunbo.store.beans.ListSCProductBean;
 import com.xunbo.store.beans.ListShopBean;
 import com.xunbo.store.beans.ListShopHomeBean;
 import com.xunbo.store.beans.ListStoreCatBean;
@@ -56,6 +57,7 @@ import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.beans.QuerenOrderBean;
 import com.xunbo.store.beans.RefundInfoBean;
 import com.xunbo.store.beans.RefundInfoDetaileBean;
+import com.xunbo.store.beans.SCProductBean;
 import com.xunbo.store.beans.ShopBean;
 import com.xunbo.store.beans.ShopInfoBean;
 import com.xunbo.store.beans.ShopItemBean;
@@ -2558,8 +2560,8 @@ public class PostHttp {
 		list.add(p);
 		NameValuePair p2 = new BasicNameValuePair("id",""+id);
 		list.add(p2);
-		NameValuePair pp = new BasicNameValuePair("authstr",""+authstr);
-		list.add(pp);
+		NameValuePair p3 = new BasicNameValuePair("authstr",""+authstr);
+		list.add(p3);
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
@@ -2696,9 +2698,9 @@ public class PostHttp {
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListProductBean getCenterProduct(int page,String authstr) {  
-		ListProductBean bean = new ListProductBean();
-		ArrayList<ProductBean> lp = new ArrayList<ProductBean>();
+	public ListSCProductBean getCenterProduct(int page,String authstr) {  
+		ListSCProductBean bean = new ListSCProductBean();
+		ArrayList<SCProductBean> lp = new ArrayList<SCProductBean>();
 		String url = ServiceUrl.Base+"personal_center.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","product");
@@ -2730,8 +2732,9 @@ public class PostHttp {
 					if(obj!=null){
 						if("200".equals(obj.getString("code"))
 								&&!obj.getString("data").equals("[]")){
-							JSONObject data = obj.getJSONObject("data");
-							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+//							JSONObject data = obj.("data");
+							JSONArray data = obj.getJSONArray("data");
+							Type type_re = new TypeToken<ArrayList<SCProductBean>>() {
 							}.getType();
 							lp = gson.fromJson(data.toString(), type_re);
 						}
@@ -2783,7 +2786,7 @@ public class PostHttp {
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","shop");
 		list.add(p1);
-		NameValuePair p = new BasicNameValuePair("page",""+page);
+		NameValuePair p = new BasicNameValuePair("Page ",""+page);
 		list.add(p);
 
 		NameValuePair pp = new BasicNameValuePair("authstr",authstr);
@@ -2919,7 +2922,7 @@ public class PostHttp {
 								infobean.setCollect(shop.getInt("collect"));
 							}
 							if(Util.IsNull(shop.getString("grade"))){
-								infobean.setGrade(shop.getInt("grade"));
+								infobean.setGrade(shop.getString("grade"));
 							}
 							if(Util.IsNull(shop.getString("describe"))){
 								infobean.setDescribe(shop.getInt("describe"));

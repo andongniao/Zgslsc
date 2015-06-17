@@ -308,9 +308,9 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			}
 			break;
 		case R.id.mycenter_home_ll_cp:
-			//			intent = new Intent(context,SCProductActivity.class);
-			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			//			startActivity(intent);
+			intent = new Intent(context,SCProductActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_dp:

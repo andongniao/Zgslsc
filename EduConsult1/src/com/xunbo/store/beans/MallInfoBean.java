@@ -28,7 +28,7 @@ public class MallInfoBean {
 	private String express_name_3;
 	private String fee_start_3;
 	private String fee_step_3;
-	private String username;
+	private String username;//公司名称唯一标识
 	private String company;
 	private String unit;
 	private String weight;	//重量
