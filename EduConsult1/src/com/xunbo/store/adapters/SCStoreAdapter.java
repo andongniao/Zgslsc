@@ -187,7 +187,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
 			PostHttp p=new PostHttp(contexts);
-			baseBean=p.Shoucang(2,2,Integer.parseInt(list.get(position).getCid()));
+			baseBean=p.Shoucang(2,2,Integer.parseInt(list.get(position).getCid()),MyApplication.mp.getUser().getAuthstr());
 			return true;
 		}
 
