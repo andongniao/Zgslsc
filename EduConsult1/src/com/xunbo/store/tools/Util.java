@@ -862,6 +862,13 @@ public class Util {
 			badge.toggle();
 		}
 	}
+	
+	// 从资源中获取Bitmap
+	public static Bitmap getBitmapFromResources(Context context2, int resId) {
+	Resources res = context2.getResources();
+	return BitmapFactory.decodeResource(res, resId);
+	}
+
 
 	/**
 	 * 得到并缓存图片
@@ -873,18 +880,25 @@ public class Util {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				if (msg.what == 1  && v!=null) {
+				if(v!=null){
+				if (msg.what == 1) {
 					v.setTag(url);
 					if(msg.obj != null){
 						v.setImageBitmap((Bitmap) msg.obj);
 					}else{
+//						 Bitmap bitmap = getBitmapFromResources(context, R.drawable.default_bg);
+//						 v.setImageBitmap(bitmap);
 						v.setBackgroundResource(R.drawable.default_bg);
 					}
 					//					mViewSwitcher.showNext();
 				} else {
 					//yToastMessage(ImageDialog.this, ErrMsg);
 					//finish();
+//					v.setBackgroundResource(R.drawable.default_bg);
+					 Bitmap bitmap = getBitmapFromResources(context, R.drawable.default_bg);
+					 v.setImageBitmap(bitmap);
 				}
+			}
 			}
 		};
 		thread = new Thread() {
