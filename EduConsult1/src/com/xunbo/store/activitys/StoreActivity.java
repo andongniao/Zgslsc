@@ -198,7 +198,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 		list.add(p3);
 		ProductBean p4 = new ProductBean();
 		list.add(p4);
-		Util.SetRedNum(context, rl_l, 1);
+//		Util.SetRedNum(context, rl_l, 1);
 		type=1;
 		showView(type);
 		gv_result.setAdapter(home_adapter);
@@ -545,9 +545,9 @@ public class StoreActivity extends Activity implements OnClickListener{
 							gv_home.setAdapter(home_adapter);
 							tv_h_number.setText(bean.getShopInfoBean().getTotalgoods());
 							tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
-							tv_h_miaoshu.setText(""+bean.getShopInfoBean().getDescribe());
-							tv_h_service.setText(""+bean.getShopInfoBean().getService());
-							tv_h_wuliu.setText(""+bean.getShopInfoBean().getLogistics());
+							tv_h_miaoshu.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getDescribe()));
+							tv_h_service.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getService()));
+							tv_h_wuliu.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getLogistics()));
 							tv_h_number.setText(""+bean.getShopInfoBean().getTotalgoods());
 							Util.Getbitmap(hean_iv,bean.getShopInfoBean().getThumb());
 							if(bean.getShopInfoBean().getCollect()==0){
