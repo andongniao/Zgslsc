@@ -316,9 +316,9 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		tv_kucun.setText(mallinfo.getAmount());
 		tv_chandi.setText(mallinfo.getAreaname());
 		tv_computer.setText(mallinfo.getCompany());
-		tv_miaoshu.setText("5");
-		tv_taidu.setText("5");
-		tv_fahuo.setText("5");
+		tv_miaoshu.setText("5.0");
+		tv_taidu.setText("5.0");
+		tv_fahuo.setText("5.0");
 		tv_content.setText(Html.fromHtml(mallinfo.getContent()));
 
 		if(buyedlist.size()==0){

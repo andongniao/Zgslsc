@@ -2732,7 +2732,7 @@ public class PostHttp {
 					if(obj!=null){
 						if("200".equals(obj.getString("code"))
 								&&!obj.getString("data").equals("[]")){
-//							JSONObject data = obj.("data");
+							//							JSONObject data = obj.("data");
 							JSONArray data = obj.getJSONArray("data");
 							Type type_re = new TypeToken<ArrayList<SCProductBean>>() {
 							}.getType();
@@ -2907,16 +2907,20 @@ public class PostHttp {
 								&&Util.IsNull(obj.getString("data"))){
 							JSONObject data = obj.getJSONObject("data");
 							JSONObject shop = data.getJSONObject("shopinfo");
-							if(type==1){
-								if(Util.IsNull(shop.getString("userid"))){
-									infobean.setUserid(shop.getString("userid"));
-								}
-								if(Util.IsNull(shop.getString("username"))){
-									infobean.setUsername(shop.getString("username"));
-								}
-								if(Util.IsNull(shop.getString("company"))){
-									infobean.setCompany(shop.getString("company"));
-								}
+							if(Util.IsNull(shop.getString("userid"))){
+								infobean.setUserid(shop.getString("userid"));
+							}
+							if(Util.IsNull(shop.getString("username"))){
+								infobean.setUsername(shop.getString("username"));
+							}
+							if(Util.IsNull(shop.getString("company"))){
+								infobean.setCompany(shop.getString("company"));
+							}
+							if(Util.IsNull(shop.getString("totalgoods"))){
+								infobean.setTotalgoods(shop.getString("totalgoods"));
+							}
+							if(Util.IsNull(shop.getString("thumb"))){
+								infobean.setThumb(shop.getString("thumb"));
 							}
 							if(Util.IsNull(shop.getString("collect"))){
 								infobean.setCollect(shop.getInt("collect"));
