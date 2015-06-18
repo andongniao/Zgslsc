@@ -14,6 +14,13 @@ public class ShopInfoBean {
 	private int service;		//服务评分
 	private int logistics;		//物流评分
 	private String totalgoods;
+	private String thumb;
+	public String getThumb() {
+		return thumb;
+	}
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
 	public String getTotalgoods() {
 		return totalgoods;
 	}
