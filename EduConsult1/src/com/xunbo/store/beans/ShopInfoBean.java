@@ -8,12 +8,20 @@ public class ShopInfoBean {
 	private String userid;
 	private String username;
 	private String company;
-	private int collect;		//是否收藏1为是0为否
-	private String grade;			//好评率
+	private int collect;		//是否收藏0为是1为否
+	private String grade;		//好评率
 	private int describe;		//描述评分
 	private int service;		//服务评分
 	private int logistics;		//物流评分
-	private String totalgoods;
+	private String totalgoods;	//产品总数
+	private String thumb;		//img
+	
+	public String getThumb() {
+		return thumb;
+	}
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
 	public String getTotalgoods() {
 		return totalgoods;
 	}

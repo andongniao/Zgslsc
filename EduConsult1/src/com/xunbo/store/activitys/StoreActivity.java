@@ -12,6 +12,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -39,6 +40,7 @@ import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.StoreAdapter;
 import com.xunbo.store.adapters.StoreFenleiAdapter;
+import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.ListShopHomeBean;
 import com.xunbo.store.beans.ListStoreCatBean;
 import com.xunbo.store.beans.ProductBean;
@@ -59,12 +61,13 @@ public class StoreActivity extends Activity implements OnClickListener{
 	private TextView tv_h_title,tv_h_name,tv_h_comment,tv_h_number,
 	tv_h_miaoshu,tv_h_service,tv_h_wuliu,tv_result_title
 	,tv_pro_name,tv_price,tv_unit,tv_more,tv_online;
-	private ImageView iv_home_shoucang,iv_home_head,iv_rem;
+	private ImageView iv_home_head,iv_rem;
 	private ScrollView home_sc;
 	private List<org.osgi.framework.Bundle> bundles=null;
 	private int showstatu,type;
 	private Intent intent;
 	public static boolean isread;
+	private ImageView iv_shoucang;
 	private MyGridView gv_home,gv_result;
 	private AddInterface addInterface;
 	private ArrayList<ProductBean> list;
@@ -82,6 +85,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 	private boolean isshow,isshoucang;
 	private View v;
 	private int num;
+	private BaseBean result;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -132,9 +136,6 @@ public class StoreActivity extends Activity implements OnClickListener{
 		findViewById(R.id.sotre_base_tv_call).setOnClickListener(this);
 		findViewById(R.id.store_base_ll_back).setOnClickListener(this);
 
-		iv_home_shoucang=(ImageView)findViewById(R.id.base_top_right_image_l);
-		iv_home_shoucang.setOnClickListener(this);
-
 		inflater = LayoutInflater.from(context);
 		v_home = inflater.inflate(R.layout.store_home_layout, null);
 		v_fenlei = inflater.inflate(R.layout.store_fenlei_layout, null);
@@ -144,8 +145,11 @@ public class StoreActivity extends Activity implements OnClickListener{
 		ll_addview.addView(v_result);
 		v_home.findViewById(R.id.store_home_iv_left).setOnClickListener(this);
 		v_home.findViewById(R.id.store_home_iv_right).setOnClickListener(this);
+		iv_shoucang = (ImageView) v_home.findViewById(R.id.store_home_iv_is_shoucang);
+		iv_shoucang.setOnClickListener(this);
 		ll_rem = (LinearLayout) v_home.findViewById(R.id.store_home_ll_rem);
 		gv_home = (MyGridView) v_home.findViewById(R.id.store_home_gv);
+		gv_home.setFocusable(false);
 		tv_h_title = (TextView) v_home.findViewById(R.id.store_home_tv_title);
 		tv_h_name = (TextView) v_home.findViewById(R.id.store_home_tv_name);
 		tv_h_comment = (TextView) v_home.findViewById(R.id.store_home_tv_comment);
@@ -358,8 +362,8 @@ public class StoreActivity extends Activity implements OnClickListener{
 			//			break;
 
 
-		case R.id.base_top_right_image_l:
-//			type=3;
+		case R.id.store_home_iv_is_shoucang:
+			type=4;
 			if(Util.detect(context)){
 				myPDT.Run(context, new RefeshData(),R.string.loding);
 			}else{
@@ -500,9 +504,16 @@ public class StoreActivity extends Activity implements OnClickListener{
 				}
 			}else if(type==2){
 				catbean = p.getShopCat(storeid, "");
+			}else if(type==4){
+				int id = Integer.parseInt(bean.getShopInfoBean().getUserid());
+				if(isshoucang){
+					result = p.Shoucang( 2 , 2 , id , authstr );
+				}else{
+					result = p.Shoucang( 1 , 2 , id , authstr );
+				}
 			}
-			
-			
+
+
 			return true;
 		}
 
@@ -522,27 +533,37 @@ public class StoreActivity extends Activity implements OnClickListener{
 					if("200".equals(bean.getCode())){
 						tv_more.setVisibility(View.VISIBLE);
 						if(page==1){
-							Util.Getbitmap(hean_iv,url);
 							list_pro = bean.getList();
+							list_rem = bean.getRecommend();
+							len = list_rem.size();
+							if(len>0){
+								ll_rem.setVisibility(View.VISIBLE);
+								showre();	
+							}
 							home_adapter = new StoreAdapter(context, list_pro);
+//							gv_home.setFocusable(false);
 							gv_home.setAdapter(home_adapter);
-							gv_home.setFocusable(false);
 							tv_h_number.setText(bean.getShopInfoBean().getTotalgoods());
 							tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
 							tv_h_miaoshu.setText(""+bean.getShopInfoBean().getDescribe());
 							tv_h_service.setText(""+bean.getShopInfoBean().getService());
 							tv_h_wuliu.setText(""+bean.getShopInfoBean().getLogistics());
-							list_rem = bean.getRecommend();
-							len = list_rem.size();
-							if(bean.getShopInfoBean().getCollect()==2){
-								iv_home_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
+							tv_h_number.setText(""+bean.getShopInfoBean().getTotalgoods());
+							Util.Getbitmap(hean_iv,bean.getShopInfoBean().getThumb());
+							if(bean.getShopInfoBean().getCollect()==0){
+								iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
 								isshoucang=true;
+							}else{
+								iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop1));
+								isshoucang=false;
 							}
-							if(len>0){
-								ll_rem.setVisibility(View.VISIBLE);
-								showre();	
-							}
-							home_sc.scrollTo(0, 1);
+//							new  Handler().postDelayed(new Runnable() {
+//								
+//								@Override
+//								public void run() {
+//									home_sc.scrollTo(0, 10);
+//								}
+//							}, 500);
 						}else{
 							if(bean.getList().size()>0){
 								list_pro.addAll(bean.getList());
@@ -596,6 +617,29 @@ public class StoreActivity extends Activity implements OnClickListener{
 						Util.ShowToast(context, catbean.getMsg());
 					}
 
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}else if(type==4){
+				if(result!=null){
+					if("200".equals(result.getCode())){
+						if(isshoucang){
+							iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop1));
+							isshoucang=false;
+						}else{
+							iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
+							isshoucang=true;
+						}
+					}else if("300".equals(result.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						intent = new Intent(context,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+						finish(); 
+					}else{
+						Util.ShowToast(context, result.getMsg());
+					}
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}

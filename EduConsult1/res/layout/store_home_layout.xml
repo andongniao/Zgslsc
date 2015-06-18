@@ -48,9 +48,10 @@
 
                     <ImageView
                         android:id="@+id/store_home_iv_is_shoucang"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_launcher" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/scstop1"
+                        android:padding="10dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -64,7 +65,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center"
-                        />
+                        android:background="@drawable/touxiang" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -258,8 +259,8 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="gone"
-            android:padding="10dp" >
+            android:padding="10dp"
+            android:visibility="gone" >
 
             <ImageView
                 android:id="@+id/store_home_iv_left"
@@ -307,7 +308,6 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal" >
-
 
                         <TextView
                             android:id="@+id/store_home_tv_price"
@@ -370,6 +370,7 @@
                 android:listSelector="#00000000"
                 android:numColumns="3"
                 android:scrollbars="none"
+                android:focusable="false"
                 android:verticalSpacing="10dp" >
             </com.xunbo.store.myviews.MyGridView>
         </LinearLayout>
@@ -378,19 +379,17 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-             >
-            <TextView 
+            android:orientation="horizontal" >
+
+            <TextView
                 android:id="@+id/store_home_tv_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/xlistview_footer_hint_normal"
                 android:padding="10dp"
-                android:textSize="15dp"
-                android:visibility="gone"
+                android:text="@string/xlistview_footer_hint_normal"
                 android:textColor="@color/home_hui"
-                />
-            
+                android:textSize="15dp"
+                android:visibility="gone" />
         </LinearLayout>
         <!--  -->
     </LinearLayout>

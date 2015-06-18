@@ -71,6 +71,8 @@
                 android:layout_marginRight="3dp"
                 android:text="@string/test"
                 android:textColor="@color/black"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:textSize="13dp" />
 
             <TextView
