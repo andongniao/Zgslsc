@@ -37,18 +37,21 @@ public class ProductAdapter extends BaseAdapter{
 	private Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean baseBean;
-	private String authstr;
-	public ProductAdapter(Context context,ArrayList<SCProductBean> list,Myorder myorder,String authstr){
+	private boolean isshow;
+	public ProductAdapter(Context context,ArrayList<SCProductBean> list,Myorder myorder,boolean isshow){
 		this.contexts = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		frame = MyApplication.frame;
 		this.myorder = myorder;
 		myPDT=new ThreadWithProgressDialog();
-		this.authstr=authstr;
+		this.isshow=isshow;
 	}
 	public void SetData(ArrayList<SCProductBean> list){
 		this.list = list;
+	}
+	public void SetIsShow(boolean isshow){
+		this.isshow=isshow;
 	}
 
 	@Override
@@ -95,11 +98,14 @@ public class ProductAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				intent = new Intent(contexts,StoreActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("storeid", "");
-				intent.putExtra("storename", list.get(position).getShopname());
-				contexts.startActivity(intent);
+				if(!isshow){
+					
+					intent = new Intent(contexts,StoreActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.putExtra("storeid", "");
+					intent.putExtra("storename", list.get(position).getShopname());
+					contexts.startActivity(intent);
+				}
 			}
 		});
 		myitem.qxsc.setOnClickListener(new OnClickListener() {
@@ -107,10 +113,13 @@ public class ProductAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(Util.detect(contexts)){
-					myPDT.Run(contexts, new RefeshData(position),R.string.loding);//可取消
-				}else{
-					Util.ShowToast(contexts, R.string.net_is_eor);
+				if(!isshow){
+
+					if(Util.detect(contexts)){
+						myPDT.Run(contexts, new RefeshData(position),R.string.loding);//可取消
+					}else{
+						Util.ShowToast(contexts, R.string.net_is_eor);
+					}
 				}
 				
 			}
@@ -157,7 +166,7 @@ public class ProductAdapter extends BaseAdapter{
 		public boolean TaskMain() {
 			// 访问
 			PostHttp p=new PostHttp(contexts);
-			baseBean=p.Shoucang(2, 1, Integer.parseInt(list.get(position).getCollected()), authstr);
+			baseBean=p.Shoucang(2, 1, Integer.parseInt(list.get(position).getCollected()), MyApplication.mp.getUser().getAuthstr());
 			return true;
 		}
 	}
