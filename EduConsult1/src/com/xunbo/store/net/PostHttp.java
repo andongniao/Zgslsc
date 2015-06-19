@@ -2731,7 +2731,7 @@ public class PostHttp {
 					obj = new JSONObject(strResult);
 					if(obj!=null){
 						if("200".equals(obj.getString("code"))
-								&&!obj.getString("data").equals("[]")){
+								&&!obj.getString("data").equals("[]")&& Util.IsNull(obj.getString("data"))){
 							//							JSONObject data = obj.("data");
 							JSONArray data = obj.getJSONArray("data");
 							Type type_re = new TypeToken<ArrayList<SCProductBean>>() {
@@ -2786,7 +2786,7 @@ public class PostHttp {
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","shop");
 		list.add(p1);
-		NameValuePair p = new BasicNameValuePair("Page ",""+page);
+		NameValuePair p = new BasicNameValuePair("page",""+page);
 		list.add(p);
 
 		NameValuePair pp = new BasicNameValuePair("authstr",authstr);

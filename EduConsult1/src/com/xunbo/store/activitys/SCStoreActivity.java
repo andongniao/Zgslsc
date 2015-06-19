@@ -1,5 +1,6 @@
 package com.xunbo.store.activitys;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -57,12 +58,13 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	public static boolean isrezoom;
 	public Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
-	private int page,ppage;
 	private ListCenterShopBean listCenterShopBean;
 	private ArrayList<CenterShopBean> centerShopBeans,centerShopBeans2;
 	private XListView lv;
 	private Handler handler;
 	private String authstr;
+	private int page,ppage,addtype;
+	private boolean isshow;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -79,6 +81,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	void init(){
 		TestinAgent.init(this);
 		authstr = MyApplication.mp.getUser().getAuthstr();
+		isshow=false;
 		page=1;
 		ppage=1;
 		reaLayout=(LinearLayout)findViewById(R.id.scstore_allway_lin);
@@ -142,7 +145,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 
 			@Override
 			public void delte(int index) {
-				list.remove(index);
+				centerShopBeans.remove(index);
 				scStoreAdapter.SetData(centerShopBeans);
 				scStoreAdapter.notifyDataSetChanged();
 			}
@@ -160,7 +163,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		};
 		
 	
-		if(centerShopBeans!=null && list.size()>0){
+		if(centerShopBeans!=null && centerShopBeans.size()>0){
 			ll_isno.setVisibility(View.GONE);
 			lv.setVisibility(View.VISIBLE);
 		}else{
@@ -187,7 +190,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 						scStoreAdapter.SetData(centerShopBeans);
 						scStoreAdapter.notifyDataSetChanged();
 					}else{
-						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder);
+						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,isshow);
 						lv.setAdapter(scStoreAdapter);
 					}
 				}else if(msg.what==2){
@@ -200,6 +203,13 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 				}
 				lv.stopRefresh();
 				lv.stopLoadMore();
+				
+				if(addtype==1){
+					SimpleDateFormat sDateFormat = new SimpleDateFormat(
+							"yyyy-MM-dd   hh:mm:ss");
+					String date = sDateFormat.format(new java.util.Date());
+					lv.setRefreshTime(date);
+				}
 			}
 		};
 		
@@ -244,11 +254,11 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 					if(page==1){
 						
 						centerShopBeans=listCenterShopBean.getList();
-						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder);
+						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,isshow);
 						lv.setAdapter(scStoreAdapter);
 					}else{
 						if(scStoreAdapter==null){
-							scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder);
+							scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,isshow);
 							lv.setAdapter(scStoreAdapter);	
 						}else{
 							scStoreAdapter.SetData(centerShopBeans);
@@ -311,12 +321,18 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	public void onRefresh() {
 		// TODO Auto-generated method stub
 		ppage=1;
+		addtype=1;
+		isshow=true;
+		scStoreAdapter.SetIsShow(isshow);
 		getDate();
 	}
 	@Override
 	public void onLoadMore() {
 		// TODO Auto-generated method stub
 		ppage+=1;
+		addtype=2;
+		isshow=true;
+		scStoreAdapter.SetIsShow(isshow);
 		getDate();
 	}
 	private void getDate(){
@@ -336,7 +352,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 				}
 			}else{
 				String ss = context.getResources().getString(R.string.net_is_eor);
-				msg.what=3;
+				msg.what=2;
 				msg.obj = ss;
 			}
 			handler.sendMessage(msg);

@@ -21,6 +21,7 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
+import com.xunbo.store.activitys.StoreActivity;
 import com.xunbo.store.activitys.SCStoreActivity.Myorder;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.CenterShopBean;
@@ -38,17 +39,22 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 	private Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean baseBean;
+	private boolean isshow;
 
-	public SCStoreAdapter(Context context,ArrayList<CenterShopBean> list,Myorder myorder2){
+	public SCStoreAdapter(Context context,ArrayList<CenterShopBean> list,Myorder myorder2,boolean isshow){
 		this.contexts = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		frame = MyApplication.frame;
 		myPDT = new ThreadWithProgressDialog();
 		this.myorder = myorder2;
+		this.isshow=isshow;
 	}
 	public void SetData(ArrayList<CenterShopBean> list){
 		this.list = list;
+	}
+	public void SetIsShow(boolean isshow){
+		this.isshow=isshow;
 	}
 
 	@Override
@@ -76,7 +82,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 			myitem = new Myitem();
 			myitem.ic=(ImageView)convertView.findViewById(R.id.scstore_item_ic);
 			myitem.instore=(TextView)convertView.findViewById(R.id.scstore_itme_instores);
-			myitem.instore.setOnClickListener(this);
+			
 			
 
 			myitem.qxsc=(TextView)convertView.findViewById(R.id.scstore_itme_qxsc);
@@ -86,41 +92,62 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 			convertView.setTag(myitem);
 		}else{
 			myitem = (Myitem) convertView.getTag();
-			Util.Getbitmap(myitem.ic, list.get(position).getThumb());
-			myitem.computername.setText(list.get(position).getCompany());
+		}
+		Util.Getbitmap(myitem.ic, list.get(position).getThumb());
+		myitem.computername.setText(list.get(position).getCompany());
+			
 			myitem.qxsc.setOnClickListener(new OnClickListener() {
-
+				
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					if(!isshow){
 						if(Util.detect(contexts)){
 							//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
 							myPDT.Run(contexts, new RefeshData(position),R.string.loding);//不可取消
 						}else{
 							Util.ShowToast(contexts, R.string.net_is_eor);
 						}
-					
+
+					}else{
+						Util.ShowToast(contexts, R.string.please_wait);
+					}
 				}
 			});
-			myitem.talk.setOnClickListener(new OnClickListener() {
-
+			myitem.instore.setOnClickListener(new OnClickListener() {
+				
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					//已安装插件列表
-					bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
-					BundleContext context = frame.getSystemBundleContext();
-					for(int i=0;i<context.getBundles().length;i++)
-					{
-						//获取已安装插件
-						bundles.add(context.getBundles()[i]);        	        
+					if(!isshow){
+						intent = new Intent(contexts,StoreActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						intent.putExtra("storeid", list.get(position).getCollected());
+						intent.putExtra("storename", "");
+						contexts.startActivity(intent);
+					}else {
+						Util.ShowToast(contexts, R.string.please_wait);
 					}
-
-					//BundleContext context =frame.getSystemBundleContext();
-					startor(bundles);
 				}
 			});
-		}
+		myitem.talk.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//已安装插件列表
+				bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
+				BundleContext context = frame.getSystemBundleContext();
+				for(int i=0;i<context.getBundles().length;i++)
+				{
+					//获取已安装插件
+					bundles.add(context.getBundles()[i]);        	        
+				}
+				
+				//BundleContext context =frame.getSystemBundleContext();
+				startor(bundles);
+			}
+		});
 
 		return convertView;
 	}
