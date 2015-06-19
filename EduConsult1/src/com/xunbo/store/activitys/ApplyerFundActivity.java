@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.CApplyerFundAdapter;
@@ -241,6 +242,18 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 			return true;
 		}
 	}
-
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart( "ApplyerFundActivity" );
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd( "ApplyerFundActivity" );
+		MobclickAgent.onPause(this);
+	}
 
 }

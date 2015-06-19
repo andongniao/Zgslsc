@@ -11,6 +11,7 @@ import android.os.Message;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
@@ -177,5 +178,6 @@ public class WelcomeActivity extends Activity{
 		startActivity(intent);
 		finish();
 	}
+	
 
 }

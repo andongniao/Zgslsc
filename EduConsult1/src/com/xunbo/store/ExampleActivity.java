@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TabWidget;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.activitys.AboutActivity;
 import com.xunbo.store.activitys.HomePagerActivity;
 import com.xunbo.store.activitys.MyCenterActivity;
@@ -55,6 +56,12 @@ public class ExampleActivity extends TabHostActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		MobclickAgent.setDebugMode(true);
+//		MobclickAgent.openActivityDurationTrack(false);
+		MobclickAgent.updateOnlineConfig(this);
+		
+		
 		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
 		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
 		activityStyle.recycle();
@@ -93,4 +100,19 @@ public class ExampleActivity extends TabHostActivity {
 		super.finish();
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart( "入口" );
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd( "入口" );
+		MobclickAgent.onPause(this);
+	}
+	
 }

@@ -80,3 +80,14 @@
 -libraryjars /libs/testinagent.jar
 -dontwarn com.testin.agent.**
 -keep class com.testin.agent.** {*;}
+
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+-keep public class [com.xunbo.store].R$*{
+public static final int *;
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.beans.CenterCountBean;
@@ -429,6 +430,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart("center"); 
+		MobclickAgent.onResume(this);
 		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
 		if(listProductBean==null){
 			listProductBean=new ListProductBean();
@@ -439,6 +442,12 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			zjnum=productBeans.size()+"";
 		}
 		tv_zuji.setText(zjnum);
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("center"); 
+		MobclickAgent.onPause(context);
 	}
 
 }

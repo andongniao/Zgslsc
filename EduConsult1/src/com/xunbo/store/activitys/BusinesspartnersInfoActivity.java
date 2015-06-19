@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.tools.UITools;
@@ -158,4 +159,17 @@ OnClickListener{
 		}
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart( "BusinesspartnersInfoActivity" );
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd( "BusinesspartnersInfoActivity" );
+		MobclickAgent.onPause(this);
+	}
 }

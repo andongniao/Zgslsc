@@ -27,6 +27,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshGridView;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.SearchResultAdapter;
 import com.xunbo.store.beans.ListProductBean;
@@ -200,11 +201,20 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		MobclickAgent.onPageStart("searchresult"); 
+		MobclickAgent.onResume(context);
 		if(isproductfinish){
 			isproductfinish=false;
 			finish();
 		}
 	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("searchresult"); 
+		MobclickAgent.onPause(context);
+	}
+
 
 
 	public class RefeshData implements ThreadWithProgressDialogTask {

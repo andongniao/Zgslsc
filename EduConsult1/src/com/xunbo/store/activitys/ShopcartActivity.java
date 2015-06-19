@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.ShopcartHomeAdapter;
@@ -690,6 +691,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart("购物车");
+		MobclickAgent.onResume(context);
 		inttype=0;
 		if(ischange){
 			if(Util.detect(context)){
@@ -713,6 +716,13 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		}
 
 	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("购物车"); 
+		MobclickAgent.onPause(context);
+	}
+
 	@SuppressWarnings("rawtypes")
 	public List deepCopy(List src) throws IOException, ClassNotFoundException{ 
 		ByteArrayOutputStream byteOut = new ByteArrayOutputStream(); 

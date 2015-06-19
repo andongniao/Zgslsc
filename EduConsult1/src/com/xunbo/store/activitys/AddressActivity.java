@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
@@ -149,6 +150,8 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart("SplashScreen"); 
+		MobclickAgent.onResume(context);
 		if(isread){
 			Util.SetRedGone(context, rl_l);
 			isread = false;
@@ -160,6 +163,13 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			}
 			isinit = false;
 		}
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd("SplashScreen"); 
+		MobclickAgent.onPause(context);
 	}
 
 	// ÈÎÎñ

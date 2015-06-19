@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.TextItemListAdapter;
@@ -121,14 +122,20 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
+		MobclickAgent.onPageStart( "BDCardActivity" );
+		MobclickAgent.onResume(this);
 		if(isrezoom){
 			Toast.makeText(context, "重新加载数据", 1).show();
 			isrezoom=false;
 		}
-		
-
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd( "BDCardActivity" );
+		MobclickAgent.onPause(this);
 	}
 	
 

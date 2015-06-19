@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.TextItemListAdapter;
@@ -389,6 +390,8 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart( "地址管理" );
+		MobclickAgent.onResume(this);
 		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
 			lare = (ListAreaBean) u.readObject(filename);
 			listsheng = lare.getList();
@@ -400,6 +403,13 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
 		}
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd( "地址管理" );
+		MobclickAgent.onPause(this);
 	}
 
 }

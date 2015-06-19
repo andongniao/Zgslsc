@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.beans.RefundInfoDetaileBean;
@@ -221,4 +222,17 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 		alertDialog.show();
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart( "ApplyInfoActivity" );
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd( "ApplyInfoActivity" );
+		MobclickAgent.onPause(this);
+	}
 }

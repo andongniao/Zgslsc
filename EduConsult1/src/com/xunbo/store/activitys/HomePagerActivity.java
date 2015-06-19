@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.R;
 import com.xunbo.store.fragments.HomeFragment;
 import com.xunbo.store.fragments.HomePageFragmentMenu;
@@ -120,4 +121,19 @@ OnClickListener {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("home"); 
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart("home"); 
+		MobclickAgent.onResume(this);
+	}
+	
 }

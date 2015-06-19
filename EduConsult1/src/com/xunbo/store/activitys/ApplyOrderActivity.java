@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
@@ -261,6 +262,19 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 			String date = sDateFormat.format(new java.util.Date());
 			lv.setRefreshTime(date);
 		}
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart( "ApplyOrderActivity" );
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd( "ApplyOrderActivity" );
+		MobclickAgent.onPause(this);
 	}
 
 }
