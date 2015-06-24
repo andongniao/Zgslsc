@@ -86,6 +86,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 	private View v;
 	private int num;
 	private BaseBean result;
+	public static boolean isfinish;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,7 @@ public class StoreActivity extends Activity implements OnClickListener{
 			}
 		};
 		isshoucang=false;
+		isfinish = false;
 		page = 1;
 		index = 0;
 		num=1;
@@ -421,6 +423,10 @@ public class StoreActivity extends Activity implements OnClickListener{
 		if(isread){
 			Util.SetRedGone(context, rl_l);
 			isread = false;
+		}
+		if(isfinish){
+			isfinish = false;
+			finish();
 		}
 	}
 	public interface AddInterface{

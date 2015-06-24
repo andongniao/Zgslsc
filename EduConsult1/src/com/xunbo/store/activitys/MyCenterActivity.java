@@ -2,6 +2,7 @@ package com.xunbo.store.activitys;
 
 import java.util.ArrayList;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.baidu.autoupdatesdk.BDAutoUpdateSDK;
+import com.baidu.autoupdatesdk.UICheckUpdateCallback;
 import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
@@ -53,6 +56,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private ArrayList<ProductBean> productBeans;
 	private TextView tv_zuji;
 	private CenterCountBean centerCountBean;
+	private ProgressDialog dialog;
+	private int inittype;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -69,6 +74,8 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 
 		context = this;
 		u=new Util(context);
+		dialog = new ProgressDialog(this);
+		dialog.setIndeterminate(true);
 		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
 		if(listProductBean==null){
 			listProductBean=new ListProductBean();
@@ -161,6 +168,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		//				//ll_youhuiquan.setVisibility(View.GONE);
 		//			}
 		//		}
+		inittype = 1;
 		myPDT = new ThreadWithProgressDialog();
 		msg = "加载中...";
 		if(MyApplication.mp.islogin){
@@ -187,9 +195,13 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
+			if(inittype==1){
 			Send s=new Send(context);
 			cbean=s.getMyinfo(type, authstr);
 			PostHttp p=new PostHttp(context);
+			}else{
+				
+			}
 //			if(cbean!=null){
 //				if("200".equals(cbean.getCode())){
 //					centerCountBean=p.getCenterCount(authstr);
@@ -214,11 +226,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public boolean OnTaskDismissed() {	
 			// TODO Auto-generated method stub
+			inittype = 1;
 			return false;
 		}
 
 		@Override
 		public boolean OnTaskDone() {
+			if(inittype==2){
+				BDAutoUpdateSDK.uiUpdateAction(context, new MyUICheckUpdateCallback());
+			}else if(inittype==1){
 			int num=0;
 			if(cbean!=null){
 				String code = cbean.getCode();
@@ -241,6 +257,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			}else{
 				num=1;
 				Util.ShowToast(context, R.string.net_is_eor);
+			}
 			}
 //			if(centerCountBean!=null){
 //				String code = centerCountBean.getCode();
@@ -392,7 +409,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_update:
-			Toast.makeText(context, "当前为最新版本", 500).show();
+//			dialog.show();
+			inittype=2;
+			if(Util.detect(context)){
+				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+				myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+//			Toast.makeText(context, "当前为最新版本", 500).show();
 			break;
 		case R.id.mycenter_home_ll_tuijian:
 			intent = new Intent(context,MyCenterTuijianActivity.class);
@@ -412,6 +437,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			finish();
 			break;
 		}
+	}
+	private class MyUICheckUpdateCallback implements UICheckUpdateCallback {
+
+		@Override
+		public void onCheckComplete() {
+			inittype = 1;
+//			dialog.dismiss();
+		}
+
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -442,6 +476,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			zjnum=productBeans.size()+"";
 		}
 		tv_zuji.setText(zjnum);
+		inittype = 1;
 	}
 	@Override
 	protected void onPause() {
