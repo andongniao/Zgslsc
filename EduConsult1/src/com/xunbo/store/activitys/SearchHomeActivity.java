@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -186,7 +187,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 		
-		popu = new PopupWindow(v_fenlei, UITools.dip2px(context, 90f) , UITools.dip2px(context, 300f));
+		popu = new PopupWindow(v_fenlei, UITools.dip2px(context, 90f) ,LayoutParams.WRAP_CONTENT  );
 		popu.setFocusable(true);
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
