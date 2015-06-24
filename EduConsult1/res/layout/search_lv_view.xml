@@ -13,6 +13,9 @@
        android:gravity="center"
        android:text="@string/test"
        android:textColor="@color/black"
+       android:singleLine="true"
+       android:ellipsize="end"
+       
        />
     
 </LinearLayout>

@@ -35,11 +35,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@null"
+            android:ellipsize="end"
             android:focusable="false"
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
-            android:textColor="@color/white" 
-            android:background="@null"/>
+            android:singleLine="true"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
@@ -206,11 +208,15 @@
 
             <TextView
                 android:id="@+id/search_result_guanjiazi"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
                 android:textColor="@color/regist_button_bg"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:singleLine="true"
+       			android:ellipsize="end" 
+       			android:layout_weight="1"
+       />
 
             <TextView
                 android:layout_width="wrap_content"
