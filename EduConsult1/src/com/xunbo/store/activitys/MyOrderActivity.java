@@ -399,7 +399,7 @@ import com.xunbo.store.tools.Util;
 				}else if(i==2 ||i==3){
 					step=i+1;
 				}
-				ttp = i;
+				ttp = step;
 				init = true;
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(init,pag,tag),R.string.loding);//¿ÉÈ¡Ïû
