@@ -387,20 +387,20 @@ public class HomeFragment extends Fragment implements OnClickListener,RefreshLis
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				if(home!=null && home.getCompany()!=null && home.getCompany().size()>0){
-					intent = new Intent(context,StoreActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					String id = "";
-					if(Util.IsNull(home.getCompany().get(arg2).getUserid())){
-						id = home.getCompany().get(arg2).getUserid();
-					}else{
-						id = home.getCompany().get(arg2).getCompany();
-					}
-					intent.putExtra("storeid", id);
-					intent.putExtra("storename", "");
-					intent.putExtra("url", home.getCompany().get(arg2).getThumb());
-					startActivity(intent);
-				}
+//				if(home!=null && home.getCompany()!=null && home.getCompany().size()>0){
+//					intent = new Intent(context,StoreActivity.class);
+//					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//					String id = "";
+//					if(Util.IsNull(home.getCompany().get(arg2).getUserid())){
+//						id = home.getCompany().get(arg2).getUserid();
+//					}else{
+//						id = home.getCompany().get(arg2).getCompany();
+//					}
+//					intent.putExtra("storeid", id);
+//					intent.putExtra("storename", "");
+//					intent.putExtra("url", home.getCompany().get(arg2).getThumb());
+//					startActivity(intent);
+//				}
 			}
 		});
 	}

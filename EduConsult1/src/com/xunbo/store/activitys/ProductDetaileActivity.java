@@ -139,6 +139,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		dianpulin=(LinearLayout)findViewById(R.id.product_detaile_ll_into_dianpu);
+		dianpulin.setVisibility(View.GONE);
         dianpulin.setOnClickListener(this);
 		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
 		ll_kefu=(LinearLayout)findViewById(R.id.product_detail_ll_kefu);
