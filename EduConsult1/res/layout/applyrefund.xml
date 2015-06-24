@@ -19,7 +19,8 @@
             <com.xunbo.store.myviews.MyListview
                 android:id="@+id/applyrefund_list"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:fadingEdge="none" >
             </com.xunbo.store.myviews.MyListview>
 
             <LinearLayout

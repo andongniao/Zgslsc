@@ -2715,6 +2715,7 @@ public class PostHttp {
 		HttpPost httpRequest = new HttpPost(url);  
 
 		String strResult = "doPostError";  
+		
 
 		try {  
 			/* 添加请求参数到请求对象 */  

@@ -9,11 +9,11 @@
     android:paddingRight="20dp"
     android:paddingTop="10dp" >
 
-    <ImageView
+    <com.xunbo.store.myviews.CircleImageView
         android:id="@+id/scstore_item_ic"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/default_bg" />
+        android:background="@drawable/touxiang" />
 
     <LinearLayout
         android:layout_width="fill_parent"
