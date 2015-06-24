@@ -609,6 +609,7 @@
                             android:divider="@color/base_hui" 
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
+                            android:fadingEdge="none"
                             >
                         </com.xunbo.store.myviews.MyListview>
                         <TextView 

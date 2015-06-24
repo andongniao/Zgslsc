@@ -183,9 +183,10 @@ public class SCProductActivity extends BaseActivity implements OnClickListener,I
 					String s = (String) msg.obj;
 					Util.ShowToast(context, s);
 				}
+				isshow=false;
+				productAdapter.SetIsShow(isshow);
 				product_list.stopRefresh();
 				product_list.stopLoadMore();
-				
 				if(addtype==1){
 					SimpleDateFormat sDateFormat = new SimpleDateFormat(
 							"yyyy-MM-dd   hh:mm:ss");

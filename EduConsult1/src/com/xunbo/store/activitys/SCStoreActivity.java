@@ -30,6 +30,7 @@ import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.adapters.SCStoreAdapter;
+import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.CenterShopBean;
 import com.xunbo.store.beans.ListCenterShopBean;
 import com.xunbo.store.myviews.MyListview;
@@ -63,8 +64,9 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	private XListView lv;
 	private Handler handler;
 	private String authstr;
-	private int page,ppage,addtype;
+	private int page,ppage,addtype,type;
 	private boolean isshow;
+	private BaseBean baseBean;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -84,6 +86,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		isshow=false;
 		page=1;
 		ppage=1;
+		type=1;
 		reaLayout=(LinearLayout)findViewById(R.id.scstore_allway_lin);
 		reaLayout.setOnClickListener(SCStoreActivity.this);
 		allway=(TextView)findViewById(R.id.scstore_allway);
@@ -131,7 +134,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		if(MyApplication.mp.islogin){
 			if(Util.detect(context)){
 				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
-				myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				myPDT.Run(context, new RefeshData(0),R.string.loding);//不可取消
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
@@ -145,9 +148,14 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 
 			@Override
 			public void delte(int index) {
-				centerShopBeans.remove(index);
-				scStoreAdapter.SetData(centerShopBeans);
-				scStoreAdapter.notifyDataSetChanged();
+				type=2;
+				if(Util.detect(context)){
+					//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+					myPDT.Run(context, new RefeshData(index),R.string.loding);//不可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+				
 			}
 
 			@Override
@@ -201,6 +209,8 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 					String s = (String) msg.obj;
 					Util.ShowToast(context, s);
 				}
+				isshow=false;
+				scStoreAdapter.SetIsShow(isshow);
 				lv.stopRefresh();
 				lv.stopLoadMore();
 				
@@ -216,26 +226,33 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	}
 
 	public class RefeshData implements ThreadWithProgressDialogTask {
-		public RefeshData(){
+		int index;
+		public RefeshData(int index){
+			this.index=index;
 		}
 
 		@Override
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
 			PostHttp p=new PostHttp(context);
-			if(page==1){
-				listCenterShopBean=p.getCenterShop(page,authstr);
-			}else{
-				listCenterShopBean=p.getCenterShop(1,authstr);
-				centerShopBeans=listCenterShopBean.getList();
-				for(int i=1;i<page+1;i++){
+			if(type==1){
+				if(page==1){
 					listCenterShopBean=p.getCenterShop(page,authstr);
-					ArrayList<CenterShopBean> s=listCenterShopBean.getList();
-					centerShopBeans.addAll(s);
-				}
+				}else{
+					listCenterShopBean=p.getCenterShop(1,authstr);
+					centerShopBeans=listCenterShopBean.getList();
+					for(int i=1;i<page+1;i++){
+						listCenterShopBean=p.getCenterShop(page,authstr);
+						ArrayList<CenterShopBean> s=listCenterShopBean.getList();
+						centerShopBeans.addAll(s);
+					}
+					
 				
-			
+				}
+			}else if(type==2){
+				baseBean=p.Shoucang(2,2,Integer.parseInt(centerShopBeans.get(index).getCollected()),MyApplication.mp.getUser().getAuthstr());
 			}
+			
 			return true;
 		}
 
@@ -247,40 +264,61 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 
 		@Override
 		public boolean OnTaskDone() {
-			if(listCenterShopBean!=null){
-				String code = listCenterShopBean.getCode();
-				String m = listCenterShopBean.getMsg();
-				if("200".equals(code)){
-					if(page==1){
-						
-						centerShopBeans=listCenterShopBean.getList();
-						scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,isshow);
-						lv.setAdapter(scStoreAdapter);
-					}else{
-						if(scStoreAdapter==null){
+			if(type==1){
+				if(listCenterShopBean!=null){
+					String code = listCenterShopBean.getCode();
+					String m = listCenterShopBean.getMsg();
+					if("200".equals(code)){
+						if(page==1){
+							
+							centerShopBeans=listCenterShopBean.getList();
 							scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,isshow);
-							lv.setAdapter(scStoreAdapter);	
+							lv.setAdapter(scStoreAdapter);
 						}else{
-							scStoreAdapter.SetData(centerShopBeans);
-							scStoreAdapter.notifyDataSetChanged();
+							if(scStoreAdapter==null){
+								scStoreAdapter=new SCStoreAdapter(context, centerShopBeans,myorder,isshow);
+								lv.setAdapter(scStoreAdapter);	
+							}else{
+								scStoreAdapter.SetData(centerShopBeans);
+								scStoreAdapter.notifyDataSetChanged();
+							}
 						}
-					}
-					//initDate();
-				}else if("300".equals(code)){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					intent = new Intent(context,LoginActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish(); 
+						//initDate();
+					}else if("300".equals(code)){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						intent = new Intent(context,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+						finish(); 
+					}else{
+						if(Util.IsNull(m)){
+							Util.ShowToast(context, m);
+						}
+					}	
 				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
-					}
-				}	
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}else if(type==2){
+				if(baseBean!=null){
+					String code = baseBean.getCode();
+					String m = baseBean.getMsg();
+					if("200".equals(code)){
+						centerShopBeans.remove(index);
+						scStoreAdapter.SetData(centerShopBeans);
+						scStoreAdapter.notifyDataSetChanged();
+					}else if("300".equals(code)){
+						myorder.finish();
+					}else{
+						if(Util.IsNull(m)){
+							Util.ShowToast(context, m);
+						}
+					}	
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}
+			
 			return true;
 
 		}

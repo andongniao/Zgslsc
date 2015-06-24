@@ -111,6 +111,7 @@
         android:dividerHeight="0.5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:fadingEdge="none"
          >
     </ListView>
     </LinearLayout>

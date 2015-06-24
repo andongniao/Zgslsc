@@ -11,7 +11,8 @@
     <ListView 
         android:id="@+id/moneycar_list_list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fadingEdge="none">
         
     </ListView>
     

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +20,11 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
-import com.xunbo.store.activitys.StoreActivity;
 import com.xunbo.store.activitys.SCStoreActivity.Myorder;
+import com.xunbo.store.activitys.StoreActivity;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.CenterShopBean;
+import com.xunbo.store.myviews.CircleImageView;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.Util;
 
@@ -38,7 +38,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 	private Intent intent;
 	private Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
-	private BaseBean baseBean;
+	
 	private boolean isshow;
 
 	public SCStoreAdapter(Context context,ArrayList<CenterShopBean> list,Myorder myorder2,boolean isshow){
@@ -80,7 +80,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 		if(convertView==null){
 			convertView = inflater.inflate(R.layout.scstore_item, null);
 			myitem = new Myitem();
-			myitem.ic=(ImageView)convertView.findViewById(R.id.scstore_item_ic);
+			myitem.ic=(CircleImageView)convertView.findViewById(R.id.scstore_item_ic);
 			myitem.instore=(TextView)convertView.findViewById(R.id.scstore_itme_instores);
 			
 			
@@ -102,13 +102,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					if(!isshow){
-						if(Util.detect(contexts)){
-							//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
-							myPDT.Run(contexts, new RefeshData(position),R.string.loding);//不可取消
-						}else{
-							Util.ShowToast(contexts, R.string.net_is_eor);
-						}
-
+						myorder.delte(position);
 					}else{
 						Util.ShowToast(contexts, R.string.please_wait);
 					}
@@ -153,7 +147,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 	}
 
 	class Myitem{
-		ImageView ic;
+		CircleImageView ic;
 		TextView computername,qxsc,instore,talk;
 
 	}
@@ -203,48 +197,6 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 		default:
 			break;
 		}
-	}
-	public class RefeshData implements ThreadWithProgressDialogTask {
-		private int position;
-		public RefeshData(int position){
-			this.position=position;
-		}
-
-		@Override
-		public boolean TaskMain() {
-			// TODO Auto-generated method stub
-			PostHttp p=new PostHttp(contexts);
-			baseBean=p.Shoucang(2,2,Integer.parseInt(list.get(position).getCid()),MyApplication.mp.getUser().getAuthstr());
-			return true;
-		}
-
-		@Override
-		public boolean OnTaskDismissed() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean OnTaskDone() {
-			if(baseBean!=null){
-				String code = baseBean.getCode();
-				String m = baseBean.getMsg();
-				if("200".equals(code)){
-					myorder.delte(position);
-				}else if("300".equals(code)){
-					myorder.finish();
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(contexts, m);
-					}
-				}	
-			}else{
-				Util.ShowToast(contexts, R.string.net_is_eor);
-			}
-			return true;
-
-		}
-
 	}
 
 }
