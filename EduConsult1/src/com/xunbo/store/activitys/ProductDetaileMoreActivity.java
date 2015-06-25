@@ -1,14 +1,16 @@
 package com.xunbo.store.activitys;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -16,24 +18,28 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
+import com.xunbo.store.adapters.MyOrderHomeAdapter;
 import com.xunbo.store.adapters.ProductPingjiaAdapter;
 import com.xunbo.store.beans.CommentBean;
 import com.xunbo.store.beans.CommentStar;
 import com.xunbo.store.beans.ListComment;
+import com.xunbo.store.beans.OrderBean;
 import com.xunbo.store.beans.ProductBean;
+import com.xunbo.store.myviews.xlistview.XListView;
+import com.xunbo.store.myviews.xlistview.XListView.IXListViewListener;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
 
 
-public class ProductDetaileMoreActivity extends BaseActivity implements OnClickListener{
-	private ListView listview;
+public class ProductDetaileMoreActivity extends BaseActivity implements OnClickListener,IXListViewListener{
+	private XListView listview;
 	private ProductPingjiaAdapter pingjiaAdapter;
 	private Context context;
 	private ArrayList<ProductBean> list;
 	private ArrayList<CommentBean>commentBeans;
-	private int type=1;
-	private TextView tv_all,tv_good,tv_ok,tv_no;
+	private int type,page;
+	private TextView tv_all,tv_good,tv_ok,tv_no,tv_isnull;
 	private LinearLayout li_all,li_good,li_ok,li_no;
 	private ThreadWithProgressDialog myPDT;
 	private ListComment listComment;
@@ -42,12 +48,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	private Intent intent;
 	private String itemid;
 	private boolean isall,isgood,isok,isno;
-	
+	private Handler handler;
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-//		topRightLVisible();
-//		topRightRVisible();
+		//		topRightLVisible();
+		//		topRightRVisible();
 		topRightTGone();
 		setTopLeftTv(R.string.product_detaile_more_title);
 		setContentXml(R.layout.product_detail_more);
@@ -56,12 +63,19 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	}
 	void init(){
 		TestinAgent.init(this);
+		type=1;
+		page = 1;
+		strstar="";
 		intent=getIntent();
 		itemid=intent.getStringExtra("qingjiamore");
-		list=new ArrayList<ProductBean>();
-		listview=(ListView)findViewById(R.id.product_detail_more_list);
 		myPDT=new ThreadWithProgressDialog();
-		
+		list=new ArrayList<ProductBean>();
+		tv_isnull = (TextView) findViewById(R.id.product_detail_more_tv_isnull);
+		listview=(XListView)findViewById(R.id.product_detail_more_list);
+		listview.setPullRefreshEnable(true);
+		listview.setPullLoadEnable(true);
+		listview.setXListViewListener(this);
+		listview.setEmptyView(tv_isnull);
 		li_all=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia_costperformace);
 		li_good=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia_zhiliang);
 		li_ok=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia_fuwu);
@@ -76,12 +90,46 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		li_ok.setOnClickListener(this);
 		setRedText(li_all,tv_all);
 		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 		isall=true;
 		isgood=false;
 		isok=false;
 		isno=false;
+		
+		
+		
+		handler = new Handler(){
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				if(msg.what==1){
+					if(page==1){
+						commentBeans = (ArrayList<CommentBean>) msg.obj;
+					}else{
+						ArrayList<CommentBean> ll = (ArrayList<CommentBean>) msg.obj;
+						commentBeans.addAll(ll);
+						if(ll.size()==0){
+							Util.ShowToast(context, R.string.page_is_final);
+							page-=1;
+						}
+					}
+					setpingjiaDate();
+				}else if(msg.what==2){
+					intent = new Intent(context,LoginActivity.class);
+					startActivity(intent);
+					finish();
+				}else{
+					String s = (String) msg.obj;
+					Util.ShowToast(context, s);
+				}
+				onLoad();
+			}
+		};
+		
 	}
 	private void setRedText(LinearLayout li,TextView tv){
 		li.setBackgroundResource(R.drawable.search_lv_notnull_btn_bg);
@@ -92,17 +140,21 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		tv.setTextColor(getResources().getColor(R.color.red));
 	}
 	private void setpingjiaDate(){
-		
-		pingjiaAdapter=new ProductPingjiaAdapter(context, commentBeans,-1);
-		listview.setAdapter(pingjiaAdapter);
-		
+		if(pingjiaAdapter==null){
+			pingjiaAdapter=new ProductPingjiaAdapter(context, commentBeans,-1);
+			listview.setAdapter(pingjiaAdapter);
+		}else{
+			pingjiaAdapter.setData(commentBeans, -1);
+			pingjiaAdapter.notifyDataSetChanged();
+		}
+
 	}
 	private void setStarDate(){
 		int starnum=0;
 		for(int i=0;i<comstar.size();i++){
-			
-				
-			 if(comstar.get(i).getStar().equals("1")){
+
+
+			if(comstar.get(i).getStar().equals("1")){
 				tv_no.setText("差评("+comstar.get(i).getNumn()+")");
 				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
 			}else if(comstar.get(i).getStar().equals("2")){
@@ -114,13 +166,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			}
 		}
 		tv_all.setText("总评("+starnum+")");
-		
+
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
-	
+
 
 		public RefeshData() {
-			
+
 		}
 
 		@Override
@@ -191,8 +243,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 				if("200".equals(listComment.getCode())){
 					commentBeans=listComment.getComlist();
 					comstar=listComment.getComstar();
+					if(type==1){
+						if(comstar.size()!=0||comstar!=null){
+							setStarDate();
+						}
+					}
 					setpingjiaDate();
-					
+
 				}else if("300".equals(listComment.getCode())){
 					MyApplication.mp.setlogin(false);
 					Util.ShowToast(context, R.string.login_out_time);
@@ -215,8 +272,8 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		public boolean TaskMain() {
 			// 访问
 			Send s = new Send(context);
-			listComment=s.GetComment("53", 1, star);
-			//listComment=s.GetComment(itemid, 1, star);
+			//			listComment=s.GetComment("53", 1, star);
+			listComment=s.GetComment(itemid, page, star);
 			return true;
 		}
 	}
@@ -233,13 +290,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_no,tv_no);
 			strstar="";
-//			if(!isall){
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
-				}
-//				isall=true;
-//			}
-			
+			//			if(!isall){
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			}
+			//				isall=true;
+			//			}
+
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_zhiliang:
 			type=2;
@@ -248,13 +305,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_no,tv_no);
 			strstar="3";
-//			if(!isgood){
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
-				}
-//				isgood=true;
-//			}
-			
+			//			if(!isgood){
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			}
+			//				isgood=true;
+			//			}
+
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_fuwu:
 			type=3;
@@ -263,13 +320,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_all,tv_all);
 			setWhiteText(li_no,tv_no);
 			strstar="2";
-//			if(!isok){
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
-				}
-//				isok=true;
-//			}
-			
+			//			if(!isok){
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			}
+			//				isok=true;
+			//			}
+
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_xiaoguo:
 			type=4;
@@ -278,20 +335,64 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			setWhiteText(li_ok,tv_ok);
 			setWhiteText(li_all,tv_all);
 			strstar="1";
-//			if(!isno){
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
-				}
-//				isno=true;
-//			}
-			
+			//			if(!isno){
+			if(Util.detect(context)){
+				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//可取消
+			}
+			//				isno=true;
+			//			}
+
 			break;
 
 		default:
 			break;
 		}
 	}
+	@Override
+	public void onRefresh() {
+		page=1;
+		getData();
+
+	}
+	@Override
+	public void onLoadMore() {
+		page+=1;
+		getData();
+	}
+
+	private void getData(){
+		new Thread(){public void run() {
+			Send s = new Send(context);
+			//			listComment=s.GetComment("53", 1, star);
+			listComment=s.GetComment(itemid, page, strstar);
+			Message msg = handler.obtainMessage();
+			if(listComment!=null){
+				if("200".equals(listComment.getCode())){
+					ArrayList<CommentBean>lt = listComment.getComlist();
+					msg.what=1;
+					msg.obj = lt;
+				}else{
+					msg.what=2;
+					msg.obj = listComment.getMsg();
+				}
+			}else{
+				String ss = context.getResources().getString(R.string.net_is_eor);
+				msg.what=2;
+				msg.obj = ss;
+			}
+			handler.sendMessage(msg);
+		};}.start();
+	}
 	
+	private void onLoad() {
+		listview.stopRefresh();
+		listview.stopLoadMore();
+		SimpleDateFormat sDateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd   hh:mm:ss");
+		String date = sDateFormat.format(new java.util.Date());
+		listview.setRefreshTime(date);
+	}
+
 
 
 }

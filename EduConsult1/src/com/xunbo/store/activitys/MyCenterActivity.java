@@ -326,16 +326,16 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			}
 			break;
 		case R.id.mycenter_home_ll_cp:
-//			intent = new Intent(context,SCProductActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
+			intent = new Intent(context,SCProductActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_dp:
-//			intent = new Intent(context,SCStoreActivity.class);
-//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//			startActivity(intent);
-			Util.ShowToast(context, R.string.maimeng);
+						intent = new Intent(context,SCStoreActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+//			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.myinfo_ll_youhuiquan:
 			//intent = new Intent(context,ConfirmTheDeliveryActivity.class);
@@ -410,14 +410,14 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.mycenter_home_ll_update:
 //			dialog.show();
-//			inittype=2;
-//			if(Util.detect(context)){
-//				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
-//				myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
-//			}else{
-//				Util.ShowToast(context, R.string.net_is_eor);
-//			}
-			Toast.makeText(context, "当前为最新版本", 500).show();
+			inittype=2;
+			if(Util.detect(context)){
+				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+				myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+//			Toast.makeText(context, "当前为最新版本", 500).show();
 			break;
 		case R.id.mycenter_home_ll_tuijian:
 			intent = new Intent(context,MyCenterTuijianActivity.class);

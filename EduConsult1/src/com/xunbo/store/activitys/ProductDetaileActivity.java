@@ -44,12 +44,13 @@ import com.xunbo.store.beans.UserBean;
 import com.xunbo.store.myviews.ImageCycleView;
 import com.xunbo.store.myviews.ImageCycleView.ImageCycleViewListener;
 import com.xunbo.store.myviews.MyListview;
+import com.xunbo.store.myviews.ScrollViewExtend;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
-	private ScrollView scrollView;
+	private ScrollViewExtend scrollView;
 	private LinearLayout ll_addshopcart,ll_gopay,ll_as_l,ll_as_t,ll_as_r,
 	ll_paied_l,ll_paied_t,ll_paied_r,ll_add_chanpin,ll_add_pingjia,ll_add_dianpu,
 	ll_add_view_chanpin,ll_add_view_pingjia,ll_add_view_dianpu,ll_kefu,ll_shouchang
@@ -133,15 +134,15 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		add=(TextView)findViewById(R.id.product_detaile_adds);
 		add.setOnClickListener(this);
 		imageview=(ImageCycleView)findViewById(R.id.product_detail_icv);
-		imageview.stopImageTimerTask();
-		imageview.settime(999999999);
+//		imageview.stopImageTimerTask();
+//		imageview.settime(999999999);
 		ispingjia=false;
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		dianpulin=(LinearLayout)findViewById(R.id.product_detaile_ll_into_dianpu);
 		dianpulin.setVisibility(View.GONE);
         dianpulin.setOnClickListener(this);
-		scrollView = (ScrollView) findViewById(R.id.product_detaile_sl);
+		scrollView = (ScrollViewExtend) findViewById(R.id.product_detaile_sl);
 		ll_kefu=(LinearLayout)findViewById(R.id.product_detail_ll_kefu);
 		ll_kefu.setOnClickListener(this);
 		ll_shouchang=(LinearLayout)findViewById(R.id.product_detail_ll_shoucang);
