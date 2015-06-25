@@ -92,9 +92,14 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		tv.setTextColor(getResources().getColor(R.color.red));
 	}
 	private void setpingjiaDate(){
-		
-		pingjiaAdapter=new ProductPingjiaAdapter(context, commentBeans,-1);
-		listview.setAdapter(pingjiaAdapter);
+		if(pingjiaAdapter!=null){
+			pingjiaAdapter.setList(commentBeans,-1);
+			pingjiaAdapter.notifyDataSetChanged();
+		}else{
+			pingjiaAdapter=new ProductPingjiaAdapter(context, commentBeans,-1);
+			listview.setAdapter(pingjiaAdapter);
+		}
+//		listview.setd
 		
 	}
 	private void setStarDate(){
@@ -215,8 +220,8 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		public boolean TaskMain() {
 			// ทรฮส
 			Send s = new Send(context);
-			listComment=s.GetComment("53", 1, star);
-			//listComment=s.GetComment(itemid, 1, star);
+//			listComment=s.GetComment("53", 1, star);
+			listComment=s.GetComment(itemid, 1, star);
 			return true;
 		}
 	}

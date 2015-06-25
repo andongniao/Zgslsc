@@ -44,6 +44,9 @@ public class ProductPingjiaAdapter extends BaseAdapter{
 		}
 		
 	}
+	public void setList(ArrayList<CommentBean> list,int num){
+		this.list = list;
+	}
 
 	@Override
 	public Object getItem(int position) {
