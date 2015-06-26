@@ -30,6 +30,11 @@ public class ProductPingjiaAdapter extends BaseAdapter{
 		this.num=num;
 	}
 
+	public void setData(ArrayList<CommentBean> list,int num){
+		this.list = list;
+		this.num=num;
+	}
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub

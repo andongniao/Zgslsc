@@ -95,11 +95,11 @@ public class ImageCycleView extends LinearLayout {
 				switch (event.getAction()) {
 				case MotionEvent.ACTION_UP:
 					// ¿ªÊ¼Í¼Æ¬¹ö¶¯
-					startImageTimerTask();
+//					startImageTimerTask();
 					break;
 				default:
 					// Í£Ö¹Í¼Æ¬¹ö¶¯
-					stopImageTimerTask();
+//					stopImageTimerTask();
 					break;
 				}
 				return false;

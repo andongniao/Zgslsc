@@ -2,29 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@color/base_hui">
+    android:background="@color/base_hui"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" 
-        android:padding="10dp">
+        android:orientation="horizontal"
+        android:padding="10dp" >
 
         <LinearLayout
             android:id="@+id/product_detaile_ll_add_view_pingjia_costperformace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/products_et_bg_line"
+            android:gravity="center"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/product_detaile_add_view_pingjia_costperformace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/test"
@@ -36,11 +35,11 @@
             android:id="@+id/product_detaile_ll_add_view_pingjia_zhiliang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/products_et_bg_line"
-            android:orientation="vertical" 
-            android:layout_marginLeft="10dp">
+            android:gravity="center"
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/product_detaile_add_view_pingjia_zhiliang"
@@ -57,10 +56,10 @@
             android:id="@+id/product_detaile_ll_add_view_pingjia_fuwu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@drawable/products_et_bg_line"
             android:gravity="center"
-            android:layout_marginLeft="10dp"
             android:orientation="vertical" >
 
             <TextView
@@ -71,19 +70,18 @@
                 android:padding="5dp"
                 android:text="@string/test"
                 android:textColor="@color/red"
-                android:textSize="10dp"
-             />
+                android:textSize="10dp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/product_detaile_ll_add_view_pingjia_xiaoguo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:background="@drawable/products_et_bg_line"
             android:gravity="center"
-             android:background="@drawable/products_et_bg_line"
-            android:orientation="vertical"
-            android:layout_marginLeft="10dp" >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/product_detaile_add_view_pingjia_xiaoguo"
@@ -96,24 +94,30 @@
                 android:textSize="10dp" />
         </LinearLayout>
     </LinearLayout>
-<LinearLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:background="@color/white">
 
-    <ListView
-        
-        android:id="@+id/product_detail_more_list"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:divider="@color/base_hui"
-        android:dividerHeight="0.5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:fadingEdge="none"
-         >
-    </ListView>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <com.xunbo.store.myviews.xlistview.XListView
+            android:id="@+id/product_detail_more_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@color/base_hui"
+            android:dividerHeight="0.5dp"
+            android:fadingEdge="none"
+            >
+        </com.xunbo.store.myviews.xlistview.XListView>
+        <TextView 
+            android:id="@+id/product_detail_more_tv_isnull"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无评论"
+            android:textColor="@color/home_hui"
+            />
     </LinearLayout>
 
 </LinearLayout>
