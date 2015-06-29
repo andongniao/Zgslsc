@@ -9,9 +9,9 @@ public class TabItem {
 	private int bg; // tab item background
 	private Intent intent; // tab item intent
 
-	public TabItem(int bg, Intent intent) {
+	public TabItem(int bg, Intent intent,String title) {
 		super();
-		// this.title = title;
+		 this.title = title;
 		// this.icon = icon;
 		this.bg = bg;
 		this.intent = intent;

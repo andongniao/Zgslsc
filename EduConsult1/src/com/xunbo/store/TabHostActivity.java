@@ -68,7 +68,9 @@ public abstract class TabHostActivity extends TabActivity {
 
 			ImageView tvTabItem = (ImageView) tabItem
 					.findViewById(R.id.tab_item_iv);
-			setTabItemTextView(tvTabItem, i);
+			TextView tvtitle = (TextView) tabItem
+					.findViewById(R.id.tab_item_tv);
+			setTabItemTextView(tvTabItem,tvtitle, i);
 			// set id
 			String tabItemId = getTabItemId(i);
 			// set tab spec
@@ -97,7 +99,7 @@ public abstract class TabHostActivity extends TabActivity {
 	}
 
 	/** 设置TabItem的图标和标题等 */
-	abstract protected void setTabItemTextView(ImageView textView, int position);
+	abstract protected void setTabItemTextView(ImageView textView, TextView tvtitle,int position);
 
 	abstract protected String getTabItemId(int position);
 
