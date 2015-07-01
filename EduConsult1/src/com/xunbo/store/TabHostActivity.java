@@ -70,6 +70,8 @@ public abstract class TabHostActivity extends TabActivity {
 					.findViewById(R.id.tab_item_iv);
 			TextView tvtitle = (TextView) tabItem
 					.findViewById(R.id.tab_item_tv);
+			TextView tvtop = (TextView) tabItem
+					.findViewById(R.id.tab_item_tv_top);
 			setTabItemTextView(tvTabItem,tvtitle, i);
 			// set id
 			String tabItemId = getTabItemId(i);

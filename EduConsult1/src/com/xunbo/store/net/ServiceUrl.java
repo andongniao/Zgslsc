@@ -5,11 +5,13 @@ package com.xunbo.store.net;
  *
  */
 public class ServiceUrl {
-//	public static String Base="http://www.zgslsc.com/app/";
-//	public static String Base="http://www.shop.com/app/";
-	public static String Base="http://192.168.1.190/app/";
-	//首页
+		public static String Base="http://www.zgslsc.com/app/";
+	//	public static String Base="http://www.shop.com/app/";
+//	public static String Base="http://192.168.1.190/app/";
+	//首页index.php
 	public static String Home_url=Base;
+	//首页
+	public static String Home=Base+"index.php";
 	//城市
 	public static String City = "area.php";
 	//分类
@@ -52,13 +54,13 @@ public class ServiceUrl {
 	public static String bank_branch  = "branch";
 	//获取开户行城市
 	public static String bank_bind  = "bind";
-	
-	
+
+
 
 	//精选推荐（个人中心）
 	public static String Mycenter_recommend = "recommendproduct.php";
-	
-	
+
+
 	//购物车列表
 	public static String cart_list = "cart.php?action=list&authstr=";
 	//添加购车
@@ -67,29 +69,29 @@ public class ServiceUrl {
 	public static String cart_del = "cart.php?action=del&itemid=";
 	//清空购车
 	public static String cart_clear = "cart.php?action=clear";
-	
-	
-	
-	
-	
+
+
+
+
+
 	//单条地址
 	public static String address = "address.php";
 	//地址列表
 	public static String address_list = "?action=list&authstr=";
 	//添加地址
 	public static String address_add = "?action=add&authstr=";
-	
+
 	//搜索、产品
 	private static String fields = "fields.php?action=";
-	
+
 	private static String fields_search = "search";
-	
-	
-	
+
+
+
 	//订单列表
 	public static String order = "order.php";
-	
-	
-	
-	
+
+
+
+
 }

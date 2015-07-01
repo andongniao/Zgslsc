@@ -82,6 +82,14 @@ public class WelcomeActivity extends Activity{
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
+	new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				Send ss = new Send(context);
+				ss.getHomeInfo();
+			}
+		}).start();
 		ct = false;
 		fl = false;
 		myPDT = new ThreadWithProgressDialog();

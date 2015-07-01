@@ -23,6 +23,8 @@ import com.xunbo.store.beans.CommentStar;
 import com.xunbo.store.beans.CompanyBean;
 import com.xunbo.store.beans.FenleiBean;
 import com.xunbo.store.beans.HomeBean;
+import com.xunbo.store.beans.HomeCatBean;
+import com.xunbo.store.beans.HomeInfoBean;
 import com.xunbo.store.beans.ListAddressBean;
 import com.xunbo.store.beans.ListAreaBean;
 import com.xunbo.store.beans.ListComment;
@@ -101,6 +103,60 @@ public class Send {
 					return home;
 
 				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				home.setCode("500");
+				home.setMsg("服务器异常，请稍候再试...");
+				return home;
+			}
+		} else {
+			home.setCode("500");
+			home.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return home;
+		}
+
+	}
+
+	/**
+	 * 获取首页信息
+	 */
+	public HomeInfoBean getHomeInfo() {
+		HomeInfoBean home = new HomeInfoBean();
+		ArrayList<ProductBean> recommend = new ArrayList<ProductBean>();
+		ArrayList<HomeCatBean> cat = new ArrayList<HomeCatBean>();
+		ArrayList<String> ad = new ArrayList<String>();
+		String url = ServiceUrl.Home;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				home.setCode(code);
+				home.setMsg(msg);
+				if (code != null && "200".equals(code)) {
+					JSONObject data = object.getJSONObject("data");
+					JSONArray rem = data.getJSONArray("recommend");
+					Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+					}.getType();
+					recommend = gson.fromJson(rem.toString(), type_re);
+					JSONArray catinfo = data.getJSONArray("cat");
+					Type type_hot = new TypeToken<ArrayList<HomeCatBean>>() {
+					}.getType();
+					cat = gson.fromJson(catinfo.toString(), type_hot);
+					JSONArray adinfo = data.getJSONArray("ad");
+					Type type_ad = new TypeToken<ArrayList<String>>() {
+					}.getType();
+					ad = gson.fromJson(adinfo.toString(), type_ad);
+				} 
+				home.setRecommend(recommend);
+				home.setCat(cat);
+				home.setAd(ad);
+				return home;
 
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -1181,7 +1237,7 @@ public class Send {
 
 	}
 
-	
+
 	/**
 	 * 供求二级精品推荐
 	 * @return
@@ -1202,7 +1258,7 @@ public class Send {
 					lb.setCode(code);
 					lb.setMsg(msg);
 					JSONArray data = object.getJSONArray("data");
-//					JSONArray j = data.getJSONArray(0);
+					//					JSONArray j = data.getJSONArray(0);
 					Type type_re = new TypeToken<ArrayList<ProductBean>>() {
 					}.getType();
 					ArrayList<ProductBean> list_recommend = gson.fromJson(data.toString(), type_re);
@@ -1249,7 +1305,7 @@ public class Send {
 					lb.setCode(code);
 					lb.setMsg(msg);
 					JSONArray data = object.getJSONArray("data");
-//					JSONArray j = data.getJSONArray(0);
+					//					JSONArray j = data.getJSONArray(0);
 					Type type_re = new TypeToken<ArrayList<CompanyBean>>() {
 					}.getType();
 					list = gson.fromJson(data.toString(), type_re);
@@ -1276,7 +1332,7 @@ public class Send {
 
 	}
 
-	
-	
+
+
 
 }

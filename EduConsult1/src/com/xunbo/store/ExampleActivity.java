@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -29,25 +30,26 @@ public class ExampleActivity extends TabHostActivity {
 	@Override
 	protected void prepare() {
 		TabItem Home = new TabItem(R.drawable.base_home, 
-				new Intent(this, HomePagerActivity.class),"home"); 
+				new Intent(this, HomePagerActivity.class),"首  页  "); 
 
-		TabItem Search = new TabItem(R.drawable.base_search, new Intent(
-				this, SearchHomeActivity.class),"home");
+//		TabItem Search = new TabItem(R.drawable.base_search, new Intent(
+//				this, SearchHomeActivity.class),"home");
 
-		TabItem MyCenter = new TabItem(R.drawable.base_mycenter, new Intent(
-				this, MyCenterActivity.class),"home");
 
 		TabItem ShopCart = new TabItem(R.drawable.base_shopcart, new Intent(
-				this, ShopcartActivity.class),"home");
-
+				this, ShopcartActivity.class),"购物车  ");
+		
 		TabItem About = new TabItem(R.drawable.base_about, new Intent(
-				this, AboutActivity.class),"home");
+				this, AboutActivity.class),"浏览历史  ");
+
+		TabItem MyCenter = new TabItem(R.drawable.base_mycenter, new Intent(
+				this, MyCenterActivity.class),"个人中心  ");
 		mItems = new ArrayList<TabItem>();
 		mItems.add(Home);
-		mItems.add(Search);
-		mItems.add(MyCenter);
+//		mItems.add(Search);
 		mItems.add(ShopCart);
 		mItems.add(About);
+		mItems.add(MyCenter);
 
 		@SuppressWarnings("deprecation")
 		TabWidget tabWidget = getTabWidget();
@@ -78,9 +80,11 @@ public class ExampleActivity extends TabHostActivity {
 	protected void setTabItemTextView(ImageView textView,TextView tvtitle, int position) {
 		textView.setPadding(3, 3, 3, 3);
 		textView.setBackgroundResource(mItems.get(position).getBg());
-//		tvtitle.setTextColor(getResources().getColor(R.color.black));
-//		tvtitle.setText(mItems.get(position).getTitle());
-		tvtitle.setVisibility(View.GONE);
+		tvtitle.setTextColor(getResources().getColor(R.color.white));
+		tvtitle.setText(mItems.get(position).getTitle());
+//		tvtop.setText(mItems.get(position).getTitle());
+//		tvtop.setHeight(10);
+//		tvtitle.setVisibility(View.GONE);
 
 	}
 
