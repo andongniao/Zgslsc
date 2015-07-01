@@ -16,6 +16,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.activitys.AboutActivity;
 import com.xunbo.store.activitys.HomePagerActivity;
 import com.xunbo.store.activitys.MyCenterActivity;
+import com.xunbo.store.activitys.MyZjActivity;
 import com.xunbo.store.activitys.SearchHomeActivity;
 import com.xunbo.store.activitys.ShopcartActivity;
 
@@ -30,7 +31,7 @@ public class ExampleActivity extends TabHostActivity {
 	@Override
 	protected void prepare() {
 		TabItem Home = new TabItem(R.drawable.base_home, 
-				new Intent(this, HomePagerActivity.class),"首  页  "); 
+				new Intent(this, HomePagerActivity.class),"首  页   "); 
 
 //		TabItem Search = new TabItem(R.drawable.base_search, new Intent(
 //				this, SearchHomeActivity.class),"home");
@@ -40,7 +41,7 @@ public class ExampleActivity extends TabHostActivity {
 				this, ShopcartActivity.class),"购物车  ");
 		
 		TabItem About = new TabItem(R.drawable.base_about, new Intent(
-				this, AboutActivity.class),"浏览历史  ");
+				this, MyZjActivity.class),"浏览历史  ");
 
 		TabItem MyCenter = new TabItem(R.drawable.base_mycenter, new Intent(
 				this, MyCenterActivity.class),"个人中心  ");
