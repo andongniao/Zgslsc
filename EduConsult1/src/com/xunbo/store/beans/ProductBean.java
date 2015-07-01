@@ -15,6 +15,22 @@ public class ProductBean extends BaseBean{
 	private String area;//
 	private String areaname;//ÇøÓò
 	private String sales;//ÏúÁ¿
+	private String subtitle;
+	private String apppic;
+	
+	
+	public String getSubtitle() {
+		return subtitle;
+	}
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+	public String getApppic() {
+		return apppic;
+	}
+	public void setApppic(String apppic) {
+		this.apppic = apppic;
+	}
 	public String getItemid() {
 		return itemid;
 	}

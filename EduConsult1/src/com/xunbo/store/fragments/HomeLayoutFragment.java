@@ -51,6 +51,7 @@ import com.xunbo.store.activitys.SearchHomeActivity;
 import com.xunbo.store.activitys.SearchResultActivity;
 import com.xunbo.store.activitys.StoreActivity;
 import com.xunbo.store.activitys.XinjianActivity;
+import com.xunbo.store.activitys.BDCardActivity.RefeshData;
 import com.xunbo.store.adapters.HomeGridAdapter;
 import com.xunbo.store.adapters.HomeLikeAdapter;
 import com.xunbo.store.adapters.HomeRuzhuAdapter;
@@ -80,6 +81,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 	private Message msg;
 	private HomeGridAdapter siliaoAdapter,shouyaoAdapter,yzsbAdapter,qxyzAdapter,
 	tianjiajiAdapter,yuanliaoAdapter;
+	private ThreadWithProgressDialog myPDT;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,6 +96,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 	private void init() {
 		context = getActivity();
 		mp=new MyApplication();
+		myPDT=new ThreadWithProgressDialog();
 		sc=(ScrollView)view.findViewById(R.id.home_layout_sc);
 		top_rl = (RelativeLayout) view.findViewById(R.id.home_layout_rl_search);
 		tv_title1=(TextView)view.findViewById(R.id.home_layout_tv_rem_title_1);
@@ -153,6 +156,12 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		gv_tianjiaji.setAdapter(tianjiajiAdapter);
 		gv_yuanliao.setAdapter(yuanliaoAdapter);
 		gv_yzsb.setAdapter(yzsbAdapter);
+		
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+		}
 		
 	}
 
@@ -320,6 +329,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		
 		
 	}
+	
 
 
 
