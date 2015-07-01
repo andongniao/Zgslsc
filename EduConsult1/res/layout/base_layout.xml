@@ -9,7 +9,7 @@
         android:id="@+id/Base_Layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_top_title_bg"
+        android:background="@drawable/top_bg"
         android:orientation="horizontal" >
 
         <LinearLayout

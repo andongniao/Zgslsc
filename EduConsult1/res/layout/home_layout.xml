@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_top_title_bg"
+        android:background="@drawable/top_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
@@ -56,12 +56,13 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none" >
-            <LinearLayout 
+
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
-				android:orientation="vertical"                
-                >
+                android:orientation="vertical" >
+
                  <ImageView 
                      android:id="@+id/home_layout_iv_top"
                      android:layout_width="fill_parent"
@@ -72,12 +73,15 @@
                      android:layout_width="fill_parent"
                      android:layout_height="wrap_content"
                      android:orientation="vertical"
+                     
                      >
                      <LinearLayout 
                          android:layout_width="fill_parent"
                          android:layout_height="wrap_content"
                          android:orientation="horizontal"
                          android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
                          >
                      	<TextView 
                      	    android:layout_width="10dp"
@@ -125,6 +129,7 @@
                          android:layout_width="fill_parent"
                          android:layout_height="wrap_content"
                          android:orientation="vertical"
+                         
                          >
                          <LinearLayout 
                              android:layout_width="fill_parent"
@@ -136,6 +141,7 @@
                                  android:layout_width="0dp"
                                  android:layout_weight="1"
                                  android:layout_height="140dp"
+                                 android:background="@color/white"
                                  />
                              <LinearLayout 
                                  android:layout_width="0dp"
@@ -144,16 +150,20 @@
                                  android:orientation="vertical"
                                  >
                                  <ImageView 
-                                     android:id="home_layout_iv_rem_right__t"
+                                     android:id="@+id/home_layout_iv_rem_right__t"
                                      android:layout_width="fill_parent"
                                      android:layout_weight="1"
                                      android:layout_height="0dp"
+                                     android:background="@color/white"
+                                     android:layout_marginBottom="0.5dp"
                                      />
                                   <ImageView 
-                                      android:id="home_layout_iv_rem_right_b"
+                                      android:id="@+id/home_layout_iv_rem_right_b"
                                      android:layout_width="fill_parent"
                                      android:layout_weight="1"
                                      android:layout_height="0dp"
+                                     android:background="@color/white"
+                                     android:layout_marginBottom="0.5dp"
                                      />
                              </LinearLayout>
                          </LinearLayout>
@@ -169,6 +179,8 @@
                                  android:layout_height="wrap_content"
                                  android:gravity="center"
                                  android:orientation="vertical"
+                                 android:background="@color/white"
+                                 android:layout_marginRight="0.5dp"
                                  >
                                  <TextView
                                      android:layout_width="wrap_content"
@@ -203,6 +215,8 @@
                                  android:layout_height="wrap_content"
                                  android:gravity="center"
                                  android:orientation="vertical"
+                                 android:background="@color/white"
+                                 android:layout_marginRight="0.5dp"
                                  >
                                  <TextView
                                      android:layout_width="wrap_content"
@@ -235,6 +249,8 @@
                                  android:layout_height="wrap_content"
                                  android:gravity="center"
                                  android:orientation="vertical"
+                                 android:background="@color/white"
+                                 android:layout_marginRight="0.5dp"
                                  >
                                  <TextView
                                      android:layout_width="wrap_content"
@@ -269,6 +285,8 @@
                                  android:layout_height="wrap_content"
                                  android:gravity="center"
                                  android:orientation="vertical"
+                                 android:background="@color/white"
+                                 android:layout_marginRight="0.5dp"
                                  >
                                  <TextView
                                      android:layout_width="wrap_content"
@@ -305,7 +323,530 @@
                      
                      
                  </LinearLayout>
-                 
+                 <LinearLayout 
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginTop="10dp"
+                     >
+                     <LinearLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
+                         >
+                     	<TextView 
+                     	    android:layout_width="10dp"
+                     	    android:layout_height="fill_parent"
+                     	    android:background="#FFCE1C"
+                     	    />   
+                     	    <TextView 
+                     	        android:layout_width="wrap_content"
+                     	        android:layout_height="wrap_content"
+                     	        android:text="@string/home_siliao"
+                     	        android:textColor="@color/black"
+                     	        android:textSize="16dp"
+                     	        android:padding="5dp"
+                     	        /> 
+                     	        <TextView 
+                     	            android:layout_width="0dp"
+                     	            android:layout_weight="1"
+                     	            android:layout_height="wrap_content"
+                     	            />
+                     	        <LinearLayout
+                     	            android:id="@+id/home_layout_ll_more_siliao" 
+                     	            android:layout_width="wrap_content"
+                     	            android:layout_height="wrap_content"
+                     	            android:orientation="horizontal"
+                     	            android:padding="5dp"
+                     	            android:gravity="center_vertical"
+                     	            android:layout_marginRight="5dp"
+                     	            >
+                     	            <TextView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:textColor="@color/home_hui"
+                     	                android:text="@string/home_more"
+                     	                android:layout_marginRight="5dp"
+                     	                />
+                     	            
+                     	            <ImageView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:background="@drawable/home_more_bg"
+                     	                />
+                     	        </LinearLayout>
+                     </LinearLayout>
+                     <com.xunbo.store.myviews.MyGridView
+                    android:id="@+id/home_layout_gv_siliao"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:focusable="false"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="10dp"
+                  
+                    android:layout_marginTop="0.5dp">
+                </com.xunbo.store.myviews.MyGridView>
+                     
+                     
+                     
+                 </LinearLayout>
+                  <ImageView 
+                     android:id="@+id/home_layout_iv_center1"
+                     android:layout_width="fill_parent"
+                     android:layout_height="80dp"
+                     android:background="@color/black"
+                     />
+                <LinearLayout 
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     
+                     >
+                     <LinearLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
+                         >
+                     	<TextView 
+                     	    android:layout_width="10dp"
+                     	    android:layout_height="fill_parent"
+                     	    android:background="#EE2F41"
+                     	    />   
+                     	    <TextView 
+                     	        android:layout_width="wrap_content"
+                     	        android:layout_height="wrap_content"
+                     	        android:text="@string/home_shouyao"
+                     	        android:textColor="@color/black"
+                     	        android:textSize="16dp"
+                     	        android:padding="5dp"
+                     	        /> 
+                     	        <TextView 
+                     	            android:layout_width="0dp"
+                     	            android:layout_weight="1"
+                     	            android:layout_height="wrap_content"
+                     	            />
+                     	        <LinearLayout
+                     	            android:id="@+id/home_layout_ll_more_shouyao" 
+                     	            android:layout_width="wrap_content"
+                     	            android:layout_height="wrap_content"
+                     	            android:orientation="horizontal"
+                     	            android:padding="5dp"
+                     	            android:gravity="center_vertical"
+                     	            android:layout_marginRight="5dp"
+                     	            >
+                     	            <TextView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:textColor="@color/home_hui"
+                     	                android:text="@string/home_more"
+                     	                android:layout_marginRight="5dp"
+                     	                />
+                     	            
+                     	            <ImageView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:background="@drawable/home_more_bg"
+                     	                />
+                     	        </LinearLayout>
+                     </LinearLayout>
+                     <com.xunbo.store.myviews.MyGridView
+                    android:id="@+id/home_layout_gv_shouyao"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:focusable="false"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="10dp" 
+                    android:layout_marginTop="0.5dp">
+                </com.xunbo.store.myviews.MyGridView>
+                     
+                     
+                     
+                 </LinearLayout>  
+                 <LinearLayout 
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginTop="10dp"
+                     >
+                     <LinearLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
+                         >
+                     	<TextView 
+                     	    android:layout_width="10dp"
+                     	    android:layout_height="fill_parent"
+                     	    android:background="#30ADEF"
+                     	    />   
+                     	    <TextView 
+                     	        android:layout_width="wrap_content"
+                     	        android:layout_height="wrap_content"
+                     	        android:text="@string/home_yangzhishebei"
+                     	        android:textColor="@color/black"
+                     	        android:textSize="16dp"
+                     	        android:padding="5dp"
+                     	        /> 
+                     	        <TextView 
+                     	            android:layout_width="0dp"
+                     	            android:layout_weight="1"
+                     	            android:layout_height="wrap_content"
+                     	            />
+                     	        <LinearLayout
+                     	            android:id="@+id/home_layout_ll_more_yangzhishebei" 
+                     	            android:layout_width="wrap_content"
+                     	            android:layout_height="wrap_content"
+                     	            android:orientation="horizontal"
+                     	            android:padding="5dp"
+                     	            android:gravity="center_vertical"
+                     	            android:layout_marginRight="5dp"
+                     	            >
+                     	            <TextView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:textColor="@color/home_hui"
+                     	                android:text="@string/home_more"
+                     	                android:layout_marginRight="5dp"
+                     	                />
+                     	            
+                     	            <ImageView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:background="@drawable/home_more_bg"
+                     	                />
+                     	        </LinearLayout>
+                     </LinearLayout>
+                     <com.xunbo.store.myviews.MyGridView
+                    android:id="@+id/home_layout_gv_yangzhishebei"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:focusable="false"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="10dp" 
+                    android:layout_marginTop="0.5dp">
+                </com.xunbo.store.myviews.MyGridView>
+                     
+                     
+                     
+                 </LinearLayout>
+                 <ImageView
+                    android:id="@+id/home_layout_iv_center2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:background="@color/black" />
+				<LinearLayout 
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     
+                     >
+                     <LinearLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
+                         >
+                     	<TextView 
+                     	    android:layout_width="10dp"
+                     	    android:layout_height="fill_parent"
+                     	    android:background="#45A510"
+                     	    />   
+                     	    <TextView 
+                     	        android:layout_width="wrap_content"
+                     	        android:layout_height="wrap_content"
+                     	        android:text="@string/home_chuqinyangzhi"
+                     	        android:textColor="@color/black"
+                     	        android:textSize="16dp"
+                     	        android:padding="5dp"
+                     	        /> 
+                     	        <TextView 
+                     	            android:layout_width="0dp"
+                     	            android:layout_weight="1"
+                     	            android:layout_height="wrap_content"
+                     	            />
+                     	        <LinearLayout
+                     	            android:id="@+id/home_layout_ll_more_chuqinyangzhi" 
+                     	            android:layout_width="wrap_content"
+                     	            android:layout_height="wrap_content"
+                     	            android:orientation="horizontal"
+                     	            android:padding="5dp"
+                     	            android:gravity="center_vertical"
+                     	            android:layout_marginRight="5dp"
+                     	            >
+                     	            <TextView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:textColor="@color/home_hui"
+                     	                android:text="@string/home_more"
+                     	                android:layout_marginRight="5dp"
+                     	                />
+                     	            
+                     	            <ImageView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:background="@drawable/home_more_bg"
+                     	                />
+                     	        </LinearLayout>
+                     </LinearLayout>
+                     <com.xunbo.store.myviews.MyGridView
+                    android:id="@+id/home_layout_gv_chuqinyangzhi"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:focusable="false"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="10dp" 
+                    android:layout_marginTop="0.5dp">
+                </com.xunbo.store.myviews.MyGridView>
+                     
+                     
+                     
+                 </LinearLayout> 
+                 <LinearLayout 
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginTop="10dp"
+                     >
+                     <LinearLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
+                         >
+                     	<TextView 
+                     	    android:layout_width="10dp"
+                     	    android:layout_height="fill_parent"
+                     	    android:background="#C021C3"
+                     	    />   
+                     	    <TextView 
+                     	        android:layout_width="wrap_content"
+                     	        android:layout_height="wrap_content"
+                     	        android:text="@string/home_tianjiaji"
+                     	        android:textColor="@color/black"
+                     	        android:textSize="16dp"
+                     	        android:padding="5dp"
+                     	        /> 
+                     	        <TextView 
+                     	            android:layout_width="0dp"
+                     	            android:layout_weight="1"
+                     	            android:layout_height="wrap_content"
+                     	            />
+                     	        <LinearLayout
+                     	            android:id="@+id/home_layout_ll_more_tianjiaji" 
+                     	            android:layout_width="wrap_content"
+                     	            android:layout_height="wrap_content"
+                     	            android:orientation="horizontal"
+                     	            android:padding="5dp"
+                     	            android:gravity="center_vertical"
+                     	            android:layout_marginRight="5dp"
+                     	            >
+                     	            <TextView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:textColor="@color/home_hui"
+                     	                android:text="@string/home_more"
+                     	                android:layout_marginRight="5dp"
+                     	                />
+                     	            
+                     	            <ImageView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:background="@drawable/home_more_bg"
+                     	                />
+                     	        </LinearLayout>
+                     </LinearLayout>
+                     <com.xunbo.store.myviews.MyGridView
+                    android:id="@+id/home_layout_gv_tianjiaji"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:focusable="false"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="10dp" 
+                    android:layout_marginTop="0.5dp">
+                </com.xunbo.store.myviews.MyGridView>
+                     
+                     
+                     
+                 </LinearLayout> 
+                 <LinearLayout 
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginTop="10dp"
+                     >
+                     <LinearLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
+                         >
+                     	<TextView 
+                     	    android:layout_width="10dp"
+                     	    android:layout_height="fill_parent"
+                     	    android:background="#D0C801"
+                     	    />   
+                     	    <TextView 
+                     	        android:layout_width="wrap_content"
+                     	        android:layout_height="wrap_content"
+                     	        android:text="@string/home_yuanliao"
+                     	        android:textColor="@color/black"
+                     	        android:textSize="16dp"
+                     	        android:padding="5dp"
+                     	        /> 
+                     	        <TextView 
+                     	            android:layout_width="0dp"
+                     	            android:layout_weight="1"
+                     	            android:layout_height="wrap_content"
+                     	            />
+                     	        <LinearLayout
+                     	            android:id="@+id/home_layout_ll_more_yuanliao" 
+                     	            android:layout_width="wrap_content"
+                     	            android:layout_height="wrap_content"
+                     	            android:orientation="horizontal"
+                     	            android:padding="5dp"
+                     	            android:gravity="center_vertical"
+                     	            android:layout_marginRight="5dp"
+                     	            >
+                     	            <TextView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:textColor="@color/home_hui"
+                     	                android:text="@string/home_more"
+                     	                android:layout_marginRight="5dp"
+                     	                />
+                     	            
+                     	            <ImageView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:background="@drawable/home_more_bg"
+                     	                />
+                     	        </LinearLayout>
+                     </LinearLayout>
+                     <com.xunbo.store.myviews.MyGridView
+                    android:id="@+id/home_layout_gv_yuanliao"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:focusable="false"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="10dp" 
+                    android:layout_marginTop="0.5dp">
+                </com.xunbo.store.myviews.MyGridView>
+                     
+                     
+                     
+                 </LinearLayout> 
+                 <LinearLayout 
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:layout_marginTop="10dp"
+                     android:visibility="gone"
+                     >
+                     <LinearLayout 
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:gravity="center_vertical"
+                         android:background="@color/white"
+                         android:layout_marginBottom="0.5dp"
+                         >
+                     	<TextView 
+                     	    android:layout_width="10dp"
+                     	    android:layout_height="fill_parent"
+                     	    android:background="#21C2BC"
+                     	    />   
+                     	    <TextView 
+                     	        android:layout_width="wrap_content"
+                     	        android:layout_height="wrap_content"
+                     	        android:text="@string/home_layout_qita"
+                     	        android:textColor="@color/black"
+                     	        android:textSize="16dp"
+                     	        android:padding="5dp"
+                     	        /> 
+                     	        <TextView 
+                     	            android:layout_width="0dp"
+                     	            android:layout_weight="1"
+                     	            android:layout_height="wrap_content"
+                     	            />
+                     	        <LinearLayout
+                     	            android:id="@+id/home_layout_ll_more_qita" 
+                     	            android:layout_width="wrap_content"
+                     	            android:layout_height="wrap_content"
+                     	            android:orientation="horizontal"
+                     	            android:padding="5dp"
+                     	            android:gravity="center_vertical"
+                     	            android:layout_marginRight="5dp"
+                     	            >
+                     	            <TextView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:textColor="@color/home_hui"
+                     	                android:text="@string/home_more"
+                     	                android:layout_marginRight="5dp"
+                     	                />
+                     	            
+                     	            <ImageView 
+                     	                android:layout_width="wrap_content"
+                     	                android:layout_height="wrap_content"
+                     	                android:background="@drawable/home_more_bg"
+                     	                />
+                     	        </LinearLayout>
+                     </LinearLayout>
+                     <com.xunbo.store.myviews.MyGridView
+                    android:id="@+id/home_layout_gv_qita"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:focusable="false"
+                    android:horizontalSpacing="10dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="10dp" 
+                    android:layout_marginTop="0.5dp">
+                </com.xunbo.store.myviews.MyGridView>
+                     
+                     
+                     
+                 </LinearLayout> 
                  <!--  -->
             
             </LinearLayout>

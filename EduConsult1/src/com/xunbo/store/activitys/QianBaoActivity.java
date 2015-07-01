@@ -105,9 +105,9 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 			//			startActivity(intent);
 			break;
 		case R.id.qianbao_ll_tixian:
-			//			intent = new Intent(this,MoneyWithdrawalActivity.class);
-			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			//			startActivity(intent);
+						intent = new Intent(this,MoneyWithdrawalActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
 			break;
 
 		}

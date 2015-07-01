@@ -28,6 +28,7 @@ import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.OnNotificationClickListener;
 import com.xunbo.store.activitys.HomePagerActivity;
+import com.xunbo.store.beans.CenterUserBean;
 import com.xunbo.store.beans.ListProductBean;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.beans.UserBean;
@@ -37,6 +38,7 @@ public class MyApplication extends Application{
 	private Context context;
 	public static SharedPreferences sp;
 	public UserBean userbean;
+	public CenterUserBean centerUserBean;
 	private static Util util;
 	public static FrameworkInstance frame=null;
 	public static boolean isopen;
@@ -243,6 +245,12 @@ public class MyApplication extends Application{
 //			Toast.makeText(context, "该插件没有配置BundleActivity",
 //					Toast.LENGTH_SHORT).show();
 //		}
+	}
+	public CenterUserBean getCenterUserBean() {
+		return centerUserBean;
+	}
+	public void setCenterUserBean(CenterUserBean centerUserBean) {
+		this.centerUserBean = centerUserBean;
 	}
 	public void setUser(UserBean bean){
 		this.userbean = bean;

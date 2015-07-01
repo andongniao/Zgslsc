@@ -68,10 +68,11 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone(); 
-		int type = getIntent().getIntExtra("type", -1);
-		if(type==-1){
-			goneTopLeft();
-		}
+		
+//		int type = getIntent().getIntExtra("type", -1);
+//		if(type==-1){
+//			goneTopLeft();
+//		}
 		setContentXml(R.layout.search_home_layout);
 		setTitleTxt(R.string.search_title);
 		init();
@@ -116,8 +117,8 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		btn_search = (Button) findViewById(R.id.search_home_btn_seatch);
 		btn_search.setOnClickListener(this);
 		btn_clean = (Button) findViewById(R.id.search_home_btn_clean);
-		btn_clean.setTextColor(getResources().getColor(R.color.black));
-		btn_clean.setBackgroundResource(R.color.white);
+//		btn_clean.setTextColor(getResources().getColor(R.color.black));
+//		btn_clean.setBackgroundResource(R.color.white);
 		btn_clean.setOnClickListener(this);
 		tv = (TextView) findViewById(R.id.search_home_tv_history);
 		isnull = (LinearLayout) findViewById(R.id.search_home_ll_list_is_null);

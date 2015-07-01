@@ -75,10 +75,12 @@ public class FenleiAdapter extends BaseAdapter{
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
 				item.iv.setBackgroundResource(R.drawable.home_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_home));
+				item.tv.setVisibility(View.INVISIBLE);
+				item.tv.setEnabled(false);
 				break;
 			case 1:
 				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
-				item.iv.setBackgroundResource(R.drawable.all_l);
+				//item.iv.setBackgroundResource(R.drawable.all_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_all));
 				break;
 			case 2:

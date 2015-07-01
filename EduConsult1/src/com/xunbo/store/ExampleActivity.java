@@ -17,6 +17,7 @@ import com.xunbo.store.activitys.HomePagerActivity;
 import com.xunbo.store.activitys.MyCenterActivity;
 import com.xunbo.store.activitys.SearchHomeActivity;
 import com.xunbo.store.activitys.ShopcartActivity;
+import com.xunbo.store.fragments.HomeLayoutFragment;
 
 
 public class ExampleActivity extends TabHostActivity {
@@ -30,7 +31,6 @@ public class ExampleActivity extends TabHostActivity {
 	protected void prepare() {
 		TabItem Home = new TabItem(R.drawable.base_home, 
 				new Intent(this, HomePagerActivity.class),"home"); 
-
 		TabItem Search = new TabItem(R.drawable.base_search, new Intent(
 				this, SearchHomeActivity.class),"home");
 
