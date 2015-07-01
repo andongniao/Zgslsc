@@ -24,41 +24,18 @@
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:paddingTop="10dp" >
-
+		
         <ImageView
             android:id="@+id/money_withdrawal_ic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_launcher" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical" 
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/money_withdrawal_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_launcher" />
-
-            <TextView
-                android:id="@+id/money_withdrawal_carid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/test"
-                android:textColor="@color/black" 
-                android:visibility="gone"/>
-        </LinearLayout>
-
+        
+        
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -71,6 +48,26 @@
            android:background="@drawable/mycenter_right"
             android:textColor="@color/black" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp" 
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/money_withdrawal_carid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test"
+            android:textColor="@color/black" 
+            android:textSize="16dp"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
@@ -82,8 +79,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:paddingTop="10dp" >
 
         <TextView
@@ -113,8 +110,8 @@
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:paddingTop="10dp" >
 
         <TextView
@@ -123,13 +120,16 @@
             android:text="@string/money_withdrawal_jine"
             android:textColor="@color/black"
             android:textSize="16dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+           android:layout_weight="1" />
 
         <EditText
             android:id="@+id/money_withdrawal_edmoney"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_weight="1"
+           
             android:background="@color/white"
             android:hint="@string/money_withtrawal_textjine"
             android:inputType="number"
@@ -137,6 +137,10 @@
             android:textColor="@color/black"
             android:textSize="16dp" 
             android:ems="10"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+           android:layout_weight="1" />
     </LinearLayout>
 
     <TextView
@@ -149,8 +153,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:paddingTop="10dp" >
 
         <TextView
@@ -173,19 +177,84 @@
             android:text="@string/money_withtrawal_tishi1"
             android:textColor="@color/black" />
     </LinearLayout>
+     <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/money_lin" />
 
-    <Button
-        android:id="@+id/money_withdrawal_up"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/search_lv_isnull_btn_bg"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/money_withtrawal_ok"
-        android:textColor="@color/white"
-        android:textSize="16dp" />
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+         >
+
+
+        <EditText
+            android:id="@+id/money_withdrawal_ed_yanzheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           
+            android:background="@color/white"
+            android:hint="@string/money_withtrawal_yanzhengma"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="16dp" 
+            android:ems="10"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+           android:layout_weight="1" />
+        
+        <Button
+            android:id="@+id/money_withdrawal_yanzheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/money_withtrawal_tv_yanzhengma"
+            android:textColor="@color/white"
+            android:textSize="16dp" 
+            android:padding="5dp"
+            android:gravity="center"
+            android:background="@drawable/search_lv_isnull_btn_bg"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/money_lin" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/money_withdrawal_up"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/search_lv_isnull_btn_bg"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/money_withtrawal_ok"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </LinearLayout>

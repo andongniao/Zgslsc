@@ -85,7 +85,8 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 		super.onCreate(arg0);
 		context=this;
 		topRightTGone();
-		setTopLeftTv(R.string.bdmoneycar_title);
+		setTitleTxt(R.string.bdmoneycar_title);
+//		setTopLeftTv(R.string.bdmoneycar_title); 
 		setContentXml(R.layout.bdmoneycad);
 		init();
 		if(Util.detect(context)){

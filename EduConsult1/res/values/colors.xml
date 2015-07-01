@@ -25,11 +25,11 @@
     <color name="result_view">#b0000000</color>
     <color name="viewfinder_mask">#60000000</color>
     <color name="possible_result_points">#c0ffff00</color>
-    <color name="base_hui">#e6e6e6</color>
-    <color name="home_hui">#AEAEAE</color>
+    <color name="base_hui">#EEEEEE</color>
+    <color name="home_hui">#CCCCCC</color>
     <color name="anniu_hui">#9F9F9F</color>
     <color name="home_image_bg">#FFF6DD</color>
-    <color name="base_top_title_bg">#28BC67</color>
+    <color name="base_top_title_bg">#2eb398</color>
     <color name="orn">#FD5601</color>
     <color name="login_text_gre">#0B9746</color>
     <color name="login_bg">#EFFFE5</color>
@@ -43,6 +43,10 @@
     <color name="coupons_item_bg">#F1DECF</color>
     <color name="coupons_item_tv">#9D653D</color>
     <color name="myorderinfo_ca">#AE6D2D</color>
+    <color name="fame_hui1">#999999</color>
+    <color name="fame_hui2">#666666</color>
+    <color name="fame_hui3">#333333</color>
+    <color name="fenge_hui">#E5E5E5</color>
     
 
 </resources>

@@ -241,7 +241,13 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			//任务完成后
 			if(listComment!=null){
 				if("200".equals(listComment.getCode())){
-					commentBeans=listComment.getComlist();
+					if(commentBeans==null){
+						
+						commentBeans=listComment.getComlist();
+					}else{
+						commentBeans.clear();
+						commentBeans.addAll(listComment.getComlist());
+					}
 					comstar=listComment.getComstar();
 					if(type==1){
 						if(comstar.size()!=0||comstar!=null){

@@ -14,6 +14,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	private UserBean bean;
 	private ThreadWithProgressDialog myPDT;
 	private String msg;
+	
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -58,7 +60,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
-		er = MyApplication.sp.edit();
+  		er = MyApplication.sp.edit();
 		isremb = MyApplication.sp.getBoolean("isremb", false);
 		et_username = (EditText) findViewById(R.id.login_et_username);
 		et_username.setOnClickListener(this);

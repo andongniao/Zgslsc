@@ -3087,7 +3087,81 @@ public class PostHttp {
 		}  
 	}
 
+	public BaseBean getMobileCode(String mobile){
+		BaseBean bean = new BaseBean();
+		
+		String url = "http://www.zgslsc.com/"+"ajax.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p1 = new BasicNameValuePair("action","mobilecode");
+		list.add(p1);
+		NameValuePair p = new BasicNameValuePair("mobile",mobile);
+		list.add(p);
 
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if(obj.getBoolean("status")){
+							bean.setCode("200");
+						}else{
+							bean.setCode("500"); 
+							
+						}
+						if(Util.IsNull(obj.getString("message"))){
+							
+							bean.setMsg(obj.getString("message"));
+						}else{
+							bean.setMsg("");
+						}
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+
+
+	}
 
 
 
@@ -3131,5 +3205,6 @@ public class PostHttp {
 
 		return httpClient;  
 	}
+	
 
 }

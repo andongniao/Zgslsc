@@ -240,6 +240,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 				String code = cbean.getCode();
 				String m = cbean.getMsg();
 				if("200".equals(code)){
+					MyApplication.mp.setCenterUserBean(cbean);
 					Util.Getbitmap(icv_head, cbean.getImg());
 					tv_name.setText(cbean.getTruename());
 				}else if("300".equals(code)){

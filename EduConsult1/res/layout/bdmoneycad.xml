@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:background="@color/base_hui"
     android:orientation="vertical" >
 
@@ -11,7 +11,7 @@
         android:layout_marginLeft="5dp"
         android:padding="5dp"
         android:text="@string/bdmoneycar_tvtest"
-        android:textColor="#1797DE" />
+        android:textColor="@color/fame_hui1" />
 
     
 
@@ -28,7 +28,7 @@
         android:background="@color/white"
         android:hint="@string/bdmoneycar_tvusername"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/fame_hui2"
         android:textSize="16dp" />
 
     <ImageView
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bdmoneycar_tvcarway"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui2"
             android:textSize="16dp" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bdmoneycar_tvcarwhere"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui2"
             android:textSize="16dp" />
 
         <TextView
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bdmoneycar_tvcarzhihang"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui2"
             android:textSize="16dp" />
 
         <TextView
@@ -166,26 +166,37 @@
         android:background="@color/white"
         android:hint="@string/bdmoneycar_tvcarid"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/fame_hui2"
         android:textSize="16dp" />
 
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
         android:background="@color/home_hui" />
-
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+    android:orientation="horizontal">
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     <Button
         android:id="@+id/bdmoneycard_button1"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/bdmoneycar_tvokbd" 
-        android:padding="10dp"
+        android:padding="5dp"
         android:background="@drawable/search_lv_isnull_btn_bg"
         android:textColor="@color/white"
         android:textSize="16dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_weight="3"
         android:gravity="center"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+</LinearLayout>
 
 </LinearLayout>

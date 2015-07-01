@@ -23,10 +23,12 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
+import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.MoneyQueryAdapter;
 import com.xunbo.store.adapters.TextItemListAdapter;
 import com.xunbo.store.beans.ListMoneyBean;
+import com.xunbo.store.beans.MoneyBagBean;
 import com.xunbo.store.beans.MoneyDetaileBean;
 import com.xunbo.store.beans.UserBean;
 import com.xunbo.store.myviews.MyListview;
@@ -50,6 +52,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private Intent intent;
 	private TextItemListAdapter adapter_r;
 	private LinearLayout lin;
+	private MoneyBagBean moneyBagBean;
 	private ListMoneyBean listmoneybean;
 	private UserBean bean;
 	private ArrayList<MoneyDetaileBean> moneylist;
@@ -96,6 +99,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	}
 	void init(){
 		TestinAgent.init(this);
+		bean=MyApplication.mp.getUser();
 		reaLayout=(LinearLayout)findViewById(R.id.qianbao_query_rela);
 		reaLayout.setOnClickListener(this);
 		image=(ImageView)findViewById(R.id.qianbao_query_image);

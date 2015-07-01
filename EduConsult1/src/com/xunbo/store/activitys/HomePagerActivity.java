@@ -18,6 +18,7 @@ import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.R;
 import com.xunbo.store.fragments.HomeFragment;
+import com.xunbo.store.fragments.HomeLayoutFragment;
 import com.xunbo.store.fragments.HomePageFragmentMenu;
 import com.xunbo.store.tools.Util;
 
@@ -56,8 +57,10 @@ OnClickListener {
 	}
 
 	public void InItObj() {
+//		getSupportFragmentManager().beginTransaction()
+//		.replace(R.id.fragmentlinear, new HomeFragment()).commit();
 		getSupportFragmentManager().beginTransaction()
-		.replace(R.id.fragmentlinear, new HomeFragment()).commit();
+		.replace(R.id.fragmentlinear, new HomeLayoutFragment()).commit();
 		context = this;
 		util = new Util(context);
 	}
