@@ -3,6 +3,7 @@ package com.xunbo.store.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.TypedValue;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.xunbo.store.R;
 import com.xunbo.store.activitys.ShopcartActivity.shop;
+import com.xunbo.store.activitys.StoreActivity;
 import com.xunbo.store.beans.ShopBean;
 import com.xunbo.store.myviews.SwipeMenuListView.SwipeMenu;
 import com.xunbo.store.myviews.SwipeMenuListView.SwipeMenuCreator;
@@ -116,6 +118,17 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 				}else{
 					shop.click(true, index, -1);
 				}
+			}
+		});
+		item.title.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context,StoreActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("storeid", "");
+				intent.putExtra("storename",s.getCompany());
+				context.startActivity(intent);
 			}
 		});
 		

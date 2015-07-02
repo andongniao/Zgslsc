@@ -93,4 +93,10 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_state</item>
+        <item name="android:paddingLeft">5.0dip</item>
+        <item name="android:maxHeight">10.0dip</item>
+    </style>
+    
 </resources>

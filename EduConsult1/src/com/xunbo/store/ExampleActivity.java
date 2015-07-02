@@ -36,20 +36,20 @@ public class ExampleActivity extends TabHostActivity {
 //		TabItem Search = new TabItem(R.drawable.base_search, new Intent(
 //				this, SearchHomeActivity.class),"home");
 
+		TabItem About = new TabItem(R.drawable.base_about, new Intent(
+				this, MyZjActivity.class),"产  品  ");
 
 		TabItem ShopCart = new TabItem(R.drawable.base_shopcart, new Intent(
 				this, ShopcartActivity.class),"购物车  ");
 		
-		TabItem About = new TabItem(R.drawable.base_about, new Intent(
-				this, MyZjActivity.class),"浏览历史  ");
 
 		TabItem MyCenter = new TabItem(R.drawable.base_mycenter, new Intent(
 				this, MyCenterActivity.class),"个人中心  ");
 		mItems = new ArrayList<TabItem>();
 		mItems.add(Home);
 //		mItems.add(Search);
-		mItems.add(ShopCart);
 		mItems.add(About);
+		mItems.add(ShopCart);
 		mItems.add(MyCenter);
 
 		@SuppressWarnings("deprecation")

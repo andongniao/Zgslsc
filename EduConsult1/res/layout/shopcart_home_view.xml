@@ -53,12 +53,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="@string/shopcart_all"
+                android:layout_marginLeft="5dp"
+                android:button="@drawable/check_state"
                 android:textColor="@color/home_hui" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="2dp"
                 android:gravity="center"
                 android:text="@string/shopcart_heji"
                 android:textColor="@color/home_hui"

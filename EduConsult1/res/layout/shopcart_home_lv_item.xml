@@ -10,6 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:padding="5dp"
         android:orientation="horizontal" >
 
         <CheckBox
@@ -17,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="@string/test"
+            android:button="@drawable/check_state"
             android:textColor="@color/black" />
 
         <TextView
@@ -50,6 +51,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:orientation="horizontal" >
 
         <TextView

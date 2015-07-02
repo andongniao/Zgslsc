@@ -318,7 +318,7 @@
     <string name="shopcart_title">购物车</string>
     <string name="shopcart_jiesuan">结算</string>
     <string name="shopcart_all">全选</string>
-    <string name="shopcart_xiaoji">小计</string>
+    <string name="shopcart_xiaoji">小计：</string>
     <string name="shopcart_heji">合计：</string>
     <string name="shopcart_yunfei">（不含运费）</string>
 

@@ -158,7 +158,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		gv_yzsb.setAdapter(yzsbAdapter);
 		
 		if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+//			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
