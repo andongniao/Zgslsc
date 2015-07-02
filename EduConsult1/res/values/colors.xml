@@ -26,7 +26,7 @@
     <color name="viewfinder_mask">#60000000</color>
     <color name="possible_result_points">#c0ffff00</color>
     <color name="base_hui">#EEEEEE</color>
-    <color name="home_hui">#CCCCCC</color>
+    <color name="home_hui">#666666</color>
     <color name="anniu_hui">#9F9F9F</color>
     <color name="home_image_bg">#FFF6DD</color>
     <color name="base_top_title_bg">#2eb398</color>

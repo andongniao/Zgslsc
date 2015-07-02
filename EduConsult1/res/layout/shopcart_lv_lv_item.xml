@@ -9,7 +9,9 @@
     <CheckBox
         android:id="@+id/shopcart_lv_lv_cb"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:button="@drawable/check_state" 
+        />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -20,8 +22,8 @@
 
         <ImageView
             android:id="@+id/shopcart_lv_lv_ic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/default_bg" />
 
@@ -30,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
+            android:padding="5dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical" >
@@ -38,6 +41,7 @@
                 android:id="@+id/shopcart_lv_lv_tv_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:text="@string/test"
                 android:textColor="@color/black" />
@@ -47,10 +51,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="5dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单价："
+                    android:textColor="@color/home_hui"
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/shopcart_lv_lv_tv_price"
@@ -72,15 +82,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/shopcart_lv_lv_tv_zongjia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:text="@string/test"
-                    android:textColor="@color/orn" />
             </LinearLayout>
 
             <LinearLayout
@@ -92,15 +93,15 @@
 
                 <ImageView
                     android:id="@+id/shopcart_lv_lv_iv_jian"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:padding="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/shop_jian" />
 
                 <EditText
                     android:id="@+id/shopcart_lv_lv_et_number"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/order_et_bg_line"
                     android:focusable="false"
                     android:gravity="center"
@@ -111,9 +112,41 @@
 
                 <ImageView
                     android:id="@+id/shopcart_lv_lv_iv_jia"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:padding="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/shop_jia" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/shopcart_xiaoji"
+                    android:textColor="@color/home_hui" />
+
+                <TextView
+                    android:id="@+id/shopcart_lv_lv_tv_zongjia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/test"
+                    android:textColor="@color/orn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="元"
+                    android:textColor="@color/home_hui" />
             </LinearLayout>
         </LinearLayout>
 
@@ -126,25 +159,24 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="删除"
-            android:visibility="gone"
             android:textColor="@color/white"
-            android:textSize="16dp" />
-        <LinearLayout 
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <LinearLayout
             android:id="@+id/shopcart_lv_lv_ll_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="10dp"
-            >
-             <ImageView 
-            android:id="@+id/shopcart_lv_lv_iv_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/delete_bg"
-            android:padding="10dp"
-            />
+            android:padding="10dp" >
+
+            <ImageView
+                android:id="@+id/shopcart_lv_lv_iv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/delete_bg"
+                android:padding="10dp" />
         </LinearLayout>
-       
     </LinearLayout>
 
 </LinearLayout>
