@@ -42,10 +42,10 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+		goneTopLeft();
 		topRightTGone();
-		
-		setTopLeftTv(R.string.myzj_title);
+		setTitleTxt(R.string.myzj_title);
+//		setTopLeftTv(R.string.myzj_title);
 		setContentXml(R.layout.myzj);
 		init();
 		addlistener();

@@ -56,6 +56,8 @@ import com.xunbo.store.adapters.HomeGridAdapter;
 import com.xunbo.store.adapters.HomeLikeAdapter;
 import com.xunbo.store.adapters.HomeRuzhuAdapter;
 import com.xunbo.store.beans.HomeBean;
+import com.xunbo.store.beans.HomeCatBean;
+import com.xunbo.store.beans.HomeInfoBean;
 import com.xunbo.store.beans.ListUserBean;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.beans.UserBean;
@@ -67,7 +69,8 @@ import com.xunbo.store.tools.Util;
 
 public class HomeLayoutFragment extends Fragment implements OnClickListener,RefreshListener{
 	private MyGridView gv_siliao,gv_shouyao,gv_yzsb,gv_qxyz,gv_tianjiaji,gv_yuanliao,gv_qita;
-	private LinearLayout lv_rem,lv_siliao,lv_shouyao,lv_yzsb,lv_qxyz,lv_tianjiaji,lv_yuanliao,lv_qita;
+	private LinearLayout lv_rem,lv_siliao,lv_shouyao,lv_yzsb,lv_qxyz,lv_tianjiaji,lv_yuanliao,lv_qita,
+	lv_rem1,lv_rem2,lv_rem3,lv_rem4;
 	private ImageView ima_top,ima_centent1,ima_centent2,ima_rem_left,ima_rem_r1,ima_rem_r2,ima_rem1,
 	ima_rem2,ima_rem3,ima_rem4,ima_fenlei;
 	private TextView tv_title1,tv_title2,tv_title3,tv_title4,tv_detaile1,tv_detaile2,
@@ -82,7 +85,12 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 	private HomeGridAdapter siliaoAdapter,shouyaoAdapter,yzsbAdapter,qxyzAdapter,
 	tianjiajiAdapter,yuanliaoAdapter;
 	private ThreadWithProgressDialog myPDT;
-
+	private HomeInfoBean homeInfoBean;
+	private ArrayList<ProductBean> recommend,siliao,shouyao,yzsb,qxyz,tianjiaji,yuanliao;
+	private ArrayList<HomeCatBean> cat;
+	private ArrayList<String> ad;
+	private Handler handler;
+	private RefreshableView refreshableView;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -97,6 +105,8 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		context = getActivity();
 		mp=new MyApplication();
 		myPDT=new ThreadWithProgressDialog();
+		refreshableView=(RefreshableView)view.findViewById(R.id.home_layout_rview);
+		refreshableView.setRefreshListener(this);
 		sc=(ScrollView)view.findViewById(R.id.home_layout_sc);
 		top_rl = (RelativeLayout) view.findViewById(R.id.home_layout_rl_search);
 		tv_title1=(TextView)view.findViewById(R.id.home_layout_tv_rem_title_1);
@@ -113,8 +123,11 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		ima_centent1=(ImageView)view.findViewById(R.id.home_layout_iv_center1);
 		ima_centent2=(ImageView)view.findViewById(R.id.home_layout_iv_center2);
 		ima_rem_left=(ImageView)view.findViewById(R.id.home_layout_iv_rem_top_lf);
+		ima_rem_left.setOnClickListener(this);
 		ima_rem_r1=(ImageView)view.findViewById(R.id.home_layout_iv_rem_right__t);
+		ima_rem_r1.setOnClickListener(this);
 		ima_rem_r2=(ImageView)view.findViewById(R.id.home_layout_iv_rem_right_b);
+		ima_rem_r2.setOnClickListener(this);
 		ima_rem1=(ImageView)view.findViewById(R.id.home_layout_iv_rem_1);
 		ima_rem2=(ImageView)view.findViewById(R.id.home_layout_iv_rem_2);
 		ima_rem3=(ImageView)view.findViewById(R.id.home_layout_iv_rem_3);
@@ -127,6 +140,14 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		lv_tianjiaji=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_tianjiaji);
 		lv_yuanliao=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_yuanliao);
 		lv_qita=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_qita);
+		lv_rem1=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_1);
+		lv_rem1.setOnClickListener(this);
+		lv_rem2=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_2);
+		lv_rem2.setOnClickListener(this);
+		lv_rem3=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_3);
+		lv_rem3.setOnClickListener(this);
+		lv_rem4=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_4);
+		lv_rem4.setOnClickListener(this);
 		lv_rem.setOnClickListener(this);
 		lv_siliao.setOnClickListener(this);
 		lv_shouyao.setOnClickListener(this);
@@ -142,20 +163,28 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		gv_tianjiaji=(MyGridView)view.findViewById(R.id.home_layout_gv_tianjiaji);
 		gv_yuanliao=(MyGridView)view.findViewById(R.id.home_layout_gv_yuanliao);
 		gv_qita=(MyGridView)view.findViewById(R.id.home_layout_gv_qita);
-//		siliaoAdapter,shouyaoAdapter,yzsbAdapter,qxyzAdapter,
-//		tianjiajiAdapter,yuanliaoAdapter;
-		siliaoAdapter=new HomeGridAdapter(context);
-		shouyaoAdapter=new HomeGridAdapter(context);
-		yzsbAdapter=new HomeGridAdapter(context);
-		qxyzAdapter=new HomeGridAdapter(context);
-		tianjiajiAdapter=new HomeGridAdapter(context);
-		yuanliaoAdapter=new HomeGridAdapter(context);
-		gv_qxyz.setAdapter(qxyzAdapter);
-		gv_shouyao.setAdapter(shouyaoAdapter);
-		gv_siliao.setAdapter(siliaoAdapter);
-		gv_tianjiaji.setAdapter(tianjiajiAdapter);
-		gv_yuanliao.setAdapter(yuanliaoAdapter);
-		gv_yzsb.setAdapter(yzsbAdapter);
+		gv_siliao.setFocusable(false);
+		gv_yzsb.setFocusable(false);
+		gv_qxyz.setFocusable(false);
+		gv_shouyao.setFocusable(false);
+		gv_tianjiaji.setFocusable(false);
+		gv_yuanliao.setFocusable(false);
+		gv_qita.setFocusable(false);
+		handler = new Handler(){
+			@Override
+			public void handleMessage(Message m) {
+				super.handleMessage(m);
+				if(m.what==1){
+					refreshableView.finishRefresh();
+					homeInfoBean = (HomeInfoBean) m.obj;
+					if(homeInfoBean!=null){
+					initData(homeInfoBean);
+					}
+				}else{
+					refreshableView.finishRefresh();
+				}
+			}
+		};
 		
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
@@ -182,6 +211,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 					long arg3) {
 				// TODO Auto-generated method stub
 				
+				Toproduct(siliao.get(arg2));
 			}
 		});
 //		gv_qita.setOnItemClickListener(new OnItemClickListener() {
@@ -199,7 +229,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				Toproduct(qxyz.get(arg2));
 			}
 		});
 		gv_shouyao.setOnItemClickListener(new OnItemClickListener() {
@@ -208,7 +238,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				Toproduct(shouyao.get(arg2));
 			}
 		});
 		gv_tianjiaji.setOnItemClickListener(new OnItemClickListener() {
@@ -217,7 +247,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				Toproduct(tianjiaji.get(arg2));
 			}
 		});
 		
@@ -227,7 +257,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				Toproduct(yuanliao.get(arg2));
 			}
 		});
 		gv_yzsb.setOnItemClickListener(new OnItemClickListener() {
@@ -236,7 +266,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				Toproduct(yzsb.get(arg2));
 			}
 		});
 //		gv_like.setOnItemClickListener(new OnItemClickListener() {
@@ -261,9 +291,9 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.home_layout_iv_cat:
-			msg = HomePagerActivity.handler.obtainMessage();
-			msg.obj = HomePagerActivity.SlidTag;
-			HomePagerActivity.handler.sendMessage(msg);
+//			msg = HomePagerActivity.handler.obtainMessage();
+//			msg.obj = HomePagerActivity.SlidTag;
+//			HomePagerActivity.handler.sendMessage(msg);
 			break;
 		case R.id.home_layout_ll_more_chuqinyangzhi:
 			
@@ -281,6 +311,27 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		case R.id.home_layout_ll_more_yangzhishebei:
 			break;
 		case R.id.home_layout_ll_more_yuanliao:
+			break;
+		case R.id.home_layout_iv_rem_top_lf:
+			Toproduct(recommend.get(0));
+			break;
+		case R.id.home_layout_iv_rem_right__t:
+			Toproduct(recommend.get(1));
+			break;
+		case R.id.home_layout_iv_rem_right_b:
+			Toproduct(recommend.get(2));
+			break;
+		case R.id.home_layout_ll_rem_b_1:
+			Toproduct(recommend.get(3));
+			break;
+		case R.id.home_layout_ll_rem_b_2:
+			Toproduct(recommend.get(4));
+			break;
+		case R.id.home_layout_ll_rem_b_3:
+			Toproduct(recommend.get(5));
+			break;
+		case R.id.home_layout_ll_rem_b_4:
+			Toproduct(recommend.get(6));
 			break;
 			
 		}
@@ -325,12 +376,190 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 
 	@Override
 	public void onRefresh(RefreshableView view) {
-		// TODO Auto-generated method stub
-		
-		
+		if (Util.detect(context)) {
+			new Thread(){
+				@Override
+				public void run() {
+					super.run();
+					Send send = new Send(context);
+					homeInfoBean = send.getHomeInfo();
+					Message m = handler.obtainMessage();
+					if(homeInfoBean!=null){
+					m.obj = homeInfoBean;
+					m.what=1;
+					}else{
+						m.what=2;
+					}
+					handler.sendMessage(m);
+				}
+			}.start();
+		} else {
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					Util.ShowToast(context, R.string.net_is_eor);
+					refreshableView.finishRefresh();
+				}
+			}, 500);
+		}
 	}
 	
+	public class RefeshData implements ThreadWithProgressDialogTask {
+        public RefeshData(){
+        	
+        }
+		@Override
+		public boolean TaskMain() {
+			// TODO Auto-generated method stub
+			Send s=new Send(context);
+			homeInfoBean=s.getHomeInfo();
+			return true;
+		}
 
+		@Override
+		public boolean OnTaskDismissed() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			// TODO Auto-generated method stub
+			if(homeInfoBean!=null){
+				if("200".equals(homeInfoBean.getCode())){
+					initData(homeInfoBean);
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			return true;
+		}
+		
+	}
+	private void initData(HomeInfoBean homeInfoBean){
+		recommend=homeInfoBean.getRecommend();
+		cat=homeInfoBean.getCat();
+		ad=homeInfoBean.getAd();
+		Util.Getbitmap(ima_top, ad.get(0));
+		Util.Getbitmap(ima_centent1, ad.get(1));
+		Util.Getbitmap(ima_centent2, ad.get(2));
+		if(Util.IsNull(recommend.get(0).getApppic())){
+			Util.Getbitmap(ima_rem_left, recommend.get(0).getApppic());
+		}else{
+			Util.Getbitmap(ima_rem_left, recommend.get(0).getThumb());
+		}
+		if(Util.IsNull(recommend.get(1).getApppic())){
+			Util.Getbitmap(ima_rem_r1, recommend.get(1).getApppic());
+		}else{
+			Util.Getbitmap(ima_rem_r1, recommend.get(1).getThumb());
+		}
+		if(Util.IsNull(recommend.get(2).getApppic())){
+			Util.Getbitmap(ima_rem_r2, recommend.get(2).getApppic());
+		}else{
+			Util.Getbitmap(ima_rem_r2, recommend.get(2).getThumb());
+		}
+		if(Util.IsNull(recommend.get(3).getApppic())){
+			Util.Getbitmap(ima_rem1, recommend.get(3).getApppic());
+		}else{
+			Util.Getbitmap(ima_rem1, recommend.get(3).getThumb());
+		}
+		if(Util.IsNull(recommend.get(4).getApppic())){
+			Util.Getbitmap(ima_rem2, recommend.get(4).getApppic());
+		}else{
+			Util.Getbitmap(ima_rem2, recommend.get(4).getThumb());
+		}
+		if(Util.IsNull(recommend.get(5).getApppic())){
+			Util.Getbitmap(ima_rem3, recommend.get(5).getApppic());
+		}else{
+			Util.Getbitmap(ima_rem3, recommend.get(5).getThumb());
+		}
+		if(Util.IsNull(recommend.get(6).getApppic())){
+			Util.Getbitmap(ima_rem4, recommend.get(6).getApppic());
+		}else{
+			Util.Getbitmap(ima_rem4, recommend.get(6).getThumb());
+		}
+		if(Util.IsNull(recommend.get(3).getSubtitle())){
+			tv_detaile1.setVisibility(View.INVISIBLE);
+			tv_detaile1.setText(recommend.get(3).getSubtitle());
+		}
+		if(Util.IsNull(recommend.get(4).getSubtitle())){
+			tv_detaile2.setVisibility(View.INVISIBLE);
+			tv_detaile2.setText(recommend.get(4).getSubtitle());
+		}
+		if(Util.IsNull(recommend.get(5).getSubtitle())){
+			tv_detaile3.setVisibility(View.INVISIBLE);
+			tv_detaile3.setText(recommend.get(5).getSubtitle());
+		}
+		if(Util.IsNull(recommend.get(6).getSubtitle())){
+			tv_detaile4.setVisibility(View.INVISIBLE);
+			tv_detaile4.setText(recommend.get(6).getSubtitle());
+		}
+		tv_title1.setText(recommend.get(3).getTitle());
+		tv_title2.setText(recommend.get(4).getTitle());
+		tv_title3.setText(recommend.get(5).getTitle());
+		tv_title4.setText(recommend.get(6).getTitle());
+		
+		for(int i=0;i<cat.size();i++){
+			if("饲料".equals(cat.get(i).getName())){
+				if(siliaoAdapter!=null){
+					siliaoAdapter.setProductBean(cat.get(i).getData());
+					siliaoAdapter.notifyDataSetChanged();
+				}else{
+					siliaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+					gv_siliao.setAdapter(siliaoAdapter);
+				}
+				siliao=cat.get(i).getData();
+			}else if("兽药".equals(cat.get(i).getName())){
+				if(shouyaoAdapter!=null){
+					shouyaoAdapter.setProductBean(cat.get(i).getData());
+					shouyaoAdapter.notifyDataSetChanged();
+				}else{
+					shouyaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+					gv_shouyao.setAdapter(shouyaoAdapter);
+				}
+				shouyao=cat.get(i).getData();
+			}else if("养殖设备".equals(cat.get(i).getName())){
+				if(yzsbAdapter!=null){
+					yzsbAdapter.setProductBean(cat.get(i).getData());
+					yzsbAdapter.notifyDataSetChanged();
+				}else{
+					yzsbAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+					gv_yzsb.setAdapter(yzsbAdapter);
+				}
+				yzsb=cat.get(i).getData();
+			}else if("畜禽养殖".equals(cat.get(i).getName())){
+				if(qxyzAdapter!=null){
+					qxyzAdapter.setProductBean(cat.get(i).getData());
+					qxyzAdapter.notifyDataSetChanged();
+				}else{
+					qxyzAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+					   gv_qxyz.setAdapter(qxyzAdapter);
+				}
+				qxyz=cat.get(i).getData();
+			}else if("添加剂".equals(cat.get(i).getName())){
+				if(tianjiajiAdapter!=null){
+					tianjiajiAdapter.setProductBean(cat.get(i).getData());
+					tianjiajiAdapter.notifyDataSetChanged();
+				}else{
+					tianjiajiAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+					gv_tianjiaji.setAdapter(tianjiajiAdapter);
+				}
+				tianjiaji=cat.get(i).getData();
+			}else if("饲料原料".equals(cat.get(i).getName())){
+				if(yuanliaoAdapter!=null){
+					yuanliaoAdapter.setProductBean(cat.get(i).getData());
+					yuanliaoAdapter.notifyDataSetChanged();
+				}else{
+					yuanliaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+					gv_yuanliao.setAdapter(yuanliaoAdapter);
+				}
+				yuanliao=cat.get(i).getData();
+			}
+		}
+		
+	}
 
 
 

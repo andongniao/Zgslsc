@@ -28,7 +28,7 @@ public class HomeSlidAdapter extends BaseAdapter{
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
-		index = -1;
+		index = 0;
 		this.type = type;
 	}
 	public void SetData(int index){
@@ -63,9 +63,9 @@ public class HomeSlidAdapter extends BaseAdapter{
 			myitem.ll = (LinearLayout) convertView.findViewById(R.id.home_slid_view_l_ll);
 			convertView.setTag(myitem);
 		}else{
-			myitem.tv_title.setText(list.get(position).getCatname());
 			myitem = (Myitem) convertView.getTag();
 		}
+		myitem.tv_title.setText(list.get(position).getCatname());
 		if(type==1){
 			for(int i=0;i<list.size();i++){
 				if(i==position){
@@ -82,14 +82,14 @@ public class HomeSlidAdapter extends BaseAdapter{
 		}else if(type==2){
 			for(int i=0;i<list.size();i++){
 				if(index==position){
-//					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.base_hui));
-					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.base_top_title_bg));
+					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
+					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.fame_hui3));
 				}else{
-//					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
-					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.black));
+					myitem.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei2_bg));
+					myitem.tv_title.setTextColor(context.getResources().getColor(R.color.fame_hui3));
 				}
 			}
-			myitem.tv_title.setText(list.get(position).getCatname());
+			myitem.tv_title.setText(list.get(position ).getCatname());
 		}
 		return convertView;
 	}

@@ -3086,7 +3086,11 @@ public class PostHttp {
 			return bean;
 		}  
 	}
-
+/**
+ * 获取验证码
+ * @param mobile
+ * @return BaseBean
+ */
 	public BaseBean getMobileCode(String mobile){
 		BaseBean bean = new BaseBean();
 		
