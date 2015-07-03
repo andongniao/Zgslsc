@@ -2,8 +2,10 @@ package com.xunbo.store.activitys;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.DisplayMetrics;
@@ -48,7 +50,9 @@ import com.xunbo.store.myviews.ScrollViewExtend;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
-public class ProductDetaileActivity extends BaseActivity implements OnClickListener{
+public class ProductDetaileActivity extends Activity implements OnClickListener{
+	protected int activityCloseEnterAnimation;
+	protected int activityCloseExitAnimation;
 	private Context context;
 	private ScrollViewExtend scrollView;
 	private LinearLayout ll_addshopcart,ll_gopay,ll_as_l,ll_as_t,ll_as_r,
@@ -61,7 +65,7 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private Intent intent;
 	private TextView chanpin,pingjia,dianpu,pingjiamore,add,buymore,tv_title
 	,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
-	,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo;
+	,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo,topchanpin,toppingjia,toptuijian;
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
@@ -93,19 +97,27 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 	private ImageView iv_top_t;
 	private RelativeLayout rl_r;
 	private int refeshDatatype;
+	private float pingjiax,pingjiay,tuijianx,tuijiany;
 
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		//		topRightLVisible();
-		topRightRVisible();
-		topRightTGone();
-		setTopLeftTv(R.string.product_detaile_title);
-		rl_r = (RelativeLayout) getTopRightRl();
-		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_shop_bg);
-		setContentXml(R.layout.product_detail);
+		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
+		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
+		activityStyle.recycle();
+		activityStyle = getTheme().obtainStyledAttributes(windowAnimationStyleResId, new int[] {android.R.attr.activityCloseEnterAnimation, android.R.attr.activityCloseExitAnimation});
+		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
+		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
+		activityStyle.recycle();
+//		topRightRVisible();
+//		topRightTGone();
+//		setTopLeftTv(R.string.product_detaile_title);
+//		rl_r = (RelativeLayout) getTopRightRl();
+//		iv_top_t = (ImageView) getTopRightView();
+//		iv_top_t.setBackgroundResource(R.drawable.top_shop_bg);
+		setContentView(R.layout.product_detail);
 		init();
 		addlistener();
 	}
@@ -182,15 +194,62 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 		gridView=(GridView)findViewById(R.id.product_detaile_all_view_dianputuijian_gv);
 		homeLikeAdapter = new HomeLikeAdapter(context, list);
 		gridView.setAdapter(homeLikeAdapter);
+		
+		ll_nobuy=(LinearLayout)findViewById(R.id.product_detaile_ll_notbuy);
+		ll_buy=(LinearLayout)findViewById(R.id.product_detaile_ll_buied);
+		buymore=(TextView)findViewById(R.id.product_detaile_tv_more_shopped);
+		buymore.setOnClickListener(this);
+
+
+
+		tv_title=(TextView)findViewById(R.id.product_detail_tv_title);
+
+		tv_shangcheng=(TextView)findViewById(R.id.product_detaile_tv_shangcheng);
+		tv_danjia=(TextView)findViewById(R.id.product_detaile_tv_danjia);
+		tv_qidingliang=(TextView)findViewById(R.id.product_detaile_tv_qiding);
+		tv_xiaoliang=(TextView)findViewById(R.id.product_detail_tv_xiaoliang);
+		tv_kucun=(TextView)findViewById(R.id.product_detail_tv_kucun);
+		tv_chandi=(TextView)findViewById(R.id.product_detail_tv_chandi);
+		tv_computer=(TextView)findViewById(R.id.product_detaile_tv_computer);
+		tv_miaoshu=(TextView)findViewById(R.id.product_detaile_tv_miaoshu);
+		tv_taidu=(TextView)findViewById(R.id.product_detaile_tv_fuwu);
+		tv_fahuo=(TextView)findViewById(R.id.product_detaile_tv_fahuo);
+
+		b_l=(ImageView)findViewById(R.id.product_detaile_ima_bui_l);
+		tb_l=(TextView)findViewById(R.id.product_detaile_tv_bui_l);
+		b_t=(ImageView)findViewById(R.id.product_detaile_ima_bui_t);
+		tb_t=(TextView)findViewById(R.id.product_detaile_tv_bui_t);
+		b_r=(ImageView)findViewById(R.id.product_detaile_ima_bui_4);
+		tb_r=(TextView)findViewById(R.id.product_detaile_tv_bui_r);
+
+		t_l=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_l);
+		tt_l=(TextView)findViewById(R.id.product_detaile_tv_tonglei_l);
+		t_t=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_t);
+		tt_t=(TextView)findViewById(R.id.product_detaile_tv_tonglei_t);
+		t_r=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_r);
+		tt_r=(TextView)findViewById(R.id.product_detaile_tv_tonglei_r);
+		refeshDatatype=1;
+		
+		
 		View v = new ImageView(context);
 		v.setBackgroundResource(R.drawable.base_to_top);
 		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		isshow = false;
+		
+		toppingjia=(TextView)findViewById(R.id.product_detaile_top_tv_pingjia);
+		
+		pingjiax=ll_add_chanpin.getX();
+		pingjiay=ll_add_chanpin.getPivotY();
+		pingjiay=ll_add_chanpin.getY();
 		scrollView.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if(event.getAction()==MotionEvent.ACTION_MOVE){
+					if(scrollView.getScrollX()==pingjiax&&(scrollView.getScrollY()+50)==pingjiay){
+						Util.ShowToast(context, "jk;");
+						toppingjia.setTextColor(getResources().getColor(R.color.fame_hui3));
+					}
 					if(!isshow){
 						if(scrollView.getScrollY()>100){
 							popupWindow.showAtLocation(ll_addshopcart, Gravity.BOTTOM,w/2-20, 120);
@@ -221,51 +280,6 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 				}
 			}
 		});
-		ll_nobuy=(LinearLayout)findViewById(R.id.product_detaile_ll_notbuy);
-		ll_buy=(LinearLayout)findViewById(R.id.product_detaile_ll_buied);
-		buymore=(TextView)findViewById(R.id.product_detaile_tv_more_shopped);
-		buymore.setOnClickListener(this);
-
-
-
-		tv_title=(TextView)findViewById(R.id.product_detail_tv_title);
-		//		,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
-		//		,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo;
-		tv_shangcheng=(TextView)findViewById(R.id.product_detaile_tv_shangcheng);
-		tv_danjia=(TextView)findViewById(R.id.product_detaile_tv_danjia);
-		tv_qidingliang=(TextView)findViewById(R.id.product_detaile_tv_qiding);
-		tv_xiaoliang=(TextView)findViewById(R.id.product_detail_tv_xiaoliang);
-		tv_kucun=(TextView)findViewById(R.id.product_detail_tv_kucun);
-		tv_chandi=(TextView)findViewById(R.id.product_detail_tv_chandi);
-		tv_computer=(TextView)findViewById(R.id.product_detaile_tv_computer);
-		tv_miaoshu=(TextView)findViewById(R.id.product_detaile_tv_miaoshu);
-		tv_taidu=(TextView)findViewById(R.id.product_detaile_tv_fuwu);
-		tv_fahuo=(TextView)findViewById(R.id.product_detaile_tv_fahuo);
-
-
-		//		b_l,b_t,b_r,t_l,t_t,t_r;
-		//		private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r;
-		b_l=(ImageView)findViewById(R.id.product_detaile_ima_bui_l);
-		tb_l=(TextView)findViewById(R.id.product_detaile_tv_bui_l);
-		b_t=(ImageView)findViewById(R.id.product_detaile_ima_bui_t);
-		tb_t=(TextView)findViewById(R.id.product_detaile_tv_bui_t);
-		b_r=(ImageView)findViewById(R.id.product_detaile_ima_bui_4);
-		tb_r=(TextView)findViewById(R.id.product_detaile_tv_bui_r);
-
-		t_l=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_l);
-		tt_l=(TextView)findViewById(R.id.product_detaile_tv_tonglei_l);
-		t_t=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_t);
-		tt_t=(TextView)findViewById(R.id.product_detaile_tv_tonglei_t);
-		t_r=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_r);
-		tt_r=(TextView)findViewById(R.id.product_detaile_tv_tonglei_r);
-
-		//b_l.setBackgroundDrawable(getResources().)
-
-
-
-
-		//		
-		refeshDatatype=1;
 
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
@@ -371,17 +385,17 @@ public class ProductDetaileActivity extends BaseActivity implements OnClickListe
 
 	}
 	private void addlistener() {
-		iv_top_t.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				SearchResultActivity.isproductfinish=true;
-				MyZjActivity.isfinish=true;
-				StoreActivity.isfinish = true;
-				ExampleActivity.setCurrentTab(3);
-				finish();
-			}
-		});
+//		iv_top_t.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				SearchResultActivity.isproductfinish=true;
+//				MyZjActivity.isfinish=true;
+//				StoreActivity.isfinish = true;
+//				ExampleActivity.setCurrentTab(3);
+//				finish();
+//			}
+//		});
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

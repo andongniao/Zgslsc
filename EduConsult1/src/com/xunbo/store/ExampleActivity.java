@@ -6,18 +6,14 @@ import java.util.List;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
-import com.xunbo.store.activitys.AboutActivity;
 import com.xunbo.store.activitys.HomePagerActivity;
 import com.xunbo.store.activitys.MyCenterActivity;
 import com.xunbo.store.activitys.MyZjActivity;
-import com.xunbo.store.activitys.SearchHomeActivity;
 import com.xunbo.store.activitys.ShopcartActivity;
 
 

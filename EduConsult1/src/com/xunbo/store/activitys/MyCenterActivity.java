@@ -131,9 +131,9 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_tuijian.setOnClickListener(this);
 		ll_youhuiquan = (LinearLayout) findViewById(R.id.myinfo_ll_youhuiquan);
 		ll_youhuiquan.setOnClickListener(this);
-		ll_youhuiquan.setVisibility(View.GONE);
+//		ll_youhuiquan.setVisibility(View.GONE);
 		ll_mima = (LinearLayout) findViewById(R.id.mycenter_home_ll_mima);
-		ll_mima.setVisibility(View.GONE);
+//		ll_mima.setVisibility(View.GONE);
 		ll_mima.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
 		ll_ll_fahuo=(LinearLayout)findViewById(R.id.mycenter_home_btn_fahuo_lin);

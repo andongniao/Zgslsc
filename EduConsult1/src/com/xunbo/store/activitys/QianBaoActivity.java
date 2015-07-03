@@ -39,7 +39,6 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		//		topRightLVisible();
-		topRightRVisible();
 		topRightTGone();
 		rl_l = (RelativeLayout) getTopLightRl();
 		rl_r = (RelativeLayout) getTopRightRl();
@@ -47,7 +46,7 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
-		setTopLeftTv(R.string.qignbao_title);
+		setTitleTxt(R.string.qignbao_title);
 		setContentXml(R.layout.qianbao);
 		init();
 		addlistener();
@@ -100,9 +99,9 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		//Intent intent;
 		switch (v.getId()) {
 		case R.id.qianbao_ll_chaxun:
-			//			intent = new Intent(this,MoneyQueryActivity.class);
-			//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			//			startActivity(intent);
+						intent = new Intent(this,MoneyQueryActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
 			break;
 		case R.id.qianbao_ll_tixian:
 						intent = new Intent(this,MoneyWithdrawalActivity.class);

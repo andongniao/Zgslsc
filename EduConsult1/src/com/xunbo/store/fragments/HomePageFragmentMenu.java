@@ -114,7 +114,21 @@ public class HomePageFragmentMenu extends Fragment {
 		lv_l.setAdapter(adapter_l);
 		lv_r = (ListView) view.findViewById(R.id.slid_view_lv_r);
 
-
+		ll_r.setVisibility(View.VISIBLE);
+		if(adapter_l==null){
+			adapter_l = new FenleiAdapter(context, l);
+			lv_l.setAdapter(adapter_l);
+		}
+		title="À«¡œ";
+		for(int i=0;i<fenleilist.size();i++){
+			if(fenleilist.get(i).getCatname().equals(title) ||
+					fenleilist.get(i).getCatid()==1918){
+				listchile=fenleilist.get(i).getChild();
+				adapter_r = new HomeSlidAdapter(context, listchile,2);
+				lv_r.setAdapter(adapter_r);
+				lv_r.setOnItemClickListener(new OnItemoclick(listchile,adapter_r));
+			}
+		}
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 			Intent intent;
 			@Override
@@ -122,16 +136,16 @@ public class HomePageFragmentMenu extends Fragment {
 					long arg3) {
 				switch (arg2) {
 				case 0:
-					msg = HomePagerActivity.handler.obtainMessage();
-					msg.obj = HomePagerActivity.SlidTag;
-					HomePagerActivity.handler.sendMessage(msg);
+//					msg = HomePagerActivity.handler.obtainMessage();
+//					msg.obj = HomePagerActivity.SlidTag;
+//					HomePagerActivity.handler.sendMessage(msg);
 					break;
 				case 1:
 					//					intent=new Intent(context, GqHomeActivity.class);
 					//					startActivity(intent);
-					msg = HomePagerActivity.handler.obtainMessage();
-					msg.obj = HomePagerActivity.SlidTag;
-					HomePagerActivity.handler.sendMessage(msg);
+//					msg = HomePagerActivity.handler.obtainMessage();
+//					msg.obj = HomePagerActivity.SlidTag;
+//					HomePagerActivity.handler.sendMessage(msg);
 					break;
 				case 2:
 					ll_r.setVisibility(View.VISIBLE);
@@ -148,7 +162,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile,adapter_r));
 						}
 					}
 					break;
@@ -167,7 +181,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile,adapter_r));
 						}
 					}
 					break;
@@ -186,7 +200,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile,adapter_r));
 						}
 					}
 					break;
@@ -205,7 +219,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile,adapter_r));
 						}
 					}
 					break;
@@ -224,7 +238,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile,adapter_r));
 						}
 					}
 					break;
@@ -243,7 +257,7 @@ public class HomePageFragmentMenu extends Fragment {
 							listchile=fenleilist.get(i).getChild();
 							adapter_r = new HomeSlidAdapter(context, listchile,2);
 							lv_r.setAdapter(adapter_r);
-							lv_r.setOnItemClickListener(new OnItemoclick(listchile));
+							lv_r.setOnItemClickListener(new OnItemoclick(listchile,adapter_r));
 						}
 					}
 					break;
@@ -266,13 +280,17 @@ public class HomePageFragmentMenu extends Fragment {
 
 	class OnItemoclick implements OnItemClickListener{
 		private ArrayList<FenleiBean> listchile;
-		public OnItemoclick(ArrayList<FenleiBean> listchile){
+		HomeSlidAdapter adapter_r;
+		public OnItemoclick(ArrayList<FenleiBean> listchile,HomeSlidAdapter adapter_r){
 			this.listchile=listchile;
+			this.adapter_r=adapter_r;
 		}
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
+			adapter_r.SetData(arg2);
+			adapter_r.notifyDataSetChanged();
 			msg = HomePagerActivity.handler.obtainMessage();
 			msg.obj = HomePagerActivity.SlidTag;
 			HomePagerActivity.handler.sendMessage(msg);

@@ -134,18 +134,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 			break;
 		case R.id.money_withdrawal_up:
 			String moneyStr=money.getText().toString().trim();
-			String numStr=num.getText().toString().trim();
 			if(Util.IsNull(moneyStr)){
-				int moneyNum=Integer.valueOf(moneyStr);
-				if("0".equals(numStr)){
-					Toast.makeText(context, "本日转出次数为0次", 200).show();
-				}
-				else{
-					Toast.makeText(context, "转出成功", 200).show();
-				}
-				if(moneyNum>300){
-					Toast.makeText(context, "转出金额大于300", 200).show();
-				}
 			}
 			else{
 				Toast.makeText(context, "转出金额出错", 200).show();

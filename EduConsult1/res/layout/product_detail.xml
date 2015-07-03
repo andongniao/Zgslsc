@@ -4,6 +4,141 @@
     android:background="#e6e6e6"
     android:gravity="center"
     android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp" >
+
+            <ImageView
+                android:id="@+id/search_result_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_back"
+                android:gravity="center"
+                android:paddingRight="5dp" />
+        </LinearLayout>
+        <TextView 
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        <LinearLayout 
+            android:id="@+id/product_detaile_top_ll_chanpin"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView 
+                android:id="@+id/product_detaile_top_tv_chanpin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品"
+                android:textColor="@color/fame_hui3"
+                android:textSize="16dp"
+                />
+             <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+             <ImageView
+                 android:id="@+id/product_detaile_top_ima_chanpin"
+                 android:layout_width="fill_parent"
+                 android:layout_height="0.5dp"
+                 android:background="@color/black"/>
+        </LinearLayout>
+        <TextView 
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        <LinearLayout 
+            android:id="@+id/product_detaile_top_ll_pingjia"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView 
+                android:id="@+id/product_detaile_top_tv_pingjia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评价"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                />
+             <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+             <ImageView
+                 android:id="@+id/product_detaile_top_ima_pingjia"
+                 android:layout_width="fill_parent"
+                 android:layout_height="0.5dp"
+                 android:background="@color/transparent"/>
+        </LinearLayout>
+        <TextView 
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        <LinearLayout 
+            android:id="@+id/product_detaile_top_ll_tuijian"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView 
+                android:id="@+id/product_detaile_top_tv_tuijian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="推荐"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                />
+             <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+             <ImageView
+                 android:id="@+id/product_detaile_top_ima_tuijian"
+                 android:layout_width="fill_parent"
+                 android:layout_height="0.5dp"
+                 android:background="@color/transparent"/>
+        </LinearLayout>
+        <TextView 
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/search_result_iv_shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_shop_bg"
+                android:gravity="center"
+               
+                 />
+        </LinearLayout>
+
+       
+    </LinearLayout>
 
     <com.xunbo.store.myviews.ScrollViewExtend
         android:id="@+id/product_detaile_sl"
@@ -33,6 +168,8 @@
                 android:padding="10dp"
                 android:text="@string/test"
                 android:textColor="@color/black"
+                android:enabled="false"
+                android:singleLine="true"
                 android:textSize="18dp" />
 
             <LinearLayout

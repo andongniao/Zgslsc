@@ -43,7 +43,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private ListView list_2,lv_l;
 	private MoneyQueryAdapter moneyQueryAdapter;
 	private Context context;
-	private ArrayList<String> list;
+	private ArrayList<String> list,ll;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
@@ -57,21 +57,20 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private UserBean bean;
 	private ArrayList<MoneyDetaileBean> moneylist;
 	private ThreadWithProgressDialog myPDT;
+	private int type;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		context=this;
-		topRightLVisible();
-		topRightRVisible();
 		topRightTGone();
+		setTitleTxt(R.string.qianbao_query_title);
 		rl_l = (RelativeLayout) getTopLightRl();
 		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_l = (ImageView) getTopLightView();
 		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
-		setTopLeftTv(R.string.qianbao_query_title);
 		setContentXml(R.layout.activity_money_query);
 		init();
 		addlistener();
@@ -100,6 +99,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	void init(){
 		TestinAgent.init(this);
 		bean=MyApplication.mp.getUser();
+		myPDT=new ThreadWithProgressDialog();
 		reaLayout=(LinearLayout)findViewById(R.id.qianbao_query_rela);
 		reaLayout.setOnClickListener(this);
 		image=(ImageView)findViewById(R.id.qianbao_query_image);
@@ -111,7 +111,7 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
 		
 		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
-		ArrayList<String> ll = new ArrayList<String>();
+		ll = new ArrayList<String>();
 		ll.add("全部收支");
 		ll.add("收入");
 		ll.add("支出");
@@ -123,7 +123,19 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
+				allquery.setText(ll.get(arg2));
+				if("收入".equals(ll.get(arg2))){
+					type=MyApplication.money_income;
+				}else if("支出".equals(ll.get(arg2))){
+					type=MyApplication.money_pay;
+				}else{
+					type=MyApplication.money_detaile;
+				}
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(type),R.string.loding);//可取消
+				}else {
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 				popu.dismiss();
 			}
 		});
@@ -133,11 +145,11 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 		popu.setOutsideTouchable(true);
 		//popu.update();
 		if(Util.detect(context)){
-			//myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			myPDT.Run(context, new RefeshData(MyApplication.money_detaile),R.string.loding);//可取消
+		}else {
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 		
-		moneyQueryAdapter=new MoneyQueryAdapter(context, moneylist);
-		list_money.setAdapter(moneyQueryAdapter);
 		list_money.setOnItemClickListener(new OnItemClickListener() {
 			
 			@Override
@@ -146,23 +158,26 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 				// TODO Auto-generated method stub
 				//
 				intent = new Intent(context,MoneyQueryInfoActivity.class);
+				intent.putExtra("itemid", moneylist.get(arg2).getItemid());
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				
 			}
 		});
 		
+		
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
-		public RefeshData(){
+		private int type;
+		public RefeshData(int type){
+			this.type=type;
 		}
 
 		@Override
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
 			Send s=new Send(context);
-			//做空指针判断，是否是登陆的用户
-//			listmoneybean=s.getMoney(bean.getType(), bean.getAuthstr());
+			listmoneybean=s.getMoneyInfo(type, bean.getAuthstr());
 			return false;
 		}
 
@@ -179,7 +194,8 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 				String code = listmoneybean.getCode();
 				String m = listmoneybean.getMsg();
 				if("200".equals(code)){
-					moneylist=listmoneybean.getList();
+					
+					initData();
 				}else{
 					if(Util.IsNull(m)){
 						Util.ShowToast(context, m);
@@ -207,6 +223,19 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 
 		default:
 			break;
+		}
+	}
+	public void initData(){
+		moneylist=listmoneybean.getList();
+		if(moneylist!=null){
+			if(moneyQueryAdapter!=null){
+				moneyQueryAdapter.setData(moneylist);
+				moneyQueryAdapter.notifyDataSetChanged();
+			}else{
+				moneyQueryAdapter=new MoneyQueryAdapter(context, moneylist);
+				list_money.setAdapter(moneyQueryAdapter);
+			}
+			
 		}
 	}
 

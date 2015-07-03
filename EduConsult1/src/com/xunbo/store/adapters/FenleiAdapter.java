@@ -26,7 +26,7 @@ public class FenleiAdapter extends BaseAdapter{
 	public FenleiAdapter(Context context,ArrayList<Integer>list){
 		this.context = context;
 		this.list = list;
-		index = -1;
+		index = 2;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(int index){
@@ -72,51 +72,58 @@ public class FenleiAdapter extends BaseAdapter{
 			item.tv_show.setVisibility(View.VISIBLE);
 			switch (position) {
 			case 0:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
-				item.iv.setBackgroundResource(R.drawable.home_l);
+//				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+//				item.iv.setBackgroundResource(R.drawable.home_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_home));
 				item.tv.setVisibility(View.INVISIBLE);
-				item.tv.setEnabled(false);
+//				item.tv.setEnabled(false);
 				break;
 			case 1:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				//item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
 				//item.iv.setBackgroundResource(R.drawable.all_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_all));
 				break;
 			case 2:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei1_bg2));
 				item.iv.setBackgroundResource(R.drawable.siliao_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_siliao));
+				item.tv.setTextColor(R.color.fame_hui3);
 				break;
 			case 3:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei1_bg2));
 				item.iv.setBackgroundResource(R.drawable.shouyao_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_shouyao));
+				item.tv.setTextColor(R.color.fame_hui3);
 				break;
 			case 4:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei1_bg2));
 				item.iv.setBackgroundResource(R.drawable.shebei_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_yanzhi));
+				item.tv.setTextColor(R.color.fame_hui3);
 				break;
 			case 5:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei1_bg2));
 				item.iv.setBackgroundResource(R.drawable.xunchu_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_xunchu));
+				item.tv.setTextColor(R.color.fame_hui3);
 				break;
 			case 6:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei1_bg2));
 				item.iv.setBackgroundResource(R.drawable.tianjiaji_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_tianjiaji));
+				item.tv.setTextColor(R.color.fame_hui3);
 				break;
 			case 7:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei1_bg2));
 				item.iv.setBackgroundResource(R.drawable.yuanliao_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_yuanliao));
+				item.tv.setTextColor(R.color.fame_hui3);
 				break;
 			case 8:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei1_bg2));
 				item.iv.setBackgroundResource(R.drawable.other_l);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_other));
+				item.tv.setTextColor(R.color.fame_hui3);
 				break;
 			}
 		}else{
@@ -124,13 +131,15 @@ public class FenleiAdapter extends BaseAdapter{
 			item.tv_show.setVisibility(View.INVISIBLE);
 			switch (position) {
 			case 0:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_top_title_bg));
-				item.iv.setBackgroundResource(R.drawable.home_q);
+//				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_top_title_bg));
+//				item.iv.setBackgroundResource(R.drawable.home_q);
+//				item.tv.setText(context.getResources().getString(R.string.home_slid_home));
 				item.tv.setText(context.getResources().getString(R.string.home_slid_home));
+				item.tv.setVisibility(View.INVISIBLE);
 				break;
 			case 1:
-				item.ll.setBackgroundColor(context.getResources().getColor(R.color.base_top_title_bg));
-				item.iv.setBackgroundResource(R.drawable.all_q);
+//				item.ll.setBackgroundColor(context.getResources().getColor(R.color.fenlei_bg));
+//				item.iv.setBackgroundResource(R.drawable.all_q);
 				item.tv.setText(context.getResources().getString(R.string.home_slid_all));
 				break;
 			case 2:

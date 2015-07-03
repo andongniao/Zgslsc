@@ -55,6 +55,7 @@
             android:id="@+id/home_layout_sc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:fadingEdge="none"
             android:scrollbars="none" >
 
             <LinearLayout
@@ -66,8 +67,10 @@
                  <ImageView 
                      android:id="@+id/home_layout_iv_top"
                      android:layout_width="fill_parent"
-                     android:layout_height="200dp"
-                     android:background="@color/black"
+                     android:layout_height="100dp"
+                     android:background="@color/white"
+                     android:scaleType="fitXY"
+                    
                      />
                  <LinearLayout 
                      android:layout_width="fill_parent"
@@ -92,9 +95,10 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_layout_rem"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
+                     	        
                      	        /> 
                      	        <TextView 
                      	            android:layout_width="0dp"
@@ -113,7 +117,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />
@@ -135,6 +139,7 @@
                              android:layout_width="fill_parent"
                              android:layout_height="wrap_content"
                              android:orientation="horizontal"
+                             
                              >
                              <ImageView 
                                  android:id="@+id/home_layout_iv_rem_top_lf"
@@ -142,6 +147,7 @@
                                  android:layout_weight="1"
                                  android:layout_height="140dp"
                                  android:background="@color/white"
+                                 android:layout_marginBottom="0.5dp"
                                  />
                              <LinearLayout 
                                  android:layout_width="0dp"
@@ -154,7 +160,7 @@
                                      android:layout_width="fill_parent"
                                      android:layout_weight="1"
                                      android:layout_height="0dp"
-                                     android:background="@color/white"
+                                      android:background="@color/white"
                                      android:layout_marginBottom="0.5dp"
                                      />
                                   <ImageView 
@@ -182,28 +188,33 @@
                                  android:background="@color/white"
                                  android:layout_marginRight="0.5dp"
                                  >
+
                                  <TextView
-                                     android:layout_width="wrap_content"
-                                     android:layout_height="wrap_content"
                                      android:id="@+id/home_layout_tv_rem_title_1"
-                                     android:textColor="@color/black"
-                                     android:textSize="15dp"
-                                      android:text="1231"
-                                      />
-                                   <TextView
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
-                                     android:id="@+id/home_layout_tv_rem_detaile_1"
-                                     android:textColor="@color/home_hui"
-                                     android:textSize="14dp"
-                                     android:text="1231"
-                                      />
+                                     android:ellipsize="end"
+                                     android:singleLine="true"
+                                     android:text="@string/test"
+                                     android:textColor="@color/fame_hui3" />
+
+                                   <TextView
+                                       android:id="@+id/home_layout_tv_rem_detaile_1"
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:ellipsize="end"
+                                       android:singleLine="true"
+                                       android:text="1231"
+                                       android:textColor="@color/fame_hui1"
+                                       android:textSize="14dp"
+                                       android:visibility="invisible" />
+
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_1"
                                        android:layout_width="75dp"
                                        android:layout_height="75dp"
                                        android:scaleType="fitXY"
-                                       android:background="@color/black"
+                                        android:background="@drawable/default_bg"
                                        />
                              </LinearLayout>
                              
@@ -218,27 +229,34 @@
                                  android:background="@color/white"
                                  android:layout_marginRight="0.5dp"
                                  >
+
                                  <TextView
-                                     android:layout_width="wrap_content"
-                                     android:layout_height="wrap_content"
                                      android:id="@+id/home_layout_tv_rem_title_2"
-                                     android:textColor="@color/black"
-                                     android:textSize="15dp"
-                                      android:text="1231"
-                                      />
-                                   <TextView
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
-                                     android:id="@+id/home_layout_tv_rem_detaile_2"
-                                     android:textColor="@color/home_hui"
-                                     android:textSize="14dp"
-                                     android:text="1231"
-                                      />
+                                     android:ellipsize="end"
+                                     android:singleLine="true"
+                                     android:text="@string/test"
+                                     android:textColor="@color/fame_hui3"
+                                     android:textSize="15dp" />
+
+                                   <TextView
+                                       android:id="@+id/home_layout_tv_rem_detaile_2"
+                                       android:layout_width="wrap_content"
+                                       android:layout_height="wrap_content"
+                                       android:ellipsize="end"
+                                       android:singleLine="true"
+                                       android:text="1231"
+                                       android:textColor="@color/home_hui"
+                                       android:textSize="14dp"
+                                       android:visibility="invisible" />
+
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_2"
                                        android:layout_width="75dp"
                                        android:layout_height="75dp"
                                        android:scaleType="fitXY"
+                                        android:background="@drawable/default_bg"
                                        />
                              </LinearLayout>
                              
@@ -252,28 +270,34 @@
                                  android:background="@color/white"
                                  android:layout_marginRight="0.5dp"
                                  >
+
                                  <TextView
+                                     android:id="@+id/home_layout_tv_rem_title_3"
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
-                                     android:id="@+id/home_layout_tv_rem_title_3"
-                                     android:textColor="@color/black"
-                                     android:textSize="15dp"
-                                      android:text="1231"
-                                      />
+                                     android:ellipsize="end"
+                                     android:singleLine="true"
+                                     android:text="@string/test"
+                                     android:textColor="@color/fame_hui3"
+                                     android:textSize="15dp" />
+
                                    <TextView
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
                                      android:id="@+id/home_layout_tv_rem_detaile_3"
-                                     android:textColor="@color/home_hui"
+                                     android:textColor="@color/fame_hui1"
                                      android:textSize="14dp"
                                      android:text="1231"
+                                     android:singleLine="true"
+      								  android:ellipsize="end"
+                                     android:visibility="invisible"
                                       />
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_3"
                                        android:layout_width="75dp"
                                        android:layout_height="75dp"
                                        android:scaleType="fitXY"
-                                       android:background="@color/black"
+                                       android:background="@drawable/default_bg"
                                        />
                              </LinearLayout>
                              
@@ -288,27 +312,34 @@
                                  android:background="@color/white"
                                  android:layout_marginRight="0.5dp"
                                  >
+
                                  <TextView
+                                     android:id="@+id/home_layout_tv_rem_title_4"
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
-                                     android:id="@+id/home_layout_tv_rem_title_4"
-                                     android:textColor="@color/black"
-                                     android:textSize="15dp"
-                                      android:text="1231"
-                                      />
+                                     android:ellipsize="end"
+                                     android:singleLine="true"
+                                     android:text="@string/test"
+                                     android:textColor="@color/fame_hui3"
+                                     android:textSize="15dp" />
+
                                    <TextView
                                      android:layout_width="wrap_content"
                                      android:layout_height="wrap_content"
                                      android:id="@+id/home_layout_tv_rem_detaile_4"
-                                     android:textColor="@color/home_hui"
+                                     android:textColor="@color/fame_hui1"
                                      android:textSize="14dp"
                                      android:text="1231"
+                                     android:singleLine="true"
+        							 android:ellipsize="end"
+                                     android:visibility="invisible"
                                       />
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_4"
                                        android:layout_width="75dp"
                                        android:layout_height="75dp"
                                        android:scaleType="fitXY"
+                                        android:background="@drawable/default_bg"
                                        />
                              </LinearLayout>
                              
@@ -346,7 +377,7 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_siliao"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
                      	        /> 
@@ -367,7 +398,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />
@@ -401,7 +432,8 @@
                      android:id="@+id/home_layout_iv_center1"
                      android:layout_width="fill_parent"
                      android:layout_height="80dp"
-                     android:background="@color/black"
+                     android:background="@color/white"
+                      android:scaleType="fitXY"
                      />
                 <LinearLayout 
                      android:layout_width="fill_parent"
@@ -426,7 +458,7 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_shouyao"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
                      	        /> 
@@ -447,7 +479,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />
@@ -499,7 +531,7 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_yangzhishebei"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
                      	        /> 
@@ -520,7 +552,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />
@@ -553,7 +585,8 @@
                     android:id="@+id/home_layout_iv_center2"
                     android:layout_width="fill_parent"
                     android:layout_height="80dp"
-                    android:background="@color/black" />
+                     android:scaleType="fitXY"
+                    android:background="@color/white" />
 				<LinearLayout 
                      android:layout_width="fill_parent"
                      android:layout_height="wrap_content"
@@ -577,7 +610,7 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_chuqinyangzhi"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
                      	        /> 
@@ -598,7 +631,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />
@@ -650,7 +683,7 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_tianjiaji"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
                      	        /> 
@@ -671,7 +704,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />
@@ -723,7 +756,7 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_yuanliao"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
                      	        /> 
@@ -744,7 +777,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />
@@ -797,7 +830,7 @@
                      	        android:layout_width="wrap_content"
                      	        android:layout_height="wrap_content"
                      	        android:text="@string/home_layout_qita"
-                     	        android:textColor="@color/black"
+                     	        android:textColor="@color/fame_hui3"
                      	        android:textSize="16dp"
                      	        android:padding="5dp"
                      	        /> 
@@ -818,7 +851,7 @@
                      	            <TextView 
                      	                android:layout_width="wrap_content"
                      	                android:layout_height="wrap_content"
-                     	                android:textColor="@color/home_hui"
+                     	                android:textColor="@color/fame_hui2"
                      	                android:text="@string/home_more"
                      	                android:layout_marginRight="5dp"
                      	                />

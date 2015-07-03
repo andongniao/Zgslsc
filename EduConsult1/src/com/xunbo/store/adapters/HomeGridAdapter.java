@@ -30,7 +30,9 @@ public class HomeGridAdapter extends BaseAdapter{
 		this.context = context;
 		inflater = LayoutInflater.from(context);
 	}
-	
+	public void setProductBean(ArrayList<ProductBean> list){
+		this.list=list;
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -63,6 +65,17 @@ public class HomeGridAdapter extends BaseAdapter{
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
+		if(Util.IsNull(list.get(position).getApppic())){
+			Util.Getbitmap(myitem.iv, list.get(position).getApppic());
+		}else{
+			Util.Getbitmap(myitem.iv, list.get(position).getThumb());
+		}
+		if(Util.IsNull(list.get(position).getSubtitle())){
+			myitem.tv_detaile.setVisibility(View.VISIBLE);
+			myitem.tv_detaile.setText(list.get(position).getSubtitle());
+		}
+		myitem.tv_price.setText("гд"+list.get(position).getPrice());
+		myitem.tv_title.setText(list.get(position).getTitle());
 		return convertView;
 	}
 	

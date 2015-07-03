@@ -73,7 +73,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		super.onCreate(arg0);
 		context=this;
 		topRightTGone();
-		setTopLeftTv(R.string.scstore_title);
+		setTitleTxt(R.string.scstore_title);
 		setContentXml(R.layout.scstore);
 		init();
 		
