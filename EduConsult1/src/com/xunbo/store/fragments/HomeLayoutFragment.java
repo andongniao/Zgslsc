@@ -24,15 +24,21 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -91,6 +97,10 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 	private ArrayList<String> ad;
 	private Handler handler;
 	private RefreshableView refreshableView;
+	private boolean isdata,isshow;
+	private int w,h;
+	private PopupWindow popupWindow;
+	private View v;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -105,6 +115,14 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		context = getActivity();
 		mp=new MyApplication();
 		myPDT=new ThreadWithProgressDialog();
+		DisplayMetrics  dm = new DisplayMetrics();  
+		this.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		w = dm.widthPixels;  
+		h = dm.heightPixels; 
+		v = new ImageView(context);
+		v.setBackgroundResource(R.drawable.base_to_top);
+		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		isshow = false;
 		refreshableView=(RefreshableView)view.findViewById(R.id.home_layout_rview);
 		refreshableView.setRefreshListener(this);
 		sc=(ScrollView)view.findViewById(R.id.home_layout_sc);
@@ -141,12 +159,12 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		lv_yuanliao=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_yuanliao);
 		lv_qita=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_qita);
 		lv_rem1=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_1);
-		lv_rem1.setOnClickListener(this);
 		lv_rem2=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_2);
-		lv_rem2.setOnClickListener(this);
 		lv_rem3=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_3);
-		lv_rem3.setOnClickListener(this);
 		lv_rem4=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_4);
+		lv_rem1.setOnClickListener(this);
+		lv_rem3.setOnClickListener(this);
+		lv_rem2.setOnClickListener(this);
 		lv_rem4.setOnClickListener(this);
 		lv_rem.setOnClickListener(this);
 		lv_siliao.setOnClickListener(this);
@@ -195,6 +213,40 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 	}
 
 	private void addlistener() {
+		sc.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if(event.getAction()==MotionEvent.ACTION_MOVE){
+					if(!isshow){
+						if(sc.getScrollY()>100){
+							popupWindow.showAtLocation(gv_yuanliao, Gravity.BOTTOM,w/2-20, 120);
+							isshow = true;
+						}
+					}else{
+						if(sc.getScrollY()<=100){
+							if(popupWindow!=null && popupWindow.isShowing()){
+								popupWindow.dismiss();
+							}
+							isshow = false;
+						}
+					}
+				}
+				return false;
+			}
+		});
+		v.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(isshow){
+					if(popupWindow!=null && popupWindow.isShowing()){
+						popupWindow.dismiss();
+					}
+					sc.scrollTo(10, 10);
+					isshow = false;
+				}
+			}
+		});
 		top_rl.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -210,8 +262,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				
-				Toproduct(siliao.get(arg2));
+					Toproduct(siliao.get(arg2));
 			}
 		});
 //		gv_qita.setOnItemClickListener(new OnItemClickListener() {
@@ -229,7 +280,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				Toproduct(qxyz.get(arg2));
+					Toproduct(qxyz.get(arg2));
 			}
 		});
 		gv_shouyao.setOnItemClickListener(new OnItemClickListener() {
@@ -247,6 +298,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+					
 				Toproduct(tianjiaji.get(arg2));
 			}
 		});
@@ -266,20 +318,10 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+					
 				Toproduct(yzsb.get(arg2));
 			}
 		});
-//		gv_like.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				if(home!=null && home.getMylike()!=null && home.getMylike().size()>0){
-//				productBean=home.getMylike().get(arg2);
-//				Toproduct(productBean);
-//				}
-//			}
-//		});
 	}
 
 	@Override
@@ -289,51 +331,53 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.home_layout_iv_cat:
-//			msg = HomePagerActivity.handler.obtainMessage();
-//			msg.obj = HomePagerActivity.SlidTag;
-//			HomePagerActivity.handler.sendMessage(msg);
-			break;
-		case R.id.home_layout_ll_more_chuqinyangzhi:
-			
-			break;
-		case R.id.home_layout_ll_more_qita:
-			break;
-		case R.id.home_layout_ll_more_rem:
-			break;
-		case R.id.home_layout_ll_more_shouyao:
-			break;
-		case R.id.home_layout_ll_more_siliao:
-			break;
-		case R.id.home_layout_ll_more_tianjiaji:
-			break;
-		case R.id.home_layout_ll_more_yangzhishebei:
-			break;
-		case R.id.home_layout_ll_more_yuanliao:
-			break;
-		case R.id.home_layout_iv_rem_top_lf:
-			Toproduct(recommend.get(0));
-			break;
-		case R.id.home_layout_iv_rem_right__t:
-			Toproduct(recommend.get(1));
-			break;
-		case R.id.home_layout_iv_rem_right_b:
-			Toproduct(recommend.get(2));
-			break;
-		case R.id.home_layout_ll_rem_b_1:
-			Toproduct(recommend.get(3));
-			break;
-		case R.id.home_layout_ll_rem_b_2:
-			Toproduct(recommend.get(4));
-			break;
-		case R.id.home_layout_ll_rem_b_3:
-			Toproduct(recommend.get(5));
-			break;
-		case R.id.home_layout_ll_rem_b_4:
-			Toproduct(recommend.get(6));
-			break;
-			
+		if(isdata){
+			switch (v.getId()) {
+			case R.id.home_layout_iv_cat:
+				//			msg = HomePagerActivity.handler.obtainMessage();
+				//			msg.obj = HomePagerActivity.SlidTag;
+				//			HomePagerActivity.handler.sendMessage(msg);
+				break;
+			case R.id.home_layout_ll_more_chuqinyangzhi:
+
+				break;
+			case R.id.home_layout_ll_more_qita:
+				break;
+			case R.id.home_layout_ll_more_rem:
+				break;
+			case R.id.home_layout_ll_more_shouyao:
+				break;
+			case R.id.home_layout_ll_more_siliao:
+				break;
+			case R.id.home_layout_ll_more_tianjiaji:
+				break;
+			case R.id.home_layout_ll_more_yangzhishebei:
+				break;
+			case R.id.home_layout_ll_more_yuanliao:
+				break;
+			case R.id.home_layout_iv_rem_top_lf:
+				Toproduct(recommend.get(0));
+				break;
+			case R.id.home_layout_iv_rem_right__t:
+				Toproduct(recommend.get(1));
+				break;
+			case R.id.home_layout_iv_rem_right_b:
+				Toproduct(recommend.get(2));
+				break;
+			case R.id.home_layout_ll_rem_b_1:
+				Toproduct(recommend.get(3));
+				break;
+			case R.id.home_layout_ll_rem_b_2:
+				Toproduct(recommend.get(4));
+				break;
+			case R.id.home_layout_ll_rem_b_3:
+				Toproduct(recommend.get(5));
+				break;
+			case R.id.home_layout_ll_rem_b_4:
+				Toproduct(recommend.get(6));
+				break;
+
+			}
 		}
 	}
  private void ToSearch(String text){
@@ -427,6 +471,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 			// TODO Auto-generated method stub
 			if(homeInfoBean!=null){
 				if("200".equals(homeInfoBean.getCode())){
+					
 					initData(homeInfoBean);
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
@@ -439,6 +484,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		
 	}
 	private void initData(HomeInfoBean homeInfoBean){
+		isdata=true;
 		recommend=homeInfoBean.getRecommend();
 		cat=homeInfoBean.getCat();
 		ad=homeInfoBean.getAd();

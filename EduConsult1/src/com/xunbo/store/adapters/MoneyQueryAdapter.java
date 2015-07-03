@@ -27,10 +27,14 @@ public class MoneyQueryAdapter extends BaseAdapter{
 		inflater = LayoutInflater.from(context);
 	}
 	
+	public void setData(ArrayList<MoneyDetaileBean> list){
+		this.list=list;
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list!=null?list.size():0;
+//		return 4;
 	}
 
 	@Override
@@ -59,10 +63,10 @@ public class MoneyQueryAdapter extends BaseAdapter{
 			myitem = (Myitem) convertView.getTag();
 		}
 		money=list.get(position);
-		myitem.money.setText(money.getAmount());
+		myitem.money.setText(money.getBalance());
 		myitem.time.setText(money.getAddtime());
-		myitem.queryway.setText(money.getBalance());
-
+		myitem.queryway.setText(money.getReason());
+		myitem.querymoney.setText(money.getAmount());
 		return convertView;
 	}
 	

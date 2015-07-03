@@ -161,21 +161,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/money_withtrawal_tishi"
-            android:textColor="@color/black" />
+            android:textColor="@color/black" 
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/money_withdrawal_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test"
-            android:textColor="@color/black" >
+            android:textColor="@color/black" 
+            android:visibility="invisible"
+            >
         </TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/money_withtrawal_tishi1"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:visibility="invisible" />
     </LinearLayout>
      <TextView
         android:layout_width="fill_parent"
