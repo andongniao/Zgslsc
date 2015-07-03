@@ -390,7 +390,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
-		MobclickAgent.onPageStart( "地址管理" );
+		MobclickAgent.onPageStart( "AddressGLActivity" );
 		MobclickAgent.onResume(this);
 		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
 			lare = (ListAreaBean) u.readObject(filename);
@@ -408,7 +408,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onPause() {
 		super.onPause();
-		MobclickAgent.onPageEnd( "地址管理" );
+		MobclickAgent.onPageEnd( "AddressGLActivity" );
 		MobclickAgent.onPause(this);
 	}
 

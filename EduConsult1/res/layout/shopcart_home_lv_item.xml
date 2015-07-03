@@ -4,7 +4,7 @@
     android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="5dp" >
+    >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -32,10 +32,6 @@
             android:textColor="@color/black" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/home_hui" />
 
     <com.xunbo.store.myviews.SwipeMenuListView.SwipeMenuListView
         android:id="@+id/shopcart_home_lv_lv"
@@ -43,6 +39,8 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:listSelector="#00000000"
+        android:divider="@color/home_hui"
+        android:dividerHeight="0.5dp"
         android:fadingEdge="none"
         android:scrollbars="none" >
     </com.xunbo.store.myviews.SwipeMenuListView.SwipeMenuListView>

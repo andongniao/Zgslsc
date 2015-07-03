@@ -277,7 +277,10 @@ public class MyApplication extends Application{
 			er.commit();
 		}
 	}
-
+	/**
+	 * 保存产品到浏览记录
+	 * @param bean
+	 */
 	public static void SaveSee(ProductBean bean){
 		ListProductBean lb = new ListProductBean();
 		ArrayList<ProductBean> list = GetSee();
@@ -316,6 +319,10 @@ public class MyApplication extends Application{
 		lb.setList(list);
 		util.saveObject(lb,Seejilu);
 	}
+	/**
+	 * 获取浏览记录列表
+	 * @return
+	 */
 	public static ArrayList<ProductBean> GetSee(){
 		ListProductBean bean;
 		ArrayList<ProductBean> list = new ArrayList<ProductBean>();
@@ -325,6 +332,31 @@ public class MyApplication extends Application{
 				list = bean.getList();
 			}
 		}
+		return list;
+	}
+	/**
+	 * 删除浏览记录
+	 * @param l
+	 * @return
+	 */
+	public static ArrayList<ProductBean> deleteSee(ArrayList<String> l){
+		ListProductBean lb = new ListProductBean();
+		ProductBean bean;
+		ArrayList<ProductBean> list =GetSee();
+		if(list!=null && list.size()>0){
+			for(int i=0;i<list.size();i++){
+				bean = list.get(i);
+				String s = bean.getItemid();
+				for(int j=0;j<l.size();j++){
+					String sl = l.get(j);
+					if(s.equals(sl)){
+						list.remove(bean);
+					}
+				}
+			}
+		}
+		lb.setList(list);
+		util.saveObject(lb,Seejilu);
 		return list;
 	}
 

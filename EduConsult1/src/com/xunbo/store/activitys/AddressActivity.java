@@ -150,7 +150,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
-		MobclickAgent.onPageStart("SplashScreen"); 
+		MobclickAgent.onPageStart("AddressActivity"); 
 		MobclickAgent.onResume(context);
 		if(isread){
 			Util.SetRedGone(context, rl_l);
@@ -168,7 +168,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		MobclickAgent.onPageEnd("SplashScreen"); 
+		MobclickAgent.onPageEnd("AddressActivity"); 
 		MobclickAgent.onPause(context);
 	}
 

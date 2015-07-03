@@ -7,10 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xunbo.store.R;
+import com.xunbo.store.activitys.MyZjActivity.myzj;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.tools.Util;
 
@@ -19,15 +23,19 @@ public class MyZjAdapter extends BaseAdapter{
 	private ArrayList<ProductBean>list;
 	private LayoutInflater inflater;
 	private Item item;
+	private int type;
+	private myzj myzj;
 
 
-	public MyZjAdapter(Context context,ArrayList<ProductBean>list){
+	public MyZjAdapter(Context context,ArrayList<ProductBean>list,int type, myzj myzj){
 		this.context = context;
 		this.list = list;
+		this.type = type;
 		inflater = LayoutInflater.from(context);
 	}
-	public void SetData(ArrayList<ProductBean>list){
+	public void SetData(ArrayList<ProductBean>list,int type){
 		this.list = list;
+		this.type = type;
 	}
 
 	@Override
@@ -51,31 +59,23 @@ public class MyZjAdapter extends BaseAdapter{
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		if(convertView==null){
-			convertView = inflater.inflate(R.layout.myzj_item, null);
+			convertView = inflater.inflate(R.layout.myzj_lv_item, null);
 			item = new Item();
-			item.iv = (ImageView) convertView.findViewById(R.id.myzj_item_iv);
+			item.iv = (ImageView) convertView.findViewById(R.id.myzj_lv_ic);
 			item.tv_title = (TextView) 
-					convertView.findViewById(R.id.myzj_item_title);
-			item.tv_address = (TextView) 
-					convertView.findViewById(R.id.myzj_item_address);
+					convertView.findViewById(R.id.myzj_lv_tv_title);
+			item.tv_subtitle = (TextView) 
+					convertView.findViewById(R.id.myzj_lv_tv_subtitle);
 			item.tv_price = (TextView) 
-					convertView.findViewById(R.id.myzj_item_price);
-			item.tv_time = (TextView) 
-					convertView.findViewById(R.id.myzj_item_time);
-			item.tv_util=(TextView)convertView.findViewById(R.id.myzj_item_utile);
+					convertView.findViewById(R.id.myzj_lv_tv_price);
+			item.tv_util=(TextView)convertView.findViewById(R.id.myzj_lv_tv_uint);
+			item.cb = (CheckBox)convertView.findViewById(R.id.myzj_lv_cb);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		
-//		try {
-			//item.iv.setImageBitmap(Util.getBitmapForNet(list.get(position).getThumb()));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-	   Util.Getbitmap(item.iv, list.get(position).getThumb());
-		item.tv_address.setText(list.get(position).getArea());
+
+		Util.Getbitmap(item.iv, list.get(position).getThumb());
 		String s="";
 		if(Util.IsNull(list.get(position).getUnit())){
 			s=list.get(position).getUnit();
@@ -83,11 +83,33 @@ public class MyZjAdapter extends BaseAdapter{
 		item.tv_util.setText(s);
 		item.tv_price.setText("гд"+list.get(position).getPrice());
 		item.tv_title.setText(list.get(position).getTitle());
+		if(Util.IsNull(list.get(position).getSubtitle())){
+			item.tv_subtitle.setVisibility(View.VISIBLE);
+		item.tv_subtitle.setText(list.get(position).getSubtitle());
+		}
+		if(type==0){
+			item.cb.setVisibility(View.GONE);
+		}else{
+			item.cb.setVisibility(View.VISIBLE);
+		}
+		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked){
+					myzj.addlist(list.get(position).getItemid());
+				}else{
+					myzj.removelist(list.get(position).getItemid());
+				}
+			}
+		});
+		
 		return convertView;
 	}
 	class Item{
-		TextView tv_title,tv_price,tv_address,tv_time,tv_util;
+		TextView tv_title,tv_price,tv_subtitle,tv_util;
 		ImageView iv;
+		CheckBox cb;
 	}
 
 }

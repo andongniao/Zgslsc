@@ -58,14 +58,14 @@ public class AboutActivity extends BaseActivity{
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		MobclickAgent.onPageEnd("SplashScreen"); 
+		MobclickAgent.onPageEnd("AboutActivity"); 
 		MobclickAgent.onPause(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		MobclickAgent.onPageStart("SplashScreen"); 
+		MobclickAgent.onPageStart("AboutActivity"); 
 		MobclickAgent.onResume(this);
 	}
 

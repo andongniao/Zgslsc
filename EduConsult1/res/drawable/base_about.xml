@@ -4,4 +4,4 @@
     <item android:drawable="@drawable/cat_bg_w" android:state_enabled="true" android:state_selected="false"/>
     <item android:drawable="@drawable/cat_bg_l" android:state_enabled="true" android:state_selected="true"/>
 
-</selector>
+</selector> 

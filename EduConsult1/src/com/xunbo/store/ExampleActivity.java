@@ -37,7 +37,7 @@ public class ExampleActivity extends TabHostActivity {
 //				this, SearchHomeActivity.class),"home");
 
 		TabItem About = new TabItem(R.drawable.base_about, new Intent(
-				this, MyZjActivity.class),"产  品  ");
+				this, MyZjActivity.class),"产品分类  ");
 
 		TabItem ShopCart = new TabItem(R.drawable.base_shopcart, new Intent(
 				this, ShopcartActivity.class),"购物车  ");

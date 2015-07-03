@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.testin.agent.TestinAgent;
@@ -25,9 +29,9 @@ import com.xunbo.store.tools.Util;
 public class MyZjActivity extends BaseActivity implements OnClickListener{
 	
 	private Context context;
-	private GridView gridView;
+	private ListView lv;;
 	private MyZjAdapter adapter;
-	private ArrayList<Integer>list;
+	private ArrayList<String>list;
 	private Intent intent;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
@@ -38,13 +42,18 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private ListProductBean listProductBean;
 	private Util u;
 	public static boolean isfinish;
+	private ImageView iv_top_t;
+	private int type;
+	private myzj myzj;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		
 		topRightTGone();
-		
+		iv_top_t = (ImageView) getTopRightView();
+		iv_top_t.setBackgroundResource(R.drawable.del_icon_normal);
+		iv_top_t.setVisibility(View.GONE);
 		setTopLeftTv(R.string.myzj_title);
 		setContentXml(R.layout.myzj);
 		init();
@@ -65,8 +74,19 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void addlistener() {
+		iv_top_t.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				productBeans = MyApplication.mp.deleteSee(list);
+				type=0;
+				iv_top_t.setVisibility(View.GONE);
+				adapter.SetData(productBeans, type);
+				adapter.notifyDataSetChanged();
+			}
+		});
 		
-		gridView.setOnItemClickListener(new OnItemClickListener() {
+		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -75,6 +95,18 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 
+		lv.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				if(type==0){
+					type=1;
+					adapter.SetData(productBeans, type);
+				}
+				return false;
+			}
+		});
+		
 	}
 
 	private void init() {
@@ -82,8 +114,9 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		context = this;
 		isread = false;
 		isfinish=false;
+		type = 0;
+		list = new ArrayList<String>();
 		myPDT=new ThreadWithProgressDialog();
-		
 		u=new Util(context);
 		listProductBean=(ListProductBean)u.readObject(MyApplication.Seejilu);
 		if(listProductBean==null){
@@ -94,31 +127,41 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 			productBeans=listProductBean.getList();
 		}
 		ll_not=(LinearLayout)findViewById(R.id.myzj_ll_isnull);
-		gridView = (GridView) findViewById(R.id.myzj_gv);
+		lv = (ListView) findViewById(R.id.myzj_lv);
+		
+		
+		myzj = new myzj() {
+			
+			@Override
+			public void removelist(String itemid) {
+				list.remove(itemid);
+			}
+			
+			@Override
+			public void addlist(String itemid) {
+				list.add(itemid);
+			}
+		};
+		
 		if(productBeans==null||productBeans.size()==0){
-			gridView.setVisibility(View.GONE);
+			lv.setVisibility(View.GONE);
 			
 			
 		}else{
 			ll_not.setVisibility(View.GONE);
-			adapter = new MyZjAdapter(context, productBeans);
-			gridView.setAdapter(adapter);
+			adapter = new MyZjAdapter(context, productBeans,type,myzj);
+			lv.setAdapter(adapter);
 		}
 		
 		
 		
-		list = new ArrayList<Integer>();
-		for(int i=0;i<10;i++){
-			list.add(i);
-		}
-		//gridView.setFocusable(false);
-		Util.SetRedNum(context, rl_l, 0);
-		/*if(Util.detect(context)){
-			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
-		}*/
 
 	}
 
+	public interface myzj{
+		void addlist(String itemid);
+		void removelist(String itemid);
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -146,6 +189,16 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 			finish();
 		}
 	}
-	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+			if(type==1){
+				type=0;
+				iv_top_t.setVisibility(View.GONE);
+			}
+			return true;   
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 	
 }

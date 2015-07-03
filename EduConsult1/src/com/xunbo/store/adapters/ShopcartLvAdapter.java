@@ -3,9 +3,12 @@ package com.xunbo.store.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xunbo.store.R;
 import com.xunbo.store.activitys.ShopcartActivity.shop;
@@ -84,18 +88,47 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		}else{
 			item = (Item) convertView.getTag();
 		}
-		if(type==1){
-			item.ll_del.setVisibility(View.VISIBLE);
-			item.cb.setVisibility(View.VISIBLE);
-		}else{
+		
+		
+		item.et_number.addTextChangedListener(new TextWatcher() {  
+            @Override  
+            public void onTextChanged(CharSequence s, int start, int before, int count) {  
+                // TODO Auto-generated method stub  
+            }  
+  
+            @Override  
+            public void beforeTextChanged(CharSequence s, int start, int count,  
+                    int after) {  
+                // TODO Auto-generated method stub  
+                  
+            }  
+              
+            @Override  
+            public void afterTextChanged(Editable s) {  
+                // TODO Auto-generated method stub  
+//                Log.i("TAG",et.getText().toString()); 
+            	String n = item.et_number.getText().toString();
+            	if(Util.IsNull(n)){
+            	int number = Integer.parseInt(n);
+            	list.get(index).getMall().get(position).setNum(number);
+            	shop.setnumber(list);
+            	}
+//            	Util.ShowToast(context,);
+            }  
+        }); 
+		
+//		if(type==1){
+//			item.ll_del.setVisibility(View.VISIBLE);
+//			item.cb.setVisibility(View.VISIBLE);
+//		}else{
 			item.ll_del.setVisibility(View.GONE);
-			item.cb.setVisibility(View.GONE);
-		}
-		if(type==0){
+//			item.cb.setVisibility(View.GONE);
+//		}
+//		if(type==0){
 			item.cb.setVisibility(View.VISIBLE);
-		}else{
-			item.cb.setVisibility(View.GONE);
-		}
+//		}else{
+//			item.cb.setVisibility(View.GONE);
+//		}
 		ShopBean sb = (ShopBean) list.get(index);
 		ArrayList<ShopItemBean> l = sb.getMall();
 
@@ -161,7 +194,16 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		float i_allmoney=i_num*i_price;
 		item.tv_zongjia.setText("гд"+i_allmoney);
 		Util.Getbitmap(item.iv_ic, b.getThumb());
-		
+		convertView.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				if(type==0){
+				shop.showdelete();
+				}
+				return false;
+			}
+		});
 		return convertView;
 	}
 

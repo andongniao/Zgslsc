@@ -26,6 +26,7 @@ import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.astuetz.PagerSlidingTabStrip;
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
@@ -311,11 +312,21 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart("GqTwoActivity"); 
+		MobclickAgent.onResume(this);
 		if(isread){
 			Util.SetRedGone(context, rl_l);
 			isread = false;
 		}
 	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("GqTwoActivity"); 
+		MobclickAgent.onPause(this);
+	}
+
+
 
 
 	// ÈÎÎñ

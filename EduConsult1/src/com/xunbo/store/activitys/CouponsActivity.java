@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.CouponsAdapter;
 
@@ -90,5 +91,19 @@ public class CouponsActivity extends BaseActivity {
 		
 	}
 	
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("CouponsActivity"); 
+		MobclickAgent.onPause(this);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart("CouponsActivity"); 
+		MobclickAgent.onResume(this);
+	}
 
 }

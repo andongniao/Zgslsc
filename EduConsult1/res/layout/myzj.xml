@@ -5,9 +5,9 @@
     android:orientation="vertical" 
     android:padding="10dp"
     android:background="@color/base_hui">
-
-    <GridView
-        android:id="@+id/myzj_gv"
+	
+    <ListView 
+        android:id="@+id/myzj_lv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:fadingEdge="none"
@@ -17,8 +17,8 @@
         android:numColumns="2"
         android:scrollbars="none"
         
-        android:verticalSpacing="10dp" >
-    </GridView>
+        android:verticalSpacing="10dp"
+        ></ListView>
     <LinearLayout 
         android:id="@+id/myzj_ll_isnull"
         android:layout_width="fill_parent"

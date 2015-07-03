@@ -26,6 +26,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.testin.agent.TestinAgent;
+import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.R;
 import com.xunbo.store.adapters.GqAdapter;
@@ -440,10 +441,18 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart("GqHomeActivity"); 
+		MobclickAgent.onResume(this);
 		if(isread){
 			Util.SetRedGone(context, rl_l);
 			isread = false;
 		}
+	}
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("GqHomeActivity"); 
+		MobclickAgent.onPause(this);
 	}
 	
 	

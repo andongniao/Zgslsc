@@ -80,6 +80,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.del_icon_normal);
+		iv_top_t.setVisibility(View.GONE);
 		setTitleTxt(R.string.shopcart_title);
 		setContentXml(R.layout.shopcart_home_view);
 		init();
@@ -172,7 +173,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 				if(len == list.size()){
 					cl = 1;
 					cb_all.setChecked(true);
-					//TODO
 				}
 				else{
 					cl = 1;
@@ -257,26 +257,20 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 
 			}
 
-		};
-
-
-	}
-
-	private void addlistener() {
-		iv_top_t.setOnClickListener(new OnClickListener() {
-			
 			@Override
-			public void onClick(View v) {
+			public void showdelete() {
 				if(list!=null){
 					if(list.size()>0){
 						if(showtp==0){
 							showtp=1;
+							iv_top_t.setVisibility(View.VISIBLE);
 							cb_all.setVisibility(View.GONE);
 							ll_jeisuan.setVisibility(View.GONE);
 							adapter.SetData(list, showtp);
 							adapter.notifyDataSetChanged();
 						}else{
 							showtp=0;
+							iv_top_t.setVisibility(View.GONE);
 							cb_all.setVisibility(View.VISIBLE);
 							ll_jeisuan.setVisibility(View.VISIBLE);
 							adapter.SetData(list, showtp);
@@ -284,7 +278,56 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 						}
 					}
 				}
-				
+			}
+
+			@Override
+			public void setnumber(ArrayList<ShopBean> ls) {
+				list = ls;
+				adapter.SetData(list, showtp);
+				adapter.notifyDataSetChanged();
+			}
+
+		};
+
+
+	}
+
+	private void addlistener() {
+		iv_top_t.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(list!=null){
+					if(list.size()>0){
+//						if(showtp==0){
+//							showtp=1;
+//							cb_all.setVisibility(View.GONE);
+//							ll_jeisuan.setVisibility(View.GONE);
+//							adapter.SetData(list, showtp);
+//							adapter.notifyDataSetChanged();
+//						}else{
+//							showtp=0;
+//							cb_all.setVisibility(View.VISIBLE);
+//							ll_jeisuan.setVisibility(View.VISIBLE);
+//							adapter.SetData(list, showtp);
+//							adapter.notifyDataSetChanged();
+//						}
+						ArrayList<String> l = new ArrayList<String>();
+						for(int i=0;i<list.size();i++){
+							for(int j=0;j<list.get(i).getMall().size();j++){
+								if(list.get(i).getMall().get(j).isIsclick()){
+									l.add(list.get(i).getMall().get(j).getItemid());
+								}
+							}
+						}
+						
+						if(l!=null && l.size()>0){
+							Util.ShowToast(context, l.toString());
+							//TODO 批量删除
+						}
+					}
+				}
+
 			}
 		});
 		cb_all.setOnClickListener(new OnClickListener() {
@@ -325,6 +368,8 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		void add1( int index,int postion);
 		void jian1(int index,int postion);
 		void delete(int index,int postion);
+		void showdelete();
+		void setnumber(ArrayList<ShopBean> list);
 	}
 
 	@Override
@@ -394,7 +439,14 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
-			if((System.currentTimeMillis()-exitTime) > 2000){  
+			if(showtp==1){
+				showtp=0;
+				iv_top_t.setVisibility(View.GONE);
+				cb_all.setVisibility(View.VISIBLE);
+				ll_jeisuan.setVisibility(View.VISIBLE);
+				adapter.SetData(list, showtp);
+				adapter.notifyDataSetChanged();
+			}else if((System.currentTimeMillis()-exitTime) > 2000){  
 				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
 				exitTime = System.currentTimeMillis();   
 			} else {

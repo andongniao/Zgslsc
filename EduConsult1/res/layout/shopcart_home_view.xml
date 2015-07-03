@@ -45,7 +45,7 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="5dp" >
+             >
 
             <CheckBox
                 android:id="@+id/shopcart_home_cb_all"

@@ -31,6 +31,7 @@ import com.xunbo.store.beans.ListComment;
 import com.xunbo.store.beans.ListCompanyBean;
 import com.xunbo.store.beans.ListFenleiBean;
 import com.xunbo.store.beans.ListMoneyBean;
+import com.xunbo.store.beans.ListMoneytxBean;
 import com.xunbo.store.beans.ListOrderBean;
 import com.xunbo.store.beans.ListProductBean;
 import com.xunbo.store.beans.ListShopBean;
@@ -38,6 +39,7 @@ import com.xunbo.store.beans.ListXinjianBean;
 import com.xunbo.store.beans.MallInfoBean;
 import com.xunbo.store.beans.MoneyBagBean;
 import com.xunbo.store.beans.MoneyDetaileBean;
+import com.xunbo.store.beans.MoneyTxBean;
 import com.xunbo.store.beans.OrderBean;
 import com.xunbo.store.beans.OrderFields;
 import com.xunbo.store.beans.ProdectDetaileBean;
@@ -733,8 +735,8 @@ public class Send {
 		}
 
 	}
-	
-	
+
+
 	/**
 	 * 获取钱包明细
 	 * @param type		全部，收入，支出
@@ -766,11 +768,13 @@ public class Send {
 				String code = object.getString("code");
 				String msg = object.getString("message");
 				if (code != null && "200".equals(code)) {
-					JSONArray data = object.getJSONArray("data");
-//					JSONObject js = data.getJSONObject(0);
-					Type t = new TypeToken<ArrayList<MoneyDetaileBean>>() {
-					}.getType();
-					list = gson.fromJson(data.toString(), t);
+					if(Util.IsNull(object.getString("data")) && !"[]".equals(object.getString("data"))){
+						JSONArray data = object.getJSONArray("data");
+						//					JSONObject js = data.getJSONObject(0);
+						Type t = new TypeToken<ArrayList<MoneyDetaileBean>>() {
+						}.getType();
+						list = gson.fromJson(data.toString(), t);
+					}
 				}
 				bean.setList(list);
 				bean.setMsg(msg);
@@ -812,11 +816,59 @@ public class Send {
 				String code = object.getString("code");
 				String msg = object.getString("message");
 				if (code != null && "200".equals(code)) {
-					JSONArray data = object.getJSONArray("data");
-//					JSONObject js = data.getJSONObject(0);
-					Type t = new TypeToken<ArrayList<MoneyDetaileBean>>() {
-					}.getType();
-					list = gson.fromJson(data.toString(), t);
+					if(Util.IsNull(object.getString("data")) && !"[]".equals(object.getString("data"))){
+						JSONArray data = object.getJSONArray("data");
+						//					JSONObject js = data.getJSONObject(0);
+						Type t = new TypeToken<ArrayList<MoneyDetaileBean>>() {
+						}.getType();
+						list = gson.fromJson(data.toString(), t);
+					}
+				}
+				bean.setList(list);
+				bean.setMsg(msg);
+				bean.setCode(code);
+				return bean;
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	/**
+	 * 获取可提现银行卡列表
+	 * @param authstr	唯一标示
+	 * @return
+	 */
+	public ListMoneytxBean getTxBankList(String authstr) {
+		ListMoneytxBean bean = new ListMoneytxBean();
+		ArrayList<MoneyTxBean> list = new ArrayList<MoneyTxBean>();
+		String baseurl = ServiceUrl.Base;
+		//TODO
+		String url=baseurl+ServiceUrl.money_hand;
+		url=url+"detail"+ServiceUrl.mycenter_footer+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					if(Util.IsNull(object.getString("data")) && !"[]".equals(object.getString("data"))){
+						JSONArray data = object.getJSONArray("data");
+						Type t = new TypeToken<ArrayList<MoneyTxBean>>() {
+						}.getType();
+						list = gson.fromJson(data.toString(), t);
+					}
 				}
 				bean.setList(list);
 				bean.setMsg(msg);
@@ -836,6 +888,55 @@ public class Send {
 
 	}
 	
+	
+	/**
+	 * 申请提现
+	 * @param authstr	唯一标示
+	 * @return
+	 */
+	public BaseBean getTx(String money,String authstr) {
+		ListMoneytxBean bean = new ListMoneytxBean();
+		ArrayList<MoneyTxBean> list = new ArrayList<MoneyTxBean>();
+		String baseurl = ServiceUrl.Base+"member.php?action=sure";
+		//TODO
+		String url=baseurl+"";
+		url=url+ServiceUrl.mycenter_footer+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				if (code != null && "200".equals(code)) {
+					if(Util.IsNull(object.getString("data")) && !"[]".equals(object.getString("data"))){
+						JSONArray data = object.getJSONArray("data");
+						Type t = new TypeToken<ArrayList<MoneyTxBean>>() {
+						}.getType();
+						list = gson.fromJson(data.toString(), t);
+					}
+				}
+				bean.setList(list);
+				bean.setMsg(msg);
+				bean.setCode(code);
+				return bean;
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+
+
 
 	/**
 	 * 获取购物车列表
@@ -1435,7 +1536,7 @@ public class Send {
 		}
 
 	}
-	
+
 
 
 

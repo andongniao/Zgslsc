@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -94,11 +96,11 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 				sum=sum+i_num*i_price;
 			}
 		}
-		if(type==0){
-			item.cb.setVisibility(View.VISIBLE);
-		}else{
-			item.cb.setVisibility(View.GONE);
-		}
+//		if(type==0){
+//			item.cb.setVisibility(View.VISIBLE);
+//		}else{
+//			item.cb.setVisibility(View.GONE);
+//		}
 		item.cb.setChecked(s.isIsclick());
 		item.title.setText(s.getCompany()+">");
 		item.heji.setText("гд"+sum);
@@ -151,6 +153,17 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 		adapter = new ShopcartLvAdapter(context,list,index, shop,type);
 		item.lv.setAdapter(adapter);
 		Util.setListViewHeightBasedOnChildren(item.lv);
+		item.lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+//				if(type!=0){
+//					shop.showdelete();
+//				}
+				return false;
+			}
+		});
 //		item.lv.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 //			@Override
 //			public void onMenuItemClick(int position, SwipeMenu menu, int i) {
