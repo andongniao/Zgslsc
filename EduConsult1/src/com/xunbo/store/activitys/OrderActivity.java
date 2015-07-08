@@ -40,6 +40,7 @@ import com.xunbo.store.beans.ListShopBean;
 import com.xunbo.store.beans.PayBean;
 import com.xunbo.store.beans.ShopBean;
 import com.xunbo.store.beans.UserBean;
+import com.xunbo.store.myviews.MyListview;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.UITools;
@@ -51,7 +52,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private LinearLayout ll_address,ll_add;
 	private Button button;
-	private ListView lv;
+	private MyListview lv;
 	private TextView tv_shouhuoren,tv_shoujihao,tv_address,tv_zongjia,tv_ok;
 	private ArrayList<Integer>list,listdizhi;
 	private OrderHomeAdapter adapter;
@@ -158,7 +159,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		tv_zongjia.setText(money);
 		tv_ok = (TextView) findViewById(R.id.order_tv_ok);
 		tv_ok.setOnClickListener(this);
-		lv = (ListView) findViewById(R.id.order_home_lv);
+		lv = (MyListview) findViewById(R.id.order_home_lv);
 		lv.setFocusable(false);
 		adapter = new OrderHomeAdapter(context, shopBeans);
 		lv.setAdapter(adapter);

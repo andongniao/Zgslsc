@@ -63,13 +63,13 @@ public class WelcomeActivity extends Activity{
 				super.handleMessage(msg);
 				if (msg.what == 1) {
 					Intent intent;
-					if(!MyApplication.mp.islogin){
-					intent = new Intent(WelcomeActivity.this,
-							LoginActivity.class);
-					}else{
+//					if(!MyApplication.mp.islogin){
+//					intent = new Intent(WelcomeActivity.this,
+//							LoginActivity.class);
+//					}else{
 						intent = new Intent(WelcomeActivity.this,
 								ExampleActivity.class);
-					}
+//					}
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 					finish();

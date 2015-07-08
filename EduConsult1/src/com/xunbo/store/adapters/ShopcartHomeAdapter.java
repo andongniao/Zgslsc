@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.xunbo.store.R;
 import com.xunbo.store.activitys.ShopcartActivity.shop;
 import com.xunbo.store.activitys.StoreActivity;
+import com.xunbo.store.activitys.StoreShopBaseActivity;
 import com.xunbo.store.beans.ShopBean;
 import com.xunbo.store.myviews.SwipeMenuListView.SwipeMenu;
 import com.xunbo.store.myviews.SwipeMenuListView.SwipeMenuCreator;
@@ -126,10 +127,10 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context,StoreActivity.class);
+				Intent intent = new Intent(context,StoreShopBaseActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("storeid", "");
-				intent.putExtra("storename",s.getCompany());
+				intent.putExtra("storeid", s.getCompanyid());
+				intent.putExtra("storename","");
 				context.startActivity(intent);
 			}
 		});

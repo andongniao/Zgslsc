@@ -91,7 +91,7 @@ public class OrderLvAdapter extends BaseAdapter{
 		final ShopItemBean b = (ShopItemBean) l.get(position);
 		
 		
-		item.tv_num.setText("X"+b.getNum());
+		item.tv_num.setText("¹²"+b.getNum()+"¼þ");
 		item.tv_price.setText("£¤"+b.getPrice());
 		item.tv_unit.setText(b.getUnit());
 		item.tv_title.setText(b.getTitle());
