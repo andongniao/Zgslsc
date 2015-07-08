@@ -97,7 +97,7 @@
     <string name="search_title">搜索</string>
     <string name="search_clean">清空搜索历史</string>
     <string name="search_history">历史记录</string>
-    <string name="search_inpu">请输入关键字</string>
+    <string name="search_inpu">请输入你要搜索的信息</string>
     <string name="search_history_is_null">没有搜索记录</string>
 
     <!-- 搜索结果 -->
@@ -273,14 +273,14 @@
     <string name="product_detaile_title">产品详情</string>
     <string name="product_detaile_price_shangcheng">商城价：</string>
     <string name="product_detaile_dw_shangcheng">元/吨</string>
-    <string name="product_detaile_price_danjia">单价：</string>
+    <string name="product_detaile_price_danjia">价格：</string>
     <string name="product_detaile_dw_danjia">元/件</string>
     <string name="product_detaile_price_qiding">起订量：</string>
     <string name="product_detaile_dw_qiding">件</string>
     <string name="product_detaile_cujiao">促销：</string>
     <string name="product_detaile_cuxiao_manjian">满减</string>
     <string name="product_detaile_peisong">配送：</string>
-    <string name="product_detaile_yunsong">运送</string>
+    <string name="product_detaile_yunsong">运送:</string>
     <string name="product_detaile_shuliang">数量：</string>
     <string name="product_detaile_xiaoliang">销量：</string>
     <string name="product_detaile_kucun">库存：</string>
@@ -313,6 +313,7 @@
     <string name="product_detaile_pingjia_item_time">2015-1-8   15:27</string>
     <string name="product_detaile_more_title">更多评价</string>
     <string name="product_detaile_chandi">产地：</string>
+    <string name="product_detaile_xiadan">18:00前完成下单，预计后天（）</string>
 
     <!-- 购物车 -->
     <string name="shopcart_title">购物车</string>
@@ -573,5 +574,7 @@
     <string name="money_password_noadress">请选择您的地址</string>
     <!-- 精品推荐 -->
     <string name="mycenter_tuijian_title">精品推荐</string>
+    <!-- 产品分类 -->
+    <string name="product_alltype_tille">产品分类</string>
 
 </resources>

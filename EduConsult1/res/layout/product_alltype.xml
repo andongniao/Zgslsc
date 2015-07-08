@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <!--
+             <Spinner
+            android:id="@+id/search_home_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/search_tubiao"
+            android:paddingRight="10dp"
+            android:entries="@array/search_home_list" />
+
+            -->
+
+            <TextView
+                android:id="@+id/product_alltype_sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/search_down"
+                android:gravity="center"
+              android:text="产品"
+                android:padding="2dp"
+                android:textColor="@color/fame_hui3" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_ic" 
+                android:layout_marginLeft="2dp"/>
+
+            <EditText
+                android:id="@+id/product_alltype_et_inpu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/search_inpu"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:textColor="@color/fame_hui3" />
+
+            <Button
+                android:id="@+id/product_alltype_button_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_clear" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/product_alltype_btn_seatch"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+           android:layout_marginLeft="5dp"
+            android:background="@drawable/search_lv_isnull_btn_bg"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/search_title"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+         <com.xunbo.store.myviews.MyListview 
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/product_alltype_list"
+        android:layout_weight="1"
+        ></com.xunbo.store.myviews.MyListview>
+
+    <com.xunbo.store.myviews.MyGridView
+        android:id="@+id/product_alltype_gridview"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:fadingEdge="none"
+        android:horizontalSpacing="10dp"
+        android:listSelector="#00000000"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:verticalSpacing="10dp" >
+        
+    </com.xunbo.store.myviews.MyGridView>
+    </LinearLayout>
+   
+
+</LinearLayout>

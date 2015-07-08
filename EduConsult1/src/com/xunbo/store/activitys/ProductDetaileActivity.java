@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.LabeledIntent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.text.Html;
@@ -31,6 +32,7 @@ import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
+import com.xunbo.store.adapters.HomeGridAdapter;
 import com.xunbo.store.adapters.HomeLikeAdapter;
 import com.xunbo.store.adapters.ProductPingjiaAdapter;
 import com.xunbo.store.beans.BaseBean;
@@ -58,14 +60,15 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private LinearLayout ll_addshopcart,ll_gopay,ll_as_l,ll_as_t,ll_as_r,
 	ll_paied_l,ll_paied_t,ll_paied_r,ll_add_chanpin,ll_add_pingjia,ll_add_dianpu,
 	ll_add_view_chanpin,ll_add_view_pingjia,ll_add_view_dianpu,ll_kefu,ll_shouchang
-	,ll_buy,ll_nobuy;
+	,ll_buy,ll_nobuy,ll_chanpin,ll_pingjia,ll_tuijian,ll_topchanpin,ll_toppingjia,ll_toptuijian;
 	private boolean isshow;
 	private PopupWindow popupWindow;
 	private int w,h,lh;
 	private Intent intent;
 	private TextView chanpin,pingjia,dianpu,pingjiamore,add,buymore,tv_title
 	,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
-	,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo,topchanpin,toppingjia,toptuijian;
+	,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo,topchanpin,toppingjia,toptuijian,
+	pingjiaisnot;
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
@@ -86,7 +89,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private ProductBean productBean;
 	private String liulanfile,storename;
 	private Util u;
-	private boolean isSave,ispingjia,iserror;
+	private boolean isSave,iserror;
 	private UserBean userbean;
 	private BaseBean bean,bean2;
 	private HomeBean home;
@@ -94,11 +97,10 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private ImageView[] imtuijian;
 	private ListProductBean listProductBean;
 	private LinearLayout dianpulin;
-	private ImageView iv_top_t;
+	private ImageView iv_top_t,ima_pingjia,ima_chanpin,ima_tuijian,ima_fanhui,ima_shop;
 	private RelativeLayout rl_r;
-	private int refeshDatatype;
-	private float pingjiax,pingjiay,tuijianx,tuijiany;
-
+	private int refeshDatatype,chanpingx,chanpingy,pingjiax,pingjiay,tuijianx,tuijiany;
+	private HomeGridAdapter recommendAdapter;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -148,7 +150,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		imageview=(ImageCycleView)findViewById(R.id.product_detail_icv);
 //		imageview.stopImageTimerTask();
 //		imageview.settime(999999999);
-		ispingjia=false;
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		dianpulin=(LinearLayout)findViewById(R.id.product_detaile_ll_into_dianpu);
@@ -175,25 +176,15 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		ll_gopay.setOnClickListener(this);
 		ll_addshopcart = (LinearLayout) findViewById(R.id.product_detaile_ll_add_shopcart);
 		ll_addshopcart.setOnClickListener(this);
-		ll_add_chanpin=(LinearLayout)findViewById(R.id.product_detaile_ll_chanpin);
-		ll_add_chanpin.setOnClickListener(this);
-		ll_add_pingjia=(LinearLayout)findViewById(R.id.product_detaile_ll_pingjia);
-		ll_add_pingjia.setOnClickListener(this);
-		ll_add_dianpu=(LinearLayout)findViewById(R.id.product_detaile_ll_dianputuijian);
-		ll_add_dianpu.setOnClickListener(this);
-		ll_add_view_chanpin=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_chanpin);
 		ll_add_view_pingjia=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia);
-		ll_add_view_dianpu=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_dianputuijian);
 		tv_content = (TextView) findViewById(R.id.product_detaile_product_main_ingredients_edit);
 		chanpin=(TextView)findViewById(R.id.product_detaile_tv_chanpin);
 		pingjia=(TextView)findViewById(R.id.product_detaile_tv_pingjia);
-		dianpu=(TextView)findViewById(R.id.product_detaile_tv_dianutuijian );
 		list=new ArrayList<ProductBean>();
 		listView=(MyListview)findViewById(R.id.product_detaile_ll_add_view_list);
 
 		gridView=(GridView)findViewById(R.id.product_detaile_all_view_dianputuijian_gv);
-		homeLikeAdapter = new HomeLikeAdapter(context, list);
-		gridView.setAdapter(homeLikeAdapter);
+		
 		
 		ll_nobuy=(LinearLayout)findViewById(R.id.product_detaile_ll_notbuy);
 		ll_buy=(LinearLayout)findViewById(R.id.product_detaile_ll_buied);
@@ -209,7 +200,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		tv_qidingliang=(TextView)findViewById(R.id.product_detaile_tv_qiding);
 		tv_xiaoliang=(TextView)findViewById(R.id.product_detail_tv_xiaoliang);
 		tv_kucun=(TextView)findViewById(R.id.product_detail_tv_kucun);
-		tv_chandi=(TextView)findViewById(R.id.product_detail_tv_chandi);
 		tv_computer=(TextView)findViewById(R.id.product_detaile_tv_computer);
 		tv_miaoshu=(TextView)findViewById(R.id.product_detaile_tv_miaoshu);
 		tv_taidu=(TextView)findViewById(R.id.product_detaile_tv_fuwu);
@@ -229,8 +219,32 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		t_r=(ImageView)findViewById(R.id.product_detaile_ima_tonglei_r);
 		tt_r=(TextView)findViewById(R.id.product_detaile_tv_tonglei_r);
 		refeshDatatype=1;
+		 
+		ll_chanpin=(LinearLayout)findViewById(R.id.product_detail_ll_chanpin);
+		ll_pingjia=(LinearLayout)findViewById(R.id.product_detail_ll_pingjia);
+		ll_tuijian=(LinearLayout)findViewById(R.id.product_detaile_ll_tongleituijian);
+		ll_topchanpin=(LinearLayout)findViewById(R.id.product_detaile_top_ll_chanpin);
+		ll_toppingjia=(LinearLayout)findViewById(R.id.product_detaile_top_ll_pingjia);
+		ll_toptuijian=(LinearLayout)findViewById(R.id.product_detaile_top_ll_tuijian);
+		ll_topchanpin.setOnClickListener(this);
+		ll_toppingjia.setOnClickListener(this);
+		ll_toptuijian.setOnClickListener(this);
+		ima_chanpin=(ImageView)findViewById(R.id.product_detaile_top_ima_chanpin);
+		ima_pingjia=(ImageView)findViewById(R.id.product_detaile_top_ima_pingjia);
+		ima_tuijian=(ImageView)findViewById(R.id.product_detaile_top_ima_tuijian);
+		topchanpin=(TextView)findViewById(R.id.product_detaile_top_tv_chanpin);
+		toppingjia=(TextView)findViewById(R.id.product_detaile_top_tv_pingjia);
+		toptuijian=(TextView)findViewById(R.id.product_detaile_top_tv_tuijian);
+		pingjiaisnot=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_isnot);
+		ll_chanpin.setFocusable(false);
+		ll_pingjia.setFocusable(false);
+		ll_tuijian.setFocusable(false);
+		gridView.setFocusable(false);
 		
-		
+		ima_shop=(ImageView)findViewById(R.id.product_detaile_iv_shop);
+		ima_fanhui=(ImageView)findViewById(R.id.product_detaile_iv_back);
+		ima_shop.setOnClickListener(this);
+		ima_fanhui.setOnClickListener(this);
 		View v = new ImageView(context);
 		v.setBackgroundResource(R.drawable.base_to_top);
 		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -238,17 +252,36 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		
 		toppingjia=(TextView)findViewById(R.id.product_detaile_top_tv_pingjia);
 		
-		pingjiax=ll_add_chanpin.getX();
-		pingjiay=ll_add_chanpin.getPivotY();
-		pingjiay=ll_add_chanpin.getY();
+		
 		scrollView.setOnTouchListener(new OnTouchListener() {
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				if(event.getAction()==MotionEvent.ACTION_MOVE){
-					if(scrollView.getScrollX()==pingjiax&&(scrollView.getScrollY()+50)==pingjiay){
-						Util.ShowToast(context, "jk;");
+					if((scrollView.getScrollY()+100)>=(pingjiay+chanpingy)){
+						toptuijian.setTextColor(getResources().getColor(R.color.fame_hui3));
+						ima_tuijian.setBackgroundColor(getResources().getColor(R.color.fame_hui3));
+						topchanpin.setTextColor(getResources().getColor(R.color.white));
+						ima_chanpin.setBackgroundColor(getResources().getColor(R.color.transparent));
+						toppingjia.setTextColor(getResources().getColor(R.color.white));
+						ima_pingjia.setBackgroundColor(getResources().getColor(R.color.transparent));
+						
+					}else if((scrollView.getScrollY()+100)>=chanpingy){
 						toppingjia.setTextColor(getResources().getColor(R.color.fame_hui3));
+						ima_pingjia.setBackgroundColor(getResources().getColor(R.color.fame_hui3));
+						toptuijian.setTextColor(getResources().getColor(R.color.white));
+						ima_tuijian.setBackgroundColor(getResources().getColor(R.color.transparent));
+						topchanpin.setTextColor(getResources().getColor(R.color.white));
+						ima_chanpin.setBackgroundColor(getResources().getColor(R.color.transparent));
+						
+					}else{
+						topchanpin.setTextColor(getResources().getColor(R.color.fame_hui3));
+						ima_chanpin.setBackgroundColor(getResources().getColor(R.color.fame_hui3));
+						toptuijian.setTextColor(getResources().getColor(R.color.white));
+						ima_tuijian.setBackgroundColor(getResources().getColor(R.color.transparent));
+						toppingjia.setTextColor(getResources().getColor(R.color.white));
+						ima_pingjia.setBackgroundColor(getResources().getColor(R.color.transparent));
+						
 					}
 					if(!isshow){
 						if(scrollView.getScrollY()>100){
@@ -277,6 +310,13 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 					}
 					scrollView.scrollTo(10, 10);
 					isshow = false;
+					topchanpin.setTextColor(getResources().getColor(R.color.fame_hui3));
+					ima_chanpin.setBackgroundColor(getResources().getColor(R.color.fame_hui3));
+					toptuijian.setTextColor(getResources().getColor(R.color.white));
+					ima_tuijian.setBackgroundColor(getResources().getColor(R.color.transparent));
+					toppingjia.setTextColor(getResources().getColor(R.color.white));
+					ima_pingjia.setBackgroundColor(getResources().getColor(R.color.transparent));
+					
 				}
 			}
 		});
@@ -286,6 +326,18 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		}else {
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
+	}
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		// TODO Auto-generated method stub
+		super.onWindowFocusChanged(hasFocus);
+		chanpingy=ll_chanpin.getHeight();
+		chanpingx=ll_chanpin.getWidth();
+		pingjiax=ll_pingjia.getWidth();
+		pingjiay=ll_pingjia.getHeight();
+		tuijianx=ll_tuijian.getWidth();
+		tuijiany=ll_tuijian.getHeight();
 	}
 	void initDate(){
 		//ll_nobuy.setVisibility(View.GONE);
@@ -325,61 +377,69 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		if(Util.IsNull(mallinfo.getQbnum())){
 			tv_qidingliang.setText(mallinfo.getQbnum());
 		}else{
-			tv_qidingliang.setText("1");
+			tv_qidingliang.setText("1"+mallinfo.getUnit());
 		}
 		storename=mallinfo.getUsername();
-		tv_xiaoliang.setText(mallinfo.getSales());
-		tv_kucun.setText(mallinfo.getAmount());
-		tv_chandi.setText(mallinfo.getAreaname());
+		tv_xiaoliang.setText(mallinfo.getSales()+mallinfo.getUnit());
+		tv_kucun.setText(mallinfo.getAmount()+mallinfo.getUnit());
+//		tv_chandi.setText(mallinfo.getAreaname());
 		tv_computer.setText(mallinfo.getCompany());
 		tv_miaoshu.setText("5.0");
 		tv_taidu.setText("5.0");
 		tv_fahuo.setText("5.0");
 		tv_content.setText(Html.fromHtml(mallinfo.getContent()));
 
-		if(buyedlist.size()==0){
-			//ll_buy.setVisibility(View.GONE);
-			buymore.setVisibility(View.GONE);
-		}else{
-			ll_nobuy.setVisibility(View.GONE);
-			ll_buy.setVisibility(View.VISIBLE);
-			try {
-//				b_l.setImageBitmap(Util.getBitmapForNet(buyedlist.get(0).getThumb()));
-//				b_t.setImageBitmap(Util.getBitmapForNet(buyedlist.get(1).getThumb()));
-//				b_r.setImageBitmap(Util.getBitmapForNet(buyedlist.get(2).getThumb()));
-				Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-				Util.Getbitmap(b_r, buyedlist.get(1).getThumb());
-				Util.Getbitmap(b_r, buyedlist.get(2).getThumb());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-			tb_l.setText(buyedlist.get(0).getPrice());
-			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
-			tb_t.setText(buyedlist.get(1).getPrice());
-			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
-			tb_r.setText(buyedlist.get(2).getPrice());
-		}
+//		if(buyedlist.size()==0){
+//			//ll_buy.setVisibility(View.GONE);
+//			buymore.setVisibility(View.GONE);
+//		}else{
+//			ll_nobuy.setVisibility(View.GONE);
+//			ll_buy.setVisibility(View.VISIBLE);
+//			try {
+////				b_l.setImageBitmap(Util.getBitmapForNet(buyedlist.get(0).getThumb()));
+////				b_t.setImageBitmap(Util.getBitmapForNet(buyedlist.get(1).getThumb()));
+////				b_r.setImageBitmap(Util.getBitmapForNet(buyedlist.get(2).getThumb()));
+//				Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
+//				Util.Getbitmap(b_r, buyedlist.get(1).getThumb());
+//				Util.Getbitmap(b_r, buyedlist.get(2).getThumb());
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
+//			tb_l.setText(buyedlist.get(0).getPrice());
+//			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
+//			tb_t.setText(buyedlist.get(1).getPrice());
+//			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
+//			tb_r.setText(buyedlist.get(2).getPrice());
+//		}
 		if(recommend.size()!=0){
-
-			try {
-//				t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
-//				t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
-//				t_r.setImageBitmap(Util.getBitmapForNet(recommend.get(2).getThumb()));
-				Util.Getbitmap(t_l, recommend.get(0).getThumb());
-				Util.Getbitmap(t_t, recommend.get(1).getThumb());
-				Util.Getbitmap(t_r, recommend.get(2).getThumb());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(recommendAdapter!=null){
+				recommendAdapter.setProductBean(recommend);
+				recommendAdapter.notifyDataSetChanged();
+			}else{
+				recommendAdapter=new HomeGridAdapter(context, recommend);
+				gridView.setAdapter(recommendAdapter);
 			}
-			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-			tt_l.setText("￥"+recommend.get(0).getPrice()+"");
-			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
-			tt_t.setText("￥"+recommend.get(1).getPrice()+"");
-			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
-			tt_r.setText("￥"+recommend.get(2).getPrice()+"");
+			
+
+//			try {
+////				t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
+////				t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
+////				t_r.setImageBitmap(Util.getBitmapForNet(recommend.get(2).getThumb()));
+//				Util.Getbitmap(t_l, recommend.get(0).getThumb());
+//				Util.Getbitmap(t_t, recommend.get(1).getThumb());
+//				Util.Getbitmap(t_r, recommend.get(2).getThumb());
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
+//			tt_l.setText("￥"+recommend.get(0).getPrice()+"");
+//			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
+//			tt_t.setText("￥"+recommend.get(1).getPrice()+"");
+//			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
+//			tt_r.setText("￥"+recommend.get(2).getPrice()+"");
 		}
 
 
@@ -389,11 +449,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 //
 //			@Override
 //			public void onClick(View v) {
-//				SearchResultActivity.isproductfinish=true;
-//				MyZjActivity.isfinish=true;
-//				StoreActivity.isfinish = true;
-//				ExampleActivity.setCurrentTab(3);
-//				finish();
+				
 //			}
 //		});
 		gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -402,7 +458,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 
-				//Toproduct();
+				Toproduct(recommend.get(arg2));
 			}
 		});
 	}
@@ -477,33 +533,17 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 				finish();
 			}
 			break;
-		case R.id.product_detaile_ll_chanpin:
-			ll_add_view_chanpin.setVisibility(View.VISIBLE);
-			ll_add_view_pingjia.setVisibility(View.GONE);
-			ll_add_view_dianpu.setVisibility(View.GONE);
-			chanpin.setTextColor(getResources().getColor(R.color.orn));
-			pingjia.setTextColor(getResources().getColor(R.color.black));
-			dianpu.setTextColor(getResources().getColor(R.color.black));
-			break;
-		case R.id.product_detaile_ll_pingjia:
-	 
-//			if(!ispingjia){
-//				if(Util.detect(context)){
-//					myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
-//				}
-//			}
-			ispingjia=true;
-			setpingjiaDate();
-
-			break;
-		case R.id.product_detaile_ll_dianputuijian:
-			ll_add_view_chanpin.setVisibility(View.GONE);
-			ll_add_view_pingjia.setVisibility(View.GONE);
-			ll_add_view_dianpu.setVisibility(View.VISIBLE);
-			chanpin.setTextColor(getResources().getColor(R.color.black));
-			pingjia.setTextColor(getResources().getColor(R.color.black));
-			dianpu.setTextColor(getResources().getColor(R.color.orn));
-			break;
+//		case R.id.product_detaile_ll_pingjia:
+//	 
+////			if(!ispingjia){
+////				if(Util.detect(context)){
+////					myPDT.Run(context, new RefeshData1(),R.string.loding);//可取消
+////				}
+////			}
+			
+//
+//			break;
+		
 		case R.id.product_detaile_ll_add_View_xiangqing_more:
 			intent = new Intent(context,ProductDetaileMoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -518,6 +558,66 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
+				
+				
+				
+		case R.id.product_detaile_top_ll_chanpin:
+			topchanpin.setTextColor(getResources().getColor(R.color.fame_hui3));
+			ima_chanpin.setBackgroundColor(getResources().getColor(R.color.fame_hui3));
+			toptuijian.setTextColor(getResources().getColor(R.color.white));
+			ima_tuijian.setBackgroundColor(getResources().getColor(R.color.transparent));
+			toppingjia.setTextColor(getResources().getColor(R.color.white));
+			ima_pingjia.setBackgroundColor(getResources().getColor(R.color.transparent));
+			ll_chanpin.setFocusable(true);
+			ll_pingjia.setFocusable(false);
+			ll_tuijian.setFocusable(false);
+			scrollView.scrollTo(10, 10);
+			isshow = false;
+			break;
+		case R.id.product_detaile_top_ll_pingjia:
+			toppingjia.setTextColor(getResources().getColor(R.color.fame_hui3));
+			ima_pingjia.setBackgroundColor(getResources().getColor(R.color.fame_hui3));
+			toptuijian.setTextColor(getResources().getColor(R.color.white));
+			ima_tuijian.setBackgroundColor(getResources().getColor(R.color.transparent));
+			topchanpin.setTextColor(getResources().getColor(R.color.white));
+			ima_chanpin.setBackgroundColor(getResources().getColor(R.color.transparent));
+			
+//			ll_chanpin.setFocusable(false);
+//			ll_pingjia.setFocusable(true);
+//			ll_tuijian.setFocusable(false);
+			
+			scrollView.scrollTo(pingjiax, chanpingy);
+			popupWindow.showAtLocation(ll_addshopcart, Gravity.BOTTOM,w/2-20, 120);
+			isshow = true;
+			break;
+		case R.id.product_detaile_top_ll_tuijian:
+			toptuijian.setTextColor(getResources().getColor(R.color.fame_hui3));
+			ima_tuijian.setBackgroundColor(getResources().getColor(R.color.fame_hui3));
+			topchanpin.setTextColor(getResources().getColor(R.color.white));
+			ima_chanpin.setBackgroundColor(getResources().getColor(R.color.transparent));
+			toppingjia.setTextColor(getResources().getColor(R.color.white));
+			ima_pingjia.setBackgroundColor(getResources().getColor(R.color.transparent));
+			
+//			ll_chanpin.setFocusable(false);
+//			ll_pingjia.setFocusable(false);
+//			ll_tuijian.setFocusable(true);
+			
+			scrollView.scrollTo(tuijianx, (chanpingy+pingjiay));
+			popupWindow.showAtLocation(ll_addshopcart, Gravity.BOTTOM,w/2-20, 120);
+			isshow = true;
+			break;
+		case R.id.product_detaile_iv_back:
+			finish();
+			break;
+		case R.id.product_detaile_iv_shop:
+			SearchResultActivity.isproductfinish=true;
+			MyZjActivity.isfinish=true;
+			StoreActivity.isfinish = true;
+			ExampleActivity.setCurrentTab(2);
+			finish();
+			break;
+		
+		
 
 
 		}
@@ -619,6 +719,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 						recommend=productdetailbean.getRecommend();
 						buyedlist=productdetailbean.getBuyedlist();
 						initDate();
+						setpingjiaDate();
 
 					}else if("300".equals(productdetailbean.getCode())){
 						MyApplication.mp.setlogin(false);
@@ -704,15 +805,16 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
 			listView.setAdapter(pingjiaAdapter);
 		}else {
+			pingjiaisnot.setVisibility(View.VISIBLE);
 			pingjiamore.setVisibility(View.GONE);
-			Util.ShowToast(context, "暂无评价");
+//			Util.ShowToast(context, "暂无评价");
 		}
-		ll_add_view_chanpin.setVisibility(View.GONE);
-		ll_add_view_pingjia.setVisibility(View.VISIBLE);
-		ll_add_view_dianpu.setVisibility(View.GONE);
-		chanpin.setTextColor(getResources().getColor(R.color.black));
-		pingjia.setTextColor(getResources().getColor(R.color.orn));
-		dianpu.setTextColor(getResources().getColor(R.color.black));
+//		ll_add_view_chanpin.setVisibility(View.GONE);
+//		ll_add_view_pingjia.setVisibility(View.VISIBLE);
+//		ll_add_view_dianpu.setVisibility(View.GONE);
+//		chanpin.setTextColor(getResources().getColor(R.color.black));
+//		pingjia.setTextColor(getResources().getColor(R.color.orn));
+//		dianpu.setTextColor(getResources().getColor(R.color.black));
 
 	}
 

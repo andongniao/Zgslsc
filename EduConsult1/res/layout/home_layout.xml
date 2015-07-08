@@ -196,7 +196,8 @@
                                      android:ellipsize="end"
                                      android:singleLine="true"
                                      android:text="@string/test"
-                                     android:textColor="@color/fame_hui3" />
+                                     android:textColor="@color/fame_hui3"
+                                     android:visibility="gone" />
 
                                    <TextView
                                        android:id="@+id/home_layout_tv_rem_detaile_1"
@@ -207,7 +208,7 @@
                                        android:text="1231"
                                        android:textColor="@color/fame_hui1"
                                        android:textSize="14dp"
-                                       android:visibility="invisible" />
+                                       android:visibility="gone" />
 
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_1"
@@ -228,6 +229,7 @@
                                  android:orientation="vertical"
                                  android:background="@color/white"
                                  android:layout_marginRight="0.5dp"
+                                 
                                  >
 
                                  <TextView
@@ -238,7 +240,8 @@
                                      android:singleLine="true"
                                      android:text="@string/test"
                                      android:textColor="@color/fame_hui3"
-                                     android:textSize="15dp" />
+                                     android:textSize="15dp"
+                                     android:visibility="gone" />
 
                                    <TextView
                                        android:id="@+id/home_layout_tv_rem_detaile_2"
@@ -249,7 +252,7 @@
                                        android:text="1231"
                                        android:textColor="@color/home_hui"
                                        android:textSize="14dp"
-                                       android:visibility="invisible" />
+                                       android:visibility="gone" />
 
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_2"
@@ -279,7 +282,8 @@
                                      android:singleLine="true"
                                      android:text="@string/test"
                                      android:textColor="@color/fame_hui3"
-                                     android:textSize="15dp" />
+                                     android:textSize="15dp"
+                                     android:visibility="gone" />
 
                                    <TextView
                                      android:layout_width="wrap_content"
@@ -290,7 +294,7 @@
                                      android:text="1231"
                                      android:singleLine="true"
       								  android:ellipsize="end"
-                                     android:visibility="invisible"
+                                     android:visibility="gone"
                                       />
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_3"
@@ -321,7 +325,8 @@
                                      android:singleLine="true"
                                      android:text="@string/test"
                                      android:textColor="@color/fame_hui3"
-                                     android:textSize="15dp" />
+                                     android:textSize="15dp"
+                                     android:visibility="gone" />
 
                                    <TextView
                                      android:layout_width="wrap_content"
@@ -332,7 +337,7 @@
                                      android:text="1231"
                                      android:singleLine="true"
         							 android:ellipsize="end"
-                                     android:visibility="invisible"
+                                     android:visibility="gone"
                                       />
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_4"

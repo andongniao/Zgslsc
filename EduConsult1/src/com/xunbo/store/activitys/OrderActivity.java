@@ -86,6 +86,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	public static boolean isinit;
 	private String money;
 	@Override
+	
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();

@@ -3,6 +3,7 @@ package com.xunbo.store.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class SearchResultAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<ProductBean>list;
 	private LayoutInflater inflater;
-	private Item item;
+	private Myitem myitem;
 
 
 	public SearchResultAdapter(Context context,ArrayList<ProductBean>list){
@@ -34,6 +35,7 @@ public class SearchResultAdapter extends BaseAdapter{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return list!=null?list.size():0;
+//		return 1;
 	}
 
 	@Override
@@ -50,38 +52,34 @@ public class SearchResultAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		Log.i("listshifouyouzhi", list.get(position).toString());
 		if(convertView==null){
-			convertView = inflater.inflate(R.layout.search_result_item, null);
-			item = new Item();
-			item.iv = (ImageView) convertView.findViewById(R.id.search_result_item_iv);
-			item.tv_title = (TextView) 
-					convertView.findViewById(R.id.search_result_item_tv_title);
-			item.tv_address = (TextView) 
-					convertView.findViewById(R.id.search_result_item_tv_address);
-			item.tv_price = (TextView) 
-					convertView.findViewById(R.id.search_result_item_tv_price);
-			item.tv_fukuan = (TextView) 
-					convertView.findViewById(R.id.search_result_item_tv_fukuan);
-			item.tv_unit = (TextView) 
-					convertView.findViewById(R.id.search_result_item_tv_unit);
-			convertView.setTag(item);
+			convertView = inflater.inflate(R.layout.home_layout_gv_item, null);
+			myitem = new Myitem();
+			myitem.iv = (ImageView) convertView.findViewById(R.id.home_layout_gv_item_image);
+			myitem.tv_title = (TextView) convertView.findViewById(R.id.home_layout_gv_item_title);
+			myitem.tv_price = (TextView) convertView.findViewById(R.id.home_layout_gv_item_money);
+			myitem.tv_detaile = (TextView) convertView.findViewById(R.id.home_layout_gv_item_detaile);
+			convertView.setTag(myitem);
 		}else{
-			item = (Item) convertView.getTag();
+			myitem = (Myitem) convertView.getTag();
 		}
-		Util.Getbitmap(item.iv, list.get(position).getThumb());
-		item.tv_title.setText(list.get(position).getTitle());
-		item.tv_address.setText(list.get(position).getAreaname()); 
-		String s ="";
-		if(Util.IsNull(list.get(position).getUnit())){
-			s=list.get(position).getUnit();
+		if(Util.IsNull(list.get(position).getApppic())){
+			Util.Getbitmap(myitem.iv, list.get(position).getApppic());
+		}else{
+			Util.Getbitmap(myitem.iv, list.get(position).getThumb());
 		}
-		item.tv_price.setText("гд"+list.get(position).getPrice());
-		item.tv_unit.setText(s);
+		if(Util.IsNull(list.get(position).getSubtitle())){
+			myitem.tv_detaile.setVisibility(View.VISIBLE);
+			myitem.tv_detaile.setText(list.get(position).getSubtitle());
+		}
+		myitem.tv_price.setText("гд"+list.get(position).getPrice());
+		myitem.tv_title.setText(list.get(position).getTitle());
 		return convertView;
 	}
-	class Item{
-		TextView tv_title,tv_price,tv_address,tv_fukuan,tv_unit;
+	
+	class Myitem{
+		TextView tv_price,tv_title,tv_detaile;
 		ImageView iv;
 	}
-
 }

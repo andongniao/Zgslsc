@@ -28,7 +28,7 @@ import com.xunbo.store.R;
  * 
  */
 public class ImageCycleView extends LinearLayout {
-	private long time = 3000;
+	private long time = 10000;
 
 	/**
 	 * 上下文
@@ -163,7 +163,7 @@ public class ImageCycleView extends LinearLayout {
 	 */
 	private void startImageTimerTask() {
 		stopImageTimerTask();
-		// 图片每3秒滚动一次
+		// 图片每10秒滚动一次
 		mHandler.postDelayed(mImageTimerTask, time);
 	}
 

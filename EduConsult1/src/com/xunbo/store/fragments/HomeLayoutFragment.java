@@ -14,6 +14,7 @@ import org.apkplug.Bundle.installCallback;
 import org.apkplug.app.FrameworkInstance;
 import org.osgi.framework.BundleContext;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -73,7 +74,7 @@ import com.xunbo.store.myviews.RefreshableView.RefreshListener;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
-public class HomeLayoutFragment extends Fragment implements OnClickListener,RefreshListener{
+public class HomeLayoutFragment extends Activity implements OnClickListener,RefreshListener{
 	private MyGridView gv_siliao,gv_shouyao,gv_yzsb,gv_qxyz,gv_tianjiaji,gv_yuanliao,gv_qita;
 	private LinearLayout lv_rem,lv_siliao,lv_shouyao,lv_yzsb,lv_qxyz,lv_tianjiaji,lv_yuanliao,lv_qita,
 	lv_rem1,lv_rem2,lv_rem3,lv_rem4;
@@ -101,67 +102,76 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 	private int w,h;
 	private PopupWindow popupWindow;
 	private View v;
+//	@Override
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//			Bundle savedInstanceState) {
+//		view = inflater.inflate(R.layout.home_layout, container, false);
+//		init();
+//		addlistener();
+//		return view;
+//	}
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.home_layout, container, false);
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.home_layout);
 		init();
 		addlistener();
-		return view;
+		
 	}
 
 
 	private void init() {
-		context = getActivity();
+		context =this;
 		mp=new MyApplication();
 		myPDT=new ThreadWithProgressDialog();
 		DisplayMetrics  dm = new DisplayMetrics();  
-		this.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		w = dm.widthPixels;  
 		h = dm.heightPixels; 
 		v = new ImageView(context);
 		v.setBackgroundResource(R.drawable.base_to_top);
 		popupWindow = new PopupWindow(v, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		isshow = false;
-		refreshableView=(RefreshableView)view.findViewById(R.id.home_layout_rview);
+		refreshableView=(RefreshableView)findViewById(R.id.home_layout_rview);
 		refreshableView.setRefreshListener(this);
-		sc=(ScrollView)view.findViewById(R.id.home_layout_sc);
-		top_rl = (RelativeLayout) view.findViewById(R.id.home_layout_rl_search);
-		tv_title1=(TextView)view.findViewById(R.id.home_layout_tv_rem_title_1);
-		tv_title2=(TextView)view.findViewById(R.id.home_layout_tv_rem_title_2);
-		tv_title3=(TextView)view.findViewById(R.id.home_layout_tv_rem_title_3);
-		tv_title4=(TextView)view.findViewById(R.id.home_layout_tv_rem_title_4);
-		tv_detaile1=(TextView)view.findViewById(R.id.home_layout_tv_rem_detaile_1);
-		tv_detaile2=(TextView)view.findViewById(R.id.home_layout_tv_rem_detaile_2);
-		tv_detaile3=(TextView)view.findViewById(R.id.home_layout_tv_rem_detaile_3);
-		tv_detaile4=(TextView)view.findViewById(R.id.home_layout_tv_rem_detaile_4);
-		ima_fenlei=(ImageView)view.findViewById(R.id.home_layout_iv_cat);
+		sc=(ScrollView)findViewById(R.id.home_layout_sc);
+		top_rl = (RelativeLayout) findViewById(R.id.home_layout_rl_search);
+		tv_title1=(TextView)findViewById(R.id.home_layout_tv_rem_title_1);
+		tv_title2=(TextView)findViewById(R.id.home_layout_tv_rem_title_2);
+		tv_title3=(TextView)findViewById(R.id.home_layout_tv_rem_title_3);
+		tv_title4=(TextView)findViewById(R.id.home_layout_tv_rem_title_4);
+		tv_detaile1=(TextView)findViewById(R.id.home_layout_tv_rem_detaile_1);
+		tv_detaile2=(TextView)findViewById(R.id.home_layout_tv_rem_detaile_2);
+		tv_detaile3=(TextView)findViewById(R.id.home_layout_tv_rem_detaile_3);
+		tv_detaile4=(TextView)findViewById(R.id.home_layout_tv_rem_detaile_4);
+		ima_fenlei=(ImageView)findViewById(R.id.home_layout_iv_cat);
 		ima_fenlei.setOnClickListener(this);
-		ima_top=(ImageView)view.findViewById(R.id.home_layout_iv_top);
-		ima_centent1=(ImageView)view.findViewById(R.id.home_layout_iv_center1);
-		ima_centent2=(ImageView)view.findViewById(R.id.home_layout_iv_center2);
-		ima_rem_left=(ImageView)view.findViewById(R.id.home_layout_iv_rem_top_lf);
+		ima_top=(ImageView)findViewById(R.id.home_layout_iv_top);
+		ima_centent1=(ImageView)findViewById(R.id.home_layout_iv_center1);
+		ima_centent2=(ImageView)findViewById(R.id.home_layout_iv_center2);
+		ima_rem_left=(ImageView)findViewById(R.id.home_layout_iv_rem_top_lf);
 		ima_rem_left.setOnClickListener(this);
-		ima_rem_r1=(ImageView)view.findViewById(R.id.home_layout_iv_rem_right__t);
+		ima_rem_r1=(ImageView)findViewById(R.id.home_layout_iv_rem_right__t);
 		ima_rem_r1.setOnClickListener(this);
-		ima_rem_r2=(ImageView)view.findViewById(R.id.home_layout_iv_rem_right_b);
+		ima_rem_r2=(ImageView)findViewById(R.id.home_layout_iv_rem_right_b);
 		ima_rem_r2.setOnClickListener(this);
-		ima_rem1=(ImageView)view.findViewById(R.id.home_layout_iv_rem_1);
-		ima_rem2=(ImageView)view.findViewById(R.id.home_layout_iv_rem_2);
-		ima_rem3=(ImageView)view.findViewById(R.id.home_layout_iv_rem_3);
-		ima_rem4=(ImageView)view.findViewById(R.id.home_layout_iv_rem_4);
-		lv_rem=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_rem);
-		lv_siliao=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_siliao);
-		lv_shouyao=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_shouyao);
-		lv_yzsb=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_yangzhishebei);
-		lv_qxyz=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_chuqinyangzhi);
-		lv_tianjiaji=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_tianjiaji);
-		lv_yuanliao=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_yuanliao);
-		lv_qita=(LinearLayout)view.findViewById(R.id.home_layout_ll_more_qita);
-		lv_rem1=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_1);
-		lv_rem2=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_2);
-		lv_rem3=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_3);
-		lv_rem4=(LinearLayout)view.findViewById(R.id.home_layout_ll_rem_b_4);
+		ima_rem1=(ImageView)findViewById(R.id.home_layout_iv_rem_1);
+		ima_rem2=(ImageView)findViewById(R.id.home_layout_iv_rem_2);
+		ima_rem3=(ImageView)findViewById(R.id.home_layout_iv_rem_3);
+		ima_rem4=(ImageView)findViewById(R.id.home_layout_iv_rem_4);
+		lv_rem=(LinearLayout)findViewById(R.id.home_layout_ll_more_rem);
+		lv_siliao=(LinearLayout)findViewById(R.id.home_layout_ll_more_siliao);
+		lv_shouyao=(LinearLayout)findViewById(R.id.home_layout_ll_more_shouyao);
+		lv_yzsb=(LinearLayout)findViewById(R.id.home_layout_ll_more_yangzhishebei);
+		lv_qxyz=(LinearLayout)findViewById(R.id.home_layout_ll_more_chuqinyangzhi);
+		lv_tianjiaji=(LinearLayout)findViewById(R.id.home_layout_ll_more_tianjiaji);
+		lv_yuanliao=(LinearLayout)findViewById(R.id.home_layout_ll_more_yuanliao);
+		lv_qita=(LinearLayout)findViewById(R.id.home_layout_ll_more_qita);
+		lv_rem1=(LinearLayout)findViewById(R.id.home_layout_ll_rem_b_1);
+		lv_rem2=(LinearLayout)findViewById(R.id.home_layout_ll_rem_b_2);
+		lv_rem3=(LinearLayout)findViewById(R.id.home_layout_ll_rem_b_3);
+		lv_rem4=(LinearLayout)findViewById(R.id.home_layout_ll_rem_b_4);
 		lv_rem1.setOnClickListener(this);
 		lv_rem3.setOnClickListener(this);
 		lv_rem2.setOnClickListener(this);
@@ -174,13 +184,13 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		lv_tianjiaji.setOnClickListener(this);
 		lv_yuanliao.setOnClickListener(this);
 		lv_qita.setOnClickListener(this);
-		gv_siliao=(MyGridView)view.findViewById(R.id.home_layout_gv_siliao);
-		gv_shouyao=(MyGridView)view.findViewById(R.id.home_layout_gv_shouyao);
-		gv_yzsb=(MyGridView)view.findViewById(R.id.home_layout_gv_yangzhishebei);
-		gv_qxyz=(MyGridView)view.findViewById(R.id.home_layout_gv_chuqinyangzhi);
-		gv_tianjiaji=(MyGridView)view.findViewById(R.id.home_layout_gv_tianjiaji);
-		gv_yuanliao=(MyGridView)view.findViewById(R.id.home_layout_gv_yuanliao);
-		gv_qita=(MyGridView)view.findViewById(R.id.home_layout_gv_qita);
+		gv_siliao=(MyGridView)findViewById(R.id.home_layout_gv_siliao);
+		gv_shouyao=(MyGridView)findViewById(R.id.home_layout_gv_shouyao);
+		gv_yzsb=(MyGridView)findViewById(R.id.home_layout_gv_yangzhishebei);
+		gv_qxyz=(MyGridView)findViewById(R.id.home_layout_gv_chuqinyangzhi);
+		gv_tianjiaji=(MyGridView)findViewById(R.id.home_layout_gv_tianjiaji);
+		gv_yuanliao=(MyGridView)findViewById(R.id.home_layout_gv_yuanliao);
+		gv_qita=(MyGridView)findViewById(R.id.home_layout_gv_qita);
 		gv_siliao.setFocusable(false);
 		gv_yzsb.setFocusable(false);
 		gv_qxyz.setFocusable(false);
@@ -205,7 +215,7 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		};
 		
 		if(Util.detect(context)){
-//			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
@@ -324,10 +334,10 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		});
 	}
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
+//	@Override
+//	public void onActivityCreated(Bundle savedInstanceState) {
+//		super.onActivityCreated(savedInstanceState);
+//	}
 
 	@Override
 	public void onClick(View v) {
@@ -488,124 +498,140 @@ public class HomeLayoutFragment extends Fragment implements OnClickListener,Refr
 		recommend=homeInfoBean.getRecommend();
 		cat=homeInfoBean.getCat();
 		ad=homeInfoBean.getAd();
-		Util.Getbitmap(ima_top, ad.get(0));
-		Util.Getbitmap(ima_centent1, ad.get(1));
-		Util.Getbitmap(ima_centent2, ad.get(2));
-		if(Util.IsNull(recommend.get(0).getApppic())){
-			Util.Getbitmap(ima_rem_left, recommend.get(0).getApppic());
-		}else{
-			Util.Getbitmap(ima_rem_left, recommend.get(0).getThumb());
+		if(ad!=null){
+			if(ad.size()>0){
+				
+				Util.Getbitmap(ima_top, ad.get(0));
+				Util.Getbitmap(ima_centent1, ad.get(1));
+				Util.Getbitmap(ima_centent2, ad.get(2));
+			}
 		}
-		if(Util.IsNull(recommend.get(1).getApppic())){
-			Util.Getbitmap(ima_rem_r1, recommend.get(1).getApppic());
-		}else{
-			Util.Getbitmap(ima_rem_r1, recommend.get(1).getThumb());
-		}
-		if(Util.IsNull(recommend.get(2).getApppic())){
-			Util.Getbitmap(ima_rem_r2, recommend.get(2).getApppic());
-		}else{
-			Util.Getbitmap(ima_rem_r2, recommend.get(2).getThumb());
-		}
-		if(Util.IsNull(recommend.get(3).getApppic())){
-			Util.Getbitmap(ima_rem1, recommend.get(3).getApppic());
-		}else{
-			Util.Getbitmap(ima_rem1, recommend.get(3).getThumb());
-		}
-		if(Util.IsNull(recommend.get(4).getApppic())){
-			Util.Getbitmap(ima_rem2, recommend.get(4).getApppic());
-		}else{
-			Util.Getbitmap(ima_rem2, recommend.get(4).getThumb());
-		}
-		if(Util.IsNull(recommend.get(5).getApppic())){
-			Util.Getbitmap(ima_rem3, recommend.get(5).getApppic());
-		}else{
-			Util.Getbitmap(ima_rem3, recommend.get(5).getThumb());
-		}
-		if(Util.IsNull(recommend.get(6).getApppic())){
-			Util.Getbitmap(ima_rem4, recommend.get(6).getApppic());
-		}else{
-			Util.Getbitmap(ima_rem4, recommend.get(6).getThumb());
-		}
-		if(Util.IsNull(recommend.get(3).getSubtitle())){
-			tv_detaile1.setVisibility(View.INVISIBLE);
-			tv_detaile1.setText(recommend.get(3).getSubtitle());
-		}
-		if(Util.IsNull(recommend.get(4).getSubtitle())){
-			tv_detaile2.setVisibility(View.INVISIBLE);
-			tv_detaile2.setText(recommend.get(4).getSubtitle());
-		}
-		if(Util.IsNull(recommend.get(5).getSubtitle())){
-			tv_detaile3.setVisibility(View.INVISIBLE);
-			tv_detaile3.setText(recommend.get(5).getSubtitle());
-		}
-		if(Util.IsNull(recommend.get(6).getSubtitle())){
-			tv_detaile4.setVisibility(View.INVISIBLE);
-			tv_detaile4.setText(recommend.get(6).getSubtitle());
-		}
-		tv_title1.setText(recommend.get(3).getTitle());
-		tv_title2.setText(recommend.get(4).getTitle());
-		tv_title3.setText(recommend.get(5).getTitle());
-		tv_title4.setText(recommend.get(6).getTitle());
-		
-		for(int i=0;i<cat.size();i++){
-			if("饲料".equals(cat.get(i).getName())){
-				if(siliaoAdapter!=null){
-					siliaoAdapter.setProductBean(cat.get(i).getData());
-					siliaoAdapter.notifyDataSetChanged();
+		if(recommend!=null){
+			if(recommend.size()>0){
+				if(Util.IsNull(recommend.get(0).getApppic())){
+					Util.Getbitmap(ima_rem_left, recommend.get(0).getApppic());
 				}else{
-					siliaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
-					gv_siliao.setAdapter(siliaoAdapter);
+					Util.Getbitmap(ima_rem_left, recommend.get(0).getThumb());
 				}
-				siliao=cat.get(i).getData();
-			}else if("兽药".equals(cat.get(i).getName())){
-				if(shouyaoAdapter!=null){
-					shouyaoAdapter.setProductBean(cat.get(i).getData());
-					shouyaoAdapter.notifyDataSetChanged();
+				if(Util.IsNull(recommend.get(1).getApppic())){
+					Util.Getbitmap(ima_rem_r1, recommend.get(1).getApppic());
 				}else{
-					shouyaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
-					gv_shouyao.setAdapter(shouyaoAdapter);
+					Util.Getbitmap(ima_rem_r1, recommend.get(1).getThumb());
 				}
-				shouyao=cat.get(i).getData();
-			}else if("养殖设备".equals(cat.get(i).getName())){
-				if(yzsbAdapter!=null){
-					yzsbAdapter.setProductBean(cat.get(i).getData());
-					yzsbAdapter.notifyDataSetChanged();
+				if(Util.IsNull(recommend.get(2).getApppic())){
+					Util.Getbitmap(ima_rem_r2, recommend.get(2).getApppic());
 				}else{
-					yzsbAdapter=new HomeGridAdapter(context,cat.get(i).getData());
-					gv_yzsb.setAdapter(yzsbAdapter);
+					Util.Getbitmap(ima_rem_r2, recommend.get(2).getThumb());
 				}
-				yzsb=cat.get(i).getData();
-			}else if("畜禽养殖".equals(cat.get(i).getName())){
-				if(qxyzAdapter!=null){
-					qxyzAdapter.setProductBean(cat.get(i).getData());
-					qxyzAdapter.notifyDataSetChanged();
+				if(Util.IsNull(recommend.get(3).getApppic())){
+					Util.Getbitmap(ima_rem1, recommend.get(3).getApppic());
 				}else{
-					qxyzAdapter=new HomeGridAdapter(context,cat.get(i).getData());
-					   gv_qxyz.setAdapter(qxyzAdapter);
+					Util.Getbitmap(ima_rem1, recommend.get(3).getThumb());
 				}
-				qxyz=cat.get(i).getData();
-			}else if("添加剂".equals(cat.get(i).getName())){
-				if(tianjiajiAdapter!=null){
-					tianjiajiAdapter.setProductBean(cat.get(i).getData());
-					tianjiajiAdapter.notifyDataSetChanged();
+				if(Util.IsNull(recommend.get(4).getApppic())){
+					Util.Getbitmap(ima_rem2, recommend.get(4).getApppic());
 				}else{
-					tianjiajiAdapter=new HomeGridAdapter(context,cat.get(i).getData());
-					gv_tianjiaji.setAdapter(tianjiajiAdapter);
+					Util.Getbitmap(ima_rem2, recommend.get(4).getThumb());
 				}
-				tianjiaji=cat.get(i).getData();
-			}else if("饲料原料".equals(cat.get(i).getName())){
-				if(yuanliaoAdapter!=null){
-					yuanliaoAdapter.setProductBean(cat.get(i).getData());
-					yuanliaoAdapter.notifyDataSetChanged();
+				if(Util.IsNull(recommend.get(5).getApppic())){
+					Util.Getbitmap(ima_rem3, recommend.get(5).getApppic());
 				}else{
-					yuanliaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
-					gv_yuanliao.setAdapter(yuanliaoAdapter);
+					Util.Getbitmap(ima_rem3, recommend.get(5).getThumb());
 				}
-				yuanliao=cat.get(i).getData();
+				if(Util.IsNull(recommend.get(6).getApppic())){
+					Util.Getbitmap(ima_rem4, recommend.get(6).getApppic());
+				}else{
+					Util.Getbitmap(ima_rem4, recommend.get(6).getThumb());
+				}
+				if(Util.IsNull(recommend.get(3).getSubtitle())){
+//					tv_detaile1.setVisibility(View.VISIBLE);
+					tv_detaile1.setText(recommend.get(3).getSubtitle());
+				}
+				if(Util.IsNull(recommend.get(4).getSubtitle())){
+//					tv_detaile2.setVisibility(View.VISIBLE);
+					tv_detaile2.setText(recommend.get(4).getSubtitle());
+				}
+				if(Util.IsNull(recommend.get(5).getSubtitle())){
+//					tv_detaile3.setVisibility(View.VISIBLE);
+					tv_detaile3.setText(recommend.get(5).getSubtitle());
+				}
+				if(Util.IsNull(recommend.get(6).getSubtitle())){
+//					tv_detaile4.setVisibility(View.VISIBLE);
+					tv_detaile4.setText(recommend.get(6).getSubtitle());
+				}
+				tv_title1.setText(recommend.get(3).getTitle());
+				tv_title2.setText(recommend.get(4).getTitle());
+				tv_title3.setText(recommend.get(5).getTitle());
+				tv_title4.setText(recommend.get(6).getTitle());
 			}
 		}
 		
+		if(cat!=null){
+			if(cat.size()>0){
+				
+				for(int i=0;i<cat.size();i++){
+					if("饲料".equals(cat.get(i).getName())){
+						if(siliaoAdapter!=null){
+							siliaoAdapter.setProductBean(cat.get(i).getData());
+							siliaoAdapter.notifyDataSetChanged();
+						}else{
+							siliaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+							gv_siliao.setAdapter(siliaoAdapter);
+						}
+						siliao=cat.get(i).getData();
+					}else if("兽药".equals(cat.get(i).getName())){
+						if(shouyaoAdapter!=null){
+							shouyaoAdapter.setProductBean(cat.get(i).getData());
+							shouyaoAdapter.notifyDataSetChanged();
+						}else{
+							shouyaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+							gv_shouyao.setAdapter(shouyaoAdapter);
+						}
+						shouyao=cat.get(i).getData();
+					}else if("养殖设备".equals(cat.get(i).getName())){
+						if(yzsbAdapter!=null){
+							yzsbAdapter.setProductBean(cat.get(i).getData());
+							yzsbAdapter.notifyDataSetChanged();
+						}else{
+							yzsbAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+							gv_yzsb.setAdapter(yzsbAdapter);
+						}
+						yzsb=cat.get(i).getData();
+					}else if("畜禽养殖".equals(cat.get(i).getName())){
+						if(qxyzAdapter!=null){
+							qxyzAdapter.setProductBean(cat.get(i).getData());
+							qxyzAdapter.notifyDataSetChanged();
+						}else{
+							qxyzAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+							gv_qxyz.setAdapter(qxyzAdapter);
+						}
+						qxyz=cat.get(i).getData();
+					}else if("添加剂".equals(cat.get(i).getName())){
+						if(tianjiajiAdapter!=null){
+							tianjiajiAdapter.setProductBean(cat.get(i).getData());
+							tianjiajiAdapter.notifyDataSetChanged();
+						}else{
+							tianjiajiAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+							gv_tianjiaji.setAdapter(tianjiajiAdapter);
+						}
+						tianjiaji=cat.get(i).getData();
+					}else if("饲料原料".equals(cat.get(i).getName())){
+						if(yuanliaoAdapter!=null){
+							yuanliaoAdapter.setProductBean(cat.get(i).getData());
+							yuanliaoAdapter.notifyDataSetChanged();
+						}else{
+							yuanliaoAdapter=new HomeGridAdapter(context,cat.get(i).getData());
+							gv_yuanliao.setAdapter(yuanliaoAdapter);
+						}
+						yuanliao=cat.get(i).getData();
+					}
+				}
+			}
+		}
+		
+		
 	}
+	
 
 
 
