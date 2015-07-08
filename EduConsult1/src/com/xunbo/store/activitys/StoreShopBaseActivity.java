@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class StoreShopBaseActivity extends BaseActivity implements OnClickListener{
@@ -38,6 +39,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 	private ArrayList<ProductBean> list_home,list_all,list_new;
 	private TextView tv_seeall;
 	private ThreadWithProgressDialog myPDT;
+	private ScrollView sc;
 
 
 
@@ -80,6 +82,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 		iv_all.setOnClickListener(this);
 		iv_new = (ImageView) findViewById(R.id.storeshop_iv_new);
 		iv_new.setOnClickListener(this);
+		sc = (ScrollView) findViewById(R.id.storeshop_sc);
 
 		ll_add = (LinearLayout) findViewById(R.id.store_base_ll_addview);
 
@@ -95,6 +98,9 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 		gv_home = (MyGridView) v_home.findViewById(R.id.storeshop_home_gv);
 		gv_all = (MyGridView) v_all.findViewById(R.id.storeshop_all_gv);
 		gv_new = (MyGridView) v_new.findViewById(R.id.storeshop_new_gv);
+		gv_home.setFocusable(false);
+		gv_all.setFocusable(false);
+		gv_new.setFocusable(false);
 		adapter = new StoreShopAdapter(context, list_home);
 		gv_home.setAdapter(adapter);
 		gv_all.setAdapter(adapter);
@@ -115,19 +121,25 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 		switch (showtype) {
 		case 1:
 			iv_home.setBackgroundResource(R.drawable.storeshop_home_bg_r);
-			iv_home.setVisibility(View.VISIBLE);
+			iv_all.setBackgroundResource(R.drawable.storeshop_all_bg_b);
+			iv_new.setBackgroundResource(R.drawable.storeshop_new_bg_b);
+			v_home.setVisibility(View.VISIBLE);
 			v_all.setVisibility(View.GONE);
 			v_new.setVisibility(View.GONE);
 			break;
 		case 2:
-			//			iv_home.setBackgroundResource(R.drawable.storeshop_home_bg_r);
-			iv_home.setVisibility(View.GONE);
+			iv_home.setBackgroundResource(R.drawable.storeshop_home_bg_b);
+			iv_all.setBackgroundResource(R.drawable.storeshop_all_bg_r);
+			iv_new.setBackgroundResource(R.drawable.storeshop_new_bg_b);
+			v_home.setVisibility(View.GONE);
 			v_all.setVisibility(View.VISIBLE);
 			v_new.setVisibility(View.GONE);
 			break;
 		case 3:
-			//			iv_home.setBackgroundResource(R.drawable.storeshop_home_bg_r);
-			iv_home.setVisibility(View.GONE);
+			iv_home.setBackgroundResource(R.drawable.storeshop_home_bg_b);
+			iv_all.setBackgroundResource(R.drawable.storeshop_all_bg_b);
+			iv_new.setBackgroundResource(R.drawable.storeshop_new_bg_r);
+			v_home.setVisibility(View.GONE);
 			v_all.setVisibility(View.GONE);
 			v_new.setVisibility(View.VISIBLE);
 			break;
@@ -144,7 +156,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 		case R.id.storeshop_home_tv_all:
 			showtype = 2;
 			show(showtype);
-
+			sc.scrollTo(0, 10);
 			break;
 		case R.id.storeshop_iv_home:
 			showtype = 1;

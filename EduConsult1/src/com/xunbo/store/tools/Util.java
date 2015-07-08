@@ -894,13 +894,13 @@ public class Util {
 				} else {
 					//yToastMessage(ImageDialog.this, ErrMsg);
 					//finish();
-//					v.setBackgroundResource(R.drawable.default_bg);
-					Resources r = context.getResources();
-					InputStream is = r.openRawResource(R.drawable.default_bg);
-					BitmapDrawable  bmpDraw = new BitmapDrawable(is);
-					Bitmap bitmap = bmpDraw.getBitmap();
-//					 Bitmap bitmap = getBitmapFromResources(context, R.drawable.default_bg);
-					 v.setImageBitmap(bitmap);
+					v.setBackgroundResource(R.drawable.default_bg);
+//					Resources r = context.getResources();
+//					InputStream is = r.openRawResource(R.drawable.default_bg);
+//					BitmapDrawable  bmpDraw = new BitmapDrawable(is);
+//					Bitmap bitmap = bmpDraw.getBitmap();
+////					 Bitmap bitmap = getBitmapFromResources(context, R.drawable.default_bg);
+//					 v.setImageBitmap(bitmap);
 				}
 			}
 			}
