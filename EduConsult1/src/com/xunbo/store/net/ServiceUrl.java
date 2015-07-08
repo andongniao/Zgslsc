@@ -8,7 +8,8 @@ public class ServiceUrl {
 //		public static String Base="http://www.zgslsc.com/app/";
 //		public static String Base="http://www.shop.com/app/";
 	public static String Base="http://192.168.1.252/app/";
-	public static String Base_MobileCode="http://192.168.1.252/";
+//	public static String Base_MobileCode="http://192.168.1.252/";
+//	http://www.shop.com/app/member.php?action=mobilecode
 	//首页index.php
 	public static String Home_url=Base;
 	//首页
@@ -43,6 +44,7 @@ public class ServiceUrl {
 	public static String money_pay= "pay";
 	public static String money_up="&captcha=";
 	public static String money_up_money="&amount=";
+	public static String Base_MobileCode="mobilecode";
 	//信件首页列表
 	public static String sms_list = "station_sms";
 	public static String sms_deteaile = "sms_detail&itemid=";
