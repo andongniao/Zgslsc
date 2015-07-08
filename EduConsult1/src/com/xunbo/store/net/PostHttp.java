@@ -3094,8 +3094,8 @@ public class PostHttp {
 	public BaseBean getMobileCode(String mobile){
 		BaseBean bean = new BaseBean();
 		
-		String url = ServiceUrl.Base_MobileCode+"ajax.php";
-		
+//		String url = ServiceUrl.Base_MobileCode+"ajax.php";
+		String url = ServiceUrl.Base+ServiceUrl.money_hand_money+ServiceUrl.Base_MobileCode+"&mobile="+mobile;
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","mobilecode");
 		list.add(p1);
@@ -3121,13 +3121,19 @@ public class PostHttp {
 				if(Util.IsNull(strResult)){
 					/* ¶Á·µ»ØÊý¾Ý */  
 					obj = new JSONObject(strResult);
+					
 					if(obj!=null){
-						if(obj.getBoolean("status")){
-							bean.setCode("200");
-						}else{
-							bean.setCode("500"); 
-							
-						}
+//						if("200".equals(obj.getString("code")){
+//							bean.setCode("200");
+//							
+//						}
+//						if(obj.getBoolean("status")){
+//							bean.setCode("200");
+//						}else{
+//							bean.setCode("500"); 
+//							
+//						}
+						bean.setCode(obj.getString("code"));
 						if(Util.IsNull(obj.getString("message"))){
 							
 							bean.setMsg(obj.getString("message"));

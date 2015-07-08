@@ -95,7 +95,9 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		public void run() {
 			// TODO Auto-generated method stub
 			// 10s倒数
-			yanzhengma.setClickable(false);
+//			yanzhengma.setClickable(false);
+//			yanzhengma.setFocusable(false);
+			yanzhengma.setEnabled(true);
 			yanzhengma.setBackgroundResource(R.drawable.money_withdrawal_code_bg);
 //			yanzhengma.setBackgroundResource(R.color.white);
 			yanzhengma.setTextColor(R.color.fame_hui2); 
@@ -118,7 +120,9 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 			intType=2;
 			if (isAutoCode) { // 按钮出于可点击状态，点击后读秒，并验证请求
 				isAutoCode = false;
-				yanzhengma.setClickable(false);
+//				yanzhengma.setClickable(false);
+//				yanzhengma.setFocusable(false);
+				yanzhengma.setEnabled(false);
 				yanzhengma.setBackgroundResource(R.drawable.money_withdrawal_code_bg);
 //				yanzhengma.setBackgroundResource(R.color.white);
 				yanzhengma.setTextColor(R.color.fame_hui2);
@@ -130,6 +134,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
+//				initAdcode();
 
 			} else {
 				return;
@@ -264,7 +269,8 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		}
 	}
 	private void initAdcode(){
-			yanzhengma.setClickable(false);
+//			yanzhengma.setClickable(false);
+			yanzhengma.setFocusable(false);
 			yanzhengma.setBackgroundResource(R.drawable.money_withdrawal_code_bg);
 //			yanzhengma.setBackgroundResource(R.color.white);
 			yanzhengma.setTextColor(R.color.fame_hui2);
@@ -274,9 +280,12 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 			yanzhengma.setEnabled(false);
 			mHandler.postDelayed(runable, 1000);
 	}
+	
 	private void AutoCode(){
 		yanzhengma.setText("获取验证码");
-		yanzhengma.setClickable(true);
+//		yanzhengma.setClickable(true);
+//		yanzhengma.setFocusable(true);
+		yanzhengma.setEnabled(true);
 		yanzhengma.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 		yanzhengma.setTextColor(Color.WHITE);
 		yanzhengma.setPadding(15, 15, 15, 15);
