@@ -1,5 +1,8 @@
 package com.xunbo.store.activitys;
 
+import java.util.ArrayList;
+
+import android.R.integer;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.handmark.pulltorefresh.library.internal.Utils;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
@@ -24,7 +28,10 @@ import com.xunbo.store.R;
 import com.xunbo.store.activitys.SCProductActivity.RefeshData;
 import com.xunbo.store.adapters.ProductAdapter;
 import com.xunbo.store.beans.BaseBean;
+import com.xunbo.store.beans.ListMoneytxBean;
+import com.xunbo.store.beans.MoneyTxBean;
 import com.xunbo.store.net.PostHttp;
+import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
 public class MoneyWithdrawalActivity extends BaseActivity implements OnClickListener{
@@ -43,6 +50,9 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 	private int intType;
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean baseBean;
+	private ListMoneytxBean listMoneytxBean;
+	private ArrayList<MoneyTxBean> moneyTxBeans;
+	private String moneyStr,AdCodeStr;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -73,7 +83,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		ed_yanzhengma=(EditText)findViewById(R.id.money_withdrawal_ed_yanzheng);
 		carIc=(ImageView)findViewById(R.id.money_withdrawal_ic);
 		carInfo=(LinearLayout)findViewById(R.id.money_withdrawal_car);
-		carInfo.setOnClickListener(this);
+//		carInfo.setOnClickListener(this);
 		submit=(Button)findViewById(R.id.money_withdrawal_up);
 		submit.setOnClickListener(this);
 		yanzhengma=(Button)findViewById(R.id.money_withdrawal_yanzheng);
@@ -106,7 +116,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		switch (v.getId()) {
 		case R.id.money_withdrawal_yanzheng:
 			intType=2;
-			if (isAutoCode == true) { // 按钮出于可点击状态，点击后读秒，并验证请求
+			if (isAutoCode) { // 按钮出于可点击状态，点击后读秒，并验证请求
 				isAutoCode = false;
 				yanzhengma.setClickable(false);
 				yanzhengma.setBackgroundResource(R.drawable.money_withdrawal_code_bg);
@@ -115,31 +125,48 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 				yanzhengma.setPadding(15, 15, 15, 15);
 				yanzhengma.setTextSize(16);
 				yanzhengma.setText("正在发送...");
-				initAdcode();
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 
 			} else {
 				return;
 			}
-//			if(Util.detect(context)){
-//				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-//			}else{
-//				Util.ShowToast(context, R.string.net_is_eor);
-//			}
+			
 			
 			break;
 		case R.id.money_withdrawal_car:
-			intent = new Intent(context,MoneyCarListActivity.class);
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
+//			intent = new Intent(context,MoneyCarListActivity.class);
+//			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//			startActivity(intent);
 			break;
 		case R.id.money_withdrawal_up:
-			String moneyStr=money.getText().toString().trim();
-			if(Util.IsNull(moneyStr)){
+			intType=3;
+			moneyStr=money.getText().toString().trim();
+			AdCodeStr=ed_yanzhengma.getText().toString().trim();
+			if(Util.IsNull(AdCodeStr)){
+				if(Util.IsNull(moneyStr)){
+					if(Integer.parseInt(moneyStr)<=Integer.parseInt(moneyTxBeans.get(0).getAll_money())&&Integer.parseInt(moneyStr)>0){
+						if(Util.detect(context)){
+							myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+						}else{
+							Util.ShowToast(context, R.string.net_is_eor);
+						}
+					}else{
+						
+						Util.ShowToast(context, "提现金额大于现有金额");
+					}
+				}else{
+					Util.ShowToast(context, "提现金额不能为空");
+				}
+				
+			}else{
+				Util.ShowToast(context, "验证码不能为空");
 			}
-			else{
-				Toast.makeText(context, "转出金额出错", 200).show();
-			}
-
+			
+			
 			break;
 		default:
 			break;
@@ -158,6 +185,24 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 
 		@Override
 		public boolean OnTaskDone() {
+			if(intType==1){
+				if(listMoneytxBean!=null){
+					if("200".equals(listMoneytxBean.getCode())){
+						initBank();
+						
+					}else if("300".equals(listMoneytxBean.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}
 			if(intType==2){
 				if(baseBean!=null){
 					if("200".equals(baseBean.getCode())){
@@ -178,6 +223,25 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
+			if(intType==3){
+				if(baseBean!=null){
+					if("200".equals(baseBean.getCode())){
+						Util.ShowToast(context,"提现成功~");
+						finish();
+					}else if("300".equals(baseBean.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+					}else{
+						Util.ShowToast(context, baseBean.getMsg());
+					}
+				
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			}
 			return true;
 		}
 
@@ -185,9 +249,16 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		public boolean TaskMain() {
 			// 访问
 			PostHttp p=new PostHttp(context);
+			Send s=new Send(context);
+			if(intType==1){
+				listMoneytxBean=s.getTxBankList(MyApplication.mp.getUser().getAuthstr());
+			}
 			if(intType==2){
 				baseBean=p.getMobileCode(MyApplication.mp.getCenterUserBean().getMobile());
-//				baseBean=p.getMobileCode("18031820695");
+//				baseBean=p.getMobileCode("18632179739");
+			}
+			if(intType==3){
+				baseBean=s.getTx(moneyStr, MyApplication.mp.getUser().getAuthstr(),AdCodeStr);
 			}
 			return true;
 		}
@@ -212,6 +283,53 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		yanzhengma.setTextSize(16);
 		isAutoCode = true;
 		startTime = 120;
+	}
+	private void initBank(){
+		moneyTxBeans=listMoneytxBean.getList();
+		if(moneyTxBeans!=null&&moneyTxBeans.size()>0){
+//			Util.Getbitmap(carIc,);
+			carId.setText(moneyTxBeans.get(0).getBindAccNum());
+			allMoney.setText(moneyTxBeans.get(0).getAll_money());
+			if("华夏银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.huaxia);
+			}else if("河北银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.hebei);
+			}else if("中国银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.zhongguo);
+			}else if("中国工商银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.gongshang);
+			}else if("中国农业银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.nongye);
+			}else if("中国建设银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.jianshe);
+			}else if("交通银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.jiaotong);
+			}else if("招商银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.zhaoshang);
+			}else if("渤海银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.bohai);
+			}else if("广发银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.guangfa);
+			}else if("平安银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.pingan);
+			}else if("中信实业银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.zhongxin);
+			}else if("中国广大银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.guangda);
+			}else if("中国民生银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.minsheng);
+			}else if("兴业银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.xingye);
+			}else if("上海浦东发展银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.pufa);
+			}else if("中国邮政储蓄银行".equals(moneyTxBeans.get(0).getBindOpenBank())){
+				carIc.setBackgroundResource(R.drawable.youchu);
+			}
+		}else{
+			Util.ShowToast(context, "您还未绑定银行卡~");
+			finish();
+		}
+		
 	}
 	
 }

@@ -77,7 +77,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			myPDT.Run(context, new RefeshData(type,order,page,text),R.string.loding);//¿ÉÈ¡Ïû
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
-				}
+		}
 		
 	}
 	

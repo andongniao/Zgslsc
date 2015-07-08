@@ -2,12 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@color/base_hui">
-    <ImageView 
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/home_hui"/>
+    android:orientation="vertical" >
     <ListView 
         android:id="@+id/moneycar_list_list"
         android:layout_width="fill_parent"

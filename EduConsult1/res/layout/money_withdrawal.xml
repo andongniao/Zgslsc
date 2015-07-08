@@ -46,7 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
            android:background="@drawable/mycenter_right"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:visibility="gone" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test"
-            android:textColor="@color/black" 
+            android:textColor="@color/fame_hui3" 
             android:textSize="16dp"/>
 
     </LinearLayout>
@@ -87,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/money_withdrawal_allmoney"
-            android:textColor="@color/black" />
+            android:textColor="@color/fame_hui3" />
 
         <TextView
             android:id="@+id/money_withdrawal_allmoney"
@@ -118,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/money_withdrawal_jine"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui3"
             android:textSize="16dp" />
         <TextView
             android:layout_width="0dp"
@@ -134,7 +135,7 @@
             android:hint="@string/money_withtrawal_textjine"
             android:inputType="number"
             android:singleLine="true"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui3"
             android:textSize="16dp" 
             android:ems="10"/>
         <TextView
@@ -207,7 +208,7 @@
             android:hint="@string/money_withtrawal_yanzhengma"
             android:inputType="number"
             android:singleLine="true"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui3"
             android:textSize="16dp" 
             android:ems="10"/>
         <TextView

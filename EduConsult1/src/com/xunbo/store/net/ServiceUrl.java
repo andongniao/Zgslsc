@@ -5,9 +5,10 @@ package com.xunbo.store.net;
  *
  */
 public class ServiceUrl {
-		public static String Base="http://www.zgslsc.com/app/";
-	//	public static String Base="http://www.shop.com/app/";
-//	public static String Base="http://192.168.1.190/app/";
+//		public static String Base="http://www.zgslsc.com/app/";
+//		public static String Base="http://www.shop.com/app/";
+	public static String Base="http://192.168.1.252/app/";
+	public static String Base_MobileCode="http://192.168.1.252/";
 	//首页index.php
 	public static String Home_url=Base;
 	//首页
@@ -35,10 +36,13 @@ public class ServiceUrl {
 	public static String Mycenter_home_company= "company_detail&authstr=";
 	//钱包 查询明细
 	public static String money_hand = "member.php?action=money_";
+	public static String money_hand_money = "member.php?action=";
 	public static String money_home ="bag";  
 	public static String money_detaile = "bag_detail";
 	public static String money_income= "income";
 	public static String money_pay= "pay";
+	public static String money_up="&captcha=";
+	public static String money_up_money="&amount=";
 	//信件首页列表
 	public static String sms_list = "station_sms";
 	public static String sms_deteaile = "sms_detail&itemid=";

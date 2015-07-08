@@ -59,8 +59,8 @@ OnClickListener {
 	public void InItObj() {
 //		getSupportFragmentManager().beginTransaction()
 //		.replace(R.id.fragmentlinear, new HomeFragment()).commit();
-		getSupportFragmentManager().beginTransaction()
-		.replace(R.id.fragmentlinear, new HomeLayoutFragment()).commit();
+//		getSupportFragmentManager().beginTransaction()
+//		.replace(R.id.fragmentlinear, new HomeLayoutFragment()).commit();
 		context = this;
 		util = new Util(context);
 	}

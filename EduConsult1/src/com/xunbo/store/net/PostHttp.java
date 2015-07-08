@@ -3094,7 +3094,8 @@ public class PostHttp {
 	public BaseBean getMobileCode(String mobile){
 		BaseBean bean = new BaseBean();
 		
-		String url = "http://www.zgslsc.com/"+"ajax.php";
+		String url = ServiceUrl.Base_MobileCode+"ajax.php";
+		
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","mobilecode");
 		list.add(p1);

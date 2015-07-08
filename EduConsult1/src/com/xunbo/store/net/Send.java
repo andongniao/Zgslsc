@@ -851,8 +851,8 @@ public class Send {
 		ArrayList<MoneyTxBean> list = new ArrayList<MoneyTxBean>();
 		String baseurl = ServiceUrl.Base;
 		//TODO
-		String url=baseurl+ServiceUrl.money_hand;
-		url=url+"detail"+ServiceUrl.mycenter_footer+authstr;
+		String url=baseurl+ServiceUrl.money_hand_money;
+		url=url+"cash"+ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -894,13 +894,13 @@ public class Send {
 	 * @param authstr	Œ®“ª±Í æ
 	 * @return
 	 */
-	public BaseBean getTx(String money,String authstr) {
+	public BaseBean getTx(String money,String authstr,String captcha) {
 		ListMoneytxBean bean = new ListMoneytxBean();
 		ArrayList<MoneyTxBean> list = new ArrayList<MoneyTxBean>();
 		String baseurl = ServiceUrl.Base+"member.php?action=sure";
 		//TODO
 		String url=baseurl+"";
-		url=url+ServiceUrl.mycenter_footer+authstr;
+		url=url+ServiceUrl.mycenter_footer+authstr+ServiceUrl.money_up+captcha+ServiceUrl.money_up_money+money;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
