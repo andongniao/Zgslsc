@@ -237,6 +237,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
+             <activity
+            android:name="com.xunbo.store.activitys.StoreShopBaseActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <!-- 银联支付 -->
         <activity

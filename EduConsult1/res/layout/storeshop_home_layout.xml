@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="2dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="fill_parent"
+            android:background="#C021C3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="热卖单品"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <com.xunbo.store.myviews.MyGridView
+        android:id="@+id/storeshop_home_gv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:fadingEdge="none"
+        android:listSelector="#00000000"
+        android:horizontalSpacing="2dp"
+        android:verticalSpacing="2dp" >
+    </com.xunbo.store.myviews.MyGridView>
+    <TextView 
+        android:id="@+id/storeshop_home_tv_all"
+        android:layout_marginTop="15dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:text="查看全部产品"
+        android:gravity="center"
+        android:textSize="14dp"
+        android:textColor="@color/home_hui"
+        
+        />
+
+</LinearLayout>

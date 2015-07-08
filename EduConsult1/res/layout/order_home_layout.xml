@@ -1,15 +1,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/order_home_sc"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:fillViewport="true"
+    android:fadingEdge="none"
     android:scrollbars="none" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#e6e6e6"
-        android:gravity="center_vertical"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -25,7 +25,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/dz" />
+                android:background="@drawable/dz" 
+                android:layout_marginRight="5dp"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -45,6 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/order_shouhuoren"
+                        android:textSize="18dp"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -52,6 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/test"
+                        android:textSize="18dp"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -64,6 +67,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/order_shoujihao"
+                        android:textSize="18dp"
+                        android:visibility="gone"
                         android:textColor="@color/black" />
 
                     <TextView
@@ -71,6 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/test"
+                        android:textSize="18dp"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
@@ -84,14 +90,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/order_shouhuodizhi"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/home_hui" />
 
                     <TextView
                         android:id="@+id/order_tv_dizhi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/test"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/home_hui" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -119,8 +125,7 @@
                 android:background="@drawable/search_lv_notnull_btn_bg"
                 android:textColor="@color/white"/>
             </LinearLayout>
-
-        <ListView
+        <com.xunbo.store.myviews.MyListview
             android:id="@+id/order_home_lv"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -131,8 +136,9 @@
             android:divider="#00000000"
             android:dividerHeight="5dp"
             android:listSelector="#00000000"
+            android:fadingEdge="none"
             android:scrollbars="none" >
-        </ListView>
+        </com.xunbo.store.myviews.MyListview>
         <LinearLayout 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

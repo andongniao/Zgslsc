@@ -58,19 +58,6 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.myzj);
 		init();
 		addlistener();
-		//		/**********set***********/
-//		UserBean b = new UserBean();
-//		b.setName("121");
-//		String l = b.toString();
-//		MyApplication.bean = b;
-//		/**********get***********/
-//		UserBean a = MyApplication.bean;
-//		String s = a.getName();
-
-
-
-
-
 	}
 
 	private void addlistener() {
@@ -95,18 +82,6 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 
-		lv.setOnLongClickListener(new OnLongClickListener() {
-			
-			@Override
-			public boolean onLongClick(View v) {
-				if(type==0){
-					type=1;
-					adapter.SetData(productBeans, type);
-				}
-				return false;
-			}
-		});
-		
 	}
 
 	private void init() {
@@ -141,6 +116,16 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 			public void addlist(String itemid) {
 				list.add(itemid);
 			}
+
+			@Override
+			public void delete() {
+				if(type==0 && adapter!=null){
+					type=1;
+					iv_top_t.setVisibility(View.VISIBLE);
+					adapter.SetData(productBeans, type);
+					adapter.notifyDataSetChanged();
+				}
+			}
 		};
 		
 		if(productBeans==null||productBeans.size()==0){
@@ -161,6 +146,7 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	public interface myzj{
 		void addlist(String itemid);
 		void removelist(String itemid);
+		void delete();
 	}
 
 	@Override
@@ -194,6 +180,8 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
 			if(type==1){
 				type=0;
+				adapter.SetData(productBeans, type);
+				adapter.notifyDataSetChanged();
 				iv_top_t.setVisibility(View.GONE);
 			}
 			return true;   

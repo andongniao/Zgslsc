@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ import com.xunbo.store.myviews.xlistview.XListView;
 import com.xunbo.store.myviews.xlistview.XListView.IXListViewListener;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
+import com.xunbo.store.tools.UITools;
 import com.xunbo.store.tools.Util;
 
 @SuppressWarnings("unused")
@@ -73,6 +75,7 @@ import com.xunbo.store.tools.Util;
 	public static boolean isinit;
 	private EditText et_pass;
 	private boolean isloding;
+	private DisplayMetrics dm;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -106,6 +109,8 @@ import com.xunbo.store.tools.Util;
 		isloding = false;
 		context = this;
 		init = true;
+		dm = new DisplayMetrics();
+		this.getWindowManager().getDefaultDisplay().getMetrics(dm);
 		userbean = MyApplication.mp.getUser();
 		pag = 1;
 		step = 0;
@@ -159,7 +164,7 @@ import com.xunbo.store.tools.Util;
 				TextView money = (TextView) v_pop.findViewById(R.id.money_password_money);
 				et_pass = (EditText) v_pop.findViewById(R.id.money_password_edpassword);
 				double mo = Double.parseDouble(ob.getPrice())*Integer.parseInt(ob.getNumber());
-				money.setText(""+mo);
+				money.setText("гд"+mo);
 				popwindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER,0, 0);
 				Button btn_pay = (Button) v_pop.findViewById(R.id.money_password_yes);
 				Button btn_cancle = (Button) v_pop.findViewById(R.id.money_password_no);	
@@ -286,7 +291,8 @@ import com.xunbo.store.tools.Util;
 
 		view_list.add(tv_show_comment);
 		v_pop = LayoutInflater.from(context).inflate(R.layout.money_password, null);
-		popwindow = new PopupWindow(v_pop, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		popwindow = new PopupWindow(v_pop, dm.widthPixels-UITools.dip2px(context, 30), LayoutParams.WRAP_CONTENT);
+//		popwindow = new PopupWindow(v_pop, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		popwindow.setOutsideTouchable(true);
 		popwindow.setFocusable(true);
 		popwindow.setBackgroundDrawable(new BitmapDrawable());

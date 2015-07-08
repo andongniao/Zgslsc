@@ -106,6 +106,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 			item.tv_online = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_on_line);
 			item.tv_qq = (TextView) convertView.findViewById(R.id.order_home_lv_item_tv_qq);
 			item.lin=(LinearLayout)convertView.findViewById(R.id.order_home_lv_item_lin_peisong);
+			item.lin_uhui =(LinearLayout)convertView.findViewById(R.id.order_home_lv_item_lin_uhui);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -164,7 +165,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 		TextView tv_title,tv_peisong,tv_heji,tv_num,tv_online,tv_qq;
 		MyListview lv;
 		EditText et;
-		LinearLayout lin;
+		LinearLayout lin,lin_uhui;
 	}
 
 }

@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +31,7 @@ public class MyZjAdapter extends BaseAdapter{
 		this.context = context;
 		this.list = list;
 		this.type = type;
+		this.myzj = myzj;
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(ArrayList<ProductBean>list,int type){
@@ -89,21 +90,40 @@ public class MyZjAdapter extends BaseAdapter{
 		}
 		if(type==0){
 			item.cb.setVisibility(View.GONE);
+			item.cb.setChecked(false);
 		}else{
 			item.cb.setVisibility(View.VISIBLE);
 		}
-		item.cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		item.cb.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if(isChecked){
+			public void onClick(View v) {
+				if(!item.cb.isChecked()){
 					myzj.addlist(list.get(position).getItemid());
 				}else{
 					myzj.removelist(list.get(position).getItemid());
 				}
 			}
 		});
-		
+//		setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				if(isChecked){
+//					myzj.addlist(list.get(position).getItemid());
+//				}else{
+//					myzj.removelist(list.get(position).getItemid());
+//				}
+//			}
+//		});
+		convertView.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View v) {
+				myzj.delete();
+				return false;
+			}
+		});
 		return convertView;
 	}
 	class Item{

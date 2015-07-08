@@ -3,8 +3,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="5dp" >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -42,9 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:visibility="gone"
             android:text="@string/service_center_on_line"
-            android:textColor="@color/orn" />
+            android:textColor="@color/orn"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/order_home_lv_item_tv_qq"
@@ -52,38 +51,22 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:visibility="gone"
             android:text="@string/service_center_qq"
-            android:textColor="@color/orn" />
+            android:textColor="@color/orn"
+            android:visibility="gone" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/home_hui" />
 
     <com.xunbo.store.myviews.MyListview
         android:id="@+id/order_home_lv_item_lv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:divider="@drawable/product_detaile_bg_xv_line"
-        android:dividerHeight="5dp"
-        android:listSelector="#00000000"
+        android:divider="@color/home_hui"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@color/home_hui"
         android:scrollbars="none" >
     </com.xunbo.store.myviews.MyListview>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/home_hui" />
-
-    
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/home_hui" />
 
     <LinearLayout
         android:id="@+id/order_home_lv_item_lin_peisong"
@@ -91,10 +74,43 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:padding="5dp" >
 
         <TextView
-            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/order_uhui"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/order_home_lv_item_tv_uhui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test"
+            android:textColor="@color/black" />
+    </LinearLayout>
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/home_hui"
+        />
+
+    <LinearLayout
+        android:id="@+id/order_home_lv_item_lin_uhui"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -116,7 +132,7 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/home_hui" />
 
     <EditText
@@ -126,9 +142,10 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/order_et_bg_line"
         android:gravity="top"
-        android:textColor="@color/black"
         android:hint="@string/order_liuyan"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:visibility="gone"
+        android:textColor="@color/black" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -143,15 +160,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-        
-         <TextView
+
+        <TextView
             android:id="@+id/order_home_lv_item_tv_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:text="@string/test"
             android:textColor="@color/black" />
-        
 
         <TextView
             android:layout_width="wrap_content"
@@ -167,7 +183,6 @@
             android:layout_marginRight="15dp"
             android:text="@string/test"
             android:textColor="@color/orn" />
-
     </LinearLayout>
 
     <!--  -->
