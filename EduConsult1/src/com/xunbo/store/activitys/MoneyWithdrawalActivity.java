@@ -129,12 +129,12 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 				yanzhengma.setPadding(15, 15, 15, 15);
 				yanzhengma.setTextSize(16);
 				yanzhengma.setText("正在发送...");
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
-//				initAdcode();
+//				if(Util.detect(context)){
+//					myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+//				}else{
+//					Util.ShowToast(context, R.string.net_is_eor);
+//				}
+				initAdcode();
 
 			} else {
 				return;
