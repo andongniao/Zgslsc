@@ -7,9 +7,7 @@ package com.xunbo.store.net;
 public class ServiceUrl {
 //		public static String Base="http://www.zgslsc.com/app/";
 //		public static String Base="http://www.shop.com/app/";
-	public static String Base="http://192.168.1.252/app/";
-//	public static String Base_MobileCode="http://192.168.1.252/";
-//	http://www.shop.com/app/member.php?action=mobilecode
+	public static String Base="http://192.168.1.190/app/";
 	//Ê×Ò³index.php
 	public static String Home_url=Base;
 	//Ê×Ò³

@@ -38,6 +38,13 @@ public class MallInfoBean {
 	private String price2;
 	private String areaname;
 	private String content;
+	private String collect;
+	public String getCollect() {
+		return collect;
+	}
+	public void setCollect(String collect) {
+		this.collect = collect;
+	}
 	public String getItemid() {
 		return itemid;
 	}

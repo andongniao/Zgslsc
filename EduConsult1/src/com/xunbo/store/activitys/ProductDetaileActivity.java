@@ -1,16 +1,18 @@
 package com.xunbo.store.activitys;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,9 +23,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -35,6 +37,7 @@ import com.xunbo.store.R;
 import com.xunbo.store.adapters.HomeGridAdapter;
 import com.xunbo.store.adapters.HomeLikeAdapter;
 import com.xunbo.store.adapters.ProductPingjiaAdapter;
+import com.xunbo.store.adapters.TextItemCenterListAdapter;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.CommentBean;
 import com.xunbo.store.beans.CommentStar;
@@ -60,15 +63,15 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private LinearLayout ll_addshopcart,ll_gopay,ll_as_l,ll_as_t,ll_as_r,
 	ll_paied_l,ll_paied_t,ll_paied_r,ll_add_chanpin,ll_add_pingjia,ll_add_dianpu,
 	ll_add_view_chanpin,ll_add_view_pingjia,ll_add_view_dianpu,ll_kefu,ll_shouchang
-	,ll_buy,ll_nobuy,ll_chanpin,ll_pingjia,ll_tuijian,ll_topchanpin,ll_toppingjia,ll_toptuijian;
+	,ll_buy,ll_nobuy,ll_chanpin,ll_pingjia,ll_tuijian,ll_topchanpin,ll_toppingjia,ll_toptuijian,ll_top;
 	private boolean isshow;
-	private PopupWindow popupWindow;
+	private PopupWindow popupWindow,popuyunfei;
 	private int w,h,lh;
 	private Intent intent;
 	private TextView chanpin,pingjia,dianpu,pingjiamore,add,buymore,tv_title
 	,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
 	,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo,topchanpin,toppingjia,toptuijian,
-	pingjiaisnot;
+	pingjiaisnot,tv_yunsong,tv_isyouhuo,tv_time;
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
@@ -81,7 +84,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private ArrayList<ProductBean> buyedlist;
 	private ImageCycleView imageview;
 	private ArrayList<String> images;
-	private ImageView b_l,b_t,b_r,t_l,t_t,t_r;
+	private ImageView b_l,b_t,b_r,t_l,t_t,t_r,shoucang;
 	private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r,tv_content;
 	private ListComment listComment;
 	private ArrayList<CommentBean> comlist;
@@ -97,11 +100,16 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private ImageView[] imtuijian;
 	private ListProductBean listProductBean;
 	private LinearLayout dianpulin;
+	private View expresslin;
 	private ImageView iv_top_t,ima_pingjia,ima_chanpin,ima_tuijian,ima_fanhui,ima_shop;
 	private RelativeLayout rl_r;
-	private int refeshDatatype,chanpingx,chanpingy,pingjiax,pingjiay,tuijianx,tuijiany;
+	private int refeshDatatype,chanpingx,chanpingy,pingjiax,pingjiay,tuijianx,tuijiany,topx,topy;
 	private HomeGridAdapter recommendAdapter;
-
+	private ArrayList<String> listExpress;
+	private LayoutInflater inflater;
+	private ListView lv_express;
+	private TextItemCenterListAdapter textItemCenterListAdapter;
+	private boolean isCollect;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -134,6 +142,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			
 			MyApplication.mp.SaveSee(productBean);
 		}
+		isCollect=false;
 		userbean=MyApplication.mp.getUser();
 		mallinfo=new MallInfoBean();
 		recommend=new ArrayList<ProductBean>();
@@ -160,6 +169,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		ll_kefu.setOnClickListener(this);
 		ll_shouchang=(LinearLayout)findViewById(R.id.product_detail_ll_shoucang);
 		ll_shouchang.setOnClickListener(this);
+		shoucang=(ImageView)findViewById(R.id.product_detail_ima_shoucang);
 		ll_as_l = (LinearLayout) findViewById(R.id.product_detaile_ll_tonglei_l);
 		ll_as_l.setOnClickListener(this);
 		ll_as_t = (LinearLayout) findViewById(R.id.product_detaile_ll_tonglei_t);
@@ -176,7 +186,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		ll_gopay.setOnClickListener(this);
 		ll_addshopcart = (LinearLayout) findViewById(R.id.product_detaile_ll_add_shopcart);
 		ll_addshopcart.setOnClickListener(this);
-		ll_add_view_pingjia=(LinearLayout)findViewById(R.id.product_detaile_ll_add_view_pingjia);
 		tv_content = (TextView) findViewById(R.id.product_detaile_product_main_ingredients_edit);
 		chanpin=(TextView)findViewById(R.id.product_detaile_tv_chanpin);
 		pingjia=(TextView)findViewById(R.id.product_detaile_tv_pingjia);
@@ -204,6 +213,10 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		tv_miaoshu=(TextView)findViewById(R.id.product_detaile_tv_miaoshu);
 		tv_taidu=(TextView)findViewById(R.id.product_detaile_tv_fuwu);
 		tv_fahuo=(TextView)findViewById(R.id.product_detaile_tv_fahuo);
+		tv_chandi=(TextView)findViewById(R.id.product_detaile_tv_chandi);
+		tv_yunsong=(TextView)findViewById(R.id.product_detaile_tv_yunsong);
+		tv_isyouhuo=(TextView)findViewById(R.id.product_detaile_tv_isyouhuo);
+		tv_time=(TextView)findViewById(R.id.product_detaile_tv_time);
 
 		b_l=(ImageView)findViewById(R.id.product_detaile_ima_bui_l);
 		tb_l=(TextView)findViewById(R.id.product_detaile_tv_bui_l);
@@ -226,6 +239,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		ll_topchanpin=(LinearLayout)findViewById(R.id.product_detaile_top_ll_chanpin);
 		ll_toppingjia=(LinearLayout)findViewById(R.id.product_detaile_top_ll_pingjia);
 		ll_toptuijian=(LinearLayout)findViewById(R.id.product_detaile_top_ll_tuijian);
+		ll_top=(LinearLayout)findViewById(R.id.product_detaile_top);
 		ll_topchanpin.setOnClickListener(this);
 		ll_toppingjia.setOnClickListener(this);
 		ll_toptuijian.setOnClickListener(this);
@@ -338,6 +352,35 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		pingjiay=ll_pingjia.getHeight();
 		tuijianx=ll_tuijian.getWidth();
 		tuijiany=ll_tuijian.getHeight();
+		topy=ll_top.getHeight();
+	}
+	private void setPopuwindowCenter(){
+		inflater=LayoutInflater.from(context);
+		expresslin = inflater.inflate(R.layout.moneycar_list, null);
+		lv_express = (ListView) expresslin.findViewById(R.id.moneycar_list_list);
+		textItemCenterListAdapter = new TextItemCenterListAdapter(context, listExpress);
+		lv_express.setAdapter(textItemCenterListAdapter);
+	
+		lv_express.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				tv_yunsong.setText(listExpress.get(arg2));
+				/*if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(arg2,0,3,""),R.string.loding);//可取消
+				}*/
+				popuyunfei.dismiss();
+			}
+		});
+		
+		popuyunfei = new PopupWindow(expresslin, LayoutParams.WRAP_CONTENT ,LayoutParams.WRAP_CONTENT  );
+		popuyunfei.setFocusable(true);
+		popuyunfei.setBackgroundDrawable(getResources().getDrawable(R.drawable.search_kuang));
+		popuyunfei.setOutsideTouchable(true);
+		popuyunfei.showAsDropDown(tv_yunsong);
+		
 	}
 	void initDate(){
 		//ll_nobuy.setVisibility(View.GONE);
@@ -382,12 +425,86 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		storename=mallinfo.getUsername();
 		tv_xiaoliang.setText(mallinfo.getSales()+mallinfo.getUnit());
 		tv_kucun.setText(mallinfo.getAmount()+mallinfo.getUnit());
-//		tv_chandi.setText(mallinfo.getAreaname());
+		tv_chandi.setText(mallinfo.getAreaname());
+		
+//		tv_yunsong.setText(mallinfo.get);
+		if("0".equals(mallinfo.getExpress_1())&&"0".equals(mallinfo.getExpress_2())
+				&&"0".equals(mallinfo.getExpress_3())){
+			tv_yunsong.setText("请联系客服");
+		}else{
+			listExpress=new ArrayList<String>();
+			if(mallinfo.getExpress_1()!=null){
+				listExpress.add(mallinfo.getExpress_name_1());
+			}
+			if(mallinfo.getExpress_2()!=null){
+				listExpress.add(mallinfo.getExpress_name_2());
+			}
+			if(mallinfo.getExpress_3()!=null){
+				listExpress.add(mallinfo.getExpress_name_3());
+			}
+//			listExpress.add("1");
+//			listExpress.add("2");
+//			listExpress.add("3");
+			if(listExpress.size()==1){
+				tv_yunsong.setText(listExpress.get(0));
+			}else{
+				tv_yunsong.setText(listExpress.get(0));
+				tv_yunsong.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						setPopuwindowCenter();
+					}
+				});
+			}
+			
+			
+		}
+		if(Integer.parseInt(mallinfo.getAmount())>0){
+			tv_isyouhuo.setText("有货");
+		}else{
+			tv_isyouhuo.setText("无货");
+		}
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		int lastDay=c.getActualMaximum(Calendar.DAY_OF_MONTH);
+		for(int i=1;i<4;i++){
+			if((day+i)==lastDay){
+				day=1;
+				month+=1;
+			}
+			day++;
+		}
+		month+=1;
+		
+		
+
+		tv_time.setText("18:00前完成下单，预计后天（"+month+"月"+day+"日到）");
 		tv_computer.setText(mallinfo.getCompany());
 		tv_miaoshu.setText("5.0");
 		tv_taidu.setText("5.0");
 		tv_fahuo.setText("5.0");
-		tv_content.setText(Html.fromHtml(mallinfo.getContent()));
+		if(mallinfo.getContent()!=null){
+			if("".equals(mallinfo.getContent())){
+				tv_content.setText("暂无产品介绍！");
+			}else{
+				tv_content.setText(Html.fromHtml(mallinfo.getContent()));
+			}
+		}else{
+			tv_content.setText("暂无产品介绍！");
+		}
+		
+		
+		if("0".equals(mallinfo.getCollect())){
+			isCollect=false;
+			shoucang.setBackgroundResource(R.drawable.product_shoucang);
+		}else{
+			isCollect=true;
+			shoucang.setBackgroundResource(R.drawable.product_shoucang2);
+		}
 
 //		if(buyedlist.size()==0){
 //			//ll_buy.setVisibility(View.GONE);
@@ -468,6 +585,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.product_detail_ll_shoucang:
 			refeshDatatype=2;
+			
 			if(Util.detect(context)){
 				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 			}else {
@@ -510,7 +628,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		case R.id.product_detaile_ll_pay_now: 
 			if(MyApplication.mp.islogin){
 //				ShopcartActivity.ischange=true;
-				ExampleActivity.setCurrentTab(3);
+				ExampleActivity.setCurrentTab(2);
 				SearchResultActivity.isproductfinish=true;
 				MyZjActivity.isfinish=true;
 				finish();
@@ -585,8 +703,11 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 //			ll_chanpin.setFocusable(false);
 //			ll_pingjia.setFocusable(true);
 //			ll_tuijian.setFocusable(false);
-			
-			scrollView.scrollTo(pingjiax, chanpingy);
+//			scrollView.scrollTo(0, 0);   
+			scrollView.scrollTo(0,(chanpingy));
+//			Handler h=new Handler();
+//			h.postDelayed(runna, 100);
+//			scrollView.smoothScrollTo(pingjiax, chanpingy);  
 			popupWindow.showAtLocation(ll_addshopcart, Gravity.BOTTOM,w/2-20, 120);
 			isshow = true;
 			break;
@@ -601,8 +722,9 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 //			ll_chanpin.setFocusable(false);
 //			ll_pingjia.setFocusable(false);
 //			ll_tuijian.setFocusable(true);
-			
-			scrollView.scrollTo(tuijianx, (chanpingy+pingjiay));
+//			scrollView.scrollTo(0, 0);   
+			scrollView.scrollTo(0, (chanpingy+pingjiay));
+//			scrollView.smoothScrollTo(pingjiax, (chanpingy+pingjiay));
 			popupWindow.showAtLocation(ll_addshopcart, Gravity.BOTTOM,w/2-20, 120);
 			isshow = true;
 			break;
@@ -765,6 +887,13 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			else if(refeshDatatype==2){
 				if(bean2!=null){
 					if("200".equals(bean2.getCode())){
+						if(isCollect){
+							isCollect=false;
+							shoucang.setBackgroundResource(R.drawable.product_shoucang);
+						}else{
+							isCollect=true;
+							shoucang.setBackgroundResource(R.drawable.product_shoucang2);
+						}
 						Util.ShowToast(context, bean2.getMsg());
 					}else if("300".equals(bean2.getCode())){
 						MyApplication.mp.setlogin(false);
@@ -794,7 +923,13 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			}else if(refeshDatatype==2){
 				PostHttp p=new PostHttp(context);
 //				BaseBean Shoucang(int t,int type,int id)
-				bean2=p.Shoucang(1, 1,Integer.parseInt(productBean.getItemid()),userbean.getAuthstr());
+				if(!isCollect){
+					//收藏
+					bean2=p.Shoucang(1, 1,Integer.parseInt(productBean.getItemid()),userbean.getAuthstr());
+				}else{
+					//取消收藏
+					bean2=p.Shoucang(2, 1,Integer.parseInt(productBean.getItemid()),userbean.getAuthstr());
+				}
 			}
 			return true;
 		}
@@ -817,6 +952,14 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 //		dianpu.setTextColor(getResources().getColor(R.color.black));
 
 	}
+	private Runnable runna=new Runnable() {
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			scrollView.scrollTo(0, chanpingy);
+		}
+	};
 
 
 

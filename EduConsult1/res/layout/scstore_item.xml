@@ -88,6 +88,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:background="@drawable/sczizhi"/>
+                 <ImageView 
+                    android:id="@+id/scstore_itme_bond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/sczizhi"/>
             </LinearLayout>
             </LinearLayout>
             

@@ -141,7 +141,7 @@ public class OrderHomeAdapter extends BaseAdapter{
 			});
 		
 		}else{
-			item.tv_peisong.setText("免运费");
+			item.tv_peisong.setText("请与客服联系");
 		}
 		float sum=0,i_price;
 		int i_num,n=0;
