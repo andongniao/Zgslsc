@@ -141,24 +141,6 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 				}
 			});
 			
-		myitem.talk.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//已安装插件列表
-				bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
-				BundleContext context = frame.getSystemBundleContext();
-				for(int i=0;i<context.getBundles().length;i++)
-				{
-					//获取已安装插件
-					bundles.add(context.getBundles()[i]);        	        
-				}
-				
-				//BundleContext context =frame.getSystemBundleContext();
-				startor(bundles);
-			}
-		});
 
 		return convertView;
 	}
@@ -170,30 +152,6 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 
 	}
 
-	public void startor(List<org.osgi.framework.Bundle> list){
-		org.osgi.framework.Bundle bundle=list.get(1);
-		if(bundle.getState()!=bundle.ACTIVE){
-			//判断插件是否已启动
-			try {
-				bundle.start();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if(bundle.getBundleActivity()!=null){
-			//			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
-			//				     Toast.LENGTH_SHORT).show();
-			Intent i=new Intent();
-			i.setClassName(contexts, bundle.getBundleActivity().split(",")[0]);
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			contexts.startActivity(i);
-		}else{
-
-			Toast.makeText(contexts, "该插件没有配置BundleActivity",
-					Toast.LENGTH_SHORT).show();
-		}
-	}
 
 	@Override
 	public void onClick(View v) {
