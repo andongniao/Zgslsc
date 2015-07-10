@@ -56,12 +56,12 @@ public class CatgvAdapter extends BaseAdapter{
 	@Override
 	public View getView(final int position, View v, ViewGroup parent) {
 		if(v==null){
-			v = inflater.inflate(R.layout.home_layout_gv_item, null);
+			v = inflater.inflate(R.layout.cat_gv_item, null);
 			item = new Item();
-			item.iv = (ImageView) v.findViewById(R.id.home_layout_gv_item_image);
-			item.tv_title = (TextView) v.findViewById(R.id.home_layout_gv_item_title);
-			item.tv_sub = (TextView) v.findViewById(R.id.home_layout_gv_item_detaile);
-			item.tv_price = (TextView) v.findViewById(R.id.home_layout_gv_item_money);
+			item.iv = (ImageView) v.findViewById(R.id.cat_gv_item_image);
+			item.tv_title = (TextView) v.findViewById(R.id.cat_gv_item_title);
+			item.tv_sub = (TextView) v.findViewById(R.id.cat_gv_item_detaile);
+			item.tv_price = (TextView) v.findViewById(R.id.cat_gv_item_money);
 			v.setTag(item);
 		}else{
 			item = (Item) v.getTag();
