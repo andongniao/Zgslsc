@@ -503,11 +503,11 @@ public class StoreActivity extends Activity implements OnClickListener{
 			// TODO Auto-generated method stub
 			PostHttp p=new PostHttp(context);
 			if(type==1){
-				if(Util.IsNull(storeid)){
-					bean = p.getShopHomeData(storeid,1,page);
-				}else{
-					bean = p.getShopHomeData(storename,2,page);
-				}
+//				if(Util.IsNull(storeid)){
+//					bean = p.getShopHomeData(storeid,1,page);
+//				}else{
+//					bean = p.getShopHomeData(storename,2,page);
+//				}
 			}else if(type==2){
 				catbean = p.getShopCat(storeid, "");
 			}else if(type==4){
@@ -534,122 +534,122 @@ public class StoreActivity extends Activity implements OnClickListener{
 
 		@Override
 		public boolean OnTaskDone() {
-			if(type==1){
-				if(bean!=null){
-					if("200".equals(bean.getCode())){
-						tv_more.setVisibility(View.VISIBLE);
-						if(page==1){
-							list_pro = bean.getList();
-							list_rem = bean.getRecommend();
-							len = list_rem.size();
-							if(len>0){
-								ll_rem.setVisibility(View.VISIBLE);
-								showre();	
-							}
-							home_adapter = new StoreAdapter(context, list_pro);
-//							gv_home.setFocusable(false);
-							gv_home.setAdapter(home_adapter);
-							tv_h_number.setText(bean.getShopInfoBean().getTotalgoods());
-							tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
-							tv_h_miaoshu.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getDescribe()));
-							tv_h_service.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getService()));
-							tv_h_wuliu.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getLogistics()));
-							tv_h_number.setText(""+bean.getShopInfoBean().getTotalgoods());
-							Util.Getbitmap(hean_iv,bean.getShopInfoBean().getThumb());
-							if(bean.getShopInfoBean().getCollect()==0){
-								iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
-								isshoucang=true;
-							}else{
-								iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop1));
-								isshoucang=false;
-							}
-//							new  Handler().postDelayed(new Runnable() {
-//								
-//								@Override
-//								public void run() {
-//									home_sc.scrollTo(0, 10);
+//			if(type==1){
+//				if(bean!=null){
+//					if("200".equals(bean.getCode())){
+//						tv_more.setVisibility(View.VISIBLE);
+//						if(page==1){
+//							list_pro = bean.getList();
+//							list_rem = bean.getRecommend();
+//							len = list_rem.size();
+//							if(len>0){
+//								ll_rem.setVisibility(View.VISIBLE);
+//								showre();	
+//							}
+//							home_adapter = new StoreAdapter(context, list_pro);
+////							gv_home.setFocusable(false);
+//							gv_home.setAdapter(home_adapter);
+//							tv_h_number.setText(bean.getShopInfoBean().getTotalgoods());
+//							tv_h_comment.setText(""+bean.getShopInfoBean().getGrade());
+//							tv_h_miaoshu.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getDescribe()));
+//							tv_h_service.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getService()));
+//							tv_h_wuliu.setText(""+Double.parseDouble(""+bean.getShopInfoBean().getLogistics()));
+//							tv_h_number.setText(""+bean.getShopInfoBean().getTotalgoods());
+//							Util.Getbitmap(hean_iv,bean.getShopInfoBean().getThumb());
+//							if(bean.getShopInfoBean().getCollect()==0){
+//								iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
+//								isshoucang=true;
+//							}else{
+//								iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop1));
+//								isshoucang=false;
+//							}
+////							new  Handler().postDelayed(new Runnable() {
+////								
+////								@Override
+////								public void run() {
+////									home_sc.scrollTo(0, 10);
+////								}
+////							}, 500);
+//						}else{
+//							if(bean.getList().size()>0){
+//								list_pro.addAll(bean.getList());
+//								if(home_adapter==null){
+//									home_adapter = new StoreAdapter(context, list_pro);
+//									gv_home.setAdapter(home_adapter);
+//								}else{
+//									home_adapter.setData(list_pro);
+//									home_adapter.notifyDataSetChanged();
 //								}
-//							}, 500);
-						}else{
-							if(bean.getList().size()>0){
-								list_pro.addAll(bean.getList());
-								if(home_adapter==null){
-									home_adapter = new StoreAdapter(context, list_pro);
-									gv_home.setAdapter(home_adapter);
-								}else{
-									home_adapter.setData(list_pro);
-									home_adapter.notifyDataSetChanged();
-								}
-							}else{
-								Util.ShowToast(context, R.string.page_is_final);
-							}
-							//						gv_home.setFocusable(false);
-						}
-
-					}else if("300".equals(bean.getCode())){
-						MyApplication.mp.setlogin(false);
-						Util.ShowToast(context, R.string.login_out_time);
-						intent = new Intent(context,LoginActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
-						finish(); 
-					}else{
-						if(page!=1){
-							page-=1;
-						}
-						Util.ShowToast(context, bean.getMsg());
-					}
-
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
-			}else if(type==2){
-				if(catbean!=null){
-					if("200".equals(catbean.getCode())){
-						if(catbean.getList().size()>0){
-							fenleiadapter = new StoreFenleiAdapter(context, catbean.getList());
-							fenlei_lv.setAdapter(fenleiadapter);
-						}else{
-							Util.ShowToast(context, "商家尚未定义分类");
-						}
-					}else if("300".equals(catbean.getCode())){
-						MyApplication.mp.setlogin(false);
-						Util.ShowToast(context, R.string.login_out_time);
-						intent = new Intent(context,LoginActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
-						finish(); 
-					}else{
-						Util.ShowToast(context, catbean.getMsg());
-					}
-
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
-			}else if(type==4){
-				if(result!=null){
-					if("200".equals(result.getCode())){
-						if(isshoucang){
-							iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop1));
-							isshoucang=false;
-						}else{
-							iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
-							isshoucang=true;
-						}
-					}else if("300".equals(result.getCode())){
-						MyApplication.mp.setlogin(false);
-						Util.ShowToast(context, R.string.login_out_time);
-						intent = new Intent(context,LoginActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(intent);
-						finish(); 
-					}else{
-						Util.ShowToast(context, result.getMsg());
-					}
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
-			}
+//							}else{
+//								Util.ShowToast(context, R.string.page_is_final);
+//							}
+//							//						gv_home.setFocusable(false);
+//						}
+//
+//					}else if("300".equals(bean.getCode())){
+//						MyApplication.mp.setlogin(false);
+//						Util.ShowToast(context, R.string.login_out_time);
+//						intent = new Intent(context,LoginActivity.class);
+//						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//						startActivity(intent);
+//						finish(); 
+//					}else{
+//						if(page!=1){
+//							page-=1;
+//						}
+//						Util.ShowToast(context, bean.getMsg());
+//					}
+//
+//				}else{
+//					Util.ShowToast(context, R.string.net_is_eor);
+//				}
+//			}else if(type==2){
+//				if(catbean!=null){
+//					if("200".equals(catbean.getCode())){
+//						if(catbean.getList().size()>0){
+//							fenleiadapter = new StoreFenleiAdapter(context, catbean.getList());
+//							fenlei_lv.setAdapter(fenleiadapter);
+//						}else{
+//							Util.ShowToast(context, "商家尚未定义分类");
+//						}
+//					}else if("300".equals(catbean.getCode())){
+//						MyApplication.mp.setlogin(false);
+//						Util.ShowToast(context, R.string.login_out_time);
+//						intent = new Intent(context,LoginActivity.class);
+//						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//						startActivity(intent);
+//						finish(); 
+//					}else{
+//						Util.ShowToast(context, catbean.getMsg());
+//					}
+//
+//				}else{
+//					Util.ShowToast(context, R.string.net_is_eor);
+//				}
+//			}else if(type==4){
+//				if(result!=null){
+//					if("200".equals(result.getCode())){
+//						if(isshoucang){
+//							iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop1));
+//							isshoucang=false;
+//						}else{
+//							iv_shoucang.setBackground(getResources().getDrawable(R.drawable.scstop2));
+//							isshoucang=true;
+//						}
+//					}else if("300".equals(result.getCode())){
+//						MyApplication.mp.setlogin(false);
+//						Util.ShowToast(context, R.string.login_out_time);
+//						intent = new Intent(context,LoginActivity.class);
+//						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//						startActivity(intent);
+//						finish(); 
+//					}else{
+//						Util.ShowToast(context, result.getMsg());
+//					}
+//				}else{
+//					Util.ShowToast(context, R.string.net_is_eor);
+//				}
+//			}
 			return true;
 
 		}

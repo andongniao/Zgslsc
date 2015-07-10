@@ -47,6 +47,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,33 @@ public class Util {
 	}
 
 
+	/**
+	 * 获取屏幕宽度
+	 * 
+	 * @param activity
+	 * @return 屏幕宽度px单位
+	 */
+	public static int getWidth(Activity activity) {
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int screenWidth = dm.widthPixels;
+		return screenWidth;
+	}
+
+	/**
+	 * 获取屏幕高度
+	 * 
+	 * @param activity
+	 * @return 屏幕高度px单位
+	 */
+	public static int getHeight(Activity activity) {
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int screenHeigh = dm.heightPixels;
+		return screenHeigh;
+	}
+	
+	
 
 	/**
 	 * 清除保存的缓存

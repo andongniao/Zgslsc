@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ListShopHomeBean extends BaseBean{
 	private ShopInfoBean shopInfoBean;
 	private ArrayList<ProductBean>recommend;
-	private ArrayList<ProductBean>list;
+//	private ArrayList<ProductBean>list;
 	public ShopInfoBean getShopInfoBean() {
 		return shopInfoBean;
 	}
@@ -22,12 +22,12 @@ public class ListShopHomeBean extends BaseBean{
 	public void setRecommend(ArrayList<ProductBean> recommend) {
 		this.recommend = recommend;
 	}
-	public ArrayList<ProductBean> getList() {
-		return list;
-	}
-	public void setList(ArrayList<ProductBean> list) {
-		this.list = list;
-	}
+//	public ArrayList<ProductBean> getList() {
+//		return list;
+//	}
+//	public void setList(ArrayList<ProductBean> list) {
+//		this.list = list;
+//	}
 	
 
 }

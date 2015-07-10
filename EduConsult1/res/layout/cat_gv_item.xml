@@ -6,7 +6,7 @@
    
     android:background="@color/white">
     <ImageView
-        android:id="@+id/home_layout_gv_item_image"
+        android:id="@+id/cat_gv_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/default_bg"
@@ -14,12 +14,13 @@
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/home_layout_gv_item_title"
+        android:id="@+id/cat_gv_item_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/test"
         android:textColor="@color/fame_hui1"
+        android:gravity="center"
         android:textSize="14dp" 
         android:singleLine="true"
         android:ellipsize="end"
@@ -28,7 +29,7 @@
          android:paddingRight="5dp"
         />
     <TextView
-        android:id="@+id/home_layout_gv_item_detaile"
+        android:id="@+id/cat_gv_item_detaile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1231"
@@ -41,7 +42,7 @@
          android:paddingRight="5dp"
         />
     <TextView
-        android:id="@+id/home_layout_gv_item_money"
+        android:id="@+id/cat_gv_item_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/test"
