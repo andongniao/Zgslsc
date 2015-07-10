@@ -91,15 +91,6 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		reaLayout.setOnClickListener(SCStoreActivity.this);
 		allway=(TextView)findViewById(R.id.scstore_allway);
 		ll_isno=(LinearLayout)findViewById(R.id.scstore_isnull);
-//		list_money.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
 		lv=(XListView)findViewById(R.id.scstore_lv);
 		lv.setPullRefreshEnable(true);
 		lv.setPullLoadEnable(true);
@@ -113,8 +104,6 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		list_2.setVisibility(View.GONE);
 		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
 		ArrayList<String>ll = new ArrayList<String>();
-//		adapter_r = new HomeSlidAdapter(context, ll,2);
-//		lv_l.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
