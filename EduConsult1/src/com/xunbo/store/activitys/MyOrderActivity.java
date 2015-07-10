@@ -80,12 +80,12 @@ import com.xunbo.store.tools.Util;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setTopLeftTv(R.string.myorder_title);
-		topRightRVisible();
+		setTitleTxt(R.string.myorder_title);
+//		topRightRVisible();
 		topRightTGone();
-		rl_r = (RelativeLayout) getTopRightRl();
-		iv_top_r = (ImageView) getTopRightView();
-		iv_top_r.setBackgroundResource(R.drawable.top_home_bg);
+//		rl_r = (RelativeLayout) getTopRightRl();
+//		iv_top_r = (ImageView) getTopRightView();
+//		iv_top_r.setBackgroundResource(R.drawable.top_home_bg);
 		setContentXml(R.layout.myorder_home_layout);
 		init();
 		addlistener();
@@ -94,13 +94,13 @@ import com.xunbo.store.tools.Util;
 	}
 
 	private void addlistener() {
-		iv_top_r.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExampleActivity.setCurrentTab(0);
-				finish();
-			}
-		});
+//		iv_top_r.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				ExampleActivity.setCurrentTab(0);
+//				finish();
+//			}
+//		});
 	}
 
 	@SuppressWarnings("deprecation")
@@ -248,6 +248,7 @@ import com.xunbo.store.tools.Util;
 		ll_isnull = (LinearLayout) findViewById(R.id.myorder_home_ll_isnull);
 		tv_isnull = (TextView) findViewById(R.id.myorder_home_tv_isnull);
 		tv_isnull.setOnClickListener(this);
+		
 		lv = (XListView) findViewById(R.id.myorder_home_lv);
 		lv.setPullRefreshEnable(true);
 		lv.setPullLoadEnable(true);
