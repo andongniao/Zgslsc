@@ -39,7 +39,7 @@ public class XinjianActivity extends BaseActivity{
 		super.onCreate(arg0);
 		//topRightRVisible();
 		topRightTGone();
-		setTopLeftTv(R.string.xinjian_title);
+		setTitleTxt(R.string.xinjian_title);
 		setContentXml(R.layout.xinjian);
 		init();
 		String flag = getIntent().getStringExtra("flag");

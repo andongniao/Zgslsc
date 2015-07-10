@@ -23,7 +23,7 @@ public class PasswordActivity extends BaseActivity implements OnClickListener{
 		super.onCreate(arg0);
 		context=this;
 		topRightTGone();
-		setTopLeftTv(R.string.possword_title);
+		setTitleTxt(R.string.possword_title);
 		setContentXml(R.layout.possword);
 		init();
 

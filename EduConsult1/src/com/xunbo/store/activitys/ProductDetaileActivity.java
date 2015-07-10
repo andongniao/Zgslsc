@@ -433,13 +433,13 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			tv_yunsong.setText("请联系客服");
 		}else{
 			listExpress=new ArrayList<String>();
-			if(mallinfo.getExpress_1()!=null){
+			if(!"0".equals(mallinfo.getExpress_1())){
 				listExpress.add(mallinfo.getExpress_name_1());
 			}
-			if(mallinfo.getExpress_2()!=null){
+			if(!"0".equals(mallinfo.getExpress_2())){
 				listExpress.add(mallinfo.getExpress_name_2());
 			}
-			if(mallinfo.getExpress_3()!=null){
+			if(!"0".equals(mallinfo.getExpress_3())){
 				listExpress.add(mallinfo.getExpress_name_3());
 			}
 //			listExpress.add("1");

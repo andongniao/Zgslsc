@@ -49,14 +49,14 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		super.onCreate(arg0);
 		topRightTGone();
 		//		topRightLVisible(); 
-		topRightRVisible();
-		rl_l = (RelativeLayout) getTopLightRl();
-		rl_r = (RelativeLayout) getTopRightRl();
-		iv_top_l = (ImageView) getTopLightView();
-		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
-		setTopLeftTv(R.string.address_title);
+//		topRightRVisible();
+//		rl_l = (RelativeLayout) getTopLightRl();
+//		rl_r = (RelativeLayout) getTopRightRl();
+//		iv_top_l = (ImageView) getTopLightView();
+//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+//		iv_top_t = (ImageView) getTopRightView();
+//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+		setTitleTxt(R.string.address_title);
 		setContentXml(R.layout.address_home);
 		init();
 		addlistener();
@@ -67,7 +67,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 	private void addlistener() {
-		rl_l.setOnClickListener(new OnClickListener() {
+		/*rl_l.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -84,7 +84,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 				ExampleActivity.setCurrentTab(0);
 				finish();
 			}
-		});
+		});*/
 	}
 	private void init() {
 		TestinAgent.init(this);

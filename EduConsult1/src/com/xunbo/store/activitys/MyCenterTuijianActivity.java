@@ -45,7 +45,7 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 		
 		topRightTGone();
 		
-		setTopLeftTv(R.string.mycenter_tuijian_title);
+		setTitleTxt(R.string.mycenter_tuijian_title);
 		setContentXml(R.layout.mycenter_tuijian);
 		
 		init();

@@ -43,7 +43,7 @@ public class CouponsActivity extends BaseActivity {
 		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);*/
 		//iv_top_t = (ImageView) getTopRightView();
 		//iv_top_t.setBackgroundResource(R.drawable.top_xx_bg);
-		setTopLeftTv(R.string.coupons_title);
+		setTitleTxt(R.string.coupons_title);
 		setContentXml(R.layout.coupons);
 		init();
 		//addlistener();

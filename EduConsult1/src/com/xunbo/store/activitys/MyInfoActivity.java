@@ -64,15 +64,16 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 //		topRightLVisible();
-		topRightRVisible();
+//		topRightRVisible();
 		topRightTGone();
-		rl_l = (RelativeLayout) getTopLightRl();
-		rl_r = (RelativeLayout) getTopRightRl();
-		iv_top_l = (ImageView) getTopLightView();
-		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
-		setTopLeftTv(R.string.myinfo_title);
+//		rl_l = (RelativeLayout) getTopLightRl();
+//		rl_r = (RelativeLayout) getTopRightRl();
+//		iv_top_l = (ImageView) getTopLightView();
+//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+//		iv_top_t = (ImageView) getTopRightView();
+//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+		setTitleTxt(R.string.myinfo_title);
+//		setTopLeftTv(R.string.myinfo_title);
 		setContentXml(R.layout.myinfo);
 		init();
 		addlistener();
@@ -90,14 +91,14 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	}
 
 	private void addlistener() {
-		rl_r.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				ExampleActivity.setCurrentTab(0);
-				finish();
-			}
-		});
+//		rl_r.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				ExampleActivity.setCurrentTab(0);
+//				finish();
+//			}
+//		});
 	}
 
 	private void init() {

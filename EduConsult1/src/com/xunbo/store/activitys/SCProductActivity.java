@@ -68,7 +68,8 @@ public class SCProductActivity extends BaseActivity implements OnClickListener,I
 		super.onCreate(arg0);
 		context=this;
 		topRightTGone();
-		setTopLeftTv(R.string.scproduct_title);
+		setTitleTxt(R.string.scproduct_title);
+		//setTopLeftTv(R.string.scproduct_title);
 		setContentXml(R.layout.scproduct);
 		init();
 		if(Util.detect(context)){

@@ -40,12 +40,12 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 		super.onCreate(arg0);
 		//		topRightLVisible();
 		topRightTGone();
-		rl_l = (RelativeLayout) getTopLightRl();
-		rl_r = (RelativeLayout) getTopRightRl();
-		iv_top_l = (ImageView) getTopLightView();
-		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-		iv_top_t = (ImageView) getTopRightView();
-		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+//		rl_l = (RelativeLayout) getTopLightRl();
+//		rl_r = (RelativeLayout) getTopRightRl();
+//		iv_top_l = (ImageView) getTopLightView();
+//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+//		iv_top_t = (ImageView) getTopRightView();
+//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTitleTxt(R.string.qignbao_title);
 		setContentXml(R.layout.qianbao);
 		init();
@@ -68,14 +68,14 @@ public class QianBaoActivity extends BaseActivity implements OnClickListener{
 //				startActivity(intent);
 //			}
 //		});
-		rl_r.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				ExampleActivity.setCurrentTab(0);
-				finish();
-			}
-		});
+//		rl_r.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				ExampleActivity.setCurrentTab(0);
+//				finish();
+//			}
+//		});
 	}
 	private void init() {
 		TestinAgent.init(this);

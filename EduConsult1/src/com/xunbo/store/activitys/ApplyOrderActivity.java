@@ -52,7 +52,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setTopLeftTv(R.string.applyinfo_title);
+		setTitleTxt(R.string.applyinfo_title);
 		topRightTGone();
 		setContentXml(R.layout.apply_home_layout);
 		init();
