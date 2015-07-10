@@ -7,8 +7,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +36,6 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 		this.catHomelvAdapter = catHomelvAdapter;
 		this.list = list;
 		this.index = index;
-		this.cat = cat;
 		this.w = we;
 		group = list.getList().get(index).getChild();
 		inflater = inflater2;//LayoutInflater.from(context);
@@ -90,15 +87,11 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 		Catlv3Adapter ap = new Catlv3Adapter(context, child);
 		halderItem.lv.setAdapter(ap);
 		halderItem.lv.setFocusable(false);
-		halderItem.lv.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				String catid = ""+child.get(arg2).getCatid();
-				cat.sreach(catid);
-			}
-		});
+//		LinearLayout.LayoutParams params = //new LayoutParams(LayoutParams.FILL_PARENT, 200);
+//				new LayoutParams(
+//						Util.getWidth((Activity)context), 5);//UITools.dip2px((Activity)context, 104));
+//		halderItem.lv.setLayoutParams(params);
+		///////////////////////////////////////////////////////////////////////
 		
 		
 		
