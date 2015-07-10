@@ -553,8 +553,8 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		case R.id.product_detaile_ll_into_dianpu:
 			intent = new Intent(context,StoreShopBaseActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("storeid", "");
-			intent.putExtra("storename", storename);
+			intent.putExtra("storeid", storename);
+			intent.putExtra("storename", "15");
 			startActivity(intent);
 //			Util.ShowToast(context, R.string.maimeng);''
 			
