@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/product_detaile_top"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/top_bg"
@@ -490,6 +491,7 @@
                             android:textColor="@color/orn" />
 
                         <TextView
+                            android:id="@+id/product_detaile_tv_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -779,26 +781,7 @@
                     android:layout_height="1dp"
                     android:background="@color/home_hui" />
 
-                <LinearLayout
-                    android:id="@+id/product_detaile_ll_add_view"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
-                    <LinearLayout
-                        android:id="@+id/product_detaile_ll_add_view_pingjia"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone" >
-
-                      
-                       
-                    </LinearLayout>
-
-                </LinearLayout>
+               
             </LinearLayout>
             <LinearLayout 
                 android:id="@+id/product_detail_ll_pingjia"
@@ -857,7 +840,7 @@
                 android:id="@+id/product_detaile_ll_tongleituijian"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+               
                 
                 android:orientation="vertical" >
 
@@ -866,7 +849,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" 
-                    android:background="@color/white">
+                    android:background="@color/white"
+                     android:layout_marginTop="20dp">
 
                     <ImageView
                         android:layout_width="5dp"
@@ -1159,6 +1143,7 @@
                 android:background="@drawable/product_kefu" />
 
             <TextView
+                
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -1177,6 +1162,7 @@
             android:padding="5dp" >
 
             <ImageView
+                android:id="@+id/product_detail_ima_shoucang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/product_shoucang" />

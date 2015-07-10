@@ -147,6 +147,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		tv_detaile4=(TextView)findViewById(R.id.home_layout_tv_rem_detaile_4);
 		ima_fenlei=(ImageView)findViewById(R.id.home_layout_iv_cat);
 		ima_fenlei.setOnClickListener(this);
+		ima_fenlei.setVisibility(View.GONE);
 		ima_top=(ImageView)findViewById(R.id.home_layout_iv_top);
 		ima_centent1=(ImageView)findViewById(R.id.home_layout_iv_center1);
 		ima_centent2=(ImageView)findViewById(R.id.home_layout_iv_center2);
@@ -232,6 +233,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 						if(sc.getScrollY()>100){
 							popupWindow.showAtLocation(gv_yuanliao, Gravity.BOTTOM,w/2-20, 120);
 							isshow = true;
+//							ispopu=true;
 						}
 					}else{
 						if(sc.getScrollY()<=100){
@@ -408,7 +410,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
  }
 
 	private void Toproduct(ProductBean productBean){
-		
+//		popupWindow.dismiss();
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		//intent.putExtra("productdetaile", value);
@@ -418,8 +420,24 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		startActivity(intent);
 	}
 
-
-
+@Override
+protected void onPause() {
+	// TODO Auto-generated method stub
+	super.onPause();
+	if(isshow){
+		
+		popupWindow.dismiss();
+	}
+}
+@Override
+protected void onResume() {
+	// TODO Auto-generated method stub
+	super.onResume();
+	
+	if(isshow){
+		popupWindow.showAtLocation(gv_yuanliao, Gravity.BOTTOM,w/2-20, 120);
+	}
+}
 
 	
 
@@ -631,6 +649,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		
 		
 	}
+	
 	
 
 

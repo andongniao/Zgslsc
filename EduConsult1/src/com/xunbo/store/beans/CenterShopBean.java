@@ -5,7 +5,7 @@ package com.xunbo.store.beans;
  *
  */
 public class CenterShopBean {
-	private String cid;
+	private String cid;	
 	private String username;
 	private String collected;
 	private String type;
@@ -14,6 +14,27 @@ public class CenterShopBean {
 	private String thumb;
 	private String linkurl;
 	private String telephone;
+	private String vip;//vip等级
+	private String validated;//实名认证
+	private String bond;//保证金
+	public String getVip() {
+		return vip;
+	}
+	public void setVip(String vip) {
+		this.vip = vip;
+	}
+	public String getValidated() {
+		return validated;
+	}
+	public void setValidated(String validated) {
+		this.validated = validated;
+	}
+	public String getBond() {
+		return bond;
+	}
+	public void setBond(String bond) {
+		this.bond = bond;
+	}
 	public String getCid() {
 		return cid;
 	}

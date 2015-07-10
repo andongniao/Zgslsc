@@ -137,7 +137,7 @@
                          >
                          <LinearLayout 
                              android:layout_width="fill_parent"
-                             android:layout_height="wrap_content"
+                             android:layout_height="150dp"
                              android:orientation="horizontal"
                              
                              >
@@ -146,6 +146,7 @@
                                  android:layout_width="fill_parent"
                                  android:layout_weight="1"
                                  android:layout_height="fill_parent"
+                                 android:scaleType="fitXY"
                                  android:background="@color/white"
                                  android:layout_marginBottom="0.5dp"
                                  />
@@ -153,21 +154,24 @@
                                  android:layout_width="fill_parent"
                                  android:layout_weight="1"
                                  android:layout_height="fill_parent"
+                                 
                                  android:orientation="vertical"
                                  >
                                  <ImageView 
                                      android:id="@+id/home_layout_iv_rem_right__t"
                                      android:layout_width="fill_parent"
                                      android:layout_weight="1"
-                                     android:layout_height="0dp"
+                                     android:layout_height="fill_parent"
                                       android:background="@color/white"
+                                      android:scaleType="fitXY"
                                      android:layout_marginBottom="0.5dp"
                                      />
                                   <ImageView 
                                       android:id="@+id/home_layout_iv_rem_right_b"
                                      android:layout_width="fill_parent"
                                      android:layout_weight="1"
-                                     android:layout_height="0dp"
+                                     android:layout_height="fill_parent"
+                                     android:scaleType="fitXY"
                                      android:background="@color/white"
                                      android:layout_marginBottom="0.5dp"
                                      />
@@ -175,14 +179,14 @@
                          </LinearLayout>
                          <LinearLayout 
                              android:layout_width="fill_parent"
-                             android:layout_height="wrap_content"
+                             android:layout_height="80dp"
                              android:orientation="horizontal"
                              >
                              <LinearLayout 
                                  android:id="@+id/home_layout_ll_rem_b_1"
                                  android:layout_width="0dp"
                                  android:layout_weight="1"
-                                 android:layout_height="wrap_content"
+                                 android:layout_height="fill_parent"
                                  android:gravity="center"
                                  android:orientation="vertical"
                                  android:background="@color/white"
@@ -212,8 +216,8 @@
 
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_1"
-                                       android:layout_width="75dp"
-                                       android:layout_height="75dp"
+                                       android:layout_width="fill_parent"
+                                       android:layout_height="fill_parent"
                                        android:scaleType="fitXY"
                                         android:background="@drawable/default_bg"
                                        />
@@ -256,8 +260,8 @@
 
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_2"
-                                       android:layout_width="75dp"
-                                       android:layout_height="75dp"
+                                       android:layout_width="fill_parent"
+                                       android:layout_height="fill_parent"
                                        android:scaleType="fitXY"
                                         android:background="@drawable/default_bg"
                                        />
@@ -298,8 +302,8 @@
                                       />
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_3"
-                                       android:layout_width="75dp"
-                                       android:layout_height="75dp"
+                                      android:layout_width="fill_parent"
+                                       android:layout_height="fill_parent"
                                        android:scaleType="fitXY"
                                        android:background="@drawable/default_bg"
                                        />
@@ -341,8 +345,8 @@
                                       />
                                    <ImageView 
                                        android:id="@+id/home_layout_iv_rem_4"
-                                       android:layout_width="75dp"
-                                       android:layout_height="75dp"
+                                       android:layout_width="fill_parent"
+                                       android:layout_height="fill_parent"
                                        android:scaleType="fitXY"
                                         android:background="@drawable/default_bg"
                                        />

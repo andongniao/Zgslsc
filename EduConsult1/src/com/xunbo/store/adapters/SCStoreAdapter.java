@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.baidu.mobstat.GetReverse;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.activitys.SCStoreActivity.Myorder;
@@ -83,17 +85,35 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 			myitem.ic=(CircleImageView)convertView.findViewById(R.id.scstore_item_ic);
 			myitem.instore=(TextView)convertView.findViewById(R.id.scstore_itme_instores);
 			
-			
-
+			myitem.vip=(ImageView)convertView.findViewById(R.id.scstore_itme_vip);
+			myitem.validated=(ImageView)convertView.findViewById(R.id.scstore_itme_zizhi);
+			myitem.bond=(ImageView)convertView.findViewById(R.id.scstore_itme_bond);
 			myitem.qxsc=(TextView)convertView.findViewById(R.id.scstore_itme_qxsc);
 			myitem.computername = (TextView) convertView.findViewById(R.id.scstore_itme_computername);
 			myitem.talk=(TextView)convertView.findViewById(R.id.scstore_itme_talk);
-			
+			myitem.bond.setVisibility(View.GONE);
 			convertView.setTag(myitem);
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
 		Util.Getbitmap(myitem.ic, list.get(position).getThumb());
+		if("1".equals(list.get(position).getVip())){
+			myitem.vip.setBackgroundResource(R.drawable.scv1);
+		}else if("2".equals(list.get(position).getVip())){
+			myitem.vip.setBackgroundResource(R.drawable.scv2);
+		}else{
+			myitem.vip.setVisibility(View.GONE);
+		}
+		if("1".equals(list.get(position).getValidated())||"1".equals(list.get(position).getBond())){
+			myitem.validated.setBackgroundResource(R.drawable.sczizhi);
+		}else{
+			myitem.validated.setVisibility(View.GONE);
+		}
+//		if("1".equals(list.get(position).getBond())){
+//			myitem.bond.setBackgroundResource(R.drawable.sczizhi);
+//		}else{
+//			myitem.bond.setVisibility(View.GONE);
+//		}
 		myitem.computername.setText(list.get(position).getCompany());
 			
 			myitem.qxsc.setOnClickListener(new OnClickListener() {
@@ -124,6 +144,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 					}
 				}
 			});
+			
 		myitem.talk.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -148,6 +169,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 
 	class Myitem{
 		CircleImageView ic;
+		ImageView vip,validated,bond;
 		TextView computername,qxsc,instore,talk;
 
 	}
