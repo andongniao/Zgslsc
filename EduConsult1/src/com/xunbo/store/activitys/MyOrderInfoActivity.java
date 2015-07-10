@@ -58,7 +58,8 @@ OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		topRightTGone();
-		setTopLeftTv(R.string.myorderinfo_title);
+//		setTopLeftTv(R.string.myorderinfo_title);
+		setTitleTxt(R.string.myorderinfo_title);
 		setContentXml(R.layout.myorderinfo);
 		init();
 	}

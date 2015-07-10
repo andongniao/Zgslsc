@@ -11,9 +11,8 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
-import com.xunbo.store.activitys.HomePagerActivity;
+import com.xunbo.store.activitys.CatDetaileActivity;
 import com.xunbo.store.activitys.MyCenterActivity;
-import com.xunbo.store.activitys.MyZjActivity;
 import com.xunbo.store.activitys.ShopcartActivity;
 import com.xunbo.store.fragments.HomeLayoutFragment;
 
@@ -34,7 +33,7 @@ public class ExampleActivity extends TabHostActivity {
 //				this, SearchHomeActivity.class),"home");
 
 		TabItem About = new TabItem(R.drawable.base_about, new Intent(
-				this, MyZjActivity.class),"产品分类  ");
+				this, CatDetaileActivity.class),"产品分类  ");
 
 		TabItem ShopCart = new TabItem(R.drawable.base_shopcart, new Intent(
 				this, ShopcartActivity.class),"购物车  ");

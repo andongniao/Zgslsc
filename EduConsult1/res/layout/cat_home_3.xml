@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cat_hui"
+    android:background="#f6f6f6"
     android:orientation="vertical" >
 
     <com.xunbo.store.myviews.MyListview
@@ -13,7 +13,6 @@
         android:cacheColorHint="#00000000"
         android:fadingEdge="none"
         android:scrollbars="none"
-        android:background="@color/cat_hui"
         android:divider="@color/base_hui"
         android:dividerHeight="0.1dp"
         >
