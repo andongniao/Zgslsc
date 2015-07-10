@@ -67,10 +67,8 @@ public class WelcomeActivity extends Activity{
 //					intent = new Intent(WelcomeActivity.this,
 //							LoginActivity.class);
 //					}else{
-//						intent = new Intent(WelcomeActivity.this,
-//								ExampleActivity.class);
-					intent = new Intent(WelcomeActivity.this,
-							CatDetaileActivity.class);
+						intent = new Intent(WelcomeActivity.this,
+								ExampleActivity.class);
 //					}
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);

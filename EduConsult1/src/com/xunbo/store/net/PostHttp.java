@@ -469,6 +469,83 @@ public class PostHttp {
 			return bean;
 		}  
 	}  
+	
+	
+	/**
+	 * 分类详情搜索
+	 * @return
+	 */
+	public ListProductBean Seanchcat(String catid) {  
+		ListProductBean bean = new ListProductBean();
+		ArrayList<ProductBean> lp = new ArrayList<ProductBean>();
+		String url = ServiceUrl.Base+"search.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p = new BasicNameValuePair("catid",catid);
+		list.add(p);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					if(!"[]".equals(strResult)){
+						obj = new JSONObject(strResult);
+						if(obj!=null){
+							String code = obj.getString("code");
+							String msg = obj.getString("message");
+							if("200".equals(code)){
+								JSONArray data = obj.getJSONArray("data");
+								Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+								}.getType();
+								lp = gson.fromJson(data.toString(), type_re);
+							}
+							bean.setList(lp);
+							bean.setMsg(msg);
+							bean.setCode(code);
+						}
+					}else{
+						bean.setList(lp);
+						bean.setMsg("暂无产品");
+						bean.setCode("200");	
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}  
 
 
 

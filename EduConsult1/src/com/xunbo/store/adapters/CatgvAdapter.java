@@ -2,6 +2,7 @@ package com.xunbo.store.adapters;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,15 +68,20 @@ public class CatgvAdapter extends BaseAdapter{
 			item = (Item) v.getTag();
 		}
 		Util.Getbitmap(item.iv, list.get(position).getThumb());
-//		item.tv_title.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-//		item.tv_title.setGravity(Gravity.CENTER);
+		@SuppressWarnings("unused")
+		int w = item.iv.getWidth();
+		LayoutParams para;  
+		para = item.iv.getLayoutParams();  
+		para.width = ((int)Util.getWidth((Activity)context)*3/8)+10;
+		para.height = (int) (para.width*0.8);  
+		item.iv.setLayoutParams(para);  
 		item.tv_title.setTextColor(context.getResources().getColor(R.color.black));
 		item.tv_title.setText(list.get(position).getTitle());
 		item.tv_sub.setVisibility(View.GONE);
 		item.tv_price.setVisibility(View.GONE);
 
 		v.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(context,ProductDetaileActivity.class);

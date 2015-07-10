@@ -7,20 +7,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.xunbo.store.R;
+import com.xunbo.store.activitys.CatDetaileActivity.Cat;
 import com.xunbo.store.beans.FenleiBean;
 import com.xunbo.store.beans.ListFenleiBean;
-import com.xunbo.store.tools.UITools;
 import com.xunbo.store.tools.Util;
 
 public class CatHomelvAdapter extends BaseExpandableListAdapter {
@@ -33,10 +32,12 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 	private Item item;
 	private int w;
 	private ExpandableListView lv;
+	private Cat cat;
 	
-	public CatHomelvAdapter(Context context,ListFenleiBean list){
+	public CatHomelvAdapter(Context context,ListFenleiBean list, Cat cat){
 		this.context = context;
 		this.list = list;
+		this.cat = cat;
 		group = list.getList();
 		inflater = LayoutInflater.from(context);
 	} 
@@ -87,7 +88,7 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 //				
 //			}
 		final CatlvAdapter adapter = new CatlvAdapter(
-				context, list, groupPosition, inflater,groupPosition,this,w);
+				context, list, groupPosition, inflater,groupPosition,this,w,cat);
 		LinearLayout.LayoutParams params = //new LayoutParams(LayoutParams.FILL_PARENT, 200);
 				new LayoutParams(
 						LinearLayout.LayoutParams.FILL_PARENT, getHeigith(groupPosition));//UITools.dip2px((Activity)context, 104));

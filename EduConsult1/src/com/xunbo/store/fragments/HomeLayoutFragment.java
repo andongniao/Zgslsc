@@ -147,7 +147,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		tv_detaile4=(TextView)findViewById(R.id.home_layout_tv_rem_detaile_4);
 		ima_fenlei=(ImageView)findViewById(R.id.home_layout_iv_cat);
 		ima_fenlei.setOnClickListener(this);
-		ima_fenlei.setVisibility(View.GONE);
+		ima_fenlei.setVisibility(View.INVISIBLE);
 		ima_top=(ImageView)findViewById(R.id.home_layout_iv_top);
 		ima_centent1=(ImageView)findViewById(R.id.home_layout_iv_center1);
 		ima_centent2=(ImageView)findViewById(R.id.home_layout_iv_center2);

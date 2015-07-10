@@ -16,18 +16,20 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/cat_hui"
+            android:background="#dcdcdc"
             android:divider="@color/base_hui"
             android:dividerHeight="0.1dp"
+            android:scrollbars="none"
             android:fadingEdge="none"
             android:cacheColorHint="#00000000"
             android:listSelector="#00000000"
-            android:scrollbars="none" >
+             >
         </ExpandableListView>
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="30dp" />
+            android:layout_height="30dp" 
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -43,7 +45,10 @@
             android:layout_height="wrap_content"
             android:horizontalSpacing="5dp"
             android:listSelector="#00000000"
+            android:cacheColorHint="#00000000"
             android:numColumns="2"
+            android:scrollbars="none"
+            android:fadingEdge="none"
             android:verticalSpacing="5dp" >
         </GridView>
     </LinearLayout>
