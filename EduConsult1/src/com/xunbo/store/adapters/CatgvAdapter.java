@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,13 +20,13 @@ import com.xunbo.store.activitys.ProductDetaileActivity;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.tools.Util;
 
-public class StoreShopAdapter extends BaseAdapter{
+public class CatgvAdapter extends BaseAdapter{
 	private Context context;
 	private ArrayList<ProductBean> list;
 	private LayoutInflater inflater;
 	private Item item;
 
-	public StoreShopAdapter(Context context,ArrayList<ProductBean> list){
+	public CatgvAdapter(Context context,ArrayList<ProductBean> list){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -65,13 +67,12 @@ public class StoreShopAdapter extends BaseAdapter{
 			item = (Item) v.getTag();
 		}
 		Util.Getbitmap(item.iv, list.get(position).getThumb());
+//		item.tv_title.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+//		item.tv_title.setGravity(Gravity.CENTER);
+		item.tv_title.setTextColor(context.getResources().getColor(R.color.black));
 		item.tv_title.setText(list.get(position).getTitle());
-		item.tv_price.setText("гд"+list.get(position).getPrice());
-		if(Util.IsNull(list.get(position).getSubtitle())){
-			item.tv_sub.setText(list.get(position).getSubtitle());
-			item.tv_sub.setVisibility(View.VISIBLE);
-		}
-
+		item.tv_sub.setVisibility(View.GONE);
+		item.tv_price.setVisibility(View.GONE);
 
 		v.setOnClickListener(new OnClickListener() {
 			

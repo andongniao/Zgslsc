@@ -2715,7 +2715,7 @@ public class PostHttp {
 		HttpPost httpRequest = new HttpPost(url);  
 
 		String strResult = "doPostError";  
-		
+
 
 		try {  
 			/* 添加请求参数到请求对象 */  
@@ -2858,14 +2858,13 @@ public class PostHttp {
 
 	/**
 	 * 获取店铺首页
-	 * @param page	页码
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListShopHomeBean getShopHomeData(String id,int type,int page) {  
+	public ListShopHomeBean getShopHomeData(String id,int type) {  
 		ListShopHomeBean bean = new ListShopHomeBean();
 		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
-		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
+		//		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
 		ShopInfoBean infobean = new ShopInfoBean();
 		String url = ServiceUrl.Base+"shop.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
@@ -2878,10 +2877,8 @@ public class PostHttp {
 			NameValuePair p2 = new BasicNameValuePair("shopname",""+id);
 			list.add(p2);
 		}
-		NameValuePair p = new BasicNameValuePair("page",""+page);
-		list.add(p);
-		//		NameValuePair pp = new BasicNameValuePair("authstr",authstr);
-		//		list.add(pp);
+		//		NameValuePair p = new BasicNameValuePair("page",""+page);
+		//		list.add(p);
 
 
 		/* 建立HTTPPost对象 */  
@@ -2917,26 +2914,20 @@ public class PostHttp {
 							if(Util.IsNull(shop.getString("company"))){
 								infobean.setCompany(shop.getString("company"));
 							}
-							if(Util.IsNull(shop.getString("totalgoods"))){
-								infobean.setTotalgoods(shop.getString("totalgoods"));
-							}
 							if(Util.IsNull(shop.getString("thumb"))){
 								infobean.setThumb(shop.getString("thumb"));
 							}
 							if(Util.IsNull(shop.getString("collect"))){
 								infobean.setCollect(shop.getInt("collect"));
 							}
-							if(Util.IsNull(shop.getString("grade"))){
-								infobean.setGrade(shop.getString("grade"));
+							if(Util.IsNull(shop.getString("vip"))){
+								infobean.setVip(shop.getString("vip"));
 							}
-							if(Util.IsNull(shop.getString("describe"))){
-								infobean.setDescribe(shop.getInt("describe"));
+							if(Util.IsNull(shop.getString("validated"))){
+								infobean.setValidated(shop.getString("validated"));
 							}
-							if(Util.IsNull(shop.getString("service"))){
-								infobean.setService(shop.getInt("service"));
-							}
-							if(Util.IsNull(shop.getString("logistics"))){
-								infobean.setLogistics(shop.getInt("logistics"));
+							if(Util.IsNull(shop.getString("bond"))){
+								infobean.setBond(shop.getString("bond"));
 							}
 						}
 						if("200".equals(obj.getString("code"))
@@ -2949,20 +2940,8 @@ public class PostHttp {
 								list_re = gson.fromJson(recommend.toString(), type_re);
 							}
 						}
-						if("200".equals(obj.getString("code"))
-								&& Util.IsNull(obj.getString("data"))){
-							//							JSONArray data = obj.getJSONArray("list");
-							JSONObject data = obj.getJSONObject("data");
-							if(!data.getString("list").equals("[]")){
-								JSONArray l = data.getJSONArray("list");
-								Type type_re = new TypeToken<ArrayList<ProductBean>>() {
-								}.getType();
-								list_data = gson.fromJson(l.toString(), type_re);
-							}
-						}
 						bean.setShopInfoBean(infobean);
 						bean.setRecommend(list_re);
-						bean.setList(list_data);
 						bean.setMsg(obj.getString("message"));
 						bean.setCode(obj.getString("code"));
 					}else{
@@ -2997,6 +2976,182 @@ public class PostHttp {
 		}  
 	}
 
+
+
+	/**
+	 * 获取店铺全部商品
+	 * @param page	页码
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public ListProductBean getShopHomeAll(String id,int type,int page) {  
+		ListProductBean bean = new ListProductBean();
+		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
+		//		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
+		ShopInfoBean infobean = new ShopInfoBean();
+		String url = ServiceUrl.Base+"shop.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p1 = new BasicNameValuePair("action","list");
+		list.add(p1);
+		if(type==1){
+			NameValuePair p2 = new BasicNameValuePair("id",""+id);
+			list.add(p2);
+		}else{
+			NameValuePair p2 = new BasicNameValuePair("shopname",""+id);
+			list.add(p2);
+		}
+		NameValuePair p = new BasicNameValuePair("page",""+page);
+		list.add(p);
+
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if("200".equals(obj.getString("code"))
+								&& Util.IsNull(obj.getString("data"))){
+							JSONArray data = obj.getJSONArray("data");
+							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+							}.getType();
+							list_re = gson.fromJson(data.toString(), type_re);
+						}
+						bean.setList(list_re);
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
+
+
+	/**
+	 * 获取店铺新品
+	 * @param page	页码
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public ListProductBean getShopHomeNew(String id,int type) {  
+		ListProductBean bean = new ListProductBean();
+		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
+		//		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
+		ShopInfoBean infobean = new ShopInfoBean();
+		String url = ServiceUrl.Base+"shop.php";
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p1 = new BasicNameValuePair("action","new");
+		list.add(p1);
+		if(type==1){
+			NameValuePair p2 = new BasicNameValuePair("id",""+id);
+			list.add(p2);
+		}else{
+			NameValuePair p2 = new BasicNameValuePair("shopname",""+id);
+			list.add(p2);
+		}
+		//		NameValuePair p = new BasicNameValuePair("page",""+page);
+		//		list.add(p);
+
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				if(Util.IsNull(strResult)){
+					/* 读返回数据 */  
+					obj = new JSONObject(strResult);
+					if(obj!=null){
+						if("200".equals(obj.getString("code"))
+								&& Util.IsNull(obj.getString("data"))){
+							JSONArray data = obj.getJSONArray("data");
+							Type type_re = new TypeToken<ArrayList<ProductBean>>() {
+							}.getType();
+							list_re = gson.fromJson(data.toString(), type_re);
+						}
+						bean.setList(list_re);
+						bean.setMsg(obj.getString("message"));
+						bean.setCode(obj.getString("code"));
+					}else{
+						bean.setMsg(error);
+						bean.setCode("500");
+					}
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");	
+			}  
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}
 
 
 
@@ -3086,21 +3241,24 @@ public class PostHttp {
 			return bean;
 		}  
 	}
-/**
- * 获取验证码
- * @param mobile
- * @return BaseBean
- */
-	public BaseBean getMobileCode(String mobile){
+	/**
+	 * 获取验证码
+	 * @param mobile
+	 * @return BaseBean
+	 */
+	public BaseBean getMobileCode(String mobile,String authstr){
 		BaseBean bean = new BaseBean();
-		
-//		String url = ServiceUrl.Base_MobileCode+"ajax.php";
-		String url = ServiceUrl.Base+ServiceUrl.money_hand_money+ServiceUrl.Base_MobileCode+"&mobile="+mobile;
+
+		//		String url = ServiceUrl.Base_MobileCode+"ajax.php";
+		String url = ServiceUrl.Base+ServiceUrl.money_hand_money+ServiceUrl.Base_MobileCode+"&mobile="+mobile
+				+"&authstr"+authstr;
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
 		NameValuePair p1 = new BasicNameValuePair("action","mobilecode");
 		list.add(p1);
 		NameValuePair p = new BasicNameValuePair("mobile",mobile);
 		list.add(p);
+		NameValuePair pq = new BasicNameValuePair("authstr",authstr);
+		list.add(pq);
 
 
 		/* 建立HTTPPost对象 */  
@@ -3121,21 +3279,21 @@ public class PostHttp {
 				if(Util.IsNull(strResult)){
 					/* 读返回数据 */  
 					obj = new JSONObject(strResult);
-					
+
 					if(obj!=null){
-//						if("200".equals(obj.getString("code")){
-//							bean.setCode("200");
-//							
-//						}
-//						if(obj.getBoolean("status")){
-//							bean.setCode("200");
-//						}else{
-//							bean.setCode("500"); 
-//							
-//						}
+						//						if("200".equals(obj.getString("code")){
+						//							bean.setCode("200");
+						//							
+						//						}
+						//						if(obj.getBoolean("status")){
+						//							bean.setCode("200");
+						//						}else{
+						//							bean.setCode("500"); 
+						//							
+						//						}
 						bean.setCode(obj.getString("code"));
 						if(Util.IsNull(obj.getString("message"))){
-							
+
 							bean.setMsg(obj.getString("message"));
 						}else{
 							bean.setMsg("");
@@ -3216,6 +3374,6 @@ public class PostHttp {
 
 		return httpClient;  
 	}
-	
+
 
 }

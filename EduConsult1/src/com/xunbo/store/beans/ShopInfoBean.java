@@ -9,25 +9,10 @@ public class ShopInfoBean {
 	private String username;
 	private String company;
 	private int collect;		//是否收藏0为是1为否
-	private String grade;		//好评率
-	private int describe;		//描述评分
-	private int service;		//服务评分
-	private int logistics;		//物流评分
-	private String totalgoods;	//产品总数
 	private String thumb;		//img
-	
-	public String getThumb() {
-		return thumb;
-	}
-	public void setThumb(String thumb) {
-		this.thumb = thumb;
-	}
-	public String getTotalgoods() {
-		return totalgoods;
-	}
-	public void setTotalgoods(String totalgoods) {
-		this.totalgoods = totalgoods;
-	}
+	private String vip;			//vip
+	private String validated;	//实名认证
+	private String bond;		//保证金
 	public String getUserid() {
 		return userid;
 	}
@@ -52,29 +37,36 @@ public class ShopInfoBean {
 	public void setCollect(int collect) {
 		this.collect = collect;
 	}
-	public String getGrade() {
-		return grade;
+	public String getThumb() {
+		return thumb;
 	}
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
 	}
-	public int getDescribe() {
-		return describe;
+	public String getVip() {
+		return vip;
 	}
-	public void setDescribe(int describe) {
-		this.describe = describe;
+	public void setVip(String vip) {
+		this.vip = vip;
 	}
-	public int getService() {
-		return service;
+	public String getValidated() {
+		return validated;
 	}
-	public void setService(int service) {
-		this.service = service;
+	public void setValidated(String validated) {
+		this.validated = validated;
 	}
-	public int getLogistics() {
-		return logistics;
+	public String getBond() {
+		return bond;
 	}
-	public void setLogistics(int logistics) {
-		this.logistics = logistics;
+	public void setBond(String bond) {
+		this.bond = bond;
 	}
+	
+//	private String grade;		//好评率
+//	private int describe;		//描述评分
+//	private int service;		//服务评分
+//	private int logistics;		//物流评分
+//	private String totalgoods;	//产品总数
+	
 
 }

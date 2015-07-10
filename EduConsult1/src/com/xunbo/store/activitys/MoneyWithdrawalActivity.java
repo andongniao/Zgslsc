@@ -259,7 +259,8 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 				listMoneytxBean=s.getTxBankList(MyApplication.mp.getUser().getAuthstr());
 			}
 			if(intType==2){
-				baseBean=p.getMobileCode(MyApplication.mp.getCenterUserBean().getMobile());
+				baseBean=p.getMobileCode(MyApplication.mp.getCenterUserBean().getMobile(),
+						MyApplication.mp.getUser().getAuthstr());
 //				baseBean=p.getMobileCode("18632179739");
 			}
 			if(intType==3){

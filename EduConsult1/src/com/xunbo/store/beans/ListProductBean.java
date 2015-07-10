@@ -1,7 +1,11 @@
 package com.xunbo.store.beans;
 
 import java.util.ArrayList;
-
+/**
+ * 单品列表实体
+ * @author Qzr
+ *
+ */
 public class ListProductBean extends BaseBean{
 	private ArrayList<ProductBean> list;
 

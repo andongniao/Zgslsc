@@ -895,8 +895,8 @@ public class Send {
 	 * @return
 	 */
 	public BaseBean getTx(String money,String authstr,String captcha) {
-		ListMoneytxBean bean = new ListMoneytxBean();
-		ArrayList<MoneyTxBean> list = new ArrayList<MoneyTxBean>();
+		BaseBean bean = new BaseBean();
+//		ArrayList<MoneyTxBean> list = new ArrayList<MoneyTxBean>();
 		String baseurl = ServiceUrl.Base+"member.php?action=sure";
 		//TODO
 		String url=baseurl+"";
@@ -910,15 +910,15 @@ public class Send {
 				object = new JSONObject(jsonStr);
 				String code = object.getString("code");
 				String msg = object.getString("message");
-				if (code != null && "200".equals(code)) {
-					if(Util.IsNull(object.getString("data")) && !"[]".equals(object.getString("data"))){
-						JSONArray data = object.getJSONArray("data");
-						Type t = new TypeToken<ArrayList<MoneyTxBean>>() {
-						}.getType();
-						list = gson.fromJson(data.toString(), t);
-					}
-				}
-				bean.setList(list);
+//				if (code != null && "200".equals(code)) {
+//					if(Util.IsNull(object.getString("data")) && !"[]".equals(object.getString("data"))){
+//						JSONArray data = object.getJSONArray("data");
+//						Type t = new TypeToken<ArrayList<MoneyTxBean>>() {
+//						}.getType();
+//						list = gson.fromJson(data.toString(), t);
+//					}
+//				}
+//				bean.setList(list);
 				bean.setMsg(msg);
 				bean.setCode(code);
 				return bean;
