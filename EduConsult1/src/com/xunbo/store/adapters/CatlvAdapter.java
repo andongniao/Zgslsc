@@ -84,6 +84,7 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 		}
 		Catlv3Adapter ap = new Catlv3Adapter(context, child);
 		halderItem.lv.setAdapter(ap);
+		halderItem.lv.setFocusable(false);
 //		LinearLayout.LayoutParams params = //new LayoutParams(LayoutParams.FILL_PARENT, 200);
 //				new LayoutParams(
 //						Util.getWidth((Activity)context), 5);//UITools.dip2px((Activity)context, 104));
@@ -169,13 +170,13 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 	public int getHeigith(int groupPosition) {
 		int height,width;
 		width = (int) (Util.getWidth((Activity)context) / 9.7);
-		if(index==3 && groupPosition==2){
-		height = (w)
-				* (group.get(groupPosition).getChild().size()+1)-33;// names[groupPosition].length;
-		}else{
+//		if(index==3 && groupPosition==2){
+//		height = (w)
+//				* (group.get(groupPosition).getChild().size());// names[groupPosition].length;
+//		}else{
 			height = (w)
-					* (group.get(groupPosition).getChild().size())+6;// names[groupPosition].length;
-		}
+					* (group.get(groupPosition).getChild().size())+10;// names[groupPosition].length;
+//		}
 		return height;
 	}
 }

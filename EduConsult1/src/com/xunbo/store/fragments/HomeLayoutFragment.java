@@ -147,7 +147,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		tv_detaile4=(TextView)findViewById(R.id.home_layout_tv_rem_detaile_4);
 		ima_fenlei=(ImageView)findViewById(R.id.home_layout_iv_cat);
 		ima_fenlei.setOnClickListener(this);
-		ima_fenlei.setVisibility(View.GONE);
+		ima_fenlei.setVisibility(View.INVISIBLE);
 		ima_top=(ImageView)findViewById(R.id.home_layout_iv_top);
 		ima_centent1=(ImageView)findViewById(R.id.home_layout_iv_center1);
 		ima_centent2=(ImageView)findViewById(R.id.home_layout_iv_center2);
@@ -274,7 +274,9 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				if(siliao.get(arg2)!=null){
 					Toproduct(siliao.get(arg2));
+				}
 			}
 		});
 //		gv_qita.setOnItemClickListener(new OnItemClickListener() {
@@ -292,7 +294,10 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				if(qxyz.get(arg2)!=null){
+					
 					Toproduct(qxyz.get(arg2));
+				}
 			}
 		});
 		gv_shouyao.setOnItemClickListener(new OnItemClickListener() {
@@ -301,7 +306,10 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				Toproduct(shouyao.get(arg2));
+				if(shouyao.get(arg2)!=null){
+					
+					Toproduct(shouyao.get(arg2));
+				}
 			}
 		});
 		gv_tianjiaji.setOnItemClickListener(new OnItemClickListener() {
@@ -310,8 +318,10 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-					
-				Toproduct(tianjiaji.get(arg2));
+					if(tianjiaji.get(arg2)!=null){
+						
+						Toproduct(tianjiaji.get(arg2));
+					}
 			}
 		});
 		
@@ -321,7 +331,10 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				Toproduct(yuanliao.get(arg2));
+				if(yuanliao.get(arg2)!=null){
+					
+					Toproduct(yuanliao.get(arg2));
+				}
 			}
 		});
 		gv_yzsb.setOnItemClickListener(new OnItemClickListener() {
@@ -330,8 +343,10 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
+				if(yzsb.get(arg2)!=null){
 					
-				Toproduct(yzsb.get(arg2));
+					Toproduct(yzsb.get(arg2));
+				}	
 			}
 		});
 	}
@@ -368,25 +383,43 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			case R.id.home_layout_ll_more_yuanliao:
 				break;
 			case R.id.home_layout_iv_rem_top_lf:
-				Toproduct(recommend.get(0));
+				if(recommend.get(0)!=null){
+					
+					Toproduct(recommend.get(0));
+				}
 				break;
 			case R.id.home_layout_iv_rem_right__t:
-				Toproduct(recommend.get(1));
+				if(recommend.get(1)!=null){
+					
+					Toproduct(recommend.get(1));
+				}
 				break;
 			case R.id.home_layout_iv_rem_right_b:
-				Toproduct(recommend.get(2));
+				if(recommend.get(2)!=null){
+					
+					Toproduct(recommend.get(2));
+				}
 				break;
 			case R.id.home_layout_ll_rem_b_1:
-				Toproduct(recommend.get(3));
+				if(recommend.get(3)!=null){
+					
+					Toproduct(recommend.get(3));
+				}
 				break;
 			case R.id.home_layout_ll_rem_b_2:
-				Toproduct(recommend.get(4));
+				if(recommend.get(4)!=null){
+					Toproduct(recommend.get(4));
+				}
 				break;
 			case R.id.home_layout_ll_rem_b_3:
-				Toproduct(recommend.get(5));
+				if(recommend.get(5)!=null){
+					Toproduct(recommend.get(5));
+				}
 				break;
 			case R.id.home_layout_ll_rem_b_4:
-				Toproduct(recommend.get(6));
+				if(recommend.get(6)!=null){
+					Toproduct(recommend.get(6));
+				}
 				break;
 
 			}

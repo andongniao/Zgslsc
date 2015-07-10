@@ -25,6 +25,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="3dp"
+            android:layout_centerInParent="true"
             android:text="中国饲料商城"
             android:textColor="@color/white"
             android:textSize="20dp" />
@@ -113,6 +114,7 @@
                      	            android:padding="5dp"
                      	            android:gravity="center_vertical"
                      	            android:layout_marginRight="5dp"
+                     	            android:visibility="gone"
                      	            >
                      	            <TextView 
                      	                android:layout_width="wrap_content"
@@ -403,6 +405,7 @@
                      	            android:padding="5dp"
                      	            android:gravity="center_vertical"
                      	            android:layout_marginRight="5dp"
+                     	            android:visibility="gone"
                      	            >
                      	            <TextView 
                      	                android:layout_width="wrap_content"
@@ -484,6 +487,7 @@
                      	            android:padding="5dp"
                      	            android:gravity="center_vertical"
                      	            android:layout_marginRight="5dp"
+                     	            android:visibility="gone"
                      	            >
                      	            <TextView 
                      	                android:layout_width="wrap_content"
@@ -557,6 +561,7 @@
                      	            android:padding="5dp"
                      	            android:gravity="center_vertical"
                      	            android:layout_marginRight="5dp"
+                     	            android:visibility="gone"
                      	            >
                      	            <TextView 
                      	                android:layout_width="wrap_content"
@@ -636,6 +641,7 @@
                      	            android:padding="5dp"
                      	            android:gravity="center_vertical"
                      	            android:layout_marginRight="5dp"
+                     	            android:visibility="gone"
                      	            >
                      	            <TextView 
                      	                android:layout_width="wrap_content"
@@ -709,6 +715,7 @@
                      	            android:padding="5dp"
                      	            android:gravity="center_vertical"
                      	            android:layout_marginRight="5dp"
+                     	            android:visibility="gone"
                      	            >
                      	            <TextView 
                      	                android:layout_width="wrap_content"
@@ -782,6 +789,7 @@
                      	            android:padding="5dp"
                      	            android:gravity="center_vertical"
                      	            android:layout_marginRight="5dp"
+                     	            android:visibility="gone"
                      	            >
                      	            <TextView 
                      	                android:layout_width="wrap_content"
