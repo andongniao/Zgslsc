@@ -37,7 +37,7 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		topRightTGone();
-		setTopLeftTv(R.string.pingjiadingdan_title);
+		setTitleTxt(R.string.pingjiadingdan_title);
 		setContentXml(R.layout.pjorder);
 		init();
 	}

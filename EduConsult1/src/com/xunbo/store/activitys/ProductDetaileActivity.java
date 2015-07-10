@@ -114,6 +114,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		//		topRightLVisible();
+		TestinAgent.init(this);
 		TypedArray activityStyle = getTheme().obtainStyledAttributes(new int[] {android.R.attr.windowAnimationStyle});
 		int windowAnimationStyleResId = activityStyle.getResourceId(0, 0);      
 		activityStyle.recycle();
@@ -121,6 +122,9 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
 		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
 		activityStyle.recycle();
+		
+		
+		
 //		topRightRVisible();
 //		topRightTGone();
 //		setTopLeftTv(R.string.product_detaile_title);
@@ -162,7 +166,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		pingjiamore=(TextView)findViewById(R.id.product_detaile_ll_add_View_xiangqing_more);
 		pingjiamore.setOnClickListener(this);
 		dianpulin=(LinearLayout)findViewById(R.id.product_detaile_ll_into_dianpu);
-		dianpulin.setVisibility(View.GONE);
+		
         dianpulin.setOnClickListener(this);
 		scrollView = (ScrollViewExtend) findViewById(R.id.product_detaile_sl);
 		ll_kefu=(LinearLayout)findViewById(R.id.product_detail_ll_kefu);
@@ -383,7 +387,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		
 	}
 	void initDate(){
-		//ll_nobuy.setVisibility(View.GONE);
 		images=new ArrayList<String>();
 		if(Util.IsNull(mallinfo.getThumb())){
 			images.add(mallinfo.getThumb());
@@ -442,9 +445,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			if(!"0".equals(mallinfo.getExpress_3())){
 				listExpress.add(mallinfo.getExpress_name_3());
 			}
-//			listExpress.add("1");
-//			listExpress.add("2");
-//			listExpress.add("3");
 			if(listExpress.size()==1){
 				tv_yunsong.setText(listExpress.get(0));
 			}else{
@@ -506,30 +506,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			shoucang.setBackgroundResource(R.drawable.product_shoucang2);
 		}
 
-//		if(buyedlist.size()==0){
-//			//ll_buy.setVisibility(View.GONE);
-//			buymore.setVisibility(View.GONE);
-//		}else{
-//			ll_nobuy.setVisibility(View.GONE);
-//			ll_buy.setVisibility(View.VISIBLE);
-//			try {
-////				b_l.setImageBitmap(Util.getBitmapForNet(buyedlist.get(0).getThumb()));
-////				b_t.setImageBitmap(Util.getBitmapForNet(buyedlist.get(1).getThumb()));
-////				b_r.setImageBitmap(Util.getBitmapForNet(buyedlist.get(2).getThumb()));
-//				Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-//				Util.Getbitmap(b_r, buyedlist.get(1).getThumb());
-//				Util.Getbitmap(b_r, buyedlist.get(2).getThumb());
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-//			tb_l.setText(buyedlist.get(0).getPrice());
-//			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
-//			tb_t.setText(buyedlist.get(1).getPrice());
-//			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
-//			tb_r.setText(buyedlist.get(2).getPrice());
-//		}
 		if(recommend.size()!=0){
 			if(recommendAdapter!=null){
 				recommendAdapter.setProductBean(recommend);
@@ -540,35 +516,12 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			}
 			
 
-//			try {
-////				t_l.setImageBitmap(Util.getBitmapForNet(recommend.get(0).getThumb()));
-////				t_t.setImageBitmap(Util.getBitmapForNet(recommend.get(1).getThumb()));
-////				t_r.setImageBitmap(Util.getBitmapForNet(recommend.get(2).getThumb()));
-//				Util.Getbitmap(t_l, recommend.get(0).getThumb());
-//				Util.Getbitmap(t_t, recommend.get(1).getThumb());
-//				Util.Getbitmap(t_r, recommend.get(2).getThumb());
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			//Util.Getbitmap(b_l, buyedlist.get(0).getThumb());
-//			tt_l.setText("£§"+recommend.get(0).getPrice()+"");
-//			//Util.Getbitmap(b_t, buyedlist.get(0).getThumb());
-//			tt_t.setText("£§"+recommend.get(1).getPrice()+"");
-//			//Util.Getbitmap(b_r, buyedlist.get(0).getThumb());
-//			tt_r.setText("£§"+recommend.get(2).getPrice()+"");
 		}
 
-
+		Handler h=new Handler();
+		h.postDelayed(runna, 500);
 	}
 	private void addlistener() {
-//		iv_top_t.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-				
-//			}
-//		});
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -598,7 +551,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.product_detaile_ll_into_dianpu:
-			intent = new Intent(context,StoreActivity.class);
+			intent = new Intent(context,StoreShopBaseActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("storeid", "");
 			intent.putExtra("storename", storename);
@@ -700,14 +653,8 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			topchanpin.setTextColor(getResources().getColor(R.color.white));
 			ima_chanpin.setBackgroundColor(getResources().getColor(R.color.transparent));
 			
-//			ll_chanpin.setFocusable(false);
-//			ll_pingjia.setFocusable(true);
-//			ll_tuijian.setFocusable(false);
-//			scrollView.scrollTo(0, 0);   
 			scrollView.scrollTo(0,(chanpingy));
-//			Handler h=new Handler();
-//			h.postDelayed(runna, 100);
-//			scrollView.smoothScrollTo(pingjiax, chanpingy);  
+//			
 			popupWindow.showAtLocation(ll_addshopcart, Gravity.BOTTOM,w/2-20, 120);
 			isshow = true;
 			break;
@@ -719,12 +666,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			toppingjia.setTextColor(getResources().getColor(R.color.white));
 			ima_pingjia.setBackgroundColor(getResources().getColor(R.color.transparent));
 			
-//			ll_chanpin.setFocusable(false);
-//			ll_pingjia.setFocusable(false);
-//			ll_tuijian.setFocusable(true);
-//			scrollView.scrollTo(0, 0);   
 			scrollView.scrollTo(0, (chanpingy+pingjiay));
-//			scrollView.smoothScrollTo(pingjiax, (chanpingy+pingjiay));
 			popupWindow.showAtLocation(ll_addshopcart, Gravity.BOTTOM,w/2-20, 120);
 			isshow = true;
 			break;
@@ -747,7 +689,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private void Toproduct(ProductBean productBean){
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		//intent.putExtra("productdetaile", value);
 		Bundle b=new Bundle();
 		b.putSerializable("product", productBean);
 		intent.putExtra("productbundle", b);
@@ -794,9 +735,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		public boolean TaskMain() {
 			// ∑√Œ 
 			Send s = new Send(context);
-			//productdetailbean = s.GetProductDetaile();
-			// listProductBean=s.getCenterRecommend();
-			//bean=s.CartAdd(mallinfo.getItemid(), 1,userbean.getAuthstr());
 			bean=s.CartAdd(productBean.getItemid(), 1,userbean.getAuthstr());
 			return true;
 		}
@@ -871,16 +809,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
-				/*if(home!=null){
-				if("200".equals(home.getCode())){
-					initTuijian();
-				}else{
-					Util.ShowToast(context, home.getMsg());
-				}
-
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}*/
 
 
 			}
@@ -957,10 +885,21 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			scrollView.scrollTo(0, chanpingy);
+			chanpingy=ll_chanpin.getHeight();
+			chanpingx=ll_chanpin.getWidth();
+			pingjiax=ll_pingjia.getWidth();
+			pingjiay=ll_pingjia.getHeight();
+			tuijianx=ll_tuijian.getWidth();
+			tuijiany=ll_tuijian.getHeight();
+			topy=ll_top.getHeight();
 		}
 	};
 
-
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
+	}
 
 }

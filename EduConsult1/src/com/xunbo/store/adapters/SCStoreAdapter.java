@@ -18,16 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
-import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
-import com.baidu.mobstat.GetReverse;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.activitys.SCStoreActivity.Myorder;
-import com.xunbo.store.activitys.StoreActivity;
-import com.xunbo.store.beans.BaseBean;
+import com.xunbo.store.activitys.StoreShopBaseActivity;
 import com.xunbo.store.beans.CenterShopBean;
 import com.xunbo.store.myviews.CircleImageView;
-import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.Util;
 
 public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
@@ -134,7 +130,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					if(!isshow){
-						intent = new Intent(contexts,StoreActivity.class);
+						intent = new Intent(contexts,StoreShopBaseActivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						intent.putExtra("storeid", list.get(position).getCollected());
 						intent.putExtra("storename", "");

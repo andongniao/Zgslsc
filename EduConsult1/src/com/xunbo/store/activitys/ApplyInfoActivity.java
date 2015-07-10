@@ -43,7 +43,7 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();
-		setTopLeftTv(R.string.applyinfo_title);
+		setTitleTxt(R.string.applyinfo_title);
 		setContentXml(R.layout.applyinfo);
 		init();
 		if(Util.detect(context)){
