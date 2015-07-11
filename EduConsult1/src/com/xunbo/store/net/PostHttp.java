@@ -469,8 +469,8 @@ public class PostHttp {
 			return bean;
 		}  
 	}  
-	
-	
+
+
 	/**
 	 * 分类详情搜索
 	 * @return
@@ -2735,7 +2735,7 @@ public class PostHttp {
 							bean = gson.fromJson(data.toString(), type_re);
 						}
 						bean.setMsg(obj.getString("message"));
-						bean.setCode(obj.getString("code"));
+						bean.setCode(""+obj.getInt("code"));
 					}else{
 						bean.setMsg(error);
 						bean.setCode("500");
@@ -2935,10 +2935,11 @@ public class PostHttp {
 
 	/**
 	 * 获取店铺首页
+	 * @param authstr 
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListShopHomeBean getShopHomeData(String id,int type) {  
+	public ListShopHomeBean getShopHomeData(String id,int type, String authstr) {  
 		ListShopHomeBean bean = new ListShopHomeBean();
 		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
 		//		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
@@ -2954,9 +2955,8 @@ public class PostHttp {
 			NameValuePair p2 = new BasicNameValuePair("shopname",""+id);
 			list.add(p2);
 		}
-		//		NameValuePair p = new BasicNameValuePair("page",""+page);
-		//		list.add(p);
-
+		NameValuePair p = new BasicNameValuePair("authstr",""+authstr);
+		list.add(p);
 
 		/* 建立HTTPPost对象 */  
 		HttpPost httpRequest = new HttpPost(url);  
@@ -3058,10 +3058,11 @@ public class PostHttp {
 	/**
 	 * 获取店铺全部商品
 	 * @param page	页码
+	 * @param authstr 
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListProductBean getShopHomeAll(String id,int type,int page) {  
+	public ListProductBean getShopHomeAll(String id,int type,int page, String authstr) {  
 		ListProductBean bean = new ListProductBean();
 		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
 		//		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
@@ -3079,6 +3080,8 @@ public class PostHttp {
 		}
 		NameValuePair p = new BasicNameValuePair("page",""+page);
 		list.add(p);
+		NameValuePair pp = new BasicNameValuePair("authstr",""+authstr);
+		list.add(pp);
 
 
 		/* 建立HTTPPost对象 */  
@@ -3145,11 +3148,12 @@ public class PostHttp {
 
 	/**
 	 * 获取店铺新品
+	 * @param authstr 
 	 * @param page	页码
 	 * @return
 	 */
 	@SuppressWarnings("unused")
-	public ListProductBean getShopHomeNew(String id,int type) {  
+	public ListProductBean getShopHomeNew(String id,int type, String authstr) {  
 		ListProductBean bean = new ListProductBean();
 		ArrayList<ProductBean> list_re = new ArrayList<ProductBean>();
 		//		ArrayList<ProductBean> list_data = new ArrayList<ProductBean>();
@@ -3165,8 +3169,8 @@ public class PostHttp {
 			NameValuePair p2 = new BasicNameValuePair("shopname",""+id);
 			list.add(p2);
 		}
-		//		NameValuePair p = new BasicNameValuePair("page",""+page);
-		//		list.add(p);
+		NameValuePair p = new BasicNameValuePair("authstr",""+authstr);
+		list.add(p);
 
 
 		/* 建立HTTPPost对象 */  

@@ -2,6 +2,7 @@ package com.xunbo.store.activitys;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,6 +50,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private TextView tv_version,tv_name,tv_cp,tv_dp;
 	private UserBean bean;
 	private CenterUserBean cbean;
+	private CenterCountBean countbean;
 	private ThreadWithProgressDialog myPDT;
 	private String msg;
 	private String zjnum;
@@ -55,9 +58,9 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private ListProductBean listProductBean;
 	private ArrayList<ProductBean> productBeans;
 	private TextView tv_zuji;
-	private CenterCountBean centerCountBean;
 	private ProgressDialog dialog;
 	private int inittype;
+	public  static boolean ischanged;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -71,7 +74,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 		TestinAgent.init(this);
-
+		ischanged = false;
 		context = this;
 		u=new Util(context);
 		dialog = new ProgressDialog(this);
@@ -91,6 +94,9 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		icv_head = (CircleImageView) findViewById(R.id.mycenter_home_civ_head);
 		icv_head.setOnClickListener(this);
 		iv_zhifu = (ImageView) findViewById(R.id.mycenter_home_btn_zhifu);
+		iv_fahuo = (ImageView) findViewById(R.id.mycenter_home_btn_fahuo);
+		iv_shouhuo = (ImageView) findViewById(R.id.mycenter_home_btn_shouhuo);
+		iv_pingjia = (ImageView) findViewById(R.id.mycenter_home_btn_pingjia);
 		ll_cp = (LinearLayout) findViewById(R.id.mycenter_home_ll_cp);
 		ll_cp.setOnClickListener(this);
 		ll_dp = (LinearLayout) findViewById(R.id.mycenter_home_ll_dp);
@@ -131,9 +137,9 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		ll_tuijian.setOnClickListener(this);
 		ll_youhuiquan = (LinearLayout) findViewById(R.id.myinfo_ll_youhuiquan);
 		ll_youhuiquan.setOnClickListener(this);
-//		ll_youhuiquan.setVisibility(View.GONE);
+		//		ll_youhuiquan.setVisibility(View.GONE);
 		ll_mima = (LinearLayout) findViewById(R.id.mycenter_home_ll_mima);
-//		ll_mima.setVisibility(View.GONE);
+		//		ll_mima.setVisibility(View.GONE);
 		ll_mima.setOnClickListener(this);
 		ll_zhifu=(LinearLayout)findViewById(R.id.mycenter_home_btn_zhifu_lin);
 		ll_ll_fahuo=(LinearLayout)findViewById(R.id.mycenter_home_btn_fahuo_lin);
@@ -159,15 +165,6 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		String vserion = info.versionName;
 		tv_version.setText(vserion);
 		bean=MyApplication.mp.getUser();
-		//		if(bean!=null){
-		//			if(bean.getType()==1){
-		//				ll_fh.setVisibility(View.GONE);
-		//			}else{
-		//				//				ll_zf.setVisibility(View.GONE);
-		//				ll_sh.setVisibility(View.GONE);
-		//				//ll_youhuiquan.setVisibility(View.GONE);
-		//			}
-		//		}
 		inittype = 1;
 		myPDT = new ThreadWithProgressDialog();
 		msg = "加载中...";
@@ -196,29 +193,28 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
 			if(inittype==1){
-			Send s=new Send(context);
-			cbean=s.getMyinfo(type, authstr);
-			PostHttp p=new PostHttp(context);
+				Send s=new Send(context);
+				PostHttp p=new PostHttp(context);
+				countbean = p.getCenterCount(authstr);
+				if(countbean!=null){
+					if("200".equals(countbean.getCode())){
+						cbean=s.getMyinfo(type, authstr);
+					}else if("300".equals(countbean.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						intent = new Intent(context,LoginActivity.class);
+						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(intent);
+						finish(); 
+					}else{
+						Util.ShowToast(context, countbean.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}else{
-				
+
 			}
-//			if(cbean!=null){
-//				if("200".equals(cbean.getCode())){
-//					centerCountBean=p.getCenterCount(authstr);
-//				}else if("300".equals(cbean.getCode())){
-//					MyApplication.mp.setlogin(false);
-//					Util.ShowToast(context, R.string.login_out_time);
-//					intent = new Intent(context,LoginActivity.class);
-//					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//					startActivity(intent);
-//					finish(); 
-//				}else{
-//					if(Util.IsNull(cbean.getMsg())){
-//						Util.ShowToast(context, cbean.getMsg());
-//					}
-//				}
-//
-//			}
 
 			return true;
 		}
@@ -235,82 +231,59 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			if(inittype==2){
 				BDAutoUpdateSDK.uiUpdateAction(context, new MyUICheckUpdateCallback());
 			}else if(inittype==1){
-			int num=0;
-			if(cbean!=null){
-				String code = cbean.getCode();
-				String m = cbean.getMsg();
-				if("200".equals(code)){
-					MyApplication.mp.setCenterUserBean(cbean);
-					Util.Getbitmap(icv_head, cbean.getImg());
-					tv_name.setText(cbean.getTruename());
-				}else if("300".equals(code)){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					intent = new Intent(context,LoginActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish(); 
-				}else{
-					if(Util.IsNull(m)){
-						Util.ShowToast(context, m);
+				int num=0;
+				if(countbean!=null && "200".equals(countbean.getCode())){
+					if(cbean!=null){
+						String code = cbean.getCode();
+						String m = cbean.getMsg();
+						if("200".equals(code)){
+							MyApplication.mp.setCenterUserBean(cbean);
+							Util.Getbitmap(icv_head, cbean.getImg());
+							tv_name.setText(cbean.getTruename());
+							initDate();
+						}else if("300".equals(code)){
+							MyApplication.mp.setlogin(false);
+							Util.ShowToast(context, R.string.login_out_time);
+							intent = new Intent(context,LoginActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
+							finish(); 
+						}else{
+							if(Util.IsNull(m)){
+								Util.ShowToast(context, m);
+							}
+						}	
+					}else{
+						num=1;
+						Util.ShowToast(context, R.string.net_is_eor);
 					}
-				}	
-			}else{
-				num=1;
-				Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}
-			}
-//			if(centerCountBean!=null){
-//				String code = centerCountBean.getCode();
-//				String m = centerCountBean.getMsg();
-//				if("200".equals(code)){
-//					//					
-//					initDate();
-//
-//
-//				}else if("300".equals(code)){
-//					MyApplication.mp.setlogin(false);
-//					Util.ShowToast(context, R.string.login_out_time);
-//					intent = new Intent(context,LoginActivity.class);
-//					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//					startActivity(intent);
-//					finish(); 
-//				}else{
-//					if(Util.IsNull(m)){
-//						Util.ShowToast(context, m);
-//					}
-//				}	
-//			}else{
-//				if(num!=1){
-//					Util.ShowToast(context, R.string.net_is_eor);
-//				}
-//			}
 			return true;
 
 		}
 
 	}
 	private void initDate(){
-		//Util.SetRedNum(context, rl_l, 0);
-		tv_cp.setText(centerCountBean.getProduct());
-		tv_dp.setText(centerCountBean.getShop());
-		if(!"0".equals(centerCountBean.getPaying())){
+		tv_cp.setText(countbean.getProduct());
+		tv_dp.setText(countbean.getShop());
+		if(!"0".equals(countbean.getPaying())){
 
-			Util.SetRedNum(context, ll_zhifu,Integer.parseInt( centerCountBean.getPaying()));
+			Util.SetRedNum(context, ll_zhifu,Integer.parseInt( countbean.getPaying()));
 		}
 
 		//		Util.SetRedNum(context, ll_ll_fahuo,Integer.parseInt( centerCountBean.getReceiving()));
-		if(!"0".equals(centerCountBean.getPingjia())){
+		if(!"0".equals(countbean.getPingjia())){
 
-			Util.SetRedNum(context, ll_ll_pingjia,Integer.parseInt( centerCountBean.getPingjia()));
+			Util.SetRedNum(context, ll_ll_pingjia,Integer.parseInt( countbean.getPingjia()));
 		}
-		if(!"0".equals(centerCountBean.getReceiving())){
+		if(!"0".equals(countbean.getReceiving())){
 
-			Util.SetRedNum(context, ll_ll_shouhou,Integer.parseInt( centerCountBean.getReceiving()));
+			Util.SetRedNum(context, ll_ll_shouhou,Integer.parseInt( countbean.getReceiving()));
 		}
-		if(!"0".equals(centerCountBean.getTuikuan())){
+		if(!"0".equals(countbean.getTuikuan())){
 
-			Util.SetRedNum(context, ll_ll_shouhuo,Integer.parseInt( centerCountBean.getTuikuan()));	
+			Util.SetRedNum(context, ll_ll_shouhuo,Integer.parseInt( countbean.getTuikuan()));	
 		}
 	}
 
@@ -336,7 +309,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			intent = new Intent(context,SCStoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-//			Util.ShowToast(context, R.string.maimeng);
+			//			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.myinfo_ll_youhuiquan:
 			//intent = new Intent(context,ConfirmTheDeliveryActivity.class);
@@ -410,7 +383,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			startActivity(intent);
 			break;
 		case R.id.mycenter_home_ll_update:
-//			dialog.show();
+			//			dialog.show();
 			inittype=2;
 			if(Util.detect(context)){
 				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
@@ -418,7 +391,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
-//			Toast.makeText(context, "当前为最新版本", 500).show();
+			//			Toast.makeText(context, "当前为最新版本", 500).show();
 			break;
 		case R.id.mycenter_home_ll_tuijian:
 			intent = new Intent(context,MyCenterTuijianActivity.class);
@@ -444,7 +417,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public void onCheckComplete() {
 			inittype = 1;
-//			dialog.dismiss();
+			//			dialog.dismiss();
 		}
 
 	}
@@ -478,6 +451,15 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		}
 		tv_zuji.setText(zjnum);
 		inittype = 1;
+		if(ischanged){
+			if(Util.detect(context)){
+				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+				myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
+			ischanged = false;
+		}
 	}
 	@Override
 	protected void onPause() {

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 		this.catHomelvAdapter = catHomelvAdapter;
 		this.list = list;
 		this.index = index;
+		this.cat = cat;
 		this.w = we;
 		group = list.getList().get(index).getChild();
 		inflater = inflater2;//LayoutInflater.from(context);
@@ -87,12 +90,15 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 		Catlv3Adapter ap = new Catlv3Adapter(context, child);
 		halderItem.lv.setAdapter(ap);
 		halderItem.lv.setFocusable(false);
-//		LinearLayout.LayoutParams params = //new LayoutParams(LayoutParams.FILL_PARENT, 200);
-//				new LayoutParams(
-//						Util.getWidth((Activity)context), 5);//UITools.dip2px((Activity)context, 104));
-//		halderItem.lv.setLayoutParams(params);
-		///////////////////////////////////////////////////////////////////////
-		
+		halderItem.lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				String catid = ""+child.get(arg2).getCatid();
+				cat.sreach(catid);
+			}
+		});
 		
 		
 		
@@ -138,8 +144,7 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 		}
 		item.tv.setText(group.get(groupPosition).getCatname());  
 		if(isExpanded){
-			Util.ShowToast(context, ""+groupPosition);
-			item.tv.setTextColor(context.getResources().getColor(R.color.red));
+			item.tv.setTextColor(context.getResources().getColor(R.color.lan));
 			item.iv.setBackgroundResource(R.drawable.jt_down);
 		}else{
 			item.tv.setTextColor(context.getResources().getColor(R.color.black));

@@ -177,7 +177,7 @@
                     android:id="@+id/storeshop_iv_isshow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shoucang_yeah" />
+                     />
             </LinearLayout>
 
             <LinearLayout

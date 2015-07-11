@@ -876,7 +876,7 @@ public class Util {
 	 * @param num
 	 */
 	public static void SetRedNum(Context context,View v,int num){
-		badge = new BadgeView(context, v);
+		BadgeView badge = new BadgeView(context, v);
 		badge.setText(""+num);
 		badge.show();
 	}

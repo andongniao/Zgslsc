@@ -203,8 +203,6 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			}else{
 				Util.ShowToast(context, "收货地址不能为空");
 			}
-			//跳转充值
-									startActivity(new Intent(context,RechargeActivity.class));
 			break;
 		case R.id.money_password_no:
 
@@ -275,9 +273,9 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 							finish();
 						}else{
 							Util.ShowToast(context, baseBean.getMsg());
-//							intent = new Intent(context,RechargeActivity.class);
-//							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//							startActivity(intent);
+							intent = new Intent(context,RechargeActivity.class);
+							intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity(intent);
 						}
 					}else if("300".equals(baseBean.getCode())){
 						MyApplication.mp.setlogin(false);

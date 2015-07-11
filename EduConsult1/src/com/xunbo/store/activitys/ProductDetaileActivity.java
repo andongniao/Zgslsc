@@ -425,7 +425,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		}else{
 			tv_qidingliang.setText("1"+mallinfo.getUnit());
 		}
-		storename=mallinfo.getCompany();
+		storename=mallinfo.getUsername();
 		tv_xiaoliang.setText(mallinfo.getSales()+mallinfo.getUnit());
 		tv_kucun.setText(mallinfo.getAmount()+mallinfo.getUnit());
 		tv_chandi.setText(mallinfo.getAreaname());

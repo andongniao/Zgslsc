@@ -154,7 +154,7 @@ import com.xunbo.store.tools.Util;
 			item.btn_l.setBackgroundResource(R.drawable.order_et_bg_line);
 		}else if(type == 2){
 			item.btn_l.setVisibility(View.GONE);
-			item.btn_r.setVisibility(View.VISIBLE);
+			item.btn_r.setVisibility(View.GONE);
 			item.btn_r.setText("¹Ø±Õ½»Ò×");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);

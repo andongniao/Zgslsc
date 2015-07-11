@@ -281,10 +281,10 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 						}
 						if(bean_home.getShopInfoBean().getCollect()==1){
 							t=1;
-							iv_shoucang.setBackgroundResource(R.drawable.shoucang_yeah);
+							iv_shoucang.setBackgroundResource(R.drawable.shoucang_yeah);//未收藏（点击收藏）
 						}else{
 							t=2;
-							iv_shoucang.setBackgroundResource(R.drawable.shoucang_nope);
+							iv_shoucang.setBackgroundResource(R.drawable.shoucang_nope);//已收藏（点击取消）
 						}
 					}else if("300".equals(bean_home.getCode())){
 						MyApplication.mp.setlogin(false);
@@ -350,6 +350,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 			}else if(showtype==4){
 				if(bean_base!=null){
 					if("200".equals(bean_base.getCode())){
+						MyCenterActivity.ischanged = true;
 						if(t==1){
 							t = 2;
 							iv_shoucang.setBackgroundResource(R.drawable.shoucang_nope);
@@ -400,11 +401,11 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 		public boolean TaskMain() {
 			PostHttp p = new PostHttp(context);
 			if(showtype==1){
-				bean_home = p.getShopHomeData(id, type);
+				bean_home = p.getShopHomeData(id, type,authstr);
 			}else if(showtype==2){
-				bean_all = p.getShopHomeAll(id, showtype, page);
+				bean_all = p.getShopHomeAll(id, showtype, page,authstr);
 			}else if(showtype==3){
-				bean_new = p.getShopHomeNew(id, showtype);
+				bean_new = p.getShopHomeNew(id, showtype,authstr);
 			}else if(showtype==4){
 				int is = Integer.parseInt(bean_home.getShopInfoBean().getUserid());
 				bean_base = p.Shoucang(t, 2, is, authstr);

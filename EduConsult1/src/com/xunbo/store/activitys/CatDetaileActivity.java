@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
@@ -37,6 +40,8 @@ public class CatDetaileActivity extends BaseActivity {
 	private ThreadWithProgressDialog myPDT;
 	private String id;
 	private Cat cat;
+	private long exitTime = 0;
+	private LinearLayout ll_isnull;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -69,8 +74,8 @@ public class CatDetaileActivity extends BaseActivity {
 				}
 			}
 		};
-		
 		bean = (ListFenleiBean) u.readObject(MyApplication.mp.FenleiName);
+		ll_isnull = (LinearLayout) findViewById(R.id.cat_home_ll_isnull);
 		gv = (GridView) findViewById(R.id.cat_home_gv);
 		lv = (ExpandableListView) findViewById(R.id.lv);
 		/* 隐藏默认箭头显示 */  
@@ -102,25 +107,20 @@ public class CatDetaileActivity extends BaseActivity {
 			if(listbean!=null){
 				if("200".equals(listbean.getCode())){
 					list = listbean.getList();
-					if(gvAdapter!=null){
-						gvAdapter.setData(list);
-						gvAdapter.notifyDataSetChanged();
-					}else{
-						gvAdapter = new CatgvAdapter(context, list);
-						gv.setAdapter(gvAdapter);
-					}
 					if(list.size()==0){
-						Util.ShowToast(context, "nope");
+						ll_isnull.setVisibility(View.VISIBLE);
+						gv.setVisibility(View.GONE);
+					}else{
+						gv.setVisibility(View.VISIBLE);
+						ll_isnull.setVisibility(View.GONE);
+						if(gvAdapter!=null){
+							gvAdapter.setData(list);
+							gvAdapter.notifyDataSetChanged();
+						}else{
+							gvAdapter = new CatgvAdapter(context, list);
+							gv.setAdapter(gvAdapter);
+						}
 					}
-//					if(list.size()>0){
-//						btn_add.setVisibility(View.VISIBLE);
-//						lv.setVisibility(View.VISIBLE);
-//						ll_show.setVisibility(View.GONE);
-//					}else{
-//						btn_add.setVisibility(View.GONE);
-//						lv.setVisibility(View.GONE);
-//						ll_show.setVisibility(View.VISIBLE);
-//					}
 				}else if("300".equals(listbean.getCode())){
 					MyApplication.mp.setlogin(false);
 					Util.ShowToast(context, R.string.login_out_time);
@@ -148,8 +148,23 @@ public class CatDetaileActivity extends BaseActivity {
 			return true;
 		}
 	}
+	
 	public interface Cat{
 		void sreach(String catid);
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+			if((System.currentTimeMillis()-exitTime) > 2000){  
+				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+				exitTime = System.currentTimeMillis();   
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;   
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

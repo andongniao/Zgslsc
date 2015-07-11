@@ -17,40 +17,52 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#dcdcdc"
+            android:cacheColorHint="#00000000"
             android:divider="@color/base_hui"
             android:dividerHeight="0.1dp"
-            android:scrollbars="none"
             android:fadingEdge="none"
-            android:cacheColorHint="#00000000"
             android:listSelector="#00000000"
-             >
+            android:scrollbars="none" >
         </ExpandableListView>
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="30dp" 
-            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="3"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="5dp" >
 
         <GridView
             android:id="@+id/cat_home_gv"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:cacheColorHint="#00000000"
+            android:fadingEdge="none"
             android:horizontalSpacing="5dp"
             android:listSelector="#00000000"
-            android:cacheColorHint="#00000000"
             android:numColumns="2"
             android:scrollbars="none"
-            android:fadingEdge="none"
+            android:visibility="gone"
             android:verticalSpacing="5dp" >
         </GridView>
+
+        <LinearLayout
+            android:id="@+id/cat_home_ll_isnull"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" 
+            android:gravity="center"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cat_isnull_bg"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
