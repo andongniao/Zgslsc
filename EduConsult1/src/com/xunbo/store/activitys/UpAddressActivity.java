@@ -43,11 +43,11 @@ public class UpAddressActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		topRightRVisible();
-		iv_top_right = (ImageView) getTopRightView();
-		iv_top_right.setBackgroundResource(R.drawable.address_guanli_btn);
+//		topRightRVisible();
+//		iv_top_right = (ImageView) getTopRightView();
+//		iv_top_right.setBackgroundResource(R.drawable.address_guanli_btn);
 		topRightTGone();
-		setTopLeftTv(R.string.address_title);
+		setTitleTxt(R.string.address_title);
 		setContentXml(R.layout.up_address_layout);
 		init();
 		addlistener();
@@ -89,15 +89,15 @@ public class UpAddressActivity extends BaseActivity{
 		lv.setAdapter(adapter);
 	}
 	private void addlistener() {
-		iv_top_right.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				intent = new Intent(context,AddressActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
-		});
+//		iv_top_right.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				intent = new Intent(context,AddressActivity.class);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+//			}
+//		});
 //		lv.setOnItemClickListener(new OnItemClickListener() {
 //			@Override
 //			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,

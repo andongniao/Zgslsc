@@ -211,7 +211,7 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 		case R.id.bdmoneycar_carway_lin:
 			if(list1!=null&&list1.size()!=0){
 				setpopuwindow(context, list1, ll_carway);
-				
+				tv_carwhere.setText("");
 			}
 			//popu_carway.showAsDropDown(ll_carway);
 			//Toast.makeText(this,"11",500).show();
@@ -231,7 +231,8 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 				
 				if(provinces!=null&&provinces.size()!=0){
 					setpopuwindow(context, provinces, ll_carwhere);
-//				
+//				tv_carzhihang
+					tv_carzhihang.setText("");
 				}
 			}
 			

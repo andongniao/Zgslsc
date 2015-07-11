@@ -7,6 +7,8 @@
         android:id="@+id/moneycar_list_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:listSelector="#00000000"
+         android:scrollbars="none"
         android:fadingEdge="none">
         
     </ListView>

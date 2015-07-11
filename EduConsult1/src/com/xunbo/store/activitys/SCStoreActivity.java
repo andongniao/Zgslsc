@@ -318,10 +318,18 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if(isrezoom){
-			Toast.makeText(context, "重新加载数据", 1).show();
-			isrezoom=false;
+//		if(isrezoom){
+//			Toast.makeText(context, "重新加载数据", 1).show();
+//			isrezoom=false;
+//		}
+		if(Util.detect(context)){
+			//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
+			myPDT.Run(context, new RefeshData(0),R.string.loding);//不可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
+		
+		
 		
 	}
 	

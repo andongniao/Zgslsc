@@ -29,7 +29,7 @@ public class XinJianInfoActivity extends BaseActivity{
 		super.onCreate(arg0);
 		//topRightRVisible();
 		topRightTGone();
-		setTopLeftTv(R.string.xinjianinfo_title);
+		setTitleTxt(R.string.xinjianinfo_title);
 		setContentXml(R.layout.xinjianinfo);
 		init();
 	}

@@ -52,7 +52,7 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 		super.onCreate(arg0);
 		context=this;
 		topRightTGone();
-		setTopLeftTv(R.string.recharge_title);
+		setTitleTxt(R.string.recharge_title);
 		setContentXml(R.layout.recharge);
 		init();
 		if(Util.detect(context)){
