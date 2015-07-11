@@ -81,7 +81,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
 		//		iv_top_t = (ImageView) getTopRightView();
 		//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
-		setTopLeftTv(R.string.address_title);
+		setTitleTxt(R.string.address_title);
 		setContentXml(R.layout.address_update);
 		init();
 	}

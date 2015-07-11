@@ -151,12 +151,13 @@
                                  android:scaleType="fitXY"
                                  android:background="@color/white"
                                  android:layout_marginBottom="0.5dp"
+                                 android:layout_marginRight="0.5dp"
                                  />
                              <LinearLayout 
                                  android:layout_width="fill_parent"
                                  android:layout_weight="1"
                                  android:layout_height="fill_parent"
-                                 
+                                
                                  android:orientation="vertical"
                                  >
                                  <ImageView 

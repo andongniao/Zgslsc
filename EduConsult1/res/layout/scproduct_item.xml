@@ -8,12 +8,13 @@
 
     <ImageView
         android:id="@+id/scproduct_item_ic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
         android:background="@drawable/default_bg" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="3dp" >
@@ -24,6 +25,8 @@
             android:layout_height="wrap_content"
             android:text="@string/test"
             android:textColor="@color/black"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:textSize="16dp" />
 
         <TextView

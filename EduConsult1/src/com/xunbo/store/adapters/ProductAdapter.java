@@ -21,6 +21,7 @@ import com.xunbo.store.MyApplication;
 import com.xunbo.store.R;
 import com.xunbo.store.activitys.SCProductActivity.Myorder;
 import com.xunbo.store.activitys.StoreActivity;
+import com.xunbo.store.activitys.StoreShopBaseActivity;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.SCProductBean;
 import com.xunbo.store.net.PostHttp;
@@ -100,10 +101,10 @@ public class ProductAdapter extends BaseAdapter{
 				// TODO Auto-generated method stub
 				if(!isshow){
 					
-					intent = new Intent(contexts,StoreActivity.class);
+					intent = new Intent(contexts,StoreShopBaseActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					intent.putExtra("storeid", "");
-					intent.putExtra("storename", list.get(position).getShopname());
+					intent.putExtra("storeid", list.get(position).getShopname());
+					intent.putExtra("storename", "15");
 					contexts.startActivity(intent);
 				}
 			}

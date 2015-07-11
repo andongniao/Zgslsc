@@ -112,40 +112,6 @@ public class SCProductActivity extends BaseActivity implements OnClickListener,I
 			}
 		};
 		
-//		list_money.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
-		/*inflater=LayoutInflater.from(context);
-		v_fenlei = inflater.inflate(R.layout.know_slidemenu_view, null);
-		lin=(LinearLayout)v_fenlei.findViewById(R.id.know_slid_view_ll_r);
-		lin.setVisibility(View.GONE);
-		list_2=(ListView)v_fenlei.findViewById(R.id.know_slid_view_lv_r);
-		list_2.setVisibility(View.GONE);
-		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
-		ArrayList<String>ll = new ArrayList<String>();
-		adapter_r = new HomeSlidAdapter(context, ll,2);
-		lv_l.setAdapter(adapter_r);
-		lv_l.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				popu.dismiss();
-			}
-		});
-		popu = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-		popu.setFocusable(true);
-		popu.setBackgroundDrawable(new BitmapDrawable());
-		popu.setOutsideTouchable(true);
-		popu.update();*/
 		if(list!=null && list.size()>0){
 			ll_isno.setVisibility(View.GONE);
 			product_list.setVisibility(View.VISIBLE);
@@ -202,9 +168,14 @@ public class SCProductActivity extends BaseActivity implements OnClickListener,I
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if(isrezoom){
-			Toast.makeText(context, "重新加载数据", 1).show();
-			isrezoom=false;
+//		if(isrezoom){
+//			Toast.makeText(context, "重新加载数据", 1).show();
+//			isrezoom=false;
+//		}
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
 		}
 		
 	}
