@@ -17,12 +17,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.KnowDetaileActivity;
-import com.xunbo.store.activitys.KnowHomeActivity;
-import com.xunbo.store.activitys.MyQuestionActivity;
-import com.xunbo.store.activitys.ProductDetaileActivity;
-import com.xunbo.store.activitys.PutQuestionActivity;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.KnowDetaileActivity;
+import com.example.educonsult.activitys.KnowHomeActivity;
+import com.example.educonsult.activitys.MyQuestionActivity;
+import com.example.educonsult.activitys.ProductDetaileActivity;
+import com.example.educonsult.activitys.PutQuestionActivity;
 import com.xunbo.store.adapters.KnowHomeLvAdapter;
 import com.xunbo.store.adapters.ZhanhuiHomeAdapter;
 import com.xunbo.store.myviews.MyGridView;

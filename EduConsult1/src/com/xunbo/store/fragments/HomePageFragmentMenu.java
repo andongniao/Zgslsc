@@ -18,13 +18,13 @@ import android.widget.ListView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.GqTwoActivity;
+import com.example.educonsult.activitys.HomePagerActivity;
+import com.example.educonsult.activitys.LoginActivity;
+import com.example.educonsult.activitys.SearchResultActivity;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.GqTwoActivity;
-import com.xunbo.store.activitys.HomePagerActivity;
-import com.xunbo.store.activitys.LoginActivity;
-import com.xunbo.store.activitys.SearchResultActivity;
 import com.xunbo.store.adapters.FenleiAdapter;
 import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.beans.FenleiBean;

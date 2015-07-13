@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 
 

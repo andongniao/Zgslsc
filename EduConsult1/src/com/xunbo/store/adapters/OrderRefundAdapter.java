@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.ApplyOrderActivity.MyApply;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.ApplyOrderActivity.MyApply;
 import com.xunbo.store.beans.OrderBean;
 import com.xunbo.store.tools.Util;
 

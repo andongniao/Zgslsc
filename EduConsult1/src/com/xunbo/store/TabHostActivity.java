@@ -14,6 +14,8 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.example.educonsult.R;
+
 @SuppressWarnings({ "unused", "deprecation" })
 public abstract class TabHostActivity extends TabActivity {
 	protected int activityCloseEnterAnimation;

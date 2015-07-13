@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 @SuppressLint("InflateParams")
 public class XListViewFooter extends LinearLayout {

@@ -10,10 +10,10 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.example.educonsult.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.R;
 import com.xunbo.store.beans.AddressBean;
 import com.xunbo.store.beans.AreaBean;
 import com.xunbo.store.beans.BaseBean;
@@ -1055,10 +1055,15 @@ public class Send {
 	/**
 	 *	É¾³ý¹ºÎï³µ
 	 */
-	public BaseBean CartDel(String itemid,String authstr) {
+	public BaseBean CartDel(ArrayList<String> list,String authstr) {
 		BaseBean bean = new BaseBean();
-		String url = ServiceUrl.Base+ServiceUrl.cart_del+itemid+
-				ServiceUrl.mycenter_footer+authstr;
+		String url = ServiceUrl.Base+ServiceUrl.cart_del;
+		String itemid = "";
+		for(int i=0;i<list.size();i++){
+			itemid+="itemid[]="+list.get(i)+"&";
+		}
+		itemid = itemid.substring(0, itemid.length()-1);
+		url=url+itemid+ServiceUrl.mycenter_footer+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 		if (jsonStr != null && !jsonStr.equals("")) { 

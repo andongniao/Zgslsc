@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
+
+
 
 @SuppressLint("InflateParams")
 public class XListViewHeader extends LinearLayout {

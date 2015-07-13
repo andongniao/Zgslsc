@@ -2,32 +2,14 @@ package com.xunbo.store;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
-import org.apkplug.app.FrameworkFactory;
 import org.apkplug.app.FrameworkInstance;
-import org.osgi.framework.BundleActivator;
 
-import android.app.ActivityManager;
 import android.app.Application;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.easemob.chat.EMChat;
-import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMChatOptions;
-import com.easemob.chat.EMConversation;
-import com.easemob.chat.EMMessage;
-import com.easemob.chat.EMMessage.ChatType;
-import com.easemob.chat.OnNotificationClickListener;
-import com.xunbo.store.activitys.HomePagerActivity;
 import com.xunbo.store.beans.CenterUserBean;
 import com.xunbo.store.beans.ListProductBean;
 import com.xunbo.store.beans.ProductBean;

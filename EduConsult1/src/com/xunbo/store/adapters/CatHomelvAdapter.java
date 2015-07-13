@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.CatDetaileActivity.Cat;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.CatDetaileActivity.Cat;
 import com.xunbo.store.beans.FenleiBean;
 import com.xunbo.store.beans.ListFenleiBean;
 import com.xunbo.store.tools.Util;
@@ -33,26 +33,43 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 	private int w;
 	private ExpandableListView lv;
 	private Cat cat;
+	private int type;
+	private CatlvAdapter adapter;
+	private int hhh,index,con;
 	
 	public CatHomelvAdapter(Context context,ListFenleiBean list, Cat cat){
 		this.context = context;
 		this.list = list;
 		this.cat = cat;
 		group = list.getList();
+		type = 0;
 		inflater = LayoutInflater.from(context);
 	} 
 
-	public void changeHeight(int type){
-		int hh = lv.getHeight();;
-		if(type==1){
-			hh=hh/2;
-		}
-		LinearLayout.LayoutParams params = //new LayoutParams(LayoutParams.FILL_PARENT, 200);
-				new LayoutParams(
-						Util.getWidth((Activity)context), hh);//UITools.dip2px((Activity)context, 104));
-		lv.setLayoutParams(params);
+	public void changeHeight(int groupPosition){
+//		int hh = lv.getHeight();;
+//		if(type==1){
+//			hh=hh/2;
+//		}
+//		LinearLayout.LayoutParams params = //new LayoutParams(LayoutParams.FILL_PARENT, 200);
+//				new LayoutParams(
+//						Util.getWidth((Activity)context), hh);//UITools.dip2px((Activity)context, 104));
+//		lv.setLayoutParams(params);
+//		this.notifyDataSetChanged();
+		LinearLayout.LayoutParams layoutParams = (LayoutParams) halderItem.exListView
+				.getLayoutParams();
+		int h = hhh
+				+ (adapter.getItemHeigith(groupPosition)/2);
+		int s = w *(group.get(index).getChild().size()+group.get(index).getChild().get(groupPosition).getChild().size());
+		LinearLayout.LayoutParams layoutParam = new LayoutParams(
+				LinearLayout.LayoutParams.FILL_PARENT, s);
+		halderItem.exListView.setLayoutParams(layoutParam);
 		this.notifyDataSetChanged();
 	}
+	public void setdata(int type){
+		this.type = type;
+	}
+	
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
@@ -84,51 +101,48 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 		} else {
 			halderItem = (MyHalderItem) convertView.getTag();
 		}
-//			if(){
-//				
-//			}
-		final CatlvAdapter adapter = new CatlvAdapter(
-				context, list, groupPosition, inflater,groupPosition,this,w,cat);
+		
+		 adapter = new CatlvAdapter(
+				context, list, groupPosition, inflater,groupPosition,this,w,cat,halderItem.exListView);
 		LinearLayout.LayoutParams params = //new LayoutParams(LayoutParams.FILL_PARENT, 200);
 				new LayoutParams(
 						LinearLayout.LayoutParams.FILL_PARENT, getHeigith(groupPosition));//UITools.dip2px((Activity)context, 104));
 		halderItem.exListView.setLayoutParams(params);
 		lv = halderItem.exListView;
 		halderItem.exListView.setAdapter(adapter);
-		halderItem.exListView
-		.setOnGroupExpandListener(new OnGroupExpandListener() {
-			ExpandableListView listView = halderItem.exListView;
-			CatlvAdapter itemAdapter = adapter;
+			halderItem.exListView
+			.setOnGroupExpandListener(new OnGroupExpandListener() {
+				ExpandableListView listView = halderItem.exListView;
+				CatlvAdapter itemAdapter = adapter;
 
-			@Override
-			public void onGroupExpand(int groupPosition) {
-				LinearLayout.LayoutParams layoutParams = (LayoutParams) listView
-						.getLayoutParams();
-				int h = layoutParams.height
-						+ itemAdapter.getItemHeigith(groupPosition);
-				LinearLayout.LayoutParams layoutParam = new LayoutParams(
-						LinearLayout.LayoutParams.FILL_PARENT, h);
-				listView.setLayoutParams(layoutParam);
-//				itemAdapter.seth(1);
-			}
-		});
-		halderItem.exListView
-		.setOnGroupCollapseListener(new OnGroupCollapseListener() {
-			ExpandableListView listView = halderItem.exListView;
-			CatlvAdapter itemAdapter = adapter;
+				@Override
+				public void onGroupExpand(int groupPosition) {
+					LinearLayout.LayoutParams layoutParams = (LayoutParams) listView
+							.getLayoutParams();
+					int h = layoutParams.height
+							+ itemAdapter.getItemHeigith(groupPosition);
+					LinearLayout.LayoutParams layoutParam = new LayoutParams(
+							LinearLayout.LayoutParams.FILL_PARENT, h);
+					listView.setLayoutParams(layoutParam);
+				}
+			});
+			halderItem.exListView
+			.setOnGroupCollapseListener(new OnGroupCollapseListener() {
+				ExpandableListView listView = halderItem.exListView;
+				CatlvAdapter itemAdapter = adapter;
 
-			@Override
-			public void onGroupCollapse(int groupPosition) {
-				LinearLayout.LayoutParams layoutParams = (LayoutParams) listView
-						.getLayoutParams();
-				int h = layoutParams.height
-						- itemAdapter.getItemHeigith(groupPosition);
-				LinearLayout.LayoutParams layoutParam = new LayoutParams(
-						LinearLayout.LayoutParams.FILL_PARENT, h);//Util.getWidth((Activity)context)
-				listView.setLayoutParams(layoutParam);
-//				itemAdapter.seth(2);
-			}
-		});
+				@Override
+				public void onGroupCollapse(int groupPosition) {
+					LinearLayout.LayoutParams layoutParams = (LayoutParams) listView
+							.getLayoutParams();
+					int h = layoutParams.height
+							- itemAdapter.getItemHeigith(groupPosition);
+					LinearLayout.LayoutParams layoutParam = new LayoutParams(
+							LinearLayout.LayoutParams.FILL_PARENT, h);//Util.getWidth((Activity)context)
+					listView.setLayoutParams(layoutParam);
+				}
+			});
+	
 		
 		return convertView;
 	}
@@ -174,6 +188,8 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 		item.tv.setText(group.get(groupPosition).getCatname());  
 		if(isExpanded){
 			item.iv.setBackgroundResource(R.drawable.jt_down);
+			hhh = item.ll.getHeight()*group.get(groupPosition).getChild().size();
+			index = groupPosition;
 		}else{
 			item.iv.setBackgroundResource(R.drawable.jt_left);
 		}

@@ -17,7 +17,7 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 
 public class CircleImageView extends ImageView {

@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 public class ZhanhuiHomeAdapter extends BaseAdapter{
 	private Context context;

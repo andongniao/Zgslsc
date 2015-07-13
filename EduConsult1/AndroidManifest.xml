@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xunbo.store"
+    package="com.example.educonsult"
     android:versionCode="3"
     android:versionName="V1.0.0" >
 
@@ -75,7 +75,7 @@
         <!-- ↑↑↑ 自更新SDK ↑↑↑ -->
 
         <activity
-            android:name="com.xunbo.store.activitys.WelcomeActivity"
+            android:name="com.example.educonsult.activitys.WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -96,154 +96,154 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.HomePagerActivity"
+            android:name="com.example.educonsult.activitys.HomePagerActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Sherlock.Light" >
         </activity>
          
         <activity
-            android:name="com.xunbo.store.activitys.LoginActivity"
+            android:name="com.example.educonsult.activitys.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.SearchHomeActivity"
+            android:name="com.example.educonsult.activitys.SearchHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyCenterActivity"
+            android:name="com.example.educonsult.activitys.MyCenterActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.GqTwoActivity"
+            android:name="com.example.educonsult.activitys.GqTwoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.RegistActivity"
+            android:name="com.example.educonsult.activitys.RegistActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ProductDetaileActivity"
+            android:name="com.example.educonsult.activitys.ProductDetaileActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ServiceCenterActivity"
+            android:name="com.example.educonsult.activitys.ServiceCenterActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.AboutActivity"
+            android:name="com.example.educonsult.activitys.AboutActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.AddressActivity"
+            android:name="com.example.educonsult.activitys.AddressActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.AddressGLActivity"
+            android:name="com.example.educonsult.activitys.AddressGLActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ShopcartActivity"
+            android:name="com.example.educonsult.activitys.ShopcartActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.QianBaoActivity"
+            android:name="com.example.educonsult.activitys.QianBaoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyInfoActivity"
+            android:name="com.example.educonsult.activitys.MyInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.XinjianActivity"
+            android:name="com.example.educonsult.activitys.XinjianActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.OrderActivity"
+            android:name="com.example.educonsult.activitys.OrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.UpAddressActivity"
+            android:name="com.example.educonsult.activitys.UpAddressActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.SearchResultActivity"
+            android:name="com.example.educonsult.activitys.SearchResultActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyOrderActivity"
+            android:name="com.example.educonsult.activitys.MyOrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.GqHomeActivity"
+            android:name="com.example.educonsult.activitys.GqHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ZhanhuiHomeActivity"
+            android:name="com.example.educonsult.activitys.ZhanhuiHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ZhanhuiDetaileActivity"
+            android:name="com.example.educonsult.activitys.ZhanhuiDetaileActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.KnowHomeActivity"
+            android:name="com.example.educonsult.activitys.KnowHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.RegistOKActivity"
+            android:name="com.example.educonsult.activitys.RegistOKActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyQuestionActivity"
+            android:name="com.example.educonsult.activitys.MyQuestionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.PutQuestionActivity"
+            android:name="com.example.educonsult.activitys.PutQuestionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.KnowDetaileActivity"
+            android:name="com.example.educonsult.activitys.KnowDetaileActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.StoreActivity"
+            android:name="com.example.educonsult.activitys.StoreActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
              <activity
-            android:name="com.xunbo.store.activitys.StoreShopBaseActivity"
+            android:name="com.example.educonsult.activitys.StoreShopBaseActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
              <activity
-            android:name="com.xunbo.store.activitys.CatDetaileActivity"
+            android:name="com.example.educonsult.activitys.CatDetaileActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
@@ -266,137 +266,137 @@
         </service>
 
         <activity
-            android:name="com.xunbo.store.activitys.MoneyQueryActivity"
+            android:name="com.example.educonsult.activitys.MoneyQueryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MoneyQueryInfoActivity"
+            android:name="com.example.educonsult.activitys.MoneyQueryInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MoneyWithdrawalActivity"
+            android:name="com.example.educonsult.activitys.MoneyWithdrawalActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.CouponsActivity"
+            android:name="com.example.educonsult.activitys.CouponsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ProductDetaileMoreActivity"
+            android:name="com.example.educonsult.activitys.ProductDetaileMoreActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.XinJianInfoActivity"
+            android:name="com.example.educonsult.activitys.XinJianInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ServiceQuestionHomeActivity"
+            android:name="com.example.educonsult.activitys.ServiceQuestionHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ServiceQuestionDetaileActivity"
+            android:name="com.example.educonsult.activitys.ServiceQuestionDetaileActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyBusinessperntActivity"
+            android:name="com.example.educonsult.activitys.MyBusinessperntActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.BusinesspartnersInfoActivity"
+            android:name="com.example.educonsult.activitys.BusinesspartnersInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.SCProductActivity"
+            android:name="com.example.educonsult.activitys.SCProductActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.SCStoreActivity"
+            android:name="com.example.educonsult.activitys.SCStoreActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyZjActivity"
+            android:name="com.example.educonsult.activitys.MyZjActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MoneyCarListActivity"
+            android:name="com.example.educonsult.activitys.MoneyCarListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.BDCardActivity"
+            android:name="com.example.educonsult.activitys.BDCardActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.NewHomeActivity"
+            android:name="com.example.educonsult.activitys.NewHomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.NewDetaileActivity"
+            android:name="com.example.educonsult.activitys.NewDetaileActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ApplyerFundActivity"
+            android:name="com.example.educonsult.activitys.ApplyerFundActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ApplyInfoActivity"
+            android:name="com.example.educonsult.activitys.ApplyInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.RechargeActivity"
+            android:name="com.example.educonsult.activitys.RechargeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ApplyOrderActivity"
+            android:name="com.example.educonsult.activitys.ApplyOrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.PasswordActivity"
+            android:name="com.example.educonsult.activitys.PasswordActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.PasswordXGActivity"
+            android:name="com.example.educonsult.activitys.PasswordXGActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyOrderInfoActivity"
+            android:name="com.example.educonsult.activitys.MyOrderInfoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.PJOrderActivity"
+            android:name="com.example.educonsult.activitys.PJOrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.ConfirmTheDeliveryActivity"
+            android:name="com.example.educonsult.activitys.ConfirmTheDeliveryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.xunbo.store.activitys.MyCenterTuijianActivity"
+            android:name="com.example.educonsult.activitys.MyCenterTuijianActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>

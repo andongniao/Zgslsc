@@ -1,42 +1,24 @@
 package com.xunbo.store.fragments;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
-
-import org.apkplug.Bundle.BundleControl;
-import org.apkplug.Bundle.OSGIServiceAgent;
-import org.apkplug.Bundle.installCallback;
-import org.apkplug.app.FrameworkInstance;
-import org.osgi.framework.BundleContext;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences.Editor;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -47,27 +29,16 @@ import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
-import com.xunbo.store.ExampleActivity;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.GqTwoActivity;
+import com.example.educonsult.activitys.ProductDetaileActivity;
+import com.example.educonsult.activitys.SearchHomeActivity;
+import com.example.educonsult.activitys.SearchResultActivity;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.GqTwoActivity;
-import com.xunbo.store.activitys.HomePagerActivity;
-import com.xunbo.store.activitys.LoginActivity;
-import com.xunbo.store.activitys.ProductDetaileActivity;
-import com.xunbo.store.activitys.SearchHomeActivity;
-import com.xunbo.store.activitys.SearchResultActivity;
-import com.xunbo.store.activitys.StoreActivity;
-import com.xunbo.store.activitys.XinjianActivity;
-import com.xunbo.store.activitys.BDCardActivity.RefeshData;
 import com.xunbo.store.adapters.HomeGridAdapter;
-import com.xunbo.store.adapters.HomeLikeAdapter;
-import com.xunbo.store.adapters.HomeRuzhuAdapter;
-import com.xunbo.store.beans.HomeBean;
 import com.xunbo.store.beans.HomeCatBean;
 import com.xunbo.store.beans.HomeInfoBean;
-import com.xunbo.store.beans.ListUserBean;
 import com.xunbo.store.beans.ProductBean;
-import com.xunbo.store.beans.UserBean;
 import com.xunbo.store.myviews.MyGridView;
 import com.xunbo.store.myviews.RefreshableView;
 import com.xunbo.store.myviews.RefreshableView.RefreshListener;
@@ -102,6 +73,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 	private int w,h;
 	private PopupWindow popupWindow;
 	private View v;
+	private long exitTime = 0;
 //	@Override
 //	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //			Bundle savedInstanceState) {
@@ -685,6 +657,19 @@ protected void onResume() {
 	
 	
 
-
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   
+			if((System.currentTimeMillis()-exitTime) > 2000){  
+				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();                                
+				exitTime = System.currentTimeMillis();   
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;   
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 }

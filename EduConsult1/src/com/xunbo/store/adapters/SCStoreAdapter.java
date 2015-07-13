@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apkplug.app.FrameworkInstance;
-import org.osgi.framework.BundleContext;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +14,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.SCStoreActivity.Myorder;
+import com.example.educonsult.activitys.StoreShopBaseActivity;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.SCStoreActivity.Myorder;
-import com.xunbo.store.activitys.StoreShopBaseActivity;
 import com.xunbo.store.beans.CenterShopBean;
 import com.xunbo.store.myviews.CircleImageView;
 import com.xunbo.store.tools.Util;
@@ -39,13 +37,13 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 	
 	private boolean isshow;
 
-	public SCStoreAdapter(Context context,ArrayList<CenterShopBean> list,Myorder myorder2,boolean isshow){
+	public SCStoreAdapter(Context context,ArrayList<CenterShopBean> list,Myorder myorder,boolean isshow){
 		this.contexts = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		frame = MyApplication.frame;
 		myPDT = new ThreadWithProgressDialog();
-		this.myorder = myorder2;
+		this.myorder = myorder;
 		this.isshow=isshow;
 	}
 	public void SetData(ArrayList<CenterShopBean> list){

@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 import com.xunbo.store.beans.CouponBean;
 import com.xunbo.store.beans.ShopBean;
 import com.xunbo.store.beans.ShopItemBean;

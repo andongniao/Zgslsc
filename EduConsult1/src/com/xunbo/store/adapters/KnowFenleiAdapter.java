@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 @SuppressLint("ResourceAsColor") public class KnowFenleiAdapter extends BaseAdapter{
 	private Context context;

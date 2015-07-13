@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 import com.xunbo.store.beans.RefundInfoBean;
 import com.xunbo.store.tools.Util;
 

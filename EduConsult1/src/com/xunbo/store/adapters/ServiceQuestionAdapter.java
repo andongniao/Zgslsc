@@ -10,8 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.beans.StorecatBean;
+import com.example.educonsult.R;
 
 public class ServiceQuestionAdapter extends BaseAdapter{
 	private Context context;

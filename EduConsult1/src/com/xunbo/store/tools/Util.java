@@ -57,7 +57,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 import com.xunbo.store.adapters.TextItemCenterListAdapter;
 import com.xunbo.store.adapters.TextItemListAdapter;
 import com.xunbo.store.myviews.BadgeView;
@@ -909,6 +909,7 @@ public class Util {
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				if(v!=null){
+					v.setTag(url);
 				if (msg.what == 1) {
 					v.setTag(url);
 					if(msg.obj != null){

@@ -13,7 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.adapters.KnowFenleiAdapter;
 

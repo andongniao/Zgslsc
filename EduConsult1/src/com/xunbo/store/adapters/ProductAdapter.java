@@ -17,11 +17,10 @@ import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.SCProductActivity.Myorder;
+import com.example.educonsult.activitys.StoreShopBaseActivity;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.SCProductActivity.Myorder;
-import com.xunbo.store.activitys.StoreActivity;
-import com.xunbo.store.activitys.StoreShopBaseActivity;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.SCProductBean;
 import com.xunbo.store.net.PostHttp;

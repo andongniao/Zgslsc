@@ -13,8 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.ProductDetaileActivity;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.ProductDetaileActivity;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.tools.Util;
 

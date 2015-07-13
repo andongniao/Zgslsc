@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.ApplyOrderActivity.MyApply;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.ApplyOrderActivity.MyApply;
 import com.xunbo.store.beans.OrderBean;
 import com.xunbo.store.myviews.MyListview;
 
@@ -26,6 +26,7 @@ OnClickListener{
 	private MyApply apply;
 	private boolean isloding;
 
+	
 	public ApplyOrderHomeAdapter(Context context,ArrayList<OrderBean>list,MyApply apply,boolean isloding){
 		this.context = context;
 		this.list = list;

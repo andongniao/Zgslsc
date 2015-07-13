@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 public class SearchFragment extends Fragment {
 

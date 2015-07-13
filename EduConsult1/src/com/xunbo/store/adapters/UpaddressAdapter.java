@@ -11,8 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.UpAddressActivity.UpAddress;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.UpAddressActivity.UpAddress;
 import com.xunbo.store.beans.AddressBean;
 
 public class UpaddressAdapter extends BaseAdapter{

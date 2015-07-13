@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.CatDetaileActivity.Cat;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.CatDetaileActivity.Cat;
 import com.xunbo.store.beans.FenleiBean;
 import com.xunbo.store.beans.ListFenleiBean;
 import com.xunbo.store.myviews.MyListview;
@@ -31,15 +33,17 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 	private int index,width,height,w;
 	private CatHomelvAdapter catHomelvAdapter;
 	private Cat cat;
+	private ExpandableListView exListView;
 
 	public CatlvAdapter(Context context,ListFenleiBean list, int index, LayoutInflater inflater2,
-			int groupPosition, CatHomelvAdapter catHomelvAdapter, int we, Cat cat){
+			int groupPosition, CatHomelvAdapter catHomelvAdapter, int we, Cat cat, ExpandableListView exListView){
 		this.context = context;
 		this.catHomelvAdapter = catHomelvAdapter;
 		this.list = list;
 		this.index = index;
 		this.cat = cat;
 		this.w = we;
+		this.exListView = exListView;
 		group = list.getList().get(index).getChild();
 		inflater = inflater2;//LayoutInflater.from(context);
 		width = (int) (Util.getWidth((Activity)context) / 9.7);
@@ -76,7 +80,7 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition,
+	public View getChildView(final int groupPosition, int childPosition,
 			boolean isLastChild, View v, ViewGroup parent) {
 		child = group.get(groupPosition).getChild();
 		if(v==null){
@@ -95,7 +99,8 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				String catid = ""+child.get(arg2).getCatid();
+				Util.ShowToast(context, group.get(groupPosition).getChild().get(arg2).getCatname());
+				String catid = ""+group.get(groupPosition).getChild().get(arg2).getCatid();
 				cat.sreach(catid);
 			}
 		});
@@ -150,6 +155,7 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 			item.tv.setTextColor(context.getResources().getColor(R.color.black));
 			item.iv.setBackgroundResource(R.drawable.jt_left);
 		}
+		
 		
 		return v;
 	}

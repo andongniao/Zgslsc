@@ -5,9 +5,9 @@ package com.xunbo.store.net;
  *
  */
 public class ServiceUrl {
-//		public static String Base="http://www.zgslsc.com/app/";
+		public static String Base="http://www.zgslsc.com/app/";
 //		public static String Base="http://www.shop.com/app/";
-	public static String Base="http://192.168.1.190/app/";
+//	public static String Base="http://192.168.1.190/app/";
 	//首页index.php
 	public static String Home_url=Base;
 	//首页
@@ -70,7 +70,7 @@ public class ServiceUrl {
 	//添加购车
 	public static String cart_add = "cart.php?action=add&itemid=";
 	//删除购车
-	public static String cart_del = "cart.php?action=del&itemid=";
+	public static String cart_del = "cart.php?action=del&";
 	//清空购车
 	public static String cart_clear = "cart.php?action=clear";
 

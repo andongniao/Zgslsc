@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 /**
  * 广告图片自动轮播控件</br>

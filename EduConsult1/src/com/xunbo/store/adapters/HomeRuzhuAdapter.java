@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 import com.xunbo.store.beans.CompanyBean;
 import com.xunbo.store.tools.Util;
 

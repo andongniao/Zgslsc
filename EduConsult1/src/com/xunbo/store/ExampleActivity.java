@@ -10,10 +10,11 @@ import android.widget.ImageView;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.CatDetaileActivity;
+import com.example.educonsult.activitys.MyCenterActivity;
+import com.example.educonsult.activitys.ShopcartActivity;
 import com.umeng.analytics.MobclickAgent;
-import com.xunbo.store.activitys.CatDetaileActivity;
-import com.xunbo.store.activitys.MyCenterActivity;
-import com.xunbo.store.activitys.ShopcartActivity;
 import com.xunbo.store.fragments.HomeLayoutFragment;
 
 

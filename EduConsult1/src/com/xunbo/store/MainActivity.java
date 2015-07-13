@@ -1,6 +1,7 @@
 package com.xunbo.store;
 
 import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -13,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.educonsult.R;
 
 @SuppressLint({ "ViewHolder", "InflateParams" })
 public class MainActivity extends ListActivity {

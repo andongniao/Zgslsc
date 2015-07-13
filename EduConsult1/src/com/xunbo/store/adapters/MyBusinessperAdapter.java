@@ -18,10 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.BusinesspartnersInfoActivity;
+import com.example.educonsult.activitys.MyBusinessperntActivity.Myorder;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.BusinesspartnersInfoActivity;
-import com.xunbo.store.activitys.MyBusinessperntActivity.Myorder;
 
 public class MyBusinessperAdapter extends BaseAdapter implements OnClickListener{
 	private Context contexts;

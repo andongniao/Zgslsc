@@ -16,10 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.ShopcartActivity.shop;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.ShopcartActivity.shop;
 import com.xunbo.store.beans.ShopBean;
 import com.xunbo.store.beans.ShopItemBean;
 import com.xunbo.store.tools.Util;
@@ -45,6 +44,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 	public void SetData(ArrayList<ShopBean>list,int type){
 		this.list = list;
 		this.type = type;
+//		item.et_number.setFocusable(false);
 	}
 
 	@Override
@@ -82,6 +82,7 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item.iv_jia = (ImageView) convertView.findViewById(R.id.shopcart_lv_lv_iv_jia);
 			item.iv_jian = (ImageView) convertView.findViewById(R.id.shopcart_lv_lv_iv_jian);
 			item.et_number = (EditText) convertView.findViewById(R.id.shopcart_lv_lv_et_number);
+//			item.et_number.setFocusable(false);
 			item.tv_delete = (TextView) convertView.findViewById(R.id.shopcart_lv_lv_tv_delete);
 			item.ll_del = (LinearLayout) convertView.findViewById(R.id.shopcart_lv_lv_ll_delete);
 			convertView.setTag(item);
@@ -89,33 +90,20 @@ public class ShopcartLvAdapter extends BaseAdapter{
 			item = (Item) convertView.getTag();
 		}
 		
-		
-		item.et_number.addTextChangedListener(new TextWatcher() {  
-            @Override  
-            public void onTextChanged(CharSequence s, int start, int before, int count) {  
-                // TODO Auto-generated method stub  
-            }  
-  
-            @Override  
-            public void beforeTextChanged(CharSequence s, int start, int count,  
-                    int after) {  
-                // TODO Auto-generated method stub  
-                  
-            }  
-              
-            @Override  
-            public void afterTextChanged(Editable s) {  
-                // TODO Auto-generated method stub  
-//                Log.i("TAG",et.getText().toString()); 
-            	String n = item.et_number.getText().toString();
-            	if(Util.IsNull(n)){
-            	int number = Integer.parseInt(n);
-            	list.get(index).getMall().get(position).setNum(number);
-            	shop.setnumber(list);
-            	}
-//            	Util.ShowToast(context,);
-            }  
-        }); 
+		item.et_number.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(!item.et_number.isFocusable()){
+					item.et_number.setFocusable(true);
+					
+				}
+			
+			}
+		});
+		if(item.et_number.isFocusable()){
+			item.et_number.addTextChangedListener(new textchange(position)); 
+		}
 		
 //		if(type==1){
 //			item.ll_del.setVisibility(View.VISIBLE);
@@ -207,6 +195,40 @@ public class ShopcartLvAdapter extends BaseAdapter{
 		return convertView;
 	}
 
+	
+	class textchange implements TextWatcher{
+		int position;
+		public textchange (int position){
+			this.position = position;
+		}
+	     @Override  
+         public void onTextChanged(CharSequence s, int start, int before, int count) {  
+             // TODO Auto-generated method stub  
+         }  
+
+         @Override  
+         public void beforeTextChanged(CharSequence s, int start, int count,  
+                 int after) {  
+             // TODO Auto-generated method stub  
+               
+         }  
+           
+         @Override  
+         public void afterTextChanged(Editable s) {  
+             // TODO Auto-generated method stub  
+//             Log.i("TAG",et.getText().toString()); 
+         	String n = item.et_number.getText().toString();
+         	int sss = Integer.parseInt(n);
+         	if(Util.IsNull(n) && sss!=list.get(index).getMall().get(position).getNum()){
+         	int number = Integer.parseInt(n);
+         	list.get(index).getMall().get(position).setNum(number);
+         	shop.setnumber(list);
+         	}
+         	item.et_number.setFocusable(false);
+//         	Util.ShowToast(context,);
+         } 
+	}
+	
 	class Item{
 		TextView tv_title,tv_price,tv_zongjia,tv_unit,tv_delete;
 		ImageView iv_jia,iv_jian,iv_ic,iv_del;

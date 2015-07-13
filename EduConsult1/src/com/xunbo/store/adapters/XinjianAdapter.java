@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 import com.xunbo.store.beans.XinJianBean;
 
 public class XinjianAdapter extends BaseAdapter{

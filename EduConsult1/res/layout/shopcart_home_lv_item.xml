@@ -33,7 +33,7 @@
     </LinearLayout>
 
 
-    <com.xunbo.store.myviews.SwipeMenuListView.SwipeMenuListView
+    <com.xunbo.store.myviews.MyListview
         android:id="@+id/shopcart_home_lv_lv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:dividerHeight="0.5dp"
         android:fadingEdge="none"
         android:scrollbars="none" >
-    </com.xunbo.store.myviews.SwipeMenuListView.SwipeMenuListView>
+    </com.xunbo.store.myviews.MyListview>
 
     <LinearLayout
         android:layout_width="fill_parent"

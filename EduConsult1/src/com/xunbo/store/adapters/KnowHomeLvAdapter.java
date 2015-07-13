@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
+import com.example.educonsult.R;
 
 @SuppressLint("ResourceAsColor") public class KnowHomeLvAdapter extends BaseAdapter{
 	private Context context;

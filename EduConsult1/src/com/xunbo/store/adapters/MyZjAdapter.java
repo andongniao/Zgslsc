@@ -13,8 +13,8 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.MyZjActivity.myzj;
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.MyZjActivity.myzj;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.tools.Util;
 
@@ -27,7 +27,7 @@ public class MyZjAdapter extends BaseAdapter{
 	private myzj myzj;
 
 
-	public MyZjAdapter(Context context,ArrayList<ProductBean>list,int type, myzj myzj){
+	public MyZjAdapter(Context context,ArrayList<ProductBean>list,int type,myzj myzj){
 		this.context = context;
 		this.list = list;
 		this.type = type;
@@ -35,6 +35,7 @@ public class MyZjAdapter extends BaseAdapter{
 		inflater = LayoutInflater.from(context);
 	}
 	public void SetData(ArrayList<ProductBean>list,int type){
+		
 		this.list = list;
 		this.type = type;
 	}

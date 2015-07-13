@@ -12,9 +12,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.educonsult.R;
+import com.example.educonsult.activitys.MyOrderActivity.Myorder;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.R;
-import com.xunbo.store.activitys.MyOrderActivity.Myorder;
 import com.xunbo.store.beans.OrderBean;
 import com.xunbo.store.myviews.MyListview;
 import com.xunbo.store.tools.Util;
