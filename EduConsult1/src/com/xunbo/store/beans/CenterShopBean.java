@@ -17,6 +17,13 @@ public class CenterShopBean {
 	private String vip;//vip等级
 	private String validated;//实名认证
 	private String bond;//保证金
+	private String shopname;//
+	public String getShopname() {
+		return shopname;
+	}
+	public void setShopname(String shopname) {
+		this.shopname = shopname;
+	}
 	public String getVip() {
 		return vip;
 	}
