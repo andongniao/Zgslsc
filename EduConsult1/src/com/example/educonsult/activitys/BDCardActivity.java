@@ -210,6 +210,7 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.bdmoneycar_carway_lin:
 			if(list1!=null&&list1.size()!=0){
+				intype=0;
 				setpopuwindow(context, list1, ll_carway);
 				tv_carwhere.setText("");
 			}
