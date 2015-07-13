@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -42,6 +43,7 @@ public class XinJianInfoActivity extends BaseActivity{
 		bean=MyApplication.mp.getUser();
 		title=(TextView)findViewById(R.id.xinjianinfo_text);
 		content=(TextView)findViewById(R.id.xinjianinfo_content);
+		content.setMovementMethod(ScrollingMovementMethod.getInstance());
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
 		}else{

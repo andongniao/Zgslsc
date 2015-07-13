@@ -421,11 +421,12 @@ public class Send {
 	/**
 	 * 获取产品详情
 	 * @param id	产品id
+	 * @param string 
 	 * @return
 	 */
-	public ProdectDetaileBean GetProductDetaile(String id) {
+	public ProdectDetaileBean GetProductDetaile(String id, String authstr) {
 		ProdectDetaileBean bean = new ProdectDetaileBean();
-		String url = ServiceUrl.Base+ServiceUrl.Product_url+id;
+		String url = ServiceUrl.Base+ServiceUrl.Product_url+id+"&authstr="+authstr;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 		if (jsonStr != null && !jsonStr.equals("")) {

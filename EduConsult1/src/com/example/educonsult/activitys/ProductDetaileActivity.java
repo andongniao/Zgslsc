@@ -122,15 +122,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		activityCloseEnterAnimation = activityStyle.getResourceId(0, 0);
 		activityCloseExitAnimation = activityStyle.getResourceId(1, 0);
 		activityStyle.recycle();
-		
-		
-		
-//		topRightRVisible();
-//		topRightTGone();
-//		setTopLeftTv(R.string.product_detaile_title);
-//		rl_r = (RelativeLayout) getTopRightRl();
-//		iv_top_t = (ImageView) getTopRightView();
-//		iv_top_t.setBackgroundResource(R.drawable.top_shop_bg);
 		setContentView(R.layout.product_detail);
 		init();
 		addlistener();
@@ -851,13 +842,10 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			// ∑√Œ 
 			if(refeshDatatype==1){
 				Send s = new Send(context);
-				productdetailbean = s.GetProductDetaile(productBean.getItemid());
-				//home = s.RequestHome();
-				//productdetailbean = s.GetProductDetaile();
+				productdetailbean = s.GetProductDetaile(productBean.getItemid(),MyApplication.mp.getUser().getAuthstr());
 				listComment=s.GetComment(productBean.getItemid(), 1, "");
 			}else if(refeshDatatype==2){
 				PostHttp p=new PostHttp(context);
-//				BaseBean Shoucang(int t,int type,int id)
 				if(!isCollect){
 					// ’≤ÿ
 					bean2=p.Shoucang(1, 1,Integer.parseInt(productBean.getItemid()),userbean.getAuthstr());
