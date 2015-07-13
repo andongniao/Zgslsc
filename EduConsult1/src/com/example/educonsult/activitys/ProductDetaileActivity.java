@@ -649,6 +649,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			ll_pingjia.setFocusable(false);
 			ll_tuijian.setFocusable(false);
 			scrollView.scrollTo(10, 10);
+			popupWindow.dismiss();
 			isshow = false;
 			break;
 		case R.id.product_detaile_top_ll_pingjia:

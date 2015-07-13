@@ -296,6 +296,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 						centerShopBeans.remove(index);
 						scStoreAdapter.SetData(centerShopBeans);
 						scStoreAdapter.notifyDataSetChanged();
+						MyCenterActivity.ischanged = true;
 					}else if("300".equals(code)){
 						myorder.finish();
 					}else{
