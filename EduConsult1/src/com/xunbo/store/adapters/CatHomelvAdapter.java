@@ -188,8 +188,6 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 		item.tv.setText(group.get(groupPosition).getCatname());  
 		if(isExpanded){
 			item.iv.setBackgroundResource(R.drawable.jt_down);
-			hhh = item.ll.getHeight()*group.get(groupPosition).getChild().size();
-			index = groupPosition;
 		}else{
 			item.iv.setBackgroundResource(R.drawable.jt_left);
 		}

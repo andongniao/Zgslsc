@@ -99,7 +99,7 @@ public class CatlvAdapter extends BaseExpandableListAdapter {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Util.ShowToast(context, group.get(groupPosition).getChild().get(arg2).getCatname());
+//				Util.ShowToast(context, group.get(groupPosition).getChild().get(arg2).getCatname());
 				String catid = ""+group.get(groupPosition).getChild().get(arg2).getCatid();
 				cat.sreach(catid);
 			}

@@ -7,12 +7,12 @@
     <string name="hello_world">Hello world!</string>
     <!-- 提示 -->
     <string name="space">\u3000\u3000</string>
-    <string name="loding">正在加载...</string>
+    <string name="loding">玩命加载中...</string>
     <string name="maimeng">亲，板块升级中，不要着急啦</string>
     <string name="net_is_eor">网络异常，请检查网络后再试</string>
     <string name="notbuy">亲，您还没有买过任何产品哦！</string>
     <string name="login_out_time">登陆超时</string>
-     <string name="please_wait">正在加载，请稍后...</string>
+     <string name="please_wait">正在玩命加载中，请稍后...</string>
     
 
     <!-- 首页 -->
