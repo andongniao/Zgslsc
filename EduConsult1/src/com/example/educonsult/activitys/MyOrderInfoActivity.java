@@ -102,7 +102,7 @@ OnClickListener {
 		listview=(MyListview)findViewById(R.id.myorderinfo_list);
 		String ms = getResources().getString(R.string.loding);
 		if(Util.detect(context)){
-		myPDT.Run(context, new RefeshData(),ms,false);//可取消
+		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
