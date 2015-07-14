@@ -338,7 +338,7 @@
     <string name="address_title">地址管理</string>
     <string name="address_default">[默认地址]</string>
     <string name="address_set_to_default">[设为默认]</string>
-    <string name="address_add_address">+ 新增收货地址</string>
+    <string name="address_add_address">添加新地址</string>
     <string name="address_new_address">新增地址</string>
     <string name="address_set_default">设为默认地址</string>
     <string name="address_diqu">所在地区</string>
@@ -346,9 +346,9 @@
     <string name="address_detaile_address">详细地址</string>
     <string name="address_shouhuoren">收货人</string>
     <string name="address_phone_number">手机号</string>
-    <string name="address_youbian">邮编</string>
-    <string name="address_detele">删除</string>
-    <string name="address_save">保存</string>
+    <string name="address_youbian">邮政编码</string>
+    <string name="address_detele">删除收货地址</string>
+    <string name="address_save">保  存</string>
 
     <!-- 确认订单 -->
     <string name="order_title">确认订单</string>

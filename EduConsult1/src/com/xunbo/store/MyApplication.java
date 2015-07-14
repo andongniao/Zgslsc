@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.xunbo.store.beans.CenterUserBean;
+import com.xunbo.store.beans.ListAreaBean;
 import com.xunbo.store.beans.ListProductBean;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.beans.UserBean;
@@ -35,6 +36,7 @@ public class MyApplication extends Application{
 	public static int money_pay = 4;
 	public boolean islogin;
 	private String authstr;
+	public static ListAreaBean lare;
 
 
 
@@ -49,6 +51,10 @@ public class MyApplication extends Application{
 		userbean = new UserBean();
 		userbean.setAuthstr(authstr);
 		util = new Util(context);
+		if(util.isExistDataCache(AreaName)&& util.isReadDataCache(AreaName)){
+			lare = (ListAreaBean) util.readObject(AreaName);
+		}
+		
 	}
 	public CenterUserBean getCenterUserBean() {
 		return centerUserBean;

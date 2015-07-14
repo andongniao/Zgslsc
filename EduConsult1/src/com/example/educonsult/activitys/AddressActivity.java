@@ -130,17 +130,17 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.address_home_btn_add_address:
 			if(!iscancle){
-				intent = new Intent(context,AddressGLActivity.class);
+				intent = new Intent(context,AddressNewSaveActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				intent.putExtra("addressnum", "1");
+				intent.putExtra("type", 2);
 				startActivity(intent);
 			}
 			break;
 		case R.id.address_home_ibtn_add_address:
-			intent = new Intent(context,AddressGLActivity.class);
+			intent = new Intent(context,AddressNewSaveActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("addressnum", "1");
-			intent.putExtra("isture", true);
+			intent.putExtra("type", 2);
+//			intent.putExtra("isture", true);
 			startActivity(intent);
 			break;
 

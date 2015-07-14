@@ -384,12 +384,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			//			dialog.show();
 			inittype=2;
 			if(Util.detect(context)){
-				//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
 				myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),R.string.loding);//不可取消
 			}else{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
-			//			Toast.makeText(context, "当前为最新版本", 500).show();
 			break;
 		case R.id.mycenter_home_ll_tuijian:
 			intent = new Intent(context,MyCenterTuijianActivity.class);
@@ -415,10 +413,10 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public void onCheckComplete() {
 			inittype = 1;
-			//			dialog.dismiss();
 		}
 
 	}
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){   

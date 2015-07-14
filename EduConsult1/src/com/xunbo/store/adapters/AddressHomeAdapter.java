@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
@@ -56,6 +58,8 @@ public class AddressHomeAdapter extends BaseAdapter{
 			item.tv_default = (TextView) convertView.findViewById(R.id.address_item_tv_default);
 			item.tv_number = (TextView) convertView.findViewById(R.id.address_item_tv_number);
 			item.tv_address = (TextView) convertView.findViewById(R.id.address_item_tv_address);
+			item.ll = (LinearLayout) convertView.findViewById(R.id.address_item_ll);
+			item.iv = (ImageView) convertView.findViewById(R.id.address_item_iv);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -63,17 +67,27 @@ public class AddressHomeAdapter extends BaseAdapter{
 		AddressBean b = list.get(position);
 		item.tv_name.setText(b.getTruename());
 		int i = Integer.parseInt(b.getIsdefault());
-		if(i==1){
-			item.tv_default.setTextColor(context.getResources().getColor(R.color.black));
+		if(i==1){//默认地址
+			item.iv.setVisibility(View.VISIBLE);
+			item.tv_name.setTextColor(context.getResources().getColor(R.color.white));
+			item.tv_number.setTextColor(context.getResources().getColor(R.color.white));
+			item.tv_address.setTextColor(context.getResources().getColor(R.color.white));
+			item.ll.setBackgroundColor(context.getResources().getColor(R.color.address_lan));
 		}else{
-			item.tv_default.setTextColor(context.getResources().getColor(R.color.orn));
+			item.iv.setVisibility(View.INVISIBLE);
+			item.tv_name.setTextColor(context.getResources().getColor(R.color.black));
+			item.tv_number.setTextColor(context.getResources().getColor(R.color.black));
+			item.tv_address.setTextColor(context.getResources().getColor(R.color.black));
+			item.ll.setBackgroundColor(context.getResources().getColor(R.color.white));
 		}
 		item.tv_number.setText(b.getMobile());
-		item.tv_address.setText(b.getAddress());
+		item.tv_address.setText("收货地址："+b.getAddress());
 		return convertView;
 	}
 	class Item{
 		TextView tv_name,tv_default,tv_number,tv_address;
+		ImageView iv;
+		LinearLayout ll;
 	}
 
 }
