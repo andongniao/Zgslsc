@@ -251,6 +251,7 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 			              setResult(RESULT_OK, intent);  
 			              finish();
 					}else if(type==2 && ischanged){
+						OrderActivity.isinit = true;
 						AddressActivity.isinit = true;
 						finish();
 					}

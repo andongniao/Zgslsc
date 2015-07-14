@@ -140,7 +140,6 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			intent = new Intent(context,AddressNewSaveActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("type", 2);
-//			intent.putExtra("isture", true);
 			startActivity(intent);
 			break;
 
