@@ -91,7 +91,7 @@ public class ProductAdapter extends BaseAdapter{
 		Util.Getbitmap(myitem.ic, list.get(position).getThumb());
 		myitem.computername.setText(list.get(position).getCompany());
 		myitem.productname.setText(list.get(position).getTitle());
-		myitem.money.setText(list.get(position).getPrice());
+		myitem.money.setText("гд"+list.get(position).getPrice());
 		myitem.time.setText(list.get(position).getTime());
 		myitem.instore.setOnClickListener(new OnClickListener() {
 			

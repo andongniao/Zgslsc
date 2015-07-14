@@ -185,7 +185,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.order_home_ll_address:
 			//TODO 
-			Intent id = new Intent(this,UpAddressActivity.class);
+			Intent id = new Intent(this,AddressActivity.class);
 			id.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			Bundle b=new Bundle();
 			b.putSerializable("orderbundle", listAddressBean);

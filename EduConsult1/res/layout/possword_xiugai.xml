@@ -15,8 +15,11 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:hint="@string/possword_tvoldpow"
-        android:padding="10dp"
-        android:textColor="@color/black"
+        android:paddingLeft="5dp" 
+        android:paddingTop="10dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/fame_hui3"
         android:textSize="16dp" />
      <ImageView
         android:layout_width="fill_parent"
@@ -33,8 +36,11 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:hint="@string/possword_tvnewpow"
-        android:padding="10dp"
-        android:textColor="@color/black"
+        android:paddingLeft="5dp" 
+        android:paddingTop="10dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/fame_hui3"
         android:textSize="16dp" />
      <ImageView
         android:layout_width="fill_parent"
@@ -51,8 +57,11 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:hint="@string/possword_tvnewpowtwo"
-        android:padding="10dp"
-        android:textColor="@color/black"
+       android:paddingLeft="5dp" 
+        android:paddingTop="10dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/fame_hui3"
         android:textSize="16dp" />
      <ImageView
         android:layout_width="fill_parent"
@@ -63,12 +72,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/possword_tvok" 
-        android:padding="10dp"
+        android:padding="5dp"
         android:background="@drawable/search_lv_isnull_btn_bg"
         android:textColor="@color/white"
         android:textSize="16dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:gravity="center"/>
 </LinearLayout>
