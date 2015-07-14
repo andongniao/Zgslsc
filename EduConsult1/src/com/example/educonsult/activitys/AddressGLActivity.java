@@ -44,30 +44,20 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private EditText tv_address,tv_shouhuoren,tv_number,tv_youbian;
 	private CheckBox cb_set;
 	private boolean isok;
-	private int areaid;
-	//	private ImageView iv_top_l,iv_top_t;
 	private Intent intent;
 	String num;
 	private int isdetault;
-	private ArrayList<String> list;
-	private TextItemListAdapter adapter_r;
-	private PopupWindow popu;
-	private ListView list_2,lv_l;
-	private LayoutInflater inflater;
-	private View v_fenlei;
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	private Context context;
 	private ThreadWithProgressDialog myPDT;
 	private AddressBean bean;
-	private ListAreaBean lare;
-	private ArrayList<AreaBean>listsheng,listshi,listxian;
 	private Util u;
 	private int type = 1,ttp;
-	private String filename;
 	private String diqu,dizhi,person,mob,postcode;
 	private BaseBean beanresult;
 	private boolean init,isture;
+	public static final int REQUSET = 1;  
 
 
 
@@ -75,21 +65,33 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();
-		//		topRightLVisible();
-		//		topRightRVisible();
-		//		iv_top_l = (ImageView) getTopLightView();
-		//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-		//		iv_top_t = (ImageView) getTopRightView();
-		//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+		topRightRVisible();
+		iv_top_t = (ImageView) getTopRightView();
+		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTitleTxt(R.string.address_title);
 		setContentXml(R.layout.address_update);
 		init();
+		addlinstener();
+	}
+
+	private void addlinstener() {
+		iv_top_t.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				 Intent intent = new Intent(AddressGLActivity.this,  
+						 AddressNewSaveActivity.class);  
+	                //发送意图标示为REQUSET=1
+				 	intent.putExtra("type", 1);
+				 	intent.putExtra("newsave", bean);
+	                startActivityForResult(intent, REQUSET);  
+			}
+		});
 	}
 
 	private void init() {
 		TestinAgent.init(this);
 		context=this;
-		filename = MyApplication.AreaName;
 		u = new Util(context);
 		bean = (AddressBean) getIntent().getExtras().get("address");
 		myPDT = new ThreadWithProgressDialog();
@@ -125,6 +127,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		tv_save = (TextView) findViewById(R.id.address_up_tv_save);
 		tv_save.setOnClickListener(this);
 		cb_set = (CheckBox) findViewById(R.id.address_up_cb_set_default);
+		cb_set.setVisibility(View.GONE);
 		cb_set.setChecked(true);
 		cb_set.setOnClickListener(new OnClickListener() {
 
@@ -142,6 +145,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 					isdetault = 1;
 					cb_set.setChecked(true);
 				}
+				Util.ShowToast(context, ""+isdetault);
 			}
 		});
 		if(num.equals("1")){//修改
@@ -149,97 +153,30 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		}else{
 			tv_delete.setVisibility(View.GONE);
 			if(bean!=null){
-				tv_youbian.setText(bean.getPostcode());
-				tv_number.setText(bean.getMobile());
-				tv_shouhuoren.setText(bean.getTruename());
-				tv_address.setText(bean.getAddress());
-				tv_diqu.setText((Html.fromHtml(bean.getArea())));
-				if("1".equals(bean.getIsdefault())){
-					cb_set.setChecked(true);
-				}else{
-					cb_set.setChecked(false);
-				}
+				initData();
 			}
 		}
 	}
-	private void setpopuwindow(Context contexts,ListAreaBean larea,LinearLayout lin){
-//		listsheng = lare.getList();
-		final ArrayList<String> list = new ArrayList<String>(); 
-		listsheng = larea.getList();
-		for(int i=0;i<listsheng.size();i++){
-			list.add(listsheng.get(i).getArename());
+	private void initData() {
+		tv_youbian.setText(bean.getPostcode());
+		tv_number.setText(bean.getMobile());
+		tv_shouhuoren.setText(bean.getTruename());
+		tv_address.setText(bean.getAddress());
+		tv_diqu.setText((Html.fromHtml(bean.getArea())));
+		if("1".equals(bean.getIsdefault())){
+			tv_save.setVisibility(View.GONE);
+		}else{
+			tv_save.setVisibility(View.VISIBLE);
 		}
-		inflater=LayoutInflater.from(contexts);
-		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
-		lv_l = (ListView) v_fenlei.findViewById(R.id.moneycar_list_list);
-		adapter_r = new TextItemListAdapter(context, list);
-		lv_l.setAdapter(adapter_r);
-		lv_l.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				listshi = listsheng.get(arg2).getChild(); 
-				areaid = listsheng.get(arg2).getAreaid();
-				tv_diqu.setText(listsheng.get(arg2).getArename());
-				list.clear();
-				for(int i=0;i<listshi.size();i++){
-					list.add(listshi.get(i).getArename());
-				}
-				adapter_r = new TextItemListAdapter(context, list);
-				lv_l.setAdapter(adapter_r);
-				adapter_r.notifyDataSetChanged();
-				lv_l.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1,
-							int ss, long arg3) {
-						listxian = listshi.get(ss).getChild();
-						areaid = listshi.get(ss).getAreaid();
-						String a2 = tv_diqu.getText().toString();
-						tv_diqu.setText(a2+listshi.get(ss).getArename());
-						if(listxian!=null && listxian.size()>0){
-							list.clear();
-							for(int i=0;i<listxian.size();i++){
-								list.add(listxian.get(i).getArename());
-							}
-							adapter_r = new TextItemListAdapter(context, list);
-							lv_l.setAdapter(adapter_r);
-							adapter_r.notifyDataSetChanged();
-							lv_l.setOnItemClickListener(new OnItemClickListener() {
-
-								@Override
-								public void onItemClick(AdapterView<?> arg0,
-										View arg1, int s3, long arg3) {
-									areaid = listxian.get(s3).getAreaid();
-									String a3 = tv_diqu.getText().toString();
-									tv_diqu.setText(a3+listxian.get(s3).getArename());
-									popu.dismiss();
-								}
-							});
-						}else{
-							popu.dismiss();
-						}
-
-					}
-				});
-				//				popu.dismiss();
-			}
-		});
-
-		popu = new PopupWindow(v_fenlei,LayoutParams.FILL_PARENT , UITools.dip2px(context, 300f));
-		popu.setFocusable(true);
-		popu.setBackgroundDrawable(new BitmapDrawable());
-		popu.setOutsideTouchable(true);
-		popu.setFocusable(true);
-		popu.showAsDropDown(lin);
+		
 	}
+
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.address_up_ll_diqu:
-			setpopuwindow(context, lare, ll_diqu);
+//			setpopuwindow(context, lare, ll_diqu);
 			break;
 		case R.id.address_up_ll_jiedao:
 
@@ -306,22 +243,22 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		public boolean OnTaskDone() {
 			//任务完成后
 			if(init){
-				if(lare!=null){
-					if("200".equals(lare.getCode())){
-						init = false;
-						u.saveObject(lare, filename);
-					}else if("300".equals(lare.getCode())){
-						MyApplication.mp.setlogin(false);
-						Util.ShowToast(context, R.string.login_out_time);
-						intent = new Intent(context,LoginActivity.class);
-						startActivity(intent);
-						finish();
-					}else{
-						Util.ShowToast(context, beanresult.getMsg());
-					}
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
+//				if(lare!=null){
+//					if("200".equals(lare.getCode())){
+//						init = false;
+////						u.saveObject(lare, filename);
+//					}else if("300".equals(lare.getCode())){
+//						MyApplication.mp.setlogin(false);
+//						Util.ShowToast(context, R.string.login_out_time);
+//						intent = new Intent(context,LoginActivity.class);
+//						startActivity(intent);
+//						finish();
+//					}else{
+//						Util.ShowToast(context, beanresult.getMsg());
+//					}
+//				}else{
+//					Util.ShowToast(context, R.string.net_is_eor);
+//				}
 			}else{
 				if(beanresult!=null){
 					if("200".equals(beanresult.getCode())){
@@ -359,23 +296,23 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				String authstr = MyApplication.mp.getUser().getAuthstr();
 				ab.setAddress(dizhi);
 				ab.setArea(diqu);
-				ab.setIsdefault(""+1);
+				//				ab.setIsdefault(""+1);
 				ab.setMobile(mob);
 				ab.setTruename(person);
 				ab.setPostcode(postcode);
-				ab.setIsdefault(""+isdetault);
-				if(num.equals("1")){
-					ab.setAreaid(""+areaid);
-					beanresult = p.addOneAddress(ab,authstr);
-				}else if(num.equals("0")){
-					ab.setAreaid(bean.getAreaid());
-					ab.setItemid(bean.getItemid());
-					ab.setIsdefault(""+isdetault);
-					beanresult = p.editOneAddress(ab, authstr);
-				}
+				//				ab.setIsdefault(""+isdetault);
+				//				if(num.equals("1")){
+				//					ab.setAreaid(""+areaid);
+				//					beanresult = p.addOneAddress(ab,authstr);
+				//				}else if(num.equals("0")){
+				ab.setAreaid(bean.getAreaid());
+				ab.setItemid(bean.getItemid());
+				ab.setIsdefault(""+1);
+				beanresult = p.SetDetaultAddress(bean, authstr);//editOneAddress(ab, authstr);
+				//				}
 			}else{
 				Send s  = new Send(context);
-				lare = s.GetArea();
+//				lare = s.GetArea();
 			}
 
 			return true;
@@ -383,28 +320,17 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	}
 
 
-	public void showpop(){
-		adapter_r = new TextItemListAdapter(context, list);
-		lv_l.setAdapter(adapter_r);
-	}
+//	public void showpop(){
+//		adapter_r = new TextItemListAdapter(context, list);
+//		lv_l.setAdapter(adapter_r);
+//	}
 	@Override
 	protected void onResume() {
 		super.onResume();
 		MobclickAgent.onPageStart( "AddressGLActivity" );
 		MobclickAgent.onResume(this);
-		if(u.isExistDataCache(filename) && u.isReadDataCache(filename)){
-			lare = (ListAreaBean) u.readObject(filename);
-			listsheng = lare.getList();
-		}else{
-			if(Util.detect(context)){
-				init = true;
-				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
-		}
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -412,4 +338,15 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		MobclickAgent.onPause(this);
 	}
 
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		   if (resultCode == RESULT_OK) {  
+			   bean = (AddressBean) data.getExtras().get("result"); 
+			   initData();
+	        }
+	}
+	
 }

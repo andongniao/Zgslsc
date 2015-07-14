@@ -64,6 +64,8 @@ public class UpAddressActivity extends BaseActivity{
 				
 				if(Util.detect(context)){
 					myPDT.Run(context, new RefeshData(index),R.string.loding);//¿ÉÈ¡Ïû
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
 		};

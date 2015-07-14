@@ -551,7 +551,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			intent = new Intent(context,StoreShopBaseActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("storeid", storename);
-			intent.putExtra("storename", "15");
+			intent.putExtra("storename", "");
 			startActivity(intent);
 //			Util.ShowToast(context, R.string.maimeng);''
 			
@@ -833,6 +833,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
+				MyCenterActivity.ischanged = true;
 			}
 			return true;
 		}

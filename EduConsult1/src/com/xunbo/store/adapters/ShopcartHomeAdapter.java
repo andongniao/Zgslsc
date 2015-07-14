@@ -123,7 +123,7 @@ public class ShopcartHomeAdapter extends BaseAdapter{
 				Intent intent = new Intent(context,StoreShopBaseActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("storeid", s.getCompanyid());
-				intent.putExtra("storename",s.getCompany());
+				intent.putExtra("storename","");
 				context.startActivity(intent);
 			}
 		});

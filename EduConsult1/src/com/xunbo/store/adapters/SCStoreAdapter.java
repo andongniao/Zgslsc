@@ -130,8 +130,8 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 					if(!isshow){
 						intent = new Intent(contexts,StoreShopBaseActivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						intent.putExtra("storeid", list.get(position).getCollected());
-						intent.putExtra("storename", "");
+						intent.putExtra("storeid", "");
+						intent.putExtra("storename", list.get(position).getShopname());
 						contexts.startActivity(intent);
 					}else {
 						Util.ShowToast(contexts, R.string.please_wait);

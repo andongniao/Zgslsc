@@ -74,12 +74,12 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 		page = 1;
 		storeid = getIntent().getStringExtra("storeid");
 		storename = getIntent().getStringExtra("storename");
-		if(Util.IsNull(storename)){
+		if(Util.IsNull(storeid)){
 			id = storeid;
 			type = 2;
-		}else if(Util.IsNull(storeid)){
-			id = storeid;
-			type = 1;
+		}else if(Util.IsNull(storename)){
+			id = storename;
+			type = 2;
 		}
 		url = getIntent().getStringExtra("url");
 		authstr = MyApplication.mp.getUser().getAuthstr();
@@ -298,15 +298,19 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 			}else if(showtype==2){
 				if(bean_all!=null){
 					if("200".equals(bean_all.getCode())){
+						ArrayList<ProductBean> l = new ArrayList<ProductBean>();;
 						show(showtype);
-						list_all = new ArrayList<ProductBean>();
-						ArrayList<ProductBean> l = bean_all.getList();
-						if(l.size()==0){
-							Util.ShowToast(context, R.string.page_is_final);
+						if(page==1){
+							list_all = new ArrayList<ProductBean>();
+							list_all = bean_all.getList();
 						}else{
+							l = bean_all.getList();
 							list_all.addAll(l);
-							setData(gv_all, list_all);
+							if(l.size()==0){
+								Util.ShowToast(context, R.string.page_is_final);
+							}
 						}
+							setData(gv_all, list_all);
 						//TODO
 					}else if("300".equals(bean_all.getCode())){
 						MyApplication.mp.setlogin(false);
@@ -378,11 +382,11 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 
 		private void setData(MyGridView gv,
 				ArrayList<ProductBean> list) {
-			
-//			if(adapter!=null){
-//				adapter.setData(list);
-//				adapter.notifyDataSetChanged();
-//			}else{
+
+			//			if(adapter!=null){
+			//				adapter.setData(list);
+			//				adapter.notifyDataSetChanged();
+			//			}else{
 			if(showtype==2 && page>1){
 				adapter.setData(list);
 				adapter.notifyDataSetChanged();
@@ -390,7 +394,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 				adapter = new StoreShopAdapter(context, list);
 				gv.setAdapter(adapter);
 			}
-//			}
+			//			}
 		}
 
 		@Override
