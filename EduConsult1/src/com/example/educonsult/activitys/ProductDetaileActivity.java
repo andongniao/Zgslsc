@@ -777,7 +777,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 						recommend=productdetailbean.getRecommend();
 						buyedlist=productdetailbean.getBuyedlist();
 						initDate();
-						setpingjiaDate();
+						
 
 					}else if("300".equals(productdetailbean.getCode())){
 						MyApplication.mp.setlogin(false);
@@ -794,7 +794,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 					if("200".equals(listComment.getCode())){
 						comlist=listComment.getComlist();
 						comstar=listComment.getComstar();
-
+						setpingjiaDate();
 					}else if("300".equals(listComment.getCode())){
 						MyApplication.mp.setlogin(false);
 						Util.ShowToast(context, R.string.login_out_time);

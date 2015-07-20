@@ -43,7 +43,7 @@
             android:gravity="center_vertical"
             android:background="@color/login_ed"
             android:cursorVisible="true"
-            android:drawableLeft="@drawable/login_username"
+            android:drawableLeft="@drawable/login_password"
             android:textCursorDrawable="@null"
             android:singleLine="true" 
             android:layout_marginTop="10dp"/>

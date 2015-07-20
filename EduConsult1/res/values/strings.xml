@@ -225,10 +225,11 @@
     <string name="moneyquery_info_beizhu">备注</string>
     <!-- 优惠券 -->
     <string name="coupons_title">优惠券</string>
-    <string name="coupons_tvid">编号</string>
-    <string name="coupons_tvmoney">面值</string>
-    <string name="coupons_tvmustmoney">需消费金额</string>
-    <string name="coupons_tvtime">过期时间</string>
+    <string name="coupons_tvtext1">消费金额满</string>
+    <string name="coupons_tvtext2">元使用</string>
+    <string name="coupons_tvtext3">使用类型：</string>
+    <string name="coupons_tvtime1">未过期</string>
+    <string name="coupons_tvtime2">已过期</string>
     <!-- 我的资料 -->
     <string name="myinfo_title">我的资料</string>
     <string name="myinfo_head">头像</string>

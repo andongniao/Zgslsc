@@ -85,7 +85,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/login_ed"
             android:cursorVisible="true"
-            android:drawableLeft="@drawable/login_username"
+            android:drawableLeft="@drawable/login_password"
             android:gravity="center_vertical"
             android:hint="@string/regist_password"
             android:padding="10dp"
@@ -103,7 +103,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/login_ed"
             android:cursorVisible="true"
-            android:drawableLeft="@drawable/login_username"
+            android:drawableLeft="@drawable/login_password"
             android:gravity="center_vertical"
             android:hint="@string/regist_chognfu"
             android:padding="10dp"
@@ -170,7 +170,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/login_ed"
             android:cursorVisible="true"
-            android:drawableLeft="@drawable/login_username"
+            android:drawableLeft="@drawable/regist_realname"
             android:gravity="center_vertical"
             android:hint="@string/myinfo_tvrealname"
             android:padding="10dp"
@@ -187,13 +187,18 @@
             android:layout_marginRight="10dp"
             android:background="@color/login_ed"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            android:padding="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/regist_where"/>
 
             <TextView
                 android:id="@+id/regist_ll_geren_tv_diqu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                
                 android:text="@string/myinfo_tvdiqu"
                 android:textColor="@color/fame_hui3"
                 android:textSize="12dp" />
@@ -206,7 +211,7 @@
             <ImageView
                 android:layout_width="10dp"
                 android:layout_height="5dp"
-                android:layout_margin="10dp"
+               
                 android:background="@drawable/bottom" />
         </LinearLayout>
 
@@ -219,7 +224,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/login_ed"
             android:cursorVisible="true"
-            android:drawableLeft="@drawable/login_username"
+            android:drawableLeft="@drawable/regist_address"
             android:gravity="center_vertical"
             android:hint="@string/myinfo_tvxiangxidizhi"
             android:padding="10dp"
@@ -236,7 +241,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/login_ed"
             android:cursorVisible="true"
-            android:drawableLeft="@drawable/login_username"
+            android:drawableLeft="@drawable/regist_tel"
             android:gravity="center_vertical"
             android:hint="@string/myinfo_tvphone"
             android:inputType="number"
@@ -260,13 +265,16 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
+                android:orientation="horizontal"
+                android:padding="10dp" >
+				<ImageView android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:background="@drawable/regist_yangzhi"/>
                 <TextView
                     android:id="@+id/regist_ll_geren_tv_pingzhong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                   
                     android:text="@string/myinfo_tvyangzhipingzhong"
                     android:textColor="@color/fame_hui3"
                     android:textSize="12dp" />
@@ -279,7 +287,7 @@
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="5dp"
-                    android:layout_margin="10dp"
+                    
                     android:background="@drawable/bottom" />
             </LinearLayout>
 
@@ -292,13 +300,18 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:gravity="center_vertical"
+                android:padding="10dp"
                 android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/regist_siliao" />
 
                 <TextView
                     android:id="@+id/regist_ll_geren_tv_siliao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:text="@string/myinfo_tvusersiliao"
                     android:textColor="@color/fame_hui3"
                     android:textSize="12dp" />
@@ -311,7 +324,6 @@
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="5dp"
-                    android:layout_margin="10dp"
                     android:background="@drawable/bottom" />
             </LinearLayout>
 
@@ -324,7 +336,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:cursorVisible="true"
-                android:drawableLeft="@drawable/login_username"
+                android:drawableLeft="@drawable/regist_computer"
                 android:gravity="center_vertical"
                 android:hint="@string/myinfo_tvchangjia"
                 android:padding="10dp"
@@ -341,7 +353,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:cursorVisible="true"
-                android:drawableLeft="@drawable/login_username"
+                android:drawableLeft="@drawable/regist_price"
                 android:gravity="center_vertical"
                 android:hint="@string/myinfo_tvprice"
                 android:inputType="number"
@@ -359,13 +371,15 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:gravity="center_vertical"
+                android:padding="10dp"
                 android:orientation="horizontal" >
-
+				<ImageView android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:background="@drawable/regist_jixu"/>
                 <TextView
                     android:id="@+id/regist_ll_geren_tv_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:text="@string/myinfo_tvproduct"
                     android:textColor="@color/fame_hui3"
                     android:textSize="12dp" />
@@ -378,7 +392,6 @@
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="5dp"
-                    android:layout_margin="10dp"
                     android:background="@drawable/bottom" />
             </LinearLayout>
 
@@ -391,7 +404,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:cursorVisible="true"
-                android:drawableLeft="@drawable/login_username"
+                android:drawableLeft="@drawable/regist_num"
                 android:gravity="center_vertical"
                 android:hint="@string/myinfo_tvnum"
                 android:inputType="number"
@@ -409,7 +422,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:cursorVisible="true"
-                android:drawableLeft="@drawable/login_username"
+                android:drawableLeft="@drawable/regist_realname"
                 android:gravity="center_vertical"
                 android:hint="@string/myinfo_tvtuijianname"
                 android:padding="10dp"
@@ -423,7 +436,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone"
+             >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -447,7 +461,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/login_ed"
                 android:cursorVisible="true"
-                android:drawableLeft="@drawable/login_username"
+                android:drawableLeft="@drawable/regist_computer"
                 android:gravity="center_vertical"
                 android:hint="@string/myinfo_gongsim"
                 android:padding="10dp"
@@ -464,13 +478,15 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/login_ed"
                 android:gravity="center_vertical"
+                android:padding="10dp"
                 android:orientation="horizontal" >
-
+				<ImageView android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:background="@drawable/regist_computer_type"/>
                 <TextView
                     android:id="@+id/regist_ll_qiye_tv_ctype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:text="@string/myinfo_gongsitype"
                     android:textColor="@color/fame_hui3"
                     android:textSize="12dp" />
@@ -483,7 +499,6 @@
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="5dp"
-                    android:layout_margin="10dp"
                     android:background="@drawable/bottom" />
             </LinearLayout>
 
@@ -496,7 +511,7 @@
                 android:layout_marginRight="10dp"
                android:background="@color/login_ed"
                 android:cursorVisible="true"
-                android:drawableLeft="@drawable/login_username"
+                android:drawableLeft="@drawable/regist_tel"
                 android:gravity="center_vertical"
                 android:hint="@string/myinfo_gongsid"
                 android:inputType="number"
