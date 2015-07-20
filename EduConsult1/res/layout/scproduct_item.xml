@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui3"
             android:singleLine="true"
             android:ellipsize="end"
             android:textSize="16dp" />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:text="@string/test"
-            android:textColor="@color/black" />
+            android:textColor="@color/fame_hui2" />
 
         
 
@@ -73,7 +73,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/scprodcut_tvqxsc"
-                android:background="@drawable/business_et_bg_line"
+                android:background="@drawable/search_lv_isnull_btn_bg"
+                android:textColor="@color/white"
                 android:padding="5dp"
                 android:layout_weight="1"/>
             <TextView 
@@ -81,7 +82,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/scproduct_instore"
-                android:background="@drawable/business_et_bg_line"
+                 android:background="@drawable/search_lv_isnull_btn_bg"
+                android:textColor="@color/white"
                 android:padding="5dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"/>

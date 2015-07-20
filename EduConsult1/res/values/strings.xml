@@ -79,7 +79,7 @@
     <string name="regist_password_need_is_one">两次密码不一致</string>
     <string name="regist_phone_isfalse">请输入正确的电话号码</string>
     <string name="regist_ok">注册成功</string>
-    <string name="regist_tvlianxifangshi">联系方式</string>
+    <string name="regist_tvlianxifangshi">个人信息</string>
     <string name="regist_tvgongsiinfo">公司信息</string>
     <!-- 完善信息 -->
     <string name="perfect_info_title">完善信息</string>
@@ -225,10 +225,11 @@
     <string name="moneyquery_info_beizhu">备注</string>
     <!-- 优惠券 -->
     <string name="coupons_title">优惠券</string>
-    <string name="coupons_tvid">编号</string>
-    <string name="coupons_tvmoney">面值</string>
-    <string name="coupons_tvmustmoney">需消费金额</string>
-    <string name="coupons_tvtime">过期时间</string>
+    <string name="coupons_tvtext1">消费金额满</string>
+    <string name="coupons_tvtext2">元使用</string>
+    <string name="coupons_tvtext3">使用类型：</string>
+    <string name="coupons_tvtime1">未过期</string>
+    <string name="coupons_tvtime2">已过期</string>
     <!-- 我的资料 -->
     <string name="myinfo_title">我的资料</string>
     <string name="myinfo_head">头像</string>
@@ -521,13 +522,13 @@
     <string name="possword_title">密码修改</string>
     <string name="possword_tvlogin">登录密码修改</string>
     <string name="possword_tvzhifu">支付密码修改</string>
-    <string name="possword_tvoldpow">原登录密码</string>
+    <string name="possword_tvoldpow">原始密码</string>
     <string name="possword_tvnewpow">新登录密码</string>
-    <string name="possword_tvnewpowtwo">重新输入新登录密码</string>
-    <string name="possword_tvoldzhifu">原支付密码</string>
+    <string name="possword_tvnewpowtwo">再次输入登录密码</string>
+    <string name="possword_tvoldzhifu">原始密码</string>
     <string name="possword_tvnewzhifu">新支付密码</string>
-    <string name="possword_tvnewzhifutwo">重新输入新支付密码</string>
-    <string name="possword_tvok">确定</string>
+    <string name="possword_tvnewzhifutwo">再次输入支付密码</string>
+    <string name="possword_tvok">保存</string>
     <!-- 订单详情 待付款 -->
     <string name="myorderinfo_title">订单详情</string>
     <string name="myorderinfo_tvdaifukuan">待付款</string>

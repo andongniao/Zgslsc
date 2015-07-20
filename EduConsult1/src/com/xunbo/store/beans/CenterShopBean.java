@@ -13,12 +13,11 @@ public class CenterShopBean {
 	private String company;
 	private String thumb;
 	private String linkurl;
-	private String shopname;
 	private String telephone;
 	private String vip;//vip等级
 	private String validated;//实名认证
 	private String bond;//保证金
-	
+	private String shopname;//
 	public String getShopname() {
 		return shopname;
 	}

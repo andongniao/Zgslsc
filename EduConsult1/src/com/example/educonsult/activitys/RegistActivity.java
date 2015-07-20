@@ -81,7 +81,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		//		topRightLVisible();
 		//		topRightRVisible();
 		topRightTGone();
-		setTopLeftTv(R.string.regist_title);
+		setTitleTxt(R.string.regist_title);
 		setContentXml(R.layout.regist_layout);
 		init();
 		addlistener();
@@ -571,21 +571,25 @@ void setrel(){
 			break;
 		case R.id.regist_tv_qiye:
 			tp = 0;
-			tv_qiye.setBackgroundResource(R.drawable.regist_clikeed);
+			tv_qiye.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 			tv_qiye.setTextColor(getResources().getColor(R.color.white));
-			tv_geren.setTextColor(getResources().getColor(R.color.black));
-			tv_geren.setBackgroundResource(R.drawable.zcbq1);
+			tv_geren.setTextColor(getResources().getColor(R.color.fame_hui3));
+			tv_geren.setBackgroundResource(R.drawable.login_et_bg_line);
+			tv_geren.setPadding(UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5));
+			tv_qiye.setPadding(UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5));
 			ll_geren.setVisibility(View.GONE);
 			ll_qiye.setVisibility(View.VISIBLE);
 			break;
 		case R.id.regist_tv_geren:
 			tp = 1;
-			tv_geren.setBackgroundResource(R.drawable.regist_clikeed);
+			tv_geren.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 			tv_geren.setTextColor(getResources().getColor(R.color.white));
-			tv_qiye.setBackgroundResource(R.color.regist_bg);
-			tv_qiye.setBackgroundResource(R.drawable.zcbq1);
+//			tv_qiye.setBackgroundResource(R.color.fame_hui3);
+			tv_qiye.setBackgroundResource(R.drawable.login_et_bg_line);
 			//(R.drawable.regist_unclick);
-			tv_qiye.setTextColor(getResources().getColor(R.color.black));
+			tv_geren.setPadding(UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5));
+			tv_qiye.setPadding(UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5), UITools.dip2px(context, 5));
+			tv_qiye.setTextColor(getResources().getColor(R.color.fame_hui3));
 			ll_geren.setVisibility(View.VISIBLE);
 			ll_qiye.setVisibility(View.GONE);
 			break;

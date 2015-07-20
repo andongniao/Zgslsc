@@ -2,78 +2,72 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/login_bg"
-    android:gravity="center_vertical"
+    
     android:orientation="vertical"
-    android:padding="5dp" >
+    android:padding="20dp" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/login_et_bg_line"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="1dp" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/login_username" />
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp">
+    
 
         <EditText
             android:id="@+id/login_et_username"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@color/white"
+           android:gravity="center_vertical"
+           android:padding="5dp"
+           android:background="@color/login_ed"
+            android:cursorVisible="true"
+            android:drawableLeft="@drawable/login_username"
+            android:focusable="true"
             android:hint="@string/login_username"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui3"
             android:textCursorDrawable="@null"
             android:singleLine="true" />
-    </LinearLayout>
+   
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/login_et_bg_line"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="1dp" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/login_password" />
-
-        <EditText
+   
+		<EditText
             android:id="@+id/login_et_password"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@color/white"
             android:hint="@string/login_password"
-            android:textColor="@color/black"
+            android:textColor="@color/fame_hui3"
             android:password="true"
+            android:padding="5dp"
+            android:gravity="center_vertical"
+            android:background="@color/login_ed"
+            android:cursorVisible="true"
+            android:drawableLeft="@drawable/login_password"
             android:textCursorDrawable="@null"
-            android:singleLine="true" />
-    </LinearLayout>
+            android:singleLine="true" 
+            android:layout_marginTop="10dp"/>
+    
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
-
+	
         <CheckBox
             android:id="@+id/login_cb_jizhu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_jizhu"
-            android:textColor="@color/home_hui" />
+            android:textColor="@color/fame_hui3" 
+            android:drawableLeft="@color/login_checkbox"
+            android:checked="false"
+            android:gravity="center_vertical"
+            android:button="@null"
+            />
+        
 
         <TextView
             android:layout_width="0dp"
@@ -84,23 +78,24 @@
             android:id="@+id/login_tv_wangji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_wangji" />
+            android:text="@string/login_wangji"
+             android:textColor="@color/fame_hui3" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/login_btn_login"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"  
             android:background="@drawable/search_lv_isnull_btn_bg"
             android:gravity="center"
-            android:padding="10dp"
+            android:padding="5dp"
             android:text="@string/login_login"
             android:textColor="@color/white"
             android:textSize="18dp" />
@@ -109,7 +104,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
@@ -118,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_regist"
-            android:textColor="@color/orn" />
+            android:textColor="@color/fame_hui3" />
 
         <TextView
             android:layout_width="0dp"
@@ -130,12 +125,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_noaclogin"
-            android:textColor="@color/login_text_gre" />
+            android:textColor="@color/fame_hui3" />
     </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
+</LinearLayout>
 </LinearLayout>

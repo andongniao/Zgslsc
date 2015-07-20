@@ -50,16 +50,16 @@ public class CouponsActivity extends BaseActivity {
 	}
 
 	private void addlistener() {
-		rl_r.setOnClickListener(new OnClickListener() {
-
-			@Override	
-			public void onClick(View v) {
-				intent = new Intent(context,XinjianActivity.class);
-				intent.putExtra("flag", "qianbao");
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
-		});
+//		rl_r.setOnClickListener(new OnClickListener() {
+//
+//			@Override	
+//			public void onClick(View v) {
+//				intent = new Intent(context,XinjianActivity.class);
+//				intent.putExtra("flag", "qianbao");
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				startActivity(intent);
+//			}
+//		});
 		
 	}
 	void init(){
@@ -69,6 +69,8 @@ public class CouponsActivity extends BaseActivity {
 		couponsAdapter=new CouponsAdapter(this);
 		list_coupons.setAdapter(couponsAdapter);
 		list=new ArrayList<String>();
+		list.add("1");
+		list.add("2");
 		list_coupons.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

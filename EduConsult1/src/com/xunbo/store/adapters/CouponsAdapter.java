@@ -53,20 +53,23 @@ public class CouponsAdapter extends BaseAdapter{
 		if(convertView==null){
 			convertView = inflater.inflate(R.layout.coupons_itme, null);
 			myitem = new Myitem();
-			myitem.id = (TextView) convertView.findViewById(R.id.coupons_id);
-			myitem.money = (TextView) convertView.findViewById(R.id.coupons_money);
-			myitem.time = (TextView) convertView.findViewById(R.id.coupons_time);
-			myitem.mustmoney = (TextView) convertView.findViewById(R.id.coupons_mustmoney);
+			myitem.num = (TextView) convertView.findViewById(R.id.coupons_item_time);
+			myitem.money = (TextView) convertView.findViewById(R.id.coupons_item_money2);
+			myitem.time = (TextView) convertView.findViewById(R.id.coupons_item_time1);
+			myitem.mustmoney = (TextView) convertView.findViewById(R.id.coupons_item_money1);
 			convertView.setTag(myitem);
 		}else{
 			myitem = (Myitem) convertView.getTag();
 		}
-
+			myitem.num.setText("NO."+(position+1)+" Ωÿ÷π"+"2015.8.31"+"»’");
+			myitem.mustmoney.setText("3000");
+			myitem.money.setText("£§"+"100");
+			myitem.time.setText(R.string.coupons_tvtime1);
 		return convertView;
 	}
 	
 class Myitem{
-	TextView id,money,mustmoney,time;
+	TextView money,mustmoney,num,time;
 	
 }
 }

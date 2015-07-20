@@ -7,10 +7,10 @@
     android:orientation="vertical" >
     <ImageView 
         android:id="@+id/base_list_item_iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:background="@drawable/default_bg"
         
         />

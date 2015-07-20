@@ -177,15 +177,15 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.order_home_ll_add:
-			intent = new Intent(context,AddressGLActivity.class);
+			intent = new Intent(context,AddressNewSaveActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra("addressnum", "1");
-			intent.putExtra("isture", true);
+			intent.putExtra("type", 2);
 			startActivity(intent);
+			
 			break;
 		case R.id.order_home_ll_address:
 			//TODO 
-			Intent id = new Intent(this,UpAddressActivity.class);
+			Intent id = new Intent(this,AddressActivity.class);
 			id.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			Bundle b=new Bundle();
 			b.putSerializable("orderbundle", listAddressBean);

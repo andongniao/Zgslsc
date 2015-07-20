@@ -2,7 +2,6 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
-import android.app.PendingIntent.OnFinished;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -251,7 +250,7 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 			              setResult(RESULT_OK, intent);  
 			              finish();
 					}else if(type==2 && ischanged){
-						OrderActivity.isinit = true;
+						OrderActivity.isinit=true;
 						AddressActivity.isinit = true;
 						finish();
 					}
