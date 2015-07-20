@@ -4,7 +4,7 @@
     android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="5dp" >
+    >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -49,8 +49,8 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/home_hui" />
+        android:layout_height="0.1dp"
+        android:background="@color/base_hui" />
 
     <com.xunbo.store.myviews.MyListview
         android:id="@+id/apply_home_lv_item_lv"
@@ -65,8 +65,8 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/home_hui" />
+        android:layout_height="0.1dp"
+        android:background="@color/base_hui" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -78,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:text="@string/applyerfund_tvorderid"
             />
          <TextView
@@ -99,6 +100,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/applyinfo_tvallmoney"
+            android:textSize="15dp"
             android:textColor="@color/black" />
 
         
@@ -108,7 +110,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test"
-            android:textColor="@color/black"
+            android:textColor="@color/orn"
+            android:textSize="13dp"
             android:layout_marginLeft="5dp" />
     </LinearLayout>
 
@@ -164,6 +167,11 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/regist_et_bg"/>
     </LinearLayout>
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:background="@color/base_hui"
+        />
 
     <!--  -->
 

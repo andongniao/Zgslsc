@@ -67,6 +67,7 @@ public class MyOrderLvAdapter extends BaseAdapter{
 			item.tv_price = (TextView) convertView.findViewById(R.id.myorder_two_lv_item_tv_price);
 			item.tv_unit = (TextView) convertView.findViewById(R.id.myorder_two_lv_item_tv_unit);
 			item.tv_num = (TextView) convertView.findViewById(R.id.myorder_two_lv_item_tv_num);
+			item.tv_order = (TextView) convertView.findViewById(R.id.myorder_two_lv_item_tv_order);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -89,7 +90,8 @@ public class MyOrderLvAdapter extends BaseAdapter{
 			s = orderBean.getUnit();
 		}
 		item.tv_unit.setText(s);
-		item.tv_num.setText("X"+orderBean.getNumber());
+		item.tv_num.setText("¹²"+orderBean.getNumber()+"¼þ");
+		item.tv_order.setText(""+orderBean.getItemid());
 		convertView.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -105,7 +107,7 @@ public class MyOrderLvAdapter extends BaseAdapter{
 		return convertView;
 	}
 	class Item{
-		TextView tv_title,tv_price,tv_num,tv_unit;
+		TextView tv_title,tv_price,tv_num,tv_unit,tv_order;
 		ImageView iv;
 	}
 

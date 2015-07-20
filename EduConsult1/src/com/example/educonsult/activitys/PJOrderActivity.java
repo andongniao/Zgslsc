@@ -65,23 +65,23 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (arg0.getId()) {
 		case R.id.pjorder_one_lin:
-			imaone.setBackgroundResource(R.drawable.pingjiatwo);
-			imatwo.setBackgroundResource(R.drawable.pingjiaone);
-			imathree.setBackgroundResource(R.drawable.pingjiaone);
+			imaone.setBackgroundResource(R.drawable.check_ed);
+			imatwo.setBackgroundResource(R.drawable.check_un);
+			imathree.setBackgroundResource(R.drawable.check_un);
 			isgood=1;
 			star = 1;
 			break;
 		case R.id.pjorder_two_lin:
-			imatwo.setBackgroundResource(R.drawable.pingjiatwo);
-			imaone.setBackgroundResource(R.drawable.pingjiaone);
-			imathree.setBackgroundResource(R.drawable.pingjiaone);
+			imatwo.setBackgroundResource(R.drawable.check_ed);
+			imaone.setBackgroundResource(R.drawable.check_un);
+			imathree.setBackgroundResource(R.drawable.check_un);
 			isgood=3;
 			star = 2;
 			break;
 		case R.id.pjorder_three_lin:
-			imathree.setBackgroundResource(R.drawable.pingjiatwo);
-			imatwo.setBackgroundResource(R.drawable.pingjiaone);
-			imaone.setBackgroundResource(R.drawable.pingjiaone);
+			imathree.setBackgroundResource(R.drawable.check_ed);
+			imatwo.setBackgroundResource(R.drawable.check_un);
+			imaone.setBackgroundResource(R.drawable.check_un);
 			isgood=5;
 			star = 3;
 			break;

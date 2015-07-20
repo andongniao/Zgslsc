@@ -29,10 +29,8 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="20dp" >
+                android:padding="10dp"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -45,13 +43,19 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计："
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/applyerfund_applyerfundmoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test"
-                    android:textColor="@color/black"
+                    android:textColor="@color/orn"
                     android:textSize="16dp" />
 
                 <TextView
@@ -143,16 +147,13 @@
                 android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:paddingBottom="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="20dp" >
+                android:padding="10dp"
+                >
 
                 <TextView
                     android:id="@+id/applyerfund_why"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
                     android:text="@string/applyerfund_tvwhy"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
@@ -175,11 +176,44 @@
                     <requestFocus />
                 </EditText>
             </LinearLayout>
+            
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
+                android:padding="5dp"
+                >
+                <TextView 
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="fill_parent"
+                    />
+                <TextView 
+                    android:id="@+id/applyerfund_tv_online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 在线客服 "
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:background="@drawable/order_et_bg_line"
+                    android:layout_marginRight="10dp"
+                    />
+                <TextView 
+                    android:id="@+id/applyerfund_tv_shenqing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 申请退款"
+                    android:textSize="15dp"
+                    android:textColor="@color/orn"
+                    android:padding="5dp"
+                    android:background="@drawable/orn_bg_line"
+                    android:layout_marginRight="5dp"
+                    />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
         </LinearLayout>
     </ScrollView>
 
@@ -188,6 +222,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:padding="5dp" >
 
         <TextView

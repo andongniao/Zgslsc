@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/base_hui"
         android:orientation="horizontal"
         android:padding="10dp" >
 
@@ -14,7 +14,7 @@
             android:id="@+id/applyrefund_ic"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/ic_launcher" />
+            android:background="@drawable/default_bg" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -27,7 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="@string/test"
                 android:textColor="@color/black"
                 android:textSize="16dp" />
 
@@ -46,6 +45,13 @@
                 android:paddingTop="5dp" >
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:text="单价：" />
+                
+                <TextView
                     android:id="@+id/applyrefun_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -54,14 +60,12 @@
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/applyrefun_money_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/scproduct_tvmoney" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    />
 
                 <TextView
                     android:id="@+id/applyrefun_talk"
@@ -84,11 +88,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/test" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:text="@string/applyerfund_tvnum" />
             </LinearLayout>
 
            
@@ -104,13 +103,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/applyerfund_tvorderid" />
+                    android:textColor="@color/home_hui"
+                    android:textSize="16dp" 
+                    android:text="订单编号：" />
 
                 <TextView
                     android:id="@+id/applyerfund_orderid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
+                    android:textColor="@color/home_hui"
+                    android:textSize="16dp" 
                     android:text="@string/test" />
             </LinearLayout>
         </LinearLayout>

@@ -152,7 +152,7 @@ public class WelcomeActivity extends Activity{
 			}
 			if(ct && fl){
 				Intent intent = new Intent(WelcomeActivity.this,
-						LoginActivity.class);
+						ExampleActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();

@@ -7,8 +7,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -401,8 +403,10 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			}
 
 			@Override
-			public void displayImage(String imageURL, ImageView imageView) {
+			public void displayImage(final String imageURL, final ImageView imageView) {
 				Util.Getbitmap(imageView, imageURL);
+//				setImage(imageURL,imageView);
+				
 			}
 		});
 		tv_title.setText(mallinfo.getKeyword());
@@ -518,6 +522,42 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		Handler h=new Handler();
 		h.postDelayed(runna, 500);
 	}
+	private void setImage(final String imageURL, final ImageView imageView) {
+		final Handler handler = new Handler(){
+			@Override
+			public void handleMessage(Message msg) {
+				super.handleMessage(msg);
+				if(msg.what==1){
+					Bitmap bitmap = (Bitmap) msg.obj;
+					imageView.setImageBitmap(bitmap);
+				}else{
+					imageView.setBackgroundResource(R.drawable.default_bg);
+				}
+			}
+		};
+		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					Bitmap b = Util.getBitmapForNet(imageURL);
+					Message msg = handler.obtainMessage();
+					if(b!=null){
+					msg.what=1;
+					msg.obj = b;
+					}else{
+						msg.what=2;
+					}
+					handler.sendMessage(msg);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+		}).start();
+	}
+
 	private void addlistener() {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -771,30 +811,15 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			if(refeshDatatype==1){
 
 				//任务完成后
-				if(productdetailbean!=null){
-					if("200".equals(productdetailbean.getCode())){
-						mallinfo=productdetailbean.getMallinfo();
-						recommend=productdetailbean.getRecommend();
-						buyedlist=productdetailbean.getBuyedlist();
-						initDate();
-						setpingjiaDate();
-
-					}else if("300".equals(productdetailbean.getCode())){
-						MyApplication.mp.setlogin(false);
-						Util.ShowToast(context, R.string.login_out_time);
-						Intent i= new Intent(context,LoginActivity.class);
-						startActivity(i);
-						finish();
-					}else{
-						Util.ShowToast(context, productdetailbean.getMsg());
-					}
-
-				}
 				if(listComment!=null){
 					if("200".equals(listComment.getCode())){
 						comlist=listComment.getComlist();
 						comstar=listComment.getComstar();
-
+						mallinfo=productdetailbean.getMallinfo();
+						recommend=productdetailbean.getRecommend();
+						buyedlist=productdetailbean.getBuyedlist();
+						setpingjiaDate();
+						initDate();
 					}else if("300".equals(listComment.getCode())){
 						MyApplication.mp.setlogin(false);
 						Util.ShowToast(context, R.string.login_out_time);
@@ -844,7 +869,22 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 			if(refeshDatatype==1){
 				Send s = new Send(context);
 				productdetailbean = s.GetProductDetaile(productBean.getItemid(),MyApplication.mp.getUser().getAuthstr());
-				listComment=s.GetComment(productBean.getItemid(), 1, "");
+				if(productdetailbean!=null){
+					if("200".equals(productdetailbean.getCode())){
+						listComment=s.GetComment(productBean.getItemid(), 1, "");
+					}else if("300".equals(productdetailbean.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						Intent i= new Intent(context,LoginActivity.class);
+						startActivity(i);
+						finish();
+					}else{
+						Util.ShowToast(context, productdetailbean.getMsg());
+					}
+
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}else if(refeshDatatype==2){
 				PostHttp p=new PostHttp(context);
 				if(!isCollect){
@@ -859,7 +899,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		}
 	}
 	private void setpingjiaDate(){
-      
+		listView.setFocusable(false);
 		if(comlist!=null&&comlist.size()>0){
 			pingjiaAdapter=new ProductPingjiaAdapter(this, comlist,3);
 			listView.setAdapter(pingjiaAdapter);

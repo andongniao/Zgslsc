@@ -87,7 +87,7 @@ OnClickListener{
 		}
 		OrderBean bean = list.get(position);
 		item.tv_title.setText(bean.getCompany());
-		item.tv_orderid.setText(bean.getItemid());
+		item.tv_orderid.setVisibility(View.GONE);//.setText(bean.getItemid());
 		item.tv_allmoney.setText("гд"+bean.getMoney());
 		item.tv_xiugai.setVisibility(View.INVISIBLE);
 		item.tv_quxiao.setVisibility(View.INVISIBLE);

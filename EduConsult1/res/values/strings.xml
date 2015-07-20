@@ -487,7 +487,7 @@
     <string name="applyerfund_tvwayone">我要退款（无需退货）</string>
     <string name="applyerfund_tvwaytwo">我要退货</string>
     <string name="applyerfund_tvwhy">退款原因：</string>
-    <string name="applyerfund_tvwhytext">请选择退款原因</string>
+    <string name="applyerfund_tvwhytext">请输入退款原因</string>
     <string name="applyerfund_tvapplyerfundwhy">退款说明：</string>
     <string name="applyerfund_tvapplyerfundwhytext">请输入退款说明</string>
     <string name="applyerfund_tvbreak">取消并返回</string>

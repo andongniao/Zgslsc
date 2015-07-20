@@ -51,7 +51,7 @@ import com.xunbo.store.tools.Util;
 	tv_shouhuo,tv_show_shouhuo,tv_comment,tv_show_comment,tv_isnull;
 	private XListView lv;
 	private ArrayList<OrderBean> list;
-	private ArrayList<View> view_list;
+	private ArrayList<View> view_list,view_tv;
 	private MyOrderHomeAdapter adapter;
 	private Myorder myorder;
 	private ImageView iv_top_r;
@@ -245,6 +245,7 @@ import com.xunbo.store.tools.Util;
 		};
 		index = getIntent().getIntExtra("index", 0);
 		view_list = new ArrayList<View>();
+		view_tv = new ArrayList<View>();
 		ll_isnull = (LinearLayout) findViewById(R.id.myorder_home_ll_isnull);
 		tv_isnull = (TextView) findViewById(R.id.myorder_home_tv_isnull);
 		tv_isnull.setOnClickListener(this);
@@ -270,7 +271,12 @@ import com.xunbo.store.tools.Util;
 		tv_send = (TextView) findViewById(R.id.myorder_home_tv_send);
 		tv_shouhuo = (TextView) findViewById(R.id.myorder_home_tv_shouhuo);
 		tv_comment = (TextView) findViewById(R.id.myorder_home_tv_comment);
-
+		view_tv.add(tv_all);
+		view_tv.add(tv_pay);
+		view_tv.add(tv_send);
+		view_tv.add(tv_shouhuo);
+		view_tv.add(tv_comment);
+		
 		tv_show_all = (TextView) findViewById(R.id.myorder_home_tv_all_show);
 		tv_show_pay = (TextView) findViewById(R.id.myorder_home_tv_pay_show);
 		tv_show_comment = (TextView) findViewById(R.id.myorder_home_tv_comment_show);
@@ -401,6 +407,8 @@ import com.xunbo.store.tools.Util;
 		for(int i=0;i<view_list.size();i++){
 			if(index==i){
 				view_list.get(i).setVisibility(View.VISIBLE);
+				TextView v = (TextView) view_tv.get(i);
+				v.setTextColor(getResources().getColor(R.color.orn));
 				if(i==0 ||i==1){
 					step = i;
 				}else if(i==2 ||i==3){
@@ -415,6 +423,8 @@ import com.xunbo.store.tools.Util;
 				}
 			}else{
 				view_list.get(i).setVisibility(View.INVISIBLE);
+				TextView v = (TextView) view_tv.get(i);
+				v.setTextColor(getResources().getColor(R.color.black));
 			}
 		}
 	}

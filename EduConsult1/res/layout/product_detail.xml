@@ -811,8 +811,7 @@
                             android:dividerHeight="0.5dp"
                             android:fadingEdge="none"
                             android:layout_marginTop="5dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp" >
+                             >
                         </com.xunbo.store.myviews.MyListview>
                         
                          <TextView

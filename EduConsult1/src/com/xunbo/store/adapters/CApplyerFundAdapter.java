@@ -62,6 +62,7 @@ public class CApplyerFundAdapter extends BaseAdapter implements OnClickListener{
 			item.tv_money=(TextView)convertView.findViewById(R.id.applyrefun_money);
 			item.tv_num=(TextView)convertView.findViewById(R.id.applyrefun_num);
 			item.tv_orderid=(TextView)convertView.findViewById(R.id.applyerfund_orderid);
+			item.tv_unit=(TextView)convertView.findViewById(R.id.applyrefun_money_unit);
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -71,14 +72,14 @@ public class CApplyerFundAdapter extends BaseAdapter implements OnClickListener{
 		item.tv_pname.setText(rebean.getTitle());
 		item.tv_cname.setText(rebean.getCompany());
 		item.tv_money.setText(rebean.getPrice());
-		item.tv_num.setText("X"+rebean.getNumber());
+		item.tv_num.setText("¹²"+rebean.getNumber()+"¼þ");
 		item.tv_orderid.setText(rebean.getItemid());
-		
+		item.tv_unit.setText(rebean.getUnit());
 		
 		return convertView;
 	}
 	class Item{
-		private TextView tv_pname,tv_cname,tv_talk,tv_money,tv_num,tv_orderid;
+		private TextView tv_pname,tv_cname,tv_talk,tv_money,tv_num,tv_orderid,tv_unit;
 		ImageView iv;
 	}
 	@Override

@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
@@ -71,10 +72,8 @@
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/home_hui" />
+        android:layout_height="0.1dp"
+        android:background="@color/base_hui" />
 
     <com.xunbo.store.myviews.MyListview
         android:id="@+id/myorder_home_lv_item_lv"
@@ -109,7 +108,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/myorder_shifu"
+            android:text="合计："
             android:textColor="@color/black"
             android:textSize="12dp" />
 
@@ -118,23 +117,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/test"
-            android:textColor="@color/black"
+            android:textColor="@color/orn"
             android:textSize="16dp" />
     </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/home_hui" />
+        android:layout_height="0.1dp"
+        android:background="@color/base_hui" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
         android:orientation="horizontal"
-        android:padding="15dp" >
+        android:padding="7dp" >
 
         <TextView
             android:id="@+id/myorder_home_lv_item_tv_houhuodays"
@@ -165,5 +162,10 @@
             android:textColor="@color/black"
             android:textSize="16dp" />
     </LinearLayout>
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="@color/base_hui"
+        />
 
 </LinearLayout>

@@ -59,7 +59,6 @@ public class Catlv3Adapter extends BaseAdapter{
 			item = (Item) v.getTag();
 		}
 		item.tv_text.setText(list.get(position).getCatname());  
-		item.tv_text.setMaxEms(5);
 //		LinearLayout ll = (LinearLayout)v.findViewById(R.id.id_group_ll);  
 
 		return v;

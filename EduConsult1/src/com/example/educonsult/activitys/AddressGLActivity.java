@@ -76,15 +76,15 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 
 	private void addlinstener() {
 		iv_top_t.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				 Intent intent = new Intent(AddressGLActivity.this,  
-						 AddressNewSaveActivity.class);  
-	                //发送意图标示为REQUSET=1
-				 	intent.putExtra("type", 1);
-				 	intent.putExtra("newsave", bean);
-	                startActivityForResult(intent, REQUSET);  
+				Intent intent = new Intent(AddressGLActivity.this,  
+						AddressNewSaveActivity.class);  
+				//发送意图标示为REQUSET=1
+				intent.putExtra("type", 1);
+				intent.putExtra("newsave", bean);
+				startActivityForResult(intent, REQUSET);  
 			}
 		});
 	}
@@ -148,14 +148,14 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				Util.ShowToast(context, ""+isdetault);
 			}
 		});
-		if(num.equals("1")){//修改
-			tv_delete.setVisibility(View.GONE);
-		}else{
-			tv_delete.setVisibility(View.GONE);
-			if(bean!=null){
-				initData();
-			}
-		}
+		//		if(num.equals("1")){//修改
+		//			tv_delete.setVisibility(View.GONE);
+		//		}else{
+		//			tv_delete.setVisibility(View.GONE);
+		//			if(bean!=null){
+		//				initData();
+		//			}
+		//		}
 	}
 	private void initData() {
 		tv_youbian.setText(bean.getPostcode());
@@ -168,7 +168,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		}else{
 			tv_save.setVisibility(View.VISIBLE);
 		}
-		
+
 	}
 
 
@@ -176,7 +176,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.address_up_ll_diqu:
-//			setpopuwindow(context, lare, ll_diqu);
+			//			setpopuwindow(context, lare, ll_diqu);
 			break;
 		case R.id.address_up_ll_jiedao:
 
@@ -202,12 +202,9 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			if(Util.IsNull(diqu) &&Util.IsNull(dizhi) &&Util.IsNull(person) &&Util.IsNull(postcode) &&
 					Util.IsNull(mob)){
 				if(Util.isMobileNO(mob)){
-					if(Util.detect(context)){
+					if(Util.detect(context)){//设为默认地址
 						init = false;
-						if(Util.detect(context)){
-							init = false;
-							myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-						}
+						myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 					}else{
 						Util.ShowToast(context, R.string.net_is_eor);
 					}
@@ -219,6 +216,12 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			}
 			break;
 		case R.id.address_up_tv_delete:
+			if(Util.detect(context)){//删除地址
+				init = true;
+				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			}else{
+				Util.ShowToast(context, R.string.net_is_eor);
+			}
 
 			break;
 
@@ -243,22 +246,23 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		public boolean OnTaskDone() {
 			//任务完成后
 			if(init){
-//				if(lare!=null){
-//					if("200".equals(lare.getCode())){
-//						init = false;
-////						u.saveObject(lare, filename);
-//					}else if("300".equals(lare.getCode())){
-//						MyApplication.mp.setlogin(false);
-//						Util.ShowToast(context, R.string.login_out_time);
-//						intent = new Intent(context,LoginActivity.class);
-//						startActivity(intent);
-//						finish();
-//					}else{
-//						Util.ShowToast(context, beanresult.getMsg());
-//					}
-//				}else{
-//					Util.ShowToast(context, R.string.net_is_eor);
-//				}
+				if(beanresult!=null){
+					if("200".equals(beanresult.getCode())){
+						init = false;
+						AddressActivity.isinit = true;
+						finish();
+					}else if("300".equals(beanresult.getCode())){
+						MyApplication.mp.setlogin(false);
+						Util.ShowToast(context, R.string.login_out_time);
+						intent = new Intent(context,LoginActivity.class);
+						startActivity(intent);
+						finish();
+					}else{
+						Util.ShowToast(context, beanresult.getMsg());
+					}
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
 			}else{
 				if(beanresult!=null){
 					if("200".equals(beanresult.getCode())){
@@ -290,29 +294,21 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public boolean TaskMain() {
 			// 访问
+			PostHttp p = new PostHttp(context);
+			AddressBean ab = new AddressBean();
+			String authstr = MyApplication.mp.getUser().getAuthstr();
 			if(!init){
-				PostHttp p = new PostHttp(context);
-				AddressBean ab = new AddressBean();
-				String authstr = MyApplication.mp.getUser().getAuthstr();
 				ab.setAddress(dizhi);
 				ab.setArea(diqu);
-				//				ab.setIsdefault(""+1);
 				ab.setMobile(mob);
 				ab.setTruename(person);
 				ab.setPostcode(postcode);
-				//				ab.setIsdefault(""+isdetault);
-				//				if(num.equals("1")){
-				//					ab.setAreaid(""+areaid);
-				//					beanresult = p.addOneAddress(ab,authstr);
-				//				}else if(num.equals("0")){
 				ab.setAreaid(bean.getAreaid());
 				ab.setItemid(bean.getItemid());
 				ab.setIsdefault(""+1);
 				beanresult = p.SetDetaultAddress(bean, authstr);//editOneAddress(ab, authstr);
-				//				}
 			}else{
-				Send s  = new Send(context);
-//				lare = s.GetArea();
+				beanresult = p.deleteOneAddress(bean.getItemid(), authstr);
 			}
 
 			return true;
@@ -320,10 +316,10 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	}
 
 
-//	public void showpop(){
-//		adapter_r = new TextItemListAdapter(context, list);
-//		lv_l.setAdapter(adapter_r);
-//	}
+	//	public void showpop(){
+	//		adapter_r = new TextItemListAdapter(context, list);
+	//		lv_l.setAdapter(adapter_r);
+	//	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -338,15 +334,15 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 		MobclickAgent.onPause(this);
 	}
 
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		   if (resultCode == RESULT_OK) {  
-			   bean = (AddressBean) data.getExtras().get("result"); 
-			   initData();
-	        }
+		if (resultCode == RESULT_OK) {  
+			bean = (AddressBean) data.getExtras().get("result"); 
+			initData();
+		}
 	}
-	
+
 }

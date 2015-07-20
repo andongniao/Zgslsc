@@ -236,6 +236,74 @@ public class PostHttp {
 	}  
 
 
+	/**
+	 *删除单条地址
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public BaseBean deleteOneAddress(String itemid,String authstr) {  
+		BaseBean bean = new BaseBean();
+		String url = ServiceUrl.Base+ServiceUrl.address;
+		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
+		NameValuePair p = new BasicNameValuePair("action","del");
+		list.add(p);
+		NameValuePair p5 = new BasicNameValuePair("itemid",itemid);
+		list.add(p5);
+		NameValuePair p8 = new BasicNameValuePair("authstr",authstr);
+		list.add(p8);
+
+		/* 建立HTTPPost对象 */  
+		HttpPost httpRequest = new HttpPost(url);  
+
+		String strResult = "doPostError";  
+
+		try {  
+			/* 添加请求参数到请求对象 */  
+			httpRequest.setEntity(new UrlEncodedFormEntity(list, HTTP.UTF_8));  
+			/* 发送请求并等待响应 */  
+			HttpResponse httpResponse = httpClient.execute(httpRequest);  
+			/* 若状态码为200 ok */  
+			JSONObject obj= null;
+			if (httpResponse.getStatusLine().getStatusCode() == 200) {  
+				/* 读返回数据 */  
+				strResult = EntityUtils.toString(httpResponse.getEntity());  
+				obj = new JSONObject(strResult);
+				if(obj!=null){
+					bean.setMsg(obj.getString("message"));
+					bean.setCode(obj.getString("code"));
+				}else{
+					bean.setMsg(error);
+					bean.setCode("500");
+				}
+			} else {  
+				bean.setMsg(error);
+				bean.setCode("500");
+			}  
+
+			return bean;
+		} catch (ClientProtocolException e) {  
+			e.printStackTrace(); 
+
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (IOException e) {  
+
+			e.printStackTrace();  
+			System.out.println("IO异常");
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		} catch (Exception e) {  
+
+			e.printStackTrace();  
+			bean.setMsg(error);
+			bean.setCode("500");
+			return bean;
+		}  
+	}  
+
+	
 
 	/**
 	 * 设置默认地址

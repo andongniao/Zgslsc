@@ -91,6 +91,7 @@ import com.xunbo.store.tools.Util;
 		}else{
 			item = (Item) convertView.getTag();
 		}
+		
 		o = list.get(position);
 		item.tv_title.setText(o.getCompany());
 		item.tv_time.setText(o.getAddtime());
@@ -146,21 +147,21 @@ import com.xunbo.store.tools.Util;
 		if(type==1){
 			item.btn_l.setVisibility(View.VISIBLE);
 			item.btn_r.setVisibility(View.VISIBLE);
-			item.btn_r.setText("立即付款");
-			item.btn_r.setTextColor(context.getResources().getColor(R.color.white));
+			item.btn_r.setText(" 立即付款 ");
+			item.btn_r.setTextColor(context.getResources().getColor(R.color.orn));
 			item.btn_r.setBackgroundResource(R.drawable.orn_bg_line);
-			item.btn_l.setText("取消订单");
+			item.btn_l.setText(" 取消订单 ");
 			item.btn_l.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_l.setBackgroundResource(R.drawable.order_et_bg_line);
 		}else if(type == 2){
 			item.btn_l.setVisibility(View.GONE);
 			item.btn_r.setVisibility(View.GONE);
-			item.btn_r.setText("关闭交易");
+			item.btn_r.setText(" 关闭交易 ");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
 			if(MyApplication.mp.getUser().getType()==0){
 				//				item.btn_l.setVisibility(View.VISIBLE);
-				item.btn_l.setText("确认发货");
+				item.btn_l.setText(" 确认发货 ");
 				item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 				item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 			}else{
@@ -168,10 +169,10 @@ import com.xunbo.store.tools.Util;
 		}else if(type == 3){
 			item.btn_l.setVisibility(View.VISIBLE);
 			item.btn_r.setVisibility(View.VISIBLE);
-			item.btn_r.setText("申请退款");
+			item.btn_r.setText(" 申请退款 ");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
-			item.btn_l.setText("确认收货");
+			item.btn_l.setText(" 确认收货 ");
 			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 		}else if(type == 4){
@@ -179,7 +180,7 @@ import com.xunbo.store.tools.Util;
 			if(isc==0){
 				item.btn_l.setVisibility(View.GONE);
 				item.btn_r.setVisibility(View.VISIBLE);
-				item.btn_r.setText("评价订单");
+				item.btn_r.setText(" 评价订单 ");
 				item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 				item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
 			}else{

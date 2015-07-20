@@ -1,76 +1,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/base_hui"
     android:gravity="center_vertical"
-    android:padding="10dp"
-    android:orientation="horizontal" >
-    <ImageView 
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <ImageView
         android:id="@+id/myorder_two_lv_item_iv"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:scaleType="fitXY"
-       	android:background="@drawable/default_bg"
-        />
-    <TextView 
-        android:id="@+id/myorder_two_lv_item_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="@string/test"
-        android:ems="8"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:layout_marginLeft="5dp"
-        />
-     <TextView 
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/default_bg"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        />
-    <LinearLayout 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:gravity="center|right"
-        android:orientation="vertical"
-        >
-        <LinearLayout 
+        android:padding="5dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/myorder_two_lv_item_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/test"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            >
-             <TextView 
-        android:id="@+id/myorder_two_lv_item_tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="@string/test"
-        />
-              <TextView 
-                 android:id="@+id/myorder_two_lv_item_tv_unit" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:layout_marginLeft="3dp"
-        android:text="@string/product_detaile_dw_danjia"
-        />
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="单价："
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/myorder_two_lv_item_tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test"
+                    android:textColor="@color/orn" />
+
+                <TextView
+                    android:id="@+id/myorder_two_lv_item_tv_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="@string/product_detaile_dw_danjia"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/myorder_two_lv_item_tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/test"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单编号："
+                    android:textColor="@color/home_hui"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/myorder_two_lv_item_tv_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/home_hui"
+                    android:textSize="16dp" />
+            </LinearLayout>
         </LinearLayout>
-         <TextView 
-        android:id="@+id/myorder_two_lv_item_tv_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"
-        android:text="@string/test"
-        />
     </LinearLayout>
-    <ImageView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/mycenter_right"
-        android:layout_marginRight="5dp"
-        />
-     
+
 </LinearLayout>

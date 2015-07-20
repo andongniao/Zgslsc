@@ -3,67 +3,154 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:background="@color/base_hui"
+        android:orientation="horizontal" >
+        
+        
+         <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp" >
 
-        <ExpandableListView
-            android:id="@+id/lv"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="#dcdcdc"
-            android:cacheColorHint="#00000000"
-            android:divider="@color/base_hui"
-            android:dividerHeight="0.1dp"
-            android:fadingEdge="none"
-            android:listSelector="#00000000"
-            android:scrollbars="none" >
-        </ExpandableListView>
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+
+            <TextView
+                android:id="@+id/search_home_sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/search_down"
+                android:gravity="center"
+              	android:text="产品"
+                android:padding="2dp"
+                android:visibility="gone"
+                android:textColor="@color/fame_hui3" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_ic" 
+                android:visibility="gone"
+                android:layout_marginLeft="2dp"/>
+
+            <EditText
+                android:id="@+id/cat_home_et_inpu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/search_inpu"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:focusable="false"
+                android:textColor="@color/fame_hui3" />
+
+          <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_ic" 
+                android:layout_marginRight="5dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/search_home_btn_seatch"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+           android:layout_marginLeft="5dp"
+            android:background="@drawable/search_lv_isnull_btn_bg"
+            android:gravity="center"
+            android:padding="4dp"
+            android:visibility="gone"
+            android:text="@string/search_title"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
+        
+        
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="3"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="5dp" >
-
-        <GridView
-            android:id="@+id/cat_home_gv"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:cacheColorHint="#00000000"
-            android:fadingEdge="none"
-            android:horizontalSpacing="5dp"
-            android:listSelector="#00000000"
-            android:numColumns="2"
-            android:scrollbars="none"
-            android:visibility="gone"
-            android:verticalSpacing="5dp" >
-        </GridView>
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
 
         <LinearLayout
-            android:id="@+id/cat_home_ll_isnull"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" 
-            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ExpandableListView
+                android:id="@+id/lv"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#dcdcdc"
+                android:cacheColorHint="#00000000"
+                android:divider="@color/base_hui"
+                android:dividerHeight="0.1dp"
+                android:fadingEdge="none"
+                android:listSelector="#00000000"
+                android:scrollbars="none" >
+            </ExpandableListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
             android:background="@color/white"
-            android:visibility="invisible"
             android:orientation="vertical"
-            >
-            <ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/cat_isnull_bg"
-                />
+            android:padding="5dp" >
+
+            <GridView
+                android:id="@+id/cat_home_gv"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:cacheColorHint="#00000000"
+                android:fadingEdge="none"
+                android:horizontalSpacing="5dp"
+                android:listSelector="#00000000"
+                android:numColumns="2"
+                android:scrollbars="none"
+                android:verticalSpacing="5dp"
+                android:visibility="gone" >
+            </GridView>
+
+            <LinearLayout
+                android:id="@+id/cat_home_ll_isnull"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/cat_isnull_bg" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

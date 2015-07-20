@@ -29,6 +29,8 @@ import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
+import com.baidu.autoupdatesdk.BDAutoUpdateSDK;
+import com.baidu.autoupdatesdk.UICheckUpdateCallback;
 import com.example.educonsult.R;
 import com.example.educonsult.activitys.GqTwoActivity;
 import com.example.educonsult.activitys.ProductDetaileActivity;
@@ -74,14 +76,6 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 	private PopupWindow popupWindow;
 	private View v;
 	private long exitTime = 0;
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		view = inflater.inflate(R.layout.home_layout, container, false);
-//		init();
-//		addlistener();
-//		return view;
-//	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -89,7 +83,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		setContentView(R.layout.home_layout);
 		init();
 		addlistener();
-		
+
 	}
 
 
@@ -179,20 +173,23 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 					refreshableView.finishRefresh();
 					homeInfoBean = (HomeInfoBean) m.obj;
 					if(homeInfoBean!=null){
-					initData(homeInfoBean);
+						initData(homeInfoBean);
 					}
 				}else{
 					refreshableView.finishRefresh();
+					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}
 		};
-		
+
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
 		}else{
 			Util.ShowToast(context, R.string.net_is_eor);
 		}
-		
+
+
+
 	}
 
 	private void addlistener() {
@@ -205,7 +202,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 						if(sc.getScrollY()>100){
 							popupWindow.showAtLocation(gv_yuanliao, Gravity.BOTTOM,w/2-20, 120);
 							isshow = true;
-//							ispopu=true;
+							//							ispopu=true;
 						}
 					}else{
 						if(sc.getScrollY()<=100){
@@ -251,15 +248,15 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 				}
 			}
 		});
-//		gv_qita.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+		//		gv_qita.setOnItemClickListener(new OnItemClickListener() {
+		//
+		//			@Override
+		//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		//					long arg3) {
+		//				// TODO Auto-generated method stub
+		//				
+		//			}
+		//		});
 		gv_qxyz.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -267,7 +264,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 					long arg3) {
 				// TODO Auto-generated method stub
 				if(qxyz.get(arg2)!=null){
-					
+
 					Toproduct(qxyz.get(arg2));
 				}
 			}
@@ -279,7 +276,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 					long arg3) {
 				// TODO Auto-generated method stub
 				if(shouyao.get(arg2)!=null){
-					
+
 					Toproduct(shouyao.get(arg2));
 				}
 			}
@@ -290,13 +287,13 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-					if(tianjiaji.get(arg2)!=null){
-						
-						Toproduct(tianjiaji.get(arg2));
-					}
+				if(tianjiaji.get(arg2)!=null){
+
+					Toproduct(tianjiaji.get(arg2));
+				}
 			}
 		});
-		
+
 		gv_yuanliao.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -304,7 +301,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 					long arg3) {
 				// TODO Auto-generated method stub
 				if(yuanliao.get(arg2)!=null){
-					
+
 					Toproduct(yuanliao.get(arg2));
 				}
 			}
@@ -316,26 +313,19 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 					long arg3) {
 				// TODO Auto-generated method stub
 				if(yzsb.get(arg2)!=null){
-					
+
 					Toproduct(yzsb.get(arg2));
 				}	
 			}
 		});
 	}
 
-//	@Override
-//	public void onActivityCreated(Bundle savedInstanceState) {
-//		super.onActivityCreated(savedInstanceState);
-//	}
 
 	@Override
 	public void onClick(View v) {
 		if(isdata){
 			switch (v.getId()) {
 			case R.id.home_layout_iv_cat:
-				//			msg = HomePagerActivity.handler.obtainMessage();
-				//			msg.obj = HomePagerActivity.SlidTag;
-				//			HomePagerActivity.handler.sendMessage(msg);
 				break;
 			case R.id.home_layout_ll_more_chuqinyangzhi:
 
@@ -356,25 +346,25 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 				break;
 			case R.id.home_layout_iv_rem_top_lf:
 				if(recommend.get(0)!=null){
-					
+
 					Toproduct(recommend.get(0));
 				}
 				break;
 			case R.id.home_layout_iv_rem_right__t:
 				if(recommend.get(1)!=null){
-					
+
 					Toproduct(recommend.get(1));
 				}
 				break;
 			case R.id.home_layout_iv_rem_right_b:
 				if(recommend.get(2)!=null){
-					
+
 					Toproduct(recommend.get(2));
 				}
 				break;
 			case R.id.home_layout_ll_rem_b_1:
 				if(recommend.get(3)!=null){
-					
+
 					Toproduct(recommend.get(3));
 				}
 				break;
@@ -397,25 +387,25 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 			}
 		}
 	}
- private void ToSearch(String text){
-	 SearchResultActivity.isproductfinish=false;
-	 intent=new Intent(context, SearchResultActivity.class);
+	private void ToSearch(String text){
+		SearchResultActivity.isproductfinish=false;
+		intent=new Intent(context, SearchResultActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtype", "1");
 		intent.putExtra("searchorder", "0");
 		intent.putExtra("searchtext", text);
 		startActivity(intent);
- }
- private void ToGqTwo(String text){
-	 intent=new Intent(context, GqTwoActivity.class);
+	}
+	private void ToGqTwo(String text){
+		intent=new Intent(context, GqTwoActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.putExtra("searchtext", text);
 		intent.putExtra("num", 0);
 		startActivity(intent);
- }
+	}
 
 	private void Toproduct(ProductBean productBean){
-//		popupWindow.dismiss();
+		//		popupWindow.dismiss();
 		intent = new Intent(context,ProductDetaileActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		//intent.putExtra("productdetaile", value);
@@ -425,26 +415,26 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		startActivity(intent);
 	}
 
-@Override
-protected void onPause() {
-	// TODO Auto-generated method stub
-	super.onPause();
-	if(isshow){
-		
-		popupWindow.dismiss();
-	}
-}
-@Override
-protected void onResume() {
-	// TODO Auto-generated method stub
-	super.onResume();
-	
-	if(isshow){
-		popupWindow.showAtLocation(gv_yuanliao, Gravity.BOTTOM,w/2-20, 120);
-	}
-}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		if(isshow){
 
-	
+			popupWindow.dismiss();
+		}
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+
+		if(isshow){
+			popupWindow.showAtLocation(gv_yuanliao, Gravity.BOTTOM,w/2-20, 120);
+		}
+	}
+
+
 
 	private void SetPrice(TextView v ,String s){
 		v.setText("￥"+s);
@@ -462,8 +452,8 @@ protected void onResume() {
 					homeInfoBean = send.getHomeInfo();
 					Message m = handler.obtainMessage();
 					if(homeInfoBean!=null){
-					m.obj = homeInfoBean;
-					m.what=1;
+						m.obj = homeInfoBean;
+						m.what=1;
 					}else{
 						m.what=2;
 					}
@@ -480,11 +470,11 @@ protected void onResume() {
 			}, 500);
 		}
 	}
-	
+
 	public class RefeshData implements ThreadWithProgressDialogTask {
-        public RefeshData(){
-        	
-        }
+		public RefeshData(){
+
+		}
 		@Override
 		public boolean TaskMain() {
 			// TODO Auto-generated method stub
@@ -504,8 +494,8 @@ protected void onResume() {
 			// TODO Auto-generated method stub
 			if(homeInfoBean!=null){
 				if("200".equals(homeInfoBean.getCode())){
-					
 					initData(homeInfoBean);
+					BDAutoUpdateSDK.uiUpdateAction(context, new MyUICheckUpdateCallback());
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
@@ -514,7 +504,14 @@ protected void onResume() {
 			}
 			return true;
 		}
-		
+
+	}
+	private class MyUICheckUpdateCallback implements UICheckUpdateCallback {
+
+		@Override
+		public void onCheckComplete() {
+		}
+
 	}
 	private void initData(HomeInfoBean homeInfoBean){
 		isdata=true;
@@ -523,7 +520,7 @@ protected void onResume() {
 		ad=homeInfoBean.getAd();
 		if(ad!=null){
 			if(ad.size()>0){
-				
+
 				Util.Getbitmap(ima_top, ad.get(0));
 				Util.Getbitmap(ima_centent1, ad.get(1));
 				Util.Getbitmap(ima_centent2, ad.get(2));
@@ -567,19 +564,19 @@ protected void onResume() {
 					Util.Getbitmap(ima_rem4, recommend.get(6).getThumb());
 				}
 				if(Util.IsNull(recommend.get(3).getSubtitle())){
-//					tv_detaile1.setVisibility(View.VISIBLE);
+					//					tv_detaile1.setVisibility(View.VISIBLE);
 					tv_detaile1.setText(recommend.get(3).getSubtitle());
 				}
 				if(Util.IsNull(recommend.get(4).getSubtitle())){
-//					tv_detaile2.setVisibility(View.VISIBLE);
+					//					tv_detaile2.setVisibility(View.VISIBLE);
 					tv_detaile2.setText(recommend.get(4).getSubtitle());
 				}
 				if(Util.IsNull(recommend.get(5).getSubtitle())){
-//					tv_detaile3.setVisibility(View.VISIBLE);
+					//					tv_detaile3.setVisibility(View.VISIBLE);
 					tv_detaile3.setText(recommend.get(5).getSubtitle());
 				}
 				if(Util.IsNull(recommend.get(6).getSubtitle())){
-//					tv_detaile4.setVisibility(View.VISIBLE);
+					//					tv_detaile4.setVisibility(View.VISIBLE);
 					tv_detaile4.setText(recommend.get(6).getSubtitle());
 				}
 				tv_title1.setText(recommend.get(3).getTitle());
@@ -588,10 +585,10 @@ protected void onResume() {
 				tv_title4.setText(recommend.get(6).getTitle());
 			}
 		}
-		
+
 		if(cat!=null){
 			if(cat.size()>0){
-				
+
 				for(int i=0;i<cat.size();i++){
 					if("饲料".equals(cat.get(i).getName())){
 						if(siliaoAdapter!=null){
@@ -651,11 +648,11 @@ protected void onResume() {
 				}
 			}
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

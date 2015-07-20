@@ -971,7 +971,7 @@ public class Util {
 						//						bmp = ApiClient.getNetBitmap(imgURL);
 						if (bmp != null) {
 							try {
-								// Ð´Í¼Æ¬»º´æ
+								// Ð´Í¼Æ¬»º´æ 
 								ImageUtils.saveImage(context,
 										filename, bmp);
 							} catch (IOException e) {

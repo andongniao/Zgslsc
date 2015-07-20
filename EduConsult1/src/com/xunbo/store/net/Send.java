@@ -542,18 +542,21 @@ public class Send {
 					}
 					int index = Integer.parseInt(c0.getNumn())+Integer.parseInt(c1.getNumn())+
 							Integer.parseInt(c2.getNumn());
-					for(int i=0;i<index;i++){
-						if(data!=null&&!"[]".equals(data.toString())){
-							JSONObject j = data.getJSONObject(i);
-							Type t = new TypeToken<CommentBean>() {
-							}.getType();
-							CommentBean cb = gson.fromJson(j.toString(), t);
-							if(cb!=null){
-								listcomm.add(cb);
-							}
-						}
-
-					}
+//					for(int i=0;i<index;i++){
+//						if(data!=null&&!"[]".equals(data.toString())){
+//							JSONObject j = data.getJSONObject(i);
+//							Type t = new TypeToken<CommentBean>() {
+//							}.getType();
+//							CommentBean cb = gson.fromJson(j.toString(), t);
+//							if(cb!=null){
+//								listcomm.add(cb);
+//							}
+//						}
+//
+//					}
+					Type t = new TypeToken<ArrayList<CommentBean>>() {
+					}.getType();
+					listcomm = gson.fromJson(data.toString(), t);
 					bean.setComlist(listcomm);
 					bean.setComstar(liststar);
 					return bean;

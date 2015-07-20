@@ -83,7 +83,7 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 
 		tv_break=(TextView)findViewById(R.id.applyerfund_break);
 		tv_break.setOnClickListener(this);
-		tv_ok=(TextView)findViewById(R.id.applyerfund_ok);
+		tv_ok=(TextView)findViewById(R.id.applyerfund_tv_shenqing);
 		tv_ok.setOnClickListener(this);
 		ed=(EditText)findViewById(R.id.applyerfund_whyedt);
 		listview=(MyListview)findViewById(R.id.applyrefund_list);
@@ -91,36 +91,13 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 		tv_yunfei=(TextView)findViewById(R.id.applyerfund_yunfeimoney);
 //		tv_yunfei.setText("（含运费￥"+""+"）");
 	}
-	public void startor(List<org.osgi.framework.Bundle> list){
-		org.osgi.framework.Bundle bundle=list.get(1);
-		if(bundle.getState()!=bundle.ACTIVE){
-			//判断插件是否已启动
-			try {
-				bundle.start();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if(bundle.getBundleActivity()!=null){
-			//			Toast.makeText(context, "启动"+bundle.getBundleActivity().split(",")[0],
-			//				     Toast.LENGTH_SHORT).show();
-			Intent i=new Intent();
-			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(i);
-		}else{
-			Toast.makeText(context, "该插件没有配置BundleActivity",
-					Toast.LENGTH_SHORT).show();
-		}
-	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.applyerfund_break:
 			finish();
 			break;
-		case R.id.applyerfund_ok:
+		case R.id.applyerfund_tv_shenqing:
 			content = ed.getText().toString().trim();
 			if(Util.IsNull(content)){
 				initdata = false;

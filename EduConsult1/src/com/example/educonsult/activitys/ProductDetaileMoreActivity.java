@@ -54,7 +54,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		//		topRightLVisible();
 		//		topRightRVisible();
 		topRightTGone();
-		setTopLeftTv(R.string.product_detaile_more_title);
+		setTitleTxt(R.string.product_detaile_more_title);
 		setContentXml(R.layout.product_detail_more);
 		context=this;
 		init();

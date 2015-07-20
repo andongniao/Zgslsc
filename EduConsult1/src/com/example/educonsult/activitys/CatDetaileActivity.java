@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -25,7 +27,7 @@ import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.Util;
 
-public class CatDetaileActivity extends BaseActivity {
+public class CatDetaileActivity extends BaseActivity implements OnClickListener{
 	private ExpandableListView lv;
 	private CatHomelvAdapter adapter;
 	private Context context;
@@ -49,11 +51,6 @@ public class CatDetaileActivity extends BaseActivity {
 		setContentXml(R.layout.cat_home);
 		
 		init();
-//		if(Util.detect(context)){
-//			myPDT.Run(context, new RefeshData(),R.string.loding);//¿ÉÈ¡Ïû
-//		}else{
-//			Util.ShowToast(context, R.string.net_is_eor);
-//		}
 	}
 
 	private void init() {
@@ -72,6 +69,7 @@ public class CatDetaileActivity extends BaseActivity {
 				}
 			}
 		};
+		findViewById(R.id.cat_home_et_inpu).setOnClickListener(this);
 		bean = (ListFenleiBean) u.readObject(MyApplication.mp.FenleiName);
 		ll_isnull = (LinearLayout) findViewById(R.id.cat_home_ll_isnull);
 		gv = (GridView) findViewById(R.id.cat_home_gv);
@@ -163,6 +161,20 @@ public class CatDetaileActivity extends BaseActivity {
 			return true;   
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.cat_home_et_inpu:
+			intent = new Intent(context,SearchHomeActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			context.startActivity(intent);
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }

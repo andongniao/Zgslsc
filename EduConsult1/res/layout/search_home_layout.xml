@@ -3,9 +3,8 @@
     android:layout_height="wrap_content"
     android:background="@color/base_hui"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    >
-    
+    android:orientation="vertical" >
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -23,32 +22,20 @@
             android:orientation="horizontal"
             android:padding="5dp" >
 
-            <!--
-             <Spinner
-            android:id="@+id/search_home_sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/search_tubiao"
-            android:paddingRight="10dp"
-            android:entries="@array/search_home_list" />
-            -->
-
             <TextView
                 android:id="@+id/search_home_sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/search_down"
                 android:gravity="center"
-              
                 android:padding="2dp"
                 android:textColor="@color/fame_hui3" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/search_ic" 
-                android:layout_marginLeft="2dp"/>
+                android:layout_marginLeft="2dp"
+                android:background="@drawable/search_ic" />
 
             <EditText
                 android:id="@+id/search_home_et_inpu"
@@ -59,8 +46,8 @@
                 android:gravity="center_vertical"
                 android:hint="@string/search_inpu"
                 android:singleLine="true"
-                android:textSize="14dp"
-                android:textColor="@color/fame_hui3" />
+                android:textColor="@color/fame_hui3"
+                android:textSize="14dp" />
 
             <Button
                 android:id="@+id/search_home_button_clear"
@@ -73,7 +60,7 @@
             android:id="@+id/search_home_btn_seatch"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-           android:layout_marginLeft="5dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/search_lv_isnull_btn_bg"
             android:gravity="center"
             android:padding="4dp"
@@ -82,211 +69,213 @@
             android:textSize="16dp" />
     </LinearLayout>
 
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/search_home_ll_isyes"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="5dp"
-        >
-        <TextView 
+        android:padding="5dp" >
+
+        <TextView
             android:id="@+id/search_home_tv_history"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="@string/search_history"
-            android:textColor="@color/fame_hui2"
-            />
-        <ImageView android:layout_width="fill_parent"
+            android:textColor="@color/fame_hui2" />
+
+        <ImageView
+            android:layout_width="fill_parent"
             android:layout_height="0.5dp"
-            android:background="@color/fame_hui3"/>
-        <ListView 
+            android:background="@color/fame_hui3" />
+
+        <ListView
             android:id="@+id/search_home_lv"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:scrollbars="none"
-          android:layout_marginTop="5dp"
-            android:listSelector="#00000000"
             android:divider="@color/fenge_hui"
             android:dividerHeight="2dp"
             android:fadingEdge="none"
-            ></ListView>
-		<Button 
-		    android:id="@+id/search_home_btn_clean"
-		    android:layout_marginTop="30dp"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_gravity="center"
-		    android:padding="5dp"
-		    android:textColor="@color/white"
-		    android:background="@drawable/search_lv_isnull_btn_bg"
-		    android:text="@string/search_clean"
-		    />        
+            android:listSelector="#00000000"
+            android:scrollbars="none" >
+        </ListView>
+
+        <Button
+            android:id="@+id/search_home_btn_clean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/search_lv_isnull_btn_bg"
+            android:padding="5dp"
+            android:text="@string/search_clean"
+            android:textColor="@color/white" />
     </LinearLayout>
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/search_home_ll_list_is_null"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
-        android:visibility="gone"
-        >
-        <ImageView 
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:background="@drawable/search_result_isnull"
-            />
-        <TextView 
+            android:background="@drawable/search_result_isnull" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="@string/search_history_is_null"
             android:textColor="@color/black"
-            android:layout_marginTop="15dp"
-            android:textSize="15dp"
-            />
+            android:textSize="15dp" />
     </LinearLayout>
-    <LinearLayout 
+
+    <LinearLayout
         android:id="@+id/search_home_ll_reasult"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:visibility="gone">
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+        android:visibility="gone" >
 
         <LinearLayout
-            android:id="@+id/search_home_ll_zonghe"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:id="@+id/search_home_ll_zonghe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_result_zonghe"
+                    android:textColor="@color/fame_hui3" />
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/fenge_hui2" />
+
+            <LinearLayout
+                android:id="@+id/search_home_ll_xiaoliang"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/search_result_zonghe"
-                android:textColor="@color/fame_hui3" />
-        </LinearLayout>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="@color/fenge_hui2" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_result_xiaoliang"
+                    android:textColor="@color/fame_hui3" />
 
-        <LinearLayout
-            android:id="@+id/search_home_ll_xiaoliang"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
+                <ImageView
+                    android:id="@+id/search_home_iv_xiaoliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/jiantou_down" />
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/fenge_hui2" />
+
+            <LinearLayout
+                android:id="@+id/search_home_ll_price"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/search_result_xiaoliang"
-                android:textColor="@color/fame_hui3" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
 
-            <ImageView
-                android:id="@+id/search_home_iv_xiaoliang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/jiantou_down" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_result_price"
+                    android:textColor="@color/fame_hui3" />
 
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="@color/fenge_hui2" />
-
-        <LinearLayout
-            android:id="@+id/search_home_ll_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
+                <ImageView
+                    android:id="@+id/search_home_iv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/jiantou_down" />
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_result_price"
-                android:textColor="@color/fame_hui3" />
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:background="@color/fenge_hui2" />
 
-            <ImageView
-                android:id="@+id/search_home_iv_price"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/search_home_ll_renqi"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/jiantou_down" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_result_renqi"
+                    android:textColor="@color/fame_hui3" />
+
+                <ImageView
+                    android:id="@+id/search_home_iv_renqi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/jiantou_down" />
+            </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="fill_parent"
-            android:background="@color/fenge_hui2" />
 
         <LinearLayout
-            android:id="@+id/search_home_ll_renqi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search_result_renqi"
-                android:textColor="@color/fame_hui3" />
-
-            <ImageView
-                android:id="@+id/search_home_iv_renqi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/jiantou_down" />
-        </LinearLayout>
-    </LinearLayout>
-     <LinearLayout
-        android:id="@+id/search_home_isyes"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal"
-        android:padding="10dp" >
-
-        <com.handmark.pulltorefresh.library.PullToRefreshGridView
-            xmlns:ptr="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/search_home_gv"
+            android:id="@+id/search_home_isyes"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:fadingEdge="none"
-            android:footerDividersEnabled="false"
-            android:gravity="center_horizontal"
-            android:headerDividersEnabled="false"
-            android:horizontalSpacing="10dp"
-            android:listSelector="#00000000"
-            android:numColumns="2"
-            android:scrollbars="none"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="10dp"
-            ptr:ptrAnimationStyle="flip"
-            ptr:ptrHeaderSubTextColor="@color/black"
-            ptr:ptrHeaderTextColor="@color/black"
-            ptr:ptrListViewExtrasEnabled="false"
-            ptr:ptrMode="both"
-            ptr:ptrScrollingWhileRefreshingEnabled="true"
-            
-            ptr:ptrShowIndicator="false" />
-    </LinearLayout>
-        
-        
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <com.handmark.pulltorefresh.library.PullToRefreshGridView
+                xmlns:ptr="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/search_home_gv"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fadingEdge="none"
+                android:footerDividersEnabled="false"
+                android:gravity="center_horizontal"
+                android:headerDividersEnabled="false"
+                android:horizontalSpacing="10dp"
+                android:listSelector="#00000000"
+                android:numColumns="2"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="10dp"
+                ptr:ptrAnimationStyle="flip"
+                ptr:ptrHeaderSubTextColor="@color/black"
+                ptr:ptrHeaderTextColor="@color/black"
+                ptr:ptrListViewExtrasEnabled="false"
+                ptr:ptrMode="both"
+                ptr:ptrScrollingWhileRefreshingEnabled="true"
+                ptr:ptrShowIndicator="false" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
