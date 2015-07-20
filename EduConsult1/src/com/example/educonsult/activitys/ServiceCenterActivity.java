@@ -338,10 +338,11 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 			@Override
 			public void onClick(DialogInterface dialog,
 					int which) {
+				String tel = context.getResources().getString(R.string.tel);
 					Intent phoneIntent = new Intent(
 							"android.intent.action.CALL",
 							Uri.parse("tel:"
-									+ "14730409666"));
+									+ tel));
 					startActivity(phoneIntent);
 //					Uri uri = Uri.parse("smsto:"
 //							+ MyApplication.smsnumber);

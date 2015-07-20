@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.apkplug.app.FrameworkInstance;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,7 +82,7 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 		ll_wayone.setOnClickListener(this);
 		ll_waytwo=(LinearLayout)findViewById(R.id.applyerfund_waytwo_lin);
 		ll_waytwo.setOnClickListener(this);
-
+		findViewById(R.id.applyerfund_tv_online).setOnClickListener(this);
 
 		tv_break=(TextView)findViewById(R.id.applyerfund_break);
 		tv_break.setOnClickListener(this);
@@ -122,18 +125,8 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 			wayone.setBackgroundResource(R.drawable.applyerfund_waytwo);
 
 			break;
-		case R.id.applyrefun_talk:
-			//			//已安装插件列表
-			//			bundles=new java.util.ArrayList<org.osgi.framework.Bundle>();
-			//			BundleContext context = frame.getSystemBundleContext();
-			//			for(int i=0;i<context.getBundles().length;i++)
-			//			{
-			//				//获取已安装插件
-			//				bundles.add(context.getBundles()[i]);        	        
-			//			}
-			//
-			//			//BundleContext context =frame.getSystemBundleContext();
-			//			startor(bundles);
+		case R.id.applyerfund_tv_online:
+			ShowDialog();
 			break;
 
 
@@ -232,5 +225,35 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 		MobclickAgent.onPageEnd( "ApplyerFundActivity" );
 		MobclickAgent.onPause(this);
 	}
+	private void ShowDialog() {
+		AlertDialog alertDialog;
+		String title = "";
+		title = "是否拨打电话?";
+		alertDialog = new AlertDialog.Builder(this)
+		.setTitle(title)
+		.setIcon(null)
+		.setPositiveButton("取消",
+				new DialogInterface.OnClickListener() {
 
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+			}
+		})
+		.setNegativeButton("确定",
+				new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog,
+					int which) {
+				String tel = context.getResources().getString(R.string.tel);
+				Intent phoneIntent = new Intent(
+						"android.intent.action.CALL",
+						Uri.parse("tel:"
+								+ tel));
+				startActivity(phoneIntent);
+			}
+		}).create();
+		alertDialog.show();
+	}
 }

@@ -5,6 +5,7 @@
     <string name="app_name">饲料商城</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="tel">14730409666</string>
     <!-- 提示 -->
     <string name="space">\u3000\u3000</string>
     <string name="loding">玩命加载中...</string>

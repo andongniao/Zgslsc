@@ -273,7 +273,7 @@ import com.xunbo.store.tools.Util;
 		tv_comment = (TextView) findViewById(R.id.myorder_home_tv_comment);
 		view_tv.add(tv_all);
 		view_tv.add(tv_pay);
-		view_tv.add(tv_send);
+//		view_tv.add(tv_send);
 		view_tv.add(tv_shouhuo);
 		view_tv.add(tv_comment);
 		

@@ -206,10 +206,11 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onClick(DialogInterface dialog,
 					int which) {
+				String tel = context.getResources().getString(R.string.tel);
 					Intent phoneIntent = new Intent(
 							"android.intent.action.CALL",
 							Uri.parse("tel:"
-									+ 86666666));
+									+ tel));
 					startActivity(phoneIntent);
 //					Uri uri = Uri.parse("smsto:"
 //							+ MyApplication.smsnumber);
