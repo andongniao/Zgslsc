@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -14,21 +13,30 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
+import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
+import com.xunbo.store.MyApplication;
 import com.xunbo.store.adapters.CouponsAdapter;
+import com.xunbo.store.beans.CouponBean;
+import com.xunbo.store.beans.ListCouponBean;
+import com.xunbo.store.net.Send;
+import com.xunbo.store.tools.Util;
 
 public class CouponsActivity extends BaseActivity {
 	private ListView list_coupons;
 	
 	private Context context;
-	private ArrayList<String> list;
+	private ArrayList<CouponBean> list;
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
 	private CouponsAdapter couponsAdapter;
 	private LinearLayout ll_isno;
+	private ThreadWithProgressDialog myPDT;
+	private ListCouponBean listCouponBean;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -47,6 +55,11 @@ public class CouponsActivity extends BaseActivity {
 		setContentXml(R.layout.coupons);
 		init();
 		//addlistener();
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+		}
 	}
 
 	private void addlistener() {
@@ -64,30 +77,9 @@ public class CouponsActivity extends BaseActivity {
 	}
 	void init(){
 		TestinAgent.init(this);
+		myPDT=new ThreadWithProgressDialog();
 		ll_isno=(LinearLayout)findViewById(R.id.coupons_ll_isnull);
 		list_coupons=(ListView)findViewById(R.id.coupons_list);
-		couponsAdapter=new CouponsAdapter(this);
-		list_coupons.setAdapter(couponsAdapter);
-		list=new ArrayList<String>();
-		list.add("1");
-		list.add("2");
-		list_coupons.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-			}
-		});
-		if(list!=null){
-			if(list.size()>0){
-				ll_isno.setVisibility(View.GONE);
-				list_coupons.setVisibility(View.VISIBLE);
-			}else{
-				ll_isno.setVisibility(View.VISIBLE);
-				list_coupons.setVisibility(View.GONE);
-			}
-		}
 		
 		
 		
@@ -106,6 +98,64 @@ public class CouponsActivity extends BaseActivity {
 		super.onResume();
 		MobclickAgent.onPageStart("CouponsActivity"); 
 		MobclickAgent.onResume(this);
+	}
+	public class RefeshData implements ThreadWithProgressDialogTask {
+		public RefeshData() {
+		}
+
+		@Override
+		public boolean OnTaskDismissed() {
+			//任务取消
+			//				Toast.makeText(context, "cancle", 1000).show();
+			return false; 
+		}
+
+		@Override
+		public boolean OnTaskDone() {
+			//任务完成后
+				if(listCouponBean!=null){
+					String code=listCouponBean.getCode();
+					String m=listCouponBean.getMsg();
+					if("200".equals(code)){
+						list=listCouponBean.getList();
+						if(list!=null){
+							if(list.size()>0){
+								ll_isno.setVisibility(View.GONE);
+								list_coupons.setVisibility(View.VISIBLE);
+								couponsAdapter=new CouponsAdapter(context,list);
+								list_coupons.setAdapter(couponsAdapter);
+							}else{
+								ll_isno.setVisibility(View.VISIBLE);
+								list_coupons.setVisibility(View.GONE);
+							}
+						}
+						
+						
+					}else if("300".equals(code)){
+						intent=new Intent(context,LoginActivity.class);
+						startActivity(intent);
+						finish();
+					}else{
+						Util.ShowToast(context, m);
+					}
+					
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+			
+			
+			return true;
+		}
+
+
+
+		@Override
+		public boolean TaskMain() {
+//			ListBanksBean getBanksList
+			Send s=new Send(context);
+			listCouponBean=s.getCouponlist(MyApplication.mp.getUser().getAuthstr());
+			return true;
+		}
 	}
 
 }
