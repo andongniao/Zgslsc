@@ -15,6 +15,14 @@ public class CouponBean implements Serializable{
 	private String rangecatid;
 	private String rangecatname;
 	private String expiretime;//时间格式2015-08-05
+	private int type;//1未使用2已过期
+	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public boolean isIsck() {
 		return isck;
 	}

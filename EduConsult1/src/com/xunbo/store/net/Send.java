@@ -205,10 +205,16 @@ public class Send {
 					Type type_re = new TypeToken<ArrayList<CouponBean>>() {
 					}.getType();
 					unused = gson.fromJson(rem.toString(), type_re);
+					for(int i=0;i<unused.size();i++){
+						unused.get(i).setType(1);
+					}
 					JSONArray catinfo = data.getJSONArray("expired");
 					Type type_hot = new TypeToken<ArrayList<CouponBean>>() {
 					}.getType();
 					expired = gson.fromJson(catinfo.toString(), type_hot);
+					for(int i=0;i<expired.size();i++){
+						expired.get(i).setType(2);
+					}
 				} 
 				unused.addAll(expired);
 				bean.setList(unused);
