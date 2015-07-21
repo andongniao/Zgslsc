@@ -21,6 +21,7 @@ import com.xunbo.store.beans.CenterUserBean;
 import com.xunbo.store.beans.CommentBean;
 import com.xunbo.store.beans.CommentStar;
 import com.xunbo.store.beans.CompanyBean;
+import com.xunbo.store.beans.CouponBean;
 import com.xunbo.store.beans.FenleiBean;
 import com.xunbo.store.beans.HomeBean;
 import com.xunbo.store.beans.HomeCatBean;
@@ -29,6 +30,7 @@ import com.xunbo.store.beans.ListAddressBean;
 import com.xunbo.store.beans.ListAreaBean;
 import com.xunbo.store.beans.ListComment;
 import com.xunbo.store.beans.ListCompanyBean;
+import com.xunbo.store.beans.ListCouponBean;
 import com.xunbo.store.beans.ListFenleiBean;
 import com.xunbo.store.beans.ListMoneyBean;
 import com.xunbo.store.beans.ListMoneytxBean;
@@ -175,6 +177,57 @@ public class Send {
 		}
 
 	}
+	
+	/**
+	 * 获取优惠券列表
+	 * @param authstr
+	 * @return
+	 */
+	public ListCouponBean getCouponlist(String authstr) {
+		ListCouponBean bean = new ListCouponBean();
+		ArrayList<CouponBean> unused = new ArrayList<CouponBean>();
+		ArrayList<CouponBean> expired = new ArrayList<CouponBean>();
+		String url = ServiceUrl.Base+"personal_center.php?action=coupon&authstr="+authstr;
+		String jsonStr = null;
+		jsonStr = GetHttp.sendGet(url);
+
+		if (jsonStr != null && !jsonStr.equals("")) {
+			JSONObject object = null;
+			try {
+				object = new JSONObject(jsonStr);
+				String code = object.getString("code");
+				String msg = object.getString("message");
+				bean.setCode(code);
+				bean.setMsg(msg);
+				if (code != null && "200".equals(code)) {
+					JSONObject data = object.getJSONObject("data");
+					JSONArray rem = data.getJSONArray("unused");
+					Type type_re = new TypeToken<ArrayList<CouponBean>>() {
+					}.getType();
+					unused = gson.fromJson(rem.toString(), type_re);
+					JSONArray catinfo = data.getJSONArray("expired");
+					Type type_hot = new TypeToken<ArrayList<CouponBean>>() {
+					}.getType();
+					expired = gson.fromJson(catinfo.toString(), type_hot);
+				} 
+				unused.addAll(expired);
+				bean.setList(unused);
+				return bean;
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+				bean.setCode("500");
+				bean.setMsg("服务器异常，请稍候再试...");
+				return bean;
+			}
+		} else {
+			bean.setCode("500");
+			bean.setMsg(context.getResources().getString(R.string.net_is_eor));
+			return bean;
+		}
+
+	}
+	
 	/**
 	 *  登录
 	 * @param username 	用户名
