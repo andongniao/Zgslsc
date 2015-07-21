@@ -81,11 +81,11 @@ import com.xunbo.store.tools.Util;
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setTitleTxt(R.string.myorder_title);
-//		topRightRVisible();
+		//		topRightRVisible();
 		topRightTGone();
-//		rl_r = (RelativeLayout) getTopRightRl();
-//		iv_top_r = (ImageView) getTopRightView();
-//		iv_top_r.setBackgroundResource(R.drawable.top_home_bg);
+		//		rl_r = (RelativeLayout) getTopRightRl();
+		//		iv_top_r = (ImageView) getTopRightView();
+		//		iv_top_r.setBackgroundResource(R.drawable.top_home_bg);
 		setContentXml(R.layout.myorder_home_layout);
 		init();
 		addlistener();
@@ -94,13 +94,13 @@ import com.xunbo.store.tools.Util;
 	}
 
 	private void addlistener() {
-//		iv_top_r.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				ExampleActivity.setCurrentTab(0);
-//				finish();
-//			}
-//		});
+		//		iv_top_r.setOnClickListener(new OnClickListener() {
+		//			@Override
+		//			public void onClick(View v) {
+		//				ExampleActivity.setCurrentTab(0);
+		//				finish();
+		//			}
+		//		});
 	}
 
 	@SuppressWarnings("deprecation")
@@ -249,7 +249,7 @@ import com.xunbo.store.tools.Util;
 		ll_isnull = (LinearLayout) findViewById(R.id.myorder_home_ll_isnull);
 		tv_isnull = (TextView) findViewById(R.id.myorder_home_tv_isnull);
 		tv_isnull.setOnClickListener(this);
-		
+
 		lv = (XListView) findViewById(R.id.myorder_home_lv);
 		lv.setPullRefreshEnable(true);
 		lv.setPullLoadEnable(true);
@@ -273,10 +273,10 @@ import com.xunbo.store.tools.Util;
 		tv_comment = (TextView) findViewById(R.id.myorder_home_tv_comment);
 		view_tv.add(tv_all);
 		view_tv.add(tv_pay);
-//		view_tv.add(tv_send);
+		//		view_tv.add(tv_send);
 		view_tv.add(tv_shouhuo);
 		view_tv.add(tv_comment);
-		
+
 		tv_show_all = (TextView) findViewById(R.id.myorder_home_tv_all_show);
 		tv_show_pay = (TextView) findViewById(R.id.myorder_home_tv_pay_show);
 		tv_show_comment = (TextView) findViewById(R.id.myorder_home_tv_comment_show);
@@ -299,7 +299,7 @@ import com.xunbo.store.tools.Util;
 		view_list.add(tv_show_comment);
 		v_pop = LayoutInflater.from(context).inflate(R.layout.money_password, null);
 		popwindow = new PopupWindow(v_pop, dm.widthPixels-UITools.dip2px(context, 30), LayoutParams.WRAP_CONTENT);
-//		popwindow = new PopupWindow(v_pop, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		//		popwindow = new PopupWindow(v_pop, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		popwindow.setOutsideTouchable(true);
 		popwindow.setFocusable(true);
 		popwindow.setBackgroundDrawable(new BitmapDrawable());
@@ -547,9 +547,9 @@ import com.xunbo.store.tools.Util;
 							}else{
 								Util.ShowToast(context, paybean.getMsg());
 								//跳转充值
-																intent = new Intent(context,RechargeActivity.class);
-																intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-																startActivity(intent);
+								intent = new Intent(context,RechargeActivity.class);
+								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								startActivity(intent);
 							}
 						}else if("300".equals(paybean.getCode())){
 							MyApplication.mp.setlogin(false);
@@ -584,7 +584,7 @@ import com.xunbo.store.tools.Util;
 				}
 				init = true;
 				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData(init,pag,tag),initdataing,false);//可取消
+					myPDT.Run(context, new RefeshData(init,pag,tag),initdataing);//可取消
 				}else{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
