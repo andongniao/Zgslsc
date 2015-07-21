@@ -85,7 +85,7 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 			myitem.qxsc=(TextView)convertView.findViewById(R.id.scstore_itme_qxsc);
 			myitem.computername = (TextView) convertView.findViewById(R.id.scstore_itme_computername);
 			myitem.talk=(TextView)convertView.findViewById(R.id.scstore_itme_talk);
-			myitem.bond.setVisibility(View.GONE);
+//			myitem.bond.setVisibility(View.GONE);
 			convertView.setTag(myitem);
 		}else{
 			myitem = (Myitem) convertView.getTag();
@@ -98,11 +98,17 @@ public class SCStoreAdapter extends BaseAdapter implements OnClickListener{
 		}else{
 			myitem.vip.setVisibility(View.GONE);
 		}
-		if("1".equals(list.get(position).getValidated())||"1".equals(list.get(position).getBond())){
-			myitem.validated.setBackgroundResource(R.drawable.sczizhi);
+		if("1".equals(list.get(position).getValidated())){
+			myitem.validated.setBackgroundResource(R.drawable.product_zizhi_t);
 		}else{
 			myitem.validated.setVisibility(View.GONE);
 		}
+		if("1".equals(list.get(position).getBond())){
+			myitem.bond.setBackgroundResource(R.drawable.product_zizhi_r);
+		}else{
+			myitem.bond.setVisibility(View.GONE);
+		}
+		
 //		if("1".equals(list.get(position).getBond())){
 //			myitem.bond.setBackgroundResource(R.drawable.sczizhi);
 //		}else{
