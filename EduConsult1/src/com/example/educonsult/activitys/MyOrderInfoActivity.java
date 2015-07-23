@@ -33,7 +33,7 @@ import com.xunbo.store.tools.Util;
 public class MyOrderInfoActivity extends BaseActivity implements
 OnClickListener {
 	private TextView tv_yunfeimoney,tv_ordermoney,tv_uname,tv_uphone,
-	tv_uaddress,tv_cname,tv_yunfei,tv_rmoney,tv_oid,tv_otime,tv_no,tv_ok;
+	tv_uaddress,tv_cname,tv_yunfei,tv_rmoney,tv_oid,tv_otime,tv_no,tv_ok,tv_title;
 	private MyListview listview;
 	private MyOrderInfoAdapter myOrderInfoAdapter;
 	private ArrayList<Integer> list;
@@ -43,7 +43,7 @@ OnClickListener {
 	private int statusid;
 	private LinearLayout ll_isshow;
 	private boolean initdata;
-	private String authstr,coupon,password;
+	private String authstr,coupon,password,title;
 	private OrderDetaileBean ordebean;
 	private int tp;
 	private PopupWindow popwindow;
@@ -68,14 +68,17 @@ OnClickListener {
 		context = this;
 		initdata = true;
 		authstr = MyApplication.mp.getUser().getAuthstr();
+		title = getIntent().getStringExtra("title");
 		itemid = getIntent().getStringExtra("itemid");
 		coupon = getIntent().getStringExtra("coupon");
 		statusid = Integer.parseInt(getIntent().getStringExtra("statusid"));
 		myPDT = new ThreadWithProgressDialog();
+		tv_title = (TextView) findViewById(R.id.myorderinfo_title);
+		tv_title.setText(title);
 		tv_yunfeimoney=(TextView)findViewById(R.id.myorderinfo_yunfeimoney);
 		tv_yunfeimoney.setText("运费金额：￥");
 		tv_ordermoney=(TextView)findViewById(R.id.myorderinfo_ordermoney);
-		tv_ordermoney.setText("订单金额：+￥");
+		tv_ordermoney.setText("订单金额：￥");
 		tv_uname=(TextView)findViewById(R.id.myorderinfo_username);
 		tv_uphone=(TextView)findViewById(R.id.myorderinfo_userphone);
 		tv_uaddress=(TextView)findViewById(R.id.myorderinfo_useraddress);
@@ -176,7 +179,7 @@ OnClickListener {
 					if(ordebean!=null){
 						if("200".equals(ordebean.getCode())){
 							tv_yunfeimoney.setText("运费金额：￥"+ordebean.getFee());
-							tv_ordermoney.setText("订单金额：+￥"+ordebean.getMoney());
+							tv_ordermoney.setText("订单金额：￥"+ordebean.getMoney());
 							tv_uname.setText(ordebean.getBuyer_name());
 							tv_uaddress.setText(ordebean.getBuyer_address());
 							tv_uphone.setText(ordebean.getBuyer_mobile());

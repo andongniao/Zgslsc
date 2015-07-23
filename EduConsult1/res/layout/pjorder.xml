@@ -24,7 +24,7 @@
                 android:id="@+id/pjorder_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/check_bg"
+                android:background="@drawable/check_ed"
                 />
             <TextView 
                 android:layout_width="wrap_content"

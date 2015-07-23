@@ -938,9 +938,9 @@ public class Util {
 			public void run() {
 				Message msg = handler.obtainMessage();
 				Bitmap bmp = null;
-				if (!StringUtils.isEmpty(url)) {
-					bmp = BitmapFactory.decodeFile(url);
-				}
+//				if (!StringUtils.isEmpty(url)) {
+//					bmp = BitmapFactory.decodeFile(url);
+//				}
 				String filename = FileUtils.getFileName(url);
 				try {
 					// ∂¡»°±æµÿÕº∆¨

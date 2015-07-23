@@ -235,6 +235,7 @@ import com.xunbo.store.tools.Util;
 				}else{
 					intent = new Intent(context,MyOrderInfoActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.putExtra("title", orderBean.getStatus());
 					intent.putExtra("itemid", orderBean.getItemid());
 					intent.putExtra("statusid", orderBean.getStatusid());
 					intent.putExtra("coupon", orderBean.getCoupons());

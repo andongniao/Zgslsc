@@ -35,9 +35,10 @@
                     android:paddingLeft="10dp" >
 
                     <TextView
+                        android:id="@+id/myorderinfo_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/myorderinfo_tvdaifukuan"
+                        android:text="@string/test"
                         android:textColor="@color/white"
                         android:textSize="16dp" />
 
@@ -164,7 +165,7 @@
 
                 <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:background="@color/home_hui" />
 
                 <com.xunbo.store.myviews.MyListview
@@ -179,7 +180,7 @@
 
                 <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:background="@color/home_hui" />
 
                 <LinearLayout
@@ -214,7 +215,7 @@
 
                 <TextView
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:background="@color/home_hui" />
 
                 <LinearLayout
@@ -228,7 +229,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="@string/myorderinfo_tvrealmoney"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
@@ -254,7 +255,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="5dp" >
 
                 <TextView
                     android:id="@+id/myorderinfo_orderid"
@@ -301,6 +302,7 @@
             android:background="@drawable/regist_et_bg"
             android:gravity="center"
             android:padding="10dp"
+            android:textColor="@color/black"
             android:text="@string/myorderinfo_tvquxiqao"
             android:textSize="16dp" />
 
