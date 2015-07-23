@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
@@ -86,7 +87,9 @@ import com.xunbo.store.tools.Util;
 					convertView.findViewById(R.id.myorder_home_lv_item_btn_l);
 			item.btn_r = (Button) 
 					convertView.findViewById(R.id.myorder_home_lv_item_btn_r);
-
+			item.ll = (LinearLayout) 
+					convertView.findViewById(R.id.myorder_home_lv_item_ll_do);
+			
 			convertView.setTag(item);
 		}else{
 			item = (Item) convertView.getTag();
@@ -147,6 +150,7 @@ import com.xunbo.store.tools.Util;
 		if(type==1){
 			item.btn_l.setVisibility(View.VISIBLE);
 			item.btn_r.setVisibility(View.VISIBLE);
+			item.ll.setVisibility(View.VISIBLE);
 			item.btn_r.setText(" 立即付款 ");
 			item.btn_r.setTextColor(context.getResources().getColor(R.color.orn));
 			item.btn_r.setBackgroundResource(R.drawable.orn_bg_line);
@@ -154,6 +158,7 @@ import com.xunbo.store.tools.Util;
 			item.btn_l.setTextColor(context.getResources().getColor(R.color.black));
 			item.btn_l.setBackgroundResource(R.drawable.order_et_bg_line);
 		}else if(type == 2){
+			item.ll.setVisibility(View.GONE);
 			item.btn_l.setVisibility(View.GONE);
 			item.btn_r.setVisibility(View.GONE);
 			item.btn_r.setText(" 关闭交易 ");
@@ -161,12 +166,14 @@ import com.xunbo.store.tools.Util;
 			item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
 			if(MyApplication.mp.getUser().getType()==0){
 				//				item.btn_l.setVisibility(View.VISIBLE);
+//				item.ll.setVisibility(View.GONE);
 				item.btn_l.setText(" 确认发货 ");
 				item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 				item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 			}else{
 			}
 		}else if(type == 3){
+			item.ll.setVisibility(View.VISIBLE);
 			item.btn_l.setVisibility(View.VISIBLE);
 			item.btn_r.setVisibility(View.VISIBLE);
 			item.btn_r.setText(" 申请退款 ");
@@ -178,12 +185,14 @@ import com.xunbo.store.tools.Util;
 		}else if(type == 4){
 			int isc = o.getIscomment();
 			if(isc==0){
+				item.ll.setVisibility(View.VISIBLE);
 				item.btn_l.setVisibility(View.GONE);
 				item.btn_r.setVisibility(View.VISIBLE);
 				item.btn_r.setText(" 评价订单 ");
 				item.btn_r.setTextColor(context.getResources().getColor(R.color.black));
 				item.btn_r.setBackgroundResource(R.drawable.order_et_bg_line);
 			}else{
+				item.ll.setVisibility(View.GONE);
 				item.btn_l.setVisibility(View.GONE);
 				item.btn_r.setVisibility(View.GONE);
 			}
@@ -191,6 +200,7 @@ import com.xunbo.store.tools.Util;
 			//			item.btn_l.setTextColor(context.getResources().getColor(R.color.white));
 			//			item.btn_l.setBackgroundResource(R.drawable.search_lv_isnull_btn_bg);
 		}else{
+			item.ll.setVisibility(View.GONE);
 			item.btn_l.setVisibility(View.GONE);
 			item.btn_r.setVisibility(View.GONE);
 		}
@@ -202,6 +212,7 @@ import com.xunbo.store.tools.Util;
 		TextView tv_title,tv_time,tv_statu,tv_shifu,tv_num,tv_day;
 		MyListview lv;
 		Button btn_l,btn_r;
+		LinearLayout ll;
 	}
 
 }

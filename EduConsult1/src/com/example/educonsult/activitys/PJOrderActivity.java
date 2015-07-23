@@ -36,14 +36,15 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
-		topRightTGone();
 		setTitleTxt(R.string.pingjiadingdan_title);
 		setContentXml(R.layout.pjorder);
 		init();
+		topRightTGone();
 	}
 	void init(){
 		TestinAgent.init(this);
 		context=this;
+		star = 3;
 		myPDT = new ThreadWithProgressDialog();
 		ll_l=(LinearLayout)findViewById(R.id.pjorder_one_lin);
 		ll_l.setOnClickListener(this);
@@ -57,7 +58,7 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 		imaone=(ImageView)findViewById(R.id.pjorder_one);
 		imathree=(ImageView)findViewById(R.id.pjorder_three);
 		imatwo=(ImageView)findViewById(R.id.pjorder_two);
-		isgood=1;
+		isgood=5;
 		itemid = getIntent().getStringExtra("itemid");
 	}
 	@Override
@@ -69,7 +70,7 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 			imatwo.setBackgroundResource(R.drawable.check_un);
 			imathree.setBackgroundResource(R.drawable.check_un);
 			isgood=1;
-			star = 1;
+			star = 3;
 			break;
 		case R.id.pjorder_two_lin:
 			imatwo.setBackgroundResource(R.drawable.check_ed);
@@ -83,7 +84,7 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 			imatwo.setBackgroundResource(R.drawable.check_un);
 			imaone.setBackgroundResource(R.drawable.check_un);
 			isgood=5;
-			star = 3;
+			star = 1;
 			break;
 		case R.id.pjorder_ok:
 			String edStr=ed.getText().toString().trim();
@@ -122,6 +123,8 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 			if(bean!=null){
 				if("200".equals(bean.getCode())){
 					Util.ShowToast(context, "∆¿º€ÕÍ≥…£°");	
+					MyOrderActivity.isinit = true;
+					finish();
 				}else if("300".equals(bean.getCode())){
 					MyApplication.mp.setlogin(false);
 					Util.ShowToast(context, R.string.login_out_time);
