@@ -1,6 +1,7 @@
 package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -85,6 +86,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 	private AddressBean addressBean;
 	public static boolean isinit;
 	private String money;
+	private HashMap<Integer, ArrayList<String>> couponmap;
 	@Override
 	
 	protected void onCreate(Bundle arg0) {
@@ -138,7 +140,7 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		money = b.getString("money");
 
 		//		intent.putExtra("shopcartbundle", b);
-		//		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean");
+		//		shopbean=(ListShopBean)intent.getSerializableExtra("shopcarbean"); 
 		//		shoporder=(ListShopBean)intent.getSerializableExtra("shopcaroder");
 		shopBeans=shopbean.getList();
 		myPDT =new  ThreadWithProgressDialog();
@@ -162,7 +164,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 		tv_ok.setOnClickListener(this);
 		lv = (MyListview) findViewById(R.id.order_home_lv);
 		lv.setFocusable(false);
-		adapter = new OrderHomeAdapter(context, shopBeans);
+		couponmap=new HashMap<Integer, ArrayList<String>>();
+		adapter = new OrderHomeAdapter(context, shopBeans,couponmap);
 		lv.setAdapter(adapter);
 		inttype=0;
 		if(Util.detect(context)){
@@ -193,12 +196,33 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 			startActivity(id);
 			break;
 		case R.id.order_tv_ok:
+			String s;
+			boolean istrue=false;
 			if(addressBean!=null){
-				inttype=1;
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+				for(int i=0;i<couponmap.size();i++){
+					for(int j=0;j<couponmap.get(i).size();j++){
+						s=couponmap.get(i).get(j);
+						for(int k=0;k<couponmap.size();k++){
+							for(int m=0;m<couponmap.get(k).size();m++){
+								if(s.equals(couponmap.get(k).get(m))){
+									istrue=true;
+									break;
+								}
+								
+							}
+						}
+					}
+				}
+				if(!istrue){
+					
+					inttype=1;
+					if(Util.detect(context)){
+						myPDT.Run(context, new RefeshData(),R.string.loding);//不可取消
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
 				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
+					Util.ShowToast(context, "每张优惠券只能使用一次哟！");
 				}
 			}else{
 				Util.ShowToast(context, "收货地址不能为空");

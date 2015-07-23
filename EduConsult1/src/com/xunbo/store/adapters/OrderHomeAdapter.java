@@ -1,6 +1,7 @@
 package com.xunbo.store.adapters;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -20,6 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
+import com.xunbo.store.beans.CouponBean;
 import com.xunbo.store.beans.ExpressBean;
 import com.xunbo.store.beans.ShopBean;
 import com.xunbo.store.myviews.MyListview;
@@ -37,12 +39,18 @@ public class OrderHomeAdapter extends BaseAdapter{
 	private View v_fenlei;
 	private ListView list_2,lv_l;
 	private TextItemListAdapter adapter_r;
+	private ArrayList<String> couponlist;
+	private HashMap<Integer, ArrayList<String>> couponmap;
+	
+	
 
-	public OrderHomeAdapter(Context context,ArrayList<ShopBean>list){
+	public OrderHomeAdapter(Context context,ArrayList<ShopBean>list,HashMap<Integer, ArrayList<String>> couponmap){
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 		express=new ArrayList<ExpressBean>();
+		couponlist=new ArrayList<String>();
+		this.couponmap=couponmap;
 	}
 	public void SetData(ArrayList<ShopBean>list){
 		this.list = list;
@@ -156,9 +164,10 @@ public class OrderHomeAdapter extends BaseAdapter{
 		item.tv_heji.setText("￥"+sum);
 		//item.tv_peisong.setText(s.get)
 		//item.
-		adapter=new OrderLvAdapter(context, list,index);
+		adapter=new OrderLvAdapter(context, list,index,couponmap);
 		item.lv.setAdapter(adapter);
 		item.tv_num.setText("共"+n+"件商品");
+		couponmap.put(index, couponlist);
 		return convertView;
 	}
 	class Item{
