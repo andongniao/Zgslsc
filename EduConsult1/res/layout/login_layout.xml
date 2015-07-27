@@ -2,135 +2,129 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/login_bg"
-    
     android:orientation="vertical"
     android:padding="20dp" >
 
-<LinearLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="20dp">
-    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical" >
 
         <EditText
             android:id="@+id/login_et_username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-           android:gravity="center_vertical"
-           android:padding="5dp"
-           android:background="@color/login_ed"
+            android:background="@color/login_ed"
             android:cursorVisible="true"
             android:drawableLeft="@drawable/login_username"
             android:focusable="true"
+            android:gravity="center_vertical"
             android:hint="@string/login_username"
+            android:padding="5dp"
+            android:singleLine="true"
             android:textColor="@color/fame_hui3"
-            android:textCursorDrawable="@null"
-            android:singleLine="true" />
-   
+            android:textCursorDrawable="@null" />
 
-   
-		<EditText
+        <EditText
             android:id="@+id/login_et_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:hint="@string/login_password"
-            android:textColor="@color/fame_hui3"
-            android:password="true"
-            android:padding="5dp"
-            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
             android:background="@color/login_ed"
             android:cursorVisible="true"
             android:drawableLeft="@drawable/login_password"
-            android:textCursorDrawable="@null"
-            android:singleLine="true" 
-            android:layout_marginTop="10dp"/>
-    
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-	
-        <CheckBox
-            android:id="@+id/login_cb_jizhu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_jizhu"
-            android:textColor="@color/fame_hui3" 
-            android:drawableLeft="@color/login_checkbox"
-            android:checked="false"
             android:gravity="center_vertical"
-            android:button="@null"
-            />
-        
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/login_tv_wangji"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_wangji"
-             android:textColor="@color/fame_hui3" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/login_btn_login"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"  
-            android:background="@drawable/search_lv_isnull_btn_bg"
-            android:gravity="center"
+            android:hint="@string/login_password"
             android:padding="5dp"
-            android:text="@string/login_login"
-            android:textColor="@color/white"
-            android:textSize="18dp" />
-    </LinearLayout>
+            android:password="true"
+            android:singleLine="true"
+            android:textColor="@color/fame_hui3"
+            android:textCursorDrawable="@null" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/login_cb_jizhu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="false"
+                android:drawableLeft="@color/login_checkbox"
+                android:gravity="center_vertical"
+                android:text="@string/login_jizhu"
+                android:textColor="@color/fame_hui3" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/login_tv_wangji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_wangji"
+                android:textColor="@color/fame_hui3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/login_btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_lv_isnull_btn_bg"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/login_login"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/login_tv_regist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_regist"
+                android:textColor="@color/fame_hui3" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/login_tv_noaclogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_noaclogin"
+                android:textColor="@color/fame_hui3" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/login_tv_regist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_regist"
-            android:textColor="@color/fame_hui3" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/login_tv_noaclogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_noaclogin"
-            android:textColor="@color/fame_hui3" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-</LinearLayout>
 </LinearLayout>
