@@ -143,20 +143,25 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			String name = et_username.getText().toString().trim();
 			String pass = et_password.getText().toString().trim();
 			if(Util.IsNull(name)&&Util.IsNull(pass)){
-				er.putBoolean("isremb", isremb);
-				if(isremb){
-					er.putString("name", name);
-					er.putString("pass", pass);
+				if(Util.isusername(name)){
+					
+					er.putBoolean("isremb", isremb);
+					if(isremb){
+						er.putString("name", name);
+						er.putString("pass", pass);
+					}else{
+						er.putString("name", "");
+						er.putString("pass", "");
+					}
+					er.commit();
+					if(Util.detect(context)){
+						myPDT.Run(context, new RefeshData(name,pass),R.string.loding);//不可取消
+					}else{
+						Util.ShowToast(context, R.string.net_is_eor);
+					}
 				}else{
-					er.putString("name", "");
-					er.putString("pass", "");
-				}
-				er.commit();
-				if(Util.detect(context)){
-					myPDT.Run(context, new RefeshData(name,pass),R.string.loding);//不可取消
-				}else{
-					Util.ShowToast(context, R.string.net_is_eor);
-				}
+					Util.ShowToast(context, "会员名为字母、数字、下划线、中划线组成的4~20位用户名");
+					}
 			}else{
 				Toast.makeText(context, "请检查用户名和密码", 200).show();
 			}

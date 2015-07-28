@@ -64,7 +64,7 @@
             android:textColor="@color/fame_hui3" 
             android:drawableLeft="@color/login_checkbox"
             android:checked="false"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|left"
             android:button="@null"
             />
         

@@ -587,6 +587,20 @@ public class Util {
 
 		return m.matches();
 	}
+	/**
+	 * 用户名位数&输入限制，大于4位，小于20位
+	 * @param username
+	 * @return
+	 */
+	public static boolean isusername(String username) {
+		String str = "[0-9A-Za-z_-]{4,20}";
+		Pattern p = Pattern.compile(str);
+		Matcher m = p.matcher(username);
+
+		return m.matches();
+	}
+
+
 
 	/**
 	 * 检查开头或结尾是否有空格

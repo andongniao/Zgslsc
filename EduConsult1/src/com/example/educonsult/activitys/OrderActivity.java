@@ -109,8 +109,8 @@ public class OrderActivity extends BaseActivity implements OnClickListener{
 					//			                        @Override
 					//			                        public void onClick(DialogInterface dialog, int which) {
 					//			                            dialog.dismiss();
-					//			                        }
-					//			                    });
+					//			                          }
+					//			                      });
 					//			            builder.create().show();
 					Util.ShowToast(context, "Õ¯¬Á¡¨Ω” ß∞‹,«Î÷ÿ ‘!");
 				} else {
