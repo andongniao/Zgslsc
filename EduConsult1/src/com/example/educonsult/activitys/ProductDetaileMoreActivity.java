@@ -147,25 +147,6 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			pingjiaAdapter.setData(commentBeans, -1);
 			pingjiaAdapter.notifyDataSetChanged();
 		}
-
-	}
-	private void setStarDate(){
-		int starnum=0;
-		for(int i=0;i<comstar.size();i++){
-
-
-			if(comstar.get(i).getStar().equals("1")){
-				tv_no.setText("差评("+comstar.get(i).getNumn()+")");
-				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
-			}else if(comstar.get(i).getStar().equals("2")){
-				tv_ok.setText("中评("+comstar.get(i).getNumn()+")");
-				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
-			}else if(comstar.get(i).getStar().equals("3")){
-				tv_good.setText("好评("+comstar.get(i).getNumn()+")");
-				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
-			}
-		}
-		tv_all.setText("总评("+starnum+")");
 		if(type==1){
 			setRedText(li_all,tv_all);
 			setWhiteText(li_good,tv_good);
@@ -189,61 +170,25 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		}
 
 	}
-	public class RefeshData implements ThreadWithProgressDialogTask {
+	private void setStarDate(){
+		int starnum=0;
+		for(int i=0;i<comstar.size();i++){
 
 
-		public RefeshData() {
-
-		}
-
-		@Override
-		public boolean OnTaskDismissed() {
-			//任务取消
-			//			Toast.makeText(context, "cancle", 1000).show();
-			//finish();
-			if(isfinish){
-				finish();
+			if(comstar.get(i).getStar().equals("1")){
+				tv_no.setText("差评("+comstar.get(i).getNumn()+")");
+				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
+			}else if(comstar.get(i).getStar().equals("2")){
+				tv_ok.setText("中评("+comstar.get(i).getNumn()+")");
+				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
+			}else if(comstar.get(i).getStar().equals("3")){
+				tv_good.setText("好评("+comstar.get(i).getNumn()+")");
+				starnum=starnum+Integer.parseInt(comstar.get(i).getNumn());
 			}
-			return false;
 		}
+		tv_all.setText("总评("+starnum+")");
+		
 
-		@Override
-		public boolean OnTaskDone() {
-			isfinish=false;
-			//任务完成后
-			if(listComment!=null){
-				if("200".equals(listComment.getCode())){
-					commentBeans=listComment.getComlist();
-					comstar=listComment.getComstar();
-					if(comstar.size()!=0||comstar!=null){
-						setStarDate();
-						setpingjiaDate();
-					}
-				}else if("300".equals(listComment.getCode())){
-					MyApplication.mp.setlogin(false);
-					Util.ShowToast(context, R.string.login_out_time);
-					Intent i= new Intent(context,LoginActivity.class);
-					startActivity(i);
-					finish();
-				}else{
-					Util.ShowToast(context, listComment.getMsg());
-				}
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
-
-
-
-			return true;
-		}
-
-		@Override
-		public boolean TaskMain() {
-			// 访问
-			Send s = new Send(context);
-			listComment=s.GetComment(itemid, 1, "");
-			return true;
-		}
 	}
 
 	public class RefeshData1 implements ThreadWithProgressDialogTask {
@@ -258,7 +203,10 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			//任务取消
 			//			Toast.makeText(context, "cancle", 1000).show();
 			//finish();
-			return false;
+			if(isfinish){
+				finish();
+			}
+			return true;
 		}
 
 		@Override
@@ -295,7 +243,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			}
 
 
-
+			isfinish=false;
 			return true;
 		}
 

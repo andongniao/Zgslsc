@@ -109,6 +109,8 @@
             android:divider="@color/base_hui"
             android:dividerHeight="0.5dp"
             android:fadingEdge="none"
+            
+        
             >
         </com.xunbo.store.myviews.xlistview.XListView>
         <TextView 
