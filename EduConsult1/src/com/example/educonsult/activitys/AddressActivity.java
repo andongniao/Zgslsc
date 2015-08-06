@@ -44,6 +44,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private ArrayList<AddressBean>list;
 	private boolean iscancle;
 	public static final int REQUSET = 100;  
+	public static AddressBean bean;  
 	private int index;
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -137,14 +138,16 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 				intent = new Intent(context,AddressNewSaveActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("type", 2);
-				startActivity(intent);
+				intent.putExtra("from", 1);
+				startActivityForResult(intent, REQUSET);
 			}
 			break;
 		case R.id.address_home_ibtn_add_address:
 			intent = new Intent(context,AddressNewSaveActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.putExtra("type", 2);
-			startActivity(intent);
+			intent.putExtra("from", 1);
+			startActivityForResult(intent, REQUSET);
 			break;
 
 		}
@@ -163,6 +166,13 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			//			}else{
 			//				Util.ShowToast(context, R.string.net_is_eor);
 			//			}
+			if(bean!=null){
+			list.remove(index);
+			list.add(index, bean);
+			bean=null;
+			adapter.SetData(list);
+			adapter.notifyDataSetChanged();
+			}
 			isinit = false;
 		}
 	}
@@ -250,12 +260,19 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		if (resultCode == RESULT_OK) {  
 			AddressBean bean = (AddressBean) data.getExtras().get("ok"); 
 			//			if(index==1){
-			for(int i=0;i<list.size();i++){
-				if(index==i){
-					list.get(i).setIsdefault("1");
-				}else{
-					list.get(i).setIsdefault("0");
+			int statu = (Integer) data.getExtras().get("statu");
+			if(statu==1){
+				for(int i=0;i<list.size();i++){
+					if(index==i){
+						list.get(i).setIsdefault("1");
+					}else{
+						list.get(i).setIsdefault("0");
+					}
 				}
+			}else if(statu==0){
+				list.add(bean);
+			}else{
+				list.remove(index);
 			}
 			adapter.SetData(list);
 			adapter.notifyDataSetChanged();

@@ -83,6 +83,7 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 						AddressNewSaveActivity.class);  
 				//发送意图标示为REQUSET=1
 				intent.putExtra("type", 1);
+				intent.putExtra("from", 2);
 				intent.putExtra("newsave", bean);
 				startActivityForResult(intent, REQUSET);  
 			}
@@ -148,13 +149,13 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				Util.ShowToast(context, ""+isdetault);
 			}
 		});
-		if(num.equals("1")){//修改
-			tv_delete.setVisibility(View.GONE);
-		}else{
-			tv_delete.setVisibility(View.GONE);
-			if(bean!=null){
-				initData();
-			}
+//		if(num.equals("1")){//修改
+//			tv_delete.setVisibility(View.GONE);
+//		}else{
+//			tv_delete.setVisibility(View.GONE);
+//		}
+		if(bean!=null){
+			initData();
 		}
 	}
 	private void initData() {
@@ -250,6 +251,10 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 					if("200".equals(beanresult.getCode())){
 						init = false;
 						AddressActivity.isinit = true;
+						Intent intent=new Intent();  
+						intent.putExtra("statu", 2);  
+						intent.putExtra("ok", bean);  
+						setResult(RESULT_OK, intent); 
 						finish();
 					}else if("300".equals(beanresult.getCode())){
 						MyApplication.mp.setlogin(false);
@@ -266,14 +271,16 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			}else{
 				if(beanresult!=null){
 					if("200".equals(beanresult.getCode())){
+						Intent intent=new Intent();  
 						if(num.equals("1")){
+							intent.putExtra("statu", 1);  
 							Util.ShowToast(context, "添加成功！");
 						}else if(num.equals("0")){
+							intent.putExtra("statu", 0);  
 							Util.ShowToast(context, "修改成功！");
 						}
 						OrderActivity.isinit = true;
 						AddressActivity.isinit = true;
-						Intent intent=new Intent();  
 						intent.putExtra("ok", bean);  
 						setResult(RESULT_OK, intent);  
 						finish();

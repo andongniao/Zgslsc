@@ -55,6 +55,7 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 	private ListAreaBean lare;
 	private boolean ischanged;
 	private BaseBean basebean;
+	private int from;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -73,6 +74,7 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 		lare = MyApplication.mp.lare;
 		filename = MyApplication.AreaName;
 		type = getIntent().getIntExtra("type", -1);
+		from = getIntent().getIntExtra("from", -1);
 		if(type==1){
 			bean = (AddressBean) getIntent().getExtras().get("newsave");
 			areaid = Integer.parseInt(bean.getAreaid());
@@ -244,16 +246,22 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 			if(bean!=null){
 				if("200".equals(basebean.getCode())){
 					ischanged = true;
-					if(type==1 && ischanged){
-						  Intent intent=new Intent();  
-			              intent.putExtra("result", bean);  
+//					if(type==1 && ischanged){
+						  Intent intent=new Intent(); 
+						  if(from==1){
+							  intent.putExtra("ok", bean);  
+							  intent.putExtra("statu", 0);  
+						  }else{
+							  intent.putExtra("result", bean);  
+							  AddressActivity.bean = bean;
+						  }
 			              setResult(RESULT_OK, intent);  
-			              finish();
-					}else if(type==2 && ischanged){
+//			              finish();
+//					}else if(type==2 && ischanged){
 						OrderActivity.isinit=true;
 						AddressActivity.isinit = true;
 						finish();
-					}
+//					}
 				}else if("300".equals(basebean.getCode())){
 					intent = new Intent(context,LoginActivity.class);
 					startActivity(intent);
