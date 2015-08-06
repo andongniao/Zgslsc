@@ -156,7 +156,7 @@ public class WelcomeActivity extends Activity{
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
-				Tologin();
+//				Tologin();
 			}else{
 				Util.ShowToast(context, "初始化失败,请保证网络通畅后重试");
 			}

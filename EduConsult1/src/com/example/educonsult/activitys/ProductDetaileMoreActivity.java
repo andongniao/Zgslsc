@@ -45,8 +45,9 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	private String strstar="";
 	private Intent intent;
 	private String itemid;
-	private boolean isall,isgood,isok,isno;
+	private boolean isall,isgood,isok,isno,isfinish;
 	private Handler handler;
+	
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -61,6 +62,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	}
 	void init(){
 		TestinAgent.init(this);
+		isfinish=true;
 		type=1;
 		page = 1;
 		strstar="";
@@ -164,6 +166,27 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			}
 		}
 		tv_all.setText("总评("+starnum+")");
+		if(type==1){
+			setRedText(li_all,tv_all);
+			setWhiteText(li_good,tv_good);
+			setWhiteText(li_ok,tv_ok);
+			setWhiteText(li_no,tv_no);
+		}else if(type==2){
+			setRedText(li_good,tv_good);
+			setWhiteText(li_all,tv_all);
+			setWhiteText(li_ok,tv_ok);
+			setWhiteText(li_no,tv_no);
+		}else if(type==3){
+			setRedText(li_ok,tv_ok);
+			setWhiteText(li_good,tv_good);
+			setWhiteText(li_all,tv_all);
+			setWhiteText(li_no,tv_no);
+		}else if(type==4){
+			setRedText(li_no,tv_no);
+			setWhiteText(li_good,tv_good);
+			setWhiteText(li_ok,tv_ok);
+			setWhiteText(li_all,tv_all); 
+		}
 
 	}
 	public class RefeshData implements ThreadWithProgressDialogTask {
@@ -178,11 +201,15 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			//任务取消
 			//			Toast.makeText(context, "cancle", 1000).show();
 			//finish();
+			if(isfinish){
+				finish();
+			}
 			return false;
 		}
 
 		@Override
 		public boolean OnTaskDone() {
+			isfinish=false;
 			//任务完成后
 			if(listComment!=null){
 				if("200".equals(listComment.getCode())){
@@ -289,10 +316,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		switch (v.getId()) {
 		case R.id.product_detaile_ll_add_view_pingjia_costperformace:
 			type=1;
-			setRedText(li_all,tv_all);
-			setWhiteText(li_good,tv_good);
-			setWhiteText(li_ok,tv_ok);
-			setWhiteText(li_no,tv_no);
+			
 			strstar="";
 			//			if(!isall){
 			if(Util.detect(context)){
@@ -304,10 +328,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_zhiliang:
 			type=2;
-			setRedText(li_good,tv_good);
-			setWhiteText(li_all,tv_all);
-			setWhiteText(li_ok,tv_ok);
-			setWhiteText(li_no,tv_no);
+			
 			strstar="3";
 			//			if(!isgood){
 			if(Util.detect(context)){
@@ -319,10 +340,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_fuwu:
 			type=3;
-			setRedText(li_ok,tv_ok);
-			setWhiteText(li_good,tv_good);
-			setWhiteText(li_all,tv_all);
-			setWhiteText(li_no,tv_no);
+			
 			strstar="2";
 			//			if(!isok){
 			if(Util.detect(context)){
@@ -334,10 +352,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_xiaoguo:
 			type=4;
-			setRedText(li_no,tv_no);
-			setWhiteText(li_good,tv_good);
-			setWhiteText(li_ok,tv_ok);
-			setWhiteText(li_all,tv_all);
+			
 			strstar="1";
 			//			if(!isno){
 			if(Util.detect(context)){

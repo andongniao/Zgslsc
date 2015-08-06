@@ -600,8 +600,6 @@ public class Util {
 		return m.matches();
 	}
 
-
-
 	/**
 	 * 检查开头或结尾是否有空格
 	 * 

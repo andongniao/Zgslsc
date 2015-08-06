@@ -351,7 +351,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 				}
 				break;
 			case R.id.home_layout_iv_rem_right__t:
-				if(recommend.get(1)!=null){
+   				if(recommend.get(1)!=null){
 
 					Toproduct(recommend.get(1));
 				}

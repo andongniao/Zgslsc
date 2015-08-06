@@ -84,7 +84,7 @@
 -keepclassmembers class * {
    public <init>(org.json.JSONObject);
 }
--keep public class [com.xunbo.store].R$*{
+-keep public class [com.example.educonsult].R$*{
 public static final int *;
 }
 -keepclassmembers enum * {
