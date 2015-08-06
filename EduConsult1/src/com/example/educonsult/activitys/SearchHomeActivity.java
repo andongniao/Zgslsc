@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -188,6 +190,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		sp.setOnClickListener(this);
 		et = (EditText) findViewById(R.id.search_home_et_inpu);
 		et.setTextColor(getResources().getColor(R.color.black));
+		et.addTextChangedListener(mTextWatcher);
 		lv = (ListView) findViewById(R.id.search_home_lv);
 		btn_search = (Button) findViewById(R.id.search_home_btn_seatch);
 		btn_search.setOnClickListener(this);
@@ -714,4 +717,29 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			break;
 		}
 	}
+	TextWatcher mTextWatcher  = new TextWatcher() {
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			if(et.getText().toString()!=null&&!et.getText().toString().equals("")){
+				btn_top_clean.setVisibility(View.VISIBLE);
+				}else{
+					btn_top_clean.setVisibility(View.INVISIBLE);
+				}
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+			// TODO Auto-generated method stub
+			
+		}};
+	
 }

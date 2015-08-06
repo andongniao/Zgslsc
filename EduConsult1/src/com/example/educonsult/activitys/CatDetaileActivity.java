@@ -49,8 +49,13 @@ public class CatDetaileActivity extends BaseActivity implements OnClickListener{
 		topRightTGone();
 		setTitleTxt("分类详情");
 		setContentXml(R.layout.cat_home);
-		
 		init();
+		id = "6902";
+		if(Util.detect(context)){
+			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+		}else{
+			Util.ShowToast(context, R.string.net_is_eor);
+		}
 	}
 
 	private void init() {

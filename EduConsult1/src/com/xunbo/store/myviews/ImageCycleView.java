@@ -275,7 +275,7 @@ public class ImageCycleView extends LinearLayout {
 				imageView = new ImageView(mContext);
 				imageView.setLayoutParams(new LayoutParams(
 						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-				imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+				imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
 			} else {
 				imageView = mImageViewCacheList.remove(0);

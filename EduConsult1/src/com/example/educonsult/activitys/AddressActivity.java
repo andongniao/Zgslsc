@@ -43,18 +43,20 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private ListAddressBean lisetbean;
 	private ArrayList<AddressBean>list;
 	private boolean iscancle;
+	public static final int REQUSET = 100;  
+	private int index;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();
 		//		topRightLVisible(); 
-//		topRightRVisible();
-//		rl_l = (RelativeLayout) getTopLightRl();
-//		rl_r = (RelativeLayout) getTopRightRl();
-//		iv_top_l = (ImageView) getTopLightView();
-//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-//		iv_top_t = (ImageView) getTopRightView();
-//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
+		//		topRightRVisible();
+		//		rl_l = (RelativeLayout) getTopLightRl();
+		//		rl_r = (RelativeLayout) getTopRightRl();
+		//		iv_top_l = (ImageView) getTopLightView();
+		//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
+		//		iv_top_t = (ImageView) getTopRightView();
+		//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTitleTxt(R.string.address_title);
 		setContentXml(R.layout.address_home);
 		init();
@@ -88,6 +90,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
+		index = -1;
 		myPDT = new ThreadWithProgressDialog();
 		lv = (ListView) findViewById(R.id.address_home_lv);
 		lv.setEmptyView(ll_show);
@@ -116,11 +119,12 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+				index = arg2;
 				intent = new Intent(context,AddressGLActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("address", list.get(arg2));
 				intent.putExtra("addressnum", "0");
-				startActivity(intent);
+				startActivityForResult(intent, REQUSET);
 			}
 		});
 		//		Util.SetRedNum(context, rl_l, 1);
@@ -154,11 +158,11 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			Util.SetRedGone(context, rl_l);
 			isread = false;
 		}else if(isinit){
-			if(Util.detect(context)){
-				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-			}else{
-				Util.ShowToast(context, R.string.net_is_eor);
-			}
+			//			if(Util.detect(context)){
+			//				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+			//			}else{
+			//				Util.ShowToast(context, R.string.net_is_eor);
+			//			}
 			isinit = false;
 		}
 	}
@@ -239,6 +243,24 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	protected void onDestroy() {
 		super.onDestroy();
 		OrderActivity.isinit = true;
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {  
+			AddressBean bean = (AddressBean) data.getExtras().get("ok"); 
+			//			if(index==1){
+			for(int i=0;i<list.size();i++){
+				if(index==i){
+					list.get(i).setIsdefault("1");
+				}else{
+					list.get(i).setIsdefault("0");
+				}
+			}
+			adapter.SetData(list);
+			adapter.notifyDataSetChanged();
+			//			}
+		}
 	}
 
 }

@@ -148,14 +148,14 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 				Util.ShowToast(context, ""+isdetault);
 			}
 		});
-		//		if(num.equals("1")){//ÐÞ¸Ä
-		//			tv_delete.setVisibility(View.GONE);
-		//		}else{
-		//			tv_delete.setVisibility(View.GONE);
-		//			if(bean!=null){
-		//				initData();
-		//			}
-		//		}
+		if(num.equals("1")){//ÐÞ¸Ä
+			tv_delete.setVisibility(View.GONE);
+		}else{
+			tv_delete.setVisibility(View.GONE);
+			if(bean!=null){
+				initData();
+			}
+		}
 	}
 	private void initData() {
 		tv_youbian.setText(bean.getPostcode());
@@ -273,6 +273,9 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 						}
 						OrderActivity.isinit = true;
 						AddressActivity.isinit = true;
+						Intent intent=new Intent();  
+						intent.putExtra("ok", bean);  
+						setResult(RESULT_OK, intent);  
 						finish();
 					}else if("300".equals(beanresult.getCode())){
 						MyApplication.mp.setlogin(false);

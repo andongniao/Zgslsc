@@ -36,6 +36,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
+import android.widget.ImageView;
 
 /**
  * 图片操作工具包
@@ -381,6 +382,51 @@ public class ImageUtils {
 		// 生成缩放后的图片文件
 		saveImageToSD(null,thumbfilePath, thb_bitmap, quality);
 	}
+	
+	/**
+	 * 获取图片缩略图
+	 * 
+	 * @param imagePath
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public static Bitmap getImageThumbnail(String imagePath, int width,
+			int height) {
+		Bitmap bitmap = null;
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
+		// 获取这个图片的宽和高，注意此处的bitmap为null
+		bitmap = BitmapFactory.decodeFile(imagePath, options);
+		options.inJustDecodeBounds = false; // 设为 false
+		// 计算缩放比
+		int h = options.outHeight;
+		int w = options.outWidth;
+		if (h < w) {
+			int size = width;
+			width = height;
+			height = size;
+		}
+		int beWidth = w / width;
+		int beHeight = h / height;
+		int be = 1;
+		if (beWidth < beHeight) {
+			be = beHeight;
+		} else {
+			be = beWidth;
+		}
+		if (be <= 0) {
+			be = 1;
+		}
+		options.inSampleSize = be;
+		// 重新读入图片，读取缩放后的bitmap，注意这次要把options.inJustDecodeBounds 设为 false
+		options.inJustDecodeBounds = false;
+		bitmap = BitmapFactory.decodeFile(imagePath, options);
+		// 利用ThumbnailUtils来创建缩略图，这里要指定要缩放哪个Bitmap对象
+		// bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
+		// ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+		return bitmap;
+	}
 
 	/**
 	 * 放大缩小图片
@@ -475,9 +521,51 @@ public class ImageUtils {
 		Matrix matrix = new Matrix();
 		// 缩放图片动作
 		matrix.postScale(zoomScale, zoomScale);
-		Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
+//		Canvas canvas = new Canvas(bitmap);
+//		Paint paint = new Paint(Paint.DITHER_FLAG);
+//		canvas.drawBitmap(bitmap, matrix, paint);
+		Bitmap resizedBitmap = 
+				Bitmap.createBitmap(bitmap, 0, 0,
 				bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 		return resizedBitmap;
+	}
+	/**
+	 * (缩放)重绘图片
+	 * 
+	 * @param context
+	 *            Activity
+	 * @param bitmap
+	 * @return
+	 */
+	public static void reDrawBitMap2View(Activity context, Bitmap bitmap,ImageView view) {
+		DisplayMetrics dm = new DisplayMetrics();
+		context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int rHeight = dm.heightPixels;
+		int rWidth = dm.widthPixels;
+		// float rHeight=dm.heightPixels/dm.density+0.5f;
+		// float rWidth=dm.widthPixels/dm.density+0.5f;
+		// int height=bitmap.getScaledHeight(dm);
+		// int width = bitmap.getScaledWidth(dm);
+		int height = bitmap.getHeight();
+		int width = bitmap.getWidth();
+		float zoomScale;
+		if (width >= rWidth)
+			zoomScale = ((float) rWidth) / width;
+		else
+			zoomScale = 1.0f;
+		// 创建操作图片用的matrix对象
+		Matrix matrix = new Matrix();
+		// 缩放图片动作
+		matrix.postScale(zoomScale, zoomScale);
+		Canvas canvas = new Canvas();
+		Paint paint = new Paint(Paint.DITHER_FLAG);
+		canvas.drawBitmap(bitmap,matrix , paint);
+		canvas.save();
+		view.setImageBitmap(bitmap);
+//		Bitmap resizedBitmap = 
+//				Bitmap.createBitmap(bitmap, 0, 0,
+//				bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+//		return resizedBitmap;
 	}
 
 	/**

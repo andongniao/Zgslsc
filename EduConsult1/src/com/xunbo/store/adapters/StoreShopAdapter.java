@@ -78,7 +78,7 @@ public class StoreShopAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(context,ProductDetaileActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				Bundle b=new Bundle();
 				b.putSerializable("product", list.get(position));
 				intent.putExtra("productbundle", b);

@@ -44,6 +44,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 	private ListProductBean bean_all,bean_new;
 	private String authstr,storeid,storename,url,id;
 	private BaseBean bean_base;
+	private boolean isall;
 
 
 
@@ -173,6 +174,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.storeshop_home_tv_all:
+			isall = true;
 			showtype = 2;
 			if(bean_all==null && list_all==null){
 				if(Util.detect(context)){
@@ -249,12 +251,15 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 
 	public class RefeshData implements ThreadWithProgressDialogTask {
 		public RefeshData() {
-
 		}
 
 		@Override
 		public boolean OnTaskDismissed() {
 			//任务取消
+			if(isall && showtype==2){
+				showtype=1;
+				bean_all = null;
+			}
 			return false; 
 		}
 

@@ -3,6 +3,7 @@ package com.xunbo.store.tools;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,6 +37,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
@@ -58,6 +60,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.example.educonsult.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xunbo.store.adapters.TextItemCenterListAdapter;
 import com.xunbo.store.adapters.TextItemListAdapter;
 import com.xunbo.store.myviews.BadgeView;
@@ -115,8 +118,8 @@ public class Util {
 		int screenHeigh = dm.heightPixels;
 		return screenHeigh;
 	}
-	
-	
+
+
 
 	/**
 	 * 清除保存的缓存
@@ -492,6 +495,35 @@ public class Util {
 	}
 
 	// 获取指定路径的图片  
+	public static InputStream getStreamForNet(String urlpath)  
+			throws Exception {  
+		File file = null;
+		InputStream inputStream = null;
+		URL url = new URL(urlpath);  
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
+		conn.setRequestMethod("GET");  
+		conn.setConnectTimeout(5 * 1000);  
+		Bitmap bitmap = null;  
+		if (conn.getResponseCode() == 200) {  
+			inputStream = conn.getInputStream(); 
+			//			BitmapFactory.Options options=new BitmapFactory.Options();
+			//		     options.inJustDecodeBounds = false;
+			//		     options.inSampleSize = 2;   //width，hight设为原来的十分一
+			//			try {
+			//				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			//				file = new File(urlpath);
+			//				FileOutputStream fos = new FileOutputStream(file);
+			//				fos.write(baos.toByteArray());
+			//				fos.flush();
+			//				fos.close();
+			//			} catch (Exception e) {
+			//				e.printStackTrace();
+			//			}
+			//			bitmap = BitmapFactory.decodeStream(inputStream);  
+		}  
+		return inputStream;  
+	}
+	// 获取指定路径的图片  
 	public static Bitmap getBitmapForNet(String urlpath)  
 			throws Exception {  
 		URL url = new URL(urlpath);  
@@ -500,11 +532,29 @@ public class Util {
 		conn.setConnectTimeout(5 * 1000);  
 		Bitmap bitmap = null;  
 		if (conn.getResponseCode() == 200) {  
-			InputStream inputStream = conn.getInputStream();  
-			bitmap = BitmapFactory.decodeStream(inputStream);  
+			InputStream inputStream = conn.getInputStream(); 
+			//			BitmapFactory.Options options=new BitmapFactory.Options();
+			//			options.inJustDecodeBounds = false;
+			//			options.inSampleSize = 12/10;   //width，hight设为原来的十分一
+			//			bitmap = BitmapFactory.decodeStream(inputStream,null,options);  
+			bitmap = BitmapFactory.decodeStream(inputStream); 
 		}  
 		return bitmap;  
 	}
+	public static Bitmap getImage(String Url) throws Exception {
+		try {
+			URL url = new URL(Url);
+			String responseCode = url.openConnection().getHeaderField(0);
+			if (responseCode.indexOf("200") < 0)
+				throw new Exception("图片文件不存在或路径错误，错误代码：" + responseCode);
+			return BitmapFactory.decodeStream(url.openStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new Exception(e.getMessage());
+		}
+
+	}
+
 
 	public static Bitmap drawableToBitmap(Drawable drawable){     
 		int width = drawable.getIntrinsicWidth();     
@@ -902,11 +952,11 @@ public class Util {
 			badge.toggle();
 		}
 	}
-	
+
 	// 从资源中获取Bitmap
 	public static Bitmap getBitmapFromResources(Context context2, int resId) {
-	Resources res = context2.getResources();
-	return BitmapFactory.decodeResource(res, resId);
+		Resources res = context2.getResources();
+		return BitmapFactory.decodeResource(res, resId);
 	}
 
 
@@ -914,101 +964,87 @@ public class Util {
 	 * 得到并缓存图片
 	 */
 	public static void Getbitmap(final ImageView v,final String url){
-		Thread thread;
-		final Handler handler;
-		handler = new Handler(){
-			@Override
-			public void handleMessage(Message msg) {
-				super.handleMessage(msg);
-				if(v!=null){
-					v.setTag(url);
-				if (msg.what == 1) {
-					v.setTag(url);
-					if(msg.obj != null){
-						v.setImageBitmap((Bitmap) msg.obj);
-					}else{
-//						 Bitmap bitmap = getBitmapFromResources(context, R.drawable.default_bg);
-//						 v.setImageBitmap(bitmap);
-						v.setBackgroundResource(R.drawable.default_bg);
-					}
-					//					mViewSwitcher.showNext();
-				} else {
-					//yToastMessage(ImageDialog.this, ErrMsg);
-					//finish();
-					v.setBackgroundResource(R.drawable.default_bg);
-//					Resources r = context.getResources();
-//					InputStream is = r.openRawResource(R.drawable.default_bg);
-//					BitmapDrawable  bmpDraw = new BitmapDrawable(is);
-//					Bitmap bitmap = bmpDraw.getBitmap();
-////					 Bitmap bitmap = getBitmapFromResources(context, R.drawable.default_bg);
-//					 v.setImageBitmap(bitmap);
-				}
-			}
-			}
-		};
-		thread = new Thread() {
-			public void run() {
-				Message msg = handler.obtainMessage();
-				Bitmap bmp = null;
-//				if (!StringUtils.isEmpty(url)) {
-//					bmp = BitmapFactory.decodeFile(url);
-//				}
-				String filename = FileUtils.getFileName(url);
-				try {
-					// 读取本地图片
-//					if (imgURL.endsWith("portrait.gif")
-//							|| StringUtils.isEmpty(imgURL)) {
-//						bmp = BitmapFactory.decodeResource(
-//								mImage.getResources(), R.drawable.widget_dface);
+		v.setScaleType(ImageView.ScaleType.FIT_XY);
+		ImageLoader.getInstance().displayImage(url, v);
+//		Thread thread;
+//		final String filename = FileUtils.getFileName(url);
+//		final Handler handler;
+//		handler = new Handler(){
+//			@Override
+//			public void handleMessage(Message msg) {
+//				super.handleMessage(msg);
+//				if(v!=null){
+//					v.setTag(url);
+//					if (msg.what == 1) {
+//						v.setTag(url);
+//						if(msg.obj != null){
+//							Bitmap bp = (Bitmap) msg.obj;
+//							v.setImageBitmap(bp);
+//							if(bp.isRecycled()){
+//								bp.recycle();
+//								System.gc();
+//							}
+//							
+//						}else{
+//							v.setBackgroundResource(R.drawable.default_bg);
+//						}
+//					} else {
+//						v.setBackgroundResource(R.drawable.default_bg);
 //					}
-					if (bmp == null) {
-						// 是否有缓存图片
-						// Environment.getExternalStorageDirectory();返回/sdcard
-						String filepath = context.getFilesDir() + File.separator
-								+ filename;
-						File file = new File(filepath);
-						if (file.exists()) {
-							bmp = ImageUtils.getBitmap(context,
-									filename);
-							if (bmp != null) {
-								// 缩放图片
-								bmp = ImageUtils.reDrawBitMap((Activity) context,bmp);
-							}
-						}
-					}
-					if (bmp == null) {
-						if(Util.detect(context)){
-							bmp = Util.getBitmapForNet(url);
-						}
-						//						bmp = ApiClient.getNetBitmap(imgURL);
-						if (bmp != null) {
-							try {
-								// 写图片缓存 
-								ImageUtils.saveImage(context,
-										filename, bmp);
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							// 缩放图片
-							bmp = ImageUtils.reDrawBitMap((Activity) context, bmp);
-						}
-					}
-					if(bmp!=null){
-						msg.what = 1;
-						msg.obj = bmp;
-					}else{
-						msg.what=2;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-					msg.what = -1;
-					msg.obj = e;
-				}
-				if (handler != null && !isInterrupted())
-					handler.sendMessage(msg);
-			}
-		};
-		thread.start();
+//				}
+//			}
+//		};
+//		thread = new Thread() {
+//			public void run() {
+//				String filepath = "";
+//				//				DisplayMetrics dm = new DisplayMetrics();
+//				//				((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(dm);
+//				//				int rHeight = dm.heightPixels;
+//				//				int rWidth = dm.widthPixels;
+//				Message msg = handler.obtainMessage();
+//				Bitmap bmp = null;
+//				//				if (!StringUtils.isEmpty(url)) {
+//				//					bmp = BitmapFactory.decodeFile(url);
+//				//				}
+//				try {
+//					filepath = context.getFilesDir() + File.separator
+//							+ filename;
+//					File file = new File(filepath);
+//					if (file.exists()) {
+//						bmp = ImageUtils.getBitmap(context,
+//								filename);
+//					}
+//					if(bmp==null){
+//						bmp = Util.getBitmapForNet(url);
+//						if (bmp != null) {
+//							try {
+//								// 写图片缓存 
+//								ImageUtils.saveImage(context,
+//										filename, bmp);
+//							} catch (IOException e) {
+//								e.printStackTrace();
+//							}
+//						}
+//					}
+//					//缩放
+//					bmp = ImageUtils.reDrawBitMap((Activity) context, bmp);
+////					ImageUtils.reDrawBitMap2View((Activity) context, bmp, v);
+//					if(bmp!=null){
+//						msg.what = 1;
+//						msg.obj = bmp;
+//					}else{
+//						msg.what=2;
+//					}
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//					msg.what = -1;
+//					msg.obj = e;
+//				}
+//				if (handler != null && !isInterrupted())
+//					handler.sendMessage(msg);
+//			}
+//		};
+//		thread.start();
 
 	}
 	/**
@@ -1048,5 +1084,104 @@ public class Util {
 
 	}
 
+
+	public static Bitmap zoomBitmap(Bitmap bitmap, int height, int weight) {
+		int h = bitmap.getHeight();
+		int w = bitmap.getWidth();
+		if (h < w) {
+			int size = height;
+			height = weight;
+			weight = size;
+		}
+		if (h > height || w > weight) {
+			float scaleWidth = ((float) weight) / w;
+			float scaleHeight = ((float) height) / h;
+			if (scaleWidth > 1) {
+				scaleWidth = 0.95f;
+			}
+			if (scaleHeight > 1) {
+				scaleHeight = 0.95f;
+			}
+			if (scaleHeight > scaleWidth) {
+				scaleHeight = scaleWidth;
+			} else {
+				scaleWidth = scaleHeight;
+			}
+			Matrix matrix = new Matrix();
+			matrix.postScale(scaleWidth, scaleHeight);
+			bitmap = Bitmap.createBitmap(bitmap, 0, 0, (int) weight,
+					(int) weight, matrix, true);
+		}
+		return bitmap;
+
+	}
+
+	/**
+	 * 按大小压缩图片 100kb以下
+	 * 
+	 * @param bmp
+	 *            图片
+	 * @param path
+	 *            所存的路径
+	 */
+	public static void compressBmpToFile(Bitmap bmp, String path) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int options = 80;
+		int index = 0;
+		bmp.compress(Bitmap.CompressFormat.JPEG, options, baos);
+		while (baos.toByteArray().length / 1024 > 100 && index < 15) {
+			baos.reset();
+			bmp.compress(Bitmap.CompressFormat.JPEG, options, baos);
+			index++;
+		}
+		try {
+			File file = new File(path);
+			FileOutputStream fos = new FileOutputStream(file);
+			fos.write(baos.toByteArray());
+			fos.flush();
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	// decode这个图片并且按比例缩放以减少内存消耗，虚拟机对每张图片的缓存大小也是有限制的
+	public static Bitmap decodeStream(InputStream is) {
+		Bitmap b = null;
+		try {
+			// decode image size
+			BitmapFactory.Options o = new BitmapFactory.Options();
+			o.inJustDecodeBounds = true;
+			BitmapFactory.decodeStream(is, null, o);
+
+			// Find the correct scale value. It should be the power of 2.
+			final int REQUIRED_SIZE = 100;
+			int width_tmp = o.outWidth, height_tmp = o.outHeight;
+			int scale = 1;
+			while (true) {
+				if (width_tmp / 2 < REQUIRED_SIZE
+						|| height_tmp / 2 < REQUIRED_SIZE)
+					break;
+				width_tmp /= 2;
+				height_tmp /= 2;
+				scale *= 2;
+			}
+
+			// decode with inSampleSize
+			BitmapFactory.Options o2 = new BitmapFactory.Options();
+			o2.inSampleSize = scale;//new FileInputStream(f)
+			b = BitmapFactory.decodeStream(is, null, o2);;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return b;
+	}
+	
+	public static void setimagebackground(String url, ImageView iv) {
+		iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+		ImageLoader.getInstance().displayImage(url, iv);
+	}
 
 }
