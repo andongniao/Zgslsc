@@ -497,6 +497,9 @@ void setrel(){
 					&& Util.IsNull(phone)&&isdiqu&& Util.IsNull(dizhi)){
 				if(tp==0){
 					if (Util.IsNull(cname)&&isctype&&Util.IsNull(cphone)) {
+						if(Util.isusername(name)){
+							
+						
 						if(Util.ispassword(pass)){
 							if(pass.equals(pass_re)){
 								if(Util.isMobileNO(phone)){
@@ -516,7 +519,9 @@ void setrel(){
 						}else{
 							Toast.makeText(context, R.string.regist_password_mach, 200).show();
 						}
-						
+						}else{
+							Util.ShowToast(context, "会员名为字母、数字、下划线、中划线组成的4~20位用户名");
+							}
 						
 					}else{
 						Toast.makeText(context, R.string.regist_inpu_error, 200).show();
