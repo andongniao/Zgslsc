@@ -263,6 +263,8 @@
                 android:fadingEdge="none"
                 android:footerDividersEnabled="false"
                 android:gravity="center_horizontal"
+                android:scaleType="centerCrop" 
+        
                 android:headerDividersEnabled="false"
                 android:horizontalSpacing="10dp"
                 android:listSelector="#00000000"

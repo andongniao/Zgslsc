@@ -620,6 +620,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 //				ShopcartActivity.ischange=true;
 				ExampleActivity.setCurrentTab(2);
 				SearchResultActivity.isproductfinish=true;
+				SearchHomeActivity.isfinish=true;
 				MyZjActivity.isfinish=true;
 				finish();
 			}else{

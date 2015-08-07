@@ -83,6 +83,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private boolean num,price,renqi;
 	private ArrayList<View> list_view;
 	private ImageView iv_back,iv_num,iv_price,iv_renqi;
+	public static boolean isfinish;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -184,6 +185,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		page=1;
 		order=0;
 		type=0;
+		isnext=true;
 		myPDT=new ThreadWithProgressDialog();
 		er = MyApplication.sp.edit();
 		sp = (TextView) findViewById(R.id.search_home_sp);
@@ -609,6 +611,10 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		super.onResume();
 		MobclickAgent.onPageStart("search"); 
 		MobclickAgent.onResume(this);
+		if(isfinish){
+			isfinish=false;
+			finish();
+		}
 	}
 	private class GetDataTask extends AsyncTask<Void, Void, Void>
 	{
