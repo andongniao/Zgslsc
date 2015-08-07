@@ -45,19 +45,11 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private boolean iscancle;
 	public static final int REQUSET = 100;  
 	public static AddressBean bean;  
-	private int index;
+	private int index,statu;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		topRightTGone();
-		//		topRightLVisible(); 
-		//		topRightRVisible();
-		//		rl_l = (RelativeLayout) getTopLightRl();
-		//		rl_r = (RelativeLayout) getTopRightRl();
-		//		iv_top_l = (ImageView) getTopLightView();
-		//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-		//		iv_top_t = (ImageView) getTopRightView();
-		//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTitleTxt(R.string.address_title);
 		setContentXml(R.layout.address_home);
 		init();
@@ -161,18 +153,24 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 			Util.SetRedGone(context, rl_l);
 			isread = false;
 		}else if(isinit){
-			//			if(Util.detect(context)){
-			//				myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
-			//			}else{
-			//				Util.ShowToast(context, R.string.net_is_eor);
-			//			}
-			if(bean!=null){
-			list.remove(index);
-			list.add(index, bean);
-			bean=null;
-			adapter.SetData(list);
-			adapter.notifyDataSetChanged();
-			}
+//			if(statu==4){
+				if(Util.detect(context)){
+					myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+				}else{
+					Util.ShowToast(context, R.string.net_is_eor);
+				}
+//			}else {
+//				if(bean!=null){
+//					list.remove(index);
+//					list.add(index, bean);
+//					bean=null;
+//					adapter.SetData(list);
+//					adapter.notifyDataSetChanged();
+//				}
+//				list.remove(index);
+//				list.add(index, bean);
+//			}else {
+//			}
 			isinit = false;
 		}
 	}
@@ -260,7 +258,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 		if (resultCode == RESULT_OK) {  
 			AddressBean bean = (AddressBean) data.getExtras().get("ok"); 
 			//			if(index==1){
-			int statu = (Integer) data.getExtras().get("statu");
+			statu = (Integer) data.getExtras().get("statu");
 			if(statu==1){
 				for(int i=0;i<list.size();i++){
 					if(index==i){
@@ -270,9 +268,12 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 					}
 				}
 			}else if(statu==0){
-				list.add(bean);
-			}else{
+//				list.add(bean);
+			}else if(statu==2){
 				list.remove(index);
+			}else if(statu==3){//修改
+				list.remove(index);
+				list.add(index, bean);
 			}
 			adapter.SetData(list);
 			adapter.notifyDataSetChanged();

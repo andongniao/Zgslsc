@@ -76,7 +76,7 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 		type = getIntent().getIntExtra("type", -1);
 		from = getIntent().getIntExtra("from", -1);
 		if(type==1){
-			bean = (AddressBean) getIntent().getExtras().get("newsave");
+			bean = (AddressBean) getIntent().getExtras().get("newsave");//TODO
 			areaid = Integer.parseInt(bean.getAreaid());
 		}else{
 			bean = new AddressBean();
@@ -107,18 +107,22 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 			if(Util.IsNull(et_pp.getText().toString())){
 				if(Util.IsNull(et_num.getText().toString())){
 					if(Util.IsNull(et_code.getText().toString())){
-						if(Util.IsNull(et_diqu.getText().toString())){
-							if(Util.IsNull(et_address.getText().toString())){
-								if(Util.detect(context)){
-									myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+						if(et_code.getText().toString().length()==6){
+							if(Util.IsNull(et_diqu.getText().toString())){
+								if(Util.IsNull(et_address.getText().toString())){
+									if(Util.detect(context)){
+										myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
+									}else{
+										Util.ShowToast(context, R.string.net_is_eor);
+									}
 								}else{
-									Util.ShowToast(context, R.string.net_is_eor);
+									Util.ShowToast(context, "详细地址不能为空");
 								}
 							}else{
-								Util.ShowToast(context, "详细地址不能为空");
+								Util.ShowToast(context, "地区不能为空");
 							}
 						}else{
-							Util.ShowToast(context, "地区不能为空");
+							Util.ShowToast(context, "请检查邮编格式");
 						}
 					}else{
 						Util.ShowToast(context, "邮政编码不能为空");
@@ -250,7 +254,7 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 						  Intent intent=new Intent(); 
 						  if(from==1){
 							  intent.putExtra("ok", bean);  
-							  intent.putExtra("statu", 0);  
+								  intent.putExtra("statu", -1);  
 						  }else{
 							  intent.putExtra("result", bean);  
 							  AddressActivity.bean = bean;
