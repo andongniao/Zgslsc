@@ -658,7 +658,7 @@ void setrel(){
 				bean=p.Regist(5, name, pass, rname, type, areaid+"", dizhi,phone, pingzhongString, siliao, computer,
 						price, numproduct+"", "",num ,person);
 			}else{
-				bean=p.Regist(6, name, pass, rname, type, areaid+"", dizhi, phone,cname, ctype, cphone);
+//				bean=p.Regist(6, name, pass, rname, type, areaid+"", dizhi, phone,cname, ctype, cphone);
 			}
 			
 

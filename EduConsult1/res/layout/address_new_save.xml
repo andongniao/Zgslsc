@@ -19,6 +19,7 @@
 			android:textColor="@color/black"            
 			android:layout_marginBottom="1dp"
 			android:padding="7dp"
+			android:singleLine="true"
             />
         <EditText 
             android:id="@+id/address_new_save_et_phone"
@@ -30,6 +31,7 @@
 			android:textColor="@color/black"            
 			android:layout_marginBottom="1dp"
 			android:padding="7dp"
+			android:singleLine="true"
             />
         <EditText 
             android:id="@+id/address_new_save_et_uzheng"
@@ -41,6 +43,7 @@
 			android:textColor="@color/black"            
 			android:layout_marginBottom="1dp"
 			android:padding="7dp"
+			android:singleLine="true"
             />
         <EditText 
             android:id="@+id/address_new_save_et_diqu"
@@ -65,6 +68,7 @@
 			android:layout_marginBottom="1dp"
 			android:gravity="top|left"
 			android:padding="7dp"
+			android:singleLine="true"
             />
     </LinearLayout>
     <TextView 

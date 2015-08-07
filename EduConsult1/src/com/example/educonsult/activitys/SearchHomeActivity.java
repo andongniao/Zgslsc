@@ -182,6 +182,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		TestinAgent.init(this);
 		context = this;
 		//t = getIntent().getIntExtra("t", -1);
+		isnext = true;
 		page=1;
 		order=0;
 		type=0;

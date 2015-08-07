@@ -2208,11 +2208,12 @@ public class PostHttp {
 	 * @param company		公司名称
 	 * @param type			公司类型	中文即可
 	 * @param telephone		公司电话
+	 * @param tjr			推荐人
 	 * @return
 	 */
 	public BaseBean Regist(int regid,String username,String password,String truename,int gender
 			,String areaid,String address,
-			String mobile,String company,String type,String telephone) {  
+			String mobile,String company,String type,String telephone,String tjr) {  
 		BaseBean bean = new BaseBean();
 		String url = ServiceUrl.Base+"register.php";
 		List<NameValuePair> list = new ArrayList<NameValuePair>(); 
@@ -2241,6 +2242,8 @@ public class PostHttp {
 		list.add(p10);
 		NameValuePair p11 = new BasicNameValuePair("post[telephone]",telephone);
 		list.add(p11);
+		NameValuePair ps3 = new BasicNameValuePair("post_fields[tjr]",tjr);
+		list.add(ps3);
 
 
 
