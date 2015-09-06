@@ -2,7 +2,6 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -19,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -48,7 +48,7 @@ import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.UITools;
 import com.xunbo.store.tools.Util;
 
-@SuppressLint({ "InflateParams", "ShowToast" }) public class SearchHomeActivity extends BaseActivity implements OnClickListener{
+public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Context context;
 	private Editor er;
@@ -60,13 +60,16 @@ import com.xunbo.store.tools.Util;
 	private LinearLayout  ll_zonghe,ll_xiaoliang,ll_price,ll_renqi,isnull,isyes,isresult;
 	private ArrayList<String> l,ll;
 	private ArrayList<String> data_list;
+	private ArrayAdapter<String> arr_adapter;
 	private SearchAdapter adapter;
 	private boolean ishave,isnext;
 	private int t=0;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
+	private SearchAdapter adapter_r;
 	private static TextItemCenterListAdapter textItemCenterListAdapter;
+    private static int postion;
     private ThreadWithProgressDialog myPDT;
     private ListProductBean listProductBean;
     private ArrayList<ProductBean> list;
@@ -79,7 +82,8 @@ import com.xunbo.store.tools.Util;
 	private SearchResultAdapter searchResultAdapter;
 	private boolean num,price,renqi;
 	private ArrayList<View> list_view;
-	private ImageView iv_num,iv_price,iv_renqi;
+	private ImageView iv_back,iv_num,iv_price,iv_renqi;
+	public static boolean isfinish;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -182,6 +186,7 @@ import com.xunbo.store.tools.Util;
 		page=1;
 		order=0;
 		type=0;
+		isnext=true;
 		myPDT=new ThreadWithProgressDialog();
 		er = MyApplication.sp.edit();
 		sp = (TextView) findViewById(R.id.search_home_sp);
@@ -400,7 +405,7 @@ import com.xunbo.store.tools.Util;
 			price=false;
 			renqi=false;
 			num=false;
-			list_view.get(0).setBackgroundResource(R.drawable.jiantou_down);	
+			list_view.get(0).setBackgroundResource(R.drawable.jiantou_down);
 			list_view.get(1).setBackgroundResource(R.drawable.jiantou_down);
 			list_view.get(2).setBackgroundResource(R.drawable.jiantou_down);
 			break;
@@ -424,6 +429,7 @@ import com.xunbo.store.tools.Util;
 			case R.id.search_home_ll_xiaoliang:
 				text=et.getText().toString();
 				Change(0);
+				int i=0;
 				if(num){
 					order=2;
 				}else{
@@ -606,16 +612,10 @@ import com.xunbo.store.tools.Util;
 		super.onResume();
 		MobclickAgent.onPageStart("search"); 
 		MobclickAgent.onResume(this);
-	}
-	@Override
-	protected void onDestroy() {
-		if(myPDT!=null){
-			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
-				myPDT.getCustomDialog().dismiss();
-			}
-			myPDT=null;
+		if(isfinish){
+			isfinish=false;
+			finish();
 		}
-		super.onDestroy();
 	}
 	private class GetDataTask extends AsyncTask<Void, Void, Void>
 	{
@@ -749,6 +749,4 @@ import com.xunbo.store.tools.Util;
 			
 		}};
 	
-
 }
-

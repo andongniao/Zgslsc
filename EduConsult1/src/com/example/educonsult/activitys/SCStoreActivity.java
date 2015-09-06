@@ -45,7 +45,7 @@ import com.xunbo.store.tools.Util;
 	private View v_fenlei;
 	private Intent intent;
 	private LinearLayout lin;
-	public static boolean isrezoom;
+	public static boolean isrezoom,isfinish;
 	public Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
 	private ListCenterShopBean listCenterShopBean;
@@ -310,6 +310,10 @@ import com.xunbo.store.tools.Util;
 //			Toast.makeText(context, "重新加载数据", 1).show();
 //			isrezoom=false;
 //		}
+		if(isfinish){
+			isfinish=false;
+			finish();
+		}
 		if(Util.detect(context)){
 			//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
 			myPDT.Run(context, new RefeshData(0),R.string.loding);//不可取消

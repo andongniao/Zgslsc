@@ -44,7 +44,7 @@ import com.xunbo.store.tools.Util;
 	,tv_cname,tv_cway,tv_cphone,t_rname,t_diqu,t_phone,t_pingzhong,t_siliao,t_person;
 	private EditText ed_dizhi,ed_phone,e_dizhi,e_computer,e_price,e_product,e_num;
 	private Button button;
-	private int cardNum=0;
+	private String cardNum="0";
 	private ThreadWithProgressDialog myPDT;
 	private CenterUserBean centerbean;
 	private UserBean bean;
@@ -200,14 +200,14 @@ import com.xunbo.store.tools.Util;
 //			popu.showAsDropDown(ll_two_diqu);
 			break;
 		case R.id.myinfo_ll_mycard:
-			if(cardNum==0){
+			if("0".equals(cardNum)){
 				intent = new Intent(context,BDCardActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}else{
-//				intent = new Intent(context,BDCardActivity.class);
-//				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				startActivity(intent);
+				intent = new Intent(context,MoneyCarListActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
 			}
 			
 			break;
@@ -263,8 +263,11 @@ import com.xunbo.store.tools.Util;
 						//TODO	
 						Util.Getbitmap(icv_head, centerbean.getImg());
 						tv_name.setText(centerbean.getUsername());
-						//cardNum=Integer.getInteger(centerbean.getCatid());
-						if(cardNum==0){
+						if(Util.IsNull(centerbean.getBank())){
+//							String s =centerbean.getBank();
+							cardNum=centerbean.getBank();
+						}
+				   		if("0".equals(cardNum)){
 							mycardNum.setText("Î´°ó¶¨");
 							mycardNum.setTextColor(getResources().getColor(R.color.red));
 						}else{
@@ -292,7 +295,8 @@ import com.xunbo.store.tools.Util;
 							ed_phone.setText(centerbean.getMobile());
 							tv_cname.setText(centerbean.getCompany());
 							tv_cway.setText(centerbean.getTypes());
-							tv_cphone.setText("");
+							t_person.setText(centerbean.getTjr());
+							tv_cphone.setText(centerbean.getTelephone());
 							
 						}
 						

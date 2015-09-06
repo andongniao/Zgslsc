@@ -30,7 +30,7 @@ public class TextItemCenterListAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list!=null?list.size():5;
+		return list!=null?list.size():0;
 	}
 
 	@Override

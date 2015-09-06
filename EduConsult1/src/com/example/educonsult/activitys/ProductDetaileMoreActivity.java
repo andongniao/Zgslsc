@@ -264,6 +264,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			type=1;
 			
 			strstar="";
+			page=1;
 			//			if(!isall){
 			if(Util.detect(context)){
 				myPDT.Run(context, new RefeshData1(strstar),R.string.loding);//¿ÉÈ¡Ïû
@@ -274,7 +275,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_zhiliang:
 			type=2;
-			
+			page=1; 
 			strstar="3";
 			//			if(!isgood){
 			if(Util.detect(context)){
@@ -286,7 +287,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_fuwu:
 			type=3;
-			
+			page=1;
 			strstar="2";
 			//			if(!isok){
 			if(Util.detect(context)){
@@ -298,7 +299,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 			break;
 		case R.id.product_detaile_ll_add_view_pingjia_xiaoguo:
 			type=4;
-			
+			page=1;
 			strstar="1";
 			//			if(!isno){
 			if(Util.detect(context)){

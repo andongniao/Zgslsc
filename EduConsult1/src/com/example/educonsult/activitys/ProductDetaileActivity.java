@@ -612,7 +612,11 @@ import com.xunbo.store.tools.Util;
 //				ShopcartActivity.ischange=true;
 				ExampleActivity.setCurrentTab(2);
 				SearchResultActivity.isproductfinish=true;
+				SearchHomeActivity.isfinish=true;
 				MyZjActivity.isfinish=true;
+				StoreShopBaseActivity.isfinish=true;
+				SCProductActivity.isfinish=true;
+				SCStoreActivity.isfinish=true;
 				finish();
 			}else{
 				intent = new Intent(context,LoginActivity.class);

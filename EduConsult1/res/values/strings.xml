@@ -76,7 +76,7 @@
     <string name="regist_read">我已阅读并接受</string>
     <string name="regist_tiaokuan">中国饲料商城网服务条款</string>
     <string name="regist_inpu_error">请保证信息完整</string>
-    <string name="regist_password_mach">请输入6-20位的字母或数字</string>
+    <string name="regist_password_mach">密码应为6-20位的字母或数字</string>
     <string name="regist_password_need_is_one">两次密码不一致</string>
     <string name="regist_phone_isfalse">请输入正确的电话号码</string>
     <string name="regist_ok">注册成功</string>

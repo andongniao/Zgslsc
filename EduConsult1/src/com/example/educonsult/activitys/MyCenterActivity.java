@@ -216,7 +216,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 					Util.ShowToast(context, R.string.net_is_eor);
 				}
 			}else{
-
+				
 			}
 
 			return true;

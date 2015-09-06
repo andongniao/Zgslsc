@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -21,45 +21,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@drawable/ic_launcher" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical"
-            android:visibility="gone" 
-            >
-            
-
-            <TextView
-                android:id="@+id/moneycar_list_item_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_launcher" />
-
-            <TextView
+		<TextView
                 android:id="@+id/moneycar_list_item_carid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
                 android:textColor="@color/black"
-                android:visibility="gone" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           android:id="@+id/moneycar_list_item_ima"
-            android:textColor="@color/black" 
-            android:background="@drawable/address_isclick"
-            android:layout_gravity="center_vertical"/>
+                
+                />
+        
     </LinearLayout>
 
 </LinearLayout>
