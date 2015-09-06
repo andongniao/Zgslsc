@@ -30,7 +30,7 @@ public class MyCenterTuijianActivity extends BaseActivity implements OnClickList
 	private GridView gridView;
 	
 	private Intent intent;
-	private RelativeLayout rl_l,rl_r;
+	private RelativeLayout rl_l;
 	public static boolean isread;
 	public View ll_gqtwo_popu;
 	private LinearLayout ll_not;

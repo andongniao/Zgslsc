@@ -1,8 +1,10 @@
 package com.example.educonsult.activitys;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +24,7 @@ import com.testin.agent.TestinAgent;
  * @author Qzr
  * 
  */
-public abstract class BaseActivity extends Activity {
+@TargetApi(Build.VERSION_CODES.FROYO) public abstract class BaseActivity extends Activity {
 
 	protected int activityCloseEnterAnimation;
 
@@ -30,7 +32,9 @@ public abstract class BaseActivity extends Activity {
 	public TextView titleTv,right_tv;// 标题控件
 	public TextView topLeftTv;// 左上 控件（返回）
 	private ImageView topright_l,topright_r;
+	@SuppressWarnings("unused")
 	private LinearLayout baseContentLayout,topleftll,toprightll;// 添加内容控件
+	@SuppressWarnings("unused")
 	private RelativeLayout baseTopLayout,rl_l,rl_r;
 
 	//	private BaseLeftClickListener leftClickListener;// 左上 点击监听

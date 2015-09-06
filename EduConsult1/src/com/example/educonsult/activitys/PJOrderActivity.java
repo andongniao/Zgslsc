@@ -25,6 +25,7 @@ public class PJOrderActivity extends BaseActivity implements OnClickListener {
 	private EditText ed;
 	private Button button;
 	private ImageView imaone,imatwo,imathree;
+	@SuppressWarnings("unused")
 	private int isgood=5;
 	private Context context;
 	private ThreadWithProgressDialog myPDT;

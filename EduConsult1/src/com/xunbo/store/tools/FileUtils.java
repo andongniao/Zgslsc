@@ -317,6 +317,7 @@ public class FileUtils {
 	 * 
 	 * @return 返回-1，说明没有安装sd卡
 	 */
+	@SuppressWarnings("deprecation")
 	public static long getFreeDiskSpace() {
 		String status = Environment.getExternalStorageState();
 		long freeSpace = 0;

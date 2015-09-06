@@ -5,7 +5,8 @@ import org.osgi.framework.BundleContext;
 
 public class SimpleBundle implements BundleActivator
 {
-    private BundleContext mcontext = null;
+    @SuppressWarnings("unused")
+	private BundleContext mcontext = null;
     public void start(BundleContext context) throws Exception
     {
     }

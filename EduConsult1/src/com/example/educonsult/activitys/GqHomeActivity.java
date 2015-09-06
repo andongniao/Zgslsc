@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,7 +17,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -29,27 +29,28 @@ import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.ExampleActivity;
-import com.xunbo.store.adapters.GqAdapter;
 import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.adapters.KnowFenleiAdapter;
 import com.xunbo.store.adapters.TextItemListAdapter;
 import com.xunbo.store.myviews.MyGridView;
 import com.xunbo.store.tools.Util;
 
-public class GqHomeActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class GqHomeActivity extends BaseActivity implements OnClickListener{
+	@SuppressWarnings("unused")
 	private TextView tv_more_tuijian,tv_more_paied,
 	tv_price_l_tuijian,tv_price_t_tuijian,tv_price_r_tuijian,
 	tv_price_l_paied,tv_price_t_paied,tv_price_r_paied;
+	@SuppressWarnings("unused")
 	private ImageView iv_l_tuijian,iv_t_tuijian,iv_r_tuijian,
 	iv_l_paied,iv_t_paied,iv_r_paied;
 	private LinearLayout ll_l_tuijian,ll_t_tuijian,ll_r_tuijian,
 	ll_l_paied,ll_t_paied,ll_r_paied,ll_all,ll_diqu,ll_zhineng,ll_shaixuan,lll_r;
 	private ScrollView scrollView;
+	@SuppressWarnings("unused")
 	private PopupWindow popupWindow,pp_top_fenlei,popu,popup_shaixuan;
 	private boolean isshow;
 	private Context context;
 	private MyGridView gridView;
-	private GqAdapter adapter;
 	private ArrayList<Integer>list;
 	private Intent intent;
 	private ImageView iv_top_l,iv_top_t,gqtwo_1,gqtwo_2;
@@ -57,14 +58,13 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	public static boolean isread;
 	private View v_fenlei;
 	private ListView lv_l,lv_r;
-	private HomeSlidAdapter adapter_r,adapter_rl;
+	private HomeSlidAdapter adapter_rl;
 	private KnowFenleiAdapter adapter_l;
 	private LayoutInflater inflater;
 	public View ll_gqtwo_popu;
 	private TextItemListAdapter textItemListAdapter;
 	private ArrayList<String> zhinenglist;
 	private Button button;
-	private EditText edmin,edmax;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -254,6 +254,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		
 
 	}
+	@SuppressWarnings("deprecation")
 	private void setpopuwindow(Context contexts,ArrayList<String> list,LinearLayout lin){
 		inflater=LayoutInflater.from(contexts);
 		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);
@@ -277,6 +278,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		popu.setOutsideTouchable(true);
 		popu.showAsDropDown(lin);
 	}
+	@SuppressWarnings("deprecation")
 	void setShaixuanpopu(Context contexts,LinearLayout lin){
 		inflater=LayoutInflater.from(contexts);
 		v_fenlei = inflater.inflate(R.layout.gq_popw_price, null);
@@ -285,12 +287,11 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		popu.setBackgroundDrawable(new BitmapDrawable());
 		popu.setOutsideTouchable(true);
 		popu.showAsDropDown(lin);
-		edmin=(EditText)v_fenlei.findViewById(R.id.gq_popw_price_et_min);
-		edmax=(EditText)v_fenlei.findViewById(R.id.gq_popw_price_et_max);
 		button=(Button)v_fenlei.findViewById(R.id.gq_popw_price_btn_ok);
 		button.setOnClickListener(this);
 		
 	}
+	@SuppressWarnings("deprecation")
 	void setDiQuPopu(){
 		v_fenlei =  LayoutInflater.from(context).inflate(R.layout.know_slidemenu_view, null);
 		pp_top_fenlei = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
@@ -298,18 +299,12 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		pp_top_fenlei.setBackgroundDrawable(new BitmapDrawable());
 		pp_top_fenlei.setOutsideTouchable(true);
 		pp_top_fenlei.update();
-		ArrayList<String>ll = new ArrayList<String>();
 		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
 		lll_r = (LinearLayout) v_fenlei.findViewById(R.id.know_slid_view_ll_r);
 		ArrayList<Integer> l = new ArrayList<Integer>();
 		for(int i=0;i<8;i++){
 			l.add(i);
 		}
-//		adapter_rl = new HomeSlidAdapter(context, ll,2);
-//		lv_l.setAdapter(adapter_rl);
-//		lv_r = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_r);
-//		adapter_r = new HomeSlidAdapter(context, ll,3);
-//		lv_r.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -333,6 +328,7 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		pp_top_fenlei.showAsDropDown(ll_all);
 		
 	}
+	@SuppressWarnings("deprecation")
 	void setAllPopu(){
 		v_fenlei =  LayoutInflater.from(context).inflate(R.layout.know_slidemenu_view, null);
 		pp_top_fenlei = new PopupWindow(v_fenlei, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
@@ -340,7 +336,6 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 		pp_top_fenlei.setBackgroundDrawable(new BitmapDrawable());
 		pp_top_fenlei.setOutsideTouchable(true);
 		pp_top_fenlei.update();
-		ArrayList<String>ll = new ArrayList<String>();
 		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
 		lll_r = (LinearLayout) v_fenlei.findViewById(R.id.know_slid_view_ll_r);
 		ArrayList<Integer> l = new ArrayList<Integer>();
@@ -370,8 +365,6 @@ public class GqHomeActivity extends BaseActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.gq_popw_price_btn_ok:
-			String stmax=edmax.getText().toString().trim();
-			String stmin=edmin.getText().toString().trim();
 		    popu.dismiss();
 			break;
 		case R.id.gq_home_ll_all:

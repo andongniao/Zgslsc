@@ -11,7 +11,6 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +18,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,24 +48,24 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 	private TextView tv_jiesuan,tv_heji;
 	private CheckBox cb_all;
 	private shop shop;
+	@SuppressWarnings("unused")
 	private int type,len,cl;
 	private ImageView iv_top_t;
-	private RelativeLayout rl_r;
 	private UserBean bean;
 	private ListShopBean shopbean,shopbean2;
-	private ArrayList<ShopBean> shoplist,shoplist2;
-	private ArrayList<ShopItemBean> shopitemlist;
+	private ArrayList<ShopBean> shoplist2;
 	private ThreadWithProgressDialog myPDT;
 	private BaseBean besebean;
+	@SuppressWarnings("unused")
 	private boolean islist,clearb,ischoose;
 	public static boolean ischange;
 	private float sum,i_price;
 	private int inttype=0;
+	@SuppressWarnings("unused")
 	private int clearposition,clearindex,deposition,showtp;
 	private QuerenOrderBean querenOrderBean;
 	private ListShopBean listShopBean; 
 	private Intent intent;
-	private ShopBean shopbeansil;
 	private String strsum;
 
 
@@ -77,7 +75,6 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		goneTopLeft();
 		topRightRVisible();
 		topRightTGone();
-		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_t = (ImageView) getTopRightView();
 		iv_top_t.setBackgroundResource(R.drawable.del_icon_normal);
 		iv_top_t.setVisibility(View.GONE);
@@ -365,6 +362,7 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		void setnumber(ArrayList<ShopBean> list);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -472,14 +470,13 @@ public class ShopcartActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 	public class deleteRefeshData implements ThreadWithProgressDialogTask {
+		@SuppressWarnings("unused")
 		private ArrayList<ShopItemBean> shopitembeanlist;
 
-		private int position,index;
+		@SuppressWarnings("unused")
 		private final ArrayList<ShopBean> lists;
 		public deleteRefeshData(  ArrayList<ShopBean> lists){
 			this.lists=lists;
-			this.index=index;
-			this.position=position;
 		}
 
 		@Override

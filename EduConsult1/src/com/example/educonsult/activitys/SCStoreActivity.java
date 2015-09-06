@@ -4,6 +4,7 @@ package com.example.educonsult.activitys;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,51 +17,39 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.adapters.SCStoreAdapter;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.CenterShopBean;
 import com.xunbo.store.beans.ListCenterShopBean;
-import com.xunbo.store.myviews.MyListview;
 import com.xunbo.store.myviews.xlistview.XListView;
 import com.xunbo.store.myviews.xlistview.XListView.IXListViewListener;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.Util;
 
-public class SCStoreActivity extends BaseActivity implements OnClickListener,IXListViewListener{
+@SuppressLint("InflateParams") public class SCStoreActivity extends BaseActivity implements OnClickListener,IXListViewListener{
 	private LinearLayout reaLayout,ll_isno;
-	private TextView allway;
-	private ListView product_list;
-	private MyListview list_way;
 	private ListView list_2,lv_l;
 	private SCStoreAdapter scStoreAdapter;
 	private Context context;
-	private ArrayList<String> list;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
-	private HomeSlidAdapter adapter_r;
 	private LinearLayout lin;
 	public static boolean isrezoom;
 	public Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
 	private ListCenterShopBean listCenterShopBean;
-	private ArrayList<CenterShopBean> centerShopBeans,centerShopBeans2;
+	private ArrayList<CenterShopBean> centerShopBeans;
 	private XListView lv;
 	private Handler handler;
 	private String authstr;
@@ -80,6 +69,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	
 		
 	}
+	@SuppressWarnings("deprecation")
 	void init(){
 		TestinAgent.init(this);
 		authstr = MyApplication.mp.getUser().getAuthstr();
@@ -89,7 +79,6 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		type=1;
 		reaLayout=(LinearLayout)findViewById(R.id.scstore_allway_lin);
 		reaLayout.setOnClickListener(SCStoreActivity.this);
-		allway=(TextView)findViewById(R.id.scstore_allway);
 		ll_isno=(LinearLayout)findViewById(R.id.scstore_isnull);
 		lv=(XListView)findViewById(R.id.scstore_lv);
 		lv.setPullRefreshEnable(true);
@@ -103,7 +92,6 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		list_2=(ListView)v_fenlei.findViewById(R.id.know_slid_view_lv_r);
 		list_2.setVisibility(View.GONE);
 		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
-		ArrayList<String>ll = new ArrayList<String>();
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -314,7 +302,6 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 		}
 
 	}
-	private void initDate(){}
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub

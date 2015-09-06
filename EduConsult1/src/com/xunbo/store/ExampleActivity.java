@@ -25,6 +25,7 @@ public class ExampleActivity extends TabHostActivity {
 
 	private List<TabItem> mItems;
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void prepare() {
 		TabItem Home = new TabItem(R.drawable.base_home, 
@@ -108,6 +109,7 @@ public class ExampleActivity extends TabHostActivity {
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -115,6 +117,7 @@ public class ExampleActivity extends TabHostActivity {
 		MobclickAgent.onResume(this);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onPause() {
 		super.onPause();

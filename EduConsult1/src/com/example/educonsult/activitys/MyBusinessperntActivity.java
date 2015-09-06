@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,21 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
-import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.adapters.MyBusinessperAdapter;
-import com.xunbo.store.myviews.MyListview;
+import com.xunbo.store.tools.Util;
 
-public class MyBusinessperntActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class MyBusinessperntActivity extends BaseActivity implements OnClickListener{
 	private RelativeLayout reaLayout;
-	private TextView allquery;
 	private ListView list_money;
-	private MyListview list_way;
 	private ListView list_2,lv_l;
 	private MyBusinessperAdapter myBusinessperAdapter;
 	private Context context;
@@ -42,7 +38,6 @@ public class MyBusinessperntActivity extends BaseActivity implements OnClickList
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
-	private HomeSlidAdapter adapter_r;
 	private LinearLayout lin;
 	public static boolean isrezoom;
 	public Myorder myorder;
@@ -87,12 +82,12 @@ public class MyBusinessperntActivity extends BaseActivity implements OnClickList
 			}
 		});
 	}
+	@SuppressWarnings("deprecation")
 	void init(){
 		TestinAgent.init(this);
 		reaLayout=(RelativeLayout)findViewById(R.id.mybusinesspartners_rela);
 		reaLayout.setOnClickListener(this);
 		list_money=(ListView)findViewById(R.id.mybusinesspartners_list);
-		allquery=(TextView)findViewById(R.id.mybusinesspartners_allquery);
 		list=new ArrayList<String>();
 		list.add("1");
 		list.add("2");
@@ -126,9 +121,6 @@ public class MyBusinessperntActivity extends BaseActivity implements OnClickList
 		list_2=(ListView)v_fenlei.findViewById(R.id.know_slid_view_lv_r);
 		list_2.setVisibility(View.GONE);
 		lv_l = (ListView) v_fenlei.findViewById(R.id.know_slid_view_lv_l);
-		ArrayList<String>ll = new ArrayList<String>();
-//		adapter_r = new HomeSlidAdapter(context, ll,2);
-//		lv_l.setAdapter(adapter_r);
 		lv_l.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -150,7 +142,7 @@ public class MyBusinessperntActivity extends BaseActivity implements OnClickList
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(isrezoom){
-			Toast.makeText(context, "重新加载数据", 1).show();
+			Util.ShowToast(context, "重新加载数据");
 			isrezoom=false;
 		}
 		

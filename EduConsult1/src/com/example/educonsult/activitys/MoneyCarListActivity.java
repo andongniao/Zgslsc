@@ -3,12 +3,10 @@ package com.example.educonsult.activitys;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.educonsult.R;
@@ -20,8 +18,6 @@ public class MoneyCarListActivity extends BaseActivity{
 	private Context context;
 	private ArrayList<Integer> list;
 	private MoneyCarListAdapter adapter;
-	private ImageView iv_top_right;
-	private Intent intent; 
 	
 	
 	@Override

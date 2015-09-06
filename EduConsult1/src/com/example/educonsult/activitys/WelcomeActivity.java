@@ -14,13 +14,11 @@ import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.beans.AreaBean;
 import com.xunbo.store.beans.ListAreaBean;
 import com.xunbo.store.beans.ListComment;
 import com.xunbo.store.beans.ListFenleiBean;
 import com.xunbo.store.beans.ListMoneyBean;
 import com.xunbo.store.beans.ListProductBean;
-import com.xunbo.store.beans.ProdectDetaileBean;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
@@ -29,15 +27,12 @@ public class WelcomeActivity extends Activity{
 
 	protected int activityCloseExitAnimation;
 	private Handler hand;
-	private AreaBean list;
 	private Context context;
 	private ListAreaBean lb;
 	private ThreadWithProgressDialog myPDT;
-	private String auth = "kn769osgurrqjrl8ljuk0boik4";
 	private String filename_area = MyApplication.AreaName; 
 	private String filename_fen = MyApplication.FenleiName; 
 	private Util u;
-	private ProdectDetaileBean bean;
 	private ListFenleiBean lf;
 	private boolean ct,fl;
 	ListComment lbn;
@@ -62,13 +57,13 @@ public class WelcomeActivity extends Activity{
 				super.handleMessage(msg);
 				if (msg.what == 1) {
 					Intent intent;
-//					if(!MyApplication.mp.islogin){
-//					intent = new Intent(WelcomeActivity.this,
-//							LoginActivity.class);
-//					}else{
-						intent = new Intent(WelcomeActivity.this,
-								ExampleActivity.class);
-//					}
+					//					if(!MyApplication.mp.islogin){
+					//					intent = new Intent(WelcomeActivity.this,
+					//							LoginActivity.class);
+					//					}else{
+					intent = new Intent(WelcomeActivity.this,
+							ExampleActivity.class);
+					//					}
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(intent);
 					finish();
@@ -81,8 +76,8 @@ public class WelcomeActivity extends Activity{
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
-	new Thread(new Runnable() {
-			
+		new Thread(new Runnable() {
+
 			@Override
 			public void run() {
 				Send ss = new Send(context);
@@ -156,7 +151,7 @@ public class WelcomeActivity extends Activity{
 				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 				finish();
-//				Tologin();
+				//				Tologin();
 			}else{
 				Util.ShowToast(context, "初始化失败,请保证网络通畅后重试");
 			}
@@ -178,6 +173,7 @@ public class WelcomeActivity extends Activity{
 		super.finish();
 		overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation);
 	}
+	@SuppressWarnings("unused")
 	private void Tologin(){
 		Intent intent = new Intent(WelcomeActivity.this,
 				LoginActivity.class);
@@ -185,6 +181,16 @@ public class WelcomeActivity extends Activity{
 		startActivity(intent);
 		finish();
 	}
-	
+	@Override
+	protected void onDestroy() {
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
+		super.onDestroy();
+	}
+
 
 }

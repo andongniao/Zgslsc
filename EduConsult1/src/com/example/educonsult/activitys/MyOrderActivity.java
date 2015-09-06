@@ -81,16 +81,10 @@ import com.xunbo.store.tools.Util;
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setTitleTxt(R.string.myorder_title);
-		//		topRightRVisible();
 		topRightTGone();
-		//		rl_r = (RelativeLayout) getTopRightRl();
-		//		iv_top_r = (ImageView) getTopRightView();
-		//		iv_top_r.setBackgroundResource(R.drawable.top_home_bg);
 		setContentXml(R.layout.myorder_home_layout);
 		init();
 		addlistener();
-		/*************测试****************/
-		//		myPDT.Run(context, new RefeshData(init,type,pag,tag),R.string.loding);//可取消
 	}
 
 	private void addlistener() {
@@ -527,6 +521,7 @@ import com.xunbo.store.tools.Util;
 					if(baseBean!=null){
 						if("200".equals(baseBean.getCode())){
 							Util.ShowToast(context, "关闭成功");
+							MyCenterActivity.ischanged = true;
 						}else if("300".equals(baseBean.getCode())){
 							MyApplication.mp.setlogin(false);
 							Util.ShowToast(context, R.string.login_out_time);
@@ -545,6 +540,7 @@ import com.xunbo.store.tools.Util;
 						if("200".equals(paybean.getCode())){
 							if("0".equals(paybean.getType())){
 								Util.ShowToast(context, "支付成功");
+								MyCenterActivity.ischanged = true;
 							}else{
 								Util.ShowToast(context, paybean.getMsg());
 								//跳转充值
@@ -569,6 +565,7 @@ import com.xunbo.store.tools.Util;
 					if(baseBean!=null){
 						if("200".equals(baseBean.getCode())){
 							Util.ShowToast(context, "确认成功");	
+							MyCenterActivity.ischanged = true;
 						}else if("300".equals(baseBean.getCode())){
 							MyApplication.mp.setlogin(false);
 							Util.ShowToast(context, R.string.login_out_time);
@@ -691,6 +688,15 @@ import com.xunbo.store.tools.Util;
 			isinit = false;
 		}
 	}
-
+	@Override
+	protected void onDestroy() {
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
+		super.onDestroy();
+	}
 
 }

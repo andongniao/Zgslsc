@@ -1,25 +1,16 @@
 package com.example.educonsult.activitys;
 
-import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -28,32 +19,24 @@ import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.adapters.TextItemListAdapter;
 import com.xunbo.store.beans.AddressBean;
-import com.xunbo.store.beans.AreaBean;
 import com.xunbo.store.beans.BaseBean;
-import com.xunbo.store.beans.ListAreaBean;
 import com.xunbo.store.net.PostHttp;
-import com.xunbo.store.net.Send;
-import com.xunbo.store.tools.UITools;
 import com.xunbo.store.tools.Util;
 
 public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_diqu,ll_jiedao,ll_address,ll_shouhuoren,ll_number,ll_youbian;
+	@SuppressWarnings("unused")
 	private TextView tv_diqu,tv_jiedao,tv_delete,tv_save;
 	private EditText tv_address,tv_shouhuoren,tv_number,tv_youbian;
 	private CheckBox cb_set;
-	private boolean isok;
 	private Intent intent;
 	String num;
 	private int isdetault;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
+	private ImageView iv_top_t;
 	private Context context;
 	private ThreadWithProgressDialog myPDT;
 	private AddressBean bean;
-	private Util u;
-	private int type = 1,ttp;
 	private String diqu,dizhi,person,mob,postcode;
 	private BaseBean beanresult;
 	private boolean init,isture;
@@ -93,10 +76,8 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 	private void init() {
 		TestinAgent.init(this);
 		context=this;
-		u = new Util(context);
 		bean = (AddressBean) getIntent().getExtras().get("address");
 		myPDT = new ThreadWithProgressDialog();
-		String  msg = getResources().getString(R.string.loding);
 		num=getIntent().getStringExtra("addressnum");
 		isture = getIntent().getBooleanExtra("isture", false);
 		//		isok = false;
@@ -353,6 +334,16 @@ public class AddressGLActivity extends BaseActivity implements OnClickListener{
 			bean = (AddressBean) data.getExtras().get("result"); 
 			initData();
 		}
+	}
+	@Override
+	protected void onDestroy() {
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
+		super.onDestroy();
 	}
 
 }

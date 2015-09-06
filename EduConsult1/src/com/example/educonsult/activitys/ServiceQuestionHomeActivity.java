@@ -8,10 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.adapters.ServiceQuestionAdapter;
@@ -20,8 +17,6 @@ import com.xunbo.store.tools.Util;
 public class ServiceQuestionHomeActivity extends BaseActivity{
 	private Context context;
 	private Intent intent;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	private ListView lv;
 	private ServiceQuestionAdapter adapter;
@@ -31,15 +26,7 @@ public class ServiceQuestionHomeActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-//		topRightLVisible();
-//		topRightRVisible();
 		topRightTGone();
-//		rl_l = (RelativeLayout) getTopLightRl();
-//		rl_r = (RelativeLayout) getTopRightRl();
-//		iv_top_l = (ImageView) getTopLightView();
-//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-//		iv_top_t = (ImageView) getTopRightView();
-//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		title = getIntent().getStringExtra("title");
 		if(Util.IsNull(title)){
 			setTopLeftTv(title);

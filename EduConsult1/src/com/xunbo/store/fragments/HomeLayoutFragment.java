@@ -668,5 +668,14 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-
+	@Override
+	protected void onDestroy() {
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
+		super.onDestroy();
+	}
 }

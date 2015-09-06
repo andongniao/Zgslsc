@@ -25,7 +25,6 @@ import com.xunbo.store.beans.ListOrderBean;
 import com.xunbo.store.beans.OrderBean;
 import com.xunbo.store.myviews.xlistview.XListView;
 import com.xunbo.store.myviews.xlistview.XListView.IXListViewListener;
-import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 /**
@@ -39,6 +38,7 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 	private ApplyOrderHomeAdapter adapter;
 	private Intent intent;
 	private ThreadWithProgressDialog myPDT;
+	@SuppressWarnings("unused")
 	private String itemid,authstr;
 	private ListOrderBean lb;
 	private MyApply apply;
@@ -97,7 +97,6 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 		itemid = getIntent().getStringExtra("itemid");
 		authstr = MyApplication.mp.getUser().getAuthstr();
 		myPDT = new ThreadWithProgressDialog();
-		String  msg = getResources().getString(R.string.loding);
 		lv = (XListView) findViewById(R.id.apply_home_lv);
 		lv.setPullRefreshEnable(true);
 		lv.setPullLoadEnable(true);
@@ -194,7 +193,6 @@ public class ApplyOrderActivity extends BaseActivity implements IXListViewListen
 
 		@Override
 		public boolean TaskMain() {
-			PostHttp p = new PostHttp(context);
 			Send s = new Send(context);
 			lb = s.getOrderRefundList(page, authstr);
 			return true;

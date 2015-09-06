@@ -31,10 +31,11 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private MyZjAdapter adapter;
 	private ArrayList<String>list;
 	private Intent intent;
-	private RelativeLayout rl_l,rl_r;
+	private RelativeLayout rl_l;
 	public static boolean isread;
 	public View ll_gqtwo_popu;
 	private LinearLayout ll_not;
+	@SuppressWarnings("unused")
 	private ThreadWithProgressDialog myPDT;
 	private ArrayList<ProductBean> productBeans;
 	private ListProductBean listProductBean;
@@ -61,6 +62,7 @@ public class MyZjActivity extends BaseActivity implements OnClickListener{
 	private void addlistener() {
 		iv_top_t.setOnClickListener(new OnClickListener() {
 			
+			@SuppressWarnings("static-access")
 			@Override
 			public void onClick(View v) {
 				productBeans = MyApplication.mp.deleteSee(list);

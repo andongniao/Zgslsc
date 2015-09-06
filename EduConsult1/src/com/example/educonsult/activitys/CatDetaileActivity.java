@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -58,6 +57,7 @@ public class CatDetaileActivity extends BaseActivity implements OnClickListener{
 		}
 	}
 
+	@SuppressWarnings("static-access")
 	private void init() {
 		context = this;
 		Util u = new Util(context);

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.adapters.ZhanhuiDetaileLvAdapter;
-import com.xunbo.store.adapters.ZhanhuiHomeAdapter;
-import com.xunbo.store.myviews.MyGridView;
 import com.xunbo.store.myviews.MyListview;
 
 public class NewDetaileActivity extends BaseActivity{
@@ -17,8 +15,6 @@ public class NewDetaileActivity extends BaseActivity{
 	private Context context;
 	private ArrayList<Integer> list;
 	private ZhanhuiDetaileLvAdapter adapter;
-	private MyGridView gv_tuijian;
-	private ZhanhuiHomeAdapter adapter_gv;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {

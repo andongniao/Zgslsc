@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -28,31 +29,26 @@ import com.xunbo.store.MyApplication;
 import com.xunbo.store.adapters.MoneyQueryAdapter;
 import com.xunbo.store.adapters.TextItemListAdapter;
 import com.xunbo.store.beans.ListMoneyBean;
-import com.xunbo.store.beans.MoneyBagBean;
 import com.xunbo.store.beans.MoneyDetaileBean;
 import com.xunbo.store.beans.UserBean;
-import com.xunbo.store.myviews.MyListview;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
-public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout reaLayout;
 	private TextView allquery;
 	private ListView list_money;
-	private MyListview list_way;
-	private ListView list_2,lv_l;
+	private ListView lv_l;
 	private MoneyQueryAdapter moneyQueryAdapter;
 	private Context context;
-	private ArrayList<String> list,ll;
+	private ArrayList<String> ll;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private ImageView iv_top_l,iv_top_t,image;
+	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
 	private TextItemListAdapter adapter_r;
-	private LinearLayout lin;
-	private MoneyBagBean moneyBagBean;
 	private ListMoneyBean listmoneybean;
 	private UserBean bean;
 	private ArrayList<MoneyDetaileBean> moneylist;
@@ -96,16 +92,15 @@ public class MoneyQueryActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 	}
+	@SuppressWarnings("deprecation")
 	void init(){
 		TestinAgent.init(this);
 		bean=MyApplication.mp.getUser();
 		myPDT=new ThreadWithProgressDialog();
 		reaLayout=(LinearLayout)findViewById(R.id.qianbao_query_rela);
 		reaLayout.setOnClickListener(this);
-		image=(ImageView)findViewById(R.id.qianbao_query_image);
 		list_money=(ListView)findViewById(R.id.qianbao_query_list);
 		allquery=(TextView)findViewById(R.id.qianbao_query_allquery);
-		list=new ArrayList<String>();
 		
 		inflater=LayoutInflater.from(context);
 		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);

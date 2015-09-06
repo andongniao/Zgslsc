@@ -5,9 +5,9 @@ package com.xunbo.store.net;
  *
  */
 public class ServiceUrl {
-		public static String Base="http://www.zgslsc.com/app/";
+//		public static String Base="http://www.zgslsc.com/app/";
 //		public static String Base="http://www.shop.com/app/";
-//		public static String Base="http://192.168.1.190/app/";
+		public static String Base="http://192.168.1.190/app/";
 	//首页index.php
 	public static String Home_url=Base;
 	//首页
@@ -86,8 +86,10 @@ public class ServiceUrl {
 	public static String address_add = "?action=add&authstr=";
 
 	//搜索、产品
+	@SuppressWarnings("unused")
 	private static String fields = "fields.php?action=";
 
+	@SuppressWarnings("unused")
 	private static String fields_search = "search";
 
 

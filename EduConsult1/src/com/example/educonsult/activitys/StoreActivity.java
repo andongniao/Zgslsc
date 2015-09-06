@@ -1,8 +1,7 @@
 package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
-import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -29,15 +28,12 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.adapters.StoreAdapter;
-import com.xunbo.store.adapters.StoreFenleiAdapter;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.ListShopHomeBean;
 import com.xunbo.store.beans.ListStoreCatBean;
@@ -47,42 +43,47 @@ import com.xunbo.store.myviews.MyGridView;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.Util;
 
-public class StoreActivity extends Activity implements OnClickListener{
+@SuppressLint("InflateParams") public class StoreActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
 
 	protected int activityCloseExitAnimation;
 	private Context context;
+	@SuppressWarnings("unused")
 	private LinearLayout ll_addview,ll_rem;
 	private RelativeLayout rl_l;
 	private View v_fenlei,v_home,v_result;
 	private LayoutInflater inflater;
+	@SuppressWarnings("unused")
 	private TextView tv_h_title,tv_h_name,tv_h_comment,tv_h_number,
 	tv_h_miaoshu,tv_h_service,tv_h_wuliu,tv_result_title
 	,tv_pro_name,tv_price,tv_unit,tv_more,tv_online;
+	@SuppressWarnings("unused")
 	private ImageView iv_home_head,iv_rem;
 	private ScrollView home_sc;
-	private List<org.osgi.framework.Bundle> bundles=null;
 	private int showstatu,type;
 	private Intent intent;
 	public static boolean isread;
 	private ImageView iv_shoucang;
 	private MyGridView gv_home,gv_result;
-	private AddInterface addInterface;
 	private ArrayList<ProductBean> list;
 	private StoreAdapter home_adapter;
 	private  ListView fenlei_lv;
-	private StoreFenleiAdapter fenleiadapter;
 	private ThreadWithProgressDialog myPDT;
+	@SuppressWarnings("unused")
 	private int page,index,len,w,h;
+	@SuppressWarnings("unused")
 	private String authstr,storeid,storename,url;
 	private ListShopHomeBean bean;
+	@SuppressWarnings("unused")
 	private CircleImageView hean_iv;
 	private ArrayList<ProductBean> list_pro,list_rem;
 	private ListStoreCatBean catbean;
 	private PopupWindow popupWindow;
 	private boolean isshow,isshoucang;
 	private View v;
+	@SuppressWarnings("unused")
 	private int num;
+	@SuppressWarnings("unused")
 	private BaseBean result;
 	public static boolean isfinish;
 
@@ -111,13 +112,6 @@ public class StoreActivity extends Activity implements OnClickListener{
 		TestinAgent.init(this);
 		myPDT = new ThreadWithProgressDialog();
 		context = this;
-		addInterface = new AddInterface() {
-
-			@Override
-			public void Add2Shopcart(int index) {
-				//TODO 
-			}
-		};
 		isshoucang=false;
 		isfinish = false;
 		page = 1;
@@ -370,27 +364,6 @@ public class StoreActivity extends Activity implements OnClickListener{
 				Util.ShowToast(context, R.string.net_is_eor);
 			}
 			break;
-		}
-	}
-	public void startor(List<org.osgi.framework.Bundle> list){
-		org.osgi.framework.Bundle bundle=list.get(1);
-		if(bundle.getState()!=bundle.ACTIVE){
-			//判断插件是否已启动
-			try {
-				bundle.start();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if(bundle.getBundleActivity()!=null){
-			Intent i=new Intent();
-			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(i);
-		}else{
-
-			Toast.makeText(context, "该插件没有配置BundleActivity",
-					Toast.LENGTH_SHORT).show();
 		}
 	}
 	private void showView(int i) {

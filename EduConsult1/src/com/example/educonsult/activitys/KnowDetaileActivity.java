@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
@@ -23,16 +22,20 @@ import com.xunbo.store.tools.Util;
 
 public class KnowDetaileActivity extends BaseActivity implements OnClickListener{
 	private Context context;
-	private RelativeLayout rl_l,rl_r;
+	@SuppressWarnings("unused")
 	private TextView tv_title,tv_name_title,tv_fenlei,tv_num,tv_time_title,
 	tv_content,tv_name_huida,tv_time_huida,tv_commit,tv_more,tv_question,
 	tv_price_l,tv_price_t,tv_price_r;
+	@SuppressWarnings("unused")
 	private MyListview lv;
+	@SuppressWarnings("unused")
 	private EditText et;
 	private CheckBox cb;
 	private Intent intent;
+	@SuppressWarnings("unused")
 	private boolean type;
 	private ArrayList<ProductBean> list;
+	@SuppressWarnings("unused")
 	private ProductPingjiaAdapter adapter;
 
 

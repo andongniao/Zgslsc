@@ -1,8 +1,6 @@
  package com.example.educonsult.activitys;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,7 +29,7 @@ import com.xunbo.store.beans.UserBean;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
-public class LoginActivity extends BaseActivity implements OnClickListener{
+@SuppressLint({ "InflateParams", "ShowToast" }) public class LoginActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private EditText et_username,et_password;
 	private CheckBox cb_jizhu;
@@ -42,7 +40,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	private PopupWindow ppw;
 	private UserBean bean;
 	private ThreadWithProgressDialog myPDT;
-	private String msg;
 	
 
 	@Override
@@ -54,11 +51,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		setContentXml(R.layout.login_layout);
 		init();
 		myPDT = new ThreadWithProgressDialog();
-		msg = "登录中...";
-		//		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
@@ -114,12 +110,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 
 			break;
 		case R.id.login_et_password:
-			String tn = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			//			UPPayAssistEx.startPay ( this, null, null, tn, mMode); 
-			//			   doStartUnionPayPlugin(this, tn, mMode);
-			//			Intent intent = new Intent();
-			//			intent.setClass(this, SlPayActivity.class);
-			//			startActivity(intent);
 
 			break;
 		case R.id.login_cb_jizhu:

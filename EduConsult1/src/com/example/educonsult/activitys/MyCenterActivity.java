@@ -30,6 +30,7 @@ import com.xunbo.store.beans.CenterUserBean;
 import com.xunbo.store.beans.ListProductBean;
 import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.beans.UserBean;
+import com.xunbo.store.myviews.BadgeView;
 import com.xunbo.store.myviews.CircleImageView;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
@@ -40,9 +41,11 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Context context;
 	private Intent intent;
+	@SuppressWarnings("unused")
 	private LinearLayout ll_zhifu,ll_cp,ll_mima,ll_dp,ll_zj,ll_zf,ll_fh,ll_sh,ll_pj,ll_order,ll_address,
 	ll_qianbao,ll_xinjian,ll_jifen,ll_youhuiquan,ll_fenxiang,ll_fuwu,ll_update,ll_tuijian,ll_logout
 	,ll_ll_fahuo,ll_ll_shouhou,ll_ll_shouhuo,ll_ll_pingjia;
+	@SuppressWarnings("unused")
 	private ImageView iv_zhifu,iv_fahuo,iv_shouhuo,iv_pingjia;
 	private CircleImageView icv_head;
 	private TextView tv_version,tv_name,tv_cp,tv_dp;
@@ -50,6 +53,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private CenterUserBean cbean;
 	private CenterCountBean countbean;
 	private ThreadWithProgressDialog myPDT;
+	@SuppressWarnings("unused")
 	private String msg;
 	private String zjnum;
 	private Util u;
@@ -59,6 +63,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 	private ProgressDialog dialog;
 	private int inittype;
 	public  static boolean ischanged;
+	private BadgeView badge1,badge2,badge3,badge4;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -224,6 +229,7 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			return false;
 		}
 
+		@SuppressWarnings("unused")
 		@Override
 		public boolean OnTaskDone() {
 			if(inittype==2){
@@ -266,22 +272,59 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		tv_cp.setText(countbean.getProduct());
 		tv_dp.setText(countbean.getShop());
 		if(!"0".equals(countbean.getPaying())){
-
-			Util.SetRedNum(context, ll_zhifu,Integer.parseInt( countbean.getPaying()));
+			int num = Integer.parseInt(countbean.getPaying());
+			if(badge1!=null){
+				badge1.toggle();
+			}
+			badge1 = new BadgeView(context, ll_zhifu);
+			badge1.setText(""+num);
+			badge1.show();
+		}else{
+			if(badge1!=null){
+				badge1.toggle();
+			}
 		}
-
-		//		Util.SetRedNum(context, ll_ll_fahuo,Integer.parseInt( centerCountBean.getReceiving()));
 		if(!"0".equals(countbean.getPingjia())){
-
-			Util.SetRedNum(context, ll_ll_pingjia,Integer.parseInt( countbean.getPingjia()));
+			int num = Integer.parseInt(countbean.getPingjia());
+			if(badge2!=null){
+				badge2.toggle();
+			}
+			badge2 = new BadgeView(context, ll_ll_pingjia);
+			badge2.setText(""+num);
+			badge2.show();
+		}else{
+			if(badge2!=null){
+				badge2.toggle();
+			}
 		}
 		if(!"0".equals(countbean.getReceiving())){
 
-			Util.SetRedNum(context, ll_ll_shouhou,Integer.parseInt( countbean.getReceiving()));
+			int num = Integer.parseInt(countbean.getReceiving());
+			if(badge3!=null){
+				badge3.toggle();
+			}
+			badge3 = new BadgeView(context, ll_ll_shouhou);
+			badge3.setText(""+num);
+			badge3.show();
+		}else{
+			if(badge3!=null){
+				badge3.toggle();
+			}
 		}
 		if(!"0".equals(countbean.getTuikuan())){
 
-			Util.SetRedNum(context, ll_ll_shouhuo,Integer.parseInt( countbean.getTuikuan()));	
+			int num = Integer.parseInt(countbean.getTuikuan());
+			if(badge4!=null){
+				badge4.toggle();
+			}
+			badge4 = new BadgeView(context, ll_ll_shouhuo);
+			badge4.setText(""+num);
+			badge4.show();
+			
+		}else{
+			if(badge4!=null){
+				badge4.toggle();
+			}
 		}
 	}
 
@@ -301,16 +344,13 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 			intent = new Intent(context,SCProductActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-//			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.mycenter_home_ll_dp:
 			intent = new Intent(context,SCStoreActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-			//			Util.ShowToast(context, R.string.maimeng);
 			break;
 		case R.id.myinfo_ll_youhuiquan:
-			//intent = new Intent(context,ConfirmTheDeliveryActivity.class);
 			intent = new Intent(context,CouponsActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
@@ -463,5 +503,14 @@ public class MyCenterActivity extends BaseActivity implements OnClickListener{
 		MobclickAgent.onPageEnd("center"); 
 		MobclickAgent.onPause(context);
 	}
-
+	@Override
+	protected void onDestroy() {
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
+		super.onDestroy();
+	}
 }

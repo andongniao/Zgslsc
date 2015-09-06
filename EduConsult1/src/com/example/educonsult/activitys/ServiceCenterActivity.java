@@ -1,6 +1,5 @@
 package com.example.educonsult.activitys;
 
-import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,12 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
@@ -33,7 +29,6 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	tv_zhuanjia_1_online,tv_zhuanjia_1_qq,tv_zhuanjia_2_online,tv_zhuanjia_2_qq;
 	private Context context;
 	private Intent intent;
-	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	private String title;
@@ -41,21 +36,13 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-//		topRightLVisible();
-//		topRightRVisible();
 		topRightTGone();
-//		rl_l = (RelativeLayout) getTopLightRl();
-//		rl_r = (RelativeLayout) getTopRightRl();
-//		iv_top_l = (ImageView) getTopLightView();
-//		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
-//		iv_top_t = (ImageView) getTopRightView();
-//		iv_top_t.setBackgroundResource(R.drawable.top_home_bg);
 		setTitleTxt(R.string.service_center_title);
 		setContentXml(R.layout.service_center_layout);
 		init();
-		//addlistener();
 	}
 
+	@SuppressWarnings("unused")
 	private void addlistener() {
 		rl_l.setOnClickListener(new OnClickListener() {
 
@@ -276,28 +263,6 @@ public class ServiceCenterActivity extends BaseActivity implements OnClickListen
 			ShowDialog();
 		}
 
-	}
-	public void startor(List<org.osgi.framework.Bundle> list){
-		org.osgi.framework.Bundle bundle=list.get(1);
-		if(bundle.getState()!=bundle.ACTIVE){
-			//判断插件是否已启动
-			try {
-				bundle.start();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if(bundle.getBundleActivity()!=null){
-			Intent i=new Intent();
-			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(i);
-		}else{
-
-			Toast.makeText(context, "该插件没有配置BundleActivity",
-					Toast.LENGTH_SHORT).show();
-		}
 	}
 	@Override
 	protected void onResume() {

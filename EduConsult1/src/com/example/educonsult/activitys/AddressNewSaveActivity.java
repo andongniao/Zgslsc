@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -35,7 +36,7 @@ import com.xunbo.store.tools.Util;
  * @author Qzr
  *
  */
-public class AddressNewSaveActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class AddressNewSaveActivity extends BaseActivity implements OnClickListener{
 	private AddressBean bean;
 	private Intent intent;
 	private Context context;
@@ -44,15 +45,13 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 	private PopupWindow popu;
 	private int areaid;
 	private TextItemListAdapter adapter_r;
-	private ArrayList<String> list;
-	private ListView list_2,lv_l;
+	private ListView lv_l;
 	private LayoutInflater inflater;
 	private View v_fenlei;
 	private ArrayList<AreaBean>listsheng,listshi,listxian;
 	private ThreadWithProgressDialog myPDT;
-	private String filename;
-	private Util u;
 	private ListAreaBean lare;
+	@SuppressWarnings("unused")
 	private boolean ischanged;
 	private BaseBean basebean;
 	private int from;
@@ -66,13 +65,12 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 		init();
 	}
 
+	@SuppressWarnings("static-access")
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
-		u = new Util(context);
 		myPDT = new ThreadWithProgressDialog();
 		lare = MyApplication.mp.lare;
-		filename = MyApplication.AreaName;
 		type = getIntent().getIntExtra("type", -1);
 		from = getIntent().getIntExtra("from", -1);
 		if(type==1){
@@ -142,6 +140,7 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 	}
 
 
+	@SuppressWarnings("deprecation")
 	private void setpopuwindow(Context contexts,ListAreaBean larea,EditText e){
 		//		listsheng = lare.getList();
 		final ArrayList<String> list = new ArrayList<String>(); 
@@ -306,7 +305,12 @@ public class AddressNewSaveActivity extends BaseActivity implements OnClickListe
 	}
 	@Override
 	protected void onDestroy() {
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
 		super.onDestroy();
 	}
-
 }

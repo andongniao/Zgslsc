@@ -1,8 +1,5 @@
 package com.example.educonsult.activitys;
 
-import java.util.List;
-
-import org.apkplug.app.FrameworkInstance;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
@@ -29,11 +25,9 @@ import com.xunbo.store.tools.Util;
 public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private Intent intent;
+	@SuppressWarnings("unused")
 	private TextView tv_name,tv_cname,tv_money,tv_time,tv_way,tv_applying,tv_why,tv_text;
 	private LinearLayout ll_talk;
-	private int time=5;
-	private List<org.osgi.framework.Bundle> bundles=null;
-	private FrameworkInstance frame=null;
 	private ThreadWithProgressDialog myPDT;
 	private RefundInfoDetaileBean bean;
 	private String itemid,authstr;
@@ -60,12 +54,6 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 		context = this;
 		itemid = getIntent().getStringExtra("itemid");
 		authstr = MyApplication.mp.getUser().getAuthstr();
-		//		private TextView tv_name,tv_cname,tv_money,
-		//		tv_time,tv_way
-		//		,tv_talk,tv_applying,tv_why;
-		//		private LinearLayout ll_talk;
-		frame = MyApplication.frame;
-
 		tv_name=(TextView)findViewById(R.id.applyinfo_shopkeeper);
 		tv_text=(TextView)findViewById(R.id.applyinfo_apptexttime);
 		tv_cname=(TextView)findViewById(R.id.applyinfo_computername);
@@ -79,29 +67,6 @@ public class ApplyInfoActivity extends BaseActivity implements OnClickListener{
 		//		tv_text.setText("（若"+time+"天内商家未处理，退款申请将达成并退款至您的银行卡中。）");
 
 		myPDT = new ThreadWithProgressDialog();
-		String  msg = getResources().getString(R.string.loding);
-	}
-	public void startor(List<org.osgi.framework.Bundle> list){
-		org.osgi.framework.Bundle bundle=list.get(1);
-		if(bundle.getState()!=bundle.ACTIVE){
-			//判断插件是否已启动
-			try {
-				bundle.start();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		if(bundle.getBundleActivity()!=null){
-			Intent i=new Intent();
-			i.setClassName(context, bundle.getBundleActivity().split(",")[0]);
-			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(i);
-		}else{
-
-			Toast.makeText(context, "该插件没有配置BundleActivity",
-					Toast.LENGTH_SHORT).show();
-		}
 	}
 	@Override
 	public void onClick(View v) {

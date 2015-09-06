@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,13 +31,15 @@ import com.xunbo.store.adapters.ZhanhuilvAdapter;
 import com.xunbo.store.myviews.MyGridView;
 import com.xunbo.store.myviews.MyListview;
 
-public class ZhanhuiHomeActivity extends Activity implements OnClickListener{
+@SuppressLint("InflateParams") public class ZhanhuiHomeActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
 
 	protected int activityCloseExitAnimation;
 	
 	private Context context;
+	@SuppressWarnings("unused")
 	private LinearLayout ll_back,ll_jinxuan_l,ll_jinxuan_t,ll_jinxuan_r,ll_add;
+	@SuppressWarnings("unused")
 	private ImageView iv_up_hot,iv_down_hot,iv_up_tuijian,iv_down_tuijian;
 	private TextView tv_title;
 	private MyGridView gv_hot,gv_tuijian;
@@ -166,7 +169,6 @@ public class ZhanhuiHomeActivity extends Activity implements OnClickListener{
 		}
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(context, "click"+x, 1000).show();
 			if(pos==-1){
 				list_view.get(x).setBackgroundResource(R.color.orn);
 			}else{

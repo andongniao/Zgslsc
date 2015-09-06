@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -36,8 +35,7 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 	private AddressHomeAdapter adapter;
 	private Context context;
 	private Intent intent;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
+	private RelativeLayout rl_l;
 	public static boolean isread,isinit;
 	private ThreadWithProgressDialog myPDT;
 	private ListAddressBean lisetbean;
@@ -249,8 +247,14 @@ public class AddressActivity extends BaseActivity implements OnClickListener{
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
 		OrderActivity.isinit = true;
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
+		super.onDestroy();
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.simonvt.datepicker.DatePickDialog;
 import net.simonvt.datepicker.DatePickDialog.IgetDate;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -33,17 +34,17 @@ import com.xunbo.store.beans.ListOrderWuliu;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.Util;
 
-public class ConfirmTheDeliveryActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class ConfirmTheDeliveryActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_way,ll_time;
+	@SuppressWarnings("unused")
 	private EditText ed_way,ed_phone,ed_carid,ed_wuliuid;
 	private TextView tv_time,tv_tp;
 	private Button button;
 	private Context context;
-	private ArrayList<String> list;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private ListView list_2,lv_l;
+	private ListView lv_l;
 	private TextItemListAdapter adapter_r;
 	private DatePickDialog datePickDialog;
 	private ThreadWithProgressDialog myPDT;
@@ -61,7 +62,6 @@ public class ConfirmTheDeliveryActivity extends BaseActivity implements OnClickL
 		setContentXml(R.layout.confirm_the_delivery);
 		init();
 		myPDT = new ThreadWithProgressDialog();
-		String  msg = getResources().getString(R.string.loding);
 		addtype=1;
 		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 	}
@@ -143,6 +143,7 @@ public class ConfirmTheDeliveryActivity extends BaseActivity implements OnClickL
 			return false;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public boolean OnTaskDone() {
 			//任务完成后

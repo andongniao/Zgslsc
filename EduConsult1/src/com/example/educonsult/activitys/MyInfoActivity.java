@@ -3,6 +3,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -34,12 +34,11 @@ import com.xunbo.store.myviews.CircleImageView;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
-public class MyInfoActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_head,ll_friend,ll_mycard,ll_diqu,ll_qiye,ll_geren,ll_two_diqu;
 	private Context context;
 	private Intent intent;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
+	private RelativeLayout rl_l;
 	public static boolean isread;
 	private TextView mycardNum,tv_name,tv_level,tv_rname,tv_diqu
 	,tv_cname,tv_cway,tv_cphone,t_rname,t_diqu,t_phone,t_pingzhong,t_siliao,t_person;
@@ -49,11 +48,10 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 	private ThreadWithProgressDialog myPDT;
 	private CenterUserBean centerbean;
 	private UserBean bean;
-	private ArrayList<String> list;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private ListView list_2,lv_l;
+	private ListView lv_l;
 	private TextItemListAdapter adapter_r;
 	private CircleImageView icv_head;
 	
@@ -100,6 +98,7 @@ public class MyInfoActivity extends BaseActivity implements OnClickListener{
 //		});
 	}
 
+	@SuppressWarnings("deprecation")
 	private void init() {
 		TestinAgent.init(this);
 		context = this;

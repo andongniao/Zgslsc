@@ -2,10 +2,10 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
-import com.astuetz.PagerSlidingTabStrip;
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
@@ -32,8 +31,6 @@ import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.adapters.GqAdapter;
 import com.xunbo.store.adapters.HomeRuzhuAdapter;
-import com.xunbo.store.adapters.HomeSlidAdapter;
-import com.xunbo.store.adapters.KnowFenleiAdapter;
 import com.xunbo.store.beans.CompanyBean;
 import com.xunbo.store.beans.FenleiBean;
 import com.xunbo.store.beans.ListCompanyBean;
@@ -45,17 +42,15 @@ import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
-public class GqTwoActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private ScrollView scrollView;
 	private PopupWindow popupWindow;
 	private boolean isshow;
 	private HomeRuzhuAdapter adapter;
 	//	private GridView gv_dh;
+	@SuppressWarnings("unused")
 	private MyGridView gv_pp,gv_dh,gv_dh_xq;
-	private ArrayList<CompanyBean>list;
-	private PagerSlidingTabStrip tabs;
-	private ViewPager pager;
 	private LinearLayout add_ll,jp_ll;
 	private TextView tv_b,tv_text,tv_l,tv_t,tv_r,util_l,util_t,util_r;
 	private ArrayList<View> l;
@@ -66,12 +61,10 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 	public View ll_gqtwo_popu;
 	private LinearLayout ll_jingxuan_l,ll_jingxuan_t,ll_jingxuan_r;
 	//public LinearLayout ll_gqtwo_popu;
-	private ImageView iv_top_l,iv_top_t,gqtwo_1,gqtwo_2,ima_l,ima_r,ima_t;
+	private ImageView iv_top_t,gqtwo_1,gqtwo_2,ima_l,ima_r,ima_t;
 	private RelativeLayout rl_l,rl_r;
 	public static boolean isread;
 	private ThreadWithProgressDialog myPDT;
-	private HomeSlidAdapter adapter_r;
-	private KnowFenleiAdapter adapter_l;
 	private ListFenleiBean listFenleiBean;
 	private String filename=MyApplication.FenleiName;
 	private ArrayList<FenleiBean> fenleilist, listchile;
@@ -199,7 +192,6 @@ public class GqTwoActivity extends BaseActivity implements OnClickListener{
 		num=1;
 		page=1;
 		l = new ArrayList<View>();
-		list = new ArrayList<CompanyBean>();
 		scrollView = (ScrollView) findViewById(R.id.gq_two_sc);
 		ll_jingxuan_l = (LinearLayout) findViewById(R.id.gq_two_ll_jingxuan_l);
 		ll_jingxuan_l.setOnClickListener(this);

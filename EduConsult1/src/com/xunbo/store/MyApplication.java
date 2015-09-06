@@ -34,6 +34,7 @@ public class MyApplication extends Application{
 	public static String AreaName = "Area";
 	public static String FenleiName = "Fenlei";
 	public static String Seejilu = "Seejilu";
+	@SuppressWarnings("unused")
 	private static String Username ="";
 	public static MyApplication mp;
 	public static int money_home = 1;

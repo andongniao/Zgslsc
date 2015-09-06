@@ -54,6 +54,7 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 	private int order;
 	private int page,addtype;
 	private String text;
+	@SuppressWarnings("unused")
 	private boolean islist,isfinish,isnext;
 	public static boolean isproductfinish;
 	private TextView tv_guanjian;
@@ -339,7 +340,6 @@ public class SearchResultActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.search_result_ll_xiaoliang:
 			Change(0);
-			int i=0;
 			if(num){
 				order=2;
 			}else{

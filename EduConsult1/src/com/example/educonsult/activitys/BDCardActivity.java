@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,13 +14,10 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
@@ -28,12 +26,10 @@ import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.adapters.TextItemListAdapter;
-import com.xunbo.store.beans.AreaBean;
 import com.xunbo.store.beans.BanksBean;
 import com.xunbo.store.beans.BanksBranchBean;
 import com.xunbo.store.beans.BanksCityBean;
 import com.xunbo.store.beans.BaseBean;
-import com.xunbo.store.beans.ListAreaBean;
 import com.xunbo.store.beans.ListBanksBean;
 import com.xunbo.store.beans.ListBanksBranch;
 import com.xunbo.store.beans.ListBanksCity;
@@ -44,25 +40,18 @@ import com.xunbo.store.tools.Util;
 public class BDCardActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_carway,ll_carwhere,ll_carzhihang;
 	private TextView tv_carway,tv_carwhere,tv_carzhihang,tv_name,tv_cid;
-	private ListView list_2,lv_l;
+	private ListView lv_l;
 	private Context context;
-	private ArrayList<String> list1,list2,list3,list4;
+	private ArrayList<String> list1,list2,list3;
+	@SuppressWarnings("unused")
 	private PopupWindow popu,popu_carway,popu_carwhere,popu_carzhihang;
 	private boolean ishave;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
 	
-	private LinearLayout lin;
 	public static boolean isrezoom;
 	private TextItemListAdapter adapter_r;
-	
-	private ListAreaBean listAreaBean; 
-	private Util u;
-	private String filename;
-	private ArrayList<AreaBean> areaBeans;
 	
 	private ListBanksCity listBanksCity;
 	private ArrayList<BanksCityBean> banksCityBeans;
@@ -70,11 +59,13 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 	private ListBanksBean listBanksBean;
 	private ArrayList<BanksBean> banks;
 	private ArrayList<String> provinces;
-	private int intype=0,tnumm,citytype;
+	private int intype=0,citytype;
+	@SuppressWarnings("unused")
 	private String province,bankKey,strCity,citynum,bankname,s_name,s_ctype,s_cid;
 	private ListBanksBranch listBanksBranch;
 	private ArrayList<BanksBranchBean> banksBranchBeans;
 	
+	@SuppressWarnings("unused")
 	private boolean istrue,isdizhi,iszhihang;
 	private Button button;
 	private BaseBean bean;
@@ -99,8 +90,6 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 	}
 	void init(){
 		TestinAgent.init(this);
-		filename=MyApplication.AreaName;
-		u=new Util(context);
 		/*listAreaBean=(ListAreaBean)u.readObject(filename);
 		areaBeans=listAreaBean.getList();*/
 		myPDT=new ThreadWithProgressDialog();
@@ -127,7 +116,7 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 		MobclickAgent.onPageStart( "BDCardActivity" );
 		MobclickAgent.onResume(this);
 		if(isrezoom){
-			Toast.makeText(context, "重新加载数据", 1).show();
+			Util.ShowToast(context, "重新加载数据");
 			isrezoom=false;
 		}
 	}
@@ -140,6 +129,7 @@ public class BDCardActivity extends BaseActivity implements OnClickListener{
 	}
 	
 
+	@SuppressLint("InflateParams") @SuppressWarnings("deprecation")
 	private void setpopuwindow(Context contexts,ArrayList<String> list,LinearLayout lin){
 		inflater=LayoutInflater.from(contexts);
 		v_fenlei = inflater.inflate(R.layout.moneycar_list, null);

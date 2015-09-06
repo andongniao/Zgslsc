@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,10 +30,13 @@ import com.xunbo.store.adapters.ZhanhuilvAdapter;
 import com.xunbo.store.myviews.MyGridView;
 import com.xunbo.store.myviews.MyListview;
 
-public class NewHomeActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class NewHomeActivity extends BaseActivity implements OnClickListener{
 	private Context context;
+	@SuppressWarnings("unused")
 	private LinearLayout ll_back,ll_jinxuan_l,ll_jinxuan_t,ll_jinxuan_r,ll_add;
+	@SuppressWarnings("unused")
 	private ImageView iv_up_hot,iv_down_hot,iv_up_tuijian,iv_down_tuijian;
+	@SuppressWarnings("unused")
 	private TextView tv_title;
 	private MyGridView gv_hot,gv_tuijian;
 	private ZhanhuiHomeAdapter adapter_gv;
@@ -45,7 +49,9 @@ public class NewHomeActivity extends BaseActivity implements OnClickListener{
 	private MyListview lv;
 	private ZhanhuilvAdapter adapter_lv;
 	private Intent intent;
+	@SuppressWarnings("unused")
 	private ImageView iv_top_l,iv_top_t;
+	@SuppressWarnings("unused")
 	private RelativeLayout rl_l,rl_r;
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -175,7 +181,6 @@ public class NewHomeActivity extends BaseActivity implements OnClickListener{
 		}
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(context, "click"+x, 1000).show();
 			if(pos==-1){
 				list_view.get(x).setBackgroundResource(R.color.orn);
 			}else{

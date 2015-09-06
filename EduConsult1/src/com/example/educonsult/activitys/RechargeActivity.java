@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,8 +31,6 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 	private EditText money;
 	private LinearLayout carInfo;
 	private Context context;
-	private Intent intent;
-	private ImageView carIc;
 	private Button submit;
 	private String mMode = "00";
 	private String Tn = "";
@@ -71,7 +68,6 @@ public class RechargeActivity extends BaseActivity implements OnClickListener{
 		authstr = MyApplication.mp.getUser().getAuthstr();
 		carId=(TextView)findViewById(R.id.recharge_tv_bankname);
 		money=(EditText)findViewById(R.id.recharge_edmoney);
-		carIc=(ImageView)findViewById(R.id.recharge_ic);
 		carInfo=(LinearLayout)findViewById(R.id.recharge_car);
 		carInfo.setOnClickListener(this);
 		submit=(Button)findViewById(R.id.recharge_up);

@@ -3,6 +3,7 @@ package com.example.educonsult.activitys;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -37,15 +37,11 @@ import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
 import com.xunbo.store.adapters.HomeGridAdapter;
-import com.xunbo.store.adapters.HomeLikeAdapter;
 import com.xunbo.store.adapters.ProductPingjiaAdapter;
 import com.xunbo.store.adapters.TextItemCenterListAdapter;
 import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.CommentBean;
-import com.xunbo.store.beans.CommentStar;
-import com.xunbo.store.beans.HomeBean;
 import com.xunbo.store.beans.ListComment;
-import com.xunbo.store.beans.ListProductBean;
 import com.xunbo.store.beans.MallInfoBean;
 import com.xunbo.store.beans.ProdectDetaileBean;
 import com.xunbo.store.beans.ProductBean;
@@ -57,19 +53,22 @@ import com.xunbo.store.myviews.ScrollViewExtend;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
-public class ProductDetaileActivity extends Activity implements OnClickListener{
+@SuppressLint("InflateParams") public class ProductDetaileActivity extends Activity implements OnClickListener{
 	protected int activityCloseEnterAnimation;
 	protected int activityCloseExitAnimation;
 	private Context context;
 	private ScrollViewExtend scrollView;
+	@SuppressWarnings("unused")
 	private LinearLayout ll_addshopcart,ll_gopay,ll_as_l,ll_as_t,ll_as_r,
 	ll_paied_l,ll_paied_t,ll_paied_r,ll_add_chanpin,ll_add_pingjia,ll_add_dianpu,
 	ll_add_view_chanpin,ll_add_view_pingjia,ll_add_view_dianpu,ll_kefu,ll_shouchang
 	,ll_buy,ll_nobuy,ll_chanpin,ll_pingjia,ll_tuijian,ll_topchanpin,ll_toppingjia,ll_toptuijian,ll_top;
 	private boolean isshow;
 	private PopupWindow popupWindow,popuyunfei;
+	@SuppressWarnings("unused")
 	private int w,h,lh;
 	private Intent intent;
+	@SuppressWarnings("unused")
 	private TextView chanpin,pingjia,dianpu,pingjiamore,add,buymore,tv_title
 	,tv_shangcheng,tv_danjia,tv_qidingliang,tv_xiaoliang,tv_kucun,tv_chandi
 	,tv_computer,tv_miaoshu,tv_taidu,tv_fahuo,topchanpin,toppingjia,toptuijian,
@@ -77,8 +76,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private GridView gridView;
 	private MyListview listView;
 	private ProductPingjiaAdapter pingjiaAdapter;
-	private ArrayList<ProductBean> list,liulanlist;
-	private HomeLikeAdapter homeLikeAdapter;
 	private ProdectDetaileBean productdetailbean;
 	private ThreadWithProgressDialog myPDT;
 	private MallInfoBean mallinfo;
@@ -86,25 +83,20 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 	private ArrayList<ProductBean> buyedlist;
 	private ImageCycleView imageview;
 	private ArrayList<String> images;
+	@SuppressWarnings("unused")
 	private ImageView b_l,b_t,b_r,t_l,t_t,t_r,shoucang;
+	@SuppressWarnings("unused")
 	private TextView tb_l,tb_t,tb_r,tt_l,tt_t,tt_r,tv_content;
 	private ListComment listComment;
 	private ArrayList<CommentBean> comlist;
-	private ArrayList<CommentStar> comstar;
 	private ProductBean productBean;
-	private String liulanfile,storename;
-	private Util u;
-	private boolean isSave,iserror;
+	private String storename;
 	private UserBean userbean;
 	private BaseBean bean,bean2;
-	private HomeBean home;
-	private TextView[] tvtuijian;
-	private ImageView[] imtuijian;
-	private ListProductBean listProductBean;
 	private LinearLayout dianpulin;
 	private View expresslin;
-	private ImageView iv_top_t,ima_pingjia,ima_chanpin,ima_tuijian,ima_fanhui,ima_shop;
-	private RelativeLayout rl_r;
+	private ImageView ima_pingjia,ima_chanpin,ima_tuijian,ima_fanhui,ima_shop;
+	@SuppressWarnings("unused")
 	private int refeshDatatype,chanpingx,chanpingy,pingjiax,pingjiay,tuijianx,tuijiany,topx,topy;
 	private HomeGridAdapter recommendAdapter;
 	private ArrayList<String> listExpress;
@@ -129,6 +121,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		addlistener();
 	}
 
+	@SuppressWarnings("static-access")
 	private void init() {
 		TestinAgent.init(this);
 		context = this;
@@ -145,7 +138,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		recommend=new ArrayList<ProductBean>();
 		buyedlist=new ArrayList<ProductBean>();
 		comlist=new ArrayList<CommentBean>();
-		comstar=new ArrayList<CommentStar>();
 		DisplayMetrics  dm = new DisplayMetrics();  
 		getWindowManager().getDefaultDisplay().getMetrics(dm);  
 		w = dm.widthPixels;  
@@ -186,7 +178,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		tv_content = (TextView) findViewById(R.id.product_detaile_product_main_ingredients_edit);
 		chanpin=(TextView)findViewById(R.id.product_detaile_tv_chanpin);
 		pingjia=(TextView)findViewById(R.id.product_detaile_tv_pingjia);
-		list=new ArrayList<ProductBean>();
 		listView=(MyListview)findViewById(R.id.product_detaile_ll_add_view_list);
 
 		gridView=(GridView)findViewById(R.id.product_detaile_all_view_dianputuijian_gv);
@@ -468,10 +459,10 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		}
 		
 		Calendar c = Calendar.getInstance();
-		int year = c.get(Calendar.YEAR);
-		int month = c.get(Calendar.MONTH);
-		int day = c.get(Calendar.DAY_OF_MONTH);
-		int lastDay=c.getActualMaximum(Calendar.DAY_OF_MONTH);
+//		long year = c.get(Calendar.YEAR);
+		long month = c.get(Calendar.MONTH);
+		long day = c.get(Calendar.DAY_OF_MONTH);
+		long lastDay=c.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for(int i=1;i<4;i++){
 			if((day+i)==lastDay){
 				day=1;
@@ -522,6 +513,7 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 		Handler h=new Handler();
 		h.postDelayed(runna, 500);
 	}
+	@SuppressWarnings("unused")
 	private void setImage(final String imageURL, final ImageView imageView) {
 		final Handler handler = new Handler(){
 			@Override
@@ -814,7 +806,6 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 				if(listComment!=null){
 					if("200".equals(listComment.getCode())){
 						comlist=listComment.getComlist();
-						comstar=listComment.getComstar();
 						mallinfo=productdetailbean.getMallinfo();
 						recommend=productdetailbean.getRecommend();
 						buyedlist=productdetailbean.getBuyedlist();

@@ -1,5 +1,6 @@
 package com.xunbo.store.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +14,13 @@ import com.example.educonsult.R;
 import com.xunbo.store.beans.RefundInfoBean;
 import com.xunbo.store.tools.Util;
 
-public class CApplyerFundAdapter extends BaseAdapter implements OnClickListener{
-	private Context context;
+@SuppressLint("InflateParams") public class CApplyerFundAdapter extends BaseAdapter implements OnClickListener{
 	private RefundInfoBean rebean;
 	private LayoutInflater inflater;
 	private Item item;
 
 
 	public CApplyerFundAdapter(Context context,RefundInfoBean rebean){
-		this.context = context;
 		this.rebean = rebean;
 		inflater = LayoutInflater.from(context);
 	}

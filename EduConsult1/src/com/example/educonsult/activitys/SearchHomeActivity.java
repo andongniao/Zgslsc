@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -18,7 +19,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -48,7 +48,7 @@ import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.UITools;
 import com.xunbo.store.tools.Util;
 
-public class SearchHomeActivity extends BaseActivity implements OnClickListener{
+@SuppressLint({ "InflateParams", "ShowToast" }) public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private long exitTime = 0;
 	private Context context;
 	private Editor er;
@@ -60,16 +60,13 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout  ll_zonghe,ll_xiaoliang,ll_price,ll_renqi,isnull,isyes,isresult;
 	private ArrayList<String> l,ll;
 	private ArrayList<String> data_list;
-	private ArrayAdapter<String> arr_adapter;
 	private SearchAdapter adapter;
 	private boolean ishave,isnext;
 	private int t=0;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private SearchAdapter adapter_r;
 	private static TextItemCenterListAdapter textItemCenterListAdapter;
-    private static int postion;
     private ThreadWithProgressDialog myPDT;
     private ListProductBean listProductBean;
     private ArrayList<ProductBean> list;
@@ -82,7 +79,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 	private SearchResultAdapter searchResultAdapter;
 	private boolean num,price,renqi;
 	private ArrayList<View> list_view;
-	private ImageView iv_back,iv_num,iv_price,iv_renqi;
+	private ImageView iv_num,iv_price,iv_renqi;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -403,7 +400,7 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			price=false;
 			renqi=false;
 			num=false;
-			list_view.get(0).setBackgroundResource(R.drawable.jiantou_down);
+			list_view.get(0).setBackgroundResource(R.drawable.jiantou_down);	
 			list_view.get(1).setBackgroundResource(R.drawable.jiantou_down);
 			list_view.get(2).setBackgroundResource(R.drawable.jiantou_down);
 			break;
@@ -427,7 +424,6 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			case R.id.search_home_ll_xiaoliang:
 				text=et.getText().toString();
 				Change(0);
-				int i=0;
 				if(num){
 					order=2;
 				}else{
@@ -611,6 +607,16 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 		MobclickAgent.onPageStart("search"); 
 		MobclickAgent.onResume(this);
 	}
+	@Override
+	protected void onDestroy() {
+		if(myPDT!=null){
+			if(myPDT.getCustomDialog()!=null && myPDT.getCustomDialog().isShowing()){
+				myPDT.getCustomDialog().dismiss();
+			}
+			myPDT=null;
+		}
+		super.onDestroy();
+	}
 	private class GetDataTask extends AsyncTask<Void, Void, Void>
 	{
 
@@ -743,4 +749,6 @@ public class SearchHomeActivity extends BaseActivity implements OnClickListener{
 			
 		}};
 	
+
 }
+

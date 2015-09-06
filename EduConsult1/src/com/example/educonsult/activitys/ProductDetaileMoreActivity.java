@@ -22,7 +22,6 @@ import com.xunbo.store.adapters.ProductPingjiaAdapter;
 import com.xunbo.store.beans.CommentBean;
 import com.xunbo.store.beans.CommentStar;
 import com.xunbo.store.beans.ListComment;
-import com.xunbo.store.beans.ProductBean;
 import com.xunbo.store.myviews.xlistview.XListView;
 import com.xunbo.store.myviews.xlistview.XListView.IXListViewListener;
 import com.xunbo.store.net.Send;
@@ -34,7 +33,6 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	private XListView listview;
 	private ProductPingjiaAdapter pingjiaAdapter;
 	private Context context;
-	private ArrayList<ProductBean> list;
 	private ArrayList<CommentBean>commentBeans;
 	private int type,page;
 	private TextView tv_all,tv_good,tv_ok,tv_no,tv_isnull;
@@ -45,6 +43,7 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 	private String strstar="";
 	private Intent intent;
 	private String itemid;
+	@SuppressWarnings("unused")
 	private boolean isall,isgood,isok,isno,isfinish;
 	private Handler handler;
 	
@@ -69,7 +68,6 @@ public class ProductDetaileMoreActivity extends BaseActivity implements OnClickL
 		intent=getIntent();
 		itemid=intent.getStringExtra("qingjiamore");
 		myPDT=new ThreadWithProgressDialog();
-		list=new ArrayList<ProductBean>();
 		tv_isnull = (TextView) findViewById(R.id.product_detail_more_tv_isnull);
 		listview=(XListView)findViewById(R.id.product_detail_more_list);
 		listview.setPullRefreshEnable(true);

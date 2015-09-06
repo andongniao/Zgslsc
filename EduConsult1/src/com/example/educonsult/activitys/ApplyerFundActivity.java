@@ -1,10 +1,5 @@
 package com.example.educonsult.activitys;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apkplug.app.FrameworkInstance;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
@@ -35,16 +29,14 @@ import com.xunbo.store.tools.Util;
 public class ApplyerFundActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private Intent intent;
-	private ImageView image,wayone,waytwo;
+	private ImageView wayone,waytwo;
+	@SuppressWarnings("unused")
 	private TextView tv_pname,tv_cname,tv_money,tv_num,tv_orderid
 	,tv_appmoney,tv_talk,tv_break,tv_ok,tv_yunfei;
 	private EditText ed;
 	private LinearLayout ll_wayone,ll_waytwo;
-	private List<org.osgi.framework.Bundle> bundles=null;
-	private FrameworkInstance frame=null;
 	private MyListview listview;
 	private CApplyerFundAdapter applyerFundAdapter;
-	private ArrayList<Integer> list;
 	private ThreadWithProgressDialog myPDT;
 	private String itemid,authstr,content;
 	private boolean initdata;
@@ -75,7 +67,6 @@ public class ApplyerFundActivity extends BaseActivity implements OnClickListener
 		itemid = getIntent().getStringExtra("itemid");
 		authstr = MyApplication.mp.getUser().getAuthstr();
 		myPDT = new ThreadWithProgressDialog();
-		frame = MyApplication.frame;
 		wayone=(ImageView)findViewById(R.id.applyerfund_wayone_img);
 		waytwo=(ImageView)findViewById(R.id.applyerfund_waytwo_img);
 		ll_wayone=(LinearLayout)findViewById(R.id.applyerfund_wayone_lin);

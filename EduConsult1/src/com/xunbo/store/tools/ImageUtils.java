@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -42,7 +43,7 @@ import android.widget.ImageView;
  * 图片操作工具包
  * 
  */
-public class ImageUtils {
+@SuppressLint("SdCardPath") public class ImageUtils {
 
 	public final static String SDCARD_MNT = "/mnt/sdcard";
 	public final static String SDCARD = "/sdcard";
@@ -250,6 +251,7 @@ public class ImageUtils {
 	 * @param uri
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static String getAbsoluteImagePath(Activity context, Uri uri) {
 		String imagePath = "";
 		String[] proj = { MediaStore.Images.Media.DATA };
@@ -278,6 +280,7 @@ public class ImageUtils {
 	 *            MediaStore.Images.Thumbnails.MICRO_KIND
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static Bitmap loadImgThumbnail(Activity context, String imgName,
 			int kind) {
 		Bitmap bitmap = null;
@@ -310,6 +313,7 @@ public class ImageUtils {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings({ "unused", "deprecation" })
 	public static String getLatestImage(Activity context) {
 		String latestImage = null;
 		String[] items = { MediaStore.Images.Media._ID,
@@ -481,6 +485,7 @@ public class ImageUtils {
 	 * @param bitmap
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public static Bitmap reDrawBitMap(Activity context, Bitmap bitmap) {
 		DisplayMetrics dm = new DisplayMetrics();
 		context.getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -537,6 +542,7 @@ public class ImageUtils {
 	 * @param bitmap
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public static void reDrawBitMap2View(Activity context, Bitmap bitmap,ImageView view) {
 		DisplayMetrics dm = new DisplayMetrics();
 		context.getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -664,6 +670,7 @@ public class ImageUtils {
 	 * @param bitmap
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static Drawable bitmapToDrawable(Bitmap bitmap) {
 		Drawable drawable = new BitmapDrawable(bitmap);
 		return drawable;

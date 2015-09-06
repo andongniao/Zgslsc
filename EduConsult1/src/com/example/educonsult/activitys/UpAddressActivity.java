@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -27,11 +26,14 @@ public class UpAddressActivity extends BaseActivity{
 	private Context context;
 	private ArrayList<Integer> list;
 	private UpaddressAdapter adapter;
-	private ImageView iv_top_right;
 	private Intent intent; 
+	@SuppressWarnings("unused")
 	private Util u;
+	@SuppressWarnings("unused")
 	private String filename;
+	@SuppressWarnings("unused")
 	private ListAreaBean lare;
+	@SuppressWarnings("unused")
 	private ArrayList<AreaBean>listsheng,listshi,listxian;
 	private ThreadWithProgressDialog myPDT;
 	private ListAddressBean listAddressBean;

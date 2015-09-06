@@ -1,6 +1,5 @@
 package com.example.educonsult.activitys;
 
-import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +20,6 @@ import com.xunbo.store.fragments.KnowSlidMenu;
 public class KnowHomeActivity extends SlidingFragmentActivity implements OnClickListener {
 	protected int activityCloseEnterAnimation;
 	protected int activityCloseExitAnimation;
-	private Context context;
 	public static String SlidTag="finish";
 	public static Handler handler;
 
@@ -61,7 +59,6 @@ public class KnowHomeActivity extends SlidingFragmentActivity implements OnClick
 	public void InItObj() {
 		getSupportFragmentManager().beginTransaction()
 		.replace(R.id.fragmentlinear, new KnowFragment()).commit();
-		context = this;
 	}
 
 
@@ -78,6 +75,7 @@ public class KnowHomeActivity extends SlidingFragmentActivity implements OnClick
 	/**
 	 * 设置划出效果
 	 */
+	@SuppressWarnings("deprecation")
 	public void setSilMenu() {
 		SlidingMenu sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT);// 设置从右侧划出

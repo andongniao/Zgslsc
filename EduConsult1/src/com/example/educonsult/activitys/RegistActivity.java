@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -41,7 +42,7 @@ import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.UITools;
 import com.xunbo.store.tools.Util;
 
-public class RegistActivity extends BaseActivity implements OnClickListener{
+@SuppressLint({ "InflateParams", "ShowToast" }) public class RegistActivity extends BaseActivity implements OnClickListener{
 	private Context context;
 	private TextView tv_qiye,tv_geren,tv_tiaokuan,tv_diqu,tv_pingzhong,tv_siliao,tv_product,tv_ctype;
 	private EditText et_name,et_pass,et_pass_re,et_rname,et_dizhi,
@@ -50,27 +51,32 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 	private Button btn_regist;
 	private CheckBox cb_read;
 	private int type,tp,tpopu;
+	@SuppressWarnings("unused")
 	private boolean isread;
 	private LinearLayout ll_diqu,ll_pingzhong,ll_siliao,ll_product,ll_ctype,ll_qiye,ll_geren;
 	private ArrayList<String> list;
 	private PopupWindow popu;
 	private LayoutInflater inflater;
 	private View v_fenlei;
-	private ListView list_2,lv_l;
+	private ListView lv_l;
 	private TextItemListAdapter adapter_r;
 	private int mscreenwidth;
 	private DisplayMetrics dm;
 	private boolean isdiqu,isctype,ispingzhong,issiliao,isproduct;
+	@SuppressWarnings("unused")
 	private int ndiqu=0,diquid=-1,numdiqu,productid=-1,numproduct,nproduct=0;
 	private ListAreaBean listareaBean;
 	private Util u;
+	@SuppressWarnings("unused")
 	private ArrayList<AreaBean> areaBeans,areaBean;
 	private ThreadWithProgressDialog myPDT;
+	@SuppressWarnings("unused")
 	private String name,pass,pass_re,phone,diqu,rname,dizhi,siliao,pingzhongString,
 	computer,price,product,num,person,cname,ctype,cphone,catid;
 	private BaseBean bean;
 	String s="" ,p="";
 	private ListFenleiBean listFenleiBean;
+	@SuppressWarnings("unused")
 	private ArrayList<FenleiBean> fenleiBeans,fenleiBeans2;
 	private ArrayList<AreaBean>listsheng,listshi,listxian;
 	private ArrayList<FenleiBean>fenleiBeanone,fenleiBeanTwo,fenleiBeanThree;
@@ -172,6 +178,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 
 
 	}
+	@SuppressWarnings("deprecation")
 	private void setpopuwindow(final ArrayList<String> list,LinearLayout lin){
 		adapter_r = new TextItemListAdapter(context, list);
 		lv_l.setAdapter(adapter_r);
@@ -226,6 +233,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		
 		
 	}
+	@SuppressWarnings("deprecation")
 	private void setpopuwindow(Context contexts,ListAreaBean larea,LinearLayout lin){
 //		listsheng = lare.getList();
 		final ArrayList<String> list = new ArrayList<String>(); 
@@ -300,6 +308,7 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		popu.setFocusable(true);
 		popu.showAsDropDown(lin);
 	}
+	@SuppressWarnings("deprecation")
 	private void setpopuwindow(Context contexts,ListFenleiBean listFenleiBean,LinearLayout lin){
 //		listsheng = lare.getList();
 		final ArrayList<String> list = new ArrayList<String>(); 
@@ -402,27 +411,6 @@ public class RegistActivity extends BaseActivity implements OnClickListener{
 		});
 
 	}
-void setrel(){
-	for(int i=0;;i++){
-		areaBeans=areaBeans.get(ndiqu).getChild();
-		if(areaBeans!=null||areaBeans.size()!=0){
-			for(int j=0;j<areaBeans.size();j++){
-				list.add(areaBeans.get(j).getArename());
-			}
-			tpopu=2;
-			setpopuwindow(list,ll_diqu);
-			//popu.showAsDropDown(ll_diqu);
-			s=s+list.get(ndiqu);
-			numdiqu=areaBeans.get(ndiqu).getAreaid();
-		}else{
-			tv_diqu.setText(s);
-			popu.dismiss();
-			break;
-		}
-	}
-	tv_diqu.setText(s);
-	popu.dismiss();
-}
 
 	@Override
 	public void onClick(View v) {

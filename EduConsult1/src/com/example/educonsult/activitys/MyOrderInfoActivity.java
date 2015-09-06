@@ -1,7 +1,7 @@
 package com.example.educonsult.activitys;
 
-import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,16 +27,14 @@ import com.xunbo.store.beans.BaseBean;
 import com.xunbo.store.beans.OrderDetaileBean;
 import com.xunbo.store.myviews.MyListview;
 import com.xunbo.store.net.PostHttp;
-import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
-public class MyOrderInfoActivity extends BaseActivity implements
+@SuppressLint("InflateParams") public class MyOrderInfoActivity extends BaseActivity implements
 OnClickListener {
 	private TextView tv_yunfeimoney,tv_ordermoney,tv_uname,tv_uphone,
 	tv_uaddress,tv_cname,tv_yunfei,tv_rmoney,tv_oid,tv_otime,tv_no,tv_ok,tv_title;
 	private MyListview listview;
 	private MyOrderInfoAdapter myOrderInfoAdapter;
-	private ArrayList<Integer> list;
 	private ThreadWithProgressDialog myPDT;
 	private Context context;
 	private String itemid;
@@ -63,6 +61,7 @@ OnClickListener {
 		setContentXml(R.layout.myorderinfo);
 		init();
 	}
+	@SuppressWarnings("deprecation")
 	private void init(){
 		TestinAgent.init(this);
 		context = this;
@@ -103,7 +102,6 @@ OnClickListener {
 		tv_ok.setOnClickListener(this);
 		tv_no.setOnClickListener(this);
 		listview=(MyListview)findViewById(R.id.myorderinfo_list);
-		String ms = getResources().getString(R.string.loding);
 		if(Util.detect(context)){
 		myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 		}else{
@@ -231,7 +229,6 @@ OnClickListener {
 			@Override
 			public boolean TaskMain() {
 				// 访问
-				Send s = new Send(context);
 				PostHttp p = new PostHttp(context);
 				if(initdata){
 				ordebean = p.getOrderDetaile(itemid,authstr);

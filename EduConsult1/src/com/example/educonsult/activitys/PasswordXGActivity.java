@@ -12,6 +12,7 @@ import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 
 public class PasswordXGActivity extends BaseActivity implements OnClickListener{
+	@SuppressWarnings("unused")
 	private Context context;
 	private Intent intent;
 	private String str;

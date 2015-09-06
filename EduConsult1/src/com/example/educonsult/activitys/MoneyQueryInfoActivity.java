@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,32 +18,19 @@ import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.xunbo.store.ExampleActivity;
 import com.xunbo.store.MyApplication;
-import com.xunbo.store.adapters.HomeSlidAdapter;
-import com.xunbo.store.adapters.MoneyQueryAdapter;
 import com.xunbo.store.beans.ListMoneyBean;
 import com.xunbo.store.beans.MoneyDetaileBean;
-import com.xunbo.store.myviews.MyListview;
 import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
 public class MoneyQueryInfoActivity extends BaseActivity {
-	private RelativeLayout reaLayout;
-	private TextView allquery,tvid,tvway,tvwaymoney,tvmoneyway,tvtime
+	private TextView tvid,tvway,tvwaymoney,tvmoneyway,tvtime
 	,tvmoney,tvbeizhu;
-	private MyListview list_money,list_way;
-	private ListView list_2,lv_l;
-	private MoneyQueryAdapter moneyQueryAdapter;
 	private Context context;
-	private ArrayList<String> list;
-	private PopupWindow popu;
-	private LayoutInflater inflater;
-	private View v_fenlei;
 	private ImageView iv_top_l,iv_top_t;
 	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
-	private HomeSlidAdapter adapter_r;
-	private LinearLayout lin,linbeizhu;
-	private int isbeizhu=1;
+	private LinearLayout linbeizhu;
 	private String itemid;
 	private ThreadWithProgressDialog myPDT;
 	private ListMoneyBean listMoneyBean;

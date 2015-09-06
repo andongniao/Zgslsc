@@ -22,11 +22,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -46,23 +44,15 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.Toast;
-
-import com.example.educonsult.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.xunbo.store.adapters.TextItemCenterListAdapter;
-import com.xunbo.store.adapters.TextItemListAdapter;
 import com.xunbo.store.myviews.BadgeView;
 
 /**
@@ -71,23 +61,16 @@ import com.xunbo.store.myviews.BadgeView;
  * @author Qzr
  * 
  */
-public class Util {
-	private static final String ALGORITHM = "RSA";
-	private static final String SIGN_ALGORITHMS = "SHA1WithRSA";
-	private static final String DEFAULT_CHARSET = "UTF-8";
+@SuppressLint("ShowToast") public class Util {
+//	private static final String ALGORITHM = "RSA";
+//	private static final String SIGN_ALGORITHMS = "SHA1WithRSA";
+//	private static final String DEFAULT_CHARSET = "UTF-8";
 	private static final int CACHE_TIME = 60*60000;//缓存失效时间
 	private Hashtable<String, Object> memCacheRegion = new Hashtable<String, Object>();
 	private static Context context;
 	private static BadgeView badge;
-	private static ArrayList<String> list;
-	private static PopupWindow popu;
-	private static LayoutInflater inflater;
-	private static View v_fenlei;
-	private static ListView list_2,lv_l;
-	private static TextItemListAdapter adapter_r;
-	private static TextItemCenterListAdapter textItemCenterListAdapter;
-	private static int postion;
 
+	@SuppressWarnings("static-access")
 	public Util(Context context){
 		this.context = context;
 	}
@@ -175,6 +158,7 @@ public class Util {
 	 * @param numDays 当前系统时间
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private int clearCacheFolder(File dir, long curTime) {          
 		int deletedFiles = 0;         
 		if (dir!= null && dir.isDirectory()) {             
@@ -259,6 +243,7 @@ public class Util {
 	 * @param file
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unused")
 	public boolean saveObject(Serializable ser, String file) {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
@@ -321,6 +306,7 @@ public class Util {
 	 * 获取package name
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private String getAppInfo() {
 		try {
 			String pkName = context.getPackageName();
@@ -495,6 +481,7 @@ public class Util {
 	}
 
 	// 获取指定路径的图片  
+	@SuppressWarnings("unused")
 	public static InputStream getStreamForNet(String urlpath)  
 			throws Exception {  
 		File file = null;
@@ -905,7 +892,7 @@ public class Util {
 	 *                              @param news	 *            
 	 *                              未读的消息数量	 * @return drawable	
 	 *                               */
-	@SuppressWarnings("unused")	
+	@SuppressWarnings("deprecation")
 	public static Drawable displayNewsNumber(Context context, int icon, int news) {		
 		// 初始化画布		
 		int iconSize = (int) context.getResources().getDimension(android.R.dimen.app_icon_size);		

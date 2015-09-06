@@ -3398,6 +3398,7 @@ public class PostHttp {
 	 * @param mobile
 	 * @return BaseBean
 	 */
+	@SuppressWarnings("unused")
 	public BaseBean getMobileCode(String mobile,String authstr){
 		BaseBean bean = new BaseBean();
 

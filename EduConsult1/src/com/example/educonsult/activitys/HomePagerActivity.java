@@ -1,6 +1,5 @@
 package com.example.educonsult.activitys;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,15 +17,12 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.xunbo.store.fragments.HomePageFragmentMenu;
-import com.xunbo.store.tools.Util;
 
 public class HomePagerActivity extends SlidingFragmentActivity implements
 OnClickListener {
 	private long exitTime = 0;
-	private Context context;
 	public static String SlidTag="finish";
 	public static Handler handler;
-	private Util util;
 
 
 
@@ -59,8 +55,6 @@ OnClickListener {
 //		.replace(R.id.fragmentlinear, new HomeFragment()).commit();
 //		getSupportFragmentManager().beginTransaction()
 //		.replace(R.id.fragmentlinear, new HomeLayoutFragment()).commit();
-		context = this;
-		util = new Util(context);
 	}
 
 
@@ -77,6 +71,7 @@ OnClickListener {
 	/**
 	 * 设置划出效果
 	 */
+	@SuppressWarnings("deprecation")
 	public void setSilMenu() {
 		SlidingMenu sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT);// 设置从右侧划出

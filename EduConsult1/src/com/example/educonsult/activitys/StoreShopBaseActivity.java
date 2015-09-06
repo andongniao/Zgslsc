@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ import com.xunbo.store.myviews.MyGridView;
 import com.xunbo.store.net.PostHttp;
 import com.xunbo.store.tools.Util;
 
-public class StoreShopBaseActivity extends BaseActivity implements OnClickListener{
+@SuppressLint("InflateParams") public class StoreShopBaseActivity extends BaseActivity implements OnClickListener{
 	private ImageView iv_hean,iv_shoucang,iv_home,iv_all,iv_new,iv_vip,iv_renzheng;
 	private TextView title;
 	private View v_home,v_all,v_new;
@@ -37,11 +38,13 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 	private int showtype,page,type,t;
 	private StoreShopAdapter adapter;
 	private ArrayList<ProductBean> list_home,list_all,list_new;
+	@SuppressWarnings("unused")
 	private TextView tv_more;
 	private ThreadWithProgressDialog myPDT;
 	private ScrollView sc;
 	private ListShopHomeBean bean_home;
 	private ListProductBean bean_all,bean_new;
+	@SuppressWarnings("unused")
 	private String authstr,storeid,storename,url,id;
 	private BaseBean bean_base;
 	private boolean isall;

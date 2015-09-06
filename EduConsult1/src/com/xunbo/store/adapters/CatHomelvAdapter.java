@@ -2,6 +2,7 @@ package com.xunbo.store.adapters;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,19 +23,23 @@ import com.xunbo.store.beans.FenleiBean;
 import com.xunbo.store.beans.ListFenleiBean;
 import com.xunbo.store.tools.Util;
 
-public class CatHomelvAdapter extends BaseExpandableListAdapter {
+@SuppressLint("InflateParams") public class CatHomelvAdapter extends BaseExpandableListAdapter {
 	private Context context;
 	private ListFenleiBean list;
 	private ArrayList<FenleiBean> group;
+	@SuppressWarnings("unused")
 	private ArrayList<FenleiBean> child;
 	private LayoutInflater inflater;
 	public MyHalderItem halderItem;
 	private Item item;
 	private int w;
+	@SuppressWarnings("unused")
 	private ExpandableListView lv;
 	private Cat cat;
+	@SuppressWarnings("unused")
 	private int type;
 	private CatlvAdapter adapter;
+	@SuppressWarnings("unused")
 	private int hhh,index,con;
 	
 	public CatHomelvAdapter(Context context,ListFenleiBean list, Cat cat){
@@ -46,6 +51,7 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 		inflater = LayoutInflater.from(context);
 	} 
 
+	@SuppressWarnings({ "unused", "deprecation" })
 	public void changeHeight(int groupPosition){
 //		int hh = lv.getHeight();;
 //		if(type==1){
@@ -82,6 +88,7 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 		return group.get(groupPosition).getChild().get(childPosition).getCatid();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
@@ -218,6 +225,7 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 		ImageView iv;
 		LinearLayout ll;
 	}
+	@SuppressWarnings("unused")
 	public int getHeigith(int groupPosition) {
 		int height,width;
 		width = (int) (Util.getWidth((Activity)context) / 9.7);
@@ -226,6 +234,7 @@ public class CatHomelvAdapter extends BaseExpandableListAdapter {
 		return height;
 	}
 	
+	@SuppressWarnings("unused")
 	public int getHeigith(int groupPosition,int pos) {
 		int height,width;
 		width = (int) (Util.getWidth((Activity)context) / 9.7);

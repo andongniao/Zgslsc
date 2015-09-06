@@ -12,8 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
@@ -29,13 +27,9 @@ import com.xunbo.store.net.Send;
 import com.xunbo.store.tools.Util;
 
 public class MoneyWithdrawalActivity extends BaseActivity implements OnClickListener{
-	private TextView carId,allMoney,num;
+	private TextView carId,allMoney;
 	private EditText money,ed_yanzhengma;
-	private LinearLayout carInfo;
 	private Context context;
-	private Intent intent;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
 	private ImageView carIc;
 	private Button submit,yanzhengma;
 	private boolean isAutoCode=true;
@@ -71,12 +65,10 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 		myPDT=new ThreadWithProgressDialog();
 		carId=(TextView)findViewById(R.id.money_withdrawal_carid);
 		allMoney=(TextView)findViewById(R.id.money_withdrawal_allmoney);
-		num=(TextView)findViewById(R.id.money_withdrawal_num);
 		money=(EditText)findViewById(R.id.money_withdrawal_edmoney);
 //		money.setOnClickListener(this);
 		ed_yanzhengma=(EditText)findViewById(R.id.money_withdrawal_ed_yanzheng);
 		carIc=(ImageView)findViewById(R.id.money_withdrawal_ic);
-		carInfo=(LinearLayout)findViewById(R.id.money_withdrawal_car);
 //		carInfo.setOnClickListener(this);
 		submit=(Button)findViewById(R.id.money_withdrawal_up);
 		submit.setOnClickListener(this);
@@ -94,7 +86,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 			yanzhengma.setEnabled(true);
 			yanzhengma.setBackgroundResource(R.drawable.money_withdrawal_code_bg);
 //			yanzhengma.setBackgroundResource(R.color.white);
-			yanzhengma.setTextColor(R.color.fame_hui2); 
+			yanzhengma.setTextColor(getResources().getColor(R.color.fame_hui2)); 
 			yanzhengma.setPadding(15, 15, 15, 15);
 			yanzhengma.setTextSize(16);
 			--startTime;
@@ -119,7 +111,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 				yanzhengma.setEnabled(false);
 				yanzhengma.setBackgroundResource(R.drawable.money_withdrawal_code_bg);
 //				yanzhengma.setBackgroundResource(R.color.white);
-				yanzhengma.setTextColor(R.color.fame_hui2);
+				yanzhengma.setTextColor(getResources().getColor(R.color.fame_hui2));
 				yanzhengma.setPadding(15, 15, 15, 15);
 				yanzhengma.setTextSize(16);
 				yanzhengma.setText("正在发送...");
@@ -268,7 +260,7 @@ public class MoneyWithdrawalActivity extends BaseActivity implements OnClickList
 			yanzhengma.setFocusable(false);
 			yanzhengma.setBackgroundResource(R.drawable.money_withdrawal_code_bg);
 //			yanzhengma.setBackgroundResource(R.color.white);
-			yanzhengma.setTextColor(R.color.fame_hui2);
+			yanzhengma.setTextColor(getResources().getColor(R.color.fame_hui2));
 			yanzhengma.setPadding(15, 15, 15, 15);
 			yanzhengma.setTextSize(16);
 			yanzhengma.setText(startTime + "s后重新获取");

@@ -2,6 +2,7 @@ package com.example.educonsult.activitys;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,22 +18,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.educonsult.R;
 import com.testin.agent.TestinAgent;
 import com.umeng.analytics.MobclickAgent;
-import com.xunbo.store.adapters.HomeSlidAdapter;
 import com.xunbo.store.tools.UITools;
 
-public class BusinesspartnersInfoActivity extends BaseActivity implements
+@SuppressLint("InflateParams") public class BusinesspartnersInfoActivity extends BaseActivity implements
 OnClickListener{
 	private Context context;
 	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
 	private LinearLayout fenleilin;
+	@SuppressWarnings("unused")
 	private TextView username,name,computername,chongzhi,sup,fenlei;
 	private EditText beizhu;
 	private String str="0";
@@ -40,7 +39,6 @@ OnClickListener{
 	private View v_fenlei;
 	private LinearLayout lin;
 	private ListView list_2,lv_l;
-	private HomeSlidAdapter adapter_r;
 	private PopupWindow popu;
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -52,8 +50,6 @@ OnClickListener{
 		topRightTGone();
 		intent=getIntent();
 		str=intent.getStringExtra("bus");
-		rl_l = (RelativeLayout) getTopLightRl();
-		rl_r = (RelativeLayout) getTopRightRl();
 		iv_top_l = (ImageView) getTopLightView();
 		iv_top_l.setBackgroundResource(R.drawable.top_xx_bg);
 		iv_top_t = (ImageView) getTopRightView();
@@ -66,12 +62,9 @@ OnClickListener{
 		init();
 		addlistener();
 	}
+	@SuppressWarnings({ "unused", "deprecation" })
 	private void init() {
 		TestinAgent.init(this);
-		// TODO Auto-generated method stub
-		//		private LinearLayout fenlei;
-		//		private TextView username,name,computername;
-		//		private EditText beizhu;
 		fenleilin=(LinearLayout)findViewById(R.id.businesspartnersinfo_way_lin);
 		fenleilin.setOnClickListener(this);
 		chongzhi=(TextView)findViewById(R.id.businesspartnersinfo_re);

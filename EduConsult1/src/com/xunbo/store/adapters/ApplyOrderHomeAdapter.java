@@ -2,6 +2,7 @@ package com.xunbo.store.adapters;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +16,13 @@ import com.example.educonsult.activitys.ApplyOrderActivity.MyApply;
 import com.xunbo.store.beans.OrderBean;
 import com.xunbo.store.myviews.MyListview;
 
-public class ApplyOrderHomeAdapter extends BaseAdapter implements
+@SuppressLint("InflateParams") public class ApplyOrderHomeAdapter extends BaseAdapter implements
 OnClickListener{
 	private Context context;
 	private ArrayList<OrderBean>list;
 	private LayoutInflater inflater;
 	private Item item;
 	private OrderRefundAdapter adapter;
-	private int n;
 	private MyApply apply;
 	private boolean isloding;
 

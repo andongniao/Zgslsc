@@ -6,13 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialog;
 import com.LibLoading.LibThreadWithProgressDialog.ThreadWithProgressDialogTask;
 import com.example.educonsult.R;
@@ -30,8 +25,6 @@ public class CouponsActivity extends BaseActivity {
 	
 	private Context context;
 	private ArrayList<CouponBean> list;
-	private ImageView iv_top_l,iv_top_t;
-	private RelativeLayout rl_l,rl_r;
 	private Intent intent;
 	private CouponsAdapter couponsAdapter;
 	private LinearLayout ll_isno;
@@ -62,6 +55,7 @@ public class CouponsActivity extends BaseActivity {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void addlistener() {
 //		rl_r.setOnClickListener(new OnClickListener() {
 //
