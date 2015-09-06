@@ -374,14 +374,14 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 				}
 				break;
 			case R.id.home_layout_ll_rem_b_3:
-				if(recommend.get(5)!=null){
+				if(recommend.get(5)!=null){   
 					Toproduct(recommend.get(5));
 				}
 				break;
 			case R.id.home_layout_ll_rem_b_4:
 				if(recommend.get(6)!=null){
 					Toproduct(recommend.get(6));
-				}
+				} 
 				break;
 
 			}
@@ -574,7 +574,7 @@ public class HomeLayoutFragment extends Activity implements OnClickListener,Refr
 				if(Util.IsNull(recommend.get(5).getSubtitle())){
 					//					tv_detaile3.setVisibility(View.VISIBLE);
 					tv_detaile3.setText(recommend.get(5).getSubtitle());
-				}
+				} 
 				if(Util.IsNull(recommend.get(6).getSubtitle())){
 					//					tv_detaile4.setVisibility(View.VISIBLE);
 					tv_detaile4.setText(recommend.get(6).getSubtitle());

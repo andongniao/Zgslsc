@@ -45,7 +45,7 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 	private String authstr,storeid,storename,url,id;
 	private BaseBean bean_base;
 	private boolean isall;
-
+	public static boolean isfinish;
 
 
 	@Override
@@ -418,6 +418,14 @@ public class StoreShopBaseActivity extends BaseActivity implements OnClickListen
 			return true;
 		}
 	}
-
+@Override
+protected void onResume() {
+	// TODO Auto-generated method stub
+	super.onResume();
+	if(isfinish){
+		isfinish=false;
+		finish();
+	}
+}
 
 }

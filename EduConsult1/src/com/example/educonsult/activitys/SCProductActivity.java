@@ -50,8 +50,8 @@ public class SCProductActivity extends BaseActivity implements OnClickListener,I
 	private Intent intent;
 	private HomeSlidAdapter adapter_r;
 	private LinearLayout lin,ll_isno;
-	public static boolean isrezoom;
 	public Myorder myorder;
+	public static boolean isrezoom,isfinish;
 	private ThreadWithProgressDialog myPDT;
 	private ListSCProductBean listProductBean;
 	private String authstr;
@@ -170,6 +170,10 @@ public class SCProductActivity extends BaseActivity implements OnClickListener,I
 //			Toast.makeText(context, "重新加载数据", 1).show();
 //			isrezoom=false;
 //		}
+		if(isfinish){
+			isfinish=false;
+			finish();
+		}
 		if(Util.detect(context)){
 			myPDT.Run(context, new RefeshData(),R.string.loding);//可取消
 		}else{

@@ -15,9 +15,23 @@ public class CenterUserBean extends UserBean{
 	private String catid;
 	private String tjr;
 	private String avatar;
-	private String userid;
+	private String userid;                                    
 	private String vip;
 	private String type;
+	private String telephone;
+	private String bank;
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
 	public String getUsername() {
 		return username;
 	}

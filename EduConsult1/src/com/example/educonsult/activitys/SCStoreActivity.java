@@ -56,7 +56,7 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 	private Intent intent;
 	private HomeSlidAdapter adapter_r;
 	private LinearLayout lin;
-	public static boolean isrezoom;
+	public static boolean isrezoom,isfinish;
 	public Myorder myorder;
 	private ThreadWithProgressDialog myPDT;
 	private ListCenterShopBean listCenterShopBean;
@@ -323,6 +323,10 @@ public class SCStoreActivity extends BaseActivity implements OnClickListener,IXL
 //			Toast.makeText(context, "重新加载数据", 1).show();
 //			isrezoom=false;
 //		}
+		if(isfinish){
+			isfinish=false;
+			finish();
+		}
 		if(Util.detect(context)){
 			//			myPDT.Run(context, new RefeshData(bean.getType(),bean.getAuthstr()),msg,false);//不可取消
 			myPDT.Run(context, new RefeshData(0),R.string.loding);//不可取消

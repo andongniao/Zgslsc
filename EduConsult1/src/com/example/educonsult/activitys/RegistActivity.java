@@ -494,7 +494,7 @@ void setrel(){
 			cphone=et_cphone.getText().toString().trim();
 
 			if(Util.IsNull(name) && Util.IsNull(pass) && Util.IsNull(pass_re)&& Util.IsNull(rname)
-					&& Util.IsNull(phone)&&isdiqu&& Util.IsNull(dizhi)){
+					&& Util.IsNull(phone)&&isdiqu&& Util.IsNull(dizhi)&&Util.IsNull(person)){
 				if(tp==0){
 					if (Util.IsNull(cname)&&isctype&&Util.IsNull(cphone)) {
 						if(Util.isusername(name)){
@@ -529,8 +529,7 @@ void setrel(){
 
 
 				}else if(tp==1){
-					if(ispingzhong&&issiliao&&Util.IsNull(computer)
-							&&Util.IsNull(price)&&isproduct&&Util.IsNull(num)&&Util.IsNull(person)){
+					if(ispingzhong){
 						if(Util.ispassword(pass)){
 							if(pass.equals(pass_re)){
 								if(Util.isMobileNO(phone)){
@@ -636,29 +635,16 @@ void setrel(){
 
 		@Override
 		public boolean TaskMain() {
-
-//			Send s = new Send(context);
-//			bean = s.Login(username, password);
 			PostHttp p=new PostHttp(context);
-//			password 密码
-//			truename 真实姓名
-//			gender 性别 1是男，2是女
-//			areaid 所在地
-//			address 详细地址 养殖户必填参数
-//			yzpz 养殖品种
-//			syzl 使用饲料
-//			xsycj 现在使用哪个厂家饲料
-//			kjsjw 可以接受的价格
-//			catid 急需产品分类 养殖户选填参数
-//			bankcard 所用银行卡
-//			yzsl 养殖数量
-//			tjr 推荐人
-
 			if(tp==1){
-				bean=p.Regist(5, name, pass, rname, type, areaid+"", dizhi,phone, pingzhongString, siliao, computer,
-						price, numproduct+"", "",num ,person);
+//				bean=p.Regist(5, name, pass, rname, type, areaid+"", dizhi,phone, pingzhongString, siliao, computer,
+//						price, numproduct+"", "",num ,person);
+				bean=p.Regist(5, name, pass, rname, type, areaid+"", dizhi,phone, pingzhongString,"12", "12",
+						"12", "12", "","12" ,person);
 			}else{
 //				bean=p.Regist(6, name, pass, rname, type, areaid+"", dizhi, phone,cname, ctype, cphone);
+				bean=p.Regist(6, name, pass, rname, type, areaid+"", dizhi, phone,cname, ctype, cphone,person);
+				
 			}
 			
 

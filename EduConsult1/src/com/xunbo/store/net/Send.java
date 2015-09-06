@@ -701,7 +701,7 @@ public class Send {
 		ArrayList<CenterUserBean>list = new ArrayList<CenterUserBean>();
 		String baseurl = ServiceUrl.Base;
 		String url="";
-		url = baseurl+"member.php?action=member_detail&authstr="+authstr;
+		url = baseurl+"member.php?action=member_detail&authstr="+authstr+"&type="+type;
 		String jsonStr = null;
 		jsonStr = GetHttp.sendGet(url);
 
@@ -716,8 +716,34 @@ public class Send {
 					//					JSONArray j = data.getJSONArray(0);
 					Type t = new TypeToken<ArrayList<CenterUserBean>>() {
 					}.getType();
-					list = gson.fromJson(data.toString(), t);
-					bean = list.get(0);
+					//list = gson.fromJson(data.toString(), t);
+					JSONObject ob=(JSONObject)data.get(0);
+					bean.setUsername(ob.getString("username"));
+					bean.setCompany(ob.getString("company"));
+					bean.setTruename(ob.getString("truename"));
+					bean.setMobile(ob.getString("mobile"));
+					bean.setAreaid(ob.getString("areaid"));
+					bean.setXxdz(ob.getString("xxdz"));
+					bean.setCatid(ob.getString("catid"));
+					bean.setAvatar(ob.getString("avatar"));
+					bean.setImg(ob.getString("img"));
+					if(type==1){
+						//bean.setUsername(data.getString("username"));
+						bean.setYzpz(ob.getString("syzl"));
+						bean.setXsycj(ob.getString("xsycj"));
+						bean.setKjsjw(ob.getString("kjsjw"));
+						bean.setTjr(ob.getString("tjr"));
+					}else{
+						bean.setUserid(ob.getString("userid"));
+						bean.setVip(ob.getString("vip"));
+						bean.setTypes(ob.getString("type"));
+						bean.setTelephone(ob.getString("telephone"));
+						bean.setBank(ob.getString("bank"));
+						
+					}
+					//int type = data.getInt("type");
+					//ean.setAreaid(object.getString("areaid"));
+//					bean = list.get(0);
 					bean.setCode(code);
 					bean.setMsg(msg);
 					return bean;

@@ -622,6 +622,9 @@ public class ProductDetaileActivity extends Activity implements OnClickListener{
 				SearchResultActivity.isproductfinish=true;
 				SearchHomeActivity.isfinish=true;
 				MyZjActivity.isfinish=true;
+				StoreShopBaseActivity.isfinish=true;
+				SCProductActivity.isfinish=true;
+				SCStoreActivity.isfinish=true;
 				finish();
 			}else{
 				intent = new Intent(context,LoginActivity.class);
